@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
@@ -9,12 +10,16 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Encodings.Web;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -31,7 +36,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client, context);
                     WriteClientCtors(writer, client, context);
 
-                    foreach (var clientMethod in client.Methods)
+                    // TODO(ellismg): The `OfType` here is unfortunate, but `Methods` contains a mix of `LowLevelClientMethods` and `RestClientMethods`
+                    // the later is for the next page operations that we synthesize for some pageables.  This should be cleaned up as part of pagable
+                    // support in azure/autorest.csharp#1329
+                    foreach (var clientMethod in client.Methods.OfType<LowLevelClientMethod>())
                     {
                         WriteClientMethod(writer, clientMethod, true);
                         WriteClientMethod(writer, clientMethod, false);
@@ -43,12 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientMethodRequest(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
-            writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
-            foreach (Parameter parameter in clientMethod.Parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-            }
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private", false);
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "private", false);
         }
 
         private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
@@ -93,11 +96,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (async)
                     {
-                        writer.Line($"await {PipelineField:I}.SendAsync({messageVariable}, options.CancellationToken).ConfigureAwait(false);");
+                        writer.Line($"await {PipelineProperty:I}.SendAsync({messageVariable}, options.CancellationToken).ConfigureAwait(false);");
                     }
                     else
                     {
-                        writer.Line($"{PipelineField:I}.Send({messageVariable}, options.CancellationToken);");
+                        writer.Line($"{PipelineProperty:I}.Send({messageVariable}, options.CancellationToken);");
                     }
 
                     using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
@@ -120,9 +123,64 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
+        private string BuildSchemaFromDocs(LowLevelClientMethod.SchemaDocumentation[] docs, bool showRequired)
+        {
+            var docDict = docs.ToDictionary(d => d.SchemaName, d => d);
+            var builder = new StringBuilder();
+            builder.AppendLine("{");
+            BuildSchemaFromDoc(builder, docs.FirstOrDefault(), docDict, showRequired, 2);
+            builder.AppendLine("}");
+            return builder.ToString();
+        }
+
+        private void BuildSchemaFromDoc(StringBuilder builder, LowLevelClientMethod.SchemaDocumentation doc, IDictionary<string, LowLevelClientMethod.SchemaDocumentation> docDict, bool showRequired, int indentation = 0)
+        {
+            foreach (var row in doc.DocumentationRows)
+            {
+                var required = showRequired && row.Required ? " (required)" : string.Empty;
+                var isArray = row.Type.EndsWith("[]");
+                var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
+                builder.AppendIndentation(indentation).Append($"{row.Name}: ");
+                if (isArray)
+                {
+                    if (docDict.ContainsKey(rowType))
+                    {
+                        builder.AppendLine("[");
+                        var docToProcess = docDict[rowType];
+                        docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
+                        builder.AppendIndentation(indentation + 2).AppendLine("{");
+                        BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 4);
+                        builder.AppendIndentation(indentation + 2).AppendLine("}");
+                        builder.AppendIndentation(indentation).AppendLine($"]{required},");
+                    }
+                    else
+                        builder.AppendLine($"[{rowType}]{required},");
+                }
+                else
+                {
+                    if (docDict.ContainsKey(rowType))
+                    {
+                        builder.AppendLine("{");
+                        var docToProcess = docDict[rowType];
+                        docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
+                        BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 2);
+                        builder.AppendIndentation(indentation).Append("}").AppendLine($"{required},");
+                    }
+                    else
+                        builder.AppendLine($"{rowType}{required},");
+                }
+            }
+            // Remove the last "," by first removing ",\n", then add back "\n".
+            builder.Length -= 1 + Environment.NewLine.Length;
+            builder.AppendLine();
+        }
+
+        private static readonly CSharpType RequestOptionsParameterType = new CSharpType(typeof(RequestOptions), true);
+        private static readonly Parameter RequestOptionsParameter = new Parameter("options", "The request options", RequestOptionsParameterType, Constant.Default(RequestOptionsParameterType), false);
+
         private void WriteClientMethodDecleration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
-            var parameters = clientMethod.Parameters;
+            var parameters = clientMethod.Parameters.Append(RequestOptionsParameter);
 
             var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning) switch
             {
@@ -133,26 +191,34 @@ namespace AutoRest.CSharp.Generation.Writers
             });
 
             writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
-
-            if (clientMethod.SchemaDocumentations != null)
+            var schemas = new List<FormattableString>();
+            if (clientMethod.SchemaDocumentations.RequestBody != null)
             {
-                var schemas = clientMethod.SchemaDocumentations.Select(schemaDoc => (FormattableString)$@"
-Schema for <c>{schemaDoc.SchemaName}</c>:
-<list type=""table"">
-  <listheader>
-    <term>Name</term>
-    <term>Type</term>
-    <term>Required</term>
-    <term>Description</term>
-  </listheader>{schemaDoc.DocumentationRows.Select(row => (FormattableString)$@"
-  <item>
-    <term>{row.Name}</term>
-    <term>{row.Type}</term>
-    <term>{(row.Required ? "Yes" : "")}</term>
-    <term>{row.Description}</term>
-  </item>")}
-</list>");
+                var schema = (FormattableString)$@"
+Schema for <c>Request Body</c>:
+<code>{BuildSchemaFromDocs(clientMethod.SchemaDocumentations.RequestBody, true)}</code>
+";
+                schemas.Add(schema);
+            }
+            if (clientMethod.SchemaDocumentations.ResponseBody != null)
+            {
+                var schema = (FormattableString)$@"
+Schema for <c>Response Body</c>:
+<code>{BuildSchemaFromDocs(clientMethod.SchemaDocumentations.ResponseBody, false)}</code>
+";
+                schemas.Add(schema);
+            }
+            if (clientMethod.SchemaDocumentations.ResponseError != null)
+            {
+                var schema = (FormattableString)$@"
+Schema for <c>Response Error</c>:
+<code>{BuildSchemaFromDocs(clientMethod.SchemaDocumentations.ResponseError, false)}</code>
+";
+                schemas.Add(schema);
+            }
 
+            if (schemas.Count > 0)
+            {
                 writer.WriteXmlDocumentation("remarks", $"{schemas}");
             }
 
@@ -188,7 +254,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
                     {
                         if (statusCode.Code != null)
                         {
-                           writer.Line($"case {statusCode.Code}:");
+                            writer.Line($"case {statusCode.Code}:");
                         }
                         else
                         {
@@ -212,7 +278,8 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private const string PipelineField = "Pipeline";
+        private const string PipelineProperty = "Pipeline";
+        private const string PipelineField = "_pipeline";
         private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
         private const string APIVersionField = "apiVersion";
@@ -226,8 +293,9 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             writer.WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.");
-            writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineField}");
-            writer.AppendRaw("{ get; }\n");
+            writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineProperty}");
+            writer.LineRaw("{ get => _pipeline; }");
+            writer.Line($"private {typeof(HttpPipeline)} {PipelineField};");
 
             foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {
@@ -272,7 +340,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             }
         }
 
-        private void WriteEmptyConstructor (CodeWriter writer, LowLevelRestClient client)
+        private void WriteEmptyConstructor(CodeWriter writer, LowLevelRestClient client)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
             using (writer.Scope($"protected {client.Type.Name:D}()"))
@@ -281,7 +349,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             writer.Line();
         }
 
-        private CSharpType? GetCredentialType (SecurityScheme scheme)
+        private CSharpType? GetCredentialType(SecurityScheme scheme)
         {
             switch (scheme)
             {
@@ -292,13 +360,13 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
                 case NoAuthSecurity noAuthSecurityScheme:
                     return null;
                 default:
-                    throw new NotImplementedException ($"Unknown security scheme: {scheme.GetType()}");
+                    throw new NotImplementedException($"Unknown security scheme: {scheme.GetType()}");
             }
         }
 
-        private void WriteConstructor (CodeWriter writer, LowLevelRestClient client, SecurityScheme securityScheme, BuildContext context)
+        private void WriteConstructor(CodeWriter writer, LowLevelRestClient client, SecurityScheme securityScheme, BuildContext context)
         {
-            var ctorParams = client.GetConstructorParameters(GetCredentialType (securityScheme));
+            var ctorParams = client.GetConstructorParameters(GetCredentialType(securityScheme));
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             foreach (Parameter parameter in ctorParams)
@@ -317,7 +385,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
 
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks (ctorParams);
+                writer.WriteParameterNullChecks(ctorParams);
                 writer.Line();
 
                 writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");

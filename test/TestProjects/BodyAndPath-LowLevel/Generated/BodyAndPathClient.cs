@@ -18,7 +18,8 @@ namespace BodyAndPath_LowLevel
     public partial class BodyAndPathClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -46,7 +47,7 @@ namespace BodyAndPath_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -60,7 +61,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateCreateRequest(itemName, content, options);
+            using HttpMessage message = CreateCreateRequest(itemName, content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
@@ -98,7 +99,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateCreateRequest(itemName, content, options);
+            using HttpMessage message = CreateCreateRequest(itemName, content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
@@ -127,13 +128,9 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Create"/> and <see cref="CreateAsync"/> operations. </summary>
-        /// <param name="itemName"> item name. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateCreateRequest(string itemName, RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateCreateRequest(string itemName, RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -157,7 +154,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
+            using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
@@ -197,7 +194,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
+            using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
@@ -226,15 +223,9 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="CreateStream"/> and <see cref="CreateStreamAsync"/> operations. </summary>
-        /// <param name="itemNameStream"> item name. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="excluded"> Excluded connection Ids. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateCreateStreamRequest(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestOptions options = null)
+        private HttpMessage CreateCreateStreamRequest(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();

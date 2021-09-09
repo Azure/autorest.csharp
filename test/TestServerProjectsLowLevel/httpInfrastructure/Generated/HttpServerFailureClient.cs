@@ -17,7 +17,8 @@ namespace httpInfrastructure_LowLevel
     public partial class HttpServerFailureClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,19 +46,28 @@ namespace httpInfrastructure_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head501Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead501Request(options);
+            using HttpMessage message = CreateHead501Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
             scope.Start();
@@ -85,13 +95,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head501(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead501Request(options);
+            using HttpMessage message = CreateHead501Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
             scope.Start();
@@ -118,11 +137,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head501"/> and <see cref="Head501Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateHead501Request(RequestOptions options = null)
+        private HttpMessage CreateHead501Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -134,13 +151,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get501Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet501Request(options);
+            using HttpMessage message = CreateGet501Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
             scope.Start();
@@ -168,13 +194,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get501(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet501Request(options);
+            using HttpMessage message = CreateGet501Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
             scope.Start();
@@ -201,11 +236,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get501"/> and <see cref="Get501Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet501Request(RequestOptions options = null)
+        private HttpMessage CreateGet501Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -217,6 +250,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -224,7 +266,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost505Request(content, options);
+            using HttpMessage message = CreatePost505Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
@@ -252,6 +294,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -259,7 +310,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost505Request(content, options);
+            using HttpMessage message = CreatePost505Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
@@ -286,12 +337,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post505"/> and <see cref="Post505Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost505Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost505Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -305,6 +353,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -312,7 +369,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete505Request(content, options);
+            using HttpMessage message = CreateDelete505Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();
@@ -340,6 +397,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -347,7 +413,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete505Request(content, options);
+            using HttpMessage message = CreateDelete505Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();
@@ -374,12 +440,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete505"/> and <see cref="Delete505Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete505Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateDelete505Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();

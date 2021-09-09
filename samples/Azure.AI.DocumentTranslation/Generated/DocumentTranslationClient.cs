@@ -18,7 +18,8 @@ namespace Azure.AI.DocumentTranslation
     public partial class DocumentTranslationClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private string endpoint;
@@ -49,7 +50,7 @@ namespace Azure.AI.DocumentTranslation
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -67,179 +68,56 @@ namespace Azure.AI.DocumentTranslation
         /// </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>inputs</term>
-        ///     <term>BatchRequest[]</term>
-        ///     <term>Yes</term>
-        ///     <term>The input list of documents or folders containing documents</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>BatchRequest</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>source</term>
-        ///     <term>SourceInput</term>
-        ///     <term>Yes</term>
-        ///     <term>Source of the input documents</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>targets</term>
-        ///     <term>TargetInput[]</term>
-        ///     <term>Yes</term>
-        ///     <term>Location of the destination for the output</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>storageType</term>
-        ///     <term>&quot;Folder&quot; | &quot;File&quot;</term>
-        ///     <term></term>
-        ///     <term>Storage type of the input documents source string</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>SourceInput</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>sourceUrl</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Location of the folder / container or single file with your documents</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>filter</term>
-        ///     <term>DocumentFilter</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>language</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>Language code
-        /// If none is specified, we will perform auto detect on the document</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>storageSource</term>
-        ///     <term>&quot;AzureBlob&quot;</term>
-        ///     <term></term>
-        ///     <term>Storage Source</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>DocumentFilter</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>prefix</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>A case-sensitive prefix string to filter documents in the source path for translation. 
-        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>suffix</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>A case-sensitive suffix string to filter documents in the source path for translation. 
-        /// This is most often use for file extensions</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>TargetInput</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>targetUrl</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Location of the folder / container with your documents</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>category</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>Category / custom system for translation request</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>language</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Target Language</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>glossaries</term>
-        ///     <term>Glossary[]</term>
-        ///     <term></term>
-        ///     <term>List of Glossary</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>storageSource</term>
-        ///     <term>&quot;AzureBlob&quot;</term>
-        ///     <term></term>
-        ///     <term>Storage Source</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>Glossary</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>glossaryUrl</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Location of the glossary. 
-        /// We will use the file extension to extract the formatting if the format parameter is not supplied.
+        /// <code>{
+        ///   inputs: [
+        ///     {
+        ///       source: {
+        ///         sourceUrl: string (required),
+        ///         filter: {
+        ///           prefix: string,
+        ///           suffix: string
+        ///         },
+        ///         language: string,
+        ///         storageSource: &quot;AzureBlob&quot;
+        ///       } (required),
+        ///       targets: [
+        ///         {
+        ///           targetUrl: string (required),
+        ///           category: string,
+        ///           language: string (required),
+        ///           glossaries: [
+        ///             {
+        ///               glossaryUrl: string (required),
+        ///               format: string (required),
+        ///               version: string,
+        ///               storageSource: &quot;AzureBlob&quot;
+        ///             }
+        ///           ],
+        ///           storageSource: &quot;AzureBlob&quot;
+        ///         }
+        ///       ] (required),
+        ///       storageType: &quot;Folder&quot; | &quot;File&quot;
+        ///     }
+        ///   ] (required)
+        /// }
+        /// </code>
         /// 
-        /// If the translation language pair is not present in the glossary, it will not be applied</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>format</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Format</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>version</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>Optional Version.  If not specified, default is used.</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>storageSource</term>
-        ///     <term>&quot;AzureBlob&quot;</term>
-        ///     <term></term>
-        ///     <term>Storage Source</term>
-        ///   </item>
-        /// </list>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -248,7 +126,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStartTranslationRequest(content, options);
+            using HttpMessage message = CreateStartTranslationRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
@@ -290,179 +168,56 @@ namespace Azure.AI.DocumentTranslation
         /// </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>inputs</term>
-        ///     <term>BatchRequest[]</term>
-        ///     <term>Yes</term>
-        ///     <term>The input list of documents or folders containing documents</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>BatchRequest</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>source</term>
-        ///     <term>SourceInput</term>
-        ///     <term>Yes</term>
-        ///     <term>Source of the input documents</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>targets</term>
-        ///     <term>TargetInput[]</term>
-        ///     <term>Yes</term>
-        ///     <term>Location of the destination for the output</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>storageType</term>
-        ///     <term>&quot;Folder&quot; | &quot;File&quot;</term>
-        ///     <term></term>
-        ///     <term>Storage type of the input documents source string</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>SourceInput</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>sourceUrl</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Location of the folder / container or single file with your documents</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>filter</term>
-        ///     <term>DocumentFilter</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>language</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>Language code
-        /// If none is specified, we will perform auto detect on the document</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>storageSource</term>
-        ///     <term>&quot;AzureBlob&quot;</term>
-        ///     <term></term>
-        ///     <term>Storage Source</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>DocumentFilter</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>prefix</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>A case-sensitive prefix string to filter documents in the source path for translation. 
-        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>suffix</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>A case-sensitive suffix string to filter documents in the source path for translation. 
-        /// This is most often use for file extensions</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>TargetInput</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>targetUrl</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Location of the folder / container with your documents</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>category</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>Category / custom system for translation request</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>language</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Target Language</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>glossaries</term>
-        ///     <term>Glossary[]</term>
-        ///     <term></term>
-        ///     <term>List of Glossary</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>storageSource</term>
-        ///     <term>&quot;AzureBlob&quot;</term>
-        ///     <term></term>
-        ///     <term>Storage Source</term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>Glossary</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>glossaryUrl</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Location of the glossary. 
-        /// We will use the file extension to extract the formatting if the format parameter is not supplied.
+        /// <code>{
+        ///   inputs: [
+        ///     {
+        ///       source: {
+        ///         sourceUrl: string (required),
+        ///         filter: {
+        ///           prefix: string,
+        ///           suffix: string
+        ///         },
+        ///         language: string,
+        ///         storageSource: &quot;AzureBlob&quot;
+        ///       } (required),
+        ///       targets: [
+        ///         {
+        ///           targetUrl: string (required),
+        ///           category: string,
+        ///           language: string (required),
+        ///           glossaries: [
+        ///             {
+        ///               glossaryUrl: string (required),
+        ///               format: string (required),
+        ///               version: string,
+        ///               storageSource: &quot;AzureBlob&quot;
+        ///             }
+        ///           ],
+        ///           storageSource: &quot;AzureBlob&quot;
+        ///         }
+        ///       ] (required),
+        ///       storageType: &quot;Folder&quot; | &quot;File&quot;
+        ///     }
+        ///   ] (required)
+        /// }
+        /// </code>
         /// 
-        /// If the translation language pair is not present in the glossary, it will not be applied</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>format</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term>Format</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>version</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>Optional Version.  If not specified, default is used.</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>storageSource</term>
-        ///     <term>&quot;AzureBlob&quot;</term>
-        ///     <term></term>
-        ///     <term>Storage Source</term>
-        ///   </item>
-        /// </list>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -471,7 +226,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStartTranslationRequest(content, options);
+            using HttpMessage message = CreateStartTranslationRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
@@ -500,12 +255,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="StartTranslation"/> and <see cref="StartTranslationAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStartTranslationRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateStartTranslationRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -544,6 +296,58 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [
+        ///     {
+        ///       id: TranslationStatusId,
+        ///       createdDateTimeUtc: string (ISO 8601 Format),
+        ///       lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///       error: {
+        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///         message: string,
+        ///         target: string,
+        ///         innerError: {
+        ///           code: string,
+        ///           message: string,
+        ///           target: string,
+        ///           innerError: InnerTranslationError
+        ///         }
+        ///       },
+        ///       summary: {
+        ///         total: number,
+        ///         failed: number,
+        ///         success: number,
+        ///         inProgress: number,
+        ///         notYetStarted: number,
+        ///         cancelled: number,
+        ///         totalCharacterCharged: number
+        ///       }
+        ///     }
+        ///   ],
+        ///   @nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -576,7 +380,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+            using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
             scope.Start();
@@ -630,6 +434,58 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [
+        ///     {
+        ///       id: TranslationStatusId,
+        ///       createdDateTimeUtc: string (ISO 8601 Format),
+        ///       lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///       error: {
+        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///         message: string,
+        ///         target: string,
+        ///         innerError: {
+        ///           code: string,
+        ///           message: string,
+        ///           target: string,
+        ///           innerError: InnerTranslationError
+        ///         }
+        ///       },
+        ///       summary: {
+        ///         total: number,
+        ///         failed: number,
+        ///         success: number,
+        ///         inProgress: number,
+        ///         notYetStarted: number,
+        ///         cancelled: number,
+        ///         totalCharacterCharged: number
+        ///       }
+        ///     }
+        ///   ],
+        ///   @nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -662,7 +518,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+            using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
             scope.Start();
@@ -691,37 +547,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetTranslationsStatus"/> and <see cref="GetTranslationsStatusAsync"/> operations. </summary>
-        /// <param name="top">
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        ///             
-        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
-        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
-        ///             
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
-        /// </param>
-        /// <param name="skip">
-        /// $skip indicates the number of records to skip from the list of records held by the server based on the sorting method specified.  By default, we sort by descending start time.
-        ///             
-        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
-        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
-        ///             
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
-        /// </param>
-        /// <param name="maxpagesize">
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// Clients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server&apos;s default page size.
-        /// </param>
-        /// <param name="ids"> Ids to use in filtering. </param>
-        /// <param name="statuses"> Statuses to use in filtering. </param>
-        /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
-        /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
-        /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetTranslationsStatusRequest(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        private HttpMessage CreateGetTranslationsStatusRequest(int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -766,6 +594,49 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   path: string,
+        ///   sourcePath: string,
+        ///   createdDateTimeUtc: string (ISO 8601 Format),
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   to: string,
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   },
+        ///   progress: number,
+        ///   id: DocumentStatusId,
+        ///   characterCharged: number
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="options"> The request options. </param>
@@ -774,7 +645,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, options);
+            using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
             scope.Start();
@@ -804,6 +675,49 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   path: string,
+        ///   sourcePath: string,
+        ///   createdDateTimeUtc: string (ISO 8601 Format),
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   to: string,
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   },
+        ///   progress: number,
+        ///   id: DocumentStatusId,
+        ///   characterCharged: number
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="options"> The request options. </param>
@@ -812,7 +726,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, options);
+            using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
             scope.Start();
@@ -841,13 +755,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDocumentStatus"/> and <see cref="GetDocumentStatusAsync"/> operations. </summary>
-        /// <param name="id"> Format - uuid.  The batch id. </param>
-        /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDocumentStatusRequest(Guid id, Guid documentId, RequestOptions options = null)
+        private HttpMessage CreateGetDocumentStatusRequest(Guid id, Guid documentId)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -866,6 +776,53 @@ namespace Azure.AI.DocumentTranslation
         /// Returns the status for a document translation request.
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: TranslationStatusId,
+        ///   createdDateTimeUtc: string (ISO 8601 Format),
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   },
+        ///   summary: {
+        ///     total: number,
+        ///     failed: number,
+        ///     success: number,
+        ///     inProgress: number,
+        ///     notYetStarted: number,
+        ///     cancelled: number,
+        ///     totalCharacterCharged: number
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -873,7 +830,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTranslationStatusRequest(id, options);
+            using HttpMessage message = CreateGetTranslationStatusRequest(id);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
             scope.Start();
@@ -906,6 +863,53 @@ namespace Azure.AI.DocumentTranslation
         /// Returns the status for a document translation request.
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: TranslationStatusId,
+        ///   createdDateTimeUtc: string (ISO 8601 Format),
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   },
+        ///   summary: {
+        ///     total: number,
+        ///     failed: number,
+        ///     success: number,
+        ///     inProgress: number,
+        ///     notYetStarted: number,
+        ///     cancelled: number,
+        ///     totalCharacterCharged: number
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -913,7 +917,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTranslationStatusRequest(id, options);
+            using HttpMessage message = CreateGetTranslationStatusRequest(id);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
             scope.Start();
@@ -942,12 +946,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetTranslationStatus"/> and <see cref="GetTranslationStatusAsync"/> operations. </summary>
-        /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetTranslationStatusRequest(Guid id, RequestOptions options = null)
+        private HttpMessage CreateGetTranslationStatusRequest(Guid id)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -967,6 +968,53 @@ namespace Azure.AI.DocumentTranslation
         /// All documents that have completed translation will not be cancelled and will be charged.
         /// All pending documents will be cancelled if possible.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: TranslationStatusId,
+        ///   createdDateTimeUtc: string (ISO 8601 Format),
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   },
+        ///   summary: {
+        ///     total: number,
+        ///     failed: number,
+        ///     success: number,
+        ///     inProgress: number,
+        ///     notYetStarted: number,
+        ///     cancelled: number,
+        ///     totalCharacterCharged: number
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -974,7 +1022,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateCancelTranslationRequest(id, options);
+            using HttpMessage message = CreateCancelTranslationRequest(id);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
             scope.Start();
@@ -1010,6 +1058,53 @@ namespace Azure.AI.DocumentTranslation
         /// All documents that have completed translation will not be cancelled and will be charged.
         /// All pending documents will be cancelled if possible.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: TranslationStatusId,
+        ///   createdDateTimeUtc: string (ISO 8601 Format),
+        ///   lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///   status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   },
+        ///   summary: {
+        ///     total: number,
+        ///     failed: number,
+        ///     success: number,
+        ///     inProgress: number,
+        ///     notYetStarted: number,
+        ///     cancelled: number,
+        ///     totalCharacterCharged: number
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1017,7 +1112,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateCancelTranslationRequest(id, options);
+            using HttpMessage message = CreateCancelTranslationRequest(id);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
             scope.Start();
@@ -1046,12 +1141,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="CancelTranslation"/> and <see cref="CancelTranslationAsync"/> operations. </summary>
-        /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateCancelTranslationRequest(Guid id, RequestOptions options = null)
+        private HttpMessage CreateCancelTranslationRequest(Guid id)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1086,6 +1178,54 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [
+        ///     {
+        ///       path: string,
+        ///       sourcePath: string,
+        ///       createdDateTimeUtc: string (ISO 8601 Format),
+        ///       lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///       to: string,
+        ///       error: {
+        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///         message: string,
+        ///         target: string,
+        ///         innerError: {
+        ///           code: string,
+        ///           message: string,
+        ///           target: string,
+        ///           innerError: InnerTranslationError
+        ///         }
+        ///       },
+        ///       progress: number,
+        ///       id: DocumentStatusId,
+        ///       characterCharged: number
+        ///     }
+        ///   ],
+        ///   @nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -1119,7 +1259,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+            using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
             scope.Start();
@@ -1170,6 +1310,54 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [
+        ///     {
+        ///       path: string,
+        ///       sourcePath: string,
+        ///       createdDateTimeUtc: string (ISO 8601 Format),
+        ///       lastActionDateTimeUtc: string (ISO 8601 Format),
+        ///       status: &quot;NotStarted&quot; | &quot;Running&quot; | &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;Cancelled&quot; | &quot;Cancelling&quot; | &quot;ValidationFailed&quot;,
+        ///       to: string,
+        ///       error: {
+        ///         code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///         message: string,
+        ///         target: string,
+        ///         innerError: {
+        ///           code: string,
+        ///           message: string,
+        ///           target: string,
+        ///           innerError: InnerTranslationError
+        ///         }
+        ///       },
+        ///       progress: number,
+        ///       id: DocumentStatusId,
+        ///       characterCharged: number
+        ///     }
+        ///   ],
+        ///   @nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -1203,7 +1391,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+            using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
             scope.Start();
@@ -1232,38 +1420,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDocumentsStatus"/> and <see cref="GetDocumentsStatusAsync"/> operations. </summary>
-        /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="top">
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        ///             
-        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
-        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
-        ///             
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
-        /// </param>
-        /// <param name="skip">
-        /// $skip indicates the number of records to skip from the list of records held by the server based on the sorting method specified.  By default, we sort by descending start time.
-        ///             
-        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
-        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
-        ///             
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
-        /// </param>
-        /// <param name="maxpagesize">
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        ///             
-        /// Clients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server&apos;s default page size.
-        /// </param>
-        /// <param name="ids"> Ids to use in filtering. </param>
-        /// <param name="statuses"> Statuses to use in filtering. </param>
-        /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
-        /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
-        /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDocumentsStatusRequest(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        private HttpMessage CreateGetDocumentsStatusRequest(Guid id, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1313,13 +1472,45 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [
+        ///     {
+        ///       format: string,
+        ///       fileExtensions: [string],
+        ///       contentTypes: [string],
+        ///       defaultVersion: string,
+        ///       versions: [string]
+        ///     }
+        ///   ]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSupportedDocumentFormatsRequest(options);
+            using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
             scope.Start();
@@ -1352,13 +1543,45 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [
+        ///     {
+        ///       format: string,
+        ///       fileExtensions: [string],
+        ///       contentTypes: [string],
+        ///       defaultVersion: string,
+        ///       versions: [string]
+        ///     }
+        ///   ]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetSupportedDocumentFormats(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSupportedDocumentFormatsRequest(options);
+            using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
             scope.Start();
@@ -1387,11 +1610,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetSupportedDocumentFormats"/> and <see cref="GetSupportedDocumentFormatsAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetSupportedDocumentFormatsRequest(RequestOptions options = null)
+        private HttpMessage CreateGetSupportedDocumentFormatsRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1407,13 +1628,45 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [
+        ///     {
+        ///       format: string,
+        ///       fileExtensions: [string],
+        ///       contentTypes: [string],
+        ///       defaultVersion: string,
+        ///       versions: [string]
+        ///     }
+        ///   ]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(options);
+            using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
             scope.Start();
@@ -1446,13 +1699,45 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [
+        ///     {
+        ///       format: string,
+        ///       fileExtensions: [string],
+        ///       contentTypes: [string],
+        ///       defaultVersion: string,
+        ///       versions: [string]
+        ///     }
+        ///   ]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetSupportedGlossaryFormats(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(options);
+            using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
             scope.Start();
@@ -1481,11 +1766,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetSupportedGlossaryFormats"/> and <see cref="GetSupportedGlossaryFormatsAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetSupportedGlossaryFormatsRequest(RequestOptions options = null)
+        private HttpMessage CreateGetSupportedGlossaryFormatsRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1498,13 +1781,37 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [&quot;AzureBlob&quot;]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSupportedStorageSourcesRequest(options);
+            using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
             scope.Start();
@@ -1534,13 +1841,37 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [&quot;AzureBlob&quot;]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   error: {
+        ///     code: &quot;InvalidRequest&quot; | &quot;InvalidArgument&quot; | &quot;InternalServerError&quot; | &quot;ServiceUnavailable&quot; | &quot;ResourceNotFound&quot; | &quot;Unauthorized&quot; | &quot;RequestRateTooHigh&quot;,
+        ///     message: string,
+        ///     target: string,
+        ///     innerError: {
+        ///       code: string,
+        ///       message: string,
+        ///       target: string,
+        ///       innerError: InnerTranslationError
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetSupportedStorageSources(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSupportedStorageSourcesRequest(options);
+            using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
             scope.Start();
@@ -1569,11 +1900,9 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetSupportedStorageSources"/> and <see cref="GetSupportedStorageSourcesAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetSupportedStorageSourcesRequest(RequestOptions options = null)
+        private HttpMessage CreateGetSupportedStorageSourcesRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
