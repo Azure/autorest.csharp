@@ -229,13 +229,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
 
-        public OperationGroup? GetOperationGroupForNonResource(string modelName)
-        {
-            OperationGroup? result = null;
-            _nonResourceOperationGroupMapping.TryGetValue(modelName, out result);
-            return result;
-        }
-
         public ResourceContainer? GetResourceContainer(OperationGroup operationGroup)
         {
             if (EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out var result))
@@ -248,18 +241,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return null;
-        }
-
-        internal ResourceData? GetResourceDataFromSchema(string schemaName)
-        {
-            List<OperationGroup>? operationGroups;
-            OperationGroup opGroup;
-            if (_operationGroups.TryGetValue(schemaName, out operationGroups))
-                opGroup = operationGroups.FirstOrDefault();
-            else
-                return null;
-
-            return GetResourceData(opGroup);
         }
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
@@ -293,23 +274,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
         public MgmtRestClient GetRestClient(OperationGroup operationGroup) => EnsureRestClients()[operationGroup];
 
-        public OperationGroup? GetOperationGroupBySchema(Schema schema)
-        {
-            List<OperationGroup>? operationGroups;
-            if (_operationGroups.TryGetValue(schema.Name, out operationGroups))
-                return operationGroups.FirstOrDefault();
-            return null;
-        }
-
         internal LongRunningOperation GetLongRunningOperation(Operation op) => EnsureLongRunningOperations()[op];
 
         internal NonLongRunningOperation GetNonLongRunningOperation(Operation op) => EnsureNonLongRunningOperations()[op];
-
-        internal MgmtObjectType? GetMgmtObjectFromModelName(string name)
-        {
-            TypeProvider? provider = _nameToTypeProvider[name];
-            return provider as MgmtObjectType;
-        }
 
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
@@ -325,17 +292,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _restClients;
-        }
-
-        private OperationGroup? GetRestApiOperationGroup()
-        {
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                if (operationGroup.Key == "Operations")
-                    return operationGroup;
-            }
-
-            return null;
         }
 
         public IEnumerable<MgmtNonResourceOperation> GetNonResourceOperations(string parent)
