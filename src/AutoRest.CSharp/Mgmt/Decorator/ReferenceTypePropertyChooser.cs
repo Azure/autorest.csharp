@@ -82,13 +82,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType>{{replacementType, typeToReplace.Type}}))
                 {
                     result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
-                    // SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema, result);
                     _valueCache.TryAdd(typeToReplace.ObjectSchema, result);
                     return result;
                 }
             }
             _valueCache.TryAdd(typeToReplace.ObjectSchema, null);
-            // SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema, null);
             return null;
         }
 

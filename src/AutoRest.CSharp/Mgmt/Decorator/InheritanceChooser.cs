@@ -34,12 +34,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
                 {
                     result = GetCSharpType(operationGroup, originalType, parentType);
-                    // SchemaMatchTracker.SetExactMatch(originalType.ObjectSchema, result);
                     _valueCache.TryAdd(originalType.ObjectSchema, result);
                     return result;
                 }
             }
-            // SchemaMatchTracker.SetExactMatch(originalType.ObjectSchema, null);
             _valueCache.TryAdd(originalType.ObjectSchema, null);
             return null;
         }
