@@ -10,12 +10,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string description, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
         {
-            if (string.IsNullOrWhiteSpace(description))
-            {
-                Description = $"The {declaration.Name}";
-
-            }
-            else Description = description;
+            Description = string.IsNullOrWhiteSpace(description) ? $"The {declaration.Name}" : description;
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
             OptionalViaNullability = optionalViaNullability;
