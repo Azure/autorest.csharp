@@ -17,12 +17,12 @@ using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class Resource : TypeProvider
     {
-        private Type? _resourceIdentifierType;
         private BuildContext<MgmtOutputLibrary> _context;
         private IEnumerable<ClientMethod>? _methods;
         private IEnumerable<PagingMethod>? _pagingMethods;
@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public ResourceData ResourceData => _context.Library.GetResourceData(OperationGroup);
 
-        public Type ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(_context);
+        public Type ResourceIdentifierType => typeof(ResourceIdentifier);
 
         public IEnumerable<ClientMethod> Methods => _methods ??= GetMethodsInScope();
 
