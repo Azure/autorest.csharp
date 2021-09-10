@@ -17,4 +17,6 @@ operation-group-to-resource:
    NonResourceModel1s: NonResource
 operation-group-to-parent:
    NonResourceModel1s: resourceGroups
+request-path-is-non-resource:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
 ```

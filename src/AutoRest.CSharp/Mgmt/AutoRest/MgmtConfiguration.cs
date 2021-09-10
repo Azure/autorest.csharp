@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             string[] operationGroupIsTuple,
             string[] operationGroupIsExtension,
             string[] operationGroupsToOmit,
+            string[] requestPathIsNonResource,
             JsonElement? operationGroupToResourceType = default,
             JsonElement? operationGroupToResource = default,
             JsonElement? operationGroupToParent = default,
@@ -41,6 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupIsTuple = operationGroupIsTuple;
             OperationGroupIsExtension = operationGroupIsExtension;
             OperationGroupsToOmit = operationGroupsToOmit;
+            RequestPathIsNonResource = requestPathIsNonResource;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
         }
 
@@ -53,6 +55,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public string[] OperationGroupIsTuple { get; }
         public string[] OperationGroupIsExtension { get; }
         public string[] OperationGroupsToOmit { get; }
+        public string[] RequestPathIsNonResource { get; }
+
         public bool IsArmCore { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
@@ -61,6 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<string[]?>("operation-group-is-tuple").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("operation-group-is-extension").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                autoRest.GetValue<string[]?>("request-path-is-non-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult(),
@@ -79,6 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(OperationGroupToSingletonResource), OperationGroupToSingletonResource);
             WriteNonEmptySettings(writer, nameof(OperationGroupIsTuple), OperationGroupIsTuple);
             WriteNonEmptySettings(writer, nameof(OperationGroupIsExtension), OperationGroupIsExtension);
+            WriteNonEmptySettings(writer, nameof(RequestPathIsNonResource), RequestPathIsNonResource);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToResource), RequestPathToResource);
             if (IsArmCore)
@@ -90,6 +96,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(OperationGroupIsTuple), out var operationGroupIsTuple);
             root.TryGetProperty(nameof(OperationGroupIsExtension), out var operationGroupIsExtension);
             root.TryGetProperty(nameof(OperationGroupsToOmit), out var operationGroupsToOmit);
+            root.TryGetProperty(nameof(RequestPathIsNonResource), out var requestPathIsNonResource);
             root.TryGetProperty(nameof(OperationGroupToResourceType), out var operationGroupToResourceType);
             root.TryGetProperty(nameof(OperationGroupToResource), out var operationGroupToResource);
             root.TryGetProperty(nameof(OperationGroupToParent), out var operationGroupToParent);
@@ -109,12 +116,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : new string[0];
 
+            var requestPathIsNonResourceList = requestPathIsNonResource.ValueKind == JsonValueKind.Array
+                ? requestPathIsNonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : new string[0];
+
             root.TryGetProperty("ArmCore", out var isArmCore);
 
             return new MgmtConfiguration(
                 operationGroupIsTupleList,
                 operationGroupIsExtensionList,
                 operationGroupList,
+                requestPathIsNonResourceList,
                 operationGroupToResourceType,
                 operationGroupToResource,
                 operationGroupToParent,

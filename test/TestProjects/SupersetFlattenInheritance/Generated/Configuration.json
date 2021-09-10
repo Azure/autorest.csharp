@@ -15,5 +15,8 @@
   },
   "OperationGroupToParent": {
     "NonResourceModel1s": "resourceGroups"
-  }
+  },
+  "RequestPathIsNonResource": [
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}"
+  ]
 }

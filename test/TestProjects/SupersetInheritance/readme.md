@@ -15,4 +15,7 @@ operation-group-to-resource:
 operation-group-to-parent:
    SupersetModel2s: resourceGroups
    SupersetModel3s: resourceGroups
+request-path-is-non-resource:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
 ```
