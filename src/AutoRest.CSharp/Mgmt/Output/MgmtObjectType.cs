@@ -33,8 +33,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultName => GetDefaultName(ObjectSchema);
 
-        internal OperationGroup? OperationGroup => _context.Library.GetOperationGroupBySchema(ObjectSchema);
-
         protected string GetDefaultName(ObjectSchema objectSchema)
         {
             var name = objectSchema.CSharpName();
@@ -114,7 +112,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return inheritedType;
 
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
-            var operationGroupToUse = OperationGroup ?? GetOperationGroupFromChildren();
             if (typeToReplace != null)
             {
                 var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties, _context);
@@ -129,41 +126,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected CSharpType? CreateInheritedTypeWithNoExtraMatch()
         {
             return base.CreateInheritedType();
-        }
-
-        private OperationGroup? GetOperationGroupFromChildren()
-        {
-            OperationGroup? operationGroup = null;
-            var children = ObjectSchema.Children;
-            if (children == null)
-                return null;
-
-            foreach (var child in children.Immediate)
-            {
-                var resourceData = _context.Library.GetResourceDataFromSchema(child.Name);
-                if (resourceData != null)
-                {
-                    return resourceData.OperationGroup;
-                }
-                else
-                {
-                    operationGroup = _context.Library.GetOperationGroupForNonResource(child.Name);
-                    if (operationGroup != null)
-                        return operationGroup;
-
-                    // child is Model not Data
-                    MgmtObjectType? mgmtObject = _context.Library.GetMgmtObjectFromModelName(child.Name);
-                    if (mgmtObject != null)
-                    {
-                        operationGroup = mgmtObject.GetOperationGroupFromChildren();
-                        if (operationGroup != null)
-                            return operationGroup;
-
-                    }
-                }
-            }
-
-            return operationGroup;
         }
 
         public override ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
