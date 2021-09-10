@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _valueCache.TryGetValue(schema, out result);
         }
 
-        public static CSharpType? GetExactMatch(OperationGroup? operationGroup, MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
         {
             if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
                 {
-                    result = GetCSharpType(operationGroup, originalType, parentType);
+                    result = GetCSharpType(originalType, parentType);
                     _valueCache.TryAdd(originalType.ObjectSchema, result);
                     return result;
                 }
@@ -42,24 +42,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        public static CSharpType? GetSupersetMatch(OperationGroup? operationGroup, MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
         {
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
             {
                 if (IsSuperset(parentType, properties))
                 {
-                    return GetCSharpType(operationGroup, originalType, parentType);
+                    return GetCSharpType(originalType, parentType);
                 }
             }
             return null;
         }
 
-        private static CSharpType GetCSharpType(OperationGroup? operationGroup, MgmtObjectType originalType, Type parentType)
+        private static CSharpType GetCSharpType(MgmtObjectType originalType, Type parentType)
         {
-            var newParentType = operationGroup == null || !parentType.IsGenericType
-                ? parentType
-                : parentType.GetGenericTypeDefinition().MakeGenericType(operationGroup.GetResourceIdentifierType(originalType.Context));
-            return CSharpType.FromSystemType(originalType.Context, newParentType);
+            return CSharpType.FromSystemType(originalType.Context, parentType);
         }
 
         private static bool IsSuperset(System.Type parentType, ObjectTypeProperty[] properties)

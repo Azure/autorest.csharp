@@ -117,13 +117,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             var operationGroupToUse = OperationGroup ?? GetOperationGroupFromChildren();
             if (typeToReplace != null)
             {
-                var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties, _context);
+                var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties, _context);
                 if (match != null)
                 {
                     inheritedType = match;
                 }
             }
-            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(operationGroupToUse, this, MyProperties, _context) : inheritedType;
+            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(this, MyProperties, _context) : inheritedType;
         }
 
         protected CSharpType? CreateInheritedTypeWithNoExtraMatch()
