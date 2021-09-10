@@ -426,11 +426,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
                 if (operations != null)
                 {
+                    // we are iterating over the ResourceSchemaMap, the value can only be [ResourceData]s
+                    var resourceData = (ResourceData)entry.Value;
                     foreach (var operation in operations)
                     {
                         if (!_resourceData.ContainsKey(operation))
                         {
-                            var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
                             _resourceData.Add(operation, resourceData);
                         }
                     }
@@ -624,7 +625,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildResourceModel(Schema schema) => schema switch
         {
-            ObjectSchema objectSchema => new ResourceData(objectSchema, GetOperationGroupBySchema(objectSchema)!, _context),
+            ObjectSchema objectSchema => new ResourceData(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
 
