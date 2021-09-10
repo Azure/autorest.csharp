@@ -306,16 +306,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return null;
         }
 
-        internal ResourceData? GetResourceDataFromSchema(string schemaName)
-        {
-            if (_resourceNameToRawOperationSets.TryGetValue(schemaName, out var operationSets))
-            {
-                var operationSet = operationSets.First();
-                return EnsureResourceData()[operationSet.RequestPath];
-            }
-            return null;
-        }
-
         public ResourceData GetResourceData(OperationGroup operationGroup)
         {
             if (TryGetResourceData(operationGroup, out var resourceData))
@@ -363,12 +353,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         internal NonLongRunningOperation GetNonLongRunningOperation(Operation op) => EnsureNonLongRunningOperations()[op];
 
-        internal MgmtObjectType? GetMgmtObjectFromModelName(string name)
-        {
-            TypeProvider? provider = _nameToTypeProvider[name];
-            return provider as MgmtObjectType;
-        }
-
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
             if (_restClients != null)
@@ -383,17 +367,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _restClients;
-        }
-
-        private OperationGroup? GetRestApiOperationGroup()
-        {
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                if (operationGroup.Key == "Operations")
-                    return operationGroup;
-            }
-
-            return null;
         }
 
         public IEnumerable<MgmtNonResourceOperation> GetNonResourceOperations(string parent)
