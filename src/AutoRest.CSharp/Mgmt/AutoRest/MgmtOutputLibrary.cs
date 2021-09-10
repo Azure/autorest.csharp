@@ -498,11 +498,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var schema = entry.Key;
                 if (ResourceNameToRequestPathMap.TryGetValue(schema.Name, out var requestPaths))
                 {
+                    // ensure different request paths are to the same resource data
+                    var resourceData = (ResourceData)entry.Value;
                     foreach (var requestPath in requestPaths)
                     {
                         if (!_rawRequestPathToResourceData.ContainsKey(requestPath))
                         {
-                            var resourceData = new ResourceData((ObjectSchema)schema, _context);
                             _rawRequestPathToResourceData.Add(requestPath, resourceData);
                         }
                     }
