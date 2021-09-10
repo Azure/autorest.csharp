@@ -56,7 +56,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<Schema> _allSchemas;
         private Dictionary<Operation, MgmtLongRunningOperation>? _longRunningOperations;
         private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
-        private Dictionary<string, OperationGroup> _nonResourceOperationGroupMapping;
 
         private Dictionary<string, string> _mergedOperations;
 
@@ -91,7 +90,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _rawRequestPathToOperations = new Dictionary<string, RawOperationSet>();
             _resourceNameToRawOperationSets = new Dictionary<string, List<RawOperationSet>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
-            _nonResourceOperationGroupMapping = new Dictionary<string, OperationGroup>();
             _mergedOperations = _mgmtConfiguration.MergeOperations.SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key))).ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
@@ -294,13 +292,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
 
-        public OperationGroup? GetOperationGroupForNonResource(string modelName)
-        {
-            OperationGroup? result = null;
-            _nonResourceOperationGroupMapping.TryGetValue(modelName, out result);
-            return result;
-        }
-
         public ResourceContainer? GetResourceContainer(OperationGroup operationGroup)
         {
             if (EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out var result))
@@ -367,13 +358,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <param name="operationGroup">OperationGroup object.</param>
         /// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
         public MgmtRestClient GetRestClient(OperationGroup operationGroup) => EnsureRestClients()[operationGroup];
-
-        public OperationGroup? GetOperationGroupBySchema(Schema schema)
-        {
-            if (_resourceNameToRawOperationSets.TryGetValue(schema.Name, out var rawOperationSets))
-                return rawOperationSets.FirstOrDefault()?.Operations.FirstOrDefault()?.Item2;
-            return null;
-        }
 
         internal LongRunningOperation GetLongRunningOperation(Operation op) => EnsureLongRunningOperations()[op];
 
@@ -748,7 +732,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         // TODO -- this will be removed after everything is based on request path
                         if (operationGroup.IsResource(_mgmtConfiguration))
                             continue;
-                        AddNonResourceOperationGroupMapping(operationGroup);
                         AddToChildNonResourceOperationGroupMap(operationGroup);
                     }
                 }
@@ -766,18 +749,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             else
             {
                 _childNonResourceOperationGroups[parent] = new HashSet<OperationGroup>() { operationGroup };
-            }
-        }
-
-        private void AddNonResourceOperationGroupMapping(OperationGroup operationsGroup)
-        {
-            foreach (var operation in operationsGroup.Operations.Where(o => o.Language.Default.Name == "Get"))
-            {
-                var responseSchema = operation.Responses.First().ResponseSchema;
-                if (responseSchema != null)
-                {
-                    _nonResourceOperationGroupMapping[responseSchema.Name] = operationsGroup;
-                }
             }
         }
 
