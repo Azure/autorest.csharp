@@ -3,20 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager;
-using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -44,6 +36,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     foreach (var resource in Context.Library.ArmResources)
                     {
+                        if (!resource.OperationGroup.IsAncestorResourceTypeTenant(Context))
+                            continue;
                         _writer.Line($"#region {resource.Type.Name}");
                         WriteExtensionGetResourceFromIdMethod(_writer, resource);
                         _writer.LineRaw("#endregion");
