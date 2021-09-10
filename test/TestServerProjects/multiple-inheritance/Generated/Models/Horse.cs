@@ -13,7 +13,7 @@ namespace multiple_inheritance.Models
     public partial class Horse : Pet
     {
         /// <summary> Initializes a new instance of Horse. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> The Name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Horse(string name) : base(name)
         {
@@ -24,8 +24,8 @@ namespace multiple_inheritance.Models
         }
 
         /// <summary> Initializes a new instance of Horse. </summary>
-        /// <param name="name"></param>
-        /// <param name="isAShowHorse"></param>
+        /// <param name="name"> The Name. </param>
+        /// <param name="isAShowHorse"> The IsAShowHorse. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Horse(string name, bool? isAShowHorse) : base(name)
         {
@@ -37,6 +37,7 @@ namespace multiple_inheritance.Models
             IsAShowHorse = isAShowHorse;
         }
 
+        /// <summary> The IsAShowHorse. </summary>
         public bool? IsAShowHorse { get; set; }
     }
 }

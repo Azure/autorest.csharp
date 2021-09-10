@@ -16,14 +16,14 @@ namespace ModelShapes.Models
     public partial class InputModel
     {
         /// <summary> Initializes a new instance of InputModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredStringList"></param>
-        /// <param name="requiredIntList"></param>
-        /// <param name="requiredNullableString"></param>
-        /// <param name="requiredNullableInt"></param>
-        /// <param name="requiredNullableStringList"></param>
-        /// <param name="requiredNullableIntList"></param>
+        /// <param name="requiredString"> The RequiredString. </param>
+        /// <param name="requiredInt"> The RequiredInt. </param>
+        /// <param name="requiredStringList"> The RequiredStringList. </param>
+        /// <param name="requiredIntList"> The RequiredIntList. </param>
+        /// <param name="requiredNullableString"> The RequiredNullableString. </param>
+        /// <param name="requiredNullableInt"> The RequiredNullableInt. </param>
+        /// <param name="requiredNullableStringList"> The RequiredNullableStringList. </param>
+        /// <param name="requiredNullableIntList"> The RequiredNullableIntList. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredStringList"/>, or <paramref name="requiredIntList"/> is null. </exception>
         public InputModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
         {
@@ -54,21 +54,37 @@ namespace ModelShapes.Models
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
         }
 
+        /// <summary> The RequiredString. </summary>
         public string RequiredString { get; }
+        /// <summary> The RequiredInt. </summary>
         public int RequiredInt { get; }
+        /// <summary> The RequiredStringList. </summary>
         public IList<string> RequiredStringList { get; }
+        /// <summary> The RequiredIntList. </summary>
         public IList<int> RequiredIntList { get; }
+        /// <summary> The NonRequiredString. </summary>
         public string NonRequiredString { get; set; }
+        /// <summary> The NonRequiredInt. </summary>
         public int? NonRequiredInt { get; set; }
+        /// <summary> The NonRequiredStringList. </summary>
         public IList<string> NonRequiredStringList { get; }
+        /// <summary> The NonRequiredIntList. </summary>
         public IList<int> NonRequiredIntList { get; }
+        /// <summary> The RequiredNullableString. </summary>
         public string RequiredNullableString { get; }
+        /// <summary> The RequiredNullableInt. </summary>
         public int? RequiredNullableInt { get; }
+        /// <summary> The RequiredNullableStringList. </summary>
         public IList<string> RequiredNullableStringList { get; set; }
+        /// <summary> The RequiredNullableIntList. </summary>
         public IList<int> RequiredNullableIntList { get; set; }
+        /// <summary> The NonRequiredNullableString. </summary>
         public string NonRequiredNullableString { get; set; }
+        /// <summary> The NonRequiredNullableInt. </summary>
         public int? NonRequiredNullableInt { get; set; }
+        /// <summary> The NonRequiredNullableStringList. </summary>
         public IList<string> NonRequiredNullableStringList { get; set; }
+        /// <summary> The NonRequiredNullableIntList. </summary>
         public IList<int> NonRequiredNullableIntList { get; set; }
     }
 }

@@ -271,9 +271,9 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Initializes a new instance of SentimentConfidenceScorePerLabel. </summary>
-        /// <param name="positive"></param>
-        /// <param name="neutral"></param>
-        /// <param name="negative"></param>
+        /// <param name="positive"> The Positive. </param>
+        /// <param name="neutral"> The Neutral. </param>
+        /// <param name="negative"> The Negative. </param>
         /// <returns> A new <see cref="Models.SentimentConfidenceScorePerLabel"/> instance for mocking. </returns>
         public static SentimentConfidenceScorePerLabel SentimentConfidenceScorePerLabel(double positive = default, double neutral = default, double negative = default)
         {

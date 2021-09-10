@@ -22,12 +22,13 @@ namespace MgmtSingleton
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="new"></param>
+        /// <param name="new"> The New. </param>
         internal SubscriptionParentSingletonData(ResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
         {
             New = @new;
         }
 
+        /// <summary> The New. </summary>
         public string New { get; set; }
     }
 }

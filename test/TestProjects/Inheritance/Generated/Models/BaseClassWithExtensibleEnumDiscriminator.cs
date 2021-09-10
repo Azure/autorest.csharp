@@ -15,6 +15,7 @@ namespace Inheritance.Models
         {
         }
 
+        /// <summary> The DiscriminatorProperty. </summary>
         internal BaseClassWithEntensibleEnumDiscriminatorEnum DiscriminatorProperty { get; set; }
     }
 }

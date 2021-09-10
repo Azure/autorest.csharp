@@ -19,12 +19,13 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Initializes a new instance of SubResourceModel2Data. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="foo"></param>
+        /// <param name="foo"> The Foo. </param>
         internal SubResourceModel2Data(string id, string foo) : base(id)
         {
             Foo = foo;
         }
 
+        /// <summary> The Foo. </summary>
         public string Foo { get; set; }
     }
 }

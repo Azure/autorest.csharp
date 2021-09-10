@@ -17,16 +17,18 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> Initializes a new instance of NotFoundErrorBase. </summary>
-        /// <param name="someBaseProp"></param>
-        /// <param name="reason"></param>
-        /// <param name="whatNotFound"></param>
+        /// <param name="someBaseProp"> The SomeBaseProp. </param>
+        /// <param name="reason"> The Reason. </param>
+        /// <param name="whatNotFound"> The WhatNotFound. </param>
         internal NotFoundErrorBase(string someBaseProp, string reason, string whatNotFound) : base(someBaseProp)
         {
             Reason = reason;
             WhatNotFound = whatNotFound ?? "NotFoundErrorBase";
         }
 
+        /// <summary> The Reason. </summary>
         public string Reason { get; }
+        /// <summary> The WhatNotFound. </summary>
         internal string WhatNotFound { get; set; }
     }
 }

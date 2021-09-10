@@ -16,12 +16,13 @@ namespace TypeSchemaMapping.Models
         }
 
         /// <summary> Initializes a new instance of AbstractModel. </summary>
-        /// <param name="discriminatorProperty"></param>
+        /// <param name="discriminatorProperty"> The DiscriminatorProperty. </param>
         internal AbstractModel(string discriminatorProperty)
         {
             DiscriminatorProperty = discriminatorProperty;
         }
 
+        /// <summary> The DiscriminatorProperty. </summary>
         internal string DiscriminatorProperty { get; set; }
     }
 }

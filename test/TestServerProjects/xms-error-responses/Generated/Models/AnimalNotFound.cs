@@ -17,16 +17,17 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> Initializes a new instance of AnimalNotFound. </summary>
-        /// <param name="someBaseProp"></param>
-        /// <param name="reason"></param>
-        /// <param name="whatNotFound"></param>
-        /// <param name="name"></param>
+        /// <param name="someBaseProp"> The SomeBaseProp. </param>
+        /// <param name="reason"> The Reason. </param>
+        /// <param name="whatNotFound"> The WhatNotFound. </param>
+        /// <param name="name"> The Name. </param>
         internal AnimalNotFound(string someBaseProp, string reason, string whatNotFound, string name) : base(someBaseProp, reason, whatNotFound)
         {
             Name = name;
             WhatNotFound = whatNotFound ?? "AnimalNotFound";
         }
 
+        /// <summary> The Name. </summary>
         public string Name { get; }
     }
 }

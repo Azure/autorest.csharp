@@ -14,24 +14,24 @@ namespace ModelShapes.Models
     public static partial class SchemaMappingModelFactory
     {
         /// <summary> Initializes a new instance of MixedModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredStringList"></param>
-        /// <param name="requiredIntList"></param>
-        /// <param name="nonRequiredString"></param>
-        /// <param name="nonRequiredInt"></param>
-        /// <param name="nonRequiredStringList"></param>
-        /// <param name="nonRequiredIntList"></param>
-        /// <param name="requiredNullableString"></param>
-        /// <param name="requiredNullableInt"></param>
-        /// <param name="requiredNullableStringList"></param>
-        /// <param name="requiredNullableIntList"></param>
-        /// <param name="nonRequiredNullableString"></param>
-        /// <param name="nonRequiredNullableInt"></param>
-        /// <param name="nonRequiredNullableStringList"></param>
-        /// <param name="nonRequiredNullableIntList"></param>
-        /// <param name="requiredReadonlyInt"></param>
-        /// <param name="nonRequiredReadonlyInt"></param>
+        /// <param name="requiredString"> The RequiredString. </param>
+        /// <param name="requiredInt"> The RequiredInt. </param>
+        /// <param name="requiredStringList"> The RequiredStringList. </param>
+        /// <param name="requiredIntList"> The RequiredIntList. </param>
+        /// <param name="nonRequiredString"> The NonRequiredString. </param>
+        /// <param name="nonRequiredInt"> The NonRequiredInt. </param>
+        /// <param name="nonRequiredStringList"> The NonRequiredStringList. </param>
+        /// <param name="nonRequiredIntList"> The NonRequiredIntList. </param>
+        /// <param name="requiredNullableString"> The RequiredNullableString. </param>
+        /// <param name="requiredNullableInt"> The RequiredNullableInt. </param>
+        /// <param name="requiredNullableStringList"> The RequiredNullableStringList. </param>
+        /// <param name="requiredNullableIntList"> The RequiredNullableIntList. </param>
+        /// <param name="nonRequiredNullableString"> The NonRequiredNullableString. </param>
+        /// <param name="nonRequiredNullableInt"> The NonRequiredNullableInt. </param>
+        /// <param name="nonRequiredNullableStringList"> The NonRequiredNullableStringList. </param>
+        /// <param name="nonRequiredNullableIntList"> The NonRequiredNullableIntList. </param>
+        /// <param name="requiredReadonlyInt"> The RequiredReadonlyInt. </param>
+        /// <param name="nonRequiredReadonlyInt"> The NonRequiredReadonlyInt. </param>
         /// <returns> A new <see cref="Models.MixedModel"/> instance for mocking. </returns>
         public static MixedModel MixedModel(string requiredString = null, int requiredInt = default, IEnumerable<string> requiredStringList = null, IEnumerable<int> requiredIntList = null, string nonRequiredString = null, int? nonRequiredInt = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, string requiredNullableString = null, int? requiredNullableInt = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, string nonRequiredNullableString = null, int? nonRequiredNullableInt = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null)
         {
@@ -48,24 +48,24 @@ namespace ModelShapes.Models
         }
 
         /// <summary> Initializes a new instance of OutputModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredStringList"></param>
-        /// <param name="requiredIntList"></param>
-        /// <param name="nonRequiredString"></param>
-        /// <param name="nonRequiredInt"></param>
-        /// <param name="nonRequiredStringList"></param>
-        /// <param name="nonRequiredIntList"></param>
-        /// <param name="requiredNullableString"></param>
-        /// <param name="requiredNullableInt"></param>
-        /// <param name="requiredNullableStringList"></param>
-        /// <param name="requiredNullableIntList"></param>
-        /// <param name="nonRequiredNullableString"></param>
-        /// <param name="nonRequiredNullableInt"></param>
-        /// <param name="nonRequiredNullableStringList"></param>
-        /// <param name="nonRequiredNullableIntList"></param>
-        /// <param name="requiredReadonlyInt"></param>
-        /// <param name="nonRequiredReadonlyInt"></param>
+        /// <param name="requiredString"> The RequiredString. </param>
+        /// <param name="requiredInt"> The RequiredInt. </param>
+        /// <param name="requiredStringList"> The RequiredStringList. </param>
+        /// <param name="requiredIntList"> The RequiredIntList. </param>
+        /// <param name="nonRequiredString"> The NonRequiredString. </param>
+        /// <param name="nonRequiredInt"> The NonRequiredInt. </param>
+        /// <param name="nonRequiredStringList"> The NonRequiredStringList. </param>
+        /// <param name="nonRequiredIntList"> The NonRequiredIntList. </param>
+        /// <param name="requiredNullableString"> The RequiredNullableString. </param>
+        /// <param name="requiredNullableInt"> The RequiredNullableInt. </param>
+        /// <param name="requiredNullableStringList"> The RequiredNullableStringList. </param>
+        /// <param name="requiredNullableIntList"> The RequiredNullableIntList. </param>
+        /// <param name="nonRequiredNullableString"> The NonRequiredNullableString. </param>
+        /// <param name="nonRequiredNullableInt"> The NonRequiredNullableInt. </param>
+        /// <param name="nonRequiredNullableStringList"> The NonRequiredNullableStringList. </param>
+        /// <param name="nonRequiredNullableIntList"> The NonRequiredNullableIntList. </param>
+        /// <param name="requiredReadonlyInt"> The RequiredReadonlyInt. </param>
+        /// <param name="nonRequiredReadonlyInt"> The NonRequiredReadonlyInt. </param>
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>
         public static OutputModel OutputModel(string requiredString = null, int requiredInt = default, IEnumerable<string> requiredStringList = null, IEnumerable<int> requiredIntList = null, string nonRequiredString = null, int? nonRequiredInt = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, string requiredNullableString = null, int? requiredNullableInt = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, string nonRequiredNullableString = null, int? nonRequiredNullableInt = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null)
         {
@@ -82,8 +82,8 @@ namespace ModelShapes.Models
         }
 
         /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
-        /// <param name="readonlyProperty"></param>
-        /// <param name="readonlyListProperty"></param>
+        /// <param name="readonlyProperty"> The ReadonlyProperty. </param>
+        /// <param name="readonlyListProperty"> The ReadonlyListProperty. </param>
         /// <returns> A new <see cref="Models.MixedModelWithReadonlyProperty"/> instance for mocking. </returns>
         public static MixedModelWithReadonlyProperty MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty = null, IEnumerable<ReadonlyModel> readonlyListProperty = null)
         {
@@ -93,7 +93,7 @@ namespace ModelShapes.Models
         }
 
         /// <summary> Initializes a new instance of ReadonlyModel. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> The Name. </param>
         /// <returns> A new <see cref="Models.ReadonlyModel"/> instance for mocking. </returns>
         public static ReadonlyModel ReadonlyModel(string name = null)
         {

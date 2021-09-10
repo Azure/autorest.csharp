@@ -15,7 +15,9 @@ namespace MultipleInputFiles.Models
         {
         }
 
+        /// <summary> The Code. </summary>
         public string Code { get; set; }
+        /// <summary> The Status. </summary>
         public string Status { get; set; }
     }
 }

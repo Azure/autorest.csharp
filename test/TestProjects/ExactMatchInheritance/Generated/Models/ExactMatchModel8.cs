@@ -19,15 +19,17 @@ namespace ExactMatchInheritance.Models
 
         /// <summary> Initializes a new instance of ExactMatchModel8. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"></param>
-        /// <param name="nEW"></param>
+        /// <param name="name"> The Name. </param>
+        /// <param name="nEW"> The NEW. </param>
         internal ExactMatchModel8(string id, string name, string nEW) : base(id)
         {
             Name = name;
             NEW = nEW;
         }
 
+        /// <summary> The Name. </summary>
         public string Name { get; set; }
+        /// <summary> The NEW. </summary>
         public string NEW { get; set; }
     }
 }

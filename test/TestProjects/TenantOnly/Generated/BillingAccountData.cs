@@ -27,12 +27,13 @@ namespace TenantOnly
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="bar"></param>
+        /// <param name="bar"> The Bar. </param>
         internal BillingAccountData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }
 
+        /// <summary> The Bar. </summary>
         public string Bar { get; set; }
     }
 }

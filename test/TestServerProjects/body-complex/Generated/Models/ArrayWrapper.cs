@@ -20,12 +20,13 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of ArrayWrapper. </summary>
-        /// <param name="array"></param>
+        /// <param name="array"> The Array. </param>
         internal ArrayWrapper(IList<string> array)
         {
             Array = array;
         }
 
+        /// <summary> The Array. </summary>
         public IList<string> Array { get; }
     }
 }

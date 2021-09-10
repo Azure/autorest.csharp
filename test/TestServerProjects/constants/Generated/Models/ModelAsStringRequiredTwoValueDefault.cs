@@ -11,12 +11,13 @@ namespace constants.Models
     internal partial class ModelAsStringRequiredTwoValueDefault
     {
         /// <summary> Initializes a new instance of ModelAsStringRequiredTwoValueDefault. </summary>
-        /// <param name="parameter"></param>
+        /// <param name="parameter"> The Parameter. </param>
         internal ModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultEnum? parameter = null)
         {
             Parameter = parameter ?? ModelAsStringRequiredTwoValueDefaultEnum.Value1;
         }
 
+        /// <summary> The Parameter. </summary>
         public ModelAsStringRequiredTwoValueDefaultEnum Parameter { get; }
     }
 }

@@ -13,7 +13,7 @@ namespace required_optional.Models
     public partial class StringWrapper
     {
         /// <summary> Initializes a new instance of StringWrapper. </summary>
-        /// <param name="value"></param>
+        /// <param name="value"> The Value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public StringWrapper(string value)
         {
@@ -25,6 +25,7 @@ namespace required_optional.Models
             Value = value;
         }
 
+        /// <summary> The Value. </summary>
         public string Value { get; }
     }
 }

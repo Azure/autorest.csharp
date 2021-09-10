@@ -22,12 +22,13 @@ namespace SupersetFlattenInheritance
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="foo"></param>
+        /// <param name="foo"> The Foo. </param>
         internal ResourceModel2Data(ResourceIdentifier id, string name, ResourceType type, string foo) : base(id, name, type)
         {
             Foo = foo;
         }
 
+        /// <summary> The Foo. </summary>
         public string Foo { get; set; }
     }
 }

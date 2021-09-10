@@ -15,7 +15,9 @@ namespace custom_baseUrl_paging.Models
         {
         }
 
+        /// <summary> The Status. </summary>
         public int? Status { get; }
+        /// <summary> The Message. </summary>
         public string Message { get; }
     }
 }

@@ -14,7 +14,7 @@ namespace AdditionalPropertiesEx.Models
     public readonly partial struct OutputAdditionalPropertiesModelStruct
     {
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModelStruct. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The Id. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>
         internal OutputAdditionalPropertiesModelStruct(int id, IReadOnlyDictionary<string, string> additionalProperties)
@@ -28,6 +28,7 @@ namespace AdditionalPropertiesEx.Models
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> The Id. </summary>
         public int Id { get; }
         /// <summary> Additional Properties. </summary>
         public IReadOnlyDictionary<string, string> AdditionalProperties { get; }

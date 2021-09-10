@@ -16,15 +16,15 @@ namespace ModelShapes.Models
     public partial class MixedModel
     {
         /// <summary> Initializes a new instance of MixedModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredStringList"></param>
-        /// <param name="requiredIntList"></param>
-        /// <param name="requiredNullableString"></param>
-        /// <param name="requiredNullableInt"></param>
-        /// <param name="requiredNullableStringList"></param>
-        /// <param name="requiredNullableIntList"></param>
-        /// <param name="requiredReadonlyInt"></param>
+        /// <param name="requiredString"> The RequiredString. </param>
+        /// <param name="requiredInt"> The RequiredInt. </param>
+        /// <param name="requiredStringList"> The RequiredStringList. </param>
+        /// <param name="requiredIntList"> The RequiredIntList. </param>
+        /// <param name="requiredNullableString"> The RequiredNullableString. </param>
+        /// <param name="requiredNullableInt"> The RequiredNullableInt. </param>
+        /// <param name="requiredNullableStringList"> The RequiredNullableStringList. </param>
+        /// <param name="requiredNullableIntList"> The RequiredNullableIntList. </param>
+        /// <param name="requiredReadonlyInt"> The RequiredReadonlyInt. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredStringList"/>, or <paramref name="requiredIntList"/> is null. </exception>
         public MixedModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList, int requiredReadonlyInt)
         {
@@ -57,24 +57,24 @@ namespace ModelShapes.Models
         }
 
         /// <summary> Initializes a new instance of MixedModel. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredStringList"></param>
-        /// <param name="requiredIntList"></param>
-        /// <param name="nonRequiredString"></param>
-        /// <param name="nonRequiredInt"></param>
-        /// <param name="nonRequiredStringList"></param>
-        /// <param name="nonRequiredIntList"></param>
-        /// <param name="requiredNullableString"></param>
-        /// <param name="requiredNullableInt"></param>
-        /// <param name="requiredNullableStringList"></param>
-        /// <param name="requiredNullableIntList"></param>
-        /// <param name="nonRequiredNullableString"></param>
-        /// <param name="nonRequiredNullableInt"></param>
-        /// <param name="nonRequiredNullableStringList"></param>
-        /// <param name="nonRequiredNullableIntList"></param>
-        /// <param name="requiredReadonlyInt"></param>
-        /// <param name="nonRequiredReadonlyInt"></param>
+        /// <param name="requiredString"> The RequiredString. </param>
+        /// <param name="requiredInt"> The RequiredInt. </param>
+        /// <param name="requiredStringList"> The RequiredStringList. </param>
+        /// <param name="requiredIntList"> The RequiredIntList. </param>
+        /// <param name="nonRequiredString"> The NonRequiredString. </param>
+        /// <param name="nonRequiredInt"> The NonRequiredInt. </param>
+        /// <param name="nonRequiredStringList"> The NonRequiredStringList. </param>
+        /// <param name="nonRequiredIntList"> The NonRequiredIntList. </param>
+        /// <param name="requiredNullableString"> The RequiredNullableString. </param>
+        /// <param name="requiredNullableInt"> The RequiredNullableInt. </param>
+        /// <param name="requiredNullableStringList"> The RequiredNullableStringList. </param>
+        /// <param name="requiredNullableIntList"> The RequiredNullableIntList. </param>
+        /// <param name="nonRequiredNullableString"> The NonRequiredNullableString. </param>
+        /// <param name="nonRequiredNullableInt"> The NonRequiredNullableInt. </param>
+        /// <param name="nonRequiredNullableStringList"> The NonRequiredNullableStringList. </param>
+        /// <param name="nonRequiredNullableIntList"> The NonRequiredNullableIntList. </param>
+        /// <param name="requiredReadonlyInt"> The RequiredReadonlyInt. </param>
+        /// <param name="nonRequiredReadonlyInt"> The NonRequiredReadonlyInt. </param>
         internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, int requiredReadonlyInt, int? nonRequiredReadonlyInt)
         {
             RequiredString = requiredString;
@@ -97,23 +97,41 @@ namespace ModelShapes.Models
             NonRequiredReadonlyInt = nonRequiredReadonlyInt;
         }
 
+        /// <summary> The RequiredString. </summary>
         public string RequiredString { get; set; }
+        /// <summary> The RequiredInt. </summary>
         public int RequiredInt { get; set; }
+        /// <summary> The RequiredStringList. </summary>
         public IList<string> RequiredStringList { get; }
+        /// <summary> The RequiredIntList. </summary>
         public IList<int> RequiredIntList { get; }
+        /// <summary> The NonRequiredString. </summary>
         public string NonRequiredString { get; set; }
+        /// <summary> The NonRequiredInt. </summary>
         public int? NonRequiredInt { get; set; }
+        /// <summary> The NonRequiredStringList. </summary>
         public IList<string> NonRequiredStringList { get; }
+        /// <summary> The NonRequiredIntList. </summary>
         public IList<int> NonRequiredIntList { get; }
+        /// <summary> The RequiredNullableString. </summary>
         public string RequiredNullableString { get; set; }
+        /// <summary> The RequiredNullableInt. </summary>
         public int? RequiredNullableInt { get; set; }
+        /// <summary> The RequiredNullableStringList. </summary>
         public IList<string> RequiredNullableStringList { get; set; }
+        /// <summary> The RequiredNullableIntList. </summary>
         public IList<int> RequiredNullableIntList { get; set; }
+        /// <summary> The NonRequiredNullableString. </summary>
         public string NonRequiredNullableString { get; set; }
+        /// <summary> The NonRequiredNullableInt. </summary>
         public int? NonRequiredNullableInt { get; set; }
+        /// <summary> The NonRequiredNullableStringList. </summary>
         public IList<string> NonRequiredNullableStringList { get; set; }
+        /// <summary> The NonRequiredNullableIntList. </summary>
         public IList<int> NonRequiredNullableIntList { get; set; }
+        /// <summary> The RequiredReadonlyInt. </summary>
         public int RequiredReadonlyInt { get; }
+        /// <summary> The NonRequiredReadonlyInt. </summary>
         public int? NonRequiredReadonlyInt { get; }
     }
 }

@@ -16,15 +16,16 @@ namespace ExactMatchInheritance.Models
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel2. </summary>
-        /// <param name="iD"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        /// <param name="new"></param>
+        /// <param name="iD"> The ID. </param>
+        /// <param name="name"> The Name. </param>
+        /// <param name="type"> The Type. </param>
+        /// <param name="new"> The New. </param>
         internal ExactMatchModel2(string iD, string name, string type, string @new) : base(iD, name, type)
         {
             New = @new;
         }
 
+        /// <summary> The New. </summary>
         public string New { get; set; }
     }
 }

@@ -16,12 +16,13 @@ namespace AppConfiguration.Models
         }
 
         /// <summary> Initializes a new instance of Label. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> The Name. </param>
         internal Label(string name)
         {
             Name = name;
         }
 
+        /// <summary> The Name. </summary>
         public string Name { get; }
     }
 }

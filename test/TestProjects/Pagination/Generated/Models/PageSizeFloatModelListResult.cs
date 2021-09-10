@@ -21,15 +21,17 @@ namespace Pagination.Models
         }
 
         /// <summary> Initializes a new instance of PageSizeFloatModelListResult. </summary>
-        /// <param name="value"></param>
-        /// <param name="nextLink"></param>
+        /// <param name="value"> The Value. </param>
+        /// <param name="nextLink"> The NextLink. </param>
         internal PageSizeFloatModelListResult(IReadOnlyList<PageSizeFloatModelData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
+        /// <summary> The Value. </summary>
         public IReadOnlyList<PageSizeFloatModelData> Value { get; }
+        /// <summary> The NextLink. </summary>
         public string NextLink { get; }
     }
 }

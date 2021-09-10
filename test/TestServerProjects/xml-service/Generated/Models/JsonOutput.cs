@@ -16,12 +16,13 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of JsonOutput. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The Id. </param>
         internal JsonOutput(int? id)
         {
             Id = id;
         }
 
+        /// <summary> The Id. </summary>
         public int? Id { get; }
     }
 }

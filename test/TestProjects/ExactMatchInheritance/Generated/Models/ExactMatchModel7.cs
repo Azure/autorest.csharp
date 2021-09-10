@@ -16,9 +16,9 @@ namespace ExactMatchInheritance.Models
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
-        /// <param name="iD"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
+        /// <param name="iD"> The ID. </param>
+        /// <param name="name"> The Name. </param>
+        /// <param name="type"> The Type. </param>
         internal ExactMatchModel7(string iD, string name, string type)
         {
             ID = iD;
@@ -26,8 +26,11 @@ namespace ExactMatchInheritance.Models
             Type = type;
         }
 
+        /// <summary> The ID. </summary>
         public string ID { get; set; }
+        /// <summary> The Name. </summary>
         public string Name { get; set; }
+        /// <summary> The Type. </summary>
         public string Type { get; set; }
     }
 }

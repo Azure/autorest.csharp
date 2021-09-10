@@ -13,22 +13,23 @@ namespace additionalProperties.Models
     public partial class CatAPTrue : PetAPTrue
     {
         /// <summary> Initializes a new instance of CatAPTrue. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The Id. </param>
         public CatAPTrue(int id) : base(id)
         {
         }
 
         /// <summary> Initializes a new instance of CatAPTrue. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="status"></param>
+        /// <param name="id"> The Id. </param>
+        /// <param name="name"> The Name. </param>
+        /// <param name="status"> The Status. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        /// <param name="friendly"></param>
+        /// <param name="friendly"> The Friendly. </param>
         internal CatAPTrue(int id, string name, bool? status, IDictionary<string, object> additionalProperties, bool? friendly) : base(id, name, status, additionalProperties)
         {
             Friendly = friendly;
         }
 
+        /// <summary> The Friendly. </summary>
         public bool? Friendly { get; set; }
     }
 }

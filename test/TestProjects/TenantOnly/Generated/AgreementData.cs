@@ -25,7 +25,7 @@ namespace TenantOnly
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="foo"></param>
+        /// <param name="foo"> The Foo. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
         internal AgreementData(ResourceIdentifier id, string name, ResourceType type, string foo, string location, IReadOnlyDictionary<string, string> tags) : base(id, name, type)
@@ -35,6 +35,7 @@ namespace TenantOnly
             Tags = tags;
         }
 
+        /// <summary> The Foo. </summary>
         public string Foo { get; }
         /// <summary> Resource location. </summary>
         public string Location { get; }

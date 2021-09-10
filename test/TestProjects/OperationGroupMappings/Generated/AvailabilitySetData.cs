@@ -32,7 +32,7 @@ namespace OperationGroupMappings
         /// <param name="type"> The type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="foo"></param>
+        /// <param name="foo"> The Foo. </param>
         /// <param name="sku"> sku. </param>
         internal AvailabilitySetData(ResourceIdentifier id, string name, ResourceType type, string location, IReadOnlyDictionary<string, string> tags, string foo, string sku) : base(id, name, type, location, tags)
         {
@@ -40,6 +40,7 @@ namespace OperationGroupMappings
             Sku = sku;
         }
 
+        /// <summary> The Foo. </summary>
         public string Foo { get; }
         /// <summary> sku. </summary>
         public string Sku { get; }

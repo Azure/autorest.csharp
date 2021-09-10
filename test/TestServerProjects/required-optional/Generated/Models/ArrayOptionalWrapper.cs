@@ -19,6 +19,7 @@ namespace required_optional.Models
             Value = new ChangeTrackingList<string>();
         }
 
+        /// <summary> The Value. </summary>
         public IList<string> Value { get; }
     }
 }

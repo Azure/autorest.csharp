@@ -15,6 +15,7 @@ namespace azure_parameter_grouping.Models
         {
         }
 
+        /// <summary> The HeaderTwo. </summary>
         public string HeaderTwo { get; set; }
         /// <summary> Query parameter with default. </summary>
         public int? QueryTwo { get; set; }

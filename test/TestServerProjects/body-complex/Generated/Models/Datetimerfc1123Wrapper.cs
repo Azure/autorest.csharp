@@ -18,15 +18,17 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of Datetimerfc1123Wrapper. </summary>
-        /// <param name="field"></param>
-        /// <param name="now"></param>
+        /// <param name="field"> The Field. </param>
+        /// <param name="now"> The Now. </param>
         internal Datetimerfc1123Wrapper(DateTimeOffset? field, DateTimeOffset? now)
         {
             Field = field;
             Now = now;
         }
 
+        /// <summary> The Field. </summary>
         public DateTimeOffset? Field { get; set; }
+        /// <summary> The Now. </summary>
         public DateTimeOffset? Now { get; set; }
     }
 }

@@ -20,15 +20,17 @@ namespace custom_baseUrl_paging.Models
         }
 
         /// <summary> Initializes a new instance of ProductResult. </summary>
-        /// <param name="values"></param>
-        /// <param name="nextLink"></param>
+        /// <param name="values"> The Values. </param>
+        /// <param name="nextLink"> The NextLink. </param>
         internal ProductResult(IReadOnlyList<Product> values, string nextLink)
         {
             Values = values;
             NextLink = nextLink;
         }
 
+        /// <summary> The Values. </summary>
         public IReadOnlyList<Product> Values { get; }
+        /// <summary> The NextLink. </summary>
         public string NextLink { get; }
     }
 }

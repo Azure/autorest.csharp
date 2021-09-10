@@ -17,10 +17,10 @@ namespace Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties. </summary>
-        /// <param name="baseClassProperty"></param>
-        /// <param name="discriminatorProperty"></param>
-        /// <param name="someProperty"></param>
-        /// <param name="someOtherProperty"></param>
+        /// <param name="baseClassProperty"> The BaseClassProperty. </param>
+        /// <param name="discriminatorProperty"> The DiscriminatorProperty. </param>
+        /// <param name="someProperty"> The SomeProperty. </param>
+        /// <param name="someOtherProperty"> The SomeOtherProperty. </param>
         internal ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(string baseClassProperty, string discriminatorProperty, string someProperty, string someOtherProperty) : base(baseClassProperty, discriminatorProperty)
         {
             SomeProperty = someProperty;
@@ -28,7 +28,9 @@ namespace Inheritance.Models
             DiscriminatorProperty = discriminatorProperty ?? "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties";
         }
 
+        /// <summary> The SomeProperty. </summary>
         public string SomeProperty { get; set; }
+        /// <summary> The SomeOtherProperty. </summary>
         public string SomeOtherProperty { get; set; }
     }
 }

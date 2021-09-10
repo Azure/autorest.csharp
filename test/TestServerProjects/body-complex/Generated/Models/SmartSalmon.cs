@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class SmartSalmon : Salmon
     {
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
-        /// <param name="length"></param>
+        /// <param name="length"> The Length. </param>
         public SmartSalmon(float length) : base(length)
         {
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();
@@ -22,13 +22,13 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
-        /// <param name="fishtype"></param>
-        /// <param name="species"></param>
-        /// <param name="length"></param>
-        /// <param name="siblings"></param>
-        /// <param name="location"></param>
-        /// <param name="iswild"></param>
-        /// <param name="collegeDegree"></param>
+        /// <param name="fishtype"> The Fishtype. </param>
+        /// <param name="species"> The Species. </param>
+        /// <param name="length"> The Length. </param>
+        /// <param name="siblings"> The Siblings. </param>
+        /// <param name="location"> The Location. </param>
+        /// <param name="iswild"> The Iswild. </param>
+        /// <param name="collegeDegree"> The CollegeDegree. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal SmartSalmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, string collegeDegree, IDictionary<string, object> additionalProperties) : base(fishtype, species, length, siblings, location, iswild)
         {
@@ -37,6 +37,7 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "smart_salmon";
         }
 
+        /// <summary> The CollegeDegree. </summary>
         public string CollegeDegree { get; set; }
         /// <summary> Additional Properties. </summary>
         public IDictionary<string, object> AdditionalProperties { get; }

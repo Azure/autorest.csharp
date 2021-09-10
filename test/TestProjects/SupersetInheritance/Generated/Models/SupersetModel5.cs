@@ -27,13 +27,14 @@ namespace SupersetInheritance.Models
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="new"></param>
-        /// <param name="foo"></param>
+        /// <param name="new"> The New. </param>
+        /// <param name="foo"> The Foo. </param>
         internal SupersetModel5(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string @new, string foo) : base(id, name, type, tags, location, @new)
         {
             Foo = foo;
         }
 
+        /// <summary> The Foo. </summary>
         public string Foo { get; set; }
     }
 }

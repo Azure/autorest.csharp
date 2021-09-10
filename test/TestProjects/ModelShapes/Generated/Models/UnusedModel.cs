@@ -15,6 +15,7 @@ namespace ModelShapes.Models
         {
         }
 
+        /// <summary> The UnusedString. </summary>
         public string UnusedString { get; }
     }
 }

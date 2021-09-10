@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class Fish
     {
         /// <summary> Initializes a new instance of Fish. </summary>
-        /// <param name="length"></param>
+        /// <param name="length"> The Length. </param>
         public Fish(float length)
         {
             Length = length;
@@ -22,10 +22,10 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of Fish. </summary>
-        /// <param name="fishtype"></param>
-        /// <param name="species"></param>
-        /// <param name="length"></param>
-        /// <param name="siblings"></param>
+        /// <param name="fishtype"> The Fishtype. </param>
+        /// <param name="species"> The Species. </param>
+        /// <param name="length"> The Length. </param>
+        /// <param name="siblings"> The Siblings. </param>
         internal Fish(string fishtype, string species, float length, IList<Fish> siblings)
         {
             Fishtype = fishtype;
@@ -34,9 +34,13 @@ namespace body_complex.Models
             Siblings = siblings;
         }
 
+        /// <summary> The Fishtype. </summary>
         internal string Fishtype { get; set; }
+        /// <summary> The Species. </summary>
         public string Species { get; set; }
+        /// <summary> The Length. </summary>
         public float Length { get; set; }
+        /// <summary> The Siblings. </summary>
         public IList<Fish> Siblings { get; }
     }
 }

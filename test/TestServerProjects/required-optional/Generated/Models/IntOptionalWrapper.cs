@@ -15,6 +15,7 @@ namespace required_optional.Models
         {
         }
 
+        /// <summary> The Value. </summary>
         public int? Value { get; set; }
     }
 }

@@ -16,15 +16,17 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of DotFish. </summary>
-        /// <param name="fishType"></param>
-        /// <param name="species"></param>
+        /// <param name="fishType"> The FishType. </param>
+        /// <param name="species"> The Species. </param>
         internal DotFish(string fishType, string species)
         {
             FishType = fishType;
             Species = species;
         }
 
+        /// <summary> The FishType. </summary>
         internal string FishType { get; set; }
+        /// <summary> The Species. </summary>
         public string Species { get; }
     }
 }

@@ -16,12 +16,13 @@ namespace httpInfrastructure.Models
         }
 
         /// <summary> Initializes a new instance of C. </summary>
-        /// <param name="httpCode"></param>
+        /// <param name="httpCode"> The HttpCode. </param>
         internal C(string httpCode)
         {
             HttpCode = httpCode;
         }
 
+        /// <summary> The HttpCode. </summary>
         public string HttpCode { get; }
     }
 }

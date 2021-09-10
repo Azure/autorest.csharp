@@ -15,6 +15,7 @@ namespace xml_service.Models
         {
         }
 
+        /// <summary> The Id. </summary>
         public int? Id { get; set; }
     }
 }

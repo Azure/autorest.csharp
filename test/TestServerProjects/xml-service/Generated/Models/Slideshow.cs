@@ -20,10 +20,10 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of Slideshow. </summary>
-        /// <param name="title"></param>
-        /// <param name="date"></param>
-        /// <param name="author"></param>
-        /// <param name="slides"></param>
+        /// <param name="title"> The Title. </param>
+        /// <param name="date"> The Date. </param>
+        /// <param name="author"> The Author. </param>
+        /// <param name="slides"> The Slides. </param>
         internal Slideshow(string title, string date, string author, IList<Slide> slides)
         {
             Title = title;
@@ -32,9 +32,13 @@ namespace xml_service.Models
             Slides = slides;
         }
 
+        /// <summary> The Title. </summary>
         public string Title { get; set; }
+        /// <summary> The Date. </summary>
         public string Date { get; set; }
+        /// <summary> The Author. </summary>
         public string Author { get; set; }
+        /// <summary> The Slides. </summary>
         public IList<Slide> Slides { get; }
     }
 }

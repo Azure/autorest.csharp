@@ -16,15 +16,17 @@ namespace header.Models
         }
 
         /// <summary> Initializes a new instance of Error. </summary>
-        /// <param name="status"></param>
-        /// <param name="message"></param>
+        /// <param name="status"> The Status. </param>
+        /// <param name="message"> The Message. </param>
         internal Error(int? status, string message)
         {
             Status = status;
             Message = message;
         }
 
+        /// <summary> The Status. </summary>
         public int? Status { get; }
+        /// <summary> The Message. </summary>
         public string Message { get; }
     }
 }

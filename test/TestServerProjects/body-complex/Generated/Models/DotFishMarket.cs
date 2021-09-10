@@ -21,10 +21,10 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of DotFishMarket. </summary>
-        /// <param name="sampleSalmon"></param>
-        /// <param name="salmons"></param>
-        /// <param name="sampleFish"></param>
-        /// <param name="fishes"></param>
+        /// <param name="sampleSalmon"> The SampleSalmon. </param>
+        /// <param name="salmons"> The Salmons. </param>
+        /// <param name="sampleFish"> The SampleFish. </param>
+        /// <param name="fishes"> The Fishes. </param>
         internal DotFishMarket(DotSalmon sampleSalmon, IReadOnlyList<DotSalmon> salmons, DotFish sampleFish, IReadOnlyList<DotFish> fishes)
         {
             SampleSalmon = sampleSalmon;
@@ -33,9 +33,13 @@ namespace body_complex.Models
             Fishes = fishes;
         }
 
+        /// <summary> The SampleSalmon. </summary>
         public DotSalmon SampleSalmon { get; }
+        /// <summary> The Salmons. </summary>
         public IReadOnlyList<DotSalmon> Salmons { get; }
+        /// <summary> The SampleFish. </summary>
         public DotFish SampleFish { get; }
+        /// <summary> The Fishes. </summary>
         public IReadOnlyList<DotFish> Fishes { get; }
     }
 }

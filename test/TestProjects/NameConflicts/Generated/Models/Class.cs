@@ -16,114 +16,114 @@ namespace NameConflicts.Models
         }
 
         /// <summary> Initializes a new instance of Class. </summary>
-        /// <param name="abstract"></param>
-        /// <param name="add"></param>
-        /// <param name="alias"></param>
-        /// <param name="as"></param>
-        /// <param name="ascending"></param>
-        /// <param name="async"></param>
-        /// <param name="await"></param>
-        /// <param name="base"></param>
-        /// <param name="bool"></param>
-        /// <param name="break"></param>
-        /// <param name="by"></param>
-        /// <param name="byte"></param>
-        /// <param name="catch"></param>
-        /// <param name="char"></param>
-        /// <param name="checked"></param>
-        /// <param name="const"></param>
-        /// <param name="continue"></param>
-        /// <param name="classValue"></param>
-        /// <param name="decimal"></param>
-        /// <param name="default"></param>
-        /// <param name="delegate"></param>
-        /// <param name="descending"></param>
-        /// <param name="do"></param>
-        /// <param name="double"></param>
-        /// <param name="dynamic"></param>
-        /// <param name="else"></param>
-        /// <param name="enum"></param>
-        /// <param name="event"></param>
-        /// <param name="explicit"></param>
-        /// <param name="extern"></param>
-        /// <param name="false"></param>
-        /// <param name="finally"></param>
-        /// <param name="fixed"></param>
-        /// <param name="float"></param>
-        /// <param name="for"></param>
-        /// <param name="foreach"></param>
-        /// <param name="from"></param>
-        /// <param name="get"></param>
-        /// <param name="global"></param>
-        /// <param name="goto"></param>
-        /// <param name="group"></param>
-        /// <param name="if"></param>
-        /// <param name="implicit"></param>
-        /// <param name="in"></param>
-        /// <param name="int"></param>
-        /// <param name="interface"></param>
-        /// <param name="internal"></param>
-        /// <param name="into"></param>
-        /// <param name="is"></param>
-        /// <param name="join"></param>
-        /// <param name="let"></param>
-        /// <param name="lock"></param>
-        /// <param name="long"></param>
-        /// <param name="nameof"></param>
-        /// <param name="namespace"></param>
-        /// <param name="new"></param>
-        /// <param name="nullProperty"></param>
-        /// <param name="object"></param>
-        /// <param name="on"></param>
-        /// <param name="operator"></param>
-        /// <param name="orderby"></param>
-        /// <param name="out"></param>
-        /// <param name="override"></param>
-        /// <param name="params"></param>
-        /// <param name="partial"></param>
-        /// <param name="private"></param>
-        /// <param name="protected"></param>
-        /// <param name="public"></param>
-        /// <param name="readonly"></param>
-        /// <param name="ref"></param>
-        /// <param name="remove"></param>
-        /// <param name="return"></param>
-        /// <param name="sbyte"></param>
-        /// <param name="sealed"></param>
-        /// <param name="select"></param>
-        /// <param name="set"></param>
-        /// <param name="short"></param>
-        /// <param name="sizeof"></param>
-        /// <param name="stackalloc"></param>
-        /// <param name="static"></param>
-        /// <param name="string"></param>
-        /// <param name="struct"></param>
-        /// <param name="switch"></param>
-        /// <param name="this"></param>
-        /// <param name="throw"></param>
-        /// <param name="true"></param>
-        /// <param name="try"></param>
-        /// <param name="typeof"></param>
-        /// <param name="uint"></param>
-        /// <param name="ulong"></param>
-        /// <param name="unchecked"></param>
-        /// <param name="unmanaged"></param>
-        /// <param name="unsafe"></param>
-        /// <param name="ushort"></param>
-        /// <param name="using"></param>
-        /// <param name="value"></param>
-        /// <param name="var"></param>
-        /// <param name="virtual"></param>
-        /// <param name="void"></param>
-        /// <param name="volatile"></param>
-        /// <param name="when"></param>
-        /// <param name="where"></param>
-        /// <param name="while"></param>
-        /// <param name="yield"></param>
-        /// <param name="system"></param>
-        /// <param name="toStringValue"></param>
-        /// <param name="equalsValue"></param>
-        /// <param name="getHashCodeValue"></param>
+        /// <param name="abstract"> The Abstract. </param>
+        /// <param name="add"> The Add. </param>
+        /// <param name="alias"> The Alias. </param>
+        /// <param name="as"> The As. </param>
+        /// <param name="ascending"> The Ascending. </param>
+        /// <param name="async"> The Async. </param>
+        /// <param name="await"> The Await. </param>
+        /// <param name="base"> The Base. </param>
+        /// <param name="bool"> The Bool. </param>
+        /// <param name="break"> The Break. </param>
+        /// <param name="by"> The By. </param>
+        /// <param name="byte"> The Byte. </param>
+        /// <param name="catch"> The Catch. </param>
+        /// <param name="char"> The Char. </param>
+        /// <param name="checked"> The Checked. </param>
+        /// <param name="const"> The Const. </param>
+        /// <param name="continue"> The Continue. </param>
+        /// <param name="classValue"> The ClassValue. </param>
+        /// <param name="decimal"> The Decimal. </param>
+        /// <param name="default"> The Default. </param>
+        /// <param name="delegate"> The Delegate. </param>
+        /// <param name="descending"> The Descending. </param>
+        /// <param name="do"> The Do. </param>
+        /// <param name="double"> The Double. </param>
+        /// <param name="dynamic"> The Dynamic. </param>
+        /// <param name="else"> The Else. </param>
+        /// <param name="enum"> The Enum. </param>
+        /// <param name="event"> The Event. </param>
+        /// <param name="explicit"> The Explicit. </param>
+        /// <param name="extern"> The Extern. </param>
+        /// <param name="false"> The False. </param>
+        /// <param name="finally"> The Finally. </param>
+        /// <param name="fixed"> The Fixed. </param>
+        /// <param name="float"> The Float. </param>
+        /// <param name="for"> The For. </param>
+        /// <param name="foreach"> The Foreach. </param>
+        /// <param name="from"> The From. </param>
+        /// <param name="get"> The Get. </param>
+        /// <param name="global"> The Global. </param>
+        /// <param name="goto"> The Goto. </param>
+        /// <param name="group"> The Group. </param>
+        /// <param name="if"> The If. </param>
+        /// <param name="implicit"> The Implicit. </param>
+        /// <param name="in"> The In. </param>
+        /// <param name="int"> The Int. </param>
+        /// <param name="interface"> The Interface. </param>
+        /// <param name="internal"> The Internal. </param>
+        /// <param name="into"> The Into. </param>
+        /// <param name="is"> The Is. </param>
+        /// <param name="join"> The Join. </param>
+        /// <param name="let"> The Let. </param>
+        /// <param name="lock"> The Lock. </param>
+        /// <param name="long"> The Long. </param>
+        /// <param name="nameof"> The Nameof. </param>
+        /// <param name="namespace"> The Namespace. </param>
+        /// <param name="new"> The New. </param>
+        /// <param name="nullProperty"> The NullProperty. </param>
+        /// <param name="object"> The Object. </param>
+        /// <param name="on"> The On. </param>
+        /// <param name="operator"> The Operator. </param>
+        /// <param name="orderby"> The Orderby. </param>
+        /// <param name="out"> The Out. </param>
+        /// <param name="override"> The Override. </param>
+        /// <param name="params"> The Params. </param>
+        /// <param name="partial"> The Partial. </param>
+        /// <param name="private"> The Private. </param>
+        /// <param name="protected"> The Protected. </param>
+        /// <param name="public"> The Public. </param>
+        /// <param name="readonly"> The Readonly. </param>
+        /// <param name="ref"> The Ref. </param>
+        /// <param name="remove"> The Remove. </param>
+        /// <param name="return"> The Return. </param>
+        /// <param name="sbyte"> The Sbyte. </param>
+        /// <param name="sealed"> The Sealed. </param>
+        /// <param name="select"> The Select. </param>
+        /// <param name="set"> The Set. </param>
+        /// <param name="short"> The Short. </param>
+        /// <param name="sizeof"> The Sizeof. </param>
+        /// <param name="stackalloc"> The Stackalloc. </param>
+        /// <param name="static"> The Static. </param>
+        /// <param name="string"> The String. </param>
+        /// <param name="struct"> The Struct. </param>
+        /// <param name="switch"> The Switch. </param>
+        /// <param name="this"> The This. </param>
+        /// <param name="throw"> The Throw. </param>
+        /// <param name="true"> The True. </param>
+        /// <param name="try"> The Try. </param>
+        /// <param name="typeof"> The Typeof. </param>
+        /// <param name="uint"> The Uint. </param>
+        /// <param name="ulong"> The Ulong. </param>
+        /// <param name="unchecked"> The Unchecked. </param>
+        /// <param name="unmanaged"> The Unmanaged. </param>
+        /// <param name="unsafe"> The Unsafe. </param>
+        /// <param name="ushort"> The Ushort. </param>
+        /// <param name="using"> The Using. </param>
+        /// <param name="value"> The Value. </param>
+        /// <param name="var"> The Var. </param>
+        /// <param name="virtual"> The Virtual. </param>
+        /// <param name="void"> The Void. </param>
+        /// <param name="volatile"> The Volatile. </param>
+        /// <param name="when"> The When. </param>
+        /// <param name="where"> The Where. </param>
+        /// <param name="while"> The While. </param>
+        /// <param name="yield"> The Yield. </param>
+        /// <param name="system"> The System. </param>
+        /// <param name="toStringValue"> The ToStringValue. </param>
+        /// <param name="equalsValue"> The EqualsValue. </param>
+        /// <param name="getHashCodeValue"> The GetHashCodeValue. </param>
         internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string classValue, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield, SystemEnum? system, string toStringValue, string equalsValue, string getHashCodeValue)
         {
             Abstract = @abstract;
@@ -236,113 +236,221 @@ namespace NameConflicts.Models
             GetHashCodeValue = getHashCodeValue;
         }
 
+        /// <summary> The Abstract. </summary>
         public string Abstract { get; set; }
+        /// <summary> The Add. </summary>
         public string Add { get; set; }
+        /// <summary> The Alias. </summary>
         public string Alias { get; set; }
+        /// <summary> The As. </summary>
         public string As { get; set; }
+        /// <summary> The Ascending. </summary>
         public string Ascending { get; set; }
+        /// <summary> The Async. </summary>
         public string Async { get; set; }
+        /// <summary> The Await. </summary>
         public string Await { get; set; }
+        /// <summary> The Base. </summary>
         public string Base { get; set; }
+        /// <summary> The Bool. </summary>
         public string Bool { get; set; }
+        /// <summary> The Break. </summary>
         public string Break { get; set; }
+        /// <summary> The By. </summary>
         public string By { get; set; }
+        /// <summary> The Byte. </summary>
         public string Byte { get; set; }
+        /// <summary> The Catch. </summary>
         public string Catch { get; set; }
+        /// <summary> The Char. </summary>
         public string Char { get; set; }
+        /// <summary> The Checked. </summary>
         public string Checked { get; set; }
+        /// <summary> The Const. </summary>
         public string Const { get; set; }
+        /// <summary> The Continue. </summary>
         public string Continue { get; set; }
+        /// <summary> The ClassValue. </summary>
         public string ClassValue { get; set; }
+        /// <summary> The Decimal. </summary>
         public string Decimal { get; set; }
+        /// <summary> The Default. </summary>
         public string Default { get; set; }
+        /// <summary> The Delegate. </summary>
         public string Delegate { get; set; }
+        /// <summary> The Descending. </summary>
         public string Descending { get; set; }
+        /// <summary> The Do. </summary>
         public string Do { get; set; }
+        /// <summary> The Double. </summary>
         public string Double { get; set; }
+        /// <summary> The Dynamic. </summary>
         public string Dynamic { get; set; }
+        /// <summary> The Else. </summary>
         public string Else { get; set; }
+        /// <summary> The Enum. </summary>
         public string Enum { get; set; }
+        /// <summary> The Event. </summary>
         public string Event { get; set; }
+        /// <summary> The Explicit. </summary>
         public string Explicit { get; set; }
+        /// <summary> The Extern. </summary>
         public string Extern { get; set; }
+        /// <summary> The False. </summary>
         public string False { get; set; }
+        /// <summary> The Finally. </summary>
         public string Finally { get; set; }
+        /// <summary> The Fixed. </summary>
         public string Fixed { get; set; }
+        /// <summary> The Float. </summary>
         public string Float { get; set; }
+        /// <summary> The For. </summary>
         public string For { get; set; }
+        /// <summary> The Foreach. </summary>
         public string Foreach { get; set; }
+        /// <summary> The From. </summary>
         public string From { get; set; }
+        /// <summary> The Get. </summary>
         public string Get { get; set; }
+        /// <summary> The Global. </summary>
         public string Global { get; set; }
+        /// <summary> The Goto. </summary>
         public string Goto { get; set; }
+        /// <summary> The Group. </summary>
         public string Group { get; set; }
+        /// <summary> The If. </summary>
         public string If { get; set; }
+        /// <summary> The Implicit. </summary>
         public string Implicit { get; set; }
+        /// <summary> The In. </summary>
         public string In { get; set; }
+        /// <summary> The Int. </summary>
         public string Int { get; set; }
+        /// <summary> The Interface. </summary>
         public string Interface { get; set; }
+        /// <summary> The Internal. </summary>
         public string Internal { get; set; }
+        /// <summary> The Into. </summary>
         public string Into { get; set; }
+        /// <summary> The Is. </summary>
         public string Is { get; set; }
+        /// <summary> The Join. </summary>
         public string Join { get; set; }
+        /// <summary> The Let. </summary>
         public string Let { get; set; }
+        /// <summary> The Lock. </summary>
         public string Lock { get; set; }
+        /// <summary> The Long. </summary>
         public string Long { get; set; }
+        /// <summary> The Nameof. </summary>
         public string Nameof { get; set; }
+        /// <summary> The Namespace. </summary>
         public string Namespace { get; set; }
+        /// <summary> The New. </summary>
         public string New { get; set; }
+        /// <summary> The NullProperty. </summary>
         public string NullProperty { get; set; }
+        /// <summary> The Object. </summary>
         public string Object { get; set; }
+        /// <summary> The On. </summary>
         public string On { get; set; }
+        /// <summary> The Operator. </summary>
         public string Operator { get; set; }
+        /// <summary> The Orderby. </summary>
         public string Orderby { get; set; }
+        /// <summary> The Out. </summary>
         public string Out { get; set; }
+        /// <summary> The Override. </summary>
         public string Override { get; set; }
+        /// <summary> The Params. </summary>
         public string Params { get; set; }
+        /// <summary> The Partial. </summary>
         public string Partial { get; set; }
+        /// <summary> The Private. </summary>
         public string Private { get; set; }
+        /// <summary> The Protected. </summary>
         public string Protected { get; set; }
+        /// <summary> The Public. </summary>
         public string Public { get; set; }
+        /// <summary> The Readonly. </summary>
         public string Readonly { get; set; }
+        /// <summary> The Ref. </summary>
         public string Ref { get; set; }
+        /// <summary> The Remove. </summary>
         public string Remove { get; set; }
+        /// <summary> The Return. </summary>
         public string Return { get; set; }
+        /// <summary> The Sbyte. </summary>
         public string Sbyte { get; set; }
+        /// <summary> The Sealed. </summary>
         public string Sealed { get; set; }
+        /// <summary> The Select. </summary>
         public string Select { get; set; }
+        /// <summary> The Set. </summary>
         public string Set { get; set; }
+        /// <summary> The Short. </summary>
         public string Short { get; set; }
+        /// <summary> The Sizeof. </summary>
         public string Sizeof { get; set; }
+        /// <summary> The Stackalloc. </summary>
         public string Stackalloc { get; set; }
+        /// <summary> The Static. </summary>
         public string Static { get; set; }
+        /// <summary> The String. </summary>
         public string String { get; set; }
+        /// <summary> The Struct. </summary>
         public string Struct { get; set; }
+        /// <summary> The Switch. </summary>
         public string Switch { get; set; }
+        /// <summary> The This. </summary>
         public string This { get; set; }
+        /// <summary> The Throw. </summary>
         public string Throw { get; set; }
+        /// <summary> The True. </summary>
         public string True { get; set; }
+        /// <summary> The Try. </summary>
         public string Try { get; set; }
+        /// <summary> The Typeof. </summary>
         public string Typeof { get; set; }
+        /// <summary> The Uint. </summary>
         public string Uint { get; set; }
+        /// <summary> The Ulong. </summary>
         public string Ulong { get; set; }
+        /// <summary> The Unchecked. </summary>
         public string Unchecked { get; set; }
+        /// <summary> The Unmanaged. </summary>
         public string Unmanaged { get; set; }
+        /// <summary> The Unsafe. </summary>
         public string Unsafe { get; set; }
+        /// <summary> The Ushort. </summary>
         public string Ushort { get; set; }
+        /// <summary> The Using. </summary>
         public string Using { get; set; }
+        /// <summary> The Value. </summary>
         public string Value { get; set; }
+        /// <summary> The Var. </summary>
         public string Var { get; set; }
+        /// <summary> The Virtual. </summary>
         public string Virtual { get; set; }
+        /// <summary> The Void. </summary>
         public string Void { get; set; }
+        /// <summary> The Volatile. </summary>
         public string Volatile { get; set; }
+        /// <summary> The When. </summary>
         public string When { get; set; }
+        /// <summary> The Where. </summary>
         public string Where { get; set; }
+        /// <summary> The While. </summary>
         public string While { get; set; }
+        /// <summary> The Yield. </summary>
         public string Yield { get; set; }
+        /// <summary> The System. </summary>
         public SystemEnum? System { get; set; }
+        /// <summary> The ToStringValue. </summary>
         public string ToStringValue { get; set; }
+        /// <summary> The EqualsValue. </summary>
         public string EqualsValue { get; set; }
+        /// <summary> The GetHashCodeValue. </summary>
         public string GetHashCodeValue { get; set; }
     }
 }

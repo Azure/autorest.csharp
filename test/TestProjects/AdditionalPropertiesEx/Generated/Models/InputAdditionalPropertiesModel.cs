@@ -14,13 +14,14 @@ namespace AdditionalPropertiesEx.Models
     public partial class InputAdditionalPropertiesModel
     {
         /// <summary> Initializes a new instance of InputAdditionalPropertiesModel. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The Id. </param>
         public InputAdditionalPropertiesModel(int id)
         {
             Id = id;
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();
         }
 
+        /// <summary> The Id. </summary>
         public int Id { get; }
         /// <summary> Additional Properties. </summary>
         public IDictionary<string, object> AdditionalProperties { get; }

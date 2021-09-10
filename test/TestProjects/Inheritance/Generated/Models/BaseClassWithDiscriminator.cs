@@ -17,13 +17,14 @@ namespace Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of BaseClassWithDiscriminator. </summary>
-        /// <param name="baseClassProperty"></param>
-        /// <param name="discriminatorProperty"></param>
+        /// <param name="baseClassProperty"> The BaseClassProperty. </param>
+        /// <param name="discriminatorProperty"> The DiscriminatorProperty. </param>
         internal BaseClassWithDiscriminator(string baseClassProperty, string discriminatorProperty) : base(baseClassProperty)
         {
             DiscriminatorProperty = discriminatorProperty ?? "BaseClassWithDiscriminator";
         }
 
+        /// <summary> The DiscriminatorProperty. </summary>
         internal string DiscriminatorProperty { get; set; }
     }
 }

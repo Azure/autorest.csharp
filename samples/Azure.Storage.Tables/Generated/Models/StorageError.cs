@@ -16,12 +16,13 @@ namespace Azure.Storage.Tables.Models
         }
 
         /// <summary> Initializes a new instance of StorageError. </summary>
-        /// <param name="message"></param>
+        /// <param name="message"> The Message. </param>
         internal StorageError(string message)
         {
             Message = message;
         }
 
+        /// <summary> The Message. </summary>
         public string Message { get; }
     }
 }

@@ -20,6 +20,7 @@ namespace ExactMatchFlattenInheritance.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
+        /// <summary> The Location. </summary>
         public string Location { get; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IReadOnlyDictionary<string, string> Tags { get; }

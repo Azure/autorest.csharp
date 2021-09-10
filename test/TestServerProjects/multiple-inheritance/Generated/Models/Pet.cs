@@ -13,7 +13,7 @@ namespace multiple_inheritance.Models
     public partial class Pet
     {
         /// <summary> Initializes a new instance of Pet. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> The Name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Pet(string name)
         {
@@ -25,6 +25,7 @@ namespace multiple_inheritance.Models
             Name = name;
         }
 
+        /// <summary> The Name. </summary>
         public string Name { get; set; }
     }
 }

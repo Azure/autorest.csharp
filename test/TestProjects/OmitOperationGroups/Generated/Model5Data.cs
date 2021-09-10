@@ -21,15 +21,17 @@ namespace OmitOperationGroups
         }
 
         /// <summary> Initializes a new instance of Model5Data. </summary>
-        /// <param name="k"></param>
-        /// <param name="modelqs"></param>
+        /// <param name="k"> The K. </param>
+        /// <param name="modelqs"> The Modelqs. </param>
         internal Model5Data(string k, IList<ModelQ> modelqs)
         {
             K = k;
             Modelqs = modelqs;
         }
 
+        /// <summary> The K. </summary>
         public string K { get; }
+        /// <summary> The Modelqs. </summary>
         public IList<ModelQ> Modelqs { get; }
     }
 }

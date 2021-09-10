@@ -23,10 +23,10 @@ namespace model_flattening.Models
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        /// <param name="pName"></param>
-        /// <param name="typePropertiesType"></param>
-        /// <param name="provisioningStateValues"></param>
-        /// <param name="provisioningState"></param>
+        /// <param name="pName"> The PName. </param>
+        /// <param name="typePropertiesType"> The TypePropertiesType. </param>
+        /// <param name="provisioningStateValues"> The ProvisioningStateValues. </param>
+        /// <param name="provisioningState"> The ProvisioningState. </param>
         internal FlattenedProduct(string id, string type, IDictionary<string, string> tags, string location, string name, string pName, string typePropertiesType, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues, string provisioningState) : base(id, type, tags, location, name)
         {
             PName = pName;
@@ -35,9 +35,13 @@ namespace model_flattening.Models
             ProvisioningState = provisioningState;
         }
 
+        /// <summary> The PName. </summary>
         public string PName { get; set; }
+        /// <summary> The TypePropertiesType. </summary>
         public string TypePropertiesType { get; set; }
+        /// <summary> The ProvisioningStateValues. </summary>
         public FlattenedProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; }
+        /// <summary> The ProvisioningState. </summary>
         public string ProvisioningState { get; set; }
     }
 }

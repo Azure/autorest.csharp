@@ -14,8 +14,8 @@ namespace body_complex.Models
     public partial class Shark : Fish
     {
         /// <summary> Initializes a new instance of Shark. </summary>
-        /// <param name="length"></param>
-        /// <param name="birthday"></param>
+        /// <param name="length"> The Length. </param>
+        /// <param name="birthday"> The Birthday. </param>
         public Shark(float length, DateTimeOffset birthday) : base(length)
         {
             Birthday = birthday;
@@ -23,12 +23,12 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of Shark. </summary>
-        /// <param name="fishtype"></param>
-        /// <param name="species"></param>
-        /// <param name="length"></param>
-        /// <param name="siblings"></param>
-        /// <param name="age"></param>
-        /// <param name="birthday"></param>
+        /// <param name="fishtype"> The Fishtype. </param>
+        /// <param name="species"> The Species. </param>
+        /// <param name="length"> The Length. </param>
+        /// <param name="siblings"> The Siblings. </param>
+        /// <param name="age"> The Age. </param>
+        /// <param name="birthday"> The Birthday. </param>
         internal Shark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday) : base(fishtype, species, length, siblings)
         {
             Age = age;
@@ -36,7 +36,9 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "shark";
         }
 
+        /// <summary> The Age. </summary>
         public int? Age { get; set; }
+        /// <summary> The Birthday. </summary>
         public DateTimeOffset Birthday { get; set; }
     }
 }
