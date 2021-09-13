@@ -33,9 +33,6 @@
     "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets",
     "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets"
   },
-  "OperationGroupIsTuple": [
-    "VirtualMachineImages"
-  ],
   "OperationGroupIsExtension": [
     "VirtualMachineScaleSetVMExtensions"
   ],
