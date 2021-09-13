@@ -13,5 +13,5 @@ $PackagesProps = "$SdkRepoRoot\eng\Packages.Data.props"
     "<PackageReference Update=`"Microsoft.Azure.AutoRest.CSharp`" Version=`"$Version`" PrivateAssets=`"All`" />" | `
     Set-Content $PackagesProps -NoNewline
 
-$Env:NODE_OPTIONS = "--max-old-space-size=8192"
+$Env:NODE_OPTIONS = "--max-old-space-size=4096"
 dotnet msbuild /restore /t:GenerateCode "$SdkRepoRoot\eng\service.proj"
