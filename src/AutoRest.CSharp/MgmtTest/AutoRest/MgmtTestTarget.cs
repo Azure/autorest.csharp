@@ -56,6 +56,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resourceContainer in context.Library.ResourceContainers)
             {
+                if (!resourceContainer.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.ResourceGroups))
+                {   // TODO: currently generate only resourceGroup's child containers
+                    continue;
+                }
                 var codeWriter = new CodeWriter();
                 var containerWriter = new ResourceContainerTestWriter(codeWriter, resourceContainer, context);
                 containerWriter.WriteContainerTest();
