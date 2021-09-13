@@ -455,7 +455,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var schema = entry.Key;
                 if (ResourceNameToRequestPathMap.TryGetValue(schema.Name, out var requestPaths))
                 {
-                    // ensure different request paths are to the same resource data
+                    // we are iterating over the ResourceSchemaMap, the value can only be [ResourceData]s
                     var resourceData = (ResourceData)entry.Value;
                     foreach (var requestPath in requestPaths)
                     {
