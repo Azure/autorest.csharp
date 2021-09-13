@@ -35,16 +35,15 @@ namespace AutoRest.CSharp.Output.Models
             Parameters = Builder.GetOrderedParameters();
 
             ClientPrefix = ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context);
-            RestClientSuffix = "Rest" + ClientBuilder.GetClientSuffix(context);
+            RestClientSuffix = ClientBuilder.GetRestClientSuffix(context);
             DefaultName = ClientPrefix + RestClientSuffix;
-            Description = "";
         }
 
         protected RestClientBuilder Builder;
         internal OperationGroup OperationGroup { get; }
         protected string RestClientSuffix { get; }
-        public Parameter[] Parameters { get; }
-        public string Description { get; }
+        public virtual Parameter[] Parameters { get; }
+        public virtual string Description { get; } = "";
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }

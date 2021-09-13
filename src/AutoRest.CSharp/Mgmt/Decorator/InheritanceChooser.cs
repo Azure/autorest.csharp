@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -16,9 +17,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InheritanceChooser
     {
+        private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
+
+        public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
+        {
+            return _valueCache.TryGetValue(schema, out result);
+        }
+
         public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
         {
-            if (SchemaMatchTracker.TryGetExactMatch(originalType.ObjectSchema, out var result))
+            if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
             {
@@ -26,11 +34,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
                 {
                     result = GetCSharpType(originalType, parentType);
-                    SchemaMatchTracker.SetExactMatch(originalType.ObjectSchema, result);
+                    _valueCache.TryAdd(originalType.ObjectSchema, result);
                     return result;
                 }
             }
-            SchemaMatchTracker.SetExactMatch(originalType.ObjectSchema, null);
+            _valueCache.TryAdd(originalType.ObjectSchema, null);
             return null;
         }
 

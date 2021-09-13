@@ -17,7 +17,8 @@ namespace body_file_LowLevel
     public partial class FilesClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,19 +46,28 @@ namespace body_file_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Get file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetFileAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetFileRequest(options);
+            using HttpMessage message = CreateGetFileRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
@@ -87,13 +97,22 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetFile(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetFileRequest(options);
+            using HttpMessage message = CreateGetFileRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
@@ -122,11 +141,9 @@ namespace body_file_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetFile"/> and <see cref="GetFileAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetFileRequest(RequestOptions options = null)
+        private HttpMessage CreateGetFileRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -138,13 +155,22 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetFileLargeAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetFileLargeRequest(options);
+            using HttpMessage message = CreateGetFileLargeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
@@ -174,13 +200,22 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetFileLarge(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetFileLargeRequest(options);
+            using HttpMessage message = CreateGetFileLargeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
@@ -209,11 +244,9 @@ namespace body_file_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetFileLarge"/> and <see cref="GetFileLargeAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetFileLargeRequest(RequestOptions options = null)
+        private HttpMessage CreateGetFileLargeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -225,13 +258,22 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyFileAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyFileRequest(options);
+            using HttpMessage message = CreateGetEmptyFileRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
@@ -261,13 +303,22 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetEmptyFile(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyFileRequest(options);
+            using HttpMessage message = CreateGetEmptyFileRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
@@ -296,11 +347,9 @@ namespace body_file_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetEmptyFile"/> and <see cref="GetEmptyFileAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetEmptyFileRequest(RequestOptions options = null)
+        private HttpMessage CreateGetEmptyFileRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

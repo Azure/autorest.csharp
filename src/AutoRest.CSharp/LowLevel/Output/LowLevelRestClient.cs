@@ -15,42 +15,36 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class LowLevelRestClient : TypeProvider
+    internal class LowLevelRestClient : RestClient
     {
-        private readonly OperationGroup _operationGroup;
-        private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private RestClientBuilder _builder;
-
-        private LowLevelClientMethod[]? _allMethods;
-
         protected override string DefaultAccessibility { get; } = "public";
 
-        public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context) : base(context)
+        private BuildContext<LowLevelOutputLibrary> _context;
+
+        public override Parameter[] Parameters { get; }
+
+        public override string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(OperationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
+
+        public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context) : base(operationGroup, context, null)
         {
-            _operationGroup = operationGroup;
             _context = context;
-            _builder = new RestClientBuilder (operationGroup, context);
-            Parameters = _builder.GetOrderedParameters ().Where (p => !p.IsApiVersionParameter).ToArray();
-            ClientPrefix = ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context);
-            var clientSuffix = ClientBuilder.GetClientSuffix(context);
-            DefaultName = ClientPrefix + clientSuffix;
+            Parameters = Builder.GetOrderedParameters().Where(p => !p.IsApiVersionParameter).ToArray();
         }
 
-        public Parameter[] Parameters { get; }
-        public string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(_operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
-        public LowLevelClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
-        public string ClientPrefix { get; }
-        protected override string DefaultName { get; }
-
-        private IEnumerable<LowLevelClientMethod> BuildAllMethods()
+        protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
-            var requestMethods = new Dictionary<ServiceRequest, LowLevelClientMethod>();
+            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
-            foreach (var operation in _operationGroup.Operations)
+            foreach (var operation in OperationGroup.Operations)
             {
-                ServiceRequest serviceRequest = operation.Requests.FirstOrDefault(r => r.Protocol.Http is HttpRequest);
-                if (serviceRequest != null)
+                foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
+                    // See also DataPlaneRestClient::EnsureNormalMethods if changing
+                    if (!(serviceRequest.Protocol.Http is HttpRequest httpRequest))
+                    {
+                        continue;
+                    }
+
                     // Prepare our parameter list. If there were any parameters that should be passed in the body of the request,
                     // we want to generate a single parameter of type `RequestContent` named `requestBody` paramter. We want that
                     // parameter to be the last required parameter in the method signature (so any required path or query parameters
@@ -58,11 +52,11 @@ namespace AutoRest.CSharp.Output.Models
 
                     IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where(FilterServiceParamaters);
                     var accessibility = operation.Accessibility ?? "public";
-                    RestClientMethod method = _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null, accessibility);
+                    RestClientMethod method = Builder.BuildMethod(operation, httpRequest, requestParameters, null, accessibility);
                     RequestHeader[] requestHeaders = method.Request.Headers;
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
-                    LowLevelClientMethod.SchemaDocumentation[]? schemaDocumentation = null;
+                    LowLevelClientMethod.SchemaDocumentation[]? requestBodyDoc = null;
 
                     if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body))
                     {
@@ -78,7 +72,7 @@ namespace AutoRest.CSharp.Output.Models
                         }
                         parameters.Insert(bodyIndex, bodyParam);
                         body = new RequestContentRequestBody(bodyParam);
-                        schemaDocumentation = GetSchemaDocumentationsForParameter(bodyParameter);
+                        requestBodyDoc = GetSchemaDocumentationsForSchema(bodyParameter.Schema, LowLevelClientMethod.SchemaDocumentation.RequestBody);
 
                         // If there's a Content-Type parameter in the parameters list, move it to after the parameter for the body, and change the
                         // type to be `Content-Type`
@@ -95,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models
 
                                 parameters.RemoveAt(contentTypeParamIndex);
 
-                                // If the Content-Type paramter came before the the body, the removal of it above shifted the body parameter
+                                // If the Content-Type parameter came before the the body, the removal of it above shifted the body parameter
                                 // closer to the start of the list.
                                 if (contentTypeParamIndex < bodyIndex)
                                 {
@@ -117,22 +111,33 @@ namespace AutoRest.CSharp.Output.Models
                         }
                     }
 
-                    // Inject the RequestOptions
-                    CSharpType requestType = new CSharpType (typeof(Azure.RequestOptions)).WithNullable(true);
-                    Parameter options = new Parameter ("options", "The request options", requestType, new Constant(null, requestType), true);
-                    parameters.Insert (parameters.Count, options);
-
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, requestHeaders, body);
                     Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");
-                    yield return new LowLevelClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, operation, schemaDocumentation, diagnostic);
+
+                    var response = operation.Responses.FirstOrDefault(r => r.ResponseSchema != null);
+                    LowLevelClientMethod.SchemaDocumentation[]? responseBodyDoc = null;
+                    if (response != null)
+                    {
+                        responseBodyDoc = GetSchemaDocumentationsForSchema(response.ResponseSchema!, LowLevelClientMethod.SchemaDocumentation.ResponseBody);
+                    }
+                    var errorResponse = operation.Exceptions.FirstOrDefault(r => r.ResponseSchema != null);
+                    LowLevelClientMethod.SchemaDocumentation[]? responseErrorDoc = null;
+                    if (errorResponse != null)
+                    {
+                        responseErrorDoc = GetSchemaDocumentationsForSchema(errorResponse.ResponseSchema!, LowLevelClientMethod.SchemaDocumentation.ResponseError);
+                    }
+                    LowLevelClientMethod.SchemaDocs schemaDocs = new LowLevelClientMethod.SchemaDocs(requestBodyDoc, responseBodyDoc, responseErrorDoc);
+                    requestMethods.Add(serviceRequest, new LowLevelClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, operation, schemaDocs, diagnostic));
                 }
             }
+
+            return requestMethods;
         }
-        private LowLevelClientMethod.SchemaDocumentation[]? GetSchemaDocumentationsForParameter(RequestParameter parameter)
+        private LowLevelClientMethod.SchemaDocumentation[]? GetSchemaDocumentationsForSchema(Schema schema, string schemaName)
         {
             // Visit each schema in the graph and for object schemas, collect information about all the properties.
             HashSet<string> visitedSchema = new HashSet<string>();
-            Queue<Schema> schemasToExplore = new Queue<Schema>(new Schema[] { parameter.Schema });
+            Queue<Schema> schemasToExplore = new Queue<Schema>(new Schema[] { schema });
             List<(string SchemaName, List<LowLevelClientMethod.SchemaDocumentation.DocumentationRow> Rows)> documentationObjects = new();
 
             while (schemasToExplore.Any())
@@ -176,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models
                             }
                         }
 
-                        documentationObjects.Add(new(parameter.Schema == o ? "Request Body" : StringifyTypeForTable(o), propertyDocumentation));
+                        documentationObjects.Add(new(schema == o ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(o)), propertyDocumentation));
                         break;
                 }
 

@@ -303,5 +303,11 @@ namespace AutoRest.CSharp.Utilities
         {
             return camelCase.Humanize().Split(' ').Select(w => w.FirstCharToUpperCase());
         }
+
+        public static StringBuilder AppendIndentation(this StringBuilder builder, int indentation)
+        {
+            var indent = new string(' ', indentation);
+            return builder.Append(indent);
+        }
     }
 }

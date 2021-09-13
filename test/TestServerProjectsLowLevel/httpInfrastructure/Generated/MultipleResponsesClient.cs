@@ -17,7 +17,8 @@ namespace httpInfrastructure_LowLevel
     public partial class MultipleResponsesClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,19 +46,34 @@ namespace httpInfrastructure_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
@@ -89,13 +105,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
@@ -126,11 +157,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200Model204NoModelDefaultError200Valid"/> and <see cref="Get200Model204NoModelDefaultError200ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -142,13 +171,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
@@ -180,13 +224,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError204Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
@@ -217,11 +276,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200Model204NoModelDefaultError204Valid"/> and <see cref="Get200Model204NoModelDefaultError204ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError204ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError204ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -233,13 +290,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
@@ -271,13 +343,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
@@ -308,11 +395,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200Model204NoModelDefaultError201Invalid"/> and <see cref="Get200Model204NoModelDefaultError201InvalidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError201InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError201InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -324,13 +409,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with no payload:. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
@@ -362,13 +462,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with no payload:. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError202None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
@@ -399,11 +514,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200Model204NoModelDefaultError202None"/> and <see cref="Get200Model204NoModelDefaultError202NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError202NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError202NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -415,13 +528,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
@@ -453,13 +581,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
@@ -490,11 +633,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200Model204NoModelDefaultError400Valid"/> and <see cref="Get200Model204NoModelDefaultError400ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -506,13 +647,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
@@ -543,13 +699,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model201ModelDefaultError200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
@@ -579,11 +750,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200Model201ModelDefaultError200Valid"/> and <see cref="Get200Model201ModelDefaultError200ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model201ModelDefaultError200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model201ModelDefaultError200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -595,13 +764,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
@@ -632,13 +816,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model201ModelDefaultError201Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
@@ -668,11 +867,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200Model201ModelDefaultError201Valid"/> and <see cref="Get200Model201ModelDefaultError201ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model201ModelDefaultError201ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model201ModelDefaultError201ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -684,13 +881,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
@@ -721,13 +933,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model201ModelDefaultError400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
@@ -757,11 +984,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200Model201ModelDefaultError400Valid"/> and <see cref="Get200Model201ModelDefaultError400ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model201ModelDefaultError400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model201ModelDefaultError400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -773,13 +998,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
@@ -811,13 +1051,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
@@ -848,11 +1103,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA201ModelC404ModelDDefaultError200Valid"/> and <see cref="Get200ModelA201ModelC404ModelDDefaultError200ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -864,13 +1117,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
@@ -902,13 +1170,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
@@ -939,11 +1222,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA201ModelC404ModelDDefaultError201Valid"/> and <see cref="Get200ModelA201ModelC404ModelDDefaultError201ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -955,13 +1236,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
@@ -993,13 +1289,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
@@ -1030,11 +1341,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA201ModelC404ModelDDefaultError404Valid"/> and <see cref="Get200ModelA201ModelC404ModelDDefaultError404ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1046,13 +1355,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
@@ -1084,13 +1408,28 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
@@ -1121,11 +1460,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA201ModelC404ModelDDefaultError400Valid"/> and <see cref="Get200ModelA201ModelC404ModelDDefaultError400ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1137,13 +1474,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get202None204NoneDefaultError202NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
             scope.Start();
@@ -1174,13 +1520,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get202None204NoneDefaultError202None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
             scope.Start();
@@ -1210,11 +1565,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get202None204NoneDefaultError202None"/> and <see cref="Get202None204NoneDefaultError202NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultError202NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultError202NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1226,13 +1579,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get202None204NoneDefaultError204NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
             scope.Start();
@@ -1263,13 +1625,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get202None204NoneDefaultError204None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
             scope.Start();
@@ -1299,11 +1670,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get202None204NoneDefaultError204None"/> and <see cref="Get202None204NoneDefaultError204NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultError204NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultError204NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1315,13 +1684,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get202None204NoneDefaultError400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
             scope.Start();
@@ -1352,13 +1730,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get202None204NoneDefaultError400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
             scope.Start();
@@ -1388,11 +1775,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get202None204NoneDefaultError400Valid"/> and <see cref="Get202None204NoneDefaultError400ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultError400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultError400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1410,7 +1795,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
             scope.Start();
@@ -1447,7 +1832,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
             scope.Start();
@@ -1477,11 +1862,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get202None204NoneDefaultNone202Invalid"/> and <see cref="Get202None204NoneDefaultNone202InvalidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultNone202InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultNone202InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1498,7 +1881,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
             scope.Start();
@@ -1535,7 +1918,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
             scope.Start();
@@ -1565,11 +1948,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get202None204NoneDefaultNone204None"/> and <see cref="Get202None204NoneDefaultNone204NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultNone204NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultNone204NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1586,7 +1967,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
             scope.Start();
@@ -1623,7 +2004,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
             scope.Start();
@@ -1653,11 +2034,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get202None204NoneDefaultNone400None"/> and <see cref="Get202None204NoneDefaultNone400NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultNone400NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultNone400NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1674,7 +2053,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
             scope.Start();
@@ -1711,7 +2090,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
             scope.Start();
@@ -1741,11 +2120,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get202None204NoneDefaultNone400Invalid"/> and <see cref="Get202None204NoneDefaultNone400InvalidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultNone400InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultNone400InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1756,13 +2133,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultModelA200ValidRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
             scope.Start();
@@ -1792,13 +2177,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetDefaultModelA200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultModelA200ValidRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
             scope.Start();
@@ -1827,11 +2220,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDefaultModelA200Valid"/> and <see cref="GetDefaultModelA200ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultModelA200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultModelA200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1843,13 +2234,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultModelA200NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA200NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
             scope.Start();
@@ -1879,13 +2278,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetDefaultModelA200None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultModelA200NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA200NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
             scope.Start();
@@ -1914,11 +2321,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDefaultModelA200None"/> and <see cref="GetDefaultModelA200NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultModelA200NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultModelA200NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1930,13 +2335,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetDefaultModelA400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultModelA400ValidRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
             scope.Start();
@@ -1966,13 +2379,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetDefaultModelA400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultModelA400ValidRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
             scope.Start();
@@ -2001,11 +2422,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDefaultModelA400Valid"/> and <see cref="GetDefaultModelA400ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultModelA400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultModelA400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2017,13 +2436,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetDefaultModelA400NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultModelA400NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA400NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
             scope.Start();
@@ -2053,13 +2480,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetDefaultModelA400None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultModelA400NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA400NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
             scope.Start();
@@ -2088,11 +2523,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDefaultModelA400None"/> and <see cref="GetDefaultModelA400NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultModelA400NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultModelA400NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2110,7 +2543,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultNone200InvalidRequest(options);
+            using HttpMessage message = CreateGetDefaultNone200InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
             scope.Start();
@@ -2146,7 +2579,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultNone200InvalidRequest(options);
+            using HttpMessage message = CreateGetDefaultNone200InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
             scope.Start();
@@ -2175,11 +2608,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDefaultNone200Invalid"/> and <see cref="GetDefaultNone200InvalidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultNone200InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultNone200InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2196,7 +2627,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultNone200NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultNone200NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
             scope.Start();
@@ -2232,7 +2663,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultNone200NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultNone200NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
             scope.Start();
@@ -2261,11 +2692,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDefaultNone200None"/> and <see cref="GetDefaultNone200NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultNone200NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultNone200NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2282,7 +2711,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultNone400InvalidRequest(options);
+            using HttpMessage message = CreateGetDefaultNone400InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
             scope.Start();
@@ -2318,7 +2747,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultNone400InvalidRequest(options);
+            using HttpMessage message = CreateGetDefaultNone400InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
             scope.Start();
@@ -2347,11 +2776,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDefaultNone400Invalid"/> and <see cref="GetDefaultNone400InvalidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultNone400InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultNone400InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2368,7 +2795,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultNone400NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultNone400NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
             scope.Start();
@@ -2404,7 +2831,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetDefaultNone400NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultNone400NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
             scope.Start();
@@ -2433,11 +2860,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDefaultNone400None"/> and <see cref="GetDefaultNone400NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultNone400NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultNone400NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2448,13 +2873,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA200NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA200NoneRequest(options);
+            using HttpMessage message = CreateGet200ModelA200NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
             scope.Start();
@@ -2484,13 +2917,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA200None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA200NoneRequest(options);
+            using HttpMessage message = CreateGet200ModelA200NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
             scope.Start();
@@ -2519,11 +2960,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA200None"/> and <see cref="Get200ModelA200NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA200NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA200NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2535,13 +2974,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA200ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
             scope.Start();
@@ -2571,13 +3018,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA200ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA200ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
             scope.Start();
@@ -2606,11 +3061,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA200Valid"/> and <see cref="Get200ModelA200ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2622,13 +3075,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA200InvalidRequest(options);
+            using HttpMessage message = CreateGet200ModelA200InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
             scope.Start();
@@ -2658,13 +3119,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA200Invalid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA200InvalidRequest(options);
+            using HttpMessage message = CreateGet200ModelA200InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
             scope.Start();
@@ -2693,11 +3162,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA200Invalid"/> and <see cref="Get200ModelA200InvalidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA200InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA200InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2709,13 +3176,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA400NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA400NoneRequest(options);
+            using HttpMessage message = CreateGet200ModelA400NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
             scope.Start();
@@ -2745,13 +3220,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA400None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA400NoneRequest(options);
+            using HttpMessage message = CreateGet200ModelA400NoneRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
             scope.Start();
@@ -2780,11 +3263,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA400None"/> and <see cref="Get200ModelA400NoneAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA400NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA400NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2796,13 +3277,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA400ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
             scope.Start();
@@ -2832,13 +3321,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA400ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA400ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
             scope.Start();
@@ -2867,11 +3364,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA400Valid"/> and <see cref="Get200ModelA400ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2883,13 +3378,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA400InvalidRequest(options);
+            using HttpMessage message = CreateGet200ModelA400InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
             scope.Start();
@@ -2919,13 +3422,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA400Invalid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA400InvalidRequest(options);
+            using HttpMessage message = CreateGet200ModelA400InvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
             scope.Start();
@@ -2954,11 +3465,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA400Invalid"/> and <see cref="Get200ModelA400InvalidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA400InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA400InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2970,13 +3479,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA202ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA202ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA202ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
             scope.Start();
@@ -3006,13 +3523,21 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   statusCode: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA202Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200ModelA202ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA202ValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
             scope.Start();
@@ -3041,11 +3566,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200ModelA202Valid"/> and <see cref="Get200ModelA202ValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA202ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA202ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
