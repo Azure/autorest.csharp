@@ -15,7 +15,7 @@ namespace MgmtListMethods.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="Status"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of Status. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Status(string value)
         {

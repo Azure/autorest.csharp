@@ -16,7 +16,7 @@ namespace non_string_enum.Models
     {
         private readonly int _value;
 
-        /// <summary> Determines if two <see cref="IntEnum"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of IntEnum. </summary>
         public IntEnum(int value)
         {
             _value = value;

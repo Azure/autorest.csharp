@@ -15,7 +15,7 @@ namespace MgmtParamOrdering.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="ProvisioningState"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of ProvisioningState. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ProvisioningState(string value)
         {

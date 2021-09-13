@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="KeyType"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of KeyType. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public KeyType(string value)
         {

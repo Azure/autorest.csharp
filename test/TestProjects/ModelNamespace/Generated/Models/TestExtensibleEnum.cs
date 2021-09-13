@@ -15,7 +15,7 @@ namespace ModelNamespace
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="TestExtensibleEnum"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of TestExtensibleEnum. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public TestExtensibleEnum(string value)
         {

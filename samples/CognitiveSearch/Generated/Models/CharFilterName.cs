@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="CharFilterName"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of CharFilterName. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public CharFilterName(string value)
         {

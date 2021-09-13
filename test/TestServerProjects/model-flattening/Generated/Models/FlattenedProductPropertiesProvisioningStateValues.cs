@@ -15,7 +15,7 @@ namespace model_flattening.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="FlattenedProductPropertiesProvisioningStateValues"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of FlattenedProductPropertiesProvisioningStateValues. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public FlattenedProductPropertiesProvisioningStateValues(string value)
         {

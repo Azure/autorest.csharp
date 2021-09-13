@@ -15,7 +15,7 @@ namespace extensible_enums_swagger.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="IntEnum"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of IntEnum. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public IntEnum(string value)
         {

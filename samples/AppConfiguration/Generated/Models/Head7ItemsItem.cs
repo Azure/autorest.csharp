@@ -15,7 +15,7 @@ namespace AppConfiguration.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="Head7ItemsItem"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of Head7ItemsItem. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Head7ItemsItem(string value)
         {

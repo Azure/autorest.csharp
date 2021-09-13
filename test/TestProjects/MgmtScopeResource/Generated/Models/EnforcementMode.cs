@@ -15,7 +15,7 @@ namespace MgmtScopeResource.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="EnforcementMode"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of EnforcementMode. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public EnforcementMode(string value)
         {

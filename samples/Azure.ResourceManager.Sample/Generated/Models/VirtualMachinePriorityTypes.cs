@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="VirtualMachinePriorityTypes"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of VirtualMachinePriorityTypes. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public VirtualMachinePriorityTypes(string value)
         {

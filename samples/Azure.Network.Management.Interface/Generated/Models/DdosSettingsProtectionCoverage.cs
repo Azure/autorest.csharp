@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="DdosSettingsProtectionCoverage"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of DdosSettingsProtectionCoverage. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public DdosSettingsProtectionCoverage(string value)
         {

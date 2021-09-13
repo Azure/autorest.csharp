@@ -15,7 +15,7 @@ namespace constants.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="ModelAsStringNoRequiredTwoValueNoDefaultOpEnum"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of ModelAsStringNoRequiredTwoValueNoDefaultOpEnum. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ModelAsStringNoRequiredTwoValueNoDefaultOpEnum(string value)
         {

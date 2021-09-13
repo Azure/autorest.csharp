@@ -15,7 +15,7 @@ namespace body_complex.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="GoblinSharkColor"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of GoblinSharkColor. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public GoblinSharkColor(string value)
         {

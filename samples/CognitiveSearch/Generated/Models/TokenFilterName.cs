@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="TokenFilterName"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of TokenFilterName. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public TokenFilterName(string value)
         {

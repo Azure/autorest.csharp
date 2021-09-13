@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="StorageAccountTypes"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of StorageAccountTypes. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public StorageAccountTypes(string value)
         {

@@ -16,7 +16,7 @@ namespace non_string_enum.Models
     {
         private readonly float _value;
 
-        /// <summary> Determines if two <see cref="FloatEnum"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of FloatEnum. </summary>
         public FloatEnum(float value)
         {
             _value = value;

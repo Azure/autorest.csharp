@@ -15,7 +15,7 @@ namespace NamespaceForEnums
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="NonExtensibleEnumTurnedExtensible"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of NonExtensibleEnumTurnedExtensible. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public NonExtensibleEnumTurnedExtensible(string value)
         {

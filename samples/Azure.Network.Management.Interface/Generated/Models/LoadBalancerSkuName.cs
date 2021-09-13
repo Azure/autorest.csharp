@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="LoadBalancerSkuName"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of LoadBalancerSkuName. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public LoadBalancerSkuName(string value)
         {

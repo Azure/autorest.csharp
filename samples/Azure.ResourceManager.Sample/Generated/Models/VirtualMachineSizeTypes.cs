@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="VirtualMachineSizeTypes"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineSizeTypes. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public VirtualMachineSizeTypes(string value)
         {
