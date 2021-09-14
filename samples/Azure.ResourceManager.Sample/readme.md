@@ -11,15 +11,15 @@ model-namespace: false
 public-clients: false
 head-as-boolean: false
 operation-group-to-resource-type:
-   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/vmextension
-   VirtualMachineImages: Microsoft.Compute/locations/publishers/vmimage
+   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/artifacttypes/types/versions
+   VirtualMachineImages: Microsoft.Compute/locations/publishers/artifacttypes/offers/skus/versions
    Usage: Microsoft.Compute/locations/usages
    VirtualMachineSizes: Microsoft.Compute/locations/vmSizes
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades
    LogAnalytics: Microsoft.Compute/locations/logAnalytics
 operation-group-to-resource:
-   VirtualMachineExtensionImages: NonResource
-   VirtualMachineImages: NonResource
+   VirtualMachineExtensionImages: VirtualMachineExtensionImage
+   VirtualMachineImages: VirtualMachineImage
    VirtualMachineSizes: NonResource
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
    LogAnalytics: NonResource
