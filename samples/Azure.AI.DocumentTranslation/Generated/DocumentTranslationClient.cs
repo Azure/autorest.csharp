@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -865,13 +866,16 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
+            var idsValues = ids.ToArray();
+            var statusesValues = statuses.ToArray();
+            var orderByValues = orderBy.ToArray();
             async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
                 scope.Start();
                 try
                 {
-                    Response response = await _restClient.GetTranslationsStatusAsync(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetTranslationsStatusAsync(top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -887,7 +891,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = await _restClient.GetTranslationsStatusNextPageAsync(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetTranslationsStatusNextPageAsync(nextLink, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1008,13 +1012,16 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
+            var idsValues = ids.ToArray();
+            var statusesValues = statuses.ToArray();
+            var orderByValues = orderBy.ToArray();
             Page<BinaryData> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
                 scope.Start();
                 try
                 {
-                    Response response = _restClient.GetTranslationsStatus(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+                    Response response = _restClient.GetTranslationsStatus(top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1030,7 +1037,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = _restClient.GetTranslationsStatusNextPage(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+                    Response response = _restClient.GetTranslationsStatusNextPage(nextLink, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1145,13 +1152,16 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
+            var idsValues = ids.ToArray();
+            var statusesValues = statuses.ToArray();
+            var orderByValues = orderBy.ToArray();
             async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
                 scope.Start();
                 try
                 {
-                    Response response = await _restClient.GetDocumentsStatusAsync(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetDocumentsStatusAsync(id, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1167,7 +1177,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = await _restClient.GetDocumentsStatusNextPageAsync(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetDocumentsStatusNextPageAsync(nextLink, id, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1282,13 +1292,16 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
+            var idsValues = ids.ToArray();
+            var statusesValues = statuses.ToArray();
+            var orderByValues = orderBy.ToArray();
             Page<BinaryData> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
                 scope.Start();
                 try
                 {
-                    Response response = _restClient.GetDocumentsStatus(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+                    Response response = _restClient.GetDocumentsStatus(id, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1304,7 +1317,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = _restClient.GetDocumentsStatusNextPage(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+                    Response response = _restClient.GetDocumentsStatusNextPage(nextLink, id, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)

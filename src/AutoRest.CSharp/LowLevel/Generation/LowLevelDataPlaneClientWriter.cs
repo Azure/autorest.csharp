@@ -20,6 +20,7 @@ using AutoRest.CSharp.Output.Builders;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Generation.Writers;
 using System.Text;
+using System.Collections;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -76,10 +77,12 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Line($"options ??= new {typeof(Azure.RequestOptions)}();");
 
+                WriteEnumerableArgumentEnumerationStatements(writer, clientMethod.FirstPageMethod, out var enumeratedParameterMap);
+
                 writer.Line($"{asyncText}{pageMethodReturnType} FirstPageFunc(int? pageSizeHint)");
                 using (writer.Scope())
                 {
-                    WritePagingFuncMethodBody(writer, clientMethod.Diagnostic, clientMethod.FirstPageMethod, clientMethod.PagingResponseInfo, async);
+                    WritePagingFuncMethodBody(writer, clientMethod.Diagnostic, clientMethod.FirstPageMethod, clientMethod.PagingResponseInfo, async, enumeratedParameterMap);
                 }
                 writer.Line();
 
@@ -88,7 +91,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{asyncText}{pageMethodReturnType} NextPageFunc(string nextLink, int? pageSizeHint)");
                     using (writer.Scope())
                     {
-                        WritePagingFuncMethodBody(writer, clientMethod.Diagnostic, clientMethod.PagingResponseInfo.NextPageMethod, clientMethod.PagingResponseInfo, async);
+                        WritePagingFuncMethodBody(writer, clientMethod.Diagnostic, clientMethod.PagingResponseInfo.NextPageMethod, clientMethod.PagingResponseInfo, async, enumeratedParameterMap);
                     }
                     writer.Line();
                 }
@@ -99,7 +102,28 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WritePagingFuncMethodBody(CodeWriter writer, Diagnostic diagnostic, RestClientMethod serviceMethod, LowLevelPagingResponseInfo pagingResponseInfo, bool async)
+        private bool IsIEnumerableType(CSharpType type)
+        {
+            return type.IsFrameworkType && (type.FrameworkType == typeof(IEnumerable) || (type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>)));
+        }
+
+        private void WriteEnumerableArgumentEnumerationStatements(CodeWriter writer, RestClientMethod clientMethod, out Dictionary<string, CodeWriterDeclaration> enumeratedParameterMap)
+        {
+            enumeratedParameterMap = new Dictionary<string, CodeWriterDeclaration>();
+
+            foreach (Parameter p in clientMethod.Parameters)
+            {
+                if (IsIEnumerableType(p.Type))
+                {
+                    writer.UseNamespace("System.Linq");
+                    CodeWriterDeclaration d = new CodeWriterDeclaration($"{p.Name}Values");
+                    writer.Line($"var {d:D} = {p.Name}.ToArray();");
+                    enumeratedParameterMap[p.Name] = d;
+                }
+            }
+        }
+
+        private void WritePagingFuncMethodBody(CodeWriter writer, Diagnostic diagnostic, RestClientMethod serviceMethod, LowLevelPagingResponseInfo pagingResponseInfo, bool async, Dictionary<string, CodeWriterDeclaration> enumeratedParameterMap)
         {
             WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
             {
@@ -115,7 +139,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"{RestClientField}.{CreateMethodName(serviceMethod.Name, async)}(");
                 foreach (var parameter in serviceMethod.Parameters)
                 {
-                    writer.Append($"{parameter.Name:I}, ");
+                    if (IsIEnumerableType(parameter.Type))
+                    {
+                        writer.Append($"{enumeratedParameterMap[parameter.Name]:I}, ");
+                    }
+                    else
+                    {
+                        writer.Append($"{parameter.Name:I}, ");
+                    }
                 }
                 writer.Append($"options)");
 
@@ -163,10 +194,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (clientMethod.PagingResponseInfo.NextPageMethod != null)
                     {
+                        WriteEnumerableArgumentEnumerationStatements(writer, clientMethod.PagingResponseInfo.NextPageMethod, out var enumeratedParameterMap);
+
                         writer.Line($"{asyncText}{pageMethodReturnType} NextPageFunc(string nextLink, int? pageSizeHint)");
                         using (writer.Scope())
                         {
-                            WritePagingFuncMethodBody(writer, clientMethod.Diagnostic, clientMethod.PagingResponseInfo.NextPageMethod, clientMethod.PagingResponseInfo, async);
+                            WritePagingFuncMethodBody(writer, clientMethod.Diagnostic, clientMethod.PagingResponseInfo.NextPageMethod, clientMethod.PagingResponseInfo, async, enumeratedParameterMap);
                         }
                         writer.Line();
                     }
