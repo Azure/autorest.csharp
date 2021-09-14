@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         private LowLevelClientMethod[]? _methods;
         private LowLevelLongRunningOperationMethod[]? _longRunningOperationMethods;
+        private LowLevelPagingMethod[]? _pagingMethods;
         private LowLevelRestClient? _restClient;
 
         public LowLevelDataPlaneClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context) : base(context)
@@ -39,8 +40,8 @@ namespace AutoRest.CSharp.Output.Models
         public string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(_operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
         public LowLevelRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public LowLevelClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
-
         public LowLevelLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
+        public LowLevelPagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
 
         protected override string DefaultName { get; }
 
@@ -50,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var operation in _operationGroup.Operations)
             {
-                if (operation.IsLongRunning)
+                if (operation.IsLongRunning || operation.Language.Default.Paging != null)
                 {
                     continue;
                 }
@@ -76,6 +77,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (operation.IsLongRunning)
                 {
+                    Paging? paging = operation.Language.Default.Paging;
+
                     foreach (var request in operation.Requests)
                     {
                         RestClientMethod startMethod = RestClient.GetOperationMethod(request);
@@ -83,12 +86,56 @@ namespace AutoRest.CSharp.Output.Models
                         Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
                         Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
 
+                        LowLevelPagingResponseInfo? pagingInfo = null;
+
+                        if (paging != null)
+                        {
+                            RestClientMethod? nextPageMethod = RestClient.GetNextOperationMethod(request);
+                            pagingInfo = new LowLevelPagingResponseInfo(nextPageMethod, paging.NextLinkName, paging.ItemName ?? "value");
+                        }
+
                         yield return new LowLevelLongRunningOperationMethod(
                             startMethod,
                             new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema),
-                            new Diagnostic($"{Declaration.Name}.{startMethod.Name}")
-                        );
+                            new Diagnostic($"{Declaration.Name}.{startMethod.Name}"),
+                            pagingInfo);
                     }
+                }
+            }
+        }
+
+        private IEnumerable<LowLevelPagingMethod> BuildPagingMethods()
+        {
+            foreach (var operation in _operationGroup.Operations)
+            {
+                Paging? paging = operation.Language.Default.Paging;
+                if (paging == null || operation.IsLongRunning)
+                {
+                    continue;
+                }
+
+                foreach (var request in operation.Requests)
+                {
+                    RestClientMethod method = RestClient.GetOperationMethod(request);
+                    RestClientMethod? nextPageMethod = RestClient.GetNextOperationMethod(request);
+                    Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
+                    Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
+                    Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
+
+                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
+                    {
+                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
+                    }
+
+                    yield return new LowLevelPagingMethod(
+                        method,
+                        new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema),
+                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
+                        new LowLevelPagingResponseInfo(
+                            nextPageMethod,
+                            paging.NextLinkName,
+                            paging.ItemName ?? "value")
+                        );
                 }
             }
         }

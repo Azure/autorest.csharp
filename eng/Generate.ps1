@@ -84,7 +84,7 @@ if (!($Exclude -contains "TestServer"))
     }
 }
 
-$llcArgs = "--low-level-client=true --security=AzureKey --security-header-name=Fake-Subscription-Key"
+$llcArgs = "--low-level-client=true --security=AzureKey --security-header-name=Fake-Subscription-Key --modelerfour.group-parameters=false"
 
 $testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
 $testNamesLowLevel =
@@ -92,11 +92,12 @@ $testNamesLowLevel =
     'body-file',
     'body-string',
     'custom-baseUrl',
+    'custom-baseUrl-paging',
     'header',
     'httpInfrastructure',
     'media_types',
     'lro',
-    #'paging',
+    'paging',
     'url-multi-collectionFormat',
     'url';
 

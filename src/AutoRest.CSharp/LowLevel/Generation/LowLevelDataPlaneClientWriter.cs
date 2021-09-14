@@ -42,6 +42,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteClientMethod(writer, clientMethod, false);
                     }
 
+                    foreach (var pagingMethod in client.PagingMethods)
+                    {
+                        WritePagingMethod(writer, pagingMethod, true);
+                        WritePagingMethod(writer, pagingMethod, false);
+                    }
+
                     foreach (var longRunningOperationMethod in client.LongRunningOperationMethods)
                     {
                         WriteLongRunningOperationMethod(writer, longRunningOperationMethod, true);
@@ -57,6 +63,82 @@ namespace AutoRest.CSharp.Generation.Writers
             WriteClientMethodBody(writer, clientMethod, async);
         }
 
+        private void WritePagingMethod(CodeWriter writer, LowLevelPagingMethod clientMethod, bool async)
+        {
+            var pageMethodReturnType = async ? new CSharpType(typeof(Task<Page<BinaryData>>)) : new CSharpType(typeof(Page<BinaryData>));
+            var asyncText = async ? "async " : string.Empty;
+            var awaitText = async ? "await " : string.Empty;
+            var enumerableFactoryMethod = async ? "CreateAsyncEnumerable" : "CreateEnumerable";
+
+            WriteClientMethodDecleration(writer, clientMethod.FirstPageMethod, clientMethod.OperationSchemas, async);
+
+            using (writer.Scope())
+            {
+                writer.Line($"options ??= new {typeof(Azure.RequestOptions)}();");
+
+                writer.Line($"{asyncText}{pageMethodReturnType} FirstPageFunc(int? pageSizeHint)");
+                using (writer.Scope())
+                {
+                    WritePagingFuncMethodBody(writer, clientMethod.Diagnostic, clientMethod.FirstPageMethod, clientMethod.PagingResponseInfo, async);
+                }
+                writer.Line();
+
+                if (clientMethod.PagingResponseInfo.NextPageMethod != null)
+                {
+                    writer.Line($"{asyncText}{pageMethodReturnType} NextPageFunc(string nextLink, int? pageSizeHint)");
+                    using (writer.Scope())
+                    {
+                        WritePagingFuncMethodBody(writer, clientMethod.Diagnostic, clientMethod.PagingResponseInfo.NextPageMethod, clientMethod.PagingResponseInfo, async);
+                    }
+                    writer.Line();
+                }
+
+                writer.Line($"return PageableHelpers.{enumerableFactoryMethod}(FirstPageFunc, {(clientMethod.PagingResponseInfo.NextPageMethod != null ? "NextPageFunc" : "null")});");
+            }
+
+            writer.Line();
+        }
+
+        private void WritePagingFuncMethodBody(CodeWriter writer, Diagnostic diagnostic, RestClientMethod serviceMethod, LowLevelPagingResponseInfo pagingResponseInfo, bool async)
+        {
+            WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+            {
+                var responseVariable = new CodeWriterDeclaration("response");
+
+                writer.Append($"{typeof(Response)} {responseVariable:D} = ");
+
+                if (async)
+                {
+                    writer.Append($"await ");
+                }
+
+                writer.Append($"RestClient.{CreateMethodName(serviceMethod.Name, async)}(");
+                foreach (var parameter in serviceMethod.Parameters)
+                {
+                    writer.Append($"{parameter.Name:I}, ");
+                }
+                writer.Append($"options)");
+
+                if (async)
+                {
+                    writer.Append($".ConfigureAwait(false)");
+                }
+
+                writer.Line($";");
+
+                writer.Append($"return LowLevelPagableHelpers.BuildPageForResponse({responseVariable}, \"{pagingResponseInfo.ItemName}\", ");
+
+                if (pagingResponseInfo.NextLinkName != null)
+                {
+                    writer.Line($"\"{pagingResponseInfo.NextLinkName}\");");
+                }
+                else
+                {
+                    writer.Line($"null);");
+                }
+            });
+        }
+
         private void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelLongRunningOperationMethod clientMethod, bool async)
         {
             var finalStateVia = clientMethod.StartMethod.Operation.LongRunningFinalStateVia;
@@ -69,11 +151,27 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var finalStateVia = clientMethod.StartMethod.Operation.LongRunningFinalStateVia;
 
+            var pageMethodReturnType = async ? new CSharpType(typeof(Task<Page<BinaryData>>)) : new CSharpType(typeof(Page<BinaryData>));
             var asyncText = async ? "async " : string.Empty;
             var awaitText = async ? "await " : string.Empty;
+            var operationReturnType = async ? new CSharpType(typeof(AsyncPageable<BinaryData>)) : new CSharpType(typeof(Pageable<BinaryData>));
+            var enumerableFactoryMethod = async ? "CreateAsyncEnumerable" : "CreateEnumerable";
 
             using (writer.Scope())
             {
+                if (clientMethod.PagingResponseInfo != null)
+                {
+                    if (clientMethod.PagingResponseInfo.NextPageMethod != null)
+                    {
+                        writer.Line($"{asyncText}{pageMethodReturnType} NextPageFunc(string nextLink, int? pageSizeHint)");
+                        using (writer.Scope())
+                        {
+                            WritePagingFuncMethodBody(writer, clientMethod.Diagnostic, clientMethod.PagingResponseInfo.NextPageMethod, clientMethod.PagingResponseInfo, async);
+                        }
+                        writer.Line();
+                    }
+                }
+
                 WriteDiagnosticScope(writer, clientMethod.Diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
@@ -106,7 +204,45 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     writer.Line($";");
 
-                    writer.Line($"return new LowLevelBinaryDataOperation({ClientDiagnosticsField}, {PipelineField}, {messageVariable}.Request, {responseVariable}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostic.ScopeName:L});");
+                    if (clientMethod.PagingResponseInfo == null)
+                    {
+                        writer.Line($"return new LowLevelBinaryDataOperation({ClientDiagnosticsField}, {PipelineField}, {messageVariable}.Request, {responseVariable}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostic.ScopeName:L});");
+                    }
+                    else
+                    {
+                        writer.Line($"return new FuncOperation<{operationReturnType}> ({ClientDiagnosticsField}, {PipelineField}, {messageVariable}.Request, {responseVariable}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostic.ScopeName:L}, ({typeof(Response)} response) => {{");
+                        {
+                            writer.Line($"return PageableHelpers.{enumerableFactoryMethod}((int? pageSizeHint) => {{");
+                            {
+                                writer.Append($"return ");
+                                if (async)
+                                {
+                                    writer.Append($"Task.FromResult(");
+                                }
+
+                                writer.Append($"LowLevelPagableHelpers.BuildPageForResponse(response, \"{clientMethod.PagingResponseInfo.ItemName}\", ");
+
+                                if (clientMethod.PagingResponseInfo.NextLinkName != null)
+                                {
+                                    writer.Append($"\"{clientMethod.PagingResponseInfo.NextLinkName}\"");
+                                }
+                                else
+                                {
+                                    writer.Append($"null");
+                                }
+
+                                if (async)
+                                {
+                                    writer.Append($")");
+                                }
+
+                                writer.Line($");");
+                            }
+
+                            writer.Line($"}}, {(clientMethod.PagingResponseInfo.NextPageMethod != null ? "NextPageFunc" : "null")});");
+                            writer.LineRaw("});");
+                        }
+                    }
                 });
             }
 
@@ -152,12 +288,16 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var parameters = clientMethod.Parameters.Concat(new Parameter[] { RequestOptionsParameter });
 
-            var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning) switch
+            var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning, clientMethod.Operation.Language.Default.Paging != null) switch
             {
-                (false, false) => typeof(Response),
-                (false, true) => typeof(Operation<BinaryData>),
-                (true, false) => typeof(Task<Response>),
-                (true, true) => typeof(Task<Operation<BinaryData>>),
+                (false, false, false) => typeof(Response),
+                (false, true, false) => typeof(Operation<BinaryData>),
+                (true, false, false) => typeof(Task<Response>),
+                (true, true, false) => typeof(Task<Operation<BinaryData>>),
+                (false, false, true) => typeof(Pageable<BinaryData>),
+                (false, true, true) => typeof(Operation<Pageable<BinaryData>>),
+                (true, false, true) => typeof(AsyncPageable<BinaryData>),
+                (true, true, true) => typeof(Task<Operation<AsyncPageable<BinaryData>>>)
             });
 
             writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
@@ -170,7 +310,7 @@ namespace AutoRest.CSharp.Generation.Writers
             WriteSchemaDocumentationRemarks(writer, operationSchemas);
 
             var methodName = CreateMethodName(clientMethod.Name, async);
-            var asyncText = async ? "async" : string.Empty;
+            var asyncText = (async && (clientMethod.Operation.Language.Default.Paging == null || clientMethod.Operation.IsLongRunning)) ? "async" : string.Empty;
             writer.Line($"#pragma warning disable AZC0002");
             writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
 
