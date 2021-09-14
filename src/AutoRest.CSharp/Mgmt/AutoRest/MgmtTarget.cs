@@ -138,9 +138,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Tenant]}.cs", tenantExtensionsCodeWriter.ToString());
             }
 
-            var armClientExtensionsCodeWriter = new CodeWriter();
-            new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context).WriteExtension();
-            project.AddGeneratedFile($"Extensions/ArmClientExtensions.cs", armClientExtensionsCodeWriter.ToString());
+            if (!context.Configuration.MgmtConfiguration.IsArmCore)
+            {
+                var armClientExtensionsCodeWriter = new CodeWriter();
+                new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context).WriteExtension();
+                project.AddGeneratedFile($"Extensions/ArmClientExtensions.cs", armClientExtensionsCodeWriter.ToString());
+            }
         }
 
         private static bool shouldSkipModeleGeneration(TypeProvider model, BuildContext<MgmtOutputLibrary> context)
