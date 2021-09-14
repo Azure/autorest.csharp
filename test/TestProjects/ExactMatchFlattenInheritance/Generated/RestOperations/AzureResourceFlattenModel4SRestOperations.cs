@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using ExactMatchFlattenInheritance.Models;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -43,7 +44,7 @@ namespace ExactMatchFlattenInheritance
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string name, AzureResourceFlattenModel4Data parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string name, AzureResourceFlattenModel4 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -73,7 +74,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AzureResourceFlattenModel4Data>> PutAsync(string resourceGroupName, string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<AzureResourceFlattenModel4>> PutAsync(string resourceGroupName, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -94,9 +95,9 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        AzureResourceFlattenModel4Data value = default;
+                        AzureResourceFlattenModel4 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AzureResourceFlattenModel4Data.DeserializeAzureResourceFlattenModel4Data(document.RootElement);
+                        value = AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -110,7 +111,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<AzureResourceFlattenModel4Data> Put(string resourceGroupName, string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
+        public Response<AzureResourceFlattenModel4> Put(string resourceGroupName, string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -131,9 +132,9 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        AzureResourceFlattenModel4Data value = default;
+                        AzureResourceFlattenModel4 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AzureResourceFlattenModel4Data.DeserializeAzureResourceFlattenModel4Data(document.RootElement);
+                        value = AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -166,7 +167,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
-        public async Task<Response<AzureResourceFlattenModel4Data>> GetAsync(string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public async Task<Response<AzureResourceFlattenModel4>> GetAsync(string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -183,13 +184,11 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        AzureResourceFlattenModel4Data value = default;
+                        AzureResourceFlattenModel4 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AzureResourceFlattenModel4Data.DeserializeAzureResourceFlattenModel4Data(document.RootElement);
+                        value = AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((AzureResourceFlattenModel4Data)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -200,7 +199,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
-        public Response<AzureResourceFlattenModel4Data> Get(string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public Response<AzureResourceFlattenModel4> Get(string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -217,13 +216,11 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        AzureResourceFlattenModel4Data value = default;
+                        AzureResourceFlattenModel4 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AzureResourceFlattenModel4Data.DeserializeAzureResourceFlattenModel4Data(document.RootElement);
+                        value = AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((AzureResourceFlattenModel4Data)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

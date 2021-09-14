@@ -11,9 +11,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
-    public partial class AzureResourceFlattenModel2Data : IUtf8JsonSerializable
+    public partial class AzureResourceFlattenModel3 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -36,7 +36,7 @@ namespace ExactMatchFlattenInheritance
             writer.WriteEndObject();
         }
 
-        internal static AzureResourceFlattenModel2Data DeserializeAzureResourceFlattenModel2Data(JsonElement element)
+        internal static AzureResourceFlattenModel3 DeserializeAzureResourceFlattenModel3(JsonElement element)
         {
             Optional<int> foo = default;
             IDictionary<string, string> tags = default;
@@ -87,7 +87,7 @@ namespace ExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel2Data(id, name, type, tags, location, Optional.ToNullable(foo));
+            return new AzureResourceFlattenModel3(id, name, type, tags, location, Optional.ToNullable(foo));
         }
     }
 }

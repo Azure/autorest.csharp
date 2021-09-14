@@ -5,22 +5,22 @@
 
 #nullable disable
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
-    /// <summary> A class representing the AzureResourceFlattenModel4 data model. </summary>
-    public partial class AzureResourceFlattenModel4Data
+    /// <summary> This model is x-ms-azure-resource, has flatten properties, and WITHOUT enough reference type properties. </summary>
+    public partial class AzureResourceFlattenModel4
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel4Data. </summary>
-        public AzureResourceFlattenModel4Data()
+        /// <summary> Initializes a new instance of AzureResourceFlattenModel4. </summary>
+        public AzureResourceFlattenModel4()
         {
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel4Data. </summary>
+        /// <summary> Initializes a new instance of AzureResourceFlattenModel4. </summary>
         /// <param name="foo"> New property. </param>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="type"></param>
-        internal AzureResourceFlattenModel4Data(int? foo, int? id, string name, string type)
+        internal AzureResourceFlattenModel4(int? foo, int? id, string name, string type)
         {
             Foo = foo;
             Id = id;

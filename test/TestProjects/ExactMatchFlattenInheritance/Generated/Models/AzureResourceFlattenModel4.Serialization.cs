@@ -8,9 +8,9 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
-    public partial class AzureResourceFlattenModel4Data : IUtf8JsonSerializable
+    public partial class AzureResourceFlattenModel4 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -41,7 +41,7 @@ namespace ExactMatchFlattenInheritance
             writer.WriteEndObject();
         }
 
-        internal static AzureResourceFlattenModel4Data DeserializeAzureResourceFlattenModel4Data(JsonElement element)
+        internal static AzureResourceFlattenModel4 DeserializeAzureResourceFlattenModel4(JsonElement element)
         {
             Optional<int> foo = default;
             Optional<int> id = default;
@@ -92,7 +92,7 @@ namespace ExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel4Data(Optional.ToNullable(foo), Optional.ToNullable(id), name.Value, type.Value);
+            return new AzureResourceFlattenModel4(Optional.ToNullable(foo), Optional.ToNullable(id), name.Value, type.Value);
         }
     }
 }

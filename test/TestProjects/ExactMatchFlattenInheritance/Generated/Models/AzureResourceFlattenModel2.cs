@@ -10,25 +10,25 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
-    /// <summary> A class representing the AzureResourceFlattenModel3 data model. </summary>
-    public partial class AzureResourceFlattenModel3Data : TrackedResource
+    /// <summary> This model is x-ms-azure-resource, has flatten properties, and reference type properties are split in flatten properties and its own properties. </summary>
+    public partial class AzureResourceFlattenModel2 : TrackedResource
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel3Data. </summary>
+        /// <summary> Initializes a new instance of AzureResourceFlattenModel2. </summary>
         /// <param name="location"> The location. </param>
-        public AzureResourceFlattenModel3Data(Location location) : base(location)
+        public AzureResourceFlattenModel2(Location location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel3Data. </summary>
+        /// <summary> Initializes a new instance of AzureResourceFlattenModel2. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"> New property. </param>
-        internal AzureResourceFlattenModel3Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, int? foo) : base(id, name, type, tags, location)
+        internal AzureResourceFlattenModel2(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, int? foo) : base(id, name, type, tags, location)
         {
             Foo = foo;
         }
