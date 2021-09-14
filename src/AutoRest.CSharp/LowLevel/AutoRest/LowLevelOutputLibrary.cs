@@ -17,20 +17,20 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
-        private CachedDictionary<OperationGroup, LowLevelDataPlaneClient> _clients;
+        private CachedDictionary<OperationGroup, LowLevelRestClient> _internalRestClients;
+        private CachedDictionary<OperationGroup, LowLevelDataPlaneClient> _publicClients;
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
             _codeModel = codeModel;
             _context = context;
-            _restClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
-            _clients = new CachedDictionary<OperationGroup, LowLevelDataPlaneClient>(EnsureClients);
+            _internalRestClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
+            _publicClients = new CachedDictionary<OperationGroup, LowLevelDataPlaneClient>(EnsureClients);
         }
 
-        public IEnumerable<LowLevelRestClient> RestClients => _restClients.Values;
+        public IEnumerable<LowLevelRestClient> RestClients => _internalRestClients.Values;
 
-        public IEnumerable<LowLevelDataPlaneClient> Clients => _clients.Values;
+        public IEnumerable<LowLevelDataPlaneClient> Clients => _publicClients.Values;
 
         private Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
         {
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public LowLevelRestClient FindRestClient(OperationGroup operationGroup)
         {
-            return _restClients[operationGroup];
+            return _internalRestClients[operationGroup];
         }
     }
 }
