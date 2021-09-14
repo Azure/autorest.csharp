@@ -107,41 +107,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             UpdateListMethodNames();
         }
 
-        /// <summary>
-        /// This is the map from resource name to their raw request path
-        /// </summary>
-        private IDictionary<string, List<string>>? _resourceNameToRequestPaths;
-
-        /// <summary>
-        /// This is the map from resource name to a list of the corresponding raw request path
-        /// </summary>
-        private IDictionary<string, List<string>> ResourceNameToRequestPathMap => EnsureResourceNameToRequestPathsMap();
-
-        private IDictionary<string, List<string>> EnsureResourceNameToRequestPathsMap()
-        {
-            if (_resourceNameToRequestPaths != null)
-                return _resourceNameToRequestPaths;
-
-            _resourceNameToRequestPaths = new Dictionary<string, List<string>>();
-            foreach (var pair in _rawRequestPathToOperations)
-            {
-                var operationSet = pair.Value;
-                if (operationSet.TryGetResourceName(_mgmtConfiguration, out var resourceName))
-                {
-                    if (_resourceNameToRequestPaths.TryGetValue(resourceName, out var list))
-                    {
-                        list.Add(operationSet.RequestPath);
-                    }
-                    else
-                    {
-                        _resourceNameToRequestPaths.Add(resourceName, new List<string> { operationSet.RequestPath });
-                    }
-                }
-            }
-
-            return _resourceNameToRequestPaths;
-        }
-
         private void UpdateListMethodNames()
         {
             foreach (var operationGroup in _codeModel.OperationGroups)
@@ -455,15 +420,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                if (ResourceNameToRequestPathMap.TryGetValue(schema.Name, out var requestPaths))
+                if (_resourceNameToRawOperationSets.TryGetValue(schema.Name, out var operationSets))
                 {
                     // we are iterating over the ResourceSchemaMap, the value can only be [ResourceData]s
                     var resourceData = (ResourceData)entry.Value;
-                    foreach (var requestPath in requestPaths)
+                    foreach (var operationSet in operationSets)
                     {
-                        if (!_rawRequestPathToResourceData.ContainsKey(requestPath))
+                        if (!_rawRequestPathToResourceData.ContainsKey(operationSet.RequestPath))
                         {
-                            _rawRequestPathToResourceData.Add(requestPath, resourceData);
+                            _rawRequestPathToResourceData.Add(operationSet.RequestPath, resourceData);
                         }
                     }
                 }
