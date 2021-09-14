@@ -80,7 +80,7 @@ namespace Azure.Core
         /// <summary>
         /// Reads the items and next link from a response for a pageable operation. The values returned are BinaryDatas formed over the underlying content.
         /// </summary>
-        public static (IEnumerable<BinaryData> Items, string? NextLink) GetItemsAndNextLinkFromJson(BinaryData content, string itemPropertyName = "value", string nextLinkPropertyName = "nextLink")
+        private static (IEnumerable<BinaryData> Items, string? NextLink) GetItemsAndNextLinkFromJson(BinaryData content, string itemPropertyName = "value", string nextLinkPropertyName = "nextLink")
         {
             string? nextLink = null;
             IEnumerable<BinaryData> items = Array.Empty<BinaryData>();
