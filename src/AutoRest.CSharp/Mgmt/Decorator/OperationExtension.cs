@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
@@ -28,6 +29,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return null;
+        }
+
+        public static ServiceResponse? GetServiceResponse(this Operation operation, StatusCodes code = StatusCodes._200)
+        {
+            return operation.Responses.FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(code));
         }
 
         public static bool IsGetResourceOperation(this Input.Operation operation, string? responseBodyType, ResourceData resourceData)
