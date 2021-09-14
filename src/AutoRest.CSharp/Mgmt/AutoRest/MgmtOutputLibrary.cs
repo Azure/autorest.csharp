@@ -46,7 +46,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IDictionary<string, ResourceData>? _rawRequestPathToResourceData;
 
         /// <summary>
-        /// This is a map from raw request path to a list of <see cref="RawOperationSet"/>
+        /// This is a map from resource name to a list of <see cref="RawOperationSet"/>
+        /// considering of the extension resources, one resource name might correspond to multiple operation sets
         /// This must be initialized before other maps
         /// </summary>
         private Dictionary<string, List<RawOperationSet>> _resourceNameToRawOperationSets;
