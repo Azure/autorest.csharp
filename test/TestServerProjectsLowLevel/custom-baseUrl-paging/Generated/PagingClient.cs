@@ -19,11 +19,10 @@ namespace custom_baseUrl_paging_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PagingRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private string host;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PagingRestClient RestClient;
 
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
         protected PagingClient()
@@ -50,8 +49,7 @@ namespace custom_baseUrl_paging_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.host = host;
-            RestClient = new PagingRestClient(_clientDiagnostics, _pipeline, host);
+            _restClient = new PagingRestClient(_clientDiagnostics, _pipeline, host);
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
@@ -84,7 +82,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetPagesPartialUrlAsync(accountName, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetPagesPartialUrlAsync(accountName, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -100,7 +98,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetPagesPartialUrlNextPageAsync(nextLink, accountName, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetPagesPartialUrlNextPageAsync(nextLink, accountName, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -143,7 +141,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetPagesPartialUrl(accountName, options);
+                    Response response = _restClient.GetPagesPartialUrl(accountName, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -159,7 +157,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetPagesPartialUrlNextPage(nextLink, accountName, options);
+                    Response response = _restClient.GetPagesPartialUrlNextPage(nextLink, accountName, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -202,7 +200,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetPagesPartialUrlOperationAsync(accountName, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetPagesPartialUrlOperationAsync(accountName, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -218,7 +216,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -261,7 +259,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetPagesPartialUrlOperation(accountName, options);
+                    Response response = _restClient.GetPagesPartialUrlOperation(accountName, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -277,7 +275,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetPagesPartialUrlOperationNext(accountName, nextLink, options);
+                    Response response = _restClient.GetPagesPartialUrlOperationNext(accountName, nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -321,7 +319,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -337,7 +335,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -381,7 +379,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetPagesPartialUrlOperationNext(accountName, nextLink, options);
+                    Response response = _restClient.GetPagesPartialUrlOperationNext(accountName, nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -397,7 +395,7 @@ namespace custom_baseUrl_paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetPagesPartialUrlOperationNext(accountName, nextLink, options);
+                    Response response = _restClient.GetPagesPartialUrlOperationNext(accountName, nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)

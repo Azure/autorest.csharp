@@ -19,11 +19,10 @@ namespace body_file_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly FilesRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FilesRestClient RestClient;
 
         /// <summary> Initializes a new instance of FilesClient for mocking. </summary>
         protected FilesClient()
@@ -47,8 +46,7 @@ namespace body_file_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new FilesRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new FilesRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Get file. </summary>
@@ -70,7 +68,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetFileAsync(options).ConfigureAwait(false);
+                return await _restClient.GetFileAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,7 +96,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetFile(options);
+                return _restClient.GetFile(options);
             }
             catch (Exception e)
             {
@@ -126,7 +124,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetFileLargeAsync(options).ConfigureAwait(false);
+                return await _restClient.GetFileLargeAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -154,7 +152,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetFileLarge(options);
+                return _restClient.GetFileLarge(options);
             }
             catch (Exception e)
             {
@@ -182,7 +180,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetEmptyFileAsync(options).ConfigureAwait(false);
+                return await _restClient.GetEmptyFileAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -210,7 +208,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetEmptyFile(options);
+                return _restClient.GetEmptyFile(options);
             }
             catch (Exception e)
             {

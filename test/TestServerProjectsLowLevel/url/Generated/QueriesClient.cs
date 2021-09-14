@@ -20,11 +20,10 @@ namespace url_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly QueriesRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly QueriesRestClient RestClient;
 
         /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
         protected QueriesClient()
@@ -48,8 +47,7 @@ namespace url_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new QueriesRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new QueriesRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Get true Boolean value on path. </summary>
@@ -71,7 +69,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetBooleanTrueAsync(options).ConfigureAwait(false);
+                return await _restClient.GetBooleanTrueAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -99,7 +97,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetBooleanTrue(options);
+                return _restClient.GetBooleanTrue(options);
             }
             catch (Exception e)
             {
@@ -127,7 +125,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetBooleanFalseAsync(options).ConfigureAwait(false);
+                return await _restClient.GetBooleanFalseAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -155,7 +153,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetBooleanFalse(options);
+                return _restClient.GetBooleanFalse(options);
             }
             catch (Exception e)
             {
@@ -184,7 +182,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetBooleanNullAsync(boolQuery, options).ConfigureAwait(false);
+                return await _restClient.GetBooleanNullAsync(boolQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -213,7 +211,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetBooleanNull(boolQuery, options);
+                return _restClient.GetBooleanNull(boolQuery, options);
             }
             catch (Exception e)
             {
@@ -241,7 +239,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetIntOneMillionAsync(options).ConfigureAwait(false);
+                return await _restClient.GetIntOneMillionAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -269,7 +267,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetIntOneMillion(options);
+                return _restClient.GetIntOneMillion(options);
             }
             catch (Exception e)
             {
@@ -297,7 +295,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetIntNegativeOneMillionAsync(options).ConfigureAwait(false);
+                return await _restClient.GetIntNegativeOneMillionAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -325,7 +323,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetIntNegativeOneMillion(options);
+                return _restClient.GetIntNegativeOneMillion(options);
             }
             catch (Exception e)
             {
@@ -354,7 +352,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetIntNullAsync(intQuery, options).ConfigureAwait(false);
+                return await _restClient.GetIntNullAsync(intQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -383,7 +381,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetIntNull(intQuery, options);
+                return _restClient.GetIntNull(intQuery, options);
             }
             catch (Exception e)
             {
@@ -411,7 +409,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetTenBillionAsync(options).ConfigureAwait(false);
+                return await _restClient.GetTenBillionAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -439,7 +437,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetTenBillion(options);
+                return _restClient.GetTenBillion(options);
             }
             catch (Exception e)
             {
@@ -467,7 +465,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetNegativeTenBillionAsync(options).ConfigureAwait(false);
+                return await _restClient.GetNegativeTenBillionAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -495,7 +493,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetNegativeTenBillion(options);
+                return _restClient.GetNegativeTenBillion(options);
             }
             catch (Exception e)
             {
@@ -524,7 +522,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetLongNullAsync(longQuery, options).ConfigureAwait(false);
+                return await _restClient.GetLongNullAsync(longQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -553,7 +551,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetLongNull(longQuery, options);
+                return _restClient.GetLongNull(longQuery, options);
             }
             catch (Exception e)
             {
@@ -581,7 +579,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.FloatScientificPositiveAsync(options).ConfigureAwait(false);
+                return await _restClient.FloatScientificPositiveAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -609,7 +607,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.FloatScientificPositive(options);
+                return _restClient.FloatScientificPositive(options);
             }
             catch (Exception e)
             {
@@ -637,7 +635,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.FloatScientificNegativeAsync(options).ConfigureAwait(false);
+                return await _restClient.FloatScientificNegativeAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -665,7 +663,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.FloatScientificNegative(options);
+                return _restClient.FloatScientificNegative(options);
             }
             catch (Exception e)
             {
@@ -694,7 +692,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.FloatNullAsync(floatQuery, options).ConfigureAwait(false);
+                return await _restClient.FloatNullAsync(floatQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -723,7 +721,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.FloatNull(floatQuery, options);
+                return _restClient.FloatNull(floatQuery, options);
             }
             catch (Exception e)
             {
@@ -751,7 +749,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.DoubleDecimalPositiveAsync(options).ConfigureAwait(false);
+                return await _restClient.DoubleDecimalPositiveAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -779,7 +777,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.DoubleDecimalPositive(options);
+                return _restClient.DoubleDecimalPositive(options);
             }
             catch (Exception e)
             {
@@ -807,7 +805,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.DoubleDecimalNegativeAsync(options).ConfigureAwait(false);
+                return await _restClient.DoubleDecimalNegativeAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -835,7 +833,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.DoubleDecimalNegative(options);
+                return _restClient.DoubleDecimalNegative(options);
             }
             catch (Exception e)
             {
@@ -864,7 +862,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.DoubleNullAsync(doubleQuery, options).ConfigureAwait(false);
+                return await _restClient.DoubleNullAsync(doubleQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -893,7 +891,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.DoubleNull(doubleQuery, options);
+                return _restClient.DoubleNull(doubleQuery, options);
             }
             catch (Exception e)
             {
@@ -921,7 +919,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.StringUnicodeAsync(options).ConfigureAwait(false);
+                return await _restClient.StringUnicodeAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -949,7 +947,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.StringUnicode(options);
+                return _restClient.StringUnicode(options);
             }
             catch (Exception e)
             {
@@ -977,7 +975,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.StringUrlEncodedAsync(options).ConfigureAwait(false);
+                return await _restClient.StringUrlEncodedAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1005,7 +1003,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.StringUrlEncoded(options);
+                return _restClient.StringUrlEncoded(options);
             }
             catch (Exception e)
             {
@@ -1033,7 +1031,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.StringEmptyAsync(options).ConfigureAwait(false);
+                return await _restClient.StringEmptyAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1061,7 +1059,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.StringEmpty(options);
+                return _restClient.StringEmpty(options);
             }
             catch (Exception e)
             {
@@ -1090,7 +1088,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.StringNullAsync(stringQuery, options).ConfigureAwait(false);
+                return await _restClient.StringNullAsync(stringQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1119,7 +1117,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.StringNull(stringQuery, options);
+                return _restClient.StringNull(stringQuery, options);
             }
             catch (Exception e)
             {
@@ -1148,7 +1146,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.EnumValidAsync(enumQuery, options).ConfigureAwait(false);
+                return await _restClient.EnumValidAsync(enumQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1177,7 +1175,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.EnumValid(enumQuery, options);
+                return _restClient.EnumValid(enumQuery, options);
             }
             catch (Exception e)
             {
@@ -1206,7 +1204,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.EnumNullAsync(enumQuery, options).ConfigureAwait(false);
+                return await _restClient.EnumNullAsync(enumQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1235,7 +1233,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.EnumNull(enumQuery, options);
+                return _restClient.EnumNull(enumQuery, options);
             }
             catch (Exception e)
             {
@@ -1264,7 +1262,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ByteMultiByteAsync(byteQuery, options).ConfigureAwait(false);
+                return await _restClient.ByteMultiByteAsync(byteQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1293,7 +1291,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ByteMultiByte(byteQuery, options);
+                return _restClient.ByteMultiByte(byteQuery, options);
             }
             catch (Exception e)
             {
@@ -1321,7 +1319,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ByteEmptyAsync(options).ConfigureAwait(false);
+                return await _restClient.ByteEmptyAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1349,7 +1347,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ByteEmpty(options);
+                return _restClient.ByteEmpty(options);
             }
             catch (Exception e)
             {
@@ -1378,7 +1376,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ByteNullAsync(byteQuery, options).ConfigureAwait(false);
+                return await _restClient.ByteNullAsync(byteQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1407,7 +1405,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ByteNull(byteQuery, options);
+                return _restClient.ByteNull(byteQuery, options);
             }
             catch (Exception e)
             {
@@ -1435,7 +1433,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.DateValidAsync(options).ConfigureAwait(false);
+                return await _restClient.DateValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1463,7 +1461,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.DateValid(options);
+                return _restClient.DateValid(options);
             }
             catch (Exception e)
             {
@@ -1492,7 +1490,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.DateNullAsync(dateQuery, options).ConfigureAwait(false);
+                return await _restClient.DateNullAsync(dateQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1521,7 +1519,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.DateNull(dateQuery, options);
+                return _restClient.DateNull(dateQuery, options);
             }
             catch (Exception e)
             {
@@ -1549,7 +1547,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.DateTimeValidAsync(options).ConfigureAwait(false);
+                return await _restClient.DateTimeValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1577,7 +1575,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.DateTimeValid(options);
+                return _restClient.DateTimeValid(options);
             }
             catch (Exception e)
             {
@@ -1606,7 +1604,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.DateTimeNullAsync(dateTimeQuery, options).ConfigureAwait(false);
+                return await _restClient.DateTimeNullAsync(dateTimeQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1635,7 +1633,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.DateTimeNull(dateTimeQuery, options);
+                return _restClient.DateTimeNull(dateTimeQuery, options);
             }
             catch (Exception e)
             {
@@ -1664,7 +1662,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringCsvValidAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringCsvValidAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1693,7 +1691,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringCsvValid(arrayQuery, options);
+                return _restClient.ArrayStringCsvValid(arrayQuery, options);
             }
             catch (Exception e)
             {
@@ -1722,7 +1720,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringCsvNullAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringCsvNullAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1751,7 +1749,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringCsvNull(arrayQuery, options);
+                return _restClient.ArrayStringCsvNull(arrayQuery, options);
             }
             catch (Exception e)
             {
@@ -1780,7 +1778,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringCsvEmptyAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringCsvEmptyAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1809,7 +1807,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringCsvEmpty(arrayQuery, options);
+                return _restClient.ArrayStringCsvEmpty(arrayQuery, options);
             }
             catch (Exception e)
             {
@@ -1838,7 +1836,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringNoCollectionFormatEmptyAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringNoCollectionFormatEmptyAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1867,7 +1865,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringNoCollectionFormatEmpty(arrayQuery, options);
+                return _restClient.ArrayStringNoCollectionFormatEmpty(arrayQuery, options);
             }
             catch (Exception e)
             {
@@ -1896,7 +1894,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringSsvValidAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringSsvValidAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1925,7 +1923,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringSsvValid(arrayQuery, options);
+                return _restClient.ArrayStringSsvValid(arrayQuery, options);
             }
             catch (Exception e)
             {
@@ -1954,7 +1952,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringTsvValidAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringTsvValidAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1983,7 +1981,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringTsvValid(arrayQuery, options);
+                return _restClient.ArrayStringTsvValid(arrayQuery, options);
             }
             catch (Exception e)
             {
@@ -2012,7 +2010,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringPipesValidAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringPipesValidAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2041,7 +2039,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringPipesValid(arrayQuery, options);
+                return _restClient.ArrayStringPipesValid(arrayQuery, options);
             }
             catch (Exception e)
             {

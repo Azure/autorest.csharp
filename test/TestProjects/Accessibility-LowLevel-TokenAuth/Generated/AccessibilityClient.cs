@@ -19,11 +19,10 @@ namespace Accessibility_LowLevel_TokenAuth
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly AccessibilityRestClient _restClient;
         private readonly string[] AuthorizationScopes = { "https://test.azure.com/.default" };
         private readonly TokenCredential _tokenCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AccessibilityRestClient RestClient;
 
         /// <summary> Initializes a new instance of AccessibilityClient for mocking. </summary>
         protected AccessibilityClient()
@@ -47,8 +46,7 @@ namespace Accessibility_LowLevel_TokenAuth
             _tokenCredential = credential;
             var authPolicy = new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new AccessibilityRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new AccessibilityRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -61,7 +59,7 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                return await RestClient.OperationAsync(content, options).ConfigureAwait(false);
+                return await _restClient.OperationAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -80,7 +78,7 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                return RestClient.Operation(content, options);
+                return _restClient.Operation(content, options);
             }
             catch (Exception e)
             {
@@ -99,7 +97,7 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                return await RestClient.OperationInternalAsync(content, options).ConfigureAwait(false);
+                return await _restClient.OperationInternalAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -118,7 +116,7 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                return RestClient.OperationInternal(content, options);
+                return _restClient.OperationInternal(content, options);
             }
             catch (Exception e)
             {

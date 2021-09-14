@@ -19,11 +19,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpFailureRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpFailureRestClient RestClient;
 
         /// <summary> Initializes a new instance of HttpFailureClient for mocking. </summary>
         protected HttpFailureClient()
@@ -47,8 +46,7 @@ namespace httpInfrastructure_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new HttpFailureRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new HttpFailureRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Get empty error form server. </summary>
@@ -70,7 +68,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetEmptyErrorAsync(options).ConfigureAwait(false);
+                return await _restClient.GetEmptyErrorAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,7 +96,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetEmptyError(options);
+                return _restClient.GetEmptyError(options);
             }
             catch (Exception e)
             {
@@ -117,7 +115,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetNoModelErrorAsync(options).ConfigureAwait(false);
+                return await _restClient.GetNoModelErrorAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -136,7 +134,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetNoModelError(options);
+                return _restClient.GetNoModelError(options);
             }
             catch (Exception e)
             {
@@ -155,7 +153,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetNoModelEmptyAsync(options).ConfigureAwait(false);
+                return await _restClient.GetNoModelEmptyAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -174,7 +172,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetNoModelEmpty(options);
+                return _restClient.GetNoModelEmpty(options);
             }
             catch (Exception e)
             {

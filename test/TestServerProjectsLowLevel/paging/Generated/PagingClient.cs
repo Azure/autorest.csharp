@@ -19,11 +19,10 @@ namespace paging_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PagingRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PagingRestClient RestClient;
 
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
         protected PagingClient()
@@ -47,8 +46,7 @@ namespace paging_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new PagingRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new PagingRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
@@ -73,7 +71,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetNoItemNamePagesAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.GetNoItemNamePagesAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
                 }
                 catch (Exception e)
@@ -89,7 +87,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetNoItemNamePagesNextPageAsync(nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetNoItemNamePagesNextPageAsync(nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
                 }
                 catch (Exception e)
@@ -124,7 +122,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetNoItemNamePages(options);
+                    Response response = _restClient.GetNoItemNamePages(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
                 }
                 catch (Exception e)
@@ -140,7 +138,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetNoItemNamePagesNextPage(nextLink, options);
+                    Response response = _restClient.GetNoItemNamePagesNextPage(nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
                 }
                 catch (Exception e)
@@ -182,7 +180,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetNullNextLinkNamePagesAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.GetNullNextLinkNamePagesAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", null);
                 }
                 catch (Exception e)
@@ -224,7 +222,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetNullNextLinkNamePages(options);
+                    Response response = _restClient.GetNullNextLinkNamePages(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", null);
                 }
                 catch (Exception e)
@@ -266,7 +264,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetSinglePagesAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.GetSinglePagesAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -282,7 +280,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetSinglePagesNextPageAsync(nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetSinglePagesNextPageAsync(nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -324,7 +322,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetSinglePages(options);
+                    Response response = _restClient.GetSinglePages(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -340,7 +338,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetSinglePagesNextPage(nextLink, options);
+                    Response response = _restClient.GetSinglePagesNextPage(nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -375,7 +373,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.FirstResponseEmptyAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.FirstResponseEmptyAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
                 }
                 catch (Exception e)
@@ -391,7 +389,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.FirstResponseEmptyNextPageAsync(nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.FirstResponseEmptyNextPageAsync(nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
                 }
                 catch (Exception e)
@@ -426,7 +424,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.FirstResponseEmpty(options);
+                    Response response = _restClient.FirstResponseEmpty(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
                 }
                 catch (Exception e)
@@ -442,7 +440,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.FirstResponseEmptyNextPage(nextLink, options);
+                    Response response = _restClient.FirstResponseEmptyNextPage(nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
                 }
                 catch (Exception e)
@@ -487,7 +485,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -503,7 +501,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesNextPageAsync(nextLink, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesNextPageAsync(nextLink, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -548,7 +546,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePages(clientRequestId, maxresults, timeout, options);
+                    Response response = _restClient.GetMultiplePages(clientRequestId, maxresults, timeout, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -564,7 +562,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesNextPage(nextLink, clientRequestId, maxresults, timeout, options);
+                    Response response = _restClient.GetMultiplePagesNextPage(nextLink, clientRequestId, maxresults, timeout, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -607,7 +605,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetWithQueryParamsAsync(requiredQueryParameter, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetWithQueryParamsAsync(requiredQueryParameter, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -623,7 +621,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.NextOperationWithQueryParamsAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.NextOperationWithQueryParamsAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -666,7 +664,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetWithQueryParams(requiredQueryParameter, options);
+                    Response response = _restClient.GetWithQueryParams(requiredQueryParameter, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -682,7 +680,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.NextOperationWithQueryParams(options);
+                    Response response = _restClient.NextOperationWithQueryParams(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -724,7 +722,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.NextOperationWithQueryParamsAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.NextOperationWithQueryParamsAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", null);
                 }
                 catch (Exception e)
@@ -766,7 +764,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.NextOperationWithQueryParams(options);
+                    Response response = _restClient.NextOperationWithQueryParams(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", null);
                 }
                 catch (Exception e)
@@ -811,7 +809,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -827,7 +825,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetOdataMultiplePagesNextPageAsync(nextLink, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetOdataMultiplePagesNextPageAsync(nextLink, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -872,7 +870,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetOdataMultiplePages(clientRequestId, maxresults, timeout, options);
+                    Response response = _restClient.GetOdataMultiplePages(clientRequestId, maxresults, timeout, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -888,7 +886,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetOdataMultiplePagesNextPage(nextLink, clientRequestId, maxresults, timeout, options);
+                    Response response = _restClient.GetOdataMultiplePagesNextPage(nextLink, clientRequestId, maxresults, timeout, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -934,7 +932,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesWithOffsetAsync(offset, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesWithOffsetAsync(offset, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -950,7 +948,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesWithOffsetNextPageAsync(nextLink, offset, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesWithOffsetNextPageAsync(nextLink, offset, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -996,7 +994,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesWithOffset(offset, clientRequestId, maxresults, timeout, options);
+                    Response response = _restClient.GetMultiplePagesWithOffset(offset, clientRequestId, maxresults, timeout, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1012,7 +1010,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesWithOffsetNextPage(nextLink, offset, clientRequestId, maxresults, timeout, options);
+                    Response response = _restClient.GetMultiplePagesWithOffsetNextPage(nextLink, offset, clientRequestId, maxresults, timeout, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1054,7 +1052,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesRetryFirstAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesRetryFirstAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1070,7 +1068,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesRetryFirstNextPageAsync(nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesRetryFirstNextPageAsync(nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1112,7 +1110,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesRetryFirst(options);
+                    Response response = _restClient.GetMultiplePagesRetryFirst(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1128,7 +1126,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesRetryFirstNextPage(nextLink, options);
+                    Response response = _restClient.GetMultiplePagesRetryFirstNextPage(nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1170,7 +1168,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesRetrySecondAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesRetrySecondAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1186,7 +1184,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesRetrySecondNextPageAsync(nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesRetrySecondNextPageAsync(nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1228,7 +1226,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesRetrySecond(options);
+                    Response response = _restClient.GetMultiplePagesRetrySecond(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1244,7 +1242,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesRetrySecondNextPage(nextLink, options);
+                    Response response = _restClient.GetMultiplePagesRetrySecondNextPage(nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1286,7 +1284,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetSinglePagesFailureAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.GetSinglePagesFailureAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1302,7 +1300,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetSinglePagesFailureNextPageAsync(nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetSinglePagesFailureNextPageAsync(nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1344,7 +1342,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetSinglePagesFailure(options);
+                    Response response = _restClient.GetSinglePagesFailure(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1360,7 +1358,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetSinglePagesFailureNextPage(nextLink, options);
+                    Response response = _restClient.GetSinglePagesFailureNextPage(nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1402,7 +1400,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesFailureAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesFailureAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1418,7 +1416,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesFailureNextPageAsync(nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesFailureNextPageAsync(nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1460,7 +1458,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesFailure(options);
+                    Response response = _restClient.GetMultiplePagesFailure(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1476,7 +1474,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesFailureNextPage(nextLink, options);
+                    Response response = _restClient.GetMultiplePagesFailureNextPage(nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1518,7 +1516,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesFailureUriAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesFailureUriAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1534,7 +1532,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesFailureUriNextPageAsync(nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesFailureUriNextPageAsync(nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1576,7 +1574,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesFailureUri(options);
+                    Response response = _restClient.GetMultiplePagesFailureUri(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1592,7 +1590,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesFailureUriNextPage(nextLink, options);
+                    Response response = _restClient.GetMultiplePagesFailureUriNextPage(nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -1636,7 +1634,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1652,7 +1650,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.NextFragmentAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.NextFragmentAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1696,7 +1694,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesFragmentNextLink(apiVersion, tenant, options);
+                    Response response = _restClient.GetMultiplePagesFragmentNextLink(apiVersion, tenant, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1712,7 +1710,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.NextFragment(apiVersion, tenant, nextLink, options);
+                    Response response = _restClient.NextFragment(apiVersion, tenant, nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1756,7 +1754,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1772,7 +1770,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1816,7 +1814,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesFragmentWithGroupingNextLink(apiVersion, tenant, options);
+                    Response response = _restClient.GetMultiplePagesFragmentWithGroupingNextLink(apiVersion, tenant, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1832,7 +1830,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, options);
+                    Response response = _restClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1877,7 +1875,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.NextFragmentAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.NextFragmentAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1893,7 +1891,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.NextFragmentAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.NextFragmentAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1938,7 +1936,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.NextFragment(apiVersion, tenant, nextLink, options);
+                    Response response = _restClient.NextFragment(apiVersion, tenant, nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1954,7 +1952,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.NextFragment(apiVersion, tenant, nextLink, options);
+                    Response response = _restClient.NextFragment(apiVersion, tenant, nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -1999,7 +1997,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -2015,7 +2013,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -2060,7 +2058,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, options);
+                    Response response = _restClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -2076,7 +2074,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, options);
+                    Response response = _restClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
                 }
                 catch (Exception e)
@@ -2118,7 +2116,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetPagingModelWithItemNameWithXMSClientNameAsync(options).ConfigureAwait(false);
+                    Response response = await _restClient.GetPagingModelWithItemNameWithXMSClientNameAsync(options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -2134,7 +2132,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetPagingModelWithItemNameWithXMSClientNameNextPageAsync(nextLink, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetPagingModelWithItemNameWithXMSClientNameNextPageAsync(nextLink, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -2176,7 +2174,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetPagingModelWithItemNameWithXMSClientName(options);
+                    Response response = _restClient.GetPagingModelWithItemNameWithXMSClientName(options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -2192,7 +2190,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetPagingModelWithItemNameWithXMSClientNameNextPage(nextLink, options);
+                    Response response = _restClient.GetPagingModelWithItemNameWithXMSClientNameNextPage(nextLink, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -2236,7 +2234,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetMultiplePagesLRONextPageAsync(nextLink, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetMultiplePagesLRONextPageAsync(nextLink, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -2250,8 +2248,8 @@ namespace paging_LowLevel
             scope0.Start();
             try
             {
-                using HttpMessage message = RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
-                Response response = await RestClient.GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
+                using HttpMessage message = _restClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                Response response = await _restClient.GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
                 return new FuncOperation<AsyncPageable<BinaryData>>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", (response) =>
                 {
                     return PageableHelpers.CreateAsyncEnumerable((pageSizeHint) =>
@@ -2298,7 +2296,7 @@ namespace paging_LowLevel
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetMultiplePagesLRONextPage(nextLink, clientRequestId, maxresults, timeout, options);
+                    Response response = _restClient.GetMultiplePagesLRONextPage(nextLink, clientRequestId, maxresults, timeout, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
                 }
                 catch (Exception e)
@@ -2312,8 +2310,8 @@ namespace paging_LowLevel
             scope0.Start();
             try
             {
-                using HttpMessage message = RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
-                Response response = RestClient.GetMultiplePagesLRO(clientRequestId, maxresults, timeout, options);
+                using HttpMessage message = _restClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                Response response = _restClient.GetMultiplePagesLRO(clientRequestId, maxresults, timeout, options);
                 return new FuncOperation<Pageable<BinaryData>>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", (response) =>
                 {
                     return PageableHelpers.CreateEnumerable((pageSizeHint) =>

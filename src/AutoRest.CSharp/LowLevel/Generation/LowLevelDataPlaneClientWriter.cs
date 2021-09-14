@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"await ");
                 }
 
-                writer.Append($"RestClient.{CreateMethodName(serviceMethod.Name, async)}(");
+                writer.Append($"{RestClientField}.{CreateMethodName(serviceMethod.Name, async)}(");
                 foreach (var parameter in serviceMethod.Parameters)
                 {
                     writer.Append($"{parameter.Name:I}, ");
@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 WriteDiagnosticScope(writer, clientMethod.Diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
-                    writer.Append($"using {typeof(HttpMessage)} {messageVariable:D} = RestClient.{RequestWriterHelpers.CreateRequestMethodName(clientMethod.StartMethod.Name)}(");
+                    writer.Append($"using {typeof(HttpMessage)} {messageVariable:D} = {RestClientField}.{RequestWriterHelpers.CreateRequestMethodName(clientMethod.StartMethod.Name)}(");
                     foreach (var parameter in clientMethod.StartMethod.Parameters)
                     {
                         writer.Append($"{parameter.Name:I}, ");
@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"await ");
                     }
 
-                    writer.Append($"RestClient.{CreateMethodName(clientMethod.StartMethod.Name, async)}(");
+                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.StartMethod.Name, async)}(");
                     foreach (var parameter in clientMethod.StartMethod.Parameters)
                     {
                         writer.Append($"{parameter.Name:I}, ");
@@ -262,7 +262,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"await ");
                     }
 
-                    writer.Append($"RestClient.{CreateMethodName(clientMethod.RestMethod.Name, async)}(");
+                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.RestMethod.Name, async)}(");
                     foreach (var parameter in clientMethod.RestMethod.Parameters)
                     {
                         writer.Append($"{parameter.Name:I}, ");
@@ -329,13 +329,16 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string ScopesConstant = "AuthorizationScopes";
         private const string KeyAuthField = "_keyCredential";
         private const string TokenAuthField = "_tokenCredential";
+        private new const string RestClientField = "_restClient";
 
         private void WriteClientFields(CodeWriter writer, LowLevelDataPlaneClient client, BuildContext context)
         {
             writer.WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.");
             writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineProperty}");
-            writer.LineRaw("{ get => _pipeline; }");
+            writer.LineRaw("{ get => " + PipelineField + "; }");
             writer.Line($"private {typeof(HttpPipeline)} {PipelineField};");
+            writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
+            writer.Line($"private readonly {client.RestClient.Declaration.Name} {RestClientField};");
 
             foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {
@@ -358,14 +361,6 @@ namespace AutoRest.CSharp.Generation.Writers
                         break;
                 }
             }
-
-            foreach (Parameter clientParameter in client.Parameters)
-            {
-                writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
-            }
-
-            writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            writer.Line($"private readonly {client.RestClient.Declaration.Name} RestClient;");
 
             writer.Line();
         }
@@ -459,22 +454,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.LineRaw(", new ResponseClassifier());");
 
-                foreach (Parameter parameter in client.Parameters)
-                {
-                    writer.Append($"this.{parameter.Name} = ");
-                    if (!parameter.IsApiVersionParameter)
-                    {
-                        writer.Append($"{parameter.Name}");
-                    }
-                    else
-                    {
-                        writer.Append($"{OptionsVariable}.Version");
-                    }
-
-                    writer.Line($";");
-                }
-
-                writer.Append($"this.RestClient = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
+                writer.Append($"this.{RestClientField} = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
                 foreach (var parameter in client.RestClient.Parameters)
                 {
                     if (!parameter.IsApiVersionParameter)

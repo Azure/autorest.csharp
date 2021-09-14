@@ -19,11 +19,10 @@ namespace header_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HeaderRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HeaderRestClient RestClient;
 
         /// <summary> Initializes a new instance of HeaderClient for mocking. </summary>
         protected HeaderClient()
@@ -47,8 +46,7 @@ namespace header_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new HeaderRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new HeaderRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
@@ -71,7 +69,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamExistingKeyAsync(userAgent, options).ConfigureAwait(false);
+                return await _restClient.ParamExistingKeyAsync(userAgent, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -100,7 +98,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamExistingKey(userAgent, options);
+                return _restClient.ParamExistingKey(userAgent, options);
             }
             catch (Exception e)
             {
@@ -128,7 +126,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseExistingKeyAsync(options).ConfigureAwait(false);
+                return await _restClient.ResponseExistingKeyAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -156,7 +154,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseExistingKey(options);
+                return _restClient.ResponseExistingKey(options);
             }
             catch (Exception e)
             {
@@ -185,7 +183,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamProtectedKeyAsync(contentType, options).ConfigureAwait(false);
+                return await _restClient.ParamProtectedKeyAsync(contentType, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -214,7 +212,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamProtectedKey(contentType, options);
+                return _restClient.ParamProtectedKey(contentType, options);
             }
             catch (Exception e)
             {
@@ -242,7 +240,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseProtectedKeyAsync(options).ConfigureAwait(false);
+                return await _restClient.ResponseProtectedKeyAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -270,7 +268,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseProtectedKey(options);
+                return _restClient.ResponseProtectedKey(options);
             }
             catch (Exception e)
             {
@@ -300,7 +298,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamIntegerAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamIntegerAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -330,7 +328,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamInteger(scenario, value, options);
+                return _restClient.ParamInteger(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -359,7 +357,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseIntegerAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseIntegerAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -388,7 +386,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseInteger(scenario, options);
+                return _restClient.ResponseInteger(scenario, options);
             }
             catch (Exception e)
             {
@@ -418,7 +416,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamLongAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamLongAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -448,7 +446,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamLong(scenario, value, options);
+                return _restClient.ParamLong(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -477,7 +475,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseLongAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseLongAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -506,7 +504,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseLong(scenario, options);
+                return _restClient.ResponseLong(scenario, options);
             }
             catch (Exception e)
             {
@@ -536,7 +534,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamFloatAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamFloatAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -566,7 +564,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamFloat(scenario, value, options);
+                return _restClient.ParamFloat(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -595,7 +593,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseFloatAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseFloatAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -624,7 +622,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseFloat(scenario, options);
+                return _restClient.ResponseFloat(scenario, options);
             }
             catch (Exception e)
             {
@@ -654,7 +652,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamDoubleAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamDoubleAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -684,7 +682,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamDouble(scenario, value, options);
+                return _restClient.ParamDouble(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -713,7 +711,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseDoubleAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseDoubleAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -742,7 +740,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseDouble(scenario, options);
+                return _restClient.ResponseDouble(scenario, options);
             }
             catch (Exception e)
             {
@@ -772,7 +770,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamBoolAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamBoolAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -802,7 +800,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamBool(scenario, value, options);
+                return _restClient.ParamBool(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -831,7 +829,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseBoolAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseBoolAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -860,7 +858,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseBool(scenario, options);
+                return _restClient.ResponseBool(scenario, options);
             }
             catch (Exception e)
             {
@@ -890,7 +888,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamStringAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamStringAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -920,7 +918,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamString(scenario, value, options);
+                return _restClient.ParamString(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -949,7 +947,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseStringAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseStringAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -978,7 +976,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseString(scenario, options);
+                return _restClient.ResponseString(scenario, options);
             }
             catch (Exception e)
             {
@@ -1008,7 +1006,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamDateAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamDateAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1038,7 +1036,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamDate(scenario, value, options);
+                return _restClient.ParamDate(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1067,7 +1065,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseDateAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseDateAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1096,7 +1094,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseDate(scenario, options);
+                return _restClient.ResponseDate(scenario, options);
             }
             catch (Exception e)
             {
@@ -1126,7 +1124,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamDatetimeAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamDatetimeAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1156,7 +1154,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamDatetime(scenario, value, options);
+                return _restClient.ParamDatetime(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1185,7 +1183,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseDatetimeAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseDatetimeAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1214,7 +1212,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseDatetime(scenario, options);
+                return _restClient.ResponseDatetime(scenario, options);
             }
             catch (Exception e)
             {
@@ -1244,7 +1242,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamDatetimeRfc1123Async(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamDatetimeRfc1123Async(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1274,7 +1272,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamDatetimeRfc1123(scenario, value, options);
+                return _restClient.ParamDatetimeRfc1123(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1303,7 +1301,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseDatetimeRfc1123Async(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseDatetimeRfc1123Async(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1332,7 +1330,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseDatetimeRfc1123(scenario, options);
+                return _restClient.ResponseDatetimeRfc1123(scenario, options);
             }
             catch (Exception e)
             {
@@ -1362,7 +1360,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamDurationAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamDurationAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1392,7 +1390,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamDuration(scenario, value, options);
+                return _restClient.ParamDuration(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1421,7 +1419,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseDurationAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseDurationAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1450,7 +1448,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseDuration(scenario, options);
+                return _restClient.ResponseDuration(scenario, options);
             }
             catch (Exception e)
             {
@@ -1480,7 +1478,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamByteAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamByteAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1510,7 +1508,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamByte(scenario, value, options);
+                return _restClient.ParamByte(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1539,7 +1537,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseByteAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseByteAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1568,7 +1566,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseByte(scenario, options);
+                return _restClient.ResponseByte(scenario, options);
             }
             catch (Exception e)
             {
@@ -1598,7 +1596,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ParamEnumAsync(scenario, value, options).ConfigureAwait(false);
+                return await _restClient.ParamEnumAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1628,7 +1626,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ParamEnum(scenario, value, options);
+                return _restClient.ParamEnum(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1657,7 +1655,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ResponseEnumAsync(scenario, options).ConfigureAwait(false);
+                return await _restClient.ResponseEnumAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1686,7 +1684,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ResponseEnum(scenario, options);
+                return _restClient.ResponseEnum(scenario, options);
             }
             catch (Exception e)
             {
@@ -1714,7 +1712,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.CustomRequestIdAsync(options).ConfigureAwait(false);
+                return await _restClient.CustomRequestIdAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1742,7 +1740,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                return RestClient.CustomRequestId(options);
+                return _restClient.CustomRequestId(options);
             }
             catch (Exception e)
             {

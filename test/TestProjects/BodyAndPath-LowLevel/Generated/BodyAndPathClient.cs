@@ -20,11 +20,10 @@ namespace BodyAndPath_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly BodyAndPathRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BodyAndPathRestClient RestClient;
 
         /// <summary> Initializes a new instance of BodyAndPathClient for mocking. </summary>
         protected BodyAndPathClient()
@@ -48,8 +47,7 @@ namespace BodyAndPath_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new BodyAndPathRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new BodyAndPathRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Resets products. </summary>
@@ -64,7 +62,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.CreateAsync(itemName, content, options).ConfigureAwait(false);
+                return await _restClient.CreateAsync(itemName, content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -85,7 +83,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Create(itemName, content, options);
+                return _restClient.Create(itemName, content, options);
             }
             catch (Exception e)
             {
@@ -108,7 +106,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.CreateStreamAsync(itemNameStream, content, contentType, excluded, options).ConfigureAwait(false);
+                return await _restClient.CreateStreamAsync(itemNameStream, content, contentType, excluded, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -131,7 +129,7 @@ namespace BodyAndPath_LowLevel
             scope.Start();
             try
             {
-                return RestClient.CreateStream(itemNameStream, content, contentType, excluded, options);
+                return _restClient.CreateStream(itemNameStream, content, contentType, excluded, options);
             }
             catch (Exception e)
             {

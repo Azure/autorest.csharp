@@ -20,11 +20,10 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly DocumentTranslationRestClient _restClient;
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private string endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DocumentTranslationRestClient RestClient;
 
         /// <summary> Initializes a new instance of DocumentTranslationClient for mocking. </summary>
         protected DocumentTranslationClient()
@@ -51,8 +50,7 @@ namespace Azure.AI.DocumentTranslation
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new DocumentTranslationRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new DocumentTranslationRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
@@ -109,7 +107,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await RestClient.GetDocumentStatusAsync(id, documentId, options).ConfigureAwait(false);
+                return await _restClient.GetDocumentStatusAsync(id, documentId, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -172,7 +170,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return RestClient.GetDocumentStatus(id, documentId, options);
+                return _restClient.GetDocumentStatus(id, documentId, options);
             }
             catch (Exception e)
             {
@@ -241,7 +239,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await RestClient.GetTranslationStatusAsync(id, options).ConfigureAwait(false);
+                return await _restClient.GetTranslationStatusAsync(id, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -310,7 +308,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return RestClient.GetTranslationStatus(id, options);
+                return _restClient.GetTranslationStatus(id, options);
             }
             catch (Exception e)
             {
@@ -382,7 +380,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await RestClient.CancelTranslationAsync(id, options).ConfigureAwait(false);
+                return await _restClient.CancelTranslationAsync(id, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -454,7 +452,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return RestClient.CancelTranslation(id, options);
+                return _restClient.CancelTranslation(id, options);
             }
             catch (Exception e)
             {
@@ -507,7 +505,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await RestClient.GetSupportedDocumentFormatsAsync(options).ConfigureAwait(false);
+                return await _restClient.GetSupportedDocumentFormatsAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -560,7 +558,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return RestClient.GetSupportedDocumentFormats(options);
+                return _restClient.GetSupportedDocumentFormats(options);
             }
             catch (Exception e)
             {
@@ -613,7 +611,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await RestClient.GetSupportedGlossaryFormatsAsync(options).ConfigureAwait(false);
+                return await _restClient.GetSupportedGlossaryFormatsAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -666,7 +664,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return RestClient.GetSupportedGlossaryFormats(options);
+                return _restClient.GetSupportedGlossaryFormats(options);
             }
             catch (Exception e)
             {
@@ -708,7 +706,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await RestClient.GetSupportedStorageSourcesAsync(options).ConfigureAwait(false);
+                return await _restClient.GetSupportedStorageSourcesAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -750,7 +748,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return RestClient.GetSupportedStorageSources(options);
+                return _restClient.GetSupportedStorageSources(options);
             }
             catch (Exception e)
             {
@@ -873,7 +871,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetTranslationsStatusAsync(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetTranslationsStatusAsync(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -889,7 +887,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetTranslationsStatusNextPageAsync(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetTranslationsStatusNextPageAsync(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1016,7 +1014,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetTranslationsStatus(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+                    Response response = _restClient.GetTranslationsStatus(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1032,7 +1030,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetTranslationsStatusNextPage(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+                    Response response = _restClient.GetTranslationsStatusNextPage(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1153,7 +1151,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetDocumentsStatusAsync(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetDocumentsStatusAsync(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1169,7 +1167,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = await RestClient.GetDocumentsStatusNextPageAsync(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
+                    Response response = await _restClient.GetDocumentsStatusNextPageAsync(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options).ConfigureAwait(false);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1290,7 +1288,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetDocumentsStatus(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+                    Response response = _restClient.GetDocumentsStatus(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1306,7 +1304,7 @@ namespace Azure.AI.DocumentTranslation
                 scope.Start();
                 try
                 {
-                    Response response = RestClient.GetDocumentsStatusNextPage(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+                    Response response = _restClient.GetDocumentsStatusNextPage(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
                     return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
                 }
                 catch (Exception e)
@@ -1392,8 +1390,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = RestClient.CreateStartTranslationRequest(content);
-                Response response = await RestClient.StartTranslationAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = _restClient.CreateStartTranslationRequest(content);
+                Response response = await _restClient.StartTranslationAsync(content, options).ConfigureAwait(false);
                 return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
             }
             catch (Exception e)
@@ -1476,8 +1474,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = RestClient.CreateStartTranslationRequest(content);
-                Response response = RestClient.StartTranslation(content, options);
+                using HttpMessage message = _restClient.CreateStartTranslationRequest(content);
+                Response response = _restClient.StartTranslation(content, options);
                 return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
             }
             catch (Exception e)

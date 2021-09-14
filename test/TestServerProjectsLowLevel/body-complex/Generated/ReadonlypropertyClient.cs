@@ -19,11 +19,10 @@ namespace body_complex_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ReadonlypropertyRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ReadonlypropertyRestClient RestClient;
 
         /// <summary> Initializes a new instance of ReadonlypropertyClient for mocking. </summary>
         protected ReadonlypropertyClient()
@@ -47,8 +46,7 @@ namespace body_complex_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new ReadonlypropertyRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new ReadonlypropertyRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Get complex types that have readonly properties. </summary>
@@ -76,7 +74,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetValidAsync(options).ConfigureAwait(false);
+                return await _restClient.GetValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -110,7 +108,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetValid(options);
+                return _restClient.GetValid(options);
             }
             catch (Exception e)
             {
@@ -145,7 +143,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutValidAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutValidAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -180,7 +178,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutValid(content, options);
+                return _restClient.PutValid(content, options);
             }
             catch (Exception e)
             {

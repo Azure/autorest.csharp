@@ -19,11 +19,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpRedirectsRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpRedirectsRestClient RestClient;
 
         /// <summary> Initializes a new instance of HttpRedirectsClient for mocking. </summary>
         protected HttpRedirectsClient()
@@ -47,8 +46,7 @@ namespace httpInfrastructure_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new HttpRedirectsRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new HttpRedirectsRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
@@ -70,7 +68,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Head300Async(options).ConfigureAwait(false);
+                return await _restClient.Head300Async(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,7 +96,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Head300(options);
+                return _restClient.Head300(options);
             }
             catch (Exception e)
             {
@@ -126,7 +124,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get300Async(options).ConfigureAwait(false);
+                return await _restClient.Get300Async(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -154,7 +152,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get300(options);
+                return _restClient.Get300(options);
             }
             catch (Exception e)
             {
@@ -182,7 +180,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Head301Async(options).ConfigureAwait(false);
+                return await _restClient.Head301Async(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -210,7 +208,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Head301(options);
+                return _restClient.Head301(options);
             }
             catch (Exception e)
             {
@@ -238,7 +236,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get301Async(options).ConfigureAwait(false);
+                return await _restClient.Get301Async(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -266,7 +264,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get301(options);
+                return _restClient.Get301(options);
             }
             catch (Exception e)
             {
@@ -295,7 +293,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Put301Async(content, options).ConfigureAwait(false);
+                return await _restClient.Put301Async(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -324,7 +322,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Put301(content, options);
+                return _restClient.Put301(content, options);
             }
             catch (Exception e)
             {
@@ -352,7 +350,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Head302Async(options).ConfigureAwait(false);
+                return await _restClient.Head302Async(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -380,7 +378,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Head302(options);
+                return _restClient.Head302(options);
             }
             catch (Exception e)
             {
@@ -408,7 +406,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get302Async(options).ConfigureAwait(false);
+                return await _restClient.Get302Async(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -436,7 +434,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get302(options);
+                return _restClient.Get302(options);
             }
             catch (Exception e)
             {
@@ -465,7 +463,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Patch302Async(content, options).ConfigureAwait(false);
+                return await _restClient.Patch302Async(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -494,7 +492,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Patch302(content, options);
+                return _restClient.Patch302(content, options);
             }
             catch (Exception e)
             {
@@ -523,7 +521,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Post303Async(content, options).ConfigureAwait(false);
+                return await _restClient.Post303Async(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -552,7 +550,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Post303(content, options);
+                return _restClient.Post303(content, options);
             }
             catch (Exception e)
             {
@@ -580,7 +578,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Head307Async(options).ConfigureAwait(false);
+                return await _restClient.Head307Async(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -608,7 +606,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Head307(options);
+                return _restClient.Head307(options);
             }
             catch (Exception e)
             {
@@ -636,7 +634,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get307Async(options).ConfigureAwait(false);
+                return await _restClient.Get307Async(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -664,7 +662,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get307(options);
+                return _restClient.Get307(options);
             }
             catch (Exception e)
             {
@@ -692,7 +690,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Options307Async(options).ConfigureAwait(false);
+                return await _restClient.Options307Async(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -720,7 +718,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Options307(options);
+                return _restClient.Options307(options);
             }
             catch (Exception e)
             {
@@ -749,7 +747,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Put307Async(content, options).ConfigureAwait(false);
+                return await _restClient.Put307Async(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -778,7 +776,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Put307(content, options);
+                return _restClient.Put307(content, options);
             }
             catch (Exception e)
             {
@@ -807,7 +805,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Patch307Async(content, options).ConfigureAwait(false);
+                return await _restClient.Patch307Async(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -836,7 +834,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Patch307(content, options);
+                return _restClient.Patch307(content, options);
             }
             catch (Exception e)
             {
@@ -865,7 +863,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Post307Async(content, options).ConfigureAwait(false);
+                return await _restClient.Post307Async(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -894,7 +892,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Post307(content, options);
+                return _restClient.Post307(content, options);
             }
             catch (Exception e)
             {
@@ -923,7 +921,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Delete307Async(content, options).ConfigureAwait(false);
+                return await _restClient.Delete307Async(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -952,7 +950,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Delete307(content, options);
+                return _restClient.Delete307(content, options);
             }
             catch (Exception e)
             {

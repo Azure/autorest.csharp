@@ -19,11 +19,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly MultipleResponsesRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly MultipleResponsesRestClient RestClient;
 
         /// <summary> Initializes a new instance of MultipleResponsesClient for mocking. </summary>
         protected MultipleResponsesClient()
@@ -47,8 +46,7 @@ namespace httpInfrastructure_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new MultipleResponsesRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new MultipleResponsesRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
@@ -75,7 +73,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200Model204NoModelDefaultError200ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200Model204NoModelDefaultError200ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -108,7 +106,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200Model204NoModelDefaultError200Valid(options);
+                return _restClient.Get200Model204NoModelDefaultError200Valid(options);
             }
             catch (Exception e)
             {
@@ -141,7 +139,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200Model204NoModelDefaultError204ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200Model204NoModelDefaultError204ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -174,7 +172,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200Model204NoModelDefaultError204Valid(options);
+                return _restClient.Get200Model204NoModelDefaultError204Valid(options);
             }
             catch (Exception e)
             {
@@ -207,7 +205,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200Model204NoModelDefaultError201InvalidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200Model204NoModelDefaultError201InvalidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -240,7 +238,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200Model204NoModelDefaultError201Invalid(options);
+                return _restClient.Get200Model204NoModelDefaultError201Invalid(options);
             }
             catch (Exception e)
             {
@@ -273,7 +271,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200Model204NoModelDefaultError202NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200Model204NoModelDefaultError202NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -306,7 +304,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200Model204NoModelDefaultError202None(options);
+                return _restClient.Get200Model204NoModelDefaultError202None(options);
             }
             catch (Exception e)
             {
@@ -339,7 +337,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200Model204NoModelDefaultError400ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200Model204NoModelDefaultError400ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -372,7 +370,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200Model204NoModelDefaultError400Valid(options);
+                return _restClient.Get200Model204NoModelDefaultError400Valid(options);
             }
             catch (Exception e)
             {
@@ -405,7 +403,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200Model201ModelDefaultError200ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200Model201ModelDefaultError200ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -438,7 +436,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200Model201ModelDefaultError200Valid(options);
+                return _restClient.Get200Model201ModelDefaultError200Valid(options);
             }
             catch (Exception e)
             {
@@ -471,7 +469,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200Model201ModelDefaultError201ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200Model201ModelDefaultError201ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -504,7 +502,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200Model201ModelDefaultError201Valid(options);
+                return _restClient.Get200Model201ModelDefaultError201Valid(options);
             }
             catch (Exception e)
             {
@@ -537,7 +535,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200Model201ModelDefaultError400ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200Model201ModelDefaultError400ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -570,7 +568,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200Model201ModelDefaultError400Valid(options);
+                return _restClient.Get200Model201ModelDefaultError400Valid(options);
             }
             catch (Exception e)
             {
@@ -603,7 +601,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -636,7 +634,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA201ModelC404ModelDDefaultError200Valid(options);
+                return _restClient.Get200ModelA201ModelC404ModelDDefaultError200Valid(options);
             }
             catch (Exception e)
             {
@@ -669,7 +667,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -702,7 +700,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA201ModelC404ModelDDefaultError201Valid(options);
+                return _restClient.Get200ModelA201ModelC404ModelDDefaultError201Valid(options);
             }
             catch (Exception e)
             {
@@ -735,7 +733,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -768,7 +766,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA201ModelC404ModelDDefaultError404Valid(options);
+                return _restClient.Get200ModelA201ModelC404ModelDDefaultError404Valid(options);
             }
             catch (Exception e)
             {
@@ -801,7 +799,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -834,7 +832,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA201ModelC404ModelDDefaultError400Valid(options);
+                return _restClient.Get200ModelA201ModelC404ModelDDefaultError400Valid(options);
             }
             catch (Exception e)
             {
@@ -862,7 +860,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get202None204NoneDefaultError202NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.Get202None204NoneDefaultError202NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -890,7 +888,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get202None204NoneDefaultError202None(options);
+                return _restClient.Get202None204NoneDefaultError202None(options);
             }
             catch (Exception e)
             {
@@ -918,7 +916,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get202None204NoneDefaultError204NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.Get202None204NoneDefaultError204NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -946,7 +944,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get202None204NoneDefaultError204None(options);
+                return _restClient.Get202None204NoneDefaultError204None(options);
             }
             catch (Exception e)
             {
@@ -974,7 +972,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get202None204NoneDefaultError400ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get202None204NoneDefaultError400ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1002,7 +1000,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get202None204NoneDefaultError400Valid(options);
+                return _restClient.Get202None204NoneDefaultError400Valid(options);
             }
             catch (Exception e)
             {
@@ -1021,7 +1019,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get202None204NoneDefaultNone202InvalidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get202None204NoneDefaultNone202InvalidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1040,7 +1038,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get202None204NoneDefaultNone202Invalid(options);
+                return _restClient.Get202None204NoneDefaultNone202Invalid(options);
             }
             catch (Exception e)
             {
@@ -1059,7 +1057,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get202None204NoneDefaultNone204NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.Get202None204NoneDefaultNone204NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1078,7 +1076,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get202None204NoneDefaultNone204None(options);
+                return _restClient.Get202None204NoneDefaultNone204None(options);
             }
             catch (Exception e)
             {
@@ -1097,7 +1095,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get202None204NoneDefaultNone400NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.Get202None204NoneDefaultNone400NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1116,7 +1114,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get202None204NoneDefaultNone400None(options);
+                return _restClient.Get202None204NoneDefaultNone400None(options);
             }
             catch (Exception e)
             {
@@ -1135,7 +1133,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get202None204NoneDefaultNone400InvalidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get202None204NoneDefaultNone400InvalidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1154,7 +1152,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get202None204NoneDefaultNone400Invalid(options);
+                return _restClient.Get202None204NoneDefaultNone400Invalid(options);
             }
             catch (Exception e)
             {
@@ -1181,7 +1179,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetDefaultModelA200ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.GetDefaultModelA200ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1208,7 +1206,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetDefaultModelA200Valid(options);
+                return _restClient.GetDefaultModelA200Valid(options);
             }
             catch (Exception e)
             {
@@ -1235,7 +1233,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetDefaultModelA200NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.GetDefaultModelA200NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1262,7 +1260,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetDefaultModelA200None(options);
+                return _restClient.GetDefaultModelA200None(options);
             }
             catch (Exception e)
             {
@@ -1289,7 +1287,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetDefaultModelA400ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.GetDefaultModelA400ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1316,7 +1314,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetDefaultModelA400Valid(options);
+                return _restClient.GetDefaultModelA400Valid(options);
             }
             catch (Exception e)
             {
@@ -1343,7 +1341,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetDefaultModelA400NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.GetDefaultModelA400NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1370,7 +1368,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetDefaultModelA400None(options);
+                return _restClient.GetDefaultModelA400None(options);
             }
             catch (Exception e)
             {
@@ -1389,7 +1387,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetDefaultNone200InvalidAsync(options).ConfigureAwait(false);
+                return await _restClient.GetDefaultNone200InvalidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1408,7 +1406,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetDefaultNone200Invalid(options);
+                return _restClient.GetDefaultNone200Invalid(options);
             }
             catch (Exception e)
             {
@@ -1427,7 +1425,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetDefaultNone200NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.GetDefaultNone200NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1446,7 +1444,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetDefaultNone200None(options);
+                return _restClient.GetDefaultNone200None(options);
             }
             catch (Exception e)
             {
@@ -1465,7 +1463,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetDefaultNone400InvalidAsync(options).ConfigureAwait(false);
+                return await _restClient.GetDefaultNone400InvalidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1484,7 +1482,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetDefaultNone400Invalid(options);
+                return _restClient.GetDefaultNone400Invalid(options);
             }
             catch (Exception e)
             {
@@ -1503,7 +1501,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetDefaultNone400NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.GetDefaultNone400NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1522,7 +1520,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetDefaultNone400None(options);
+                return _restClient.GetDefaultNone400None(options);
             }
             catch (Exception e)
             {
@@ -1549,7 +1547,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA200NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA200NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1576,7 +1574,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA200None(options);
+                return _restClient.Get200ModelA200None(options);
             }
             catch (Exception e)
             {
@@ -1603,7 +1601,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA200ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA200ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1630,7 +1628,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA200Valid(options);
+                return _restClient.Get200ModelA200Valid(options);
             }
             catch (Exception e)
             {
@@ -1657,7 +1655,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA200InvalidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA200InvalidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1684,7 +1682,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA200Invalid(options);
+                return _restClient.Get200ModelA200Invalid(options);
             }
             catch (Exception e)
             {
@@ -1711,7 +1709,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA400NoneAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA400NoneAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1738,7 +1736,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA400None(options);
+                return _restClient.Get200ModelA400None(options);
             }
             catch (Exception e)
             {
@@ -1765,7 +1763,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA400ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA400ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1792,7 +1790,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA400Valid(options);
+                return _restClient.Get200ModelA400Valid(options);
             }
             catch (Exception e)
             {
@@ -1819,7 +1817,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA400InvalidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA400InvalidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1846,7 +1844,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA400Invalid(options);
+                return _restClient.Get200ModelA400Invalid(options);
             }
             catch (Exception e)
             {
@@ -1873,7 +1871,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.Get200ModelA202ValidAsync(options).ConfigureAwait(false);
+                return await _restClient.Get200ModelA202ValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1900,7 +1898,7 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return RestClient.Get200ModelA202Valid(options);
+                return _restClient.Get200ModelA202Valid(options);
             }
             catch (Exception e)
             {

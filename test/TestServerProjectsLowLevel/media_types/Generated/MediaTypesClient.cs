@@ -19,11 +19,10 @@ namespace media_types_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly MediaTypesRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly MediaTypesRestClient RestClient;
 
         /// <summary> Initializes a new instance of MediaTypesClient for mocking. </summary>
         protected MediaTypesClient()
@@ -47,8 +46,7 @@ namespace media_types_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new MediaTypesRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new MediaTypesRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -63,7 +61,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.AnalyzeBodyAsync(content, contentType, options).ConfigureAwait(false);
+                return await _restClient.AnalyzeBodyAsync(content, contentType, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -84,7 +82,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return RestClient.AnalyzeBody(content, contentType, options);
+                return _restClient.AnalyzeBody(content, contentType, options);
             }
             catch (Exception e)
             {
@@ -112,7 +110,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.AnalyzeBodyAsync(content, options).ConfigureAwait(false);
+                return await _restClient.AnalyzeBodyAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -140,7 +138,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return RestClient.AnalyzeBody(content, options);
+                return _restClient.AnalyzeBody(content, options);
             }
             catch (Exception e)
             {
@@ -161,7 +159,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.AnalyzeBodyNoAcceptHeaderAsync(content, contentType, options).ConfigureAwait(false);
+                return await _restClient.AnalyzeBodyNoAcceptHeaderAsync(content, contentType, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -182,7 +180,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return RestClient.AnalyzeBodyNoAcceptHeader(content, contentType, options);
+                return _restClient.AnalyzeBodyNoAcceptHeader(content, contentType, options);
             }
             catch (Exception e)
             {
@@ -210,7 +208,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.AnalyzeBodyNoAcceptHeaderAsync(content, options).ConfigureAwait(false);
+                return await _restClient.AnalyzeBodyNoAcceptHeaderAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -238,7 +236,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return RestClient.AnalyzeBodyNoAcceptHeader(content, options);
+                return _restClient.AnalyzeBodyNoAcceptHeader(content, options);
             }
             catch (Exception e)
             {
@@ -258,7 +256,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ContentTypeWithEncodingAsync(content, options).ConfigureAwait(false);
+                return await _restClient.ContentTypeWithEncodingAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -278,7 +276,7 @@ namespace media_types_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ContentTypeWithEncoding(content, options);
+                return _restClient.ContentTypeWithEncoding(content, options);
             }
             catch (Exception e)
             {

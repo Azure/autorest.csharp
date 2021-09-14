@@ -19,11 +19,10 @@ namespace body_complex_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly FlattencomplexRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FlattencomplexRestClient RestClient;
 
         /// <summary> Initializes a new instance of FlattencomplexClient for mocking. </summary>
         protected FlattencomplexClient()
@@ -47,8 +46,7 @@ namespace body_complex_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new FlattencomplexRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new FlattencomplexRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <param name="options"> The request options. </param>
@@ -70,7 +68,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetValidAsync(options).ConfigureAwait(false);
+                return await _restClient.GetValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,7 +96,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetValid(options);
+                return _restClient.GetValid(options);
             }
             catch (Exception e)
             {

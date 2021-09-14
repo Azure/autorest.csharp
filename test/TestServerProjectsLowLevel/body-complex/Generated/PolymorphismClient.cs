@@ -19,11 +19,10 @@ namespace body_complex_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PolymorphismRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PolymorphismRestClient RestClient;
 
         /// <summary> Initializes a new instance of PolymorphismClient for mocking. </summary>
         protected PolymorphismClient()
@@ -47,8 +46,7 @@ namespace body_complex_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new PolymorphismRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new PolymorphismRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
@@ -78,7 +76,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetValidAsync(options).ConfigureAwait(false);
+                return await _restClient.GetValidAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -114,7 +112,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetValid(options);
+                return _restClient.GetValid(options);
             }
             catch (Exception e)
             {
@@ -151,7 +149,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutValidAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutValidAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -188,7 +186,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutValid(content, options);
+                return _restClient.PutValid(content, options);
             }
             catch (Exception e)
             {
@@ -222,7 +220,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetDotSyntaxAsync(options).ConfigureAwait(false);
+                return await _restClient.GetDotSyntaxAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -256,7 +254,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetDotSyntax(options);
+                return _restClient.GetDotSyntax(options);
             }
             catch (Exception e)
             {
@@ -300,7 +298,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetComposedWithDiscriminatorAsync(options).ConfigureAwait(false);
+                return await _restClient.GetComposedWithDiscriminatorAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -344,7 +342,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetComposedWithDiscriminator(options);
+                return _restClient.GetComposedWithDiscriminator(options);
             }
             catch (Exception e)
             {
@@ -388,7 +386,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetComposedWithoutDiscriminatorAsync(options).ConfigureAwait(false);
+                return await _restClient.GetComposedWithoutDiscriminatorAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -432,7 +430,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetComposedWithoutDiscriminator(options);
+                return _restClient.GetComposedWithoutDiscriminator(options);
             }
             catch (Exception e)
             {
@@ -477,7 +475,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetComplicatedAsync(options).ConfigureAwait(false);
+                return await _restClient.GetComplicatedAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -522,7 +520,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetComplicated(options);
+                return _restClient.GetComplicated(options);
             }
             catch (Exception e)
             {
@@ -568,7 +566,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutComplicatedAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutComplicatedAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -614,7 +612,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutComplicated(content, options);
+                return _restClient.PutComplicated(content, options);
             }
             catch (Exception e)
             {
@@ -677,7 +675,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutMissingDiscriminatorAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutMissingDiscriminatorAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -740,7 +738,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutMissingDiscriminator(content, options);
+                return _restClient.PutMissingDiscriminator(content, options);
             }
             catch (Exception e)
             {
@@ -777,7 +775,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutValidMissingRequiredAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutValidMissingRequiredAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -814,7 +812,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutValidMissingRequired(content, options);
+                return _restClient.PutValidMissingRequired(content, options);
             }
             catch (Exception e)
             {

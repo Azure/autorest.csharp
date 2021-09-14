@@ -19,11 +19,10 @@ namespace body_string_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly EnumRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly EnumRestClient RestClient;
 
         /// <summary> Initializes a new instance of EnumClient for mocking. </summary>
         protected EnumClient()
@@ -47,8 +46,7 @@ namespace body_string_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new EnumRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new EnumRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
@@ -70,7 +68,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetNotExpandableAsync(options).ConfigureAwait(false);
+                return await _restClient.GetNotExpandableAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,7 +96,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetNotExpandable(options);
+                return _restClient.GetNotExpandable(options);
             }
             catch (Exception e)
             {
@@ -127,7 +125,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutNotExpandableAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutNotExpandableAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -156,7 +154,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutNotExpandable(content, options);
+                return _restClient.PutNotExpandable(content, options);
             }
             catch (Exception e)
             {
@@ -184,7 +182,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetReferencedAsync(options).ConfigureAwait(false);
+                return await _restClient.GetReferencedAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -212,7 +210,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetReferenced(options);
+                return _restClient.GetReferenced(options);
             }
             catch (Exception e)
             {
@@ -241,7 +239,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutReferencedAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutReferencedAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -270,7 +268,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutReferenced(content, options);
+                return _restClient.PutReferenced(content, options);
             }
             catch (Exception e)
             {
@@ -304,7 +302,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetReferencedConstantAsync(options).ConfigureAwait(false);
+                return await _restClient.GetReferencedConstantAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -338,7 +336,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetReferencedConstant(options);
+                return _restClient.GetReferencedConstant(options);
             }
             catch (Exception e)
             {
@@ -373,7 +371,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutReferencedConstantAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutReferencedConstantAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -408,7 +406,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutReferencedConstant(content, options);
+                return _restClient.PutReferencedConstant(content, options);
             }
             catch (Exception e)
             {

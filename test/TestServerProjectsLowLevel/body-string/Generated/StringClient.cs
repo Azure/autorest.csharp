@@ -19,11 +19,10 @@ namespace body_string_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly StringRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly StringRestClient RestClient;
 
         /// <summary> Initializes a new instance of StringClient for mocking. </summary>
         protected StringClient()
@@ -47,8 +46,7 @@ namespace body_string_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new StringRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new StringRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Get null string value value. </summary>
@@ -70,7 +68,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetNullAsync(options).ConfigureAwait(false);
+                return await _restClient.GetNullAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,7 +96,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetNull(options);
+                return _restClient.GetNull(options);
             }
             catch (Exception e)
             {
@@ -127,7 +125,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutNullAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutNullAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -156,7 +154,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutNull(content, options);
+                return _restClient.PutNull(content, options);
             }
             catch (Exception e)
             {
@@ -184,7 +182,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetEmptyAsync(options).ConfigureAwait(false);
+                return await _restClient.GetEmptyAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -212,7 +210,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetEmpty(options);
+                return _restClient.GetEmpty(options);
             }
             catch (Exception e)
             {
@@ -241,7 +239,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutEmptyAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutEmptyAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -270,7 +268,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutEmpty(content, options);
+                return _restClient.PutEmpty(content, options);
             }
             catch (Exception e)
             {
@@ -298,7 +296,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetMbcsAsync(options).ConfigureAwait(false);
+                return await _restClient.GetMbcsAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -326,7 +324,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetMbcs(options);
+                return _restClient.GetMbcs(options);
             }
             catch (Exception e)
             {
@@ -355,7 +353,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutMbcsAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutMbcsAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -384,7 +382,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutMbcs(content, options);
+                return _restClient.PutMbcs(content, options);
             }
             catch (Exception e)
             {
@@ -412,7 +410,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetWhitespaceAsync(options).ConfigureAwait(false);
+                return await _restClient.GetWhitespaceAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -440,7 +438,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetWhitespace(options);
+                return _restClient.GetWhitespace(options);
             }
             catch (Exception e)
             {
@@ -469,7 +467,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutWhitespaceAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutWhitespaceAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -498,7 +496,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutWhitespace(content, options);
+                return _restClient.PutWhitespace(content, options);
             }
             catch (Exception e)
             {
@@ -526,7 +524,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetNotProvidedAsync(options).ConfigureAwait(false);
+                return await _restClient.GetNotProvidedAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -554,7 +552,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetNotProvided(options);
+                return _restClient.GetNotProvided(options);
             }
             catch (Exception e)
             {
@@ -582,7 +580,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetBase64EncodedAsync(options).ConfigureAwait(false);
+                return await _restClient.GetBase64EncodedAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -610,7 +608,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetBase64Encoded(options);
+                return _restClient.GetBase64Encoded(options);
             }
             catch (Exception e)
             {
@@ -638,7 +636,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetBase64UrlEncodedAsync(options).ConfigureAwait(false);
+                return await _restClient.GetBase64UrlEncodedAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -666,7 +664,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetBase64UrlEncoded(options);
+                return _restClient.GetBase64UrlEncoded(options);
             }
             catch (Exception e)
             {
@@ -695,7 +693,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.PutBase64UrlEncodedAsync(content, options).ConfigureAwait(false);
+                return await _restClient.PutBase64UrlEncodedAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -724,7 +722,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.PutBase64UrlEncoded(content, options);
+                return _restClient.PutBase64UrlEncoded(content, options);
             }
             catch (Exception e)
             {
@@ -752,7 +750,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetNullBase64UrlEncodedAsync(options).ConfigureAwait(false);
+                return await _restClient.GetNullBase64UrlEncodedAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -780,7 +778,7 @@ namespace body_string_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetNullBase64UrlEncoded(options);
+                return _restClient.GetNullBase64UrlEncoded(options);
             }
             catch (Exception e)
             {

@@ -19,11 +19,10 @@ namespace custom_baseUrl_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PathsRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private string host;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PathsRestClient RestClient;
 
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
@@ -50,8 +49,7 @@ namespace custom_baseUrl_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.host = host;
-            RestClient = new PathsRestClient(_clientDiagnostics, _pipeline, host);
+            _restClient = new PathsRestClient(_clientDiagnostics, _pipeline, host);
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
@@ -74,7 +72,7 @@ namespace custom_baseUrl_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetEmptyAsync(accountName, options).ConfigureAwait(false);
+                return await _restClient.GetEmptyAsync(accountName, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -103,7 +101,7 @@ namespace custom_baseUrl_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetEmpty(accountName, options);
+                return _restClient.GetEmpty(accountName, options);
             }
             catch (Exception e)
             {

@@ -19,9 +19,8 @@ namespace Accessibility_LowLevel_NoAuth
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
-        private Uri endpoint;
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AccessibilityRestClient RestClient;
+        private readonly AccessibilityRestClient _restClient;
 
         /// <summary> Initializes a new instance of AccessibilityClient for mocking. </summary>
         protected AccessibilityClient()
@@ -38,8 +37,7 @@ namespace Accessibility_LowLevel_NoAuth
             options ??= new AccessibilityClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new AccessibilityRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new AccessibilityRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -52,7 +50,7 @@ namespace Accessibility_LowLevel_NoAuth
             scope.Start();
             try
             {
-                return await RestClient.OperationAsync(content, options).ConfigureAwait(false);
+                return await _restClient.OperationAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -71,7 +69,7 @@ namespace Accessibility_LowLevel_NoAuth
             scope.Start();
             try
             {
-                return RestClient.Operation(content, options);
+                return _restClient.Operation(content, options);
             }
             catch (Exception e)
             {
@@ -90,7 +88,7 @@ namespace Accessibility_LowLevel_NoAuth
             scope.Start();
             try
             {
-                return await RestClient.OperationInternalAsync(content, options).ConfigureAwait(false);
+                return await _restClient.OperationInternalAsync(content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -109,7 +107,7 @@ namespace Accessibility_LowLevel_NoAuth
             scope.Start();
             try
             {
-                return RestClient.OperationInternal(content, options);
+                return _restClient.OperationInternal(content, options);
             }
             catch (Exception e)
             {

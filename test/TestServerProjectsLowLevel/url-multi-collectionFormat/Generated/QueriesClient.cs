@@ -20,11 +20,10 @@ namespace url_multi_collectionFormat_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly QueriesRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly QueriesRestClient RestClient;
 
         /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
         protected QueriesClient()
@@ -48,8 +47,7 @@ namespace url_multi_collectionFormat_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            RestClient = new QueriesRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _restClient = new QueriesRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
@@ -72,7 +70,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringMultiNullAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringMultiNullAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -101,7 +99,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringMultiNull(arrayQuery, options);
+                return _restClient.ArrayStringMultiNull(arrayQuery, options);
             }
             catch (Exception e)
             {
@@ -130,7 +128,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringMultiEmptyAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringMultiEmptyAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -159,7 +157,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringMultiEmpty(arrayQuery, options);
+                return _restClient.ArrayStringMultiEmpty(arrayQuery, options);
             }
             catch (Exception e)
             {
@@ -188,7 +186,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.ArrayStringMultiValidAsync(arrayQuery, options).ConfigureAwait(false);
+                return await _restClient.ArrayStringMultiValidAsync(arrayQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -217,7 +215,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return RestClient.ArrayStringMultiValid(arrayQuery, options);
+                return _restClient.ArrayStringMultiValid(arrayQuery, options);
             }
             catch (Exception e)
             {

@@ -19,13 +19,10 @@ namespace url_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PathItemsRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private string globalStringPath;
-        private Uri endpoint;
-        private string globalStringQuery;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PathItemsRestClient RestClient;
 
         /// <summary> Initializes a new instance of PathItemsClient for mocking. </summary>
         protected PathItemsClient()
@@ -55,10 +52,7 @@ namespace url_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.globalStringPath = globalStringPath;
-            this.endpoint = endpoint;
-            this.globalStringQuery = globalStringQuery;
-            RestClient = new PathItemsRestClient(_clientDiagnostics, _pipeline, globalStringPath, endpoint, globalStringQuery);
+            _restClient = new PathItemsRestClient(_clientDiagnostics, _pipeline, globalStringPath, endpoint, globalStringQuery);
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
@@ -84,7 +78,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetAllWithValuesAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options).ConfigureAwait(false);
+                return await _restClient.GetAllWithValuesAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -116,7 +110,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetAllWithValues(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+                return _restClient.GetAllWithValues(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
             }
             catch (Exception e)
             {
@@ -148,7 +142,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetGlobalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options).ConfigureAwait(false);
+                return await _restClient.GetGlobalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -180,7 +174,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetGlobalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+                return _restClient.GetGlobalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
             }
             catch (Exception e)
             {
@@ -212,7 +206,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetGlobalAndLocalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options).ConfigureAwait(false);
+                return await _restClient.GetGlobalAndLocalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -244,7 +238,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetGlobalAndLocalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+                return _restClient.GetGlobalAndLocalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
             }
             catch (Exception e)
             {
@@ -276,7 +270,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await RestClient.GetLocalPathItemQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options).ConfigureAwait(false);
+                return await _restClient.GetLocalPathItemQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -308,7 +302,7 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return RestClient.GetLocalPathItemQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+                return _restClient.GetLocalPathItemQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
             }
             catch (Exception e)
             {
