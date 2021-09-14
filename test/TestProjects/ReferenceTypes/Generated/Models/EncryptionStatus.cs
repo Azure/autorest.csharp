@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of EncryptionStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionStatus"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public EncryptionStatus(string value)
         {

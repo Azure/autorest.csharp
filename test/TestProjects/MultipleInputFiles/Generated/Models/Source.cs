@@ -15,7 +15,7 @@ namespace MultipleInputFiles.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of Source. </summary>
+        /// <summary> Initializes a new instance of <see cref="Source"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Source(string value)
         {

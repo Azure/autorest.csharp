@@ -15,7 +15,7 @@ namespace MgmtExtensionResource.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of PolicyType. </summary>
+        /// <summary> Initializes a new instance of <see cref="PolicyType"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public PolicyType(string value)
         {

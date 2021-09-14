@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ProximityPlacementGroupType. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupType"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ProximityPlacementGroupType(string value)
         {

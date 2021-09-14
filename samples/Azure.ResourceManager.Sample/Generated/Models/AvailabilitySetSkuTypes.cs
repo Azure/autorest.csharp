@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of AvailabilitySetSkuTypes. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetSkuTypes"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public AvailabilitySetSkuTypes(string value)
         {

@@ -15,7 +15,7 @@ namespace AppConfiguration.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of Enum4. </summary>
+        /// <summary> Initializes a new instance of <see cref="Enum4"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Enum4(string value)
         {

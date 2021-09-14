@@ -15,7 +15,7 @@ namespace MgmtListMethods.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of QuotaUnit. </summary>
+        /// <summary> Initializes a new instance of <see cref="QuotaUnit"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public QuotaUnit(string value)
         {

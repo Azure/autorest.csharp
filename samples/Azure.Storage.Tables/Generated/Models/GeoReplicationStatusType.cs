@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of GeoReplicationStatusType. </summary>
+        /// <summary> Initializes a new instance of <see cref="GeoReplicationStatusType"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public GeoReplicationStatusType(string value)
         {

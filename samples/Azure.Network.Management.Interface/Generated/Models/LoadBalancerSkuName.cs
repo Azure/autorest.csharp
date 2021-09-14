@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of LoadBalancerSkuName. </summary>
+        /// <summary> Initializes a new instance of <see cref="LoadBalancerSkuName"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public LoadBalancerSkuName(string value)
         {

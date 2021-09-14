@@ -15,7 +15,7 @@ namespace constants.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ModelAsStringRequiredOneValueNoDefaultOpEnum. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredOneValueNoDefaultOpEnum"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ModelAsStringRequiredOneValueNoDefaultOpEnum(string value)
         {

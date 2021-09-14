@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of SentimentSkillLanguage. </summary>
+        /// <summary> Initializes a new instance of <see cref="SentimentSkillLanguage"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public SentimentSkillLanguage(string value)
         {

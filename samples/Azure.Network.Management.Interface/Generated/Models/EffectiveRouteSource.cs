@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of EffectiveRouteSource. </summary>
+        /// <summary> Initializes a new instance of <see cref="EffectiveRouteSource"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public EffectiveRouteSource(string value)
         {

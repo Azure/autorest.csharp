@@ -16,7 +16,7 @@ namespace non_string_enum.Models
     {
         private readonly float _value;
 
-        /// <summary> Initializes a new instance of FloatEnum. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatEnum"/>. </summary>
         public FloatEnum(float value)
         {
             _value = value;

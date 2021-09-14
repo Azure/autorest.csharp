@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ShareAccessTier. </summary>
+        /// <summary> Initializes a new instance of <see cref="ShareAccessTier"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ShareAccessTier(string value)
         {

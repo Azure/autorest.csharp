@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionProvisioningState. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionProvisioningState"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public PrivateEndpointConnectionProvisioningState(string value)
         {

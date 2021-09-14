@@ -15,7 +15,7 @@ namespace NameConflicts.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of SystemEnum. </summary>
+        /// <summary> Initializes a new instance of <see cref="SystemEnum"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public SystemEnum(string value)
         {

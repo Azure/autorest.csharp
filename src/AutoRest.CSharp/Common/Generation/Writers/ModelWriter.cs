@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"private readonly {schema.BaseType} _value;");
                     writer.Line();
 
-                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {name}.");
+                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref=\"{name}\"/>.");
 
                     if (isString)
                     {

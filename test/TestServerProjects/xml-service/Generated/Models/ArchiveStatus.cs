@@ -15,7 +15,7 @@ namespace xml_service.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ArchiveStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="ArchiveStatus"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ArchiveStatus(string value)
         {

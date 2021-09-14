@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of RegexFlags. </summary>
+        /// <summary> Initializes a new instance of <see cref="RegexFlags"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public RegexFlags(string value)
         {

@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of EncryptionScopeState. </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionScopeState"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public EncryptionScopeState(string value)
         {

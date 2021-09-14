@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of CharFilterName. </summary>
+        /// <summary> Initializes a new instance of <see cref="CharFilterName"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public CharFilterName(string value)
         {

@@ -15,7 +15,7 @@ namespace MgmtParamOrdering.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of CreatedByType. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreatedByType"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public CreatedByType(string value)
         {

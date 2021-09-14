@@ -15,7 +15,7 @@ namespace constants.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ModelAsStringNoRequiredTwoValueDefaultEnum. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelAsStringNoRequiredTwoValueDefaultEnum"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ModelAsStringNoRequiredTwoValueDefaultEnum(string value)
         {

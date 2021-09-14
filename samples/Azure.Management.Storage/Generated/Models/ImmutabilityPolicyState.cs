@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ImmutabilityPolicyState. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImmutabilityPolicyState"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ImmutabilityPolicyState(string value)
         {

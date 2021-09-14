@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of TokenizerName. </summary>
+        /// <summary> Initializes a new instance of <see cref="TokenizerName"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public TokenizerName(string value)
         {

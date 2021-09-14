@@ -15,7 +15,7 @@ namespace lro.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ProductPropertiesProvisioningStateValues. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductPropertiesProvisioningStateValues"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ProductPropertiesProvisioningStateValues(string value)
         {

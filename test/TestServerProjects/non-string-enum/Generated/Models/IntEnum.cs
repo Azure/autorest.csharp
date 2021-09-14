@@ -16,7 +16,7 @@ namespace non_string_enum.Models
     {
         private readonly int _value;
 
-        /// <summary> Initializes a new instance of IntEnum. </summary>
+        /// <summary> Initializes a new instance of <see cref="IntEnum"/>. </summary>
         public IntEnum(int value)
         {
             _value = value;

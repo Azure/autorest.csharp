@@ -15,7 +15,7 @@ namespace body_complex.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of GoblinSharkColor. </summary>
+        /// <summary> Initializes a new instance of <see cref="GoblinSharkColor"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public GoblinSharkColor(string value)
         {

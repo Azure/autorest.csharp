@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of SecurityRuleDirection. </summary>
+        /// <summary> Initializes a new instance of <see cref="SecurityRuleDirection"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public SecurityRuleDirection(string value)
         {

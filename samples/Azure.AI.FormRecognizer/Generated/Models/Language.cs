@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of Language. </summary>
+        /// <summary> Initializes a new instance of <see cref="Language"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Language(string value)
         {

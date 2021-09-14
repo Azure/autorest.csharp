@@ -15,7 +15,7 @@ namespace MgmtListMethods.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of Status. </summary>
+        /// <summary> Initializes a new instance of <see cref="Status"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Status(string value)
         {

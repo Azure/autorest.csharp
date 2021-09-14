@@ -15,7 +15,7 @@ namespace body_complex.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of CMYKColors. </summary>
+        /// <summary> Initializes a new instance of <see cref="CMYKColors"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public CMYKColors(string value)
         {

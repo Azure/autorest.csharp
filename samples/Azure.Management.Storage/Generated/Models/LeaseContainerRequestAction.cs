@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of LeaseContainerRequestAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="LeaseContainerRequestAction"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public LeaseContainerRequestAction(string value)
         {

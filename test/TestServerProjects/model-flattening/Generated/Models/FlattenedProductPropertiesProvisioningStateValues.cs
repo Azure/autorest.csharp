@@ -15,7 +15,7 @@ namespace model_flattening.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of FlattenedProductPropertiesProvisioningStateValues. </summary>
+        /// <summary> Initializes a new instance of <see cref="FlattenedProductPropertiesProvisioningStateValues"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public FlattenedProductPropertiesProvisioningStateValues(string value)
         {

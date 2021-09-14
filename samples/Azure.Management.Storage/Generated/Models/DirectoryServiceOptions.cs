@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of DirectoryServiceOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="DirectoryServiceOptions"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public DirectoryServiceOptions(string value)
         {

@@ -15,7 +15,7 @@ namespace NameConflicts.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ItemValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="ItemValue"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ItemValue(string value)
         {

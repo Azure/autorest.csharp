@@ -15,7 +15,7 @@ namespace AppConfiguration.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of Head7ItemsItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="Head7ItemsItem"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Head7ItemsItem(string value)
         {

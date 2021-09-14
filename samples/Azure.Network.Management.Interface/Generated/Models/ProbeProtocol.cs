@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ProbeProtocol. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProbeProtocol"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ProbeProtocol(string value)
         {

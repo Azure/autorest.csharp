@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of ResponseFormat. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResponseFormat"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ResponseFormat(string value)
         {

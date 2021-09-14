@@ -15,7 +15,7 @@ namespace xml_service.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of AccessTier. </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessTier"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public AccessTier(string value)
         {

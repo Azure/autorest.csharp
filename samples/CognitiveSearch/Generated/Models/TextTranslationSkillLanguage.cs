@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of TextTranslationSkillLanguage. </summary>
+        /// <summary> Initializes a new instance of <see cref="TextTranslationSkillLanguage"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public TextTranslationSkillLanguage(string value)
         {

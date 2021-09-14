@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of OrchestrationServiceState. </summary>
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceState"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public OrchestrationServiceState(string value)
         {

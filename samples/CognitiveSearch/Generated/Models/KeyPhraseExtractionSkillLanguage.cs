@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of KeyPhraseExtractionSkillLanguage. </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyPhraseExtractionSkillLanguage"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public KeyPhraseExtractionSkillLanguage(string value)
         {

@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of DdosSettingsProtectionCoverage. </summary>
+        /// <summary> Initializes a new instance of <see cref="DdosSettingsProtectionCoverage"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public DdosSettingsProtectionCoverage(string value)
         {

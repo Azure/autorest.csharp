@@ -15,7 +15,7 @@ namespace body_array.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of Enum0. </summary>
+        /// <summary> Initializes a new instance of <see cref="Enum0"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Enum0(string value)
         {

@@ -15,7 +15,7 @@ namespace body_formdata_urlencoded.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of PetFood. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetFood"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public PetFood(string value)
         {

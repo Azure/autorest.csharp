@@ -15,7 +15,7 @@ namespace Inheritance.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of BaseClassWithEntensibleEnumDiscriminatorEnum. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithEntensibleEnumDiscriminatorEnum"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public BaseClassWithEntensibleEnumDiscriminatorEnum(string value)
         {

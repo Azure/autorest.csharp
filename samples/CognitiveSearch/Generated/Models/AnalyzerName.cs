@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of AnalyzerName. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzerName"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public AnalyzerName(string value)
         {

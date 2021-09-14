@@ -15,7 +15,7 @@ namespace xml_service.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of PublicAccessType. </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicAccessType"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public PublicAccessType(string value)
         {

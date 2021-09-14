@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private readonly string _value;
 
-        /// <summary> Initializes a new instance of CheckNameAvailabilityReason. </summary>
+        /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityReason"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public CheckNameAvailabilityReason(string value)
         {
