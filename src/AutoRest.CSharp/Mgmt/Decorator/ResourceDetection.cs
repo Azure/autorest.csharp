@@ -118,17 +118,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 switch (property.SerializedName)
                 {
                     case "id":
-                        idProperty = property;
+                        if (property.Schema.Type == AllSchemaTypes.String)
+                            idProperty = property;
                         continue;
-                    // TODO -- should we check for type and name?
-                    //case "type":
-                    //    // we require type is read-only
-                    //    if (property.IsReadOnly)
-                    //        typeProperty = property;
-                    //    continue;
-                    //case "name":
-                    //    nameProperty = property;
-                    //    continue;
+                        // TODO -- should we check for type and name?
+                        //case "type":
+                        //    // we require type is read-only
+                        //    if (property.IsReadOnly)
+                        //        typeProperty = property;
+                        //    continue;
+                        //case "name":
+                        //    nameProperty = property;
+                        //    continue;
                 }
             }
 
