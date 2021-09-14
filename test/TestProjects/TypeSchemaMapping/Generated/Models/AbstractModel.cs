@@ -22,7 +22,7 @@ namespace TypeSchemaMapping.Models
             DiscriminatorProperty = discriminatorProperty;
         }
 
-        /// <summary> Gets or sets the discriminatorproperty. </summary>
+        /// <summary> Gets or sets the discriminator property. </summary>
         internal string DiscriminatorProperty { get; set; }
     }
 }

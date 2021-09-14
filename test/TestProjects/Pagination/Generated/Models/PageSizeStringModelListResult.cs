@@ -31,7 +31,7 @@ namespace Pagination.Models
 
         /// <summary> Gets the value. </summary>
         public IReadOnlyList<PageSizeStringModelData> Value { get; }
-        /// <summary> Gets the nextlink. </summary>
+        /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }
 }

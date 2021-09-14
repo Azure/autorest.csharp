@@ -45,11 +45,11 @@ namespace AppConfiguration.Models
         public string Key { get; set; }
         /// <summary> Gets or sets the label. </summary>
         public string Label { get; set; }
-        /// <summary> Gets or sets the contenttype. </summary>
+        /// <summary> Gets or sets the content type. </summary>
         public string ContentType { get; set; }
         /// <summary> Gets or sets the value. </summary>
         public string Value { get; set; }
-        /// <summary> Gets or sets the lastmodified. </summary>
+        /// <summary> Gets or sets the last modified. </summary>
         public DateTimeOffset? LastModified { get; set; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> Tags { get; }

@@ -24,9 +24,9 @@ namespace body_complex.Models
             Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
         }
 
-        /// <summary> Gets or sets the field1. </summary>
+        /// <summary> Gets or sets the field 1. </summary>
         public double? Field1 { get; set; }
-        /// <summary> Gets or sets the field56zerosafterthedotandnegativezerobeforedotandthisisalongfieldnameonpurpose. </summary>
+        /// <summary> Gets or sets the field 56 zeros after the dot and negative zero before dot and this is a long field name on purpose. </summary>
         public double? Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose { get; set; }
     }
 }

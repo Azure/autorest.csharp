@@ -37,7 +37,7 @@ namespace multiple_inheritance.Models
             IsAShowHorse = isAShowHorse;
         }
 
-        /// <summary> Gets or sets the isashowhorse. </summary>
+        /// <summary> Gets or sets the is a show horse. </summary>
         public bool? IsAShowHorse { get; set; }
     }
 }

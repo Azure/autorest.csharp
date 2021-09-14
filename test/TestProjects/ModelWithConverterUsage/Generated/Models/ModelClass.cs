@@ -28,7 +28,7 @@ namespace ModelWithConverterUsage.Models
             ObjProperty = objProperty;
         }
 
-        /// <summary> Gets or sets the stringproperty. </summary>
+        /// <summary> Gets or sets the string property. </summary>
         public string StringProperty { get; set; }
         /// <summary> More Letters. </summary>
         public EnumProperty EnumProperty { get; set; }

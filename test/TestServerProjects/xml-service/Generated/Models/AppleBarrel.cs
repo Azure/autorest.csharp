@@ -29,9 +29,9 @@ namespace xml_service.Models
             BadApples = badApples;
         }
 
-        /// <summary> Gets the goodapples. </summary>
+        /// <summary> Gets the good apples. </summary>
         public IList<string> GoodApples { get; }
-        /// <summary> Gets the badapples. </summary>
+        /// <summary> Gets the bad apples. </summary>
         public IList<string> BadApples { get; }
     }
 }

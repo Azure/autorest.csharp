@@ -27,7 +27,7 @@ namespace body_complex.Models
             Kind = kind;
         }
 
-        /// <summary> Gets the propd1. </summary>
+        /// <summary> Gets the prop d 1. </summary>
         public string PropD1 { get; }
     }
 }

@@ -57,7 +57,7 @@ namespace Azure.ResourceManager.Sample.Models
         public PurchasePlan Plan { get; set; }
         /// <summary> Contains the os disk image information. </summary>
         public OSDiskImage OsDiskImage { get; set; }
-        /// <summary> Gets the datadiskimages. </summary>
+        /// <summary> Gets the data disk images. </summary>
         public IList<DataDiskImage> DataDiskImages { get; }
         /// <summary> Describes automatic OS upgrade properties on the image. </summary>
         public AutomaticOSUpgradeProperties AutomaticOSUpgradeProperties { get; set; }

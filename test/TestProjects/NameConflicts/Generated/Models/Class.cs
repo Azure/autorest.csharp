@@ -270,7 +270,7 @@ namespace NameConflicts.Models
         public string Const { get; set; }
         /// <summary> Gets or sets the continue. </summary>
         public string Continue { get; set; }
-        /// <summary> Gets or sets the classvalue. </summary>
+        /// <summary> Gets or sets the class value. </summary>
         public string ClassValue { get; set; }
         /// <summary> Gets or sets the decimal. </summary>
         public string Decimal { get; set; }
@@ -348,7 +348,7 @@ namespace NameConflicts.Models
         public string Namespace { get; set; }
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
-        /// <summary> Gets or sets the nullproperty. </summary>
+        /// <summary> Gets or sets the null property. </summary>
         public string NullProperty { get; set; }
         /// <summary> Gets or sets the object. </summary>
         public string Object { get; set; }
@@ -446,11 +446,11 @@ namespace NameConflicts.Models
         public string Yield { get; set; }
         /// <summary> Gets or sets the system. </summary>
         public SystemEnum? System { get; set; }
-        /// <summary> Gets or sets the tostringvalue. </summary>
+        /// <summary> Gets or sets the to string value. </summary>
         public string ToStringValue { get; set; }
-        /// <summary> Gets or sets the equalsvalue. </summary>
+        /// <summary> Gets or sets the equals value. </summary>
         public string EqualsValue { get; set; }
-        /// <summary> Gets or sets the gethashcodevalue. </summary>
+        /// <summary> Gets or sets the get hash code value. </summary>
         public string GetHashCodeValue { get; set; }
     }
 }

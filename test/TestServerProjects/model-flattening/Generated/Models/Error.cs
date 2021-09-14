@@ -30,7 +30,7 @@ namespace model_flattening.Models
         public int? Status { get; }
         /// <summary> Gets the message. </summary>
         public string Message { get; }
-        /// <summary> Gets the parenterror. </summary>
+        /// <summary> Gets the parent error. </summary>
         public Error ParentError { get; }
     }
 }

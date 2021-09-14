@@ -78,21 +78,21 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        /// <summary> Gets the serviceendpoint. </summary>
+        /// <summary> Gets the service endpoint. </summary>
         public string ServiceEndpoint { get; }
-        /// <summary> Gets the containername. </summary>
+        /// <summary> Gets the container name. </summary>
         public string ContainerName { get; }
         /// <summary> Gets the prefix. </summary>
         public string Prefix { get; }
         /// <summary> Gets the marker. </summary>
         public string Marker { get; }
-        /// <summary> Gets the maxresults. </summary>
+        /// <summary> Gets the max results. </summary>
         public int MaxResults { get; }
         /// <summary> Gets the delimiter. </summary>
         public string Delimiter { get; }
         /// <summary> Gets the blobs. </summary>
         public Blobs Blobs { get; }
-        /// <summary> Gets the nextmarker. </summary>
+        /// <summary> Gets the next marker. </summary>
         public string NextMarker { get; }
     }
 }

@@ -24,9 +24,9 @@ namespace body_complex.Models
             Field2 = field2;
         }
 
-        /// <summary> Gets or sets the field1. </summary>
+        /// <summary> Gets or sets the field 1. </summary>
         public int? Field1 { get; set; }
-        /// <summary> Gets or sets the field2. </summary>
+        /// <summary> Gets or sets the field 2. </summary>
         public int? Field2 { get; set; }
     }
 }

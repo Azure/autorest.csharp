@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -89,13 +90,14 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return $"{property.Description}";
             }
+            String splitDeclarationName = string.Join(" ", StringExtensions.SplitByCamelCase(property.Declaration.Name)).ToLower();
             if (property.IsReadOnly)
             {
-                return $"Gets the {property.Declaration.Name.ToLower()}";
+                return $"Gets the {splitDeclarationName}";
             }
             else
             {
-                return $"Gets or sets the {property.Declaration.Name.ToLower()}";
+                return $"Gets or sets the {splitDeclarationName}";
             }
         }
 

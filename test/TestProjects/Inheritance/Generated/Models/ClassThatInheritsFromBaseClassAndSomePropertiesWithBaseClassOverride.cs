@@ -24,7 +24,7 @@ namespace Inheritance.Models
             BaseClassProperty = baseClassProperty;
         }
 
-        /// <summary> Gets or sets the baseclassproperty. </summary>
+        /// <summary> Gets or sets the base class property. </summary>
         public string BaseClassProperty { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace SupersetFlattenInheritance
         public string Foo { get; set; }
         /// <summary> Gets or sets the bar. </summary>
         public string Bar { get; set; }
-        /// <summary> Gets or sets the foopropertiesfoo. </summary>
+        /// <summary> Gets or sets the foo properties foo. </summary>
         public string FooPropertiesFoo { get; set; }
     }
 }

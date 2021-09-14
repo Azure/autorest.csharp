@@ -26,7 +26,7 @@ namespace xms_error_responses.Models
             ErrorMessage = errorMessage;
         }
 
-        /// <summary> Gets or sets the errortype. </summary>
+        /// <summary> Gets or sets the error type. </summary>
         internal string ErrorType { get; set; }
         /// <summary> the error message. </summary>
         public string ErrorMessage { get; }

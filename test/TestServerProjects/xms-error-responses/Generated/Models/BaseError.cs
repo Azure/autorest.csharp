@@ -22,7 +22,7 @@ namespace xms_error_responses.Models
             SomeBaseProp = someBaseProp;
         }
 
-        /// <summary> Gets the somebaseprop. </summary>
+        /// <summary> Gets the some base prop. </summary>
         public string SomeBaseProp { get; }
     }
 }

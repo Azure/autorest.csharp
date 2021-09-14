@@ -54,7 +54,7 @@ namespace additionalProperties.Models
         public string Name { get; set; }
         /// <summary> Gets the status. </summary>
         public bool? Status { get; }
-        /// <summary> Gets or sets the odatalocation. </summary>
+        /// <summary> Gets or sets the odata location. </summary>
         public string OdataLocation { get; set; }
         /// <summary> Dictionary of &lt;number&gt;. </summary>
         public IDictionary<string, float> AdditionalProperties { get; }

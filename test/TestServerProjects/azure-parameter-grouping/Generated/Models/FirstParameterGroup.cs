@@ -15,7 +15,7 @@ namespace azure_parameter_grouping.Models
         {
         }
 
-        /// <summary> Gets or sets the headerone. </summary>
+        /// <summary> Gets or sets the header one. </summary>
         public string HeaderOne { get; set; }
         /// <summary> Query parameter with default. </summary>
         public int? QueryOne { get; set; }

@@ -30,7 +30,7 @@ namespace custom_baseUrl_paging.Models
 
         /// <summary> Gets the values. </summary>
         public IReadOnlyList<Product> Values { get; }
-        /// <summary> Gets the nextlink. </summary>
+        /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }
 }

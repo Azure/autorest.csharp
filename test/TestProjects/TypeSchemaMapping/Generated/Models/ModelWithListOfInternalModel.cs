@@ -28,7 +28,7 @@ namespace TypeSchemaMapping.Models
             InternalListProperty = internalListProperty;
         }
 
-        /// <summary> Gets the stringproperty. </summary>
+        /// <summary> Gets the string property. </summary>
         public string StringProperty { get; }
     }
 }

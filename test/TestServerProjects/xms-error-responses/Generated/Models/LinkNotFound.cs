@@ -27,7 +27,7 @@ namespace xms_error_responses.Models
             WhatNotFound = whatNotFound ?? "InvalidResourceLink";
         }
 
-        /// <summary> Gets the whatsubaddress. </summary>
+        /// <summary> Gets the what sub address. </summary>
         public string WhatSubAddress { get; }
     }
 }

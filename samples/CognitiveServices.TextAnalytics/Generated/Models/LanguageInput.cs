@@ -35,7 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
         public string Id { get; }
         /// <summary> Gets the text. </summary>
         public string Text { get; }
-        /// <summary> Gets or sets the countryhint. </summary>
+        /// <summary> Gets or sets the country hint. </summary>
         public string CountryHint { get; set; }
     }
 }

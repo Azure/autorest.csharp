@@ -28,9 +28,9 @@ namespace ModelShapes.Models
             ReadonlyListProperty = readonlyListProperty;
         }
 
-        /// <summary> Gets the readonlyproperty. </summary>
+        /// <summary> Gets the readonly property. </summary>
         public ReadonlyModel ReadonlyProperty { get; }
-        /// <summary> Gets the readonlylistproperty. </summary>
+        /// <summary> Gets the readonly list property. </summary>
         public IReadOnlyList<ReadonlyModel> ReadonlyListProperty { get; }
     }
 }

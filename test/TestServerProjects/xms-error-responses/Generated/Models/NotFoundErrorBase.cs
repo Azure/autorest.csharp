@@ -28,7 +28,7 @@ namespace xms_error_responses.Models
 
         /// <summary> Gets the reason. </summary>
         public string Reason { get; }
-        /// <summary> Gets or sets the whatnotfound. </summary>
+        /// <summary> Gets or sets the what not found. </summary>
         internal string WhatNotFound { get; set; }
     }
 }

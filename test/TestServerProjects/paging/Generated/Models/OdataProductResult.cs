@@ -30,7 +30,7 @@ namespace paging.Models
 
         /// <summary> Gets the values. </summary>
         public IReadOnlyList<Product> Values { get; }
-        /// <summary> Gets the odatanextlink. </summary>
+        /// <summary> Gets the odata next link. </summary>
         public string OdataNextLink { get; }
     }
 }

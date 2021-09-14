@@ -27,7 +27,7 @@ namespace azure_parameter_grouping.Models
             Body = body;
         }
 
-        /// <summary> Gets or sets the customheader. </summary>
+        /// <summary> Gets or sets the custom header. </summary>
         public string CustomHeader { get; set; }
         /// <summary> Query parameter with default. </summary>
         public int? Query { get; set; }

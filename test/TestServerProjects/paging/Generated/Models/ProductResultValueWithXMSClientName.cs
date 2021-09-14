@@ -30,7 +30,7 @@ namespace paging.Models
 
         /// <summary> Gets the indexes. </summary>
         public IReadOnlyList<Product> Indexes { get; }
-        /// <summary> Gets the nextlink. </summary>
+        /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }
 }

@@ -59,17 +59,17 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        /// <summary> Gets the serviceendpoint. </summary>
+        /// <summary> Gets the service endpoint. </summary>
         public string ServiceEndpoint { get; }
         /// <summary> Gets the prefix. </summary>
         public string Prefix { get; }
         /// <summary> Gets the marker. </summary>
         public string Marker { get; }
-        /// <summary> Gets the maxresults. </summary>
+        /// <summary> Gets the max results. </summary>
         public int MaxResults { get; }
         /// <summary> Gets the containers. </summary>
         public IReadOnlyList<Container> Containers { get; }
-        /// <summary> Gets the nextmarker. </summary>
+        /// <summary> Gets the next marker. </summary>
         public string NextMarker { get; }
     }
 }

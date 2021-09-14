@@ -23,7 +23,7 @@ namespace httpInfrastructure.Models
             TextStatusCode = textStatusCode;
         }
 
-        /// <summary> Gets the textstatuscode. </summary>
+        /// <summary> Gets the text status code. </summary>
         public string TextStatusCode { get; }
     }
 }

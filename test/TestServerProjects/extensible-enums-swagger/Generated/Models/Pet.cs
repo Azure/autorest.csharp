@@ -32,7 +32,7 @@ namespace extensible_enums_swagger.Models
         public string Name { get; set; }
         /// <summary> Type of Pet. </summary>
         public DaysOfWeekExtensibleEnum? DaysOfWeek { get; set; }
-        /// <summary> Gets or sets the intenum. </summary>
+        /// <summary> Gets or sets the int enum. </summary>
         public IntEnum IntEnum { get; set; }
     }
 }

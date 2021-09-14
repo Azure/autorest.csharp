@@ -24,7 +24,7 @@ namespace body_complex.Models
             Species = species;
         }
 
-        /// <summary> Gets or sets the fishtype. </summary>
+        /// <summary> Gets or sets the fish type. </summary>
         internal string FishType { get; set; }
         /// <summary> Gets the species. </summary>
         public string Species { get; }
