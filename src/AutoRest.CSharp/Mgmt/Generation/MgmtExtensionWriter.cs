@@ -236,5 +236,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.Line();
         }
+
+        protected virtual void WriteExtensionGetResourceFromIdMethod(CodeWriter writer, Resource resource)
+        {
+            writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it but with no data.");
+            writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            writer.WriteXmlDocumentationParameter("id", $"The resource ID of the resource to get.");
+            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
+            using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, {typeof(ResourceIdentifier)} id)"))
+            {
+                writer.Line($"return new {resource.Type}({ExtensionOperationVariableName}, id);");
+            }
+        }
     }
 }

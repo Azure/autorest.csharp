@@ -51,6 +51,18 @@ namespace MgmtListMethods
             _restClient = new ManagementGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
+        /// <summary> Initializes a new instance of the <see cref="ManagementGroup"/> class. </summary>
+        /// <param name="clientOptions"> The client options to build client context. </param>
+        /// <param name="credential"> The credential to build client context. </param>
+        /// <param name="uri"> The uri to build client context. </param>
+        /// <param name="pipeline"> The pipeline to build client context. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        internal ManagementGroup(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
+        {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new ManagementGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+        }
+
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Management/managementGroups";
 
