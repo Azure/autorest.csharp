@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ParentDetection
     {
-        private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
+        //private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         private static ConcurrentDictionary<OperationGroup, OperationGroup?> _parentCache = new ConcurrentDictionary<OperationGroup, OperationGroup?>();

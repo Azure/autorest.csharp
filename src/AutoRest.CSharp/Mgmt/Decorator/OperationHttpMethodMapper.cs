@@ -15,9 +15,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping(this RawOperationSet operations)
         {
             var result = new Dictionary<HttpMethod, List<ServiceRequest>>();
-            foreach (var operationTuple in operations)
+            foreach (var operation in operations)
             {
-                var operation = operationTuple.Item1;
                 foreach (var serviceRequest in operation.Requests)
                 {
                     if (serviceRequest.Protocol.Http is HttpRequest httpRequest)

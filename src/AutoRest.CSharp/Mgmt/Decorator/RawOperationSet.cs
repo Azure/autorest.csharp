@@ -9,29 +9,33 @@ using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
-    internal class RawOperationSet : IReadOnlyCollection<Tuple<Operation, OperationGroup>>
+    internal class RawOperationSet : IReadOnlyCollection<Operation>
     {
+        private IDictionary<Operation, OperationGroup> _operationGroupCache = new Dictionary<Operation, OperationGroup>();
         public string RequestPath { get; }
 
-        public List<Tuple<Operation, OperationGroup>> Operations { get; }
+        public HashSet<Operation> Operations { get; }
 
         public int Count => Operations.Count;
 
-        public RawOperationSet(string requestPath, List<Tuple<Operation, OperationGroup>> operations)
+        public RawOperationSet(string requestPath)
         {
             RequestPath = requestPath;
-            Operations = operations;
+            Operations = new HashSet<Operation>();
         }
 
-        public void Add(Tuple<Operation, OperationGroup> item)
+        public void Add(Operation operation, OperationGroup operationGroup)
         {
-            var path = item.Item1.GetHttpPath();
+            var path = operation.GetHttpPath();
             if (path != RequestPath)
                 throw new InvalidOperationException($"Cannot add operation with path {path} to RawOperationSet with path {RequestPath}");
-            Operations.Add(item);
+            Operations.Add(operation);
+            _operationGroupCache.TryAdd(operation, operationGroup);
         }
 
-        public IEnumerator<Tuple<Operation, OperationGroup>> GetEnumerator() => Operations.GetEnumerator();
+        public OperationGroup this[Operation operation] => _operationGroupCache[operation];
+
+        public IEnumerator<Operation> GetEnumerator() => Operations.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => Operations.GetEnumerator();
     }

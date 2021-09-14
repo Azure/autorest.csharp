@@ -69,11 +69,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static Operation? FindOperation(this RawOperationSet set, HttpMethod method)
         {
-            foreach (var operationTuple in set)
+            foreach (var operation in set)
             {
-                var request = operationTuple.Item1.GetHttpRequest();
+                var request = operation.GetHttpRequest();
                 if (request?.Method == method)
-                    return operationTuple.Item1;
+                    return operation;
             }
 
             return null;

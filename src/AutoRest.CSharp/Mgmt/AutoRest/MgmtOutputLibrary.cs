@@ -547,12 +547,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             if (_context.Configuration.PublicClients)
             {
-                foreach (var operationGroup in _codeModel.OperationGroups)
+                foreach ((_, var rawOperationSet) in _rawRequestPathToOperations)
                 {
-                    // if non-resource, we won't be able to get the info for LRO
-                    if (operationGroup.IsResource(_mgmtConfiguration))
+                    if (rawOperationSet.IsResource(_mgmtConfiguration))
                     {
-                        foreach (var operation in operationGroup.Operations)
+                        foreach (var operation in rawOperationSet)
                         {
                             if (!operation.IsLongRunning
                                 && operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest
@@ -561,10 +560,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 _nonLongRunningOperations.Add(
                                     operation,
                                     new NonLongRunningOperation(
-                                        operationGroup,
+                                        rawOperationSet[operation],
                                         operation,
                                         _context,
-                                        FindLongRunningOperationInfo(operationGroup, operation)
+                                        FindLongRunningOperationInfo(rawOperationSet[operation], operation)
                                     )
                                 );
                             }
@@ -688,7 +687,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var operation in operationSet)
                 {
-                    var operationGroup = operation.Item2;
+                    var operationGroup = operationSet[operation];
                     ResourceTypes.Add(operationGroup.ResourceType(_mgmtConfiguration));
 
                     string? parent;
@@ -713,6 +712,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ParentDetection.VerifyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
+        // TODO -- change this to use operation or request path instead of using operation group
         private void AddToChildNonResourceOperationGroupMap(OperationGroup operationGroup)
         {
             var parent = operationGroup.ParentResourceType(_mgmtConfiguration);
@@ -747,13 +747,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     var path = operation.GetHttpPath();
                     requestPathList.Add(path);
-                    if (_rawRequestPathToOperations.TryGetValue(path, out var list))
+                    if (_rawRequestPathToOperations.TryGetValue(path, out var rawOperationSet))
                     {
-                        list.Add(new Tuple<Operation, OperationGroup>(operation, operationGroup));
+                        rawOperationSet.Add(operation, operationGroup);
                     }
                     else
                     {
-                        _rawRequestPathToOperations.Add(path, new RawOperationSet(path, new List<Tuple<Operation, OperationGroup>> { new Tuple<Operation, OperationGroup>(operation, operationGroup) }));
+                        rawOperationSet = new RawOperationSet(path)
+                        {
+                            {operation, operationGroup }
+                        };
+                        _rawRequestPathToOperations.Add(path, rawOperationSet);
                     }
                 }
             }
