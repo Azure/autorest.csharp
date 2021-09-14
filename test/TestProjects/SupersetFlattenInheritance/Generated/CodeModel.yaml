@@ -627,7 +627,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: ResourceModel2
-          description: Resource with flatten properties.
+          description: Resource with flatten properties (contains id). Since the id comes from flattened properties, this should not be counted as a resource
           namespace: ''
       protocol: !Protocols {}
     - !ObjectSchema &ref_81
@@ -795,7 +795,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: TrackedResourceModel2
-          description: TrackedResource with flatten properties
+          description: TrackedResource with flatten properties, but the id comes from flattened properties, therefore this should not be a resource
           namespace: ''
       protocol: !Protocols {}
     - !ObjectSchema &ref_93

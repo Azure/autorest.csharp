@@ -1001,7 +1001,7 @@
         },
         "ResourceModel2": {
             "type": "object",
-            "description": "Resource with flatten properties.",
+            "description": "Resource with flatten properties (contains id). Since the id comes from flattened properties, this should not be counted as a resource",
             "x-ms-azure-resource": true,
             "properties": {
                 "name": {
@@ -1052,7 +1052,7 @@
         },
         "TrackedResourceModel2": {
             "type": "object",
-            "description": "TrackedResource with flatten properties",
+            "description": "TrackedResource with flatten properties, but the id comes from flattened properties, therefore this should not be a resource",
             "x-ms-azure-resource": true,
             "properties": {
                 "location": {

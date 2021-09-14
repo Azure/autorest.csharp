@@ -12,28 +12,6 @@ namespace SupersetFlattenInheritance
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region CustomModel1
-        /// <summary> Gets an object representing a CustomModel1 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel1" /> object. </returns>
-        public static CustomModel1 GetCustomModel1(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new CustomModel1(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
-        #region CustomModel2
-        /// <summary> Gets an object representing a CustomModel2 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel2" /> object. </returns>
-        public static CustomModel2 GetCustomModel2(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new CustomModel2(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
         #region SubResourceModel1
         /// <summary> Gets an object representing a SubResourceModel1 along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -89,17 +67,6 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region ResourceModel2
-        /// <summary> Gets an object representing a ResourceModel2 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResourceModel2" /> object. </returns>
-        public static ResourceModel2 GetResourceModel2(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ResourceModel2(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
         #region TrackedResourceModel1
         /// <summary> Gets an object representing a TrackedResourceModel1 along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -108,17 +75,6 @@ namespace SupersetFlattenInheritance
         public static TrackedResourceModel1 GetTrackedResourceModel1(this ArmClient armClient, ResourceIdentifier id)
         {
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new TrackedResourceModel1(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
-        #region TrackedResourceModel2
-        /// <summary> Gets an object representing a TrackedResourceModel2 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TrackedResourceModel2" /> object. </returns>
-        public static TrackedResourceModel2 GetTrackedResourceModel2(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new TrackedResourceModel2(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
     }

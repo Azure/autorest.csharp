@@ -11,12 +11,17 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "OperationGroupToResource": {
+    "CustomModel1s": "NonResource",
+    "CustomModel2s": "NonResource",
+    "ResourceModel2s": "NonResource",
+    "TrackedResourceModel2s": "NonResource",
     "NonResourceModel1s": "NonResource"
   },
   "OperationGroupToParent": {
+    "CustomModel1s": "resourceGroups",
+    "CustomModel2s": "resourceGroups",
+    "ResourceModel2s": "resourceGroups",
+    "TrackedResourceModel2s": "resourceGroups",
     "NonResourceModel1s": "resourceGroups"
-  },
-  "RequestPathIsNonResource": [
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}"
-  ]
+  }
 }

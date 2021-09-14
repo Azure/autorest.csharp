@@ -10,18 +10,18 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
-namespace SupersetFlattenInheritance
+namespace SupersetFlattenInheritance.Models
 {
-    /// <summary> A class representing the TrackedResourceModel2 data model. </summary>
-    public partial class TrackedResourceModel2Data : TrackedResource
+    /// <summary> TrackedResource with flatten properties, but the id comes from flattened properties, therefore this should not be a resource. </summary>
+    public partial class TrackedResourceModel2 : TrackedResource
     {
-        /// <summary> Initializes a new instance of TrackedResourceModel2Data. </summary>
+        /// <summary> Initializes a new instance of TrackedResourceModel2. </summary>
         /// <param name="location"> The location. </param>
-        public TrackedResourceModel2Data(Location location) : base(location)
+        public TrackedResourceModel2(Location location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of TrackedResourceModel2Data. </summary>
+        /// <summary> Initializes a new instance of TrackedResourceModel2. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
@@ -30,7 +30,7 @@ namespace SupersetFlattenInheritance
         /// <param name="foo"></param>
         /// <param name="bar"></param>
         /// <param name="fooPropertiesFoo"></param>
-        internal TrackedResourceModel2Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string foo, string bar, string fooPropertiesFoo) : base(id, name, type, tags, location)
+        internal TrackedResourceModel2(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string foo, string bar, string fooPropertiesFoo) : base(id, name, type, tags, location)
         {
             Foo = foo;
             Bar = bar;

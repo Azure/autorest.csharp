@@ -9,9 +9,9 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace SupersetFlattenInheritance
+namespace SupersetFlattenInheritance.Models
 {
-    public partial class ResourceModel2Data : IUtf8JsonSerializable
+    public partial class ResourceModel2 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -27,7 +27,7 @@ namespace SupersetFlattenInheritance
             writer.WriteEndObject();
         }
 
-        internal static ResourceModel2Data DeserializeResourceModel2Data(JsonElement element)
+        internal static ResourceModel2 DeserializeResourceModel2(JsonElement element)
         {
             ResourceIdentifier id = default;
             string name = default;
@@ -68,7 +68,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new ResourceModel2Data(id, name, type, foo.Value);
+            return new ResourceModel2(id, name, type, foo.Value);
         }
     }
 }

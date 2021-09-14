@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
@@ -18,16 +17,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(object), typeof(CustomModel1Data))]
-        [TestCase(typeof(object), typeof(CustomModel2Data))]
+        [TestCase(typeof(object), typeof(CustomModel1))]
+        [TestCase(typeof(object), typeof(CustomModel2))]
         [TestCase(typeof(SubResource), typeof(SubResourceModel1Data))]
         [TestCase(typeof(SubResource), typeof(SubResourceModel2Data))]
         [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel1Data))]
         [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel2Data))]
         [TestCase(typeof(Resource), typeof(ResourceModel1Data))]
-        [TestCase(typeof(Resource), typeof(ResourceModel2Data))]
+        [TestCase(typeof(Resource), typeof(ResourceModel2))]
         [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel1Data))]
-        [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel2Data))]
+        [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel2))]
         [TestCase(typeof(object), typeof(NonResourceModel1))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
@@ -38,12 +37,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(CustomModel1Data), typeof(CustomModel2Data))]
-        [TestCase(typeof(CustomModel1Data), typeof(SubResourceModel2Data))]
-        [TestCase(typeof(CustomModel1Data), typeof(WritableSubResourceModel2Data))]
-        [TestCase(typeof(SubResourceModel1Data), typeof(ResourceModel2Data))]
-        [TestCase(typeof(ResourceModel1Data), typeof(TrackedResourceModel2Data))]
-        [TestCase(typeof(CustomModel1Data), typeof(NonResourceModel1))]
+        [TestCase(typeof(CustomModel1), typeof(CustomModel2))]
+        [TestCase(typeof(CustomModel1), typeof(SubResourceModel2Data))]
+        [TestCase(typeof(CustomModel1), typeof(WritableSubResourceModel2Data))]
+        [TestCase(typeof(SubResourceModel1Data), typeof(ResourceModel2))]
+        [TestCase(typeof(ResourceModel1Data), typeof(TrackedResourceModel2))]
+        [TestCase(typeof(CustomModel1), typeof(NonResourceModel1))]
         public void ValidateFlattenType(Type sourceType, Type targetType)
         {
             // source type is not the parent of the target type
@@ -55,8 +54,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(CustomModel1Data), new string[] { "foo" }, new Type[] { typeof(string) })]
-        [TestCase(typeof(CustomModel2Data), new string[] { "foo", "bar" }, new Type[] { typeof(string), typeof(string) })]
+        [TestCase(typeof(CustomModel1), new string[] { "foo" }, new Type[] { typeof(string) })]
+        [TestCase(typeof(CustomModel2), new string[] { "foo", "bar" }, new Type[] { typeof(string), typeof(string) })]
         [TestCase(typeof(SubResourceModel1Data), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
         [TestCase(typeof(SubResourceModel2Data), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
         [TestCase(typeof(WritableSubResourceModel1Data), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
@@ -64,7 +63,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
         [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
         [TestCase(typeof(TrackedResourceModel1Data), new string[] { "location" }, new Type[] { typeof(Location) })]
-        [TestCase(typeof(TrackedResourceModel2Data), new string[] { "location" }, new Type[] { typeof(Location) })]
+        [TestCase(typeof(TrackedResourceModel2), new string[] { "location" }, new Type[] { typeof(Location) })]
         [TestCase(typeof(NonResourceModel1), new string[] { "foo", "bar" }, new Type[] { typeof(string), typeof(string) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }

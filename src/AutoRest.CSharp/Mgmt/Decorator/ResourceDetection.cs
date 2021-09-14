@@ -103,9 +103,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (schema is not ObjectSchema objSchema)
                 return false;
-            Property? idProperty = null, typeProperty = null, nameProperty = null;
 
-            foreach (var property in objSchema.Properties)
+            // union all the property on myself and all the properties from my parents
+            var allProperties = objSchema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties)
+                .Concat(objSchema.Properties);
+            Property? idProperty = null;//, typeProperty = null, nameProperty = null;
+
+            foreach (var property in allProperties)
             {
                 // check if this property is flattened from lower level, we should only consider first level properties in this model
                 // therefore if flattenedNames is not empty, this property is flattened, we skip this property
@@ -116,20 +120,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     case "id":
                         idProperty = property;
                         continue;
-                    case "type":
-                        // we require type is read-only
-                        if (property.IsReadOnly)
-                            typeProperty = property;
-                        continue;
-                    case "name":
-                        // we require name is read-only
-                        if (property.IsReadOnly)
-                            nameProperty = property;
-                        continue;
+                    // TODO -- should we check for type and name?
+                    //case "type":
+                    //    // we require type is read-only
+                    //    if (property.IsReadOnly)
+                    //        typeProperty = property;
+                    //    continue;
+                    //case "name":
+                    //    nameProperty = property;
+                    //    continue;
                 }
             }
 
-            return idProperty != null && typeProperty != null && nameProperty != null;
+            return idProperty != null;// && typeProperty != null && nameProperty != null;
         }
     }
 }

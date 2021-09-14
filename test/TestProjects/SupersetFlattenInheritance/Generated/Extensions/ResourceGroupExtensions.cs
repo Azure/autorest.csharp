@@ -20,26 +20,6 @@ namespace SupersetFlattenInheritance
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region CustomModel1
-        /// <summary> Gets an object representing a CustomModel1Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="CustomModel1Container" /> object. </returns>
-        public static CustomModel1Container GetCustomModel1s(this ResourceGroup resourceGroup)
-        {
-            return new CustomModel1Container(resourceGroup);
-        }
-        #endregion
-
-        #region CustomModel2
-        /// <summary> Gets an object representing a CustomModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="CustomModel2Container" /> object. </returns>
-        public static CustomModel2Container GetCustomModel2s(this ResourceGroup resourceGroup)
-        {
-            return new CustomModel2Container(resourceGroup);
-        }
-        #endregion
-
         #region SubResourceModel1
         /// <summary> Gets an object representing a SubResourceModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -90,16 +70,6 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region ResourceModel2
-        /// <summary> Gets an object representing a ResourceModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResourceModel2Container" /> object. </returns>
-        public static ResourceModel2Container GetResourceModel2s(this ResourceGroup resourceGroup)
-        {
-            return new ResourceModel2Container(resourceGroup);
-        }
-        #endregion
-
         #region TrackedResourceModel1
         /// <summary> Gets an object representing a TrackedResourceModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -110,14 +80,572 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region TrackedResourceModel2
-        /// <summary> Gets an object representing a TrackedResourceModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="TrackedResourceModel2Container" /> object. </returns>
-        public static TrackedResourceModel2Container GetTrackedResourceModel2s(this ResourceGroup resourceGroup)
+        #region CustomModel1
+        private static CustomModel1SRestOperations GetCustomModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new TrackedResourceModel2Container(resourceGroup);
+            return new CustomModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="customModel1SName"> The String to use. </param>
+        /// <param name="parameters"> The CustomModel1 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        public static async Task<Response<CustomModel1>> PutCustomModel1Async(this ResourceGroup resourceGroup, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        {
+            if (customModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutCustomModel1");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, customModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="customModel1SName"> The String to use. </param>
+        /// <param name="parameters"> The CustomModel1 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        public static Response<CustomModel1> PutCustomModel1(this ResourceGroup resourceGroup, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        {
+            if (customModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutCustomModel1");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.Put(resourceGroup.Id.Name, customModel1SName, parameters, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="customModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
+        public static async Task<Response<CustomModel1>> GetCustomModel1Async(this ResourceGroup resourceGroup, string customModel1SName, CancellationToken cancellationToken = default)
+        {
+            if (customModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel1SName));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, customModel1SName, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="customModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
+        public static Response<CustomModel1> GetCustomModel1(this ResourceGroup resourceGroup, string customModel1SName, CancellationToken cancellationToken = default)
+        {
+            if (customModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel1SName));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetCustomModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.Get(resourceGroup.Id.Name, customModel1SName, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        #endregion
+
+        #region CustomModel2
+        private static CustomModel2SRestOperations GetCustomModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new CustomModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="customModel2SName"> The String to use. </param>
+        /// <param name="parameters"> The CustomModel2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public static async Task<Response<CustomModel2>> PutCustomModel2Async(this ResourceGroup resourceGroup, string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
+        {
+            if (customModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutCustomModel2");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="customModel2SName"> The String to use. </param>
+        /// <param name="parameters"> The CustomModel2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public static Response<CustomModel2> PutCustomModel2(this ResourceGroup resourceGroup, string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
+        {
+            if (customModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutCustomModel2");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.Put(resourceGroup.Id.Name, customModel2SName, parameters, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="customModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
+        public static async Task<Response<CustomModel2>> GetCustomModel2Async(this ResourceGroup resourceGroup, string customModel2SName, CancellationToken cancellationToken = default)
+        {
+            if (customModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel2SName));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, customModel2SName, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="customModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
+        public static Response<CustomModel2> GetCustomModel2(this ResourceGroup resourceGroup, string customModel2SName, CancellationToken cancellationToken = default)
+        {
+            if (customModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel2SName));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetCustomModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.Get(resourceGroup.Id.Name, customModel2SName, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        #endregion
+
+        #region ResourceModel2
+        private static ResourceModel2SRestOperations GetResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new ResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceModel2SName"> The String to use. </param>
+        /// <param name="parameters"> The ResourceModel2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public static async Task<Response<ResourceModel2>> PutResourceModel2Async(this ResourceGroup resourceGroup, string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutResourceModel2");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, resourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceModel2SName"> The String to use. </param>
+        /// <param name="parameters"> The ResourceModel2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public static Response<ResourceModel2> PutResourceModel2(this ResourceGroup resourceGroup, string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutResourceModel2");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.Put(resourceGroup.Id.Name, resourceModel2SName, parameters, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
+        public static async Task<Response<ResourceModel2>> GetResourceModel2Async(this ResourceGroup resourceGroup, string resourceModel2SName, CancellationToken cancellationToken = default)
+        {
+            if (resourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel2SName));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, resourceModel2SName, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
+        public static Response<ResourceModel2> GetResourceModel2(this ResourceGroup resourceGroup, string resourceModel2SName, CancellationToken cancellationToken = default)
+        {
+            if (resourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel2SName));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.Get(resourceGroup.Id.Name, resourceModel2SName, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        #endregion
+
+        #region TrackedResourceModel2
+        private static TrackedResourceModel2SRestOperations GetTrackedResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new TrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="trackedResourceModel2SName"> The String to use. </param>
+        /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public static async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(this ResourceGroup resourceGroup, string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
+        {
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutTrackedResourceModel2");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="trackedResourceModel2SName"> The String to use. </param>
+        /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public static Response<TrackedResourceModel2> PutTrackedResourceModel2(this ResourceGroup resourceGroup, string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
+        {
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutTrackedResourceModel2");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.Put(resourceGroup.Id.Name, trackedResourceModel2SName, parameters, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="trackedResourceModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
+        public static async Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(this ResourceGroup resourceGroup, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        {
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="trackedResourceModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
+        public static Response<TrackedResourceModel2> GetTrackedResourceModel2(this ResourceGroup resourceGroup, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        {
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.Get(resourceGroup.Id.Name, trackedResourceModel2SName, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
         #endregion
 
         #region NonResourceModel1

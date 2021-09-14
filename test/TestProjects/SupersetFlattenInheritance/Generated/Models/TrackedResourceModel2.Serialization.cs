@@ -11,9 +11,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace SupersetFlattenInheritance
+namespace SupersetFlattenInheritance.Models
 {
-    public partial class TrackedResourceModel2Data : IUtf8JsonSerializable
+    public partial class TrackedResourceModel2 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -49,7 +49,7 @@ namespace SupersetFlattenInheritance
             writer.WriteEndObject();
         }
 
-        internal static TrackedResourceModel2Data DeserializeTrackedResourceModel2Data(JsonElement element)
+        internal static TrackedResourceModel2 DeserializeTrackedResourceModel2(JsonElement element)
         {
             Optional<string> foo = default;
             Optional<string> bar = default;
@@ -119,7 +119,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new TrackedResourceModel2Data(id, name, type, tags, location, foo.Value, bar.Value, foo0.Value);
+            return new TrackedResourceModel2(id, name, type, tags, location, foo.Value, bar.Value, foo0.Value);
         }
     }
 }

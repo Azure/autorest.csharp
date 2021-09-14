@@ -8,9 +8,9 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace SupersetFlattenInheritance
+namespace SupersetFlattenInheritance.Models
 {
-    public partial class CustomModel1Data : IUtf8JsonSerializable
+    public partial class CustomModel1 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -23,7 +23,7 @@ namespace SupersetFlattenInheritance
             writer.WriteEndObject();
         }
 
-        internal static CustomModel1Data DeserializeCustomModel1Data(JsonElement element)
+        internal static CustomModel1 DeserializeCustomModel1(JsonElement element)
         {
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
@@ -34,7 +34,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new CustomModel1Data(foo.Value);
+            return new CustomModel1(foo.Value);
         }
     }
 }
