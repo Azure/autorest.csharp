@@ -153,6 +153,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public IEnumerable<Resource> ManagementGroupChildResources => GetChildren(ResourceTypeBuilder.ManagementGroups);
+        public IEnumerable<Resource> TenantChildResources => GetChildren(ResourceTypeBuilder.Tenant);
 
         private IEnumerable<Resource> GetChildren(string parent)
         {

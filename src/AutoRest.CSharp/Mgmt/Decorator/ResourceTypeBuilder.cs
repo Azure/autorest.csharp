@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             { Subscriptions , "SubscriptionExtensions" },
             { ResourceGroups , "ResourceGroupExtensions" },
-            { Tenant , "ArmClientExtensions" },
+            { Tenant , "TenantExtensions" },
             { ManagementGroups , "ManagementGroupExtensions" },
         };
 
