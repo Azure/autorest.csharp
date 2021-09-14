@@ -16,7 +16,7 @@ namespace TypeSchemaMapping.Models
         }
 
         /// <summary> Initializes a new instance of ModelWithInternalModel. </summary>
-        /// <param name="internalProperty"> The InternalProperty. </param>
+        /// <param name="internalProperty"></param>
         internal ModelWithInternalModel(InternalModel internalProperty)
         {
             InternalProperty = internalProperty;

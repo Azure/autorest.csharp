@@ -18,13 +18,13 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of ByteWrapper. </summary>
-        /// <param name="field"> The Field. </param>
+        /// <param name="field"></param>
         internal ByteWrapper(byte[] field)
         {
             Field = field;
         }
 
-        /// <summary> The Field. </summary>
+        /// <summary> Gets or sets the field. </summary>
         public byte[] Field { get; set; }
     }
 }

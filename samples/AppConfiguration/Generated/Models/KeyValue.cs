@@ -21,14 +21,14 @@ namespace AppConfiguration.Models
         }
 
         /// <summary> Initializes a new instance of KeyValue. </summary>
-        /// <param name="key"> The Key. </param>
-        /// <param name="label"> The Label. </param>
-        /// <param name="contentType"> The ContentType. </param>
-        /// <param name="value"> The Value. </param>
-        /// <param name="lastModified"> The LastModified. </param>
+        /// <param name="key"></param>
+        /// <param name="label"></param>
+        /// <param name="contentType"></param>
+        /// <param name="value"></param>
+        /// <param name="lastModified"></param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
-        /// <param name="locked"> The Locked. </param>
-        /// <param name="etag"> The Etag. </param>
+        /// <param name="locked"></param>
+        /// <param name="etag"></param>
         internal KeyValue(string key, string label, string contentType, string value, DateTimeOffset? lastModified, IDictionary<string, string> tags, bool? locked, string etag)
         {
             Key = key;
@@ -41,21 +41,21 @@ namespace AppConfiguration.Models
             Etag = etag;
         }
 
-        /// <summary> The Key. </summary>
+        /// <summary> Gets or sets the key. </summary>
         public string Key { get; set; }
-        /// <summary> The Label. </summary>
+        /// <summary> Gets or sets the label. </summary>
         public string Label { get; set; }
-        /// <summary> The ContentType. </summary>
+        /// <summary> Gets or sets the contenttype. </summary>
         public string ContentType { get; set; }
-        /// <summary> The Value. </summary>
+        /// <summary> Gets or sets the value. </summary>
         public string Value { get; set; }
-        /// <summary> The LastModified. </summary>
+        /// <summary> Gets or sets the lastmodified. </summary>
         public DateTimeOffset? LastModified { get; set; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> Tags { get; }
-        /// <summary> The Locked. </summary>
+        /// <summary> Gets or sets the locked. </summary>
         public bool? Locked { get; set; }
-        /// <summary> The Etag. </summary>
+        /// <summary> Gets or sets the etag. </summary>
         public string Etag { get; set; }
     }
 }

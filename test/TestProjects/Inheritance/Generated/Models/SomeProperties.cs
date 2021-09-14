@@ -16,17 +16,17 @@ namespace Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of SomeProperties. </summary>
-        /// <param name="someProperty"> The SomeProperty. </param>
-        /// <param name="someOtherProperty"> The SomeOtherProperty. </param>
+        /// <param name="someProperty"></param>
+        /// <param name="someOtherProperty"></param>
         internal SomeProperties(string someProperty, string someOtherProperty)
         {
             SomeProperty = someProperty;
             SomeOtherProperty = someOtherProperty;
         }
 
-        /// <summary> The SomeProperty. </summary>
+        /// <summary> Gets or sets the someproperty. </summary>
         public string SomeProperty { get; set; }
-        /// <summary> The SomeOtherProperty. </summary>
+        /// <summary> Gets or sets the someotherproperty. </summary>
         public string SomeOtherProperty { get; set; }
     }
 }

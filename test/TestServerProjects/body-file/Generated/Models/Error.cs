@@ -16,17 +16,17 @@ namespace body_file.Models
         }
 
         /// <summary> Initializes a new instance of Error. </summary>
-        /// <param name="status"> The Status. </param>
-        /// <param name="message"> The Message. </param>
+        /// <param name="status"></param>
+        /// <param name="message"></param>
         internal Error(int? status, string message)
         {
             Status = status;
             Message = message;
         }
 
-        /// <summary> The Status. </summary>
+        /// <summary> Gets the status. </summary>
         public int? Status { get; }
-        /// <summary> The Message. </summary>
+        /// <summary> Gets the message. </summary>
         public string Message { get; }
     }
 }

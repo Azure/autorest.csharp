@@ -16,13 +16,13 @@ namespace httpInfrastructure.Models
         }
 
         /// <summary> Initializes a new instance of D. </summary>
-        /// <param name="httpStatusCode"> The HttpStatusCode. </param>
+        /// <param name="httpStatusCode"></param>
         internal D(string httpStatusCode)
         {
             HttpStatusCode = httpStatusCode;
         }
 
-        /// <summary> The HttpStatusCode. </summary>
+        /// <summary> Gets the httpstatuscode. </summary>
         public string HttpStatusCode { get; }
     }
 }

@@ -18,8 +18,8 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of Banana. </summary>
-        /// <param name="name"> The Name. </param>
-        /// <param name="flavor"> The Flavor. </param>
+        /// <param name="name"></param>
+        /// <param name="flavor"></param>
         /// <param name="expiration"> The time at which you should reconsider eating this banana. </param>
         internal Banana(string name, string flavor, DateTimeOffset? expiration)
         {
@@ -28,9 +28,9 @@ namespace xml_service.Models
             Expiration = expiration;
         }
 
-        /// <summary> The Name. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> The Flavor. </summary>
+        /// <summary> Gets or sets the flavor. </summary>
         public string Flavor { get; set; }
         /// <summary> The time at which you should reconsider eating this banana. </summary>
         public DateTimeOffset? Expiration { get; set; }

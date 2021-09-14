@@ -14,7 +14,7 @@ namespace azure_parameter_grouping.Models
     {
         /// <summary> Initializes a new instance of ParameterGroupingPostRequiredParameters. </summary>
         /// <param name="path"> Path parameter. </param>
-        /// <param name="body"> The Body. </param>
+        /// <param name="body"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="path"/> is null. </exception>
         public ParameterGroupingPostRequiredParameters(string path, int body)
         {
@@ -27,13 +27,13 @@ namespace azure_parameter_grouping.Models
             Body = body;
         }
 
-        /// <summary> The CustomHeader. </summary>
+        /// <summary> Gets or sets the customheader. </summary>
         public string CustomHeader { get; set; }
         /// <summary> Query parameter with default. </summary>
         public int? Query { get; set; }
         /// <summary> Path parameter. </summary>
         public string Path { get; }
-        /// <summary> The Body. </summary>
+        /// <summary> Gets the body. </summary>
         public int Body { get; }
     }
 }

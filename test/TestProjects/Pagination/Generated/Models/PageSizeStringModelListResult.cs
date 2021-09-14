@@ -21,17 +21,17 @@ namespace Pagination.Models
         }
 
         /// <summary> Initializes a new instance of PageSizeStringModelListResult. </summary>
-        /// <param name="value"> The Value. </param>
-        /// <param name="nextLink"> The NextLink. </param>
+        /// <param name="value"></param>
+        /// <param name="nextLink"></param>
         internal PageSizeStringModelListResult(IReadOnlyList<PageSizeStringModelData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
-        /// <summary> The Value. </summary>
+        /// <summary> Gets the value. </summary>
         public IReadOnlyList<PageSizeStringModelData> Value { get; }
-        /// <summary> The NextLink. </summary>
+        /// <summary> Gets the nextlink. </summary>
         public string NextLink { get; }
     }
 }

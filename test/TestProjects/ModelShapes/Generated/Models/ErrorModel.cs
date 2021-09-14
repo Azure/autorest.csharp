@@ -16,17 +16,17 @@ namespace ModelShapes.Models
         }
 
         /// <summary> Initializes a new instance of ErrorModel. </summary>
-        /// <param name="code"> The Code. </param>
-        /// <param name="status"> The Status. </param>
+        /// <param name="code"></param>
+        /// <param name="status"></param>
         internal ErrorModel(string code, string status)
         {
             Code = code;
             Status = status;
         }
 
-        /// <summary> The Code. </summary>
+        /// <summary> Gets the code. </summary>
         public string Code { get; }
-        /// <summary> The Status. </summary>
+        /// <summary> Gets the status. </summary>
         public string Status { get; }
     }
 }

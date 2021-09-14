@@ -16,10 +16,10 @@ namespace SupersetInheritance.Models
         }
 
         /// <summary> Initializes a new instance of SupersetModel2. </summary>
-        /// <param name="iD"> The ID. </param>
-        /// <param name="name"> The Name. </param>
-        /// <param name="type"> The Type. </param>
-        /// <param name="new"> The New. </param>
+        /// <param name="iD"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <param name="new"></param>
         internal SupersetModel2(string iD, string name, string type, string @new)
         {
             ID = iD;
@@ -28,13 +28,13 @@ namespace SupersetInheritance.Models
             New = @new;
         }
 
-        /// <summary> The ID. </summary>
+        /// <summary> Gets or sets the id. </summary>
         public string ID { get; set; }
-        /// <summary> The Name. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> The Type. </summary>
+        /// <summary> Gets or sets the type. </summary>
         public string Type { get; set; }
-        /// <summary> The New. </summary>
+        /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
     }
 }

@@ -17,17 +17,17 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> Initializes a new instance of LinkNotFound. </summary>
-        /// <param name="someBaseProp"> The SomeBaseProp. </param>
-        /// <param name="reason"> The Reason. </param>
-        /// <param name="whatNotFound"> The WhatNotFound. </param>
-        /// <param name="whatSubAddress"> The WhatSubAddress. </param>
+        /// <param name="someBaseProp"></param>
+        /// <param name="reason"></param>
+        /// <param name="whatNotFound"></param>
+        /// <param name="whatSubAddress"></param>
         internal LinkNotFound(string someBaseProp, string reason, string whatNotFound, string whatSubAddress) : base(someBaseProp, reason, whatNotFound)
         {
             WhatSubAddress = whatSubAddress;
             WhatNotFound = whatNotFound ?? "InvalidResourceLink";
         }
 
-        /// <summary> The WhatSubAddress. </summary>
+        /// <summary> Gets the whatsubaddress. </summary>
         public string WhatSubAddress { get; }
     }
 }

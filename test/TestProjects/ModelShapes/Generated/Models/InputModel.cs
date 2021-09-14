@@ -16,14 +16,14 @@ namespace ModelShapes.Models
     public partial class InputModel
     {
         /// <summary> Initializes a new instance of InputModel. </summary>
-        /// <param name="requiredString"> The RequiredString. </param>
-        /// <param name="requiredInt"> The RequiredInt. </param>
-        /// <param name="requiredStringList"> The RequiredStringList. </param>
-        /// <param name="requiredIntList"> The RequiredIntList. </param>
-        /// <param name="requiredNullableString"> The RequiredNullableString. </param>
-        /// <param name="requiredNullableInt"> The RequiredNullableInt. </param>
-        /// <param name="requiredNullableStringList"> The RequiredNullableStringList. </param>
-        /// <param name="requiredNullableIntList"> The RequiredNullableIntList. </param>
+        /// <param name="requiredString"></param>
+        /// <param name="requiredInt"></param>
+        /// <param name="requiredStringList"></param>
+        /// <param name="requiredIntList"></param>
+        /// <param name="requiredNullableString"></param>
+        /// <param name="requiredNullableInt"></param>
+        /// <param name="requiredNullableStringList"></param>
+        /// <param name="requiredNullableIntList"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredStringList"/>, or <paramref name="requiredIntList"/> is null. </exception>
         public InputModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
         {
@@ -54,37 +54,37 @@ namespace ModelShapes.Models
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
         }
 
-        /// <summary> The RequiredString. </summary>
+        /// <summary> Gets the requiredstring. </summary>
         public string RequiredString { get; }
-        /// <summary> The RequiredInt. </summary>
+        /// <summary> Gets the requiredint. </summary>
         public int RequiredInt { get; }
-        /// <summary> The RequiredStringList. </summary>
+        /// <summary> Gets the requiredstringlist. </summary>
         public IList<string> RequiredStringList { get; }
-        /// <summary> The RequiredIntList. </summary>
+        /// <summary> Gets the requiredintlist. </summary>
         public IList<int> RequiredIntList { get; }
-        /// <summary> The NonRequiredString. </summary>
+        /// <summary> Gets or sets the nonrequiredstring. </summary>
         public string NonRequiredString { get; set; }
-        /// <summary> The NonRequiredInt. </summary>
+        /// <summary> Gets or sets the nonrequiredint. </summary>
         public int? NonRequiredInt { get; set; }
-        /// <summary> The NonRequiredStringList. </summary>
+        /// <summary> Gets the nonrequiredstringlist. </summary>
         public IList<string> NonRequiredStringList { get; }
-        /// <summary> The NonRequiredIntList. </summary>
+        /// <summary> Gets the nonrequiredintlist. </summary>
         public IList<int> NonRequiredIntList { get; }
-        /// <summary> The RequiredNullableString. </summary>
+        /// <summary> Gets the requirednullablestring. </summary>
         public string RequiredNullableString { get; }
-        /// <summary> The RequiredNullableInt. </summary>
+        /// <summary> Gets the requirednullableint. </summary>
         public int? RequiredNullableInt { get; }
-        /// <summary> The RequiredNullableStringList. </summary>
+        /// <summary> Gets or sets the requirednullablestringlist. </summary>
         public IList<string> RequiredNullableStringList { get; set; }
-        /// <summary> The RequiredNullableIntList. </summary>
+        /// <summary> Gets or sets the requirednullableintlist. </summary>
         public IList<int> RequiredNullableIntList { get; set; }
-        /// <summary> The NonRequiredNullableString. </summary>
+        /// <summary> Gets or sets the nonrequirednullablestring. </summary>
         public string NonRequiredNullableString { get; set; }
-        /// <summary> The NonRequiredNullableInt. </summary>
+        /// <summary> Gets or sets the nonrequirednullableint. </summary>
         public int? NonRequiredNullableInt { get; set; }
-        /// <summary> The NonRequiredNullableStringList. </summary>
+        /// <summary> Gets or sets the nonrequirednullablestringlist. </summary>
         public IList<string> NonRequiredNullableStringList { get; set; }
-        /// <summary> The NonRequiredNullableIntList. </summary>
+        /// <summary> Gets or sets the nonrequirednullableintlist. </summary>
         public IList<int> NonRequiredNullableIntList { get; set; }
     }
 }

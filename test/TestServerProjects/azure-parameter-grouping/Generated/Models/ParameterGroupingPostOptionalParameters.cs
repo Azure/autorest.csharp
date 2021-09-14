@@ -15,7 +15,7 @@ namespace azure_parameter_grouping.Models
         {
         }
 
-        /// <summary> The CustomHeader. </summary>
+        /// <summary> Gets or sets the customheader. </summary>
         public string CustomHeader { get; set; }
         /// <summary> Query parameter with default. </summary>
         public int? Query { get; set; }

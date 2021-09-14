@@ -16,17 +16,17 @@ namespace body_array.Models
         }
 
         /// <summary> Initializes a new instance of Product. </summary>
-        /// <param name="integer"> The Integer. </param>
-        /// <param name="string"> The String. </param>
+        /// <param name="integer"></param>
+        /// <param name="string"></param>
         internal Product(int? integer, string @string)
         {
             Integer = integer;
             String = @string;
         }
 
-        /// <summary> The Integer. </summary>
+        /// <summary> Gets or sets the integer. </summary>
         public int? Integer { get; set; }
-        /// <summary> The String. </summary>
+        /// <summary> Gets or sets the string. </summary>
         public string String { get; set; }
     }
 }

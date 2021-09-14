@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var property in schema.Properties)
                     {
-                        writer.WriteXmlDocumentationSummary($"{property.Description}");
+                        writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
 
                         CSharpType propertyType = property.Declaration.Type;
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
@@ -81,6 +81,21 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line();
                     }
                 }
+            }
+        }
+        private FormattableString CreatePropertyDescription(ObjectTypeProperty property)
+        {
+            if (!string.IsNullOrWhiteSpace(property.Description))
+            {
+                return $"{property.Description}";
+            }
+            if (property.IsReadOnly)
+            {
+                return $"Gets the {property.Declaration.Name.ToLower()}";
+            }
+            else
+            {
+                return $"Gets or sets the {property.Declaration.Name.ToLower()}";
             }
         }
 

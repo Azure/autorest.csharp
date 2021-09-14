@@ -14,20 +14,20 @@ namespace body_complex.Models
     public partial class Cookiecuttershark : Shark
     {
         /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
-        /// <param name="length"> The Length. </param>
-        /// <param name="birthday"> The Birthday. </param>
+        /// <param name="length"></param>
+        /// <param name="birthday"></param>
         public Cookiecuttershark(float length, DateTimeOffset birthday) : base(length, birthday)
         {
             Fishtype = "cookiecuttershark";
         }
 
         /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
-        /// <param name="fishtype"> The Fishtype. </param>
-        /// <param name="species"> The Species. </param>
-        /// <param name="length"> The Length. </param>
-        /// <param name="siblings"> The Siblings. </param>
-        /// <param name="age"> The Age. </param>
-        /// <param name="birthday"> The Birthday. </param>
+        /// <param name="fishtype"></param>
+        /// <param name="species"></param>
+        /// <param name="length"></param>
+        /// <param name="siblings"></param>
+        /// <param name="age"></param>
+        /// <param name="birthday"></param>
         internal Cookiecuttershark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday) : base(fishtype, species, length, siblings, age, birthday)
         {
             Fishtype = fishtype ?? "cookiecuttershark";

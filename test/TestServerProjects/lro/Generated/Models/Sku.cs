@@ -16,17 +16,17 @@ namespace lro.Models
         }
 
         /// <summary> Initializes a new instance of Sku. </summary>
-        /// <param name="name"> The Name. </param>
-        /// <param name="id"> The Id. </param>
+        /// <param name="name"></param>
+        /// <param name="id"></param>
         internal Sku(string name, string id)
         {
             Name = name;
             Id = id;
         }
 
-        /// <summary> The Name. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> The Id. </summary>
+        /// <summary> Gets or sets the id. </summary>
         public string Id { get; set; }
     }
 }

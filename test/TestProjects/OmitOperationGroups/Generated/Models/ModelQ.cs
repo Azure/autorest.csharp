@@ -16,13 +16,13 @@ namespace OmitOperationGroups.Models
         }
 
         /// <summary> Initializes a new instance of ModelQ. </summary>
-        /// <param name="m"> The M. </param>
+        /// <param name="m"></param>
         internal ModelQ(string m)
         {
             M = m;
         }
 
-        /// <summary> The M. </summary>
+        /// <summary> Gets or sets the m. </summary>
         public string M { get; set; }
     }
 }

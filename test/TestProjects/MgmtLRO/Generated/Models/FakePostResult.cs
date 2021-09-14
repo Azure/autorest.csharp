@@ -16,13 +16,13 @@ namespace MgmtLRO.Models
         }
 
         /// <summary> Initializes a new instance of FakePostResult. </summary>
-        /// <param name="properties"> The Properties. </param>
+        /// <param name="properties"></param>
         internal FakePostResult(FakePostResultProperties properties)
         {
             Properties = properties;
         }
 
-        /// <summary> The Properties. </summary>
+        /// <summary> Gets the properties. </summary>
         public FakePostResultProperties Properties { get; }
     }
 }

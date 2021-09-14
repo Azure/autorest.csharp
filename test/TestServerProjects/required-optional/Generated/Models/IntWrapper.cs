@@ -11,13 +11,13 @@ namespace required_optional.Models
     public partial class IntWrapper
     {
         /// <summary> Initializes a new instance of IntWrapper. </summary>
-        /// <param name="value"> The Value. </param>
+        /// <param name="value"></param>
         public IntWrapper(int value)
         {
             Value = value;
         }
 
-        /// <summary> The Value. </summary>
+        /// <summary> Gets the value. </summary>
         public int Value { get; }
     }
 }

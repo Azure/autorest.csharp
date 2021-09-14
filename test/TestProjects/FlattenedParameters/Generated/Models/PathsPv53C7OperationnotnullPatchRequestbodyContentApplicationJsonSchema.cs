@@ -19,7 +19,7 @@ namespace FlattenedParameters.Models
             Items = new ChangeTrackingList<string>();
         }
 
-        /// <summary> The Items. </summary>
+        /// <summary> Gets the items. </summary>
         public IList<string> Items { get; }
     }
 }

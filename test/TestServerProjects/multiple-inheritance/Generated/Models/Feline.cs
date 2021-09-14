@@ -16,17 +16,17 @@ namespace multiple_inheritance.Models
         }
 
         /// <summary> Initializes a new instance of Feline. </summary>
-        /// <param name="meows"> The Meows. </param>
-        /// <param name="hisses"> The Hisses. </param>
+        /// <param name="meows"></param>
+        /// <param name="hisses"></param>
         internal Feline(bool? meows, bool? hisses)
         {
             Meows = meows;
             Hisses = hisses;
         }
 
-        /// <summary> The Meows. </summary>
+        /// <summary> Gets or sets the meows. </summary>
         public bool? Meows { get; set; }
-        /// <summary> The Hisses. </summary>
+        /// <summary> Gets or sets the hisses. </summary>
         public bool? Hisses { get; set; }
     }
 }

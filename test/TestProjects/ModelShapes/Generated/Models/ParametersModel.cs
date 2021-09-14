@@ -15,9 +15,9 @@ namespace ModelShapes.Models
         {
         }
 
-        /// <summary> The Code. </summary>
+        /// <summary> Gets or sets the code. </summary>
         public string Code { get; set; }
-        /// <summary> The Status. </summary>
+        /// <summary> Gets or sets the status. </summary>
         public string Status { get; set; }
     }
 }

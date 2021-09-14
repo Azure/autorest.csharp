@@ -16,7 +16,7 @@ namespace constants.Models
             Parameter = "value1";
         }
 
-        /// <summary> The Parameter. </summary>
+        /// <summary> Gets the parameter. </summary>
         public string Parameter { get; }
     }
 }

@@ -15,7 +15,7 @@ namespace required_optional.Models
         {
         }
 
-        /// <summary> The Value. </summary>
+        /// <summary> Gets or sets the value. </summary>
         public Product Value { get; set; }
     }
 }

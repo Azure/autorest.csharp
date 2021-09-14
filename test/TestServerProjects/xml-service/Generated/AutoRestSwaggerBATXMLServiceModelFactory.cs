@@ -15,12 +15,12 @@ namespace xml_service.Models
     public static partial class AutoRestSwaggerBATXMLServiceModelFactory
     {
         /// <summary> Initializes a new instance of ListContainersResponse. </summary>
-        /// <param name="serviceEndpoint"> The ServiceEndpoint. </param>
-        /// <param name="prefix"> The Prefix. </param>
-        /// <param name="marker"> The Marker. </param>
-        /// <param name="maxResults"> The MaxResults. </param>
-        /// <param name="containers"> The Containers. </param>
-        /// <param name="nextMarker"> The NextMarker. </param>
+        /// <param name="serviceEndpoint"></param>
+        /// <param name="prefix"></param>
+        /// <param name="marker"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="containers"></param>
+        /// <param name="nextMarker"></param>
         /// <returns> A new <see cref="Models.ListContainersResponse"/> instance for mocking. </returns>
         public static ListContainersResponse ListContainersResponse(string serviceEndpoint = null, string prefix = null, string marker = null, int maxResults = default, IEnumerable<Container> containers = null, string nextMarker = null)
         {
@@ -30,7 +30,7 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of Container. </summary>
-        /// <param name="name"> The Name. </param>
+        /// <param name="name"></param>
         /// <param name="properties"> Properties of a container. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
         /// <returns> A new <see cref="Models.Container"/> instance for mocking. </returns>
@@ -42,12 +42,12 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ContainerProperties. </summary>
-        /// <param name="lastModified"> The LastModified. </param>
-        /// <param name="etag"> The Etag. </param>
-        /// <param name="leaseStatus"> The LeaseStatus. </param>
-        /// <param name="leaseState"> The LeaseState. </param>
-        /// <param name="leaseDuration"> The LeaseDuration. </param>
-        /// <param name="publicAccess"> The PublicAccess. </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
+        /// <param name="leaseStatus"></param>
+        /// <param name="leaseState"></param>
+        /// <param name="leaseDuration"></param>
+        /// <param name="publicAccess"></param>
         /// <returns> A new <see cref="Models.ContainerProperties"/> instance for mocking. </returns>
         public static ContainerProperties ContainerProperties(DateTimeOffset lastModified = default, string etag = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, PublicAccessType? publicAccess = null)
         {
@@ -55,14 +55,14 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
-        /// <param name="serviceEndpoint"> The ServiceEndpoint. </param>
-        /// <param name="containerName"> The ContainerName. </param>
-        /// <param name="prefix"> The Prefix. </param>
-        /// <param name="marker"> The Marker. </param>
-        /// <param name="maxResults"> The MaxResults. </param>
-        /// <param name="delimiter"> The Delimiter. </param>
-        /// <param name="blobs"> The Blobs. </param>
-        /// <param name="nextMarker"> The NextMarker. </param>
+        /// <param name="serviceEndpoint"></param>
+        /// <param name="containerName"></param>
+        /// <param name="prefix"></param>
+        /// <param name="marker"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="delimiter"></param>
+        /// <param name="blobs"></param>
+        /// <param name="nextMarker"></param>
         /// <returns> A new <see cref="Models.ListBlobsResponse"/> instance for mocking. </returns>
         public static ListBlobsResponse ListBlobsResponse(string serviceEndpoint = null, string containerName = null, string prefix = null, string marker = null, int maxResults = default, string delimiter = null, Blobs blobs = null, string nextMarker = null)
         {
@@ -70,8 +70,8 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of Blobs. </summary>
-        /// <param name="blobPrefix"> The BlobPrefix. </param>
-        /// <param name="blob"> The Blob. </param>
+        /// <param name="blobPrefix"></param>
+        /// <param name="blob"></param>
         /// <returns> A new <see cref="Models.Blobs"/> instance for mocking. </returns>
         public static Blobs Blobs(IEnumerable<BlobPrefix> blobPrefix = null, IEnumerable<Blob> blob = null)
         {
@@ -82,7 +82,7 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of BlobPrefix. </summary>
-        /// <param name="name"> The Name. </param>
+        /// <param name="name"></param>
         /// <returns> A new <see cref="Models.BlobPrefix"/> instance for mocking. </returns>
         public static BlobPrefix BlobPrefix(string name = null)
         {
@@ -90,9 +90,9 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of Blob. </summary>
-        /// <param name="name"> The Name. </param>
-        /// <param name="deleted"> The Deleted. </param>
-        /// <param name="snapshot"> The Snapshot. </param>
+        /// <param name="name"></param>
+        /// <param name="deleted"></param>
+        /// <param name="snapshot"></param>
         /// <param name="properties"> Properties of a blob. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
         /// <returns> A new <see cref="Models.Blob"/> instance for mocking. </returns>
@@ -104,34 +104,34 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of BlobProperties. </summary>
-        /// <param name="lastModified"> The LastModified. </param>
-        /// <param name="etag"> The Etag. </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
         /// <param name="contentLength"> Size in bytes. </param>
-        /// <param name="contentType"> The ContentType. </param>
-        /// <param name="contentEncoding"> The ContentEncoding. </param>
-        /// <param name="contentLanguage"> The ContentLanguage. </param>
-        /// <param name="contentMD5"> The ContentMD5. </param>
-        /// <param name="contentDisposition"> The ContentDisposition. </param>
-        /// <param name="cacheControl"> The CacheControl. </param>
-        /// <param name="blobSequenceNumber"> The BlobSequenceNumber. </param>
-        /// <param name="blobType"> The BlobType. </param>
-        /// <param name="leaseStatus"> The LeaseStatus. </param>
-        /// <param name="leaseState"> The LeaseState. </param>
-        /// <param name="leaseDuration"> The LeaseDuration. </param>
-        /// <param name="copyId"> The CopyId. </param>
-        /// <param name="copyStatus"> The CopyStatus. </param>
-        /// <param name="copySource"> The CopySource. </param>
-        /// <param name="copyProgress"> The CopyProgress. </param>
-        /// <param name="copyCompletionTime"> The CopyCompletionTime. </param>
-        /// <param name="copyStatusDescription"> The CopyStatusDescription. </param>
-        /// <param name="serverEncrypted"> The ServerEncrypted. </param>
-        /// <param name="incrementalCopy"> The IncrementalCopy. </param>
-        /// <param name="destinationSnapshot"> The DestinationSnapshot. </param>
-        /// <param name="deletedTime"> The DeletedTime. </param>
-        /// <param name="remainingRetentionDays"> The RemainingRetentionDays. </param>
-        /// <param name="accessTier"> The AccessTier. </param>
-        /// <param name="accessTierInferred"> The AccessTierInferred. </param>
-        /// <param name="archiveStatus"> The ArchiveStatus. </param>
+        /// <param name="contentType"></param>
+        /// <param name="contentEncoding"></param>
+        /// <param name="contentLanguage"></param>
+        /// <param name="contentMD5"></param>
+        /// <param name="contentDisposition"></param>
+        /// <param name="cacheControl"></param>
+        /// <param name="blobSequenceNumber"></param>
+        /// <param name="blobType"></param>
+        /// <param name="leaseStatus"></param>
+        /// <param name="leaseState"></param>
+        /// <param name="leaseDuration"></param>
+        /// <param name="copyId"></param>
+        /// <param name="copyStatus"></param>
+        /// <param name="copySource"></param>
+        /// <param name="copyProgress"></param>
+        /// <param name="copyCompletionTime"></param>
+        /// <param name="copyStatusDescription"></param>
+        /// <param name="serverEncrypted"></param>
+        /// <param name="incrementalCopy"></param>
+        /// <param name="destinationSnapshot"></param>
+        /// <param name="deletedTime"></param>
+        /// <param name="remainingRetentionDays"></param>
+        /// <param name="accessTier"></param>
+        /// <param name="accessTierInferred"></param>
+        /// <param name="archiveStatus"></param>
         /// <returns> A new <see cref="Models.BlobProperties"/> instance for mocking. </returns>
         public static BlobProperties BlobProperties(DateTimeOffset lastModified = default, string etag = null, long? contentLength = null, string contentType = null, string contentEncoding = null, string contentLanguage = null, string contentMD5 = null, string contentDisposition = null, string cacheControl = null, int? blobSequenceNumber = null, BlobType? blobType = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, string copyId = null, CopyStatusType? copyStatus = null, string copySource = null, string copyProgress = null, DateTimeOffset? copyCompletionTime = null, string copyStatusDescription = null, bool? serverEncrypted = null, bool? incrementalCopy = null, string destinationSnapshot = null, DateTimeOffset? deletedTime = null, int? remainingRetentionDays = null, AccessTier? accessTier = null, bool? accessTierInferred = null, ArchiveStatus? archiveStatus = null)
         {
@@ -139,7 +139,7 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of JsonOutput. </summary>
-        /// <param name="id"> The Id. </param>
+        /// <param name="id"></param>
         /// <returns> A new <see cref="Models.JsonOutput"/> instance for mocking. </returns>
         public static JsonOutput JsonOutput(int? id = null)
         {

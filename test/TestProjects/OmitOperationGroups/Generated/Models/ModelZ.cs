@@ -16,17 +16,17 @@ namespace OmitOperationGroups.Models
         }
 
         /// <summary> Initializes a new instance of ModelZ. </summary>
-        /// <param name="h"> The H. </param>
-        /// <param name="i"> The I. </param>
+        /// <param name="h"></param>
+        /// <param name="i"></param>
         internal ModelZ(string h, string i)
         {
             H = h;
             I = i;
         }
 
-        /// <summary> The H. </summary>
+        /// <summary> Gets or sets the h. </summary>
         public string H { get; set; }
-        /// <summary> The I. </summary>
+        /// <summary> Gets the i. </summary>
         public string I { get; }
     }
 }

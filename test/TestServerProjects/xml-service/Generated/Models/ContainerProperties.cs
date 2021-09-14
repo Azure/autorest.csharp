@@ -13,8 +13,8 @@ namespace xml_service.Models
     public partial class ContainerProperties
     {
         /// <summary> Initializes a new instance of ContainerProperties. </summary>
-        /// <param name="lastModified"> The LastModified. </param>
-        /// <param name="etag"> The Etag. </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="etag"/> is null. </exception>
         internal ContainerProperties(DateTimeOffset lastModified, string etag)
         {
@@ -28,12 +28,12 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ContainerProperties. </summary>
-        /// <param name="lastModified"> The LastModified. </param>
-        /// <param name="etag"> The Etag. </param>
-        /// <param name="leaseStatus"> The LeaseStatus. </param>
-        /// <param name="leaseState"> The LeaseState. </param>
-        /// <param name="leaseDuration"> The LeaseDuration. </param>
-        /// <param name="publicAccess"> The PublicAccess. </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
+        /// <param name="leaseStatus"></param>
+        /// <param name="leaseState"></param>
+        /// <param name="leaseDuration"></param>
+        /// <param name="publicAccess"></param>
         internal ContainerProperties(DateTimeOffset lastModified, string etag, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, PublicAccessType? publicAccess)
         {
             LastModified = lastModified;
@@ -44,17 +44,17 @@ namespace xml_service.Models
             PublicAccess = publicAccess;
         }
 
-        /// <summary> The LastModified. </summary>
+        /// <summary> Gets the lastmodified. </summary>
         public DateTimeOffset LastModified { get; }
-        /// <summary> The Etag. </summary>
+        /// <summary> Gets the etag. </summary>
         public string Etag { get; }
-        /// <summary> The LeaseStatus. </summary>
+        /// <summary> Gets the leasestatus. </summary>
         public LeaseStatusType? LeaseStatus { get; }
-        /// <summary> The LeaseState. </summary>
+        /// <summary> Gets the leasestate. </summary>
         public LeaseStateType? LeaseState { get; }
-        /// <summary> The LeaseDuration. </summary>
+        /// <summary> Gets the leaseduration. </summary>
         public LeaseDurationType? LeaseDuration { get; }
-        /// <summary> The PublicAccess. </summary>
+        /// <summary> Gets the publicaccess. </summary>
         public PublicAccessType? PublicAccess { get; }
     }
 }

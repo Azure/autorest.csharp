@@ -16,13 +16,13 @@ namespace TypeSchemaMapping.Models
         }
 
         /// <summary> Initializes a new instance of InternalModel. </summary>
-        /// <param name="stringProperty"> The StringProperty. </param>
+        /// <param name="stringProperty"></param>
         internal InternalModel(string stringProperty)
         {
             StringProperty = stringProperty;
         }
 
-        /// <summary> The StringProperty. </summary>
+        /// <summary> Gets the stringproperty. </summary>
         public string StringProperty { get; }
     }
 }

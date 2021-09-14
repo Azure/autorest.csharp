@@ -15,10 +15,10 @@ namespace xml_service.Models
     public partial class ListContainersResponse
     {
         /// <summary> Initializes a new instance of ListContainersResponse. </summary>
-        /// <param name="serviceEndpoint"> The ServiceEndpoint. </param>
-        /// <param name="prefix"> The Prefix. </param>
-        /// <param name="maxResults"> The MaxResults. </param>
-        /// <param name="nextMarker"> The NextMarker. </param>
+        /// <param name="serviceEndpoint"></param>
+        /// <param name="prefix"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="nextMarker"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="serviceEndpoint"/>, <paramref name="prefix"/>, or <paramref name="nextMarker"/> is null. </exception>
         internal ListContainersResponse(string serviceEndpoint, string prefix, int maxResults, string nextMarker)
         {
@@ -43,12 +43,12 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ListContainersResponse. </summary>
-        /// <param name="serviceEndpoint"> The ServiceEndpoint. </param>
-        /// <param name="prefix"> The Prefix. </param>
-        /// <param name="marker"> The Marker. </param>
-        /// <param name="maxResults"> The MaxResults. </param>
-        /// <param name="containers"> The Containers. </param>
-        /// <param name="nextMarker"> The NextMarker. </param>
+        /// <param name="serviceEndpoint"></param>
+        /// <param name="prefix"></param>
+        /// <param name="marker"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="containers"></param>
+        /// <param name="nextMarker"></param>
         internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IReadOnlyList<Container> containers, string nextMarker)
         {
             ServiceEndpoint = serviceEndpoint;
@@ -59,17 +59,17 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        /// <summary> The ServiceEndpoint. </summary>
+        /// <summary> Gets the serviceendpoint. </summary>
         public string ServiceEndpoint { get; }
-        /// <summary> The Prefix. </summary>
+        /// <summary> Gets the prefix. </summary>
         public string Prefix { get; }
-        /// <summary> The Marker. </summary>
+        /// <summary> Gets the marker. </summary>
         public string Marker { get; }
-        /// <summary> The MaxResults. </summary>
+        /// <summary> Gets the maxresults. </summary>
         public int MaxResults { get; }
-        /// <summary> The Containers. </summary>
+        /// <summary> Gets the containers. </summary>
         public IReadOnlyList<Container> Containers { get; }
-        /// <summary> The NextMarker. </summary>
+        /// <summary> Gets the nextmarker. </summary>
         public string NextMarker { get; }
     }
 }

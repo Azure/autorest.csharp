@@ -16,9 +16,9 @@ namespace model_flattening.Models
         }
 
         /// <summary> Initializes a new instance of Error. </summary>
-        /// <param name="status"> The Status. </param>
-        /// <param name="message"> The Message. </param>
-        /// <param name="parentError"> The ParentError. </param>
+        /// <param name="status"></param>
+        /// <param name="message"></param>
+        /// <param name="parentError"></param>
         internal Error(int? status, string message, Error parentError)
         {
             Status = status;
@@ -26,11 +26,11 @@ namespace model_flattening.Models
             ParentError = parentError;
         }
 
-        /// <summary> The Status. </summary>
+        /// <summary> Gets the status. </summary>
         public int? Status { get; }
-        /// <summary> The Message. </summary>
+        /// <summary> Gets the message. </summary>
         public string Message { get; }
-        /// <summary> The ParentError. </summary>
+        /// <summary> Gets the parenterror. </summary>
         public Error ParentError { get; }
     }
 }

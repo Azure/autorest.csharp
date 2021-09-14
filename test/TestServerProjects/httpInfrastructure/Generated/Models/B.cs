@@ -16,14 +16,14 @@ namespace httpInfrastructure.Models
         }
 
         /// <summary> Initializes a new instance of B. </summary>
-        /// <param name="statusCode"> The StatusCode. </param>
-        /// <param name="textStatusCode"> The TextStatusCode. </param>
+        /// <param name="statusCode"></param>
+        /// <param name="textStatusCode"></param>
         internal B(string statusCode, string textStatusCode) : base(statusCode)
         {
             TextStatusCode = textStatusCode;
         }
 
-        /// <summary> The TextStatusCode. </summary>
+        /// <summary> Gets the textstatuscode. </summary>
         public string TextStatusCode { get; }
     }
 }

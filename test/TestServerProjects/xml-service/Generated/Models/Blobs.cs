@@ -21,17 +21,17 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of Blobs. </summary>
-        /// <param name="blobPrefix"> The BlobPrefix. </param>
-        /// <param name="blob"> The Blob. </param>
+        /// <param name="blobPrefix"></param>
+        /// <param name="blob"></param>
         internal Blobs(IReadOnlyList<BlobPrefix> blobPrefix, IReadOnlyList<Blob> blob)
         {
             BlobPrefix = blobPrefix;
             Blob = blob;
         }
 
-        /// <summary> The BlobPrefix. </summary>
+        /// <summary> Gets the blobprefix. </summary>
         public IReadOnlyList<BlobPrefix> BlobPrefix { get; }
-        /// <summary> The Blob. </summary>
+        /// <summary> Gets the blob. </summary>
         public IReadOnlyList<Blob> Blob { get; }
     }
 }

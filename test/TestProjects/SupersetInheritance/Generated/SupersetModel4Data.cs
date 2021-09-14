@@ -27,13 +27,13 @@ namespace SupersetInheritance
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="new"> The New. </param>
+        /// <param name="new"></param>
         internal SupersetModel4Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string @new) : base(id, name, type, tags, location)
         {
             New = @new;
         }
 
-        /// <summary> The New. </summary>
+        /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
     }
 }

@@ -16,13 +16,13 @@ namespace Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of BaseClass. </summary>
-        /// <param name="baseClassProperty"> The BaseClassProperty. </param>
+        /// <param name="baseClassProperty"></param>
         internal BaseClass(string baseClassProperty)
         {
             BaseClassProperty = baseClassProperty;
         }
 
-        /// <summary> The BaseClassProperty. </summary>
+        /// <summary> Gets or sets the baseclassproperty. </summary>
         public string BaseClassProperty { get; set; }
     }
 }

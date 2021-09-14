@@ -16,17 +16,17 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of Pet. </summary>
-        /// <param name="id"> The Id. </param>
-        /// <param name="name"> The Name. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
         internal Pet(int? id, string name)
         {
             Id = id;
             Name = name;
         }
 
-        /// <summary> The Id. </summary>
+        /// <summary> Gets or sets the id. </summary>
         public int? Id { get; set; }
-        /// <summary> The Name. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
     }
 }

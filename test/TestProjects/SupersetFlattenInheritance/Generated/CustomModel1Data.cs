@@ -16,13 +16,13 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of CustomModel1Data. </summary>
-        /// <param name="foo"> The Foo. </param>
+        /// <param name="foo"></param>
         internal CustomModel1Data(string foo)
         {
             Foo = foo;
         }
 
-        /// <summary> The Foo. </summary>
+        /// <summary> Gets or sets the foo. </summary>
         public string Foo { get; set; }
     }
 }

@@ -16,17 +16,17 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of BooleanWrapper. </summary>
-        /// <param name="fieldTrue"> The FieldTrue. </param>
-        /// <param name="fieldFalse"> The FieldFalse. </param>
+        /// <param name="fieldTrue"></param>
+        /// <param name="fieldFalse"></param>
         internal BooleanWrapper(bool? fieldTrue, bool? fieldFalse)
         {
             FieldTrue = fieldTrue;
             FieldFalse = fieldFalse;
         }
 
-        /// <summary> The FieldTrue. </summary>
+        /// <summary> Gets or sets the fieldtrue. </summary>
         public bool? FieldTrue { get; set; }
-        /// <summary> The FieldFalse. </summary>
+        /// <summary> Gets or sets the fieldfalse. </summary>
         public bool? FieldFalse { get; set; }
     }
 }

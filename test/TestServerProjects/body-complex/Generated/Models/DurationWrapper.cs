@@ -18,13 +18,13 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of DurationWrapper. </summary>
-        /// <param name="field"> The Field. </param>
+        /// <param name="field"></param>
         internal DurationWrapper(TimeSpan? field)
         {
             Field = field;
         }
 
-        /// <summary> The Field. </summary>
+        /// <summary> Gets or sets the field. </summary>
         public TimeSpan? Field { get; set; }
     }
 }

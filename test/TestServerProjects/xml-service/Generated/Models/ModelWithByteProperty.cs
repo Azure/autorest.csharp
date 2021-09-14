@@ -18,13 +18,13 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ModelWithByteProperty. </summary>
-        /// <param name="bytes"> The Bytes. </param>
+        /// <param name="bytes"></param>
         internal ModelWithByteProperty(byte[] bytes)
         {
             Bytes = bytes;
         }
 
-        /// <summary> The Bytes. </summary>
+        /// <summary> Gets or sets the bytes. </summary>
         public byte[] Bytes { get; set; }
     }
 }

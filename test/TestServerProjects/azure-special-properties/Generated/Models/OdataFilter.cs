@@ -15,9 +15,9 @@ namespace azure_special_properties.Models
         {
         }
 
-        /// <summary> The Id. </summary>
+        /// <summary> Gets the id. </summary>
         public int? Id { get; }
-        /// <summary> The Name. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
     }
 }

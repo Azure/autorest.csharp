@@ -13,8 +13,8 @@ namespace xml_service.Models
     public partial class BlobProperties
     {
         /// <summary> Initializes a new instance of BlobProperties. </summary>
-        /// <param name="lastModified"> The LastModified. </param>
-        /// <param name="etag"> The Etag. </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="etag"/> is null. </exception>
         internal BlobProperties(DateTimeOffset lastModified, string etag)
         {
@@ -28,34 +28,34 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of BlobProperties. </summary>
-        /// <param name="lastModified"> The LastModified. </param>
-        /// <param name="etag"> The Etag. </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
         /// <param name="contentLength"> Size in bytes. </param>
-        /// <param name="contentType"> The ContentType. </param>
-        /// <param name="contentEncoding"> The ContentEncoding. </param>
-        /// <param name="contentLanguage"> The ContentLanguage. </param>
-        /// <param name="contentMD5"> The ContentMD5. </param>
-        /// <param name="contentDisposition"> The ContentDisposition. </param>
-        /// <param name="cacheControl"> The CacheControl. </param>
-        /// <param name="blobSequenceNumber"> The BlobSequenceNumber. </param>
-        /// <param name="blobType"> The BlobType. </param>
-        /// <param name="leaseStatus"> The LeaseStatus. </param>
-        /// <param name="leaseState"> The LeaseState. </param>
-        /// <param name="leaseDuration"> The LeaseDuration. </param>
-        /// <param name="copyId"> The CopyId. </param>
-        /// <param name="copyStatus"> The CopyStatus. </param>
-        /// <param name="copySource"> The CopySource. </param>
-        /// <param name="copyProgress"> The CopyProgress. </param>
-        /// <param name="copyCompletionTime"> The CopyCompletionTime. </param>
-        /// <param name="copyStatusDescription"> The CopyStatusDescription. </param>
-        /// <param name="serverEncrypted"> The ServerEncrypted. </param>
-        /// <param name="incrementalCopy"> The IncrementalCopy. </param>
-        /// <param name="destinationSnapshot"> The DestinationSnapshot. </param>
-        /// <param name="deletedTime"> The DeletedTime. </param>
-        /// <param name="remainingRetentionDays"> The RemainingRetentionDays. </param>
-        /// <param name="accessTier"> The AccessTier. </param>
-        /// <param name="accessTierInferred"> The AccessTierInferred. </param>
-        /// <param name="archiveStatus"> The ArchiveStatus. </param>
+        /// <param name="contentType"></param>
+        /// <param name="contentEncoding"></param>
+        /// <param name="contentLanguage"></param>
+        /// <param name="contentMD5"></param>
+        /// <param name="contentDisposition"></param>
+        /// <param name="cacheControl"></param>
+        /// <param name="blobSequenceNumber"></param>
+        /// <param name="blobType"></param>
+        /// <param name="leaseStatus"></param>
+        /// <param name="leaseState"></param>
+        /// <param name="leaseDuration"></param>
+        /// <param name="copyId"></param>
+        /// <param name="copyStatus"></param>
+        /// <param name="copySource"></param>
+        /// <param name="copyProgress"></param>
+        /// <param name="copyCompletionTime"></param>
+        /// <param name="copyStatusDescription"></param>
+        /// <param name="serverEncrypted"></param>
+        /// <param name="incrementalCopy"></param>
+        /// <param name="destinationSnapshot"></param>
+        /// <param name="deletedTime"></param>
+        /// <param name="remainingRetentionDays"></param>
+        /// <param name="accessTier"></param>
+        /// <param name="accessTierInferred"></param>
+        /// <param name="archiveStatus"></param>
         internal BlobProperties(DateTimeOffset lastModified, string etag, long? contentLength, string contentType, string contentEncoding, string contentLanguage, string contentMD5, string contentDisposition, string cacheControl, int? blobSequenceNumber, BlobType? blobType, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, string copyId, CopyStatusType? copyStatus, string copySource, string copyProgress, DateTimeOffset? copyCompletionTime, string copyStatusDescription, bool? serverEncrypted, bool? incrementalCopy, string destinationSnapshot, DateTimeOffset? deletedTime, int? remainingRetentionDays, AccessTier? accessTier, bool? accessTierInferred, ArchiveStatus? archiveStatus)
         {
             LastModified = lastModified;
@@ -88,61 +88,61 @@ namespace xml_service.Models
             ArchiveStatus = archiveStatus;
         }
 
-        /// <summary> The LastModified. </summary>
+        /// <summary> Gets the lastmodified. </summary>
         public DateTimeOffset LastModified { get; }
-        /// <summary> The Etag. </summary>
+        /// <summary> Gets the etag. </summary>
         public string Etag { get; }
         /// <summary> Size in bytes. </summary>
         public long? ContentLength { get; }
-        /// <summary> The ContentType. </summary>
+        /// <summary> Gets the contenttype. </summary>
         public string ContentType { get; }
-        /// <summary> The ContentEncoding. </summary>
+        /// <summary> Gets the contentencoding. </summary>
         public string ContentEncoding { get; }
-        /// <summary> The ContentLanguage. </summary>
+        /// <summary> Gets the contentlanguage. </summary>
         public string ContentLanguage { get; }
-        /// <summary> The ContentMD5. </summary>
+        /// <summary> Gets the contentmd5. </summary>
         public string ContentMD5 { get; }
-        /// <summary> The ContentDisposition. </summary>
+        /// <summary> Gets the contentdisposition. </summary>
         public string ContentDisposition { get; }
-        /// <summary> The CacheControl. </summary>
+        /// <summary> Gets the cachecontrol. </summary>
         public string CacheControl { get; }
-        /// <summary> The BlobSequenceNumber. </summary>
+        /// <summary> Gets the blobsequencenumber. </summary>
         public int? BlobSequenceNumber { get; }
-        /// <summary> The BlobType. </summary>
+        /// <summary> Gets the blobtype. </summary>
         public BlobType? BlobType { get; }
-        /// <summary> The LeaseStatus. </summary>
+        /// <summary> Gets the leasestatus. </summary>
         public LeaseStatusType? LeaseStatus { get; }
-        /// <summary> The LeaseState. </summary>
+        /// <summary> Gets the leasestate. </summary>
         public LeaseStateType? LeaseState { get; }
-        /// <summary> The LeaseDuration. </summary>
+        /// <summary> Gets the leaseduration. </summary>
         public LeaseDurationType? LeaseDuration { get; }
-        /// <summary> The CopyId. </summary>
+        /// <summary> Gets the copyid. </summary>
         public string CopyId { get; }
-        /// <summary> The CopyStatus. </summary>
+        /// <summary> Gets the copystatus. </summary>
         public CopyStatusType? CopyStatus { get; }
-        /// <summary> The CopySource. </summary>
+        /// <summary> Gets the copysource. </summary>
         public string CopySource { get; }
-        /// <summary> The CopyProgress. </summary>
+        /// <summary> Gets the copyprogress. </summary>
         public string CopyProgress { get; }
-        /// <summary> The CopyCompletionTime. </summary>
+        /// <summary> Gets the copycompletiontime. </summary>
         public DateTimeOffset? CopyCompletionTime { get; }
-        /// <summary> The CopyStatusDescription. </summary>
+        /// <summary> Gets the copystatusdescription. </summary>
         public string CopyStatusDescription { get; }
-        /// <summary> The ServerEncrypted. </summary>
+        /// <summary> Gets the serverencrypted. </summary>
         public bool? ServerEncrypted { get; }
-        /// <summary> The IncrementalCopy. </summary>
+        /// <summary> Gets the incrementalcopy. </summary>
         public bool? IncrementalCopy { get; }
-        /// <summary> The DestinationSnapshot. </summary>
+        /// <summary> Gets the destinationsnapshot. </summary>
         public string DestinationSnapshot { get; }
-        /// <summary> The DeletedTime. </summary>
+        /// <summary> Gets the deletedtime. </summary>
         public DateTimeOffset? DeletedTime { get; }
-        /// <summary> The RemainingRetentionDays. </summary>
+        /// <summary> Gets the remainingretentiondays. </summary>
         public int? RemainingRetentionDays { get; }
-        /// <summary> The AccessTier. </summary>
+        /// <summary> Gets the accesstier. </summary>
         public AccessTier? AccessTier { get; }
-        /// <summary> The AccessTierInferred. </summary>
+        /// <summary> Gets the accesstierinferred. </summary>
         public bool? AccessTierInferred { get; }
-        /// <summary> The ArchiveStatus. </summary>
+        /// <summary> Gets the archivestatus. </summary>
         public ArchiveStatus? ArchiveStatus { get; }
     }
 }

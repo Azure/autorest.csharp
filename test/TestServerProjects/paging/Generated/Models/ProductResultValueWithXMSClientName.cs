@@ -20,17 +20,17 @@ namespace paging.Models
         }
 
         /// <summary> Initializes a new instance of ProductResultValueWithXMSClientName. </summary>
-        /// <param name="indexes"> The Indexes. </param>
-        /// <param name="nextLink"> The NextLink. </param>
+        /// <param name="indexes"></param>
+        /// <param name="nextLink"></param>
         internal ProductResultValueWithXMSClientName(IReadOnlyList<Product> indexes, string nextLink)
         {
             Indexes = indexes;
             NextLink = nextLink;
         }
 
-        /// <summary> The Indexes. </summary>
+        /// <summary> Gets the indexes. </summary>
         public IReadOnlyList<Product> Indexes { get; }
-        /// <summary> The NextLink. </summary>
+        /// <summary> Gets the nextlink. </summary>
         public string NextLink { get; }
     }
 }

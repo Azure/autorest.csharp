@@ -18,17 +18,17 @@ namespace OmitOperationGroups
         }
 
         /// <summary> Initializes a new instance of Model4Data. </summary>
-        /// <param name="j"> The J. </param>
-        /// <param name="modelz"> The Modelz. </param>
+        /// <param name="j"></param>
+        /// <param name="modelz"></param>
         internal Model4Data(string j, ModelZ modelz)
         {
             J = j;
             Modelz = modelz;
         }
 
-        /// <summary> The J. </summary>
+        /// <summary> Gets the j. </summary>
         public string J { get; }
-        /// <summary> The Modelz. </summary>
+        /// <summary> Gets the modelz. </summary>
         public ModelZ Modelz { get; }
     }
 }

@@ -16,13 +16,13 @@ namespace custom_baseUrl_paging.Models
         }
 
         /// <summary> Initializes a new instance of Product. </summary>
-        /// <param name="properties"> The Properties. </param>
+        /// <param name="properties"></param>
         internal Product(ProductProperties properties)
         {
             Properties = properties;
         }
 
-        /// <summary> The Properties. </summary>
+        /// <summary> Gets the properties. </summary>
         public ProductProperties Properties { get; }
     }
 }

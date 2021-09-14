@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of ClassicSimilarity. </summary>
-        /// <param name="odataType"> The OdataType. </param>
+        /// <param name="odataType"></param>
         internal ClassicSimilarity(string odataType) : base(odataType)
         {
             OdataType = odataType ?? "#Microsoft.Azure.Search.ClassicSimilarity";

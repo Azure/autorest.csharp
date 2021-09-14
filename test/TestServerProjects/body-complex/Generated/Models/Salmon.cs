@@ -13,19 +13,19 @@ namespace body_complex.Models
     public partial class Salmon : Fish
     {
         /// <summary> Initializes a new instance of Salmon. </summary>
-        /// <param name="length"> The Length. </param>
+        /// <param name="length"></param>
         public Salmon(float length) : base(length)
         {
             Fishtype = "salmon";
         }
 
         /// <summary> Initializes a new instance of Salmon. </summary>
-        /// <param name="fishtype"> The Fishtype. </param>
-        /// <param name="species"> The Species. </param>
-        /// <param name="length"> The Length. </param>
-        /// <param name="siblings"> The Siblings. </param>
-        /// <param name="location"> The Location. </param>
-        /// <param name="iswild"> The Iswild. </param>
+        /// <param name="fishtype"></param>
+        /// <param name="species"></param>
+        /// <param name="length"></param>
+        /// <param name="siblings"></param>
+        /// <param name="location"></param>
+        /// <param name="iswild"></param>
         internal Salmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild) : base(fishtype, species, length, siblings)
         {
             Location = location;
@@ -33,9 +33,9 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "salmon";
         }
 
-        /// <summary> The Location. </summary>
+        /// <summary> Gets or sets the location. </summary>
         public string Location { get; set; }
-        /// <summary> The Iswild. </summary>
+        /// <summary> Gets or sets the iswild. </summary>
         public bool? Iswild { get; set; }
     }
 }

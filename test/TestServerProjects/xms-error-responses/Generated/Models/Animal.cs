@@ -16,13 +16,13 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> Initializes a new instance of Animal. </summary>
-        /// <param name="aniType"> The AniType. </param>
+        /// <param name="aniType"></param>
         internal Animal(string aniType)
         {
             AniType = aniType;
         }
 
-        /// <summary> The AniType. </summary>
+        /// <summary> Gets the anitype. </summary>
         public string AniType { get; }
     }
 }

@@ -15,7 +15,7 @@ namespace required_optional.Models
     public partial class ArrayWrapper
     {
         /// <summary> Initializes a new instance of ArrayWrapper. </summary>
-        /// <param name="value"> The Value. </param>
+        /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ArrayWrapper(IEnumerable<string> value)
         {
@@ -27,7 +27,7 @@ namespace required_optional.Models
             Value = value.ToList();
         }
 
-        /// <summary> The Value. </summary>
+        /// <summary> Gets the value. </summary>
         public IList<string> Value { get; }
     }
 }

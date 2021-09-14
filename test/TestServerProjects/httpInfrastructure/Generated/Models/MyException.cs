@@ -16,13 +16,13 @@ namespace httpInfrastructure.Models
         }
 
         /// <summary> Initializes a new instance of MyException. </summary>
-        /// <param name="statusCode"> The StatusCode. </param>
+        /// <param name="statusCode"></param>
         internal MyException(string statusCode)
         {
             StatusCode = statusCode;
         }
 
-        /// <summary> The StatusCode. </summary>
+        /// <summary> Gets the statuscode. </summary>
         public string StatusCode { get; }
     }
 }

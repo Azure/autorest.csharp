@@ -13,7 +13,7 @@ namespace Azure.AI.FormRecognizer.Models
     internal partial class ErrorResponse
     {
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
-        /// <param name="error"> The Error. </param>
+        /// <param name="error"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         internal ErrorResponse(ErrorInformation error)
         {
@@ -25,7 +25,7 @@ namespace Azure.AI.FormRecognizer.Models
             Error = error;
         }
 
-        /// <summary> The Error. </summary>
+        /// <summary> Gets the error. </summary>
         public ErrorInformation Error { get; }
     }
 }

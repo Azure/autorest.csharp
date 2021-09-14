@@ -11,15 +11,15 @@ namespace required_optional.Models
     public partial class Product
     {
         /// <summary> Initializes a new instance of Product. </summary>
-        /// <param name="id"> The Id. </param>
+        /// <param name="id"></param>
         public Product(int id)
         {
             Id = id;
         }
 
-        /// <summary> The Id. </summary>
+        /// <summary> Gets the id. </summary>
         public int Id { get; }
-        /// <summary> The Name. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
     }
 }

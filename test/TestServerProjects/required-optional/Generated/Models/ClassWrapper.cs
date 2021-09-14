@@ -13,7 +13,7 @@ namespace required_optional.Models
     public partial class ClassWrapper
     {
         /// <summary> Initializes a new instance of ClassWrapper. </summary>
-        /// <param name="value"> The Value. </param>
+        /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ClassWrapper(Product value)
         {
@@ -25,7 +25,7 @@ namespace required_optional.Models
             Value = value;
         }
 
-        /// <summary> The Value. </summary>
+        /// <summary> Gets the value. </summary>
         public Product Value { get; }
     }
 }

@@ -16,9 +16,9 @@ namespace ExactMatchInheritance.Models
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel9. </summary>
-        /// <param name="id"> The Id. </param>
-        /// <param name="name"> The Name. </param>
-        /// <param name="type"> The Type. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         internal ExactMatchModel9(int? id, string name, string type)
         {
             Id = id;
@@ -26,11 +26,11 @@ namespace ExactMatchInheritance.Models
             Type = type;
         }
 
-        /// <summary> The Id. </summary>
+        /// <summary> Gets or sets the id. </summary>
         public int? Id { get; set; }
-        /// <summary> The Name. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> The Type. </summary>
+        /// <summary> Gets or sets the type. </summary>
         public string Type { get; set; }
     }
 }

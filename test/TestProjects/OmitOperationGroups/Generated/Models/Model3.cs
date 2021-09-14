@@ -16,17 +16,17 @@ namespace OmitOperationGroups.Models
         }
 
         /// <summary> Initializes a new instance of Model3. </summary>
-        /// <param name="f"> The F. </param>
-        /// <param name="g"> The G. </param>
+        /// <param name="f"></param>
+        /// <param name="g"></param>
         internal Model3(string f, string g)
         {
             F = f;
             G = g;
         }
 
-        /// <summary> The F. </summary>
+        /// <summary> Gets the f. </summary>
         public string F { get; }
-        /// <summary> The G. </summary>
+        /// <summary> Gets the g. </summary>
         public string G { get; }
     }
 }

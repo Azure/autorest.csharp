@@ -20,19 +20,19 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of Cat. </summary>
-        /// <param name="id"> The Id. </param>
-        /// <param name="name"> The Name. </param>
-        /// <param name="color"> The Color. </param>
-        /// <param name="hates"> The Hates. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="color"></param>
+        /// <param name="hates"></param>
         internal Cat(int? id, string name, string color, IList<Dog> hates) : base(id, name)
         {
             Color = color;
             Hates = hates;
         }
 
-        /// <summary> The Color. </summary>
+        /// <summary> Gets or sets the color. </summary>
         public string Color { get; set; }
-        /// <summary> The Hates. </summary>
+        /// <summary> Gets the hates. </summary>
         public IList<Dog> Hates { get; }
     }
 }

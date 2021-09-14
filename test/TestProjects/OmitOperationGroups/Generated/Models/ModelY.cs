@@ -16,13 +16,13 @@ namespace OmitOperationGroups.Models
         }
 
         /// <summary> Initializes a new instance of ModelY. </summary>
-        /// <param name="e"> The E. </param>
+        /// <param name="e"></param>
         internal ModelY(string e)
         {
             E = e;
         }
 
-        /// <summary> The E. </summary>
+        /// <summary> Gets or sets the e. </summary>
         public string E { get; set; }
     }
 }

@@ -16,17 +16,17 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of ReadonlyObj. </summary>
-        /// <param name="id"> The Id. </param>
-        /// <param name="size"> The Size. </param>
+        /// <param name="id"></param>
+        /// <param name="size"></param>
         internal ReadonlyObj(string id, int? size)
         {
             Id = id;
             Size = size;
         }
 
-        /// <summary> The Id. </summary>
+        /// <summary> Gets the id. </summary>
         public string Id { get; }
-        /// <summary> The Size. </summary>
+        /// <summary> Gets or sets the size. </summary>
         public int? Size { get; set; }
     }
 }

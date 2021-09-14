@@ -16,18 +16,18 @@ namespace OmitOperationGroups.Models
         }
 
         /// <summary> Initializes a new instance of ModelX. </summary>
-        /// <param name="e"> The E. </param>
-        /// <param name="c"> The C. </param>
-        /// <param name="d"> The D. </param>
+        /// <param name="e"></param>
+        /// <param name="c"></param>
+        /// <param name="d"></param>
         internal ModelX(string e, string c, string d) : base(e)
         {
             C = c;
             D = d;
         }
 
-        /// <summary> The C. </summary>
+        /// <summary> Gets or sets the c. </summary>
         public string C { get; set; }
-        /// <summary> The D. </summary>
+        /// <summary> Gets or sets the d. </summary>
         public string D { get; set; }
     }
 }
