@@ -56,7 +56,9 @@ namespace body_complex_LowLevel
         /// <code>{
         ///   kind: &quot;Kind1&quot;,
         ///   propB1: string,
-        ///   propBH1: string
+        ///   helper: {
+        ///     propBH1: string
+        ///   }
         /// }
         /// </code>
         /// 
@@ -101,7 +103,9 @@ namespace body_complex_LowLevel
         /// <code>{
         ///   kind: &quot;Kind1&quot;,
         ///   propB1: string,
-        ///   propBH1: string
+        ///   helper: {
+        ///     propBH1: string
+        ///   }
         /// }
         /// </code>
         /// 
