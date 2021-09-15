@@ -411,25 +411,22 @@ namespace AutoRest.CSharp.Input
 
     internal partial class TestLayout
     {
-        [YamlMember(Alias = "mockTests")]
-        public System.Collections.Generic.ICollection<TestGroup> MockTests;
+        [YamlMember(Alias = "mockTest")]
+        public MockTestDefinitionModel MockTest;
 
         [YamlMember(Alias = "scenarioTests")]
         public System.Collections.Generic.ICollection<TestDefinitionModel> ScenarioTests;
     }
 
-    internal partial class TestGroup
+    internal partial class MockTestDefinitionModel
     {
-        [YamlMember(Alias = "name")]
-        public string Name;
-
         [YamlMember(Alias = "exampleGroups")]
         public System.Collections.Generic.ICollection<ExampleGroup> ExampleGroups;
     }
 
     internal partial class ExampleGroup
     {
-        [YamlMember(Alias = "name")]
+        [YamlMember(Alias = "operationId")]
         public string Name;
 
         [YamlMember(Alias = "examples")]

@@ -572,7 +572,7 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             {
                 WriteGetContainer();
 
-                var exampleGroup = (from x in context.CodeModel.TestLayout?.MockTests.First().ExampleGroups where x.Name == $"{_resourceContainer.OperationGroup.Key}_{clientMethod.Operation.Language.Default.Name}" select x).FirstOrDefault();
+                var exampleGroup = (from x in context.CodeModel.TestLayout?.MockTest.ExampleGroups where x.Name == $"{_resourceContainer.OperationGroup.Key}_{clientMethod.Operation.Language.Default.Name}" select x).FirstOrDefault();
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
                     // do something with entry.Value or entry.Key
