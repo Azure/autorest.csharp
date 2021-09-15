@@ -60,8 +60,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -72,8 +74,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -131,8 +135,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -143,8 +149,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -217,8 +225,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -229,8 +239,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -287,8 +299,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -299,8 +313,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -372,8 +388,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -430,8 +448,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -707,8 +727,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -765,8 +787,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -838,8 +862,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
@@ -896,8 +922,10 @@ namespace lro_LowLevel
         ///   tags: Dictionary&lt;string, string&gt;,
         ///   location: string,
         ///   name: string,
-        ///   provisioningState: string,
-        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
         /// }
         /// </code>
         /// 
