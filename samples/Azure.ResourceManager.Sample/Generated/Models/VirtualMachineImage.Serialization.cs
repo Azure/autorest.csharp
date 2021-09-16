@@ -9,11 +9,10 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Sample.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineImageData : IUtf8JsonSerializable
+    public partial class VirtualMachineImage : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -76,7 +75,7 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineImageData DeserializeVirtualMachineImageData(JsonElement element)
+        internal static VirtualMachineImage DeserializeVirtualMachineImage(JsonElement element)
         {
             string name = default;
             string location = default;
@@ -198,7 +197,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineImageData(id, name, location, Optional.ToDictionary(tags), plan.Value, osDiskImage.Value, Optional.ToList(dataDiskImages), automaticOSUpgradeProperties.Value, Optional.ToNullable(hyperVGeneration), disallowed.Value);
+            return new VirtualMachineImage(id, name, location, Optional.ToDictionary(tags), plan.Value, osDiskImage.Value, Optional.ToList(dataDiskImages), automaticOSUpgradeProperties.Value, Optional.ToNullable(hyperVGeneration), disallowed.Value);
         }
     }
 }

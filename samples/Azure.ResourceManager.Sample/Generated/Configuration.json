@@ -19,7 +19,7 @@
   },
   "OperationGroupToResource": {
     "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
-    "VirtualMachineImages": "VirtualMachineImage",
+    "VirtualMachineImages": "NonResource",
     "VirtualMachineSizes": "NonResource",
     "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
     "LogAnalytics": "NonResource"

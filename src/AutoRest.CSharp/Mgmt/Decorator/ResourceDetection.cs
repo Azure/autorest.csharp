@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // union all the property on myself and all the properties from my parents
             var allProperties = objSchema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties)
                 .Concat(objSchema.Properties);
-            Property? idProperty = null;//, typeProperty = null, nameProperty = null;
+            Property? idProperty = null, typeProperty = null, nameProperty = null;
 
             foreach (var property in allProperties)
             {
@@ -121,19 +121,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         if (property.Schema.Type == AllSchemaTypes.String)
                             idProperty = property;
                         continue;
-                        // TODO -- should we check for type and name?
-                        //case "type":
-                        //    // we require type is read-only
-                        //    if (property.IsReadOnly)
-                        //        typeProperty = property;
-                        //    continue;
-                        //case "name":
-                        //    nameProperty = property;
-                        //    continue;
+                    case "type":
+                        if (property.Schema.Type == AllSchemaTypes.String)
+                            typeProperty = property;
+                        continue;
+                    case "name":
+                        if (property.Schema.Type == AllSchemaTypes.String)
+                            nameProperty = property;
+                        continue;
                 }
             }
 
-            return idProperty != null;// && typeProperty != null && nameProperty != null;
+            return idProperty != null && typeProperty != null && nameProperty != null;
         }
     }
 }
