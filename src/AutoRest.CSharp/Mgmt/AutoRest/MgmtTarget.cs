@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.Models)
             {
-                if (shouldSkipModeleGeneration(model, context))
+                if (ShouldSkipModeleGeneration(model, context))
                     continue;
 
                 var codeWriter = new CodeWriter();
@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile($"Extensions/ArmClientExtensions.cs", armClientExtensionsCodeWriter.ToString());
         }
 
-        private static bool shouldSkipModeleGeneration(TypeProvider model, BuildContext<MgmtOutputLibrary> context)
+        private static bool ShouldSkipModeleGeneration(TypeProvider model, BuildContext<MgmtOutputLibrary> context)
         {
             // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.
             // Can go way after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
