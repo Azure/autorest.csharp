@@ -15,7 +15,7 @@ namespace constants.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="ModelAsStringRequiredOneValueDefaultOpEnum"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredOneValueDefaultOpEnum"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ModelAsStringRequiredOneValueDefaultOpEnum(string value)
         {

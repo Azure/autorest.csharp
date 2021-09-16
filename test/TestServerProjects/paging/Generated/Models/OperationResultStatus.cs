@@ -15,7 +15,7 @@ namespace paging.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="OperationResultStatus"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationResultStatus"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public OperationResultStatus(string value)
         {

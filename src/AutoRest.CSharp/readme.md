@@ -7,9 +7,6 @@ use-extension:
   "@autorest/modelerfour": "4.19.3"
 modelerfour:
   always-create-content-type-parameter: true
-  flatten-models: true
-  flatten-payloads: true
-  group-parameters: true
 pipeline:
   csharpgen:
     input: modelerfour/identity
@@ -19,6 +16,13 @@ pipeline:
 output-scope:
   output-artifact: source-file-csharp
 shared-source-folders: $(this-folder)/Generator.Shared;$(this-folder)/Azure.Core.Shared
+```
+
+```yaml !$(low-level-client)
+modelerfour:
+  flatten-models: true
+  flatten-payloads: true
+  group-parameters: true
 ```
 
 ```yaml !$(skip-csproj)

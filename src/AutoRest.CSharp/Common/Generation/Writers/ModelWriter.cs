@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"private readonly {schema.BaseType} _value;");
                     writer.Line();
 
-                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
+                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref=\"{name}\"/>.");
 
                     if (isString)
                     {

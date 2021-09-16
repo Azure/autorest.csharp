@@ -153,6 +153,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public IEnumerable<Resource> ManagementGroupChildResources => GetChildren(ResourceTypeBuilder.ManagementGroups);
+        public IEnumerable<Resource> TenantChildResources => GetChildren(ResourceTypeBuilder.Tenant);
 
         private IEnumerable<Resource> GetChildren(string parent)
         {
@@ -229,13 +230,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
 
-        public OperationGroup? GetOperationGroupForNonResource(string modelName)
-        {
-            OperationGroup? result = null;
-            _nonResourceOperationGroupMapping.TryGetValue(modelName, out result);
-            return result;
-        }
-
         public ResourceContainer? GetResourceContainer(OperationGroup operationGroup)
         {
             if (EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out var result))
@@ -248,18 +242,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return null;
-        }
-
-        internal ResourceData? GetResourceDataFromSchema(string schemaName)
-        {
-            List<OperationGroup>? operationGroups;
-            OperationGroup opGroup;
-            if (_operationGroups.TryGetValue(schemaName, out operationGroups))
-                opGroup = operationGroups.FirstOrDefault();
-            else
-                return null;
-
-            return GetResourceData(opGroup);
         }
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
@@ -293,23 +275,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
         public MgmtRestClient GetRestClient(OperationGroup operationGroup) => EnsureRestClients()[operationGroup];
 
-        public OperationGroup? GetOperationGroupBySchema(Schema schema)
-        {
-            List<OperationGroup>? operationGroups;
-            if (_operationGroups.TryGetValue(schema.Name, out operationGroups))
-                return operationGroups.FirstOrDefault();
-            return null;
-        }
-
         internal LongRunningOperation GetLongRunningOperation(Operation op) => EnsureLongRunningOperations()[op];
 
         internal NonLongRunningOperation GetNonLongRunningOperation(Operation op) => EnsureNonLongRunningOperations()[op];
-
-        internal MgmtObjectType? GetMgmtObjectFromModelName(string name)
-        {
-            TypeProvider? provider = _nameToTypeProvider[name];
-            return provider as MgmtObjectType;
-        }
 
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
@@ -325,17 +293,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _restClients;
-        }
-
-        private OperationGroup? GetRestApiOperationGroup()
-        {
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                if (operationGroup.Key == "Operations")
-                    return operationGroup;
-            }
-
-            return null;
         }
 
         public IEnumerable<MgmtNonResourceOperation> GetNonResourceOperations(string parent)
@@ -426,11 +383,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
                 if (operations != null)
                 {
+                    // we are iterating over the ResourceSchemaMap, the value can only be [ResourceData]s
+                    var resourceData = (ResourceData)entry.Value;
                     foreach (var operation in operations)
                     {
                         if (!_resourceData.ContainsKey(operation))
                         {
-                            var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
                             _resourceData.Add(operation, resourceData);
                         }
                     }
@@ -624,7 +582,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildResourceModel(Schema schema) => schema switch
         {
-            ObjectSchema objectSchema => new ResourceData(objectSchema, GetOperationGroupBySchema(objectSchema)!, _context),
+            ObjectSchema objectSchema => new ResourceData(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
 
