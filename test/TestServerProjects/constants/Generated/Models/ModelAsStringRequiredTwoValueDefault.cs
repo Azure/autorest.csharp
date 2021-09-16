@@ -17,6 +17,7 @@ namespace constants.Models
             Parameter = parameter ?? ModelAsStringRequiredTwoValueDefaultEnum.Value1;
         }
 
+        /// <summary> Gets the parameter. </summary>
         public ModelAsStringRequiredTwoValueDefaultEnum Parameter { get; }
     }
 }

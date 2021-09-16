@@ -97,23 +97,41 @@ namespace ModelShapes.Models
             NonRequiredReadonlyInt = nonRequiredReadonlyInt;
         }
 
+        /// <summary> Gets or sets the required string. </summary>
         public string RequiredString { get; set; }
+        /// <summary> Gets or sets the required int. </summary>
         public int RequiredInt { get; set; }
+        /// <summary> Gets the required string list. </summary>
         public IList<string> RequiredStringList { get; }
+        /// <summary> Gets the required int list. </summary>
         public IList<int> RequiredIntList { get; }
+        /// <summary> Gets or sets the non required string. </summary>
         public string NonRequiredString { get; set; }
+        /// <summary> Gets or sets the non required int. </summary>
         public int? NonRequiredInt { get; set; }
+        /// <summary> Gets the non required string list. </summary>
         public IList<string> NonRequiredStringList { get; }
+        /// <summary> Gets the non required int list. </summary>
         public IList<int> NonRequiredIntList { get; }
+        /// <summary> Gets or sets the required nullable string. </summary>
         public string RequiredNullableString { get; set; }
+        /// <summary> Gets or sets the required nullable int. </summary>
         public int? RequiredNullableInt { get; set; }
+        /// <summary> Gets or sets the required nullable string list. </summary>
         public IList<string> RequiredNullableStringList { get; set; }
+        /// <summary> Gets or sets the required nullable int list. </summary>
         public IList<int> RequiredNullableIntList { get; set; }
+        /// <summary> Gets or sets the non required nullable string. </summary>
         public string NonRequiredNullableString { get; set; }
+        /// <summary> Gets or sets the non required nullable int. </summary>
         public int? NonRequiredNullableInt { get; set; }
+        /// <summary> Gets or sets the non required nullable string list. </summary>
         public IList<string> NonRequiredNullableStringList { get; set; }
+        /// <summary> Gets or sets the non required nullable int list. </summary>
         public IList<int> NonRequiredNullableIntList { get; set; }
+        /// <summary> Gets the required readonly int. </summary>
         public int RequiredReadonlyInt { get; }
+        /// <summary> Gets the non required readonly int. </summary>
         public int? NonRequiredReadonlyInt { get; }
     }
 }

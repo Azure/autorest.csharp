@@ -28,6 +28,7 @@ namespace AdditionalPropertiesEx.Models
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> Gets the id. </summary>
         public int Id { get; }
         /// <summary> Additional Properties. </summary>
         public IReadOnlyDictionary<string, string> AdditionalProperties { get; }

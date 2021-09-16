@@ -25,7 +25,9 @@ namespace OmitOperationGroups.Models
             D = d;
         }
 
+        /// <summary> Gets or sets the c. </summary>
         public string C { get; set; }
+        /// <summary> Gets or sets the d. </summary>
         public string D { get; set; }
     }
 }

@@ -33,6 +33,7 @@ namespace MgmtSingleton
             New = @new;
         }
 
+        /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
     }
 }

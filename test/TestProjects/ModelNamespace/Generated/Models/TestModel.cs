@@ -15,7 +15,9 @@ namespace ModelNamespace
         {
         }
 
+        /// <summary> Gets the code. </summary>
         public string Code { get; }
+        /// <summary> Gets the status. </summary>
         public string Status { get; }
     }
 }

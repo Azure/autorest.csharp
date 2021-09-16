@@ -22,6 +22,7 @@ namespace xml_service.Models
             Id = id;
         }
 
+        /// <summary> Gets the id. </summary>
         public int? Id { get; }
     }
 }

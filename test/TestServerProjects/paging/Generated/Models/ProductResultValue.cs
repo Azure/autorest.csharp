@@ -28,7 +28,9 @@ namespace paging.Models
             NextLink = nextLink;
         }
 
+        /// <summary> Gets the value. </summary>
         public IReadOnlyList<Product> Value { get; }
+        /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }
 }

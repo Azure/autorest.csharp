@@ -37,6 +37,7 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "smart_salmon";
         }
 
+        /// <summary> Gets or sets the college degree. </summary>
         public string CollegeDegree { get; set; }
         /// <summary> Additional Properties. </summary>
         public IDictionary<string, object> AdditionalProperties { get; }

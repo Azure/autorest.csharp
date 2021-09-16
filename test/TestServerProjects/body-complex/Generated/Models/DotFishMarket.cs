@@ -33,9 +33,13 @@ namespace body_complex.Models
             Fishes = fishes;
         }
 
+        /// <summary> Gets the sample salmon. </summary>
         public DotSalmon SampleSalmon { get; }
+        /// <summary> Gets the salmons. </summary>
         public IReadOnlyList<DotSalmon> Salmons { get; }
+        /// <summary> Gets the sample fish. </summary>
         public DotFish SampleFish { get; }
+        /// <summary> Gets the fishes. </summary>
         public IReadOnlyList<DotFish> Fishes { get; }
     }
 }

@@ -26,7 +26,9 @@ namespace body_complex.Models
             Leap = leap;
         }
 
+        /// <summary> Gets or sets the field. </summary>
         public DateTimeOffset? Field { get; set; }
+        /// <summary> Gets or sets the leap. </summary>
         public DateTimeOffset? Leap { get; set; }
     }
 }

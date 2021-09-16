@@ -22,6 +22,7 @@ namespace custom_baseUrl_paging.Models
             Properties = properties;
         }
 
+        /// <summary> Gets the properties. </summary>
         public ProductProperties Properties { get; }
     }
 }

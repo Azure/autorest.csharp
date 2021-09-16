@@ -15,6 +15,7 @@ namespace constants.Models
         {
         }
 
+        /// <summary> Gets the parameter. </summary>
         public ModelAsStringNoRequiredOneValueNoDefaultEnum? Parameter { get; }
     }
 }

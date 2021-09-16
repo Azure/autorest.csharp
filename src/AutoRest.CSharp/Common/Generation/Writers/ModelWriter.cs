@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -72,7 +73,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var property in schema.Properties)
                     {
-                        writer.WriteXmlDocumentationSummary($"{property.Description}");
+                        writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
 
                         CSharpType propertyType = property.Declaration.Type;
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
@@ -81,6 +82,22 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line();
                     }
                 }
+            }
+        }
+        private FormattableString CreatePropertyDescription(ObjectTypeProperty property)
+        {
+            if (!string.IsNullOrWhiteSpace(property.Description))
+            {
+                return $"{property.Description}";
+            }
+            String splitDeclarationName = string.Join(" ", StringExtensions.SplitByCamelCase(property.Declaration.Name)).ToLower();
+            if (property.IsReadOnly)
+            {
+                return $"Gets the {splitDeclarationName}";
+            }
+            else
+            {
+                return $"Gets or sets the {splitDeclarationName}";
             }
         }
 
@@ -165,7 +182,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"private readonly {schema.BaseType} _value;");
                     writer.Line();
 
-                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
+                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref=\"{name}\"/>.");
 
                     if (isString)
                     {

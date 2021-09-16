@@ -17,6 +17,7 @@ namespace constants.Models
             Parameter = parameter;
         }
 
+        /// <summary> Gets the parameter. </summary>
         public NoModelAsStringRequiredTwoValueNoDefaultEnum Parameter { get; }
     }
 }

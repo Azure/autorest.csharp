@@ -15,7 +15,7 @@ namespace MultipleInputFiles.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="SourceEnum"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="SourceEnum"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public SourceEnum(string value)
         {

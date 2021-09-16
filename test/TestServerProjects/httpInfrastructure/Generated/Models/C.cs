@@ -22,6 +22,7 @@ namespace httpInfrastructure.Models
             HttpCode = httpCode;
         }
 
+        /// <summary> Gets the http code. </summary>
         public string HttpCode { get; }
     }
 }

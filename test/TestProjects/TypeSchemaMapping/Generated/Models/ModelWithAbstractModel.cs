@@ -22,6 +22,7 @@ namespace TypeSchemaMapping.Models
             AbstractModelProperty = abstractModelProperty;
         }
 
+        /// <summary> Gets the abstract model property. </summary>
         public AbstractModel AbstractModelProperty { get; }
     }
 }

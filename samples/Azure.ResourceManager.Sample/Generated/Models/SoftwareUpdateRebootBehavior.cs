@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="SoftwareUpdateRebootBehavior"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="SoftwareUpdateRebootBehavior"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public SoftwareUpdateRebootBehavior(string value)
         {

@@ -24,7 +24,9 @@ namespace lro.Models
             Message = message;
         }
 
+        /// <summary> Gets the code. </summary>
         public int? Code { get; }
+        /// <summary> Gets the message. </summary>
         public string Message { get; }
     }
 }

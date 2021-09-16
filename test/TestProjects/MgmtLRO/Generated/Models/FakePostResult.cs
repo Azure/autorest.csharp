@@ -22,6 +22,7 @@ namespace MgmtLRO.Models
             Properties = properties;
         }
 
+        /// <summary> Gets the properties. </summary>
         public FakePostResultProperties Properties { get; }
     }
 }

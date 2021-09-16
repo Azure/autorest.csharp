@@ -26,8 +26,11 @@ namespace body_complex.Models
             NullProperty = nullProperty;
         }
 
+        /// <summary> Gets or sets the field. </summary>
         public string Field { get; set; }
+        /// <summary> Gets or sets the empty. </summary>
         public string Empty { get; set; }
+        /// <summary> Gets or sets the null property. </summary>
         public string NullProperty { get; set; }
     }
 }

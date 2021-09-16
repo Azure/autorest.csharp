@@ -24,6 +24,7 @@ namespace xml_service.Models
             Url = url;
         }
 
+        /// <summary> Gets or sets the url. </summary>
         public Uri Url { get; set; }
     }
 }

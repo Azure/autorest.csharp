@@ -35,6 +35,7 @@ namespace TenantOnly
             Tags = tags;
         }
 
+        /// <summary> Gets the foo. </summary>
         public string Foo { get; }
         /// <summary> Resource location. </summary>
         public string Location { get; }

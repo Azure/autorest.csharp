@@ -28,7 +28,9 @@ namespace custom_baseUrl_paging.Models
             NextLink = nextLink;
         }
 
+        /// <summary> Gets the values. </summary>
         public IReadOnlyList<Product> Values { get; }
+        /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }
 }

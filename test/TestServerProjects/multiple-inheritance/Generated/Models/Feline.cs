@@ -24,7 +24,9 @@ namespace multiple_inheritance.Models
             Hisses = hisses;
         }
 
+        /// <summary> Gets or sets the meows. </summary>
         public bool? Meows { get; set; }
+        /// <summary> Gets or sets the hisses. </summary>
         public bool? Hisses { get; set; }
     }
 }

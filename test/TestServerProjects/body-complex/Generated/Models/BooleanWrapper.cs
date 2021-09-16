@@ -24,7 +24,9 @@ namespace body_complex.Models
             FieldFalse = fieldFalse;
         }
 
+        /// <summary> Gets or sets the field true. </summary>
         public bool? FieldTrue { get; set; }
+        /// <summary> Gets or sets the field false. </summary>
         public bool? FieldFalse { get; set; }
     }
 }

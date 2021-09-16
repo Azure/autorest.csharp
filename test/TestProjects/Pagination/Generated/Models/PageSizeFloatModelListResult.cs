@@ -29,7 +29,9 @@ namespace Pagination.Models
             NextLink = nextLink;
         }
 
+        /// <summary> Gets the value. </summary>
         public IReadOnlyList<PageSizeFloatModelData> Value { get; }
+        /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }
 }

@@ -24,7 +24,9 @@ namespace body_datetime_rfc1123.Models
             Message = message;
         }
 
+        /// <summary> Gets the status. </summary>
         public int? Status { get; }
+        /// <summary> Gets the message. </summary>
         public string Message { get; }
     }
 }

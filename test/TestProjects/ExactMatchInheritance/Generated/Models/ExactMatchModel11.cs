@@ -24,7 +24,9 @@ namespace ExactMatchInheritance.Models
             Type = type;
         }
 
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
+        /// <summary> Gets the type. </summary>
         public string Type { get; }
     }
 }

@@ -39,6 +39,7 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> New property. </summary>
         public int? Foo { get; set; }
+        /// <summary> Gets or sets the foo properties foo. </summary>
         public string FooPropertiesFoo { get; set; }
         /// <summary> ID in CustomModel1. </summary>
         public string IdPropertiesId { get; set; }

@@ -28,7 +28,9 @@ namespace xml_service.Models
             Expiration = expiration;
         }
 
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
+        /// <summary> Gets or sets the flavor. </summary>
         public string Flavor { get; set; }
         /// <summary> The time at which you should reconsider eating this banana. </summary>
         public DateTimeOffset? Expiration { get; set; }

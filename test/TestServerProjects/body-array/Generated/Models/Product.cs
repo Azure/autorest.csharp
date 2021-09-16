@@ -24,7 +24,9 @@ namespace body_array.Models
             String = @string;
         }
 
+        /// <summary> Gets or sets the integer. </summary>
         public int? Integer { get; set; }
+        /// <summary> Gets or sets the string. </summary>
         public string String { get; set; }
     }
 }

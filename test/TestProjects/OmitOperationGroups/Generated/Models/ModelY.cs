@@ -22,6 +22,7 @@ namespace OmitOperationGroups.Models
             E = e;
         }
 
+        /// <summary> Gets or sets the e. </summary>
         public string E { get; set; }
     }
 }

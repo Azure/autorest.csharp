@@ -24,7 +24,9 @@ namespace SupersetFlattenInheritance.Models
             Foo = foo;
         }
 
+        /// <summary> Gets or sets the bar. </summary>
         public string Bar { get; set; }
+        /// <summary> Gets or sets the foo. </summary>
         public string Foo { get; set; }
     }
 }

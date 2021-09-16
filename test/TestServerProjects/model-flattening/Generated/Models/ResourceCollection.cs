@@ -33,6 +33,7 @@ namespace model_flattening.Models
 
         /// <summary> Flattened product. </summary>
         public FlattenedProduct Productresource { get; set; }
+        /// <summary> Gets the arrayofresources. </summary>
         public IList<FlattenedProduct> Arrayofresources { get; }
         /// <summary> Dictionary of &lt;FlattenedProduct&gt;. </summary>
         public IDictionary<string, FlattenedProduct> Dictionaryofresources { get; }

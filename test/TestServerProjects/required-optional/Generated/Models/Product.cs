@@ -17,7 +17,9 @@ namespace required_optional.Models
             Id = id;
         }
 
+        /// <summary> Gets the id. </summary>
         public int Id { get; }
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
     }
 }

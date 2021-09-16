@@ -28,7 +28,9 @@ namespace paging.Models
             OdataNextLink = odataNextLink;
         }
 
+        /// <summary> Gets the values. </summary>
         public IReadOnlyList<Product> Values { get; }
+        /// <summary> Gets the odata next link. </summary>
         public string OdataNextLink { get; }
     }
 }

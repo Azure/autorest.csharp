@@ -33,6 +33,7 @@ namespace TenantOnly
             Bar = bar;
         }
 
+        /// <summary> Gets or sets the bar. </summary>
         public string Bar { get; set; }
     }
 }

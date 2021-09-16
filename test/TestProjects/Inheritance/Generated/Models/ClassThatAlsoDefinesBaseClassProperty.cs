@@ -15,6 +15,7 @@ namespace Inheritance.Models
         {
         }
 
+        /// <summary> Gets the base class property. </summary>
         public string BaseClassProperty { get; }
     }
 }

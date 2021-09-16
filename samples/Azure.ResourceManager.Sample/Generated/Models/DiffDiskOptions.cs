@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="DiffDiskOptions"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="DiffDiskOptions"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public DiffDiskOptions(string value)
         {

@@ -35,6 +35,7 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "sawshark";
         }
 
+        /// <summary> Gets or sets the picture. </summary>
         public byte[] Picture { get; set; }
     }
 }
