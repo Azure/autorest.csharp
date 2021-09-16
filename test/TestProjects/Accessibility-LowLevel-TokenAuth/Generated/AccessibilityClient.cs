@@ -23,6 +23,7 @@ namespace Accessibility_LowLevel_TokenAuth
         private readonly AccessibilityRestClient _restClient;
         private readonly string[] AuthorizationScopes = { "https://test.azure.com/.default" };
         private readonly TokenCredential _tokenCredential;
+        private Uri endpoint;
 
         /// <summary> Initializes a new instance of AccessibilityClient for mocking. </summary>
         protected AccessibilityClient()
@@ -47,6 +48,7 @@ namespace Accessibility_LowLevel_TokenAuth
             var authPolicy = new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             _restClient = new AccessibilityRestClient(_clientDiagnostics, _pipeline, endpoint);
+            this.endpoint = endpoint;
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>

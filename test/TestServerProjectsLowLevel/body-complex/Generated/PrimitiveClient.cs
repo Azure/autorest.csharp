@@ -23,6 +23,7 @@ namespace body_complex_LowLevel
         private readonly PrimitiveRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+        private Uri endpoint;
 
         /// <summary> Initializes a new instance of PrimitiveClient for mocking. </summary>
         protected PrimitiveClient()
@@ -47,6 +48,7 @@ namespace body_complex_LowLevel
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             _restClient = new PrimitiveRestClient(_clientDiagnostics, _pipeline, endpoint);
+            this.endpoint = endpoint;
         }
 
         /// <summary> Get complex types with integer properties. </summary>

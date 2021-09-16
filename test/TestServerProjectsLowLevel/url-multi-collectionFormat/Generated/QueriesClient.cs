@@ -24,6 +24,7 @@ namespace url_multi_collectionFormat_LowLevel
         private readonly QueriesRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+        private Uri endpoint;
 
         /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
         protected QueriesClient()
@@ -48,6 +49,7 @@ namespace url_multi_collectionFormat_LowLevel
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             _restClient = new QueriesRestClient(_clientDiagnostics, _pipeline, endpoint);
+            this.endpoint = endpoint;
         }
 
         /// <summary> Get a null array of string using the multi-array format. </summary>

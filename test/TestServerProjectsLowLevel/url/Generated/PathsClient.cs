@@ -24,6 +24,7 @@ namespace url_LowLevel
         private readonly PathsRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+        private Uri endpoint;
 
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
@@ -48,6 +49,7 @@ namespace url_LowLevel
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             _restClient = new PathsRestClient(_clientDiagnostics, _pipeline, endpoint);
+            this.endpoint = endpoint;
         }
 
         /// <summary> Get true Boolean value on path. </summary>

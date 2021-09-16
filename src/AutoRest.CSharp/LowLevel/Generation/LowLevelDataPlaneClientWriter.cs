@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelDataPlaneClientWriter : ClientWriter
     {
-        public void WriteClient(CodeWriter writer, LowLevelDataPlaneClient client, BuildContext context)
+        public void WriteClient(CodeWriter writer, LowLevelDataPlaneClient client, BuildContext<LowLevelOutputLibrary> context)
         {
             var cs = client.Type;
             using (writer.Namespace(cs.Namespace))
@@ -53,6 +53,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         WriteLongRunningOperationMethod(writer, longRunningOperationMethod, true);
                         WriteLongRunningOperationMethod(writer, longRunningOperationMethod, false);
+                    }
+
+                    foreach (var subClient in context.Library.FindSubClents(client))
+                    {
+                        WriteSubClientFactoryMethod(writer, client, subClient, context);
                     }
                 }
             }
@@ -357,12 +362,14 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string OptionsVariable = "options";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
         private const string ScopesConstant = "AuthorizationScopes";
-        private const string KeyAuthField = "_keyCredential";
-        private const string TokenAuthField = "_tokenCredential";
+        private const string KeyAuthVariable = "keyCredential";
+        private const string KeyAuthField = "_" + KeyAuthVariable;
+        private const string TokenAuthVariable = "tokenCredential";
+        private const string TokenAuthField = "_" + TokenAuthVariable;
         private const string ResponseSelectorField = "_responseContentSelector";
         private new const string RestClientField = "_restClient";
 
-        private void WriteClientFields(CodeWriter writer, LowLevelDataPlaneClient client, BuildContext context)
+        private void WriteClientFields(CodeWriter writer, LowLevelDataPlaneClient client, BuildContext<LowLevelOutputLibrary> context)
         {
             writer.WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.");
             writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineProperty}");
@@ -394,16 +401,29 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
+            foreach (Parameter clientParameter in client.Parameters)
+            {
+                writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
+            }
+
             writer.Line();
         }
 
-        private void WriteClientCtors(CodeWriter writer, LowLevelDataPlaneClient client, BuildContext context)
+        private void WriteClientCtors(CodeWriter writer, LowLevelDataPlaneClient client, BuildContext<LowLevelOutputLibrary> context)
         {
             WriteEmptyConstructor(writer, client);
 
+            if (context.Library.EmitSubClientConstructor(client.RestClient.OperationGroup))
+            {
+                WriteSubClientConstructor(writer, client, context);
+            }
+
             foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {
-                WriteConstructor(writer, client, scheme, context);
+                if (context.Library.EmitPublicConstructor(client.RestClient.OperationGroup))
+                {
+                    WriteConstructor(writer, client, scheme, context);
+                }
             }
         }
 
@@ -431,7 +451,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteConstructor(CodeWriter writer, LowLevelDataPlaneClient client, SecurityScheme securityScheme, BuildContext context)
+        private void WriteConstructor(CodeWriter writer, LowLevelDataPlaneClient client, SecurityScheme securityScheme, BuildContext<LowLevelOutputLibrary> context)
         {
             var ctorParams = client.GetConstructorParameters(GetCredentialType(securityScheme));
 
@@ -484,7 +504,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($" {authPolicy:I} ");
                     writer.AppendRaw("}");
                 }
-                writer.LineRaw(", new ResponseClassifier());");
+                writer.Line($", new {typeof(ResponseClassifier)}());");
 
                 writer.Append($"this.{RestClientField} = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
                 foreach (var parameter in client.RestClient.Parameters)
@@ -499,7 +519,79 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
                 writer.RemoveTrailingComma();
-                writer.Append($");");
+                writer.Line($");");
+
+                foreach (Parameter parameter in client.Parameters)
+                {
+                    writer.Append($"this.{parameter.Name} = ");
+                    if (!parameter.IsApiVersionParameter)
+                    {
+                        writer.Append($"{parameter.Name}");
+                    }
+                    else
+                    {
+                        writer.Append($"{OptionsVariable}.Version");
+                    }
+
+                    writer.Line($";");
+                }
+            }
+            writer.Line();
+        }
+
+        private void WriteSubClientConstructor(CodeWriter writer, LowLevelDataPlaneClient client, BuildContext<LowLevelOutputLibrary> context)
+        {
+            writer.Append($"internal {client.Type.Name:D}({new CSharpType(typeof(HttpPipeline))} {PipelineVariable}, {new CSharpType(typeof(ClientDiagnostics))} {ClientDiagnosticsVariable}, ");
+            foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
+            {
+                switch (scheme)
+                {
+                    case AzureKeySecurityScheme _:
+                        writer.Append($"{new CSharpType(typeof(AzureKeyCredential))} {KeyAuthVariable}, ");
+                        break;
+                    case AADTokenSecurityScheme _:
+                        writer.Append($"{new CSharpType(typeof(TokenCredential))} {TokenAuthVariable}, ");
+                        break;
+                }
+            }
+
+            foreach (Parameter parameter in client.Parameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.RemoveTrailingComma();
+            writer.Line($")");
+
+            using (writer.Scope())
+            {
+                writer.Line($"{PipelineField} = {PipelineVariable};");
+                writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
+
+                foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
+                {
+                    switch (scheme)
+                    {
+                        case AzureKeySecurityScheme _:
+                            writer.Line($"{KeyAuthField} = {KeyAuthVariable};");
+                            break;
+                        case AADTokenSecurityScheme _:
+                            writer.Line($"{TokenAuthField} = {TokenAuthVariable};");
+                            break;
+                    }
+                }
+
+                writer.Append($"this.{RestClientField} = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
+                foreach (var parameter in client.RestClient.Parameters)
+                {
+                    writer.Append($"{parameter.Name}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Line($");");
+
+                foreach (Parameter parameter in client.Parameters)
+                {
+                    writer.Line($"this.{parameter.Name} = {parameter.Name};");
+                }
             }
             writer.Line();
         }
@@ -531,6 +623,80 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteXmlDocumentation("remarks", $"{schemas}");
             }
+        }
+
+        private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelDataPlaneClient parentClient, LowLevelDataPlaneClient childClient, BuildContext context)
+        {
+            var factoryMethodParameters = childClient.Parameters.Where(p => !parentClient.Parameters.Any(x => x.Name == p.Name));
+
+            CodeWriterDeclaration cacheVariable = new CodeWriterDeclaration($"_cached{childClient.ClientShortName}Client");
+
+            if (!factoryMethodParameters.Any())
+            {
+                writer.Line($"private {childClient.Type} {cacheVariable:D};");
+                writer.Line();
+            }
+
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {childClient.Type.Name}");
+
+            foreach (Parameter parameter in factoryMethodParameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter);
+            }
+
+            writer.Append($"public virtual {childClient.Type} Get{childClient.ClientShortName}Client(");
+            foreach (var parameter in factoryMethodParameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.RemoveTrailingComma();
+            writer.Line($")");
+
+            using (writer.Scope())
+            {
+                writer.WriteParameterNullChecks(factoryMethodParameters.ToArray());
+
+                CodeWriterDeclaration clientVariable = new CodeWriterDeclaration($"client");
+
+                writer.Append($"var {clientVariable:D} = new {childClient.Type}({PipelineField}, {ClientDiagnosticsField}, ");
+
+                foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
+                {
+                    switch (scheme)
+                    {
+                        case AzureKeySecurityScheme _:
+                            writer.Append($"{KeyAuthField}, ");
+                            break;
+                        case AADTokenSecurityScheme _:
+                            writer.Append($"{TokenAuthField}, ");
+                            break;
+                    }
+                }
+
+                foreach (var parameter in childClient.Parameters)
+                {
+                    var thisPrefix = !factoryMethodParameters.Any(x => x.Name == parameter.Name) ? "this." : "";
+                    writer.Append($"{thisPrefix}{parameter.Name}, ");
+                }
+
+                writer.RemoveTrailingComma();
+                writer.Line($");");
+
+                if (!factoryMethodParameters.Any())
+                {
+                    writer.Line($"if ({cacheVariable} == null)");
+                    using (writer.Scope())
+                    {
+                        writer.Line($"{new CSharpType(typeof(Interlocked))}.CompareExchange<{childClient.Type}>(ref {cacheVariable}, {clientVariable}, null);");
+                    }
+                    writer.Line($"return {cacheVariable};");
+                }
+                else
+                {
+                    writer.Line($"return {clientVariable};");
+                }
+            }
+            writer.Line();
         }
 
         private string BuildSchemaFromDocs(SchemaDocumentation[] docs, bool showRequired)

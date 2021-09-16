@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, MgmtConfiguration mgmtConfiguration, LowLevelSubClientConfiguration subClientConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -26,6 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;
             MgmtConfiguration = mgmtConfiguration;
+            SubClientConfiguration = subClientConfiguration;
         }
 
         public string OutputFolder { get; }
@@ -41,6 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static string ProjectRelativeDirectory = "../";
         public bool LowLevelClient { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
+        public LowLevelSubClientConfiguration SubClientConfiguration { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -56,7 +58,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 GetOptionValue(autoRest, "head-as-boolean"),
                 GetOptionValue(autoRest, "skip-csproj-packagereference"),
                 GetOptionValue(autoRest, "low-level-client"),
-                MgmtConfiguration.GetConfiguration(autoRest)
+                MgmtConfiguration.GetConfiguration(autoRest),
+                LowLevelSubClientConfiguration.GetConfiguration(autoRest)
             );
         }
 

@@ -23,6 +23,7 @@ namespace custom_baseUrl_LowLevel
         private readonly PathsRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+        private string host;
 
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
@@ -50,6 +51,7 @@ namespace custom_baseUrl_LowLevel
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             _restClient = new PathsRestClient(_clientDiagnostics, _pipeline, host);
+            this.host = host;
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>

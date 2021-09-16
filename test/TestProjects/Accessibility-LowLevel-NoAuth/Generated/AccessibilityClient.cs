@@ -21,6 +21,7 @@ namespace Accessibility_LowLevel_NoAuth
         private HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AccessibilityRestClient _restClient;
+        private Uri endpoint;
 
         /// <summary> Initializes a new instance of AccessibilityClient for mocking. </summary>
         protected AccessibilityClient()
@@ -38,6 +39,7 @@ namespace Accessibility_LowLevel_NoAuth
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _restClient = new AccessibilityRestClient(_clientDiagnostics, _pipeline, endpoint);
+            this.endpoint = endpoint;
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>

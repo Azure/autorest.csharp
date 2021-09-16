@@ -71,6 +71,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, "low-level-client", configuration.LowLevelClient);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
+                    configuration.SubClientConfiguration.SaveConfiguration(writer);
 
                     writer.WriteEndObject();
                 }
@@ -119,7 +120,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, "head-as-boolean"),
                 ReadOption(root, "skip-csproj-packagereference"),
                 ReadOption(root, "low-level-client"),
-                MgmtConfiguration.LoadConfiguration(root)
+                MgmtConfiguration.LoadConfiguration(root),
+                LowLevelSubClientConfiguration.LoadConfiguration(root)
             );
         }
     }

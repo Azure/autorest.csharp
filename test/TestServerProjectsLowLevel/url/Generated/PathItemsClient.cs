@@ -23,6 +23,9 @@ namespace url_LowLevel
         private readonly PathItemsRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+        private string globalStringPath;
+        private Uri endpoint;
+        private string globalStringQuery;
 
         /// <summary> Initializes a new instance of PathItemsClient for mocking. </summary>
         protected PathItemsClient()
@@ -53,6 +56,9 @@ namespace url_LowLevel
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             _restClient = new PathItemsRestClient(_clientDiagnostics, _pipeline, globalStringPath, endpoint, globalStringQuery);
+            this.globalStringPath = globalStringPath;
+            this.endpoint = endpoint;
+            this.globalStringQuery = globalStringQuery;
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>

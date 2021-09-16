@@ -23,6 +23,7 @@ namespace body_complex_LowLevel
         private readonly ReadonlypropertyRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+        private Uri endpoint;
 
         /// <summary> Initializes a new instance of ReadonlypropertyClient for mocking. </summary>
         protected ReadonlypropertyClient()
@@ -47,6 +48,7 @@ namespace body_complex_LowLevel
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             _restClient = new ReadonlypropertyRestClient(_clientDiagnostics, _pipeline, endpoint);
+            this.endpoint = endpoint;
         }
 
         /// <summary> Get complex types that have readonly properties. </summary>

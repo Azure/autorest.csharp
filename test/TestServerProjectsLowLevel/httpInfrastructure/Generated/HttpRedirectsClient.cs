@@ -23,6 +23,7 @@ namespace httpInfrastructure_LowLevel
         private readonly HttpRedirectsRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+        private Uri endpoint;
 
         /// <summary> Initializes a new instance of HttpRedirectsClient for mocking. </summary>
         protected HttpRedirectsClient()
@@ -47,6 +48,7 @@ namespace httpInfrastructure_LowLevel
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             _restClient = new HttpRedirectsRestClient(_clientDiagnostics, _pipeline, endpoint);
+            this.endpoint = endpoint;
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
