@@ -1109,11 +1109,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> Gets a list of VirtualMachineExtensions in the VirtualMachine. </summary>
-        /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachine. </returns>
-        public VirtualMachineExtensionContainer GetVirtualMachineExtensions()
+        /// <summary> Gets a list of VirtualMachineExtensionVirtualMachines in the VirtualMachine. </summary>
+        /// <returns> An object representing collection of VirtualMachineExtensionVirtualMachines and their operations over a VirtualMachine. </returns>
+        public VirtualMachineExtensionVirtualMachineContainer GetVirtualMachineExtensionVirtualMachines()
         {
-            return new VirtualMachineExtensionContainer(this);
+            return new VirtualMachineExtensionVirtualMachineContainer(this);
         }
     }
 }

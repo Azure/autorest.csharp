@@ -12,10 +12,12 @@
   "skip-csproj-packagereference": true,
   "OperationGroupToResource": {
     "ExactMatchModel2s": "NonResource",
+    "ExactMatchModel3s": "NonResource",
     "ExactMatchModel4s": "NonResource"
   },
   "OperationGroupToParent": {
-    "ExactMatchModel2s": "subscriptions",
-    "ExactMatchModel4s": "subscriptions"
+    "ExactMatchModel2s": "resourceGroups",
+    "ExactMatchModel3s": "resourceGroups",
+    "ExactMatchModel4s": "resourceGroups"
   }
 }

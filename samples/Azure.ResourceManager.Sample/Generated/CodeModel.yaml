@@ -3099,7 +3099,7 @@ schemas: !Schemas
           name: VirtualMachineScaleSetVMZonesItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_515
+    - !StringSchema &ref_512
       type: string
       apiVersions:
         - !ApiVersion 
@@ -12866,7 +12866,7 @@ schemas: !Schemas
                     description: Azure VM unique ID.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ObjectSchema &ref_512
+                schema: !ObjectSchema &ref_513
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -13094,7 +13094,7 @@ schemas: !Schemas
                     description: Specifies the network interfaces of the virtual machine.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ObjectSchema &ref_513
+                schema: !ObjectSchema &ref_514
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -13205,7 +13205,7 @@ schemas: !Schemas
                     description: Specifies whether the model applied to the virtual machine is the model of the virtual machine scale set or the customized model for the virtual machine.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ObjectSchema &ref_514
+                schema: !ObjectSchema &ref_515
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -16701,11 +16701,7 @@ schemas: !Schemas
           description: The input for OrchestrationServiceState
           namespace: ''
       protocol: !Protocols {}
-    - *ref_337
-    - *ref_512
-    - *ref_513
-    - *ref_514
-    - !ObjectSchema &ref_970
+    - !ObjectSchema &ref_947
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16731,7 +16727,7 @@ schemas: !Schemas
               description: The list of virtual machine scale sets VMs.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_515
+          schema: *ref_512
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -16749,6 +16745,10 @@ schemas: !Schemas
           description: The List Virtual Machine Scale Set VMs operation response.
           namespace: ''
       protocol: !Protocols {}
+    - *ref_337
+    - *ref_513
+    - *ref_514
+    - *ref_515
     - !ObjectSchema &ref_516
       type: object
       apiVersions:
@@ -27832,7 +27832,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_616
-          - !Parameter &ref_943
+          - !Parameter &ref_942
             schema: *ref_1
             implementation: Method
             required: true
@@ -27844,7 +27844,129 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
+          - !Parameter &ref_943
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: virtualMachineScaleSetName
+                description: The name of the VM scale set.
+                serializedName: virtualMachineScaleSetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
           - !Parameter &ref_944
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: filter
+                description: The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_945
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: select
+                description: The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
+                serializedName: $select
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_946
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: expand
+                description: The expand expression to apply to the operation. Allowed values are 'instanceView'.
+                serializedName: $expand
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_617
+          - *ref_620
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_618
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_942
+          - *ref_943
+          - *ref_944
+          - *ref_945
+          - *ref_946
+        responses:
+          - !SchemaResponse 
+            schema: *ref_947
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-odata: '#/components/schemas/VirtualMachineScaleSetVM'
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: List
+            description: Gets a list of all virtual machines in a VM scale sets.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_616
+          - !Parameter &ref_948
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_949
             schema: *ref_1
             implementation: Method
             required: true
@@ -27856,7 +27978,83 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_945
+          - !Parameter &ref_950
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: instanceId
+                description: The instance ID of the virtual machine.
+                serializedName: instanceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_617
+          - *ref_620
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/simulateEviction
+                method: post
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_948
+          - *ref_949
+          - *ref_950
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        extensions:
+          x-ms-long-running-operation: false
+        language: !Languages 
+          default:
+            name: SimulateEviction
+            description: The operation to simulate the eviction of spot virtual machine in a VM scale set.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_616
+          - !Parameter &ref_952
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_953
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmScaleSetName
+                description: The name of the VM scale set.
+                serializedName: vmScaleSetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_954
             schema: *ref_1
             implementation: Method
             required: true
@@ -27886,7 +28084,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_942
+              - !Parameter &ref_951
                 schema: *ref_433
                 implementation: Method
                 required: false
@@ -27899,23 +28097,23 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_942
+              - *ref_951
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/reimage
                 method: post
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_943
-          - *ref_944
-          - *ref_945
+          - *ref_952
+          - *ref_953
+          - *ref_954
         responses:
           - !Response 
             language: !Languages 
@@ -27948,7 +28146,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_616
-          - !Parameter &ref_946
+          - !Parameter &ref_955
             schema: *ref_1
             implementation: Method
             required: true
@@ -27960,7 +28158,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_947
+          - !Parameter &ref_956
             schema: *ref_1
             implementation: Method
             required: true
@@ -27972,7 +28170,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_948
+          - !Parameter &ref_957
             schema: *ref_1
             implementation: Method
             required: true
@@ -27994,13 +28192,13 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimageall
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/reimageall
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_946
-          - *ref_947
-          - *ref_948
+          - *ref_955
+          - *ref_956
+          - *ref_957
         responses:
           - !Response 
             language: !Languages 
@@ -28033,7 +28231,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_616
-          - !Parameter &ref_949
+          - !Parameter &ref_958
             schema: *ref_1
             implementation: Method
             required: true
@@ -28045,7 +28243,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_950
+          - !Parameter &ref_959
             schema: *ref_1
             implementation: Method
             required: true
@@ -28057,7 +28255,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_951
+          - !Parameter &ref_960
             schema: *ref_1
             implementation: Method
             required: true
@@ -28079,13 +28277,13 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/deallocate
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_949
-          - *ref_950
-          - *ref_951
+          - *ref_958
+          - *ref_959
+          - *ref_960
         responses:
           - !Response 
             language: !Languages 
@@ -28118,7 +28316,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_616
-          - !Parameter &ref_953
+          - !Parameter &ref_962
             schema: *ref_1
             implementation: Method
             required: true
@@ -28130,7 +28328,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_954
+          - !Parameter &ref_963
             schema: *ref_1
             implementation: Method
             required: true
@@ -28142,7 +28340,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_955
+          - !Parameter &ref_964
             schema: *ref_1
             implementation: Method
             required: true
@@ -28172,7 +28370,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_952
+              - !Parameter &ref_961
                 schema: *ref_337
                 implementation: Method
                 required: true
@@ -28198,23 +28396,23 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_952
+              - *ref_961
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_953
-          - *ref_954
-          - *ref_955
+          - *ref_962
+          - *ref_963
+          - *ref_964
         responses:
           - !SchemaResponse 
             schema: *ref_337
@@ -28255,7 +28453,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_616
-          - !Parameter &ref_956
+          - !Parameter &ref_965
             schema: *ref_1
             implementation: Method
             required: true
@@ -28267,7 +28465,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_957
+          - !Parameter &ref_966
             schema: *ref_1
             implementation: Method
             required: true
@@ -28279,7 +28477,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_958
+          - !Parameter &ref_967
             schema: *ref_1
             implementation: Method
             required: true
@@ -28301,13 +28499,13 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_956
-          - *ref_957
-          - *ref_958
+          - *ref_965
+          - *ref_966
+          - *ref_967
         responses:
           - !Response 
             language: !Languages 
@@ -28349,7 +28547,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_616
-          - !Parameter &ref_959
+          - !Parameter &ref_968
             schema: *ref_1
             implementation: Method
             required: true
@@ -28361,7 +28559,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_960
+          - !Parameter &ref_969
             schema: *ref_1
             implementation: Method
             required: true
@@ -28373,7 +28571,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_961
+          - !Parameter &ref_970
             schema: *ref_1
             implementation: Method
             required: true
@@ -28421,13 +28619,13 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_959
-          - *ref_960
-          - *ref_961
+          - *ref_968
+          - *ref_969
+          - *ref_970
         responses:
           - !SchemaResponse 
             schema: *ref_337
@@ -28446,221 +28644,6 @@ operationGroups:
           default:
             name: Get
             description: Gets a virtual machine from a VM scale set.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_616
-          - !Parameter &ref_962
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_963
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vmScaleSetName
-                description: The name of the VM scale set.
-                serializedName: vmScaleSetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_964
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: instanceId
-                description: The instance ID of the virtual machine.
-                serializedName: instanceId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_617
-          - *ref_620
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_618
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/instanceView
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_962
-          - *ref_963
-          - *ref_964
-        responses:
-          - !SchemaResponse 
-            schema: *ref_512
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: GetInstanceView
-            description: Gets the status of a virtual machine from a VM scale set.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_616
-          - !Parameter &ref_965
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_966
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: virtualMachineScaleSetName
-                description: The name of the VM scale set.
-                serializedName: virtualMachineScaleSetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_967
-            schema: *ref_1
-            implementation: Method
-            language: !Languages 
-              default:
-                name: filter
-                description: The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-                serializedName: $filter
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - !Parameter &ref_968
-            schema: *ref_1
-            implementation: Method
-            language: !Languages 
-              default:
-                name: select
-                description: The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-                serializedName: $select
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - !Parameter &ref_969
-            schema: *ref_1
-            implementation: Method
-            language: !Languages 
-              default:
-                name: expand
-                description: The expand expression to apply to the operation. Allowed values are 'instanceView'.
-                serializedName: $expand
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - *ref_617
-          - *ref_620
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_618
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_965
-          - *ref_966
-          - *ref_967
-          - *ref_968
-          - *ref_969
-        responses:
-          - !SchemaResponse 
-            schema: *ref_970
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        extensions:
-          x-ms-odata: '#/components/schemas/VirtualMachineScaleSetVM'
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: List
-            description: Gets a list of all virtual machines in a VM scale sets.
-            paging:
-              nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -28704,7 +28687,100 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
+          - *ref_617
+          - *ref_620
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_618
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_971
+          - *ref_972
+          - *ref_973
+        responses:
+          - !SchemaResponse 
+            schema: *ref_513
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: GetInstanceView
+            description: Gets the status of a virtual machine from a VM scale set.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_616
           - !Parameter &ref_974
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_975
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmScaleSetName
+                description: The name of the VM scale set.
+                serializedName: vmScaleSetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_976
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: instanceId
+                description: The instance ID of the virtual machine.
+                serializedName: instanceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_977
             schema: *ref_785
             implementation: Method
             language: !Languages 
@@ -28725,96 +28801,11 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/poweroff
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_971
-          - *ref_972
-          - *ref_973
           - *ref_974
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: PowerOff
-            description: Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_616
-          - !Parameter &ref_975
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_976
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vmScaleSetName
-                description: The name of the VM scale set.
-                serializedName: vmScaleSetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_977
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: instanceId
-                description: The instance ID of the virtual machine.
-                serializedName: instanceId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_617
-          - *ref_620
-        requests:
-          - !Request 
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart
-                method: post
-                uri: '{$host}'
-        signatureParameters:
           - *ref_975
           - *ref_976
           - *ref_977
@@ -28841,8 +28832,8 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: Restart
-            description: Restarts a virtual machine in a VM scale set.
+            name: PowerOff
+            description: Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -28896,7 +28887,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/restart
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -28926,8 +28917,8 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: Start
-            description: Starts a virtual machine in a VM scale set.
+            name: Restart
+            description: Restarts a virtual machine in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -28981,7 +28972,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/redeploy
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/start
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -29011,8 +29002,8 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: Redeploy
-            description: Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.
+            name: Start
+            description: Starts a virtual machine in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -29056,7 +29047,92 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
+          - *ref_617
+          - *ref_620
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/redeploy
+                method: post
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_984
+          - *ref_985
+          - *ref_986
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Redeploy
+            description: Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_616
           - !Parameter &ref_987
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_988
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmScaleSetName
+                description: The name of the VM scale set.
+                serializedName: vmScaleSetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_989
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: instanceId
+                description: The instance ID of the virtual machine.
+                serializedName: instanceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_990
             schema: *ref_703
             implementation: Method
             language: !Languages 
@@ -29092,14 +29168,14 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/retrieveBootDiagnosticsData
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/retrieveBootDiagnosticsData
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_984
-          - *ref_985
-          - *ref_986
           - *ref_987
+          - *ref_988
+          - *ref_989
+          - *ref_990
         responses:
           - !SchemaResponse 
             schema: *ref_804
@@ -29134,91 +29210,6 @@ operationGroups:
           default:
             name: RetrieveBootDiagnosticsData
             description: The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_616
-          - !Parameter &ref_988
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_989
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vmScaleSetName
-                description: The name of the VM scale set.
-                serializedName: vmScaleSetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_990
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: instanceId
-                description: The instance ID of the virtual machine.
-                serializedName: instanceId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_617
-          - *ref_620
-        requests:
-          - !Request 
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/performMaintenance
-                method: post
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_988
-          - *ref_989
-          - *ref_990
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: PerformMaintenance
-            description: Performs maintenance on a virtual machine in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -29272,7 +29263,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/simulateEviction
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/performMaintenance
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -29284,17 +29275,26 @@ operationGroups:
             language: !Languages 
               default:
                 name: ''
-                description: No Content
+                description: OK
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '204'
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
         extensions:
-          x-ms-long-running-operation: false
+          x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: SimulateEviction
-            description: The operation to simulate the eviction of spot virtual machine in a VM scale set.
+            name: PerformMaintenance
+            description: Performs maintenance on a virtual machine in a VM scale set.
         protocol: !Protocols {}
     language: !Languages 
       default:

@@ -44,668 +44,6 @@ namespace Azure.ResourceManager.Sample
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateReimageRequest(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMReimageParameters vmScaleSetVMReimageInput)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
-            uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
-            uri.AppendPath(instanceId, true);
-            uri.AppendPath("/reimage", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            if (vmScaleSetVMReimageInput != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(vmScaleSetVMReimageInput);
-                request.Content = content;
-            }
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> Reimages (upgrade the operating system) a specific virtual machine in a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="vmScaleSetVMReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response> ReimageAsync(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMReimageParameters vmScaleSetVMReimageInput = null, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateReimageRequest(resourceGroupName, vmScaleSetName, instanceId, vmScaleSetVMReimageInput);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Reimages (upgrade the operating system) a specific virtual machine in a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="vmScaleSetVMReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response Reimage(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMReimageParameters vmScaleSetVMReimageInput = null, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateReimageRequest(resourceGroupName, vmScaleSetName, instanceId, vmScaleSetVMReimageInput);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateReimageAllRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
-            uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
-            uri.AppendPath(instanceId, true);
-            uri.AppendPath("/reimageall", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response> ReimageAllAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateReimageAllRequest(resourceGroupName, vmScaleSetName, instanceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response ReimageAll(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateReimageAllRequest(resourceGroupName, vmScaleSetName, instanceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateDeallocateRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
-            uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
-            uri.AppendPath(instanceId, true);
-            uri.AppendPath("/deallocate", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response> DeallocateAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateDeallocateRequest(resourceGroupName, vmScaleSetName, instanceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response Deallocate(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateDeallocateRequest(resourceGroupName, vmScaleSetName, instanceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMData parameters)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Put;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
-            uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
-            uri.AppendPath(instanceId, true);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
-            request.Content = content;
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> Updates a virtual machine of a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set where the extension should be create or updated. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="instanceId"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var message = CreateUpdateRequest(resourceGroupName, vmScaleSetName, instanceId, parameters);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Updates a virtual machine of a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set where the extension should be create or updated. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="instanceId"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response Update(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var message = CreateUpdateRequest(resourceGroupName, vmScaleSetName, instanceId, parameters);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Delete;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
-            uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
-            uri.AppendPath(instanceId, true);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> Deletes a virtual machine from a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateDeleteRequest(resourceGroupName, vmScaleSetName, instanceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                case 204:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Deletes a virtual machine from a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response Delete(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateDeleteRequest(resourceGroupName, vmScaleSetName, instanceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 202:
-                case 204:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
-            uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
-            uri.AppendPath(instanceId, true);
-            uri.AppendQuery("$expand", "instanceView", true);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> Gets a virtual machine from a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSetVMData>> GetAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateGetRequest(resourceGroupName, vmScaleSetName, instanceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        VirtualMachineScaleSetVMData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                case 404:
-                    return Response.FromValue((VirtualMachineScaleSetVMData)null, message.Response);
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets a virtual machine from a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response<VirtualMachineScaleSetVMData> Get(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateGetRequest(resourceGroupName, vmScaleSetName, instanceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        VirtualMachineScaleSetVMData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                case 404:
-                    return Response.FromValue((VirtualMachineScaleSetVMData)null, message.Response);
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetInstanceViewRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
-            uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
-            uri.AppendPath(instanceId, true);
-            uri.AppendPath("/instanceView", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> Gets the status of a virtual machine from a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSetVMInstanceView>> GetInstanceViewAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateGetInstanceViewRequest(resourceGroupName, vmScaleSetName, instanceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        VirtualMachineScaleSetVMInstanceView value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VirtualMachineScaleSetVMInstanceView.DeserializeVirtualMachineScaleSetVMInstanceView(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets the status of a virtual machine from a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response<VirtualMachineScaleSetVMInstanceView> GetInstanceView(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateGetInstanceViewRequest(resourceGroupName, vmScaleSetName, instanceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        VirtualMachineScaleSetVMInstanceView value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VirtualMachineScaleSetVMInstanceView.DeserializeVirtualMachineScaleSetVMInstanceView(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
         internal HttpMessage CreateGetAllRequest(string resourceGroupName, string virtualMachineScaleSetName, string filter, string select, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -809,6 +147,754 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        internal HttpMessage CreateSimulateEvictionRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/virtualMachines/", false);
+            uri.AppendPath(instanceId, true);
+            uri.AppendPath("/simulateEviction", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public async Task<Response> SimulateEvictionAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateSimulateEvictionRequest(resourceGroupName, vmScaleSetName, instanceId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public Response SimulateEviction(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateSimulateEvictionRequest(resourceGroupName, vmScaleSetName, instanceId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateReimageRequest(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMReimageParameters vmScaleSetVMReimageInput)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/virtualMachines/", false);
+            uri.AppendPath(instanceId, true);
+            uri.AppendPath("/reimage", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            if (vmScaleSetVMReimageInput != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(vmScaleSetVMReimageInput);
+                request.Content = content;
+            }
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Reimages (upgrade the operating system) a specific virtual machine in a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="vmScaleSetVMReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public async Task<Response> ReimageAsync(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMReimageParameters vmScaleSetVMReimageInput = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateReimageRequest(resourceGroupName, vmScaleSetName, instanceId, vmScaleSetVMReimageInput);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Reimages (upgrade the operating system) a specific virtual machine in a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="vmScaleSetVMReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public Response Reimage(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMReimageParameters vmScaleSetVMReimageInput = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateReimageRequest(resourceGroupName, vmScaleSetName, instanceId, vmScaleSetVMReimageInput);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateReimageAllRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/virtualMachines/", false);
+            uri.AppendPath(instanceId, true);
+            uri.AppendPath("/reimageall", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public async Task<Response> ReimageAllAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateReimageAllRequest(resourceGroupName, vmScaleSetName, instanceId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public Response ReimageAll(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateReimageAllRequest(resourceGroupName, vmScaleSetName, instanceId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateDeallocateRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/virtualMachines/", false);
+            uri.AppendPath(instanceId, true);
+            uri.AppendPath("/deallocate", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public async Task<Response> DeallocateAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateDeallocateRequest(resourceGroupName, vmScaleSetName, instanceId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public Response Deallocate(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateDeallocateRequest(resourceGroupName, vmScaleSetName, instanceId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMData parameters)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/virtualMachines/", false);
+            uri.AppendPath(instanceId, true);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(parameters);
+            request.Content = content;
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Updates a virtual machine of a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set where the extension should be create or updated. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="instanceId"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> UpdateAsync(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var message = CreateUpdateRequest(resourceGroupName, vmScaleSetName, instanceId, parameters);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Updates a virtual machine of a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set where the extension should be create or updated. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="instanceId"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response Update(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var message = CreateUpdateRequest(resourceGroupName, vmScaleSetName, instanceId, parameters);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/virtualMachines/", false);
+            uri.AppendPath(instanceId, true);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Deletes a virtual machine from a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateDeleteRequest(resourceGroupName, vmScaleSetName, instanceId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Deletes a virtual machine from a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public Response Delete(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateDeleteRequest(resourceGroupName, vmScaleSetName, instanceId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/virtualMachines/", false);
+            uri.AppendPath(instanceId, true);
+            uri.AppendQuery("$expand", "instanceView", true);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Gets a virtual machine from a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public async Task<Response<VirtualMachineScaleSetVMData>> GetAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateGetRequest(resourceGroupName, vmScaleSetName, instanceId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        VirtualMachineScaleSetVMData value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 404:
+                    return Response.FromValue((VirtualMachineScaleSetVMData)null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Gets a virtual machine from a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public Response<VirtualMachineScaleSetVMData> Get(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateGetRequest(resourceGroupName, vmScaleSetName, instanceId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        VirtualMachineScaleSetVMData value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 404:
+                    return Response.FromValue((VirtualMachineScaleSetVMData)null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateGetInstanceViewRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/virtualMachines/", false);
+            uri.AppendPath(instanceId, true);
+            uri.AppendPath("/instanceView", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Gets the status of a virtual machine from a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public async Task<Response<VirtualMachineScaleSetVMInstanceView>> GetInstanceViewAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateGetInstanceViewRequest(resourceGroupName, vmScaleSetName, instanceId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        VirtualMachineScaleSetVMInstanceView value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = VirtualMachineScaleSetVMInstanceView.DeserializeVirtualMachineScaleSetVMInstanceView(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Gets the status of a virtual machine from a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public Response<VirtualMachineScaleSetVMInstanceView> GetInstanceView(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateGetInstanceViewRequest(resourceGroupName, vmScaleSetName, instanceId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        VirtualMachineScaleSetVMInstanceView value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = VirtualMachineScaleSetVMInstanceView.DeserializeVirtualMachineScaleSetVMInstanceView(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreatePowerOffRequest(string resourceGroupName, string vmScaleSetName, string instanceId, bool? skipShutdown)
         {
             var message = _pipeline.CreateMessage();
@@ -822,7 +908,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/poweroff", false);
             if (skipShutdown != null)
@@ -916,7 +1002,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/restart", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -1004,7 +1090,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/start", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -1092,7 +1178,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/redeploy", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -1180,7 +1266,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/retrieveBootDiagnosticsData", false);
             if (sasUriExpirationTimeInMinutes != null)
@@ -1283,7 +1369,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/performMaintenance", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -1352,92 +1438,6 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                 case 202:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateSimulateEvictionRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
-            uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualMachines/", false);
-            uri.AppendPath(instanceId, true);
-            uri.AppendPath("/simulateEviction", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response> SimulateEvictionAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateSimulateEvictionRequest(resourceGroupName, vmScaleSetName, instanceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 204:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response SimulateEviction(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (vmScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(vmScaleSetName));
-            }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-
-            using var message = CreateSimulateEvictionRequest(resourceGroupName, vmScaleSetName, instanceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 204:
                     return message.Response;
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

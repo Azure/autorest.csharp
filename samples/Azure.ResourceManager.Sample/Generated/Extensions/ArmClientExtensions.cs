@@ -78,14 +78,14 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region VirtualMachineExtension
-        /// <summary> Gets an object representing a VirtualMachineExtension along with the instance operations that can be performed on it but with no data. </summary>
+        #region VirtualMachineExtensionVirtualMachine
+        /// <summary> Gets an object representing a VirtualMachineExtensionVirtualMachine along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineExtension" /> object. </returns>
-        public static VirtualMachineExtension GetVirtualMachineExtension(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="VirtualMachineExtensionVirtualMachine" /> object. </returns>
+        public static VirtualMachineExtensionVirtualMachine GetVirtualMachineExtensionVirtualMachine(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachineExtension(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachineExtensionVirtualMachine(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
@@ -144,14 +144,14 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region VirtualMachineExtensionVirtualMachineScaleSet
-        /// <summary> Gets an object representing a VirtualMachineExtensionVirtualMachineScaleSet along with the instance operations that can be performed on it but with no data. </summary>
+        #region VirtualMachineExtensionVirtualMachineScaleSetVM
+        /// <summary> Gets an object representing a VirtualMachineExtensionVirtualMachineScaleSetVM along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineExtensionVirtualMachineScaleSet" /> object. </returns>
-        public static VirtualMachineExtensionVirtualMachineScaleSet GetVirtualMachineExtensionVirtualMachineScaleSet(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="VirtualMachineExtensionVirtualMachineScaleSetVM" /> object. </returns>
+        public static VirtualMachineExtensionVirtualMachineScaleSetVM GetVirtualMachineExtensionVirtualMachineScaleSetVM(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachineExtensionVirtualMachineScaleSet(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachineExtensionVirtualMachineScaleSetVM(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 

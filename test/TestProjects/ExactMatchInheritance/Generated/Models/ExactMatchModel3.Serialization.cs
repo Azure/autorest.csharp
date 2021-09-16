@@ -9,9 +9,9 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace ExactMatchInheritance
+namespace ExactMatchInheritance.Models
 {
-    public partial class ExactMatchModel3Data : IUtf8JsonSerializable
+    public partial class ExactMatchModel3 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -36,7 +36,7 @@ namespace ExactMatchInheritance
             writer.WriteEndObject();
         }
 
-        internal static ExactMatchModel3Data DeserializeExactMatchModel3Data(JsonElement element)
+        internal static ExactMatchModel3 DeserializeExactMatchModel3(JsonElement element)
         {
             Optional<string> @new = default;
             Optional<string> name = default;
@@ -65,7 +65,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel3Data(id, name.Value, nEW.Value, @new.Value);
+            return new ExactMatchModel3(id, name.Value, nEW.Value, @new.Value);
         }
     }
 }

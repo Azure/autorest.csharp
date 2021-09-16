@@ -29,11 +29,12 @@ operation-group-to-parent:
    VirtualMachineExtensionImages: subscriptions
    VirtualMachineImages: subscriptions
    VirtualMachineSizes: subscriptions
-   VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
+   VirtualMachineExtensions: Microsoft.Compute/virtualMachines
+   VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets/virtualMachines
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets
 request-path-to-resource:
    /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest: VirtualMachineScaleSetRollingUpgrade
-operation-group-is-extension: VirtualMachineScaleSetVMExtensions
+operation-group-is-extension: VirtualMachineScaleSetVMExtensions;VirtualMachineExtensions
 modelerfour:
   lenient-model-deduplication: true
 directive:
@@ -49,4 +50,15 @@ directive:
   - rename-model:
       from: RollingUpgradeStatusInfo
       to: VirtualMachineScaleSetRollingUpgrade
+  ## we need to unify all the paths by changing `virtualmachines` to `virtualMachines` so that every path could have consistent casing
+  - from: swagger-document
+    where: $.paths
+    transform: >
+      for (var key in $) {
+          const newKey = key.replace('virtualmachines', 'virtualMachines');
+          if (newKey !== key) {
+              $[newKey] = $[key]
+              delete $[key]
+          }
+      }
 ```

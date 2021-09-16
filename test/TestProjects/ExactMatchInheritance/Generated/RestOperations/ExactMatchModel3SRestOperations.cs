@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using ExactMatchInheritance.Models;
 
 namespace ExactMatchInheritance
 {
@@ -43,7 +44,7 @@ namespace ExactMatchInheritance
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3Data parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -72,7 +73,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel3SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ExactMatchModel3Data>> PutAsync(string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ExactMatchModel3>> PutAsync(string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -93,9 +94,9 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel3Data value = default;
+                        ExactMatchModel3 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ExactMatchModel3Data.DeserializeExactMatchModel3Data(document.RootElement);
+                        value = ExactMatchModel3.DeserializeExactMatchModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -108,7 +109,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel3SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ExactMatchModel3Data> Put(string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        public Response<ExactMatchModel3> Put(string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -129,9 +130,9 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel3Data value = default;
+                        ExactMatchModel3 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ExactMatchModel3Data.DeserializeExactMatchModel3Data(document.RootElement);
+                        value = ExactMatchModel3.DeserializeExactMatchModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -163,7 +164,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is null. </exception>
-        public async Task<Response<ExactMatchModel3Data>> GetAsync(string resourceGroupName, string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public async Task<Response<ExactMatchModel3>> GetAsync(string resourceGroupName, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -180,13 +181,11 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel3Data value = default;
+                        ExactMatchModel3 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ExactMatchModel3Data.DeserializeExactMatchModel3Data(document.RootElement);
+                        value = ExactMatchModel3.DeserializeExactMatchModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((ExactMatchModel3Data)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -196,7 +195,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is null. </exception>
-        public Response<ExactMatchModel3Data> Get(string resourceGroupName, string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public Response<ExactMatchModel3> Get(string resourceGroupName, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -213,13 +212,11 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel3Data value = default;
+                        ExactMatchModel3 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ExactMatchModel3Data.DeserializeExactMatchModel3Data(document.RootElement);
+                        value = ExactMatchModel3.DeserializeExactMatchModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((ExactMatchModel3Data)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
