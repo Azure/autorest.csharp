@@ -5,22 +5,20 @@
 
 #nullable disable
 
-using OmitOperationGroups.Models;
-
-namespace OmitOperationGroups
+namespace OmitOperationGroups.Models
 {
-    /// <summary> A class representing the Model4 data model. </summary>
-    public partial class Model4Data
+    /// <summary> The Model4. </summary>
+    public partial class Model4
     {
-        /// <summary> Initializes a new instance of Model4Data. </summary>
-        internal Model4Data()
+        /// <summary> Initializes a new instance of Model4. </summary>
+        internal Model4()
         {
         }
 
-        /// <summary> Initializes a new instance of Model4Data. </summary>
+        /// <summary> Initializes a new instance of Model4. </summary>
         /// <param name="j"></param>
         /// <param name="modelz"></param>
-        internal Model4Data(string j, ModelZ modelz)
+        internal Model4(string j, ModelZ modelz)
         {
             J = j;
             Modelz = modelz;

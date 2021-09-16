@@ -32,8 +32,6 @@ operation-group-to-parent:
    VirtualMachineExtensions: Microsoft.Compute/virtualMachines
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets/virtualMachines
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets
-request-path-to-resource:
-   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest: VirtualMachineScaleSetRollingUpgrade
 operation-group-is-extension: VirtualMachineScaleSetVMExtensions;VirtualMachineExtensions
 modelerfour:
   lenient-model-deduplication: true

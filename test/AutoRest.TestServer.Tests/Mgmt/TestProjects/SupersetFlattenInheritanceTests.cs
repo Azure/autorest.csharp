@@ -19,10 +19,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(typeof(object), typeof(CustomModel1))]
         [TestCase(typeof(object), typeof(CustomModel2))]
-        [TestCase(typeof(SubResource), typeof(SubResourceModel1Data))]
-        [TestCase(typeof(SubResource), typeof(SubResourceModel2Data))]
-        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel1Data))]
-        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel2Data))]
+        [TestCase(typeof(SubResource), typeof(SubResourceModel1))]
+        [TestCase(typeof(SubResource), typeof(SubResourceModel2))]
+        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel1))]
+        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel2))]
         [TestCase(typeof(Resource), typeof(ResourceModel1Data))]
         [TestCase(typeof(Resource), typeof(ResourceModel2))]
         [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel1Data))]
@@ -38,9 +38,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase(typeof(CustomModel1), typeof(CustomModel2))]
-        [TestCase(typeof(CustomModel1), typeof(SubResourceModel2Data))]
-        [TestCase(typeof(CustomModel1), typeof(WritableSubResourceModel2Data))]
-        [TestCase(typeof(SubResourceModel1Data), typeof(ResourceModel2))]
+        [TestCase(typeof(CustomModel1), typeof(SubResourceModel2))]
+        [TestCase(typeof(CustomModel1), typeof(WritableSubResourceModel2))]
+        [TestCase(typeof(SubResourceModel1), typeof(ResourceModel2))]
         [TestCase(typeof(ResourceModel1Data), typeof(TrackedResourceModel2))]
         [TestCase(typeof(CustomModel1), typeof(NonResourceModel1))]
         public void ValidateFlattenType(Type sourceType, Type targetType)
@@ -56,10 +56,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(typeof(CustomModel1), new string[] { "foo" }, new Type[] { typeof(string) })]
         [TestCase(typeof(CustomModel2), new string[] { "foo", "bar" }, new Type[] { typeof(string), typeof(string) })]
-        [TestCase(typeof(SubResourceModel1Data), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
-        [TestCase(typeof(SubResourceModel2Data), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
-        [TestCase(typeof(WritableSubResourceModel1Data), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
-        [TestCase(typeof(WritableSubResourceModel2Data), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
+        [TestCase(typeof(SubResourceModel1), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
+        [TestCase(typeof(SubResourceModel2), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
+        [TestCase(typeof(WritableSubResourceModel1), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
+        [TestCase(typeof(WritableSubResourceModel2), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
         [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
         [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
         [TestCase(typeof(TrackedResourceModel1Data), new string[] { "location" }, new Type[] { typeof(Location) })]

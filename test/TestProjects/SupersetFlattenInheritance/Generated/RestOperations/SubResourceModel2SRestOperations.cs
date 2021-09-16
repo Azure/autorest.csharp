@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
@@ -43,7 +44,7 @@ namespace SupersetFlattenInheritance
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string subResourceModel2SName, SubResourceModel2Data parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string subResourceModel2SName, SubResourceModel2 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -72,7 +73,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="subResourceModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SubResourceModel2Data>> PutAsync(string resourceGroupName, string subResourceModel2SName, SubResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SubResourceModel2>> PutAsync(string resourceGroupName, string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -93,9 +94,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        SubResourceModel2Data value = default;
+                        SubResourceModel2 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SubResourceModel2Data.DeserializeSubResourceModel2Data(document.RootElement);
+                        value = SubResourceModel2.DeserializeSubResourceModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -108,7 +109,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="subResourceModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SubResourceModel2Data> Put(string resourceGroupName, string subResourceModel2SName, SubResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        public Response<SubResourceModel2> Put(string resourceGroupName, string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -129,9 +130,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        SubResourceModel2Data value = default;
+                        SubResourceModel2 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SubResourceModel2Data.DeserializeSubResourceModel2Data(document.RootElement);
+                        value = SubResourceModel2.DeserializeSubResourceModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -163,7 +164,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="subResourceModel2SName"/> is null. </exception>
-        public async Task<Response<SubResourceModel2Data>> GetAsync(string resourceGroupName, string subResourceModel2SName, CancellationToken cancellationToken = default)
+        public async Task<Response<SubResourceModel2>> GetAsync(string resourceGroupName, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -180,13 +181,11 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        SubResourceModel2Data value = default;
+                        SubResourceModel2 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SubResourceModel2Data.DeserializeSubResourceModel2Data(document.RootElement);
+                        value = SubResourceModel2.DeserializeSubResourceModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((SubResourceModel2Data)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -196,7 +195,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="subResourceModel2SName"/> is null. </exception>
-        public Response<SubResourceModel2Data> Get(string resourceGroupName, string subResourceModel2SName, CancellationToken cancellationToken = default)
+        public Response<SubResourceModel2> Get(string resourceGroupName, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -213,13 +212,11 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        SubResourceModel2Data value = default;
+                        SubResourceModel2 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SubResourceModel2Data.DeserializeSubResourceModel2Data(document.RootElement);
+                        value = SubResourceModel2.DeserializeSubResourceModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((SubResourceModel2Data)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

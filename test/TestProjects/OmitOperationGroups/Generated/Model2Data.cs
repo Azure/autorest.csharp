@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.ResourceManager;
 using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
@@ -18,11 +19,14 @@ namespace OmitOperationGroups
         }
 
         /// <summary> Initializes a new instance of Model2Data. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="f"></param>
         /// <param name="g"></param>
         /// <param name="b"></param>
         /// <param name="modelx"></param>
-        internal Model2Data(string f, string g, string b, ModelX modelx) : base(f, g)
+        internal Model2Data(ResourceIdentifier id, string name, ResourceType type, string f, string g, string b, ModelX modelx) : base(id, name, type, f, g)
         {
             B = b;
             Modelx = modelx;

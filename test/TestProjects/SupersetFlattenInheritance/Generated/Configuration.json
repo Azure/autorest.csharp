@@ -15,13 +15,21 @@
     "CustomModel2s": "NonResource",
     "ResourceModel2s": "NonResource",
     "TrackedResourceModel2s": "NonResource",
-    "NonResourceModel1s": "NonResource"
+    "NonResourceModel1s": "NonResource",
+    "SubResourceModel1s": "NonResource",
+    "SubResourceModel2s": "NonResource",
+    "WritableSubResourceModel1s": "NonResource",
+    "WritableSubResourceModel2s": "NonResource"
   },
   "OperationGroupToParent": {
     "CustomModel1s": "resourceGroups",
     "CustomModel2s": "resourceGroups",
     "ResourceModel2s": "resourceGroups",
     "TrackedResourceModel2s": "resourceGroups",
-    "NonResourceModel1s": "resourceGroups"
+    "NonResourceModel1s": "resourceGroups",
+    "SubResourceModel1s": "resourceGroups",
+    "SubResourceModel2s": "resourceGroups",
+    "WritableSubResourceModel1s": "resourceGroups",
+    "WritableSubResourceModel2s": "resourceGroups"
   }
 }

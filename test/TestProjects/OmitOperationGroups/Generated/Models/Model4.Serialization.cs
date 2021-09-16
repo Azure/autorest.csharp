@@ -7,13 +7,12 @@
 
 using System.Text.Json;
 using Azure.Core;
-using OmitOperationGroups.Models;
 
-namespace OmitOperationGroups
+namespace OmitOperationGroups.Models
 {
-    public partial class Model4Data
+    public partial class Model4
     {
-        internal static Model4Data DeserializeModel4Data(JsonElement element)
+        internal static Model4 DeserializeModel4(JsonElement element)
         {
             Optional<string> j = default;
             Optional<ModelZ> modelz = default;
@@ -35,7 +34,7 @@ namespace OmitOperationGroups
                     continue;
                 }
             }
-            return new Model4Data(j.Value, modelz.Value);
+            return new Model4(j.Value, modelz.Value);
         }
     }
 }

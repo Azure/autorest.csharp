@@ -7,23 +7,22 @@
 
 using System.Collections.Generic;
 using Azure.Core;
-using OmitOperationGroups.Models;
 
-namespace OmitOperationGroups
+namespace OmitOperationGroups.Models
 {
-    /// <summary> A class representing the Model5 data model. </summary>
-    public partial class Model5Data
+    /// <summary> The Model5. </summary>
+    public partial class Model5
     {
-        /// <summary> Initializes a new instance of Model5Data. </summary>
-        public Model5Data()
+        /// <summary> Initializes a new instance of Model5. </summary>
+        public Model5()
         {
             Modelqs = new ChangeTrackingList<ModelQ>();
         }
 
-        /// <summary> Initializes a new instance of Model5Data. </summary>
+        /// <summary> Initializes a new instance of Model5. </summary>
         /// <param name="k"></param>
         /// <param name="modelqs"></param>
-        internal Model5Data(string k, IList<ModelQ> modelqs)
+        internal Model5(string k, IList<ModelQ> modelqs)
         {
             K = k;
             Modelqs = modelqs;

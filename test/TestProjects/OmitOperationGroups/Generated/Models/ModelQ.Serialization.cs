@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace OmitOperationGroups.Models
 {
@@ -26,6 +27,9 @@ namespace OmitOperationGroups.Models
         internal static ModelQ DeserializeModelQ(JsonElement element)
         {
             Optional<string> m = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("m"))
@@ -33,8 +37,23 @@ namespace OmitOperationGroups.Models
                     m = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
             }
-            return new ModelQ(m.Value);
+            return new ModelQ(id, name, type, m.Value);
         }
     }
 }

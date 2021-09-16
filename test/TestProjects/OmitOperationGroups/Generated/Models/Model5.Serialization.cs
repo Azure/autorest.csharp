@@ -8,11 +8,10 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using OmitOperationGroups.Models;
 
-namespace OmitOperationGroups
+namespace OmitOperationGroups.Models
 {
-    public partial class Model5Data : IUtf8JsonSerializable
+    public partial class Model5 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -30,7 +29,7 @@ namespace OmitOperationGroups
             writer.WriteEndObject();
         }
 
-        internal static Model5Data DeserializeModel5Data(JsonElement element)
+        internal static Model5 DeserializeModel5(JsonElement element)
         {
             Optional<string> k = default;
             Optional<IList<ModelQ>> modelqs = default;
@@ -57,7 +56,7 @@ namespace OmitOperationGroups
                     continue;
                 }
             }
-            return new Model5Data(k.Value, Optional.ToList(modelqs));
+            return new Model5(k.Value, Optional.ToList(modelqs));
         }
     }
 }

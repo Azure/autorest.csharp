@@ -19,10 +19,18 @@ operation-group-to-resource:
    ResourceModel2s: NonResource # the model of ResourceModel2 contains id, but it comes from a flattened properties, therefore it should not be a resource
    TrackedResourceModel2s: NonResource # the model of TrackedResourceModel2 contains id, but it comes from a flattened properties, therefore it should not be a resource
    NonResourceModel1s: NonResource
+   SubResourceModel1s: NonResource # this model only contains an id, but no type or name
+   SubResourceModel2s: NonResource # this model only contains an id, but no type or name
+   WritableSubResourceModel1s: NonResource # this model only contains an id, but no type or name
+   WritableSubResourceModel2s: NonResource # this model only contains an id, but no type or name
 operation-group-to-parent:
    CustomModel1s: resourceGroups
    CustomModel2s: resourceGroups
    ResourceModel2s: resourceGroups
    TrackedResourceModel2s: resourceGroups
    NonResourceModel1s: resourceGroups
+   SubResourceModel1s: resourceGroups
+   SubResourceModel2s: resourceGroups
+   WritableSubResourceModel1s: resourceGroups
+   WritableSubResourceModel2s: resourceGroups
 ```

@@ -12,50 +12,6 @@ namespace SupersetFlattenInheritance
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region SubResourceModel1
-        /// <summary> Gets an object representing a SubResourceModel1 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubResourceModel1" /> object. </returns>
-        public static SubResourceModel1 GetSubResourceModel1(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SubResourceModel1(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
-        #region SubResourceModel2
-        /// <summary> Gets an object representing a SubResourceModel2 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubResourceModel2" /> object. </returns>
-        public static SubResourceModel2 GetSubResourceModel2(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SubResourceModel2(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
-        #region WritableSubResourceModel1
-        /// <summary> Gets an object representing a WritableSubResourceModel1 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="WritableSubResourceModel1" /> object. </returns>
-        public static WritableSubResourceModel1 GetWritableSubResourceModel1(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new WritableSubResourceModel1(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
-        #region WritableSubResourceModel2
-        /// <summary> Gets an object representing a WritableSubResourceModel2 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="WritableSubResourceModel2" /> object. </returns>
-        public static WritableSubResourceModel2 GetWritableSubResourceModel2(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new WritableSubResourceModel2(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
         #region ResourceModel1
         /// <summary> Gets an object representing a ResourceModel1 along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>

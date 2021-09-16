@@ -37,8 +37,5 @@
   "OperationGroupIsExtension": [
     "VirtualMachineScaleSetVMExtensions",
     "VirtualMachineExtensions"
-  ],
-  "RequestPathToResource": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest": "VirtualMachineScaleSetRollingUpgrade"
-  }
+  ]
 }

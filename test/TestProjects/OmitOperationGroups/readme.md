@@ -12,9 +12,8 @@ namespace: OmitOperationGroups
 operation-group-to-resource-type:
   Model4s: Microsoft.Compute/model2s/model4s
 operation-group-to-resource:
-  Model4s: Model4
+  Model4s: NonResource
+  Model5s: NonResource
 operation-groups-to-omit:
    Model1s
-request-path-to-resource:
-   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default: Model4
 ```

@@ -15,6 +15,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
+using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
 {
@@ -24,6 +25,7 @@ namespace OmitOperationGroups
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Model2SRestOperations _restClient;
         private readonly Model2Data _data;
+        private Model4SRestOperations _model4sRestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="Model2"/> class for mocking. </summary>
         protected Model2()
@@ -33,12 +35,13 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref = "Model2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Model2(ArmResource options, Model2Data resource)
+        internal Model2(ArmResource options, Model2Data resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Model2"/> class. </summary>
@@ -48,6 +51,7 @@ namespace OmitOperationGroups
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Model2"/> class. </summary>
@@ -60,6 +64,7 @@ namespace OmitOperationGroups
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -136,12 +141,38 @@ namespace OmitOperationGroups
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
-
-        /// <summary> Gets an object representing a Model4 along with the instance operations that can be performed on it. </summary>
-        /// <returns> Returns a <see cref="Model4" /> object. </returns>
-        public Model4 GetModel4()
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<Model4>> GetModel4DefaultAsync(CancellationToken cancellationToken = default)
         {
-            return new Model4(this, Id + "/model4s/default");
+            using var scope = _clientDiagnostics.CreateScope("Model2.GetModel4Default");
+            scope.Start();
+            try
+            {
+                var response = await _model4sRestClient.GetDefaultAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Model4> GetModel4Default(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("Model2.GetModel4Default");
+            scope.Start();
+            try
+            {
+                var response = _model4sRestClient.GetDefault(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

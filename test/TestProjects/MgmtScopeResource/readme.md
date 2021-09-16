@@ -26,7 +26,10 @@ operation-group-to-parent:
   PolicyAssignments: tenant
   ResourceLinks: tenant
 request-path-to-resource:
+  # model of this only has ID
   /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}: DeploymentOperation
+  # model of this has id, type and name, but its type has the type of `object` instead of `string`
+  /{linkId}: ResourceLink
 merge-operations:
   WhatIf: Deployments_WhatIf_POST;Deployments_WhatIfAtTenantScope_POST;Deployments_WhatIfAtManagementGroupScope_POST;Deployments_WhatIfAtSubscriptionScope_POST
 directive:

@@ -16,6 +16,4 @@ operation-group-to-resource:
    AvailabilitySets: AvailabilitySet
 operation-group-to-parent:
    Usage: subscriptions
-request-path-to-resource:
-   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}: AvailabilitySet
 ```

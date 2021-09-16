@@ -34,6 +34,7 @@
     ]
   },
   "RequestPathToResource": {
-    "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": "DeploymentOperation"
+    "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": "DeploymentOperation",
+    "/{linkId}": "ResourceLink"
   }
 }

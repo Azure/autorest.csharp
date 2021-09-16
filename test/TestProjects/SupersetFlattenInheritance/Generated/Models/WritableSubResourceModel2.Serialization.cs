@@ -9,13 +9,15 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace SupersetFlattenInheritance
+namespace SupersetFlattenInheritance.Models
 {
-    public partial class SubResourceModel2Data : IUtf8JsonSerializable
+    public partial class WritableSubResourceModel2 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -27,7 +29,7 @@ namespace SupersetFlattenInheritance
             writer.WriteEndObject();
         }
 
-        internal static SubResourceModel2Data DeserializeSubResourceModel2Data(JsonElement element)
+        internal static WritableSubResourceModel2 DeserializeWritableSubResourceModel2(JsonElement element)
         {
             ResourceIdentifier id = default;
             Optional<string> foo = default;
@@ -56,7 +58,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new SubResourceModel2Data(id, foo.Value);
+            return new WritableSubResourceModel2(id, foo.Value);
         }
     }
 }
