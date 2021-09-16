@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -16,42 +17,46 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InheritanceChooser
     {
-        public static CSharpType? GetExactMatch(OperationGroup? operationGroup, MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
+
+        public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
         {
-            if (SchemaMatchTracker.TryGetExactMatch(originalType.ObjectSchema, out var result))
+            return _valueCache.TryGetValue(schema, out result);
+        }
+
+        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
             {
                 List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
                 {
-                    result = GetCSharpType(operationGroup, originalType, parentType);
-                    SchemaMatchTracker.SetExactMatch(originalType.ObjectSchema, result);
+                    result = GetCSharpType(originalType, parentType);
+                    _valueCache.TryAdd(originalType.ObjectSchema, result);
                     return result;
                 }
             }
-            SchemaMatchTracker.SetExactMatch(originalType.ObjectSchema, null);
+            _valueCache.TryAdd(originalType.ObjectSchema, null);
             return null;
         }
 
-        public static CSharpType? GetSupersetMatch(OperationGroup? operationGroup, MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
         {
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
             {
                 if (IsSuperset(parentType, properties))
                 {
-                    return GetCSharpType(operationGroup, originalType, parentType);
+                    return GetCSharpType(originalType, parentType);
                 }
             }
             return null;
         }
 
-        private static CSharpType GetCSharpType(OperationGroup? operationGroup, MgmtObjectType originalType, Type parentType)
+        private static CSharpType GetCSharpType(MgmtObjectType originalType, Type parentType)
         {
-            var newParentType = operationGroup == null || !parentType.IsGenericType
-                ? parentType
-                : parentType.GetGenericTypeDefinition().MakeGenericType(operationGroup.GetResourceIdentifierType(originalType.Context));
-            return CSharpType.FromSystemType(originalType.Context, newParentType);
+            return CSharpType.FromSystemType(originalType.Context, parentType);
         }
 
         private static bool IsSuperset(System.Type parentType, ObjectTypeProperty[] properties)

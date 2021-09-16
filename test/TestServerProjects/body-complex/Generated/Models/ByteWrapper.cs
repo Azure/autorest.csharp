@@ -24,6 +24,7 @@ namespace body_complex.Models
             Field = field;
         }
 
+        /// <summary> Gets or sets the field. </summary>
         public byte[] Field { get; set; }
     }
 }

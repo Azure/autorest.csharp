@@ -24,7 +24,9 @@ namespace paging.Models
             Name = name;
         }
 
+        /// <summary> Gets the id. </summary>
         public int? Id { get; }
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
     }
 }

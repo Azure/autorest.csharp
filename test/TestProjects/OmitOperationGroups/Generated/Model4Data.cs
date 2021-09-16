@@ -26,7 +26,9 @@ namespace OmitOperationGroups
             Modelz = modelz;
         }
 
+        /// <summary> Gets the j. </summary>
         public string J { get; }
+        /// <summary> Gets the modelz. </summary>
         public ModelZ Modelz { get; }
     }
 }

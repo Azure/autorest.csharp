@@ -26,7 +26,9 @@ namespace body_complex.Models
             Now = now;
         }
 
+        /// <summary> Gets or sets the field. </summary>
         public DateTimeOffset? Field { get; set; }
+        /// <summary> Gets or sets the now. </summary>
         public DateTimeOffset? Now { get; set; }
     }
 }

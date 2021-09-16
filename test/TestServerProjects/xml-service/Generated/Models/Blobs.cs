@@ -29,7 +29,9 @@ namespace xml_service.Models
             Blob = blob;
         }
 
+        /// <summary> Gets the blob prefix. </summary>
         public IReadOnlyList<BlobPrefix> BlobPrefix { get; }
+        /// <summary> Gets the blob. </summary>
         public IReadOnlyList<Blob> Blob { get; }
     }
 }

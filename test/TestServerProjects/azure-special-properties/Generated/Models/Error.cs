@@ -27,8 +27,11 @@ namespace azure_special_properties.Models
             Message = message;
         }
 
+        /// <summary> Gets the status. </summary>
         public int? Status { get; }
+        /// <summary> Gets the constant id. </summary>
         public int ConstantId { get; }
+        /// <summary> Gets the message. </summary>
         public string Message { get; }
     }
 }

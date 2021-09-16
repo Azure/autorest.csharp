@@ -26,8 +26,11 @@ namespace validation.Models
             Fields = fields;
         }
 
+        /// <summary> Gets the code. </summary>
         public int? Code { get; }
+        /// <summary> Gets the message. </summary>
         public string Message { get; }
+        /// <summary> Gets the fields. </summary>
         public string Fields { get; }
     }
 }

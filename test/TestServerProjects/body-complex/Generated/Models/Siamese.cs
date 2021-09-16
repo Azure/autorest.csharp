@@ -28,6 +28,7 @@ namespace body_complex.Models
             Breed = breed;
         }
 
+        /// <summary> Gets or sets the breed. </summary>
         public string Breed { get; set; }
     }
 }

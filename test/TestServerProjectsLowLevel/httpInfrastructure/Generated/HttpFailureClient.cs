@@ -17,7 +17,8 @@ namespace httpInfrastructure_LowLevel
     public partial class HttpFailureClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,19 +46,28 @@ namespace httpInfrastructure_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Get empty error form server. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyErrorAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyErrorRequest(options);
+            using HttpMessage message = CreateGetEmptyErrorRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
@@ -87,13 +97,22 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetEmptyError(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyErrorRequest(options);
+            using HttpMessage message = CreateGetEmptyErrorRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
@@ -122,11 +141,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetEmptyError"/> and <see cref="GetEmptyErrorAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetEmptyErrorRequest(RequestOptions options = null)
+        private HttpMessage CreateGetEmptyErrorRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -144,7 +161,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoModelErrorRequest(options);
+            using HttpMessage message = CreateGetNoModelErrorRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
@@ -180,7 +197,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoModelErrorRequest(options);
+            using HttpMessage message = CreateGetNoModelErrorRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
@@ -209,11 +226,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNoModelError"/> and <see cref="GetNoModelErrorAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNoModelErrorRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNoModelErrorRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -231,7 +246,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoModelEmptyRequest(options);
+            using HttpMessage message = CreateGetNoModelEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
@@ -267,7 +282,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoModelEmptyRequest(options);
+            using HttpMessage message = CreateGetNoModelEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
@@ -296,11 +311,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNoModelEmpty"/> and <see cref="GetNoModelEmptyAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNoModelEmptyRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNoModelEmptyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

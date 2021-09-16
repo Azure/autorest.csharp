@@ -18,7 +18,8 @@ namespace url_LowLevel
     public partial class PathsClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -46,19 +47,28 @@ namespace url_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Get true Boolean value on path. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanTrueAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanTrueRequest(options);
+            using HttpMessage message = CreateGetBooleanTrueRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
@@ -88,13 +98,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get true Boolean value on path. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetBooleanTrue(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanTrueRequest(options);
+            using HttpMessage message = CreateGetBooleanTrueRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
@@ -123,11 +142,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBooleanTrue"/> and <see cref="GetBooleanTrueAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetBooleanTrueRequest(RequestOptions options = null)
+        private HttpMessage CreateGetBooleanTrueRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -140,13 +157,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get false Boolean value on path. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanFalseAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanFalseRequest(options);
+            using HttpMessage message = CreateGetBooleanFalseRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
@@ -176,13 +202,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get false Boolean value on path. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetBooleanFalse(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanFalseRequest(options);
+            using HttpMessage message = CreateGetBooleanFalseRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
@@ -211,11 +246,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBooleanFalse"/> and <see cref="GetBooleanFalseAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetBooleanFalseRequest(RequestOptions options = null)
+        private HttpMessage CreateGetBooleanFalseRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -228,13 +261,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetIntOneMillionAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntOneMillionRequest(options);
+            using HttpMessage message = CreateGetIntOneMillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
@@ -264,13 +306,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetIntOneMillion(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntOneMillionRequest(options);
+            using HttpMessage message = CreateGetIntOneMillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
@@ -299,11 +350,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetIntOneMillion"/> and <see cref="GetIntOneMillionAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetIntOneMillionRequest(RequestOptions options = null)
+        private HttpMessage CreateGetIntOneMillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -316,13 +365,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
+            using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -352,13 +410,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetIntNegativeOneMillion(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
+            using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -387,11 +454,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetIntNegativeOneMillion"/> and <see cref="GetIntNegativeOneMillionAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetIntNegativeOneMillionRequest(RequestOptions options = null)
+        private HttpMessage CreateGetIntNegativeOneMillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -404,13 +469,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetTenBillionAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTenBillionRequest(options);
+            using HttpMessage message = CreateGetTenBillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
@@ -440,13 +514,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetTenBillion(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTenBillionRequest(options);
+            using HttpMessage message = CreateGetTenBillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
@@ -475,11 +558,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetTenBillion"/> and <see cref="GetTenBillionAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetTenBillionRequest(RequestOptions options = null)
+        private HttpMessage CreateGetTenBillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -492,13 +573,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
+            using HttpMessage message = CreateGetNegativeTenBillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
@@ -528,13 +618,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetNegativeTenBillion(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
+            using HttpMessage message = CreateGetNegativeTenBillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
@@ -563,11 +662,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNegativeTenBillion"/> and <see cref="GetNegativeTenBillionAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNegativeTenBillionRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNegativeTenBillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -580,13 +677,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificPositiveRequest(options);
+            using HttpMessage message = CreateFloatScientificPositiveRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
@@ -616,13 +722,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response FloatScientificPositive(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificPositiveRequest(options);
+            using HttpMessage message = CreateFloatScientificPositiveRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
@@ -651,11 +766,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="FloatScientificPositive"/> and <see cref="FloatScientificPositiveAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateFloatScientificPositiveRequest(RequestOptions options = null)
+        private HttpMessage CreateFloatScientificPositiveRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -668,13 +781,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificNegativeRequest(options);
+            using HttpMessage message = CreateFloatScientificNegativeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
@@ -704,13 +826,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response FloatScientificNegative(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificNegativeRequest(options);
+            using HttpMessage message = CreateFloatScientificNegativeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
@@ -739,11 +870,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="FloatScientificNegative"/> and <see cref="FloatScientificNegativeAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateFloatScientificNegativeRequest(RequestOptions options = null)
+        private HttpMessage CreateFloatScientificNegativeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -756,13 +885,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
+            using HttpMessage message = CreateDoubleDecimalPositiveRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
@@ -792,13 +930,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DoubleDecimalPositive(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
+            using HttpMessage message = CreateDoubleDecimalPositiveRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
@@ -827,11 +974,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DoubleDecimalPositive"/> and <see cref="DoubleDecimalPositiveAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDoubleDecimalPositiveRequest(RequestOptions options = null)
+        private HttpMessage CreateDoubleDecimalPositiveRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -844,13 +989,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
+            using HttpMessage message = CreateDoubleDecimalNegativeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
@@ -880,13 +1034,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DoubleDecimalNegative(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
+            using HttpMessage message = CreateDoubleDecimalNegativeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
@@ -915,11 +1078,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DoubleDecimalNegative"/> and <see cref="DoubleDecimalNegativeAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDoubleDecimalNegativeRequest(RequestOptions options = null)
+        private HttpMessage CreateDoubleDecimalNegativeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -932,13 +1093,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> StringUnicodeAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUnicodeRequest(options);
+            using HttpMessage message = CreateStringUnicodeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
@@ -968,13 +1138,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response StringUnicode(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUnicodeRequest(options);
+            using HttpMessage message = CreateStringUnicodeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
@@ -1003,11 +1182,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringUnicode"/> and <see cref="StringUnicodeAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStringUnicodeRequest(RequestOptions options = null)
+        private HttpMessage CreateStringUnicodeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1020,13 +1197,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlEncodedAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlEncodedRequest(options);
+            using HttpMessage message = CreateStringUrlEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
@@ -1056,13 +1242,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response StringUrlEncoded(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlEncodedRequest(options);
+            using HttpMessage message = CreateStringUrlEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
@@ -1091,11 +1286,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringUrlEncoded"/> and <see cref="StringUrlEncodedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStringUrlEncodedRequest(RequestOptions options = null)
+        private HttpMessage CreateStringUrlEncodedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1108,13 +1301,22 @@ namespace url_LowLevel
         }
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlNonEncodedRequest(options);
+            using HttpMessage message = CreateStringUrlNonEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
@@ -1144,13 +1346,22 @@ namespace url_LowLevel
         }
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response StringUrlNonEncoded(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlNonEncodedRequest(options);
+            using HttpMessage message = CreateStringUrlNonEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
@@ -1179,11 +1390,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringUrlNonEncoded"/> and <see cref="StringUrlNonEncodedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStringUrlNonEncodedRequest(RequestOptions options = null)
+        private HttpMessage CreateStringUrlNonEncodedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1196,13 +1405,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos;. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> StringEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringEmptyRequest(options);
+            using HttpMessage message = CreateStringEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
@@ -1232,13 +1450,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos;. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response StringEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringEmptyRequest(options);
+            using HttpMessage message = CreateStringEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
@@ -1267,11 +1494,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringEmpty"/> and <see cref="StringEmptyAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStringEmptyRequest(RequestOptions options = null)
+        private HttpMessage CreateStringEmptyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1284,6 +1509,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="stringPath"> null string value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1291,7 +1525,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringNullRequest(stringPath, options);
+            using HttpMessage message = CreateStringNullRequest(stringPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -1321,6 +1555,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="stringPath"> null string value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1328,7 +1571,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringNullRequest(stringPath, options);
+            using HttpMessage message = CreateStringNullRequest(stringPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -1357,12 +1600,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringNull"/> and <see cref="StringNullAsync"/> operations. </summary>
-        /// <param name="stringPath"> null string value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStringNullRequest(string stringPath, RequestOptions options = null)
+        private HttpMessage CreateStringNullRequest(string stringPath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1375,6 +1615,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="enumPath"> send the value green. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1382,7 +1631,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumValidRequest(enumPath, options);
+            using HttpMessage message = CreateEnumValidRequest(enumPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -1412,6 +1661,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="enumPath"> send the value green. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1419,7 +1677,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumValidRequest(enumPath, options);
+            using HttpMessage message = CreateEnumValidRequest(enumPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -1448,12 +1706,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="EnumValid"/> and <see cref="EnumValidAsync"/> operations. </summary>
-        /// <param name="enumPath"> send the value green. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateEnumValidRequest(string enumPath, RequestOptions options = null)
+        private HttpMessage CreateEnumValidRequest(string enumPath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1466,6 +1721,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="enumPath"> send null should throw. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1473,7 +1737,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumNullRequest(enumPath, options);
+            using HttpMessage message = CreateEnumNullRequest(enumPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
@@ -1503,6 +1767,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="enumPath"> send null should throw. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1510,7 +1783,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumNullRequest(enumPath, options);
+            using HttpMessage message = CreateEnumNullRequest(enumPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
@@ -1539,12 +1812,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="EnumNull"/> and <see cref="EnumNullAsync"/> operations. </summary>
-        /// <param name="enumPath"> send null should throw. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateEnumNullRequest(string enumPath, RequestOptions options = null)
+        private HttpMessage CreateEnumNullRequest(string enumPath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1557,6 +1827,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1564,7 +1843,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteMultiByteRequest(bytePath, options);
+            using HttpMessage message = CreateByteMultiByteRequest(bytePath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
@@ -1594,6 +1873,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1601,7 +1889,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteMultiByteRequest(bytePath, options);
+            using HttpMessage message = CreateByteMultiByteRequest(bytePath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
@@ -1630,12 +1918,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ByteMultiByte"/> and <see cref="ByteMultiByteAsync"/> operations. </summary>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateByteMultiByteRequest(byte[] bytePath, RequestOptions options = null)
+        private HttpMessage CreateByteMultiByteRequest(byte[] bytePath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1648,13 +1933,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ByteEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteEmptyRequest(options);
+            using HttpMessage message = CreateByteEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
@@ -1684,13 +1978,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ByteEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteEmptyRequest(options);
+            using HttpMessage message = CreateByteEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
@@ -1719,11 +2022,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ByteEmpty"/> and <see cref="ByteEmptyAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateByteEmptyRequest(RequestOptions options = null)
+        private HttpMessage CreateByteEmptyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1736,6 +2037,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null as byte array (should throw). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1743,7 +2053,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteNullRequest(bytePath, options);
+            using HttpMessage message = CreateByteNullRequest(bytePath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
@@ -1773,6 +2083,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null as byte array (should throw). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1780,7 +2099,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteNullRequest(bytePath, options);
+            using HttpMessage message = CreateByteNullRequest(bytePath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
@@ -1809,12 +2128,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ByteNull"/> and <see cref="ByteNullAsync"/> operations. </summary>
-        /// <param name="bytePath"> null as byte array (should throw). </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateByteNullRequest(byte[] bytePath, RequestOptions options = null)
+        private HttpMessage CreateByteNullRequest(byte[] bytePath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1827,13 +2143,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DateValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateValidRequest(options);
+            using HttpMessage message = CreateDateValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
@@ -1863,13 +2188,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DateValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateValidRequest(options);
+            using HttpMessage message = CreateDateValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
@@ -1898,11 +2232,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateValid"/> and <see cref="DateValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDateValidRequest(RequestOptions options = null)
+        private HttpMessage CreateDateValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1915,6 +2247,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="datePath"> null as date (should throw). </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1922,7 +2263,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateNullRequest(datePath, options);
+            using HttpMessage message = CreateDateNullRequest(datePath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
@@ -1952,6 +2293,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="datePath"> null as date (should throw). </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1959,7 +2309,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateNullRequest(datePath, options);
+            using HttpMessage message = CreateDateNullRequest(datePath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
@@ -1988,12 +2338,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateNull"/> and <see cref="DateNullAsync"/> operations. </summary>
-        /// <param name="datePath"> null as date (should throw). </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDateNullRequest(DateTimeOffset datePath, RequestOptions options = null)
+        private HttpMessage CreateDateNullRequest(DateTimeOffset datePath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2006,13 +2353,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeValidRequest(options);
+            using HttpMessage message = CreateDateTimeValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
@@ -2042,13 +2398,22 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DateTimeValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeValidRequest(options);
+            using HttpMessage message = CreateDateTimeValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
@@ -2077,11 +2442,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateTimeValid"/> and <see cref="DateTimeValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDateTimeValidRequest(RequestOptions options = null)
+        private HttpMessage CreateDateTimeValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2094,6 +2457,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="dateTimePath"> null as date-time. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2101,7 +2473,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, options);
+            using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
@@ -2131,6 +2503,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="dateTimePath"> null as date-time. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2138,7 +2519,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, options);
+            using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
@@ -2167,12 +2548,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateTimeNull"/> and <see cref="DateTimeNullAsync"/> operations. </summary>
-        /// <param name="dateTimePath"> null as date-time. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath, RequestOptions options = null)
+        private HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2185,6 +2563,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2192,7 +2579,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, options);
+            using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
@@ -2222,6 +2609,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2229,7 +2625,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, options);
+            using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
@@ -2258,12 +2654,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Base64Url"/> and <see cref="Base64UrlAsync"/> operations. </summary>
-        /// <param name="base64UrlPath"> base64url encoded value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath, RequestOptions options = null)
+        private HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2276,6 +2669,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2283,7 +2685,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, options);
+            using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
@@ -2313,6 +2715,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2320,7 +2731,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, options);
+            using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
@@ -2349,12 +2760,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayCsvInPath"/> and <see cref="ArrayCsvInPathAsync"/> operations. </summary>
-        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath, RequestOptions options = null)
+        private HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2367,6 +2775,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2374,7 +2791,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, options);
+            using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
@@ -2404,6 +2821,15 @@ namespace url_LowLevel
         }
 
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2411,7 +2837,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, options);
+            using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
@@ -2440,12 +2866,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="UnixTimeUrl"/> and <see cref="UnixTimeUrlAsync"/> operations. </summary>
-        /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath, RequestOptions options = null)
+        private HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

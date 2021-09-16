@@ -28,7 +28,9 @@ namespace paging.Models
             NextLink = nextLink;
         }
 
+        /// <summary> Gets the indexes. </summary>
         public IReadOnlyList<Product> Indexes { get; }
+        /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }
 }

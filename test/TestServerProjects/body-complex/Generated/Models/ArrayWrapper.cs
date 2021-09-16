@@ -26,6 +26,7 @@ namespace body_complex.Models
             Array = array;
         }
 
+        /// <summary> Gets the array. </summary>
         public IList<string> Array { get; }
     }
 }

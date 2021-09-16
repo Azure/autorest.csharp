@@ -22,6 +22,7 @@ namespace OmitOperationGroups.Models
             M = m;
         }
 
+        /// <summary> Gets or sets the m. </summary>
         public string M { get; set; }
     }
 }

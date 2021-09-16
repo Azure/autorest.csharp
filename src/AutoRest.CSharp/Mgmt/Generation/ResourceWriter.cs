@@ -155,7 +155,25 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resource.ResourceIdentifierType} id) : base(options, id)"))
             {
                 if (IsSingleton)
-                _writer.Line($"Parent = options;");
+                    _writer.Line($"Parent = options;");
+                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
+                foreach (var operationGroup in _resource.ChildOperations.Keys)
+                {
+                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
+                }
+            }
+
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.");
+            _writer.WriteXmlDocumentationParameter("clientOptions", $"The client options to build client context.");
+            _writer.WriteXmlDocumentationParameter("credential", $"The credential to build client context.");
+            _writer.WriteXmlDocumentationParameter("uri", $"The uri to build client context.");
+            _writer.WriteXmlDocumentationParameter("pipeline", $"The pipeline to build client context.");
+            _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmClientOptions)} clientOptions, {typeof(TokenCredential)} credential, {typeof(Uri)} uri, {typeof(HttpPipeline)} pipeline, {_resource.ResourceIdentifierType} id) : base(clientOptions, credential, uri, pipeline, id)"))
+            {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
                 _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");

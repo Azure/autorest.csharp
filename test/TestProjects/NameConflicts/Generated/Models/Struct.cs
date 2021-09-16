@@ -130,6 +130,7 @@ namespace NameConflicts.Models
             One = one;
         }
 
+        /// <summary> Gets or sets the one. </summary>
         public string One { get; set; }
     }
 }

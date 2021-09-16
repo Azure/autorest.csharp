@@ -24,6 +24,7 @@ namespace xml_service.Models
             Bytes = bytes;
         }
 
+        /// <summary> Gets or sets the bytes. </summary>
         public byte[] Bytes { get; set; }
     }
 }

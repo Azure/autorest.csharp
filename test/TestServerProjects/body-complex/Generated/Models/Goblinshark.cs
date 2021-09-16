@@ -37,6 +37,7 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "goblin";
         }
 
+        /// <summary> Gets or sets the jawsize. </summary>
         public int? Jawsize { get; set; }
         /// <summary> Colors possible. </summary>
         public GoblinSharkColor? Color { get; set; }

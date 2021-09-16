@@ -97,23 +97,41 @@ namespace ModelShapes.Models
             NonRequiredReadonlyInt = nonRequiredReadonlyInt;
         }
 
+        /// <summary> Gets the required string. </summary>
         public string RequiredString { get; }
+        /// <summary> Gets the required int. </summary>
         public int RequiredInt { get; }
+        /// <summary> Gets the required string list. </summary>
         public IReadOnlyList<string> RequiredStringList { get; }
+        /// <summary> Gets the required int list. </summary>
         public IReadOnlyList<int> RequiredIntList { get; }
+        /// <summary> Gets the non required string. </summary>
         public string NonRequiredString { get; }
+        /// <summary> Gets the non required int. </summary>
         public int? NonRequiredInt { get; }
+        /// <summary> Gets the non required string list. </summary>
         public IReadOnlyList<string> NonRequiredStringList { get; }
+        /// <summary> Gets the non required int list. </summary>
         public IReadOnlyList<int> NonRequiredIntList { get; }
+        /// <summary> Gets the required nullable string. </summary>
         public string RequiredNullableString { get; }
+        /// <summary> Gets the required nullable int. </summary>
         public int? RequiredNullableInt { get; }
+        /// <summary> Gets the required nullable string list. </summary>
         public IReadOnlyList<string> RequiredNullableStringList { get; }
+        /// <summary> Gets the required nullable int list. </summary>
         public IReadOnlyList<int> RequiredNullableIntList { get; }
+        /// <summary> Gets the non required nullable string. </summary>
         public string NonRequiredNullableString { get; }
+        /// <summary> Gets the non required nullable int. </summary>
         public int? NonRequiredNullableInt { get; }
+        /// <summary> Gets the non required nullable string list. </summary>
         public IReadOnlyList<string> NonRequiredNullableStringList { get; }
+        /// <summary> Gets the non required nullable int list. </summary>
         public IReadOnlyList<int> NonRequiredNullableIntList { get; }
+        /// <summary> Gets the required readonly int. </summary>
         public int RequiredReadonlyInt { get; }
+        /// <summary> Gets the non required readonly int. </summary>
         public int? NonRequiredReadonlyInt { get; }
     }
 }

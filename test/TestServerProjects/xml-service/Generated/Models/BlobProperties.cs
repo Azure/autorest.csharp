@@ -88,34 +88,61 @@ namespace xml_service.Models
             ArchiveStatus = archiveStatus;
         }
 
+        /// <summary> Gets the last modified. </summary>
         public DateTimeOffset LastModified { get; }
+        /// <summary> Gets the etag. </summary>
         public string Etag { get; }
         /// <summary> Size in bytes. </summary>
         public long? ContentLength { get; }
+        /// <summary> Gets the content type. </summary>
         public string ContentType { get; }
+        /// <summary> Gets the content encoding. </summary>
         public string ContentEncoding { get; }
+        /// <summary> Gets the content language. </summary>
         public string ContentLanguage { get; }
+        /// <summary> Gets the content md 5. </summary>
         public string ContentMD5 { get; }
+        /// <summary> Gets the content disposition. </summary>
         public string ContentDisposition { get; }
+        /// <summary> Gets the cache control. </summary>
         public string CacheControl { get; }
+        /// <summary> Gets the blob sequence number. </summary>
         public int? BlobSequenceNumber { get; }
+        /// <summary> Gets the blob type. </summary>
         public BlobType? BlobType { get; }
+        /// <summary> Gets the lease status. </summary>
         public LeaseStatusType? LeaseStatus { get; }
+        /// <summary> Gets the lease state. </summary>
         public LeaseStateType? LeaseState { get; }
+        /// <summary> Gets the lease duration. </summary>
         public LeaseDurationType? LeaseDuration { get; }
+        /// <summary> Gets the copy id. </summary>
         public string CopyId { get; }
+        /// <summary> Gets the copy status. </summary>
         public CopyStatusType? CopyStatus { get; }
+        /// <summary> Gets the copy source. </summary>
         public string CopySource { get; }
+        /// <summary> Gets the copy progress. </summary>
         public string CopyProgress { get; }
+        /// <summary> Gets the copy completion time. </summary>
         public DateTimeOffset? CopyCompletionTime { get; }
+        /// <summary> Gets the copy status description. </summary>
         public string CopyStatusDescription { get; }
+        /// <summary> Gets the server encrypted. </summary>
         public bool? ServerEncrypted { get; }
+        /// <summary> Gets the incremental copy. </summary>
         public bool? IncrementalCopy { get; }
+        /// <summary> Gets the destination snapshot. </summary>
         public string DestinationSnapshot { get; }
+        /// <summary> Gets the deleted time. </summary>
         public DateTimeOffset? DeletedTime { get; }
+        /// <summary> Gets the remaining retention days. </summary>
         public int? RemainingRetentionDays { get; }
+        /// <summary> Gets the access tier. </summary>
         public AccessTier? AccessTier { get; }
+        /// <summary> Gets the access tier inferred. </summary>
         public bool? AccessTierInferred { get; }
+        /// <summary> Gets the archive status. </summary>
         public ArchiveStatus? ArchiveStatus { get; }
     }
 }

@@ -24,6 +24,7 @@ namespace body_complex.Models
             Food = food;
         }
 
+        /// <summary> Gets or sets the food. </summary>
         public string Food { get; set; }
     }
 }

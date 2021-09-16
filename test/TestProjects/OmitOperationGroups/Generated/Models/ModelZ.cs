@@ -24,7 +24,9 @@ namespace OmitOperationGroups.Models
             I = i;
         }
 
+        /// <summary> Gets or sets the h. </summary>
         public string H { get; set; }
+        /// <summary> Gets the i. </summary>
         public string I { get; }
     }
 }

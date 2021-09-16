@@ -22,6 +22,7 @@ namespace ModelShapes.Models
             Name = name;
         }
 
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
     }
 }

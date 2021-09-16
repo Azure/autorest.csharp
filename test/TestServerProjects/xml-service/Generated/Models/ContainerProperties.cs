@@ -44,11 +44,17 @@ namespace xml_service.Models
             PublicAccess = publicAccess;
         }
 
+        /// <summary> Gets the last modified. </summary>
         public DateTimeOffset LastModified { get; }
+        /// <summary> Gets the etag. </summary>
         public string Etag { get; }
+        /// <summary> Gets the lease status. </summary>
         public LeaseStatusType? LeaseStatus { get; }
+        /// <summary> Gets the lease state. </summary>
         public LeaseStateType? LeaseState { get; }
+        /// <summary> Gets the lease duration. </summary>
         public LeaseDurationType? LeaseDuration { get; }
+        /// <summary> Gets the public access. </summary>
         public PublicAccessType? PublicAccess { get; }
     }
 }

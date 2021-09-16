@@ -36,7 +36,9 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "shark";
         }
 
+        /// <summary> Gets or sets the age. </summary>
         public int? Age { get; set; }
+        /// <summary> Gets or sets the birthday. </summary>
         public DateTimeOffset Birthday { get; set; }
     }
 }

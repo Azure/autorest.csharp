@@ -27,6 +27,7 @@ namespace required_optional.Models
             Value = value.ToList();
         }
 
+        /// <summary> Gets the value. </summary>
         public IList<string> Value { get; }
     }
 }

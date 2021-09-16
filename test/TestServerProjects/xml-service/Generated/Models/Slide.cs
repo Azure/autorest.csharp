@@ -30,8 +30,11 @@ namespace xml_service.Models
             Items = items;
         }
 
+        /// <summary> Gets or sets the type. </summary>
         public string Type { get; set; }
+        /// <summary> Gets or sets the title. </summary>
         public string Title { get; set; }
+        /// <summary> Gets the items. </summary>
         public IList<string> Items { get; }
     }
 }

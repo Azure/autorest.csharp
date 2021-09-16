@@ -17,7 +17,8 @@ namespace Accessibility_LowLevel_TokenAuth
     public partial class AccessibilityClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private readonly string[] AuthorizationScopes = { "https://test.azure.com/.default" };
         private readonly TokenCredential _tokenCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace Accessibility_LowLevel_TokenAuth
             _clientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
             var authPolicy = new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -57,7 +58,7 @@ namespace Accessibility_LowLevel_TokenAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOperationRequest(content, options);
+            using HttpMessage message = CreateOperationRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
@@ -93,7 +94,7 @@ namespace Accessibility_LowLevel_TokenAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOperationRequest(content, options);
+            using HttpMessage message = CreateOperationRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
@@ -122,12 +123,9 @@ namespace Accessibility_LowLevel_TokenAuth
             }
         }
 
-        /// <summary> Create Request for <see cref="Operation"/> and <see cref="OperationAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOperationRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateOperationRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -146,7 +144,7 @@ namespace Accessibility_LowLevel_TokenAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOperationInternalRequest(content, options);
+            using HttpMessage message = CreateOperationInternalRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
@@ -182,7 +180,7 @@ namespace Accessibility_LowLevel_TokenAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOperationInternalRequest(content, options);
+            using HttpMessage message = CreateOperationInternalRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
@@ -211,12 +209,9 @@ namespace Accessibility_LowLevel_TokenAuth
             }
         }
 
-        /// <summary> Create Request for <see cref="OperationInternal"/> and <see cref="OperationInternalAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOperationInternalRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateOperationInternalRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();

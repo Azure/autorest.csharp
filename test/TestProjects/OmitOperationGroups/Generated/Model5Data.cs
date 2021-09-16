@@ -29,7 +29,9 @@ namespace OmitOperationGroups
             Modelqs = modelqs;
         }
 
+        /// <summary> Gets the k. </summary>
         public string K { get; }
+        /// <summary> Gets the modelqs. </summary>
         public IList<ModelQ> Modelqs { get; }
     }
 }

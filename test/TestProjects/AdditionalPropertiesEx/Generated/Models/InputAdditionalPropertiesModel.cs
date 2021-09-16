@@ -21,6 +21,7 @@ namespace AdditionalPropertiesEx.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();
         }
 
+        /// <summary> Gets the id. </summary>
         public int Id { get; }
         /// <summary> Additional Properties. </summary>
         public IDictionary<string, object> AdditionalProperties { get; }

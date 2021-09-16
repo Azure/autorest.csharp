@@ -29,6 +29,7 @@ namespace additionalProperties.Models
             Friendly = friendly;
         }
 
+        /// <summary> Gets or sets the friendly. </summary>
         public bool? Friendly { get; set; }
     }
 }

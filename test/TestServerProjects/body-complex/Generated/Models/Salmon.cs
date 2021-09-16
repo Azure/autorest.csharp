@@ -33,7 +33,9 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "salmon";
         }
 
+        /// <summary> Gets or sets the location. </summary>
         public string Location { get; set; }
+        /// <summary> Gets or sets the iswild. </summary>
         public bool? Iswild { get; set; }
     }
 }

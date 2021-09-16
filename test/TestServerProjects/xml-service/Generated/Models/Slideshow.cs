@@ -32,9 +32,13 @@ namespace xml_service.Models
             Slides = slides;
         }
 
+        /// <summary> Gets or sets the title. </summary>
         public string Title { get; set; }
+        /// <summary> Gets or sets the date. </summary>
         public string Date { get; set; }
+        /// <summary> Gets or sets the author. </summary>
         public string Author { get; set; }
+        /// <summary> Gets the slides. </summary>
         public IList<Slide> Slides { get; }
     }
 }
