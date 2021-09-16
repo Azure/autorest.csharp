@@ -27,6 +27,7 @@ namespace xms_error_responses.Models
             WhatNotFound = whatNotFound ?? "AnimalNotFound";
         }
 
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
     }
 }

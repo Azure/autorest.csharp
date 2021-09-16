@@ -45,6 +45,7 @@ namespace xml_service.Models
             Metadata = metadata;
         }
 
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
         /// <summary> Properties of a container. </summary>
         public ContainerProperties Properties { get; }

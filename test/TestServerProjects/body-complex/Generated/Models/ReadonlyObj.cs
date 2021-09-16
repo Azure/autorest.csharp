@@ -24,7 +24,9 @@ namespace body_complex.Models
             Size = size;
         }
 
+        /// <summary> Gets the id. </summary>
         public string Id { get; }
+        /// <summary> Gets or sets the size. </summary>
         public int? Size { get; set; }
     }
 }

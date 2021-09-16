@@ -28,7 +28,9 @@ namespace body_complex.Models
             FishType = fishType ?? "DotSalmon";
         }
 
+        /// <summary> Gets the location. </summary>
         public string Location { get; }
+        /// <summary> Gets the iswild. </summary>
         public bool? Iswild { get; }
     }
 }

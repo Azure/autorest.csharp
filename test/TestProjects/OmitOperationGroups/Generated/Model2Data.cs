@@ -28,7 +28,9 @@ namespace OmitOperationGroups
             Modelx = modelx;
         }
 
+        /// <summary> Gets or sets the b. </summary>
         public string B { get; set; }
+        /// <summary> Gets or sets the modelx. </summary>
         public ModelX Modelx { get; set; }
     }
 }

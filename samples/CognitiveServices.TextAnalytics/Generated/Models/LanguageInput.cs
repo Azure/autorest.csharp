@@ -33,7 +33,9 @@ namespace CognitiveServices.TextAnalytics.Models
 
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; }
+        /// <summary> Gets the text. </summary>
         public string Text { get; }
+        /// <summary> Gets or sets the country hint. </summary>
         public string CountryHint { get; set; }
     }
 }

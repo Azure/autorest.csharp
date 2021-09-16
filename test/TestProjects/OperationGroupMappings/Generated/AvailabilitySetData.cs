@@ -40,6 +40,7 @@ namespace OperationGroupMappings
             Sku = sku;
         }
 
+        /// <summary> Gets the foo. </summary>
         public string Foo { get; }
         /// <summary> sku. </summary>
         public string Sku { get; }

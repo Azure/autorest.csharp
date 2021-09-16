@@ -25,6 +25,7 @@ namespace TypeSchemaMapping.Models
             StringPropertyJson = stringPropertyJson;
             PublicProperty = publicProperty;
         }
+        /// <summary> Gets the public property. </summary>
         public string PublicProperty { get; }
     }
 }

@@ -25,6 +25,7 @@ namespace multiple_inheritance.Models
             Name = name;
         }
 
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
     }
 }

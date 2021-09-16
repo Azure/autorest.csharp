@@ -15,6 +15,7 @@ namespace required_optional.Models
         {
         }
 
+        /// <summary> Gets or sets the value. </summary>
         public string Value { get; set; }
     }
 }

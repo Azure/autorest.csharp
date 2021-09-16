@@ -35,9 +35,13 @@ namespace model_flattening.Models
             ProvisioningState = provisioningState;
         }
 
+        /// <summary> Gets or sets the p name. </summary>
         public string PName { get; set; }
+        /// <summary> Gets or sets the type properties type. </summary>
         public string TypePropertiesType { get; set; }
+        /// <summary> Gets the provisioning state values. </summary>
         public FlattenedProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; }
+        /// <summary> Gets or sets the provisioning state. </summary>
         public string ProvisioningState { get; set; }
     }
 }

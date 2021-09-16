@@ -34,9 +34,13 @@ namespace body_complex.Models
             Siblings = siblings;
         }
 
+        /// <summary> Gets or sets the fishtype. </summary>
         internal string Fishtype { get; set; }
+        /// <summary> Gets or sets the species. </summary>
         public string Species { get; set; }
+        /// <summary> Gets or sets the length. </summary>
         public float Length { get; set; }
+        /// <summary> Gets the siblings. </summary>
         public IList<Fish> Siblings { get; }
     }
 }

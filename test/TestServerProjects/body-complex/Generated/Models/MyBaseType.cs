@@ -26,8 +26,11 @@ namespace body_complex.Models
             PropBH1 = propBH1;
         }
 
+        /// <summary> Gets or sets the kind. </summary>
         internal MyKind Kind { get; set; }
+        /// <summary> Gets the prop b 1. </summary>
         public string PropB1 { get; }
+        /// <summary> Gets the prop bh 1. </summary>
         public string PropBH1 { get; }
     }
 }

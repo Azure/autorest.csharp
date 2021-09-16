@@ -17,7 +17,9 @@ namespace ExactMatchFlattenInheritance.Models
         {
         }
 
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
+        /// <summary> Gets the type. </summary>
         public string Type { get; }
     }
 }

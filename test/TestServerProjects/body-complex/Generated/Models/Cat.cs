@@ -30,7 +30,9 @@ namespace body_complex.Models
             Hates = hates;
         }
 
+        /// <summary> Gets or sets the color. </summary>
         public string Color { get; set; }
+        /// <summary> Gets the hates. </summary>
         public IList<Dog> Hates { get; }
     }
 }

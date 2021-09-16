@@ -25,6 +25,7 @@ namespace xml_service.Models
             Name = name;
         }
 
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
     }
 }

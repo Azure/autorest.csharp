@@ -41,14 +41,21 @@ namespace AppConfiguration.Models
             Etag = etag;
         }
 
+        /// <summary> Gets or sets the key. </summary>
         public string Key { get; set; }
+        /// <summary> Gets or sets the label. </summary>
         public string Label { get; set; }
+        /// <summary> Gets or sets the content type. </summary>
         public string ContentType { get; set; }
+        /// <summary> Gets or sets the value. </summary>
         public string Value { get; set; }
+        /// <summary> Gets or sets the last modified. </summary>
         public DateTimeOffset? LastModified { get; set; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> Tags { get; }
+        /// <summary> Gets or sets the locked. </summary>
         public bool? Locked { get; set; }
+        /// <summary> Gets or sets the etag. </summary>
         public string Etag { get; set; }
     }
 }

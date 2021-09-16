@@ -24,7 +24,9 @@ namespace custom_baseUrl_more_options.Models
             Message = message;
         }
 
+        /// <summary> Gets the status. </summary>
         public int? Status { get; }
+        /// <summary> Gets the message. </summary>
         public string Message { get; }
     }
 }

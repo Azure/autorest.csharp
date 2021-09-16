@@ -34,8 +34,11 @@ namespace additionalProperties.Models
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> Gets or sets the id. </summary>
         public int Id { get; set; }
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
+        /// <summary> Gets the status. </summary>
         public bool? Status { get; }
         /// <summary> Additional Properties. </summary>
         public IDictionary<string, string> AdditionalProperties { get; }

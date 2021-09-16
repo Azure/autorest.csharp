@@ -25,7 +25,9 @@ namespace lro.Models
             ProvisioningStateValues = provisioningStateValues;
         }
 
+        /// <summary> Gets or sets the provisioning state. </summary>
         public string ProvisioningState { get; set; }
+        /// <summary> Gets the provisioning state values. </summary>
         public SubProductPropertiesProvisioningStateValues? ProvisioningStateValues { get; }
     }
 }

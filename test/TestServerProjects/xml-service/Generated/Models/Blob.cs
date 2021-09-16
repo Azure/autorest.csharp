@@ -57,8 +57,11 @@ namespace xml_service.Models
             Metadata = metadata;
         }
 
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
+        /// <summary> Gets the deleted. </summary>
         public bool Deleted { get; }
+        /// <summary> Gets the snapshot. </summary>
         public string Snapshot { get; }
         /// <summary> Properties of a blob. </summary>
         public BlobProperties Properties { get; }

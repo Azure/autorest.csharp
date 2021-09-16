@@ -24,6 +24,7 @@ namespace Inheritance.Models
             DiscriminatorProperty = discriminatorProperty ?? "BaseClassWithDiscriminator";
         }
 
+        /// <summary> Gets or sets the discriminator property. </summary>
         internal string DiscriminatorProperty { get; set; }
     }
 }

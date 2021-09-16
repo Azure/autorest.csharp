@@ -22,6 +22,7 @@ namespace xms_error_responses.Models
             AniType = aniType;
         }
 
+        /// <summary> Gets the ani type. </summary>
         public string AniType { get; }
     }
 }

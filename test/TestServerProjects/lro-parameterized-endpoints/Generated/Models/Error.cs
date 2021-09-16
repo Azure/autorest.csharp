@@ -24,7 +24,9 @@ namespace lro_parameterized_endpoints.Models
             Message = message;
         }
 
+        /// <summary> Gets the status. </summary>
         public int? Status { get; }
+        /// <summary> Gets the message. </summary>
         public string Message { get; }
     }
 }

@@ -17,6 +17,7 @@ namespace lro.Models
 
         /// <summary> The status of the request. </summary>
         public OperationResultStatus? Status { get; }
+        /// <summary> Gets the error. </summary>
         public OperationResultError Error { get; }
     }
 }

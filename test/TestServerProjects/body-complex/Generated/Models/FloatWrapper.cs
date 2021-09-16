@@ -24,7 +24,9 @@ namespace body_complex.Models
             Field2 = field2;
         }
 
+        /// <summary> Gets or sets the field 1. </summary>
         public float? Field1 { get; set; }
+        /// <summary> Gets or sets the field 2. </summary>
         public float? Field2 { get; set; }
     }
 }

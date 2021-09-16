@@ -27,7 +27,9 @@ namespace ExactMatchInheritance.Models
             NEW = nEW;
         }
 
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
+        /// <summary> Gets or sets the new. </summary>
         public string NEW { get; set; }
     }
 }

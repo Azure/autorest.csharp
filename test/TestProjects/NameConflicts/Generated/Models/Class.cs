@@ -236,113 +236,221 @@ namespace NameConflicts.Models
             GetHashCodeValue = getHashCodeValue;
         }
 
+        /// <summary> Gets or sets the abstract. </summary>
         public string Abstract { get; set; }
+        /// <summary> Gets or sets the add. </summary>
         public string Add { get; set; }
+        /// <summary> Gets or sets the alias. </summary>
         public string Alias { get; set; }
+        /// <summary> Gets or sets the as. </summary>
         public string As { get; set; }
+        /// <summary> Gets or sets the ascending. </summary>
         public string Ascending { get; set; }
+        /// <summary> Gets or sets the async. </summary>
         public string Async { get; set; }
+        /// <summary> Gets or sets the await. </summary>
         public string Await { get; set; }
+        /// <summary> Gets or sets the base. </summary>
         public string Base { get; set; }
+        /// <summary> Gets or sets the bool. </summary>
         public string Bool { get; set; }
+        /// <summary> Gets or sets the break. </summary>
         public string Break { get; set; }
+        /// <summary> Gets or sets the by. </summary>
         public string By { get; set; }
+        /// <summary> Gets or sets the byte. </summary>
         public string Byte { get; set; }
+        /// <summary> Gets or sets the catch. </summary>
         public string Catch { get; set; }
+        /// <summary> Gets or sets the char. </summary>
         public string Char { get; set; }
+        /// <summary> Gets or sets the checked. </summary>
         public string Checked { get; set; }
+        /// <summary> Gets or sets the const. </summary>
         public string Const { get; set; }
+        /// <summary> Gets or sets the continue. </summary>
         public string Continue { get; set; }
+        /// <summary> Gets or sets the class value. </summary>
         public string ClassValue { get; set; }
+        /// <summary> Gets or sets the decimal. </summary>
         public string Decimal { get; set; }
+        /// <summary> Gets or sets the default. </summary>
         public string Default { get; set; }
+        /// <summary> Gets or sets the delegate. </summary>
         public string Delegate { get; set; }
+        /// <summary> Gets or sets the descending. </summary>
         public string Descending { get; set; }
+        /// <summary> Gets or sets the do. </summary>
         public string Do { get; set; }
+        /// <summary> Gets or sets the double. </summary>
         public string Double { get; set; }
+        /// <summary> Gets or sets the dynamic. </summary>
         public string Dynamic { get; set; }
+        /// <summary> Gets or sets the else. </summary>
         public string Else { get; set; }
+        /// <summary> Gets or sets the enum. </summary>
         public string Enum { get; set; }
+        /// <summary> Gets or sets the event. </summary>
         public string Event { get; set; }
+        /// <summary> Gets or sets the explicit. </summary>
         public string Explicit { get; set; }
+        /// <summary> Gets or sets the extern. </summary>
         public string Extern { get; set; }
+        /// <summary> Gets or sets the false. </summary>
         public string False { get; set; }
+        /// <summary> Gets or sets the finally. </summary>
         public string Finally { get; set; }
+        /// <summary> Gets or sets the fixed. </summary>
         public string Fixed { get; set; }
+        /// <summary> Gets or sets the float. </summary>
         public string Float { get; set; }
+        /// <summary> Gets or sets the for. </summary>
         public string For { get; set; }
+        /// <summary> Gets or sets the foreach. </summary>
         public string Foreach { get; set; }
+        /// <summary> Gets or sets the from. </summary>
         public string From { get; set; }
+        /// <summary> Gets or sets the get. </summary>
         public string Get { get; set; }
+        /// <summary> Gets or sets the global. </summary>
         public string Global { get; set; }
+        /// <summary> Gets or sets the goto. </summary>
         public string Goto { get; set; }
+        /// <summary> Gets or sets the group. </summary>
         public string Group { get; set; }
+        /// <summary> Gets or sets the if. </summary>
         public string If { get; set; }
+        /// <summary> Gets or sets the implicit. </summary>
         public string Implicit { get; set; }
+        /// <summary> Gets or sets the in. </summary>
         public string In { get; set; }
+        /// <summary> Gets or sets the int. </summary>
         public string Int { get; set; }
+        /// <summary> Gets or sets the interface. </summary>
         public string Interface { get; set; }
+        /// <summary> Gets or sets the internal. </summary>
         public string Internal { get; set; }
+        /// <summary> Gets or sets the into. </summary>
         public string Into { get; set; }
+        /// <summary> Gets or sets the is. </summary>
         public string Is { get; set; }
+        /// <summary> Gets or sets the join. </summary>
         public string Join { get; set; }
+        /// <summary> Gets or sets the let. </summary>
         public string Let { get; set; }
+        /// <summary> Gets or sets the lock. </summary>
         public string Lock { get; set; }
+        /// <summary> Gets or sets the long. </summary>
         public string Long { get; set; }
+        /// <summary> Gets or sets the nameof. </summary>
         public string Nameof { get; set; }
+        /// <summary> Gets or sets the namespace. </summary>
         public string Namespace { get; set; }
+        /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
+        /// <summary> Gets or sets the null property. </summary>
         public string NullProperty { get; set; }
+        /// <summary> Gets or sets the object. </summary>
         public string Object { get; set; }
+        /// <summary> Gets or sets the on. </summary>
         public string On { get; set; }
+        /// <summary> Gets or sets the operator. </summary>
         public string Operator { get; set; }
+        /// <summary> Gets or sets the orderby. </summary>
         public string Orderby { get; set; }
+        /// <summary> Gets or sets the out. </summary>
         public string Out { get; set; }
+        /// <summary> Gets or sets the override. </summary>
         public string Override { get; set; }
+        /// <summary> Gets or sets the params. </summary>
         public string Params { get; set; }
+        /// <summary> Gets or sets the partial. </summary>
         public string Partial { get; set; }
+        /// <summary> Gets or sets the private. </summary>
         public string Private { get; set; }
+        /// <summary> Gets or sets the protected. </summary>
         public string Protected { get; set; }
+        /// <summary> Gets or sets the public. </summary>
         public string Public { get; set; }
+        /// <summary> Gets or sets the readonly. </summary>
         public string Readonly { get; set; }
+        /// <summary> Gets or sets the ref. </summary>
         public string Ref { get; set; }
+        /// <summary> Gets or sets the remove. </summary>
         public string Remove { get; set; }
+        /// <summary> Gets or sets the return. </summary>
         public string Return { get; set; }
+        /// <summary> Gets or sets the sbyte. </summary>
         public string Sbyte { get; set; }
+        /// <summary> Gets or sets the sealed. </summary>
         public string Sealed { get; set; }
+        /// <summary> Gets or sets the select. </summary>
         public string Select { get; set; }
+        /// <summary> Gets or sets the set. </summary>
         public string Set { get; set; }
+        /// <summary> Gets or sets the short. </summary>
         public string Short { get; set; }
+        /// <summary> Gets or sets the sizeof. </summary>
         public string Sizeof { get; set; }
+        /// <summary> Gets or sets the stackalloc. </summary>
         public string Stackalloc { get; set; }
+        /// <summary> Gets or sets the static. </summary>
         public string Static { get; set; }
+        /// <summary> Gets or sets the string. </summary>
         public string String { get; set; }
+        /// <summary> Gets or sets the struct. </summary>
         public string Struct { get; set; }
+        /// <summary> Gets or sets the switch. </summary>
         public string Switch { get; set; }
+        /// <summary> Gets or sets the this. </summary>
         public string This { get; set; }
+        /// <summary> Gets or sets the throw. </summary>
         public string Throw { get; set; }
+        /// <summary> Gets or sets the true. </summary>
         public string True { get; set; }
+        /// <summary> Gets or sets the try. </summary>
         public string Try { get; set; }
+        /// <summary> Gets or sets the typeof. </summary>
         public string Typeof { get; set; }
+        /// <summary> Gets or sets the uint. </summary>
         public string Uint { get; set; }
+        /// <summary> Gets or sets the ulong. </summary>
         public string Ulong { get; set; }
+        /// <summary> Gets or sets the unchecked. </summary>
         public string Unchecked { get; set; }
+        /// <summary> Gets or sets the unmanaged. </summary>
         public string Unmanaged { get; set; }
+        /// <summary> Gets or sets the unsafe. </summary>
         public string Unsafe { get; set; }
+        /// <summary> Gets or sets the ushort. </summary>
         public string Ushort { get; set; }
+        /// <summary> Gets or sets the using. </summary>
         public string Using { get; set; }
+        /// <summary> Gets or sets the value. </summary>
         public string Value { get; set; }
+        /// <summary> Gets or sets the var. </summary>
         public string Var { get; set; }
+        /// <summary> Gets or sets the virtual. </summary>
         public string Virtual { get; set; }
+        /// <summary> Gets or sets the void. </summary>
         public string Void { get; set; }
+        /// <summary> Gets or sets the volatile. </summary>
         public string Volatile { get; set; }
+        /// <summary> Gets or sets the when. </summary>
         public string When { get; set; }
+        /// <summary> Gets or sets the where. </summary>
         public string Where { get; set; }
+        /// <summary> Gets or sets the while. </summary>
         public string While { get; set; }
+        /// <summary> Gets or sets the yield. </summary>
         public string Yield { get; set; }
+        /// <summary> Gets or sets the system. </summary>
         public SystemEnum? System { get; set; }
+        /// <summary> Gets or sets the to string value. </summary>
         public string ToStringValue { get; set; }
+        /// <summary> Gets or sets the equals value. </summary>
         public string EqualsValue { get; set; }
+        /// <summary> Gets or sets the get hash code value. </summary>
         public string GetHashCodeValue { get; set; }
     }
 }

@@ -21,8 +21,11 @@ namespace CognitiveServices.TextAnalytics.Models
             Negative = negative;
         }
 
+        /// <summary> Gets the positive. </summary>
         public double Positive { get; }
+        /// <summary> Gets the neutral. </summary>
         public double Neutral { get; }
+        /// <summary> Gets the negative. </summary>
         public double Negative { get; }
     }
 }

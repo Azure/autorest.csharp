@@ -22,6 +22,7 @@ namespace CognitiveSearch.Models
             OdataType = odataType;
         }
 
+        /// <summary> Gets or sets the odata type. </summary>
         internal string OdataType { get; set; }
     }
 }

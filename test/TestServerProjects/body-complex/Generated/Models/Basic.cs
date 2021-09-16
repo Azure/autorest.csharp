@@ -30,6 +30,7 @@ namespace body_complex.Models
         public int? Id { get; set; }
         /// <summary> Name property with a very long description that does not fit on a single line and a line break. </summary>
         public string Name { get; set; }
+        /// <summary> Gets or sets the color. </summary>
         public CMYKColors? Color { get; set; }
     }
 }

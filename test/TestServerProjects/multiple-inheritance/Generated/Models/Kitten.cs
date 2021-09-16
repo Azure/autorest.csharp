@@ -40,6 +40,7 @@ namespace multiple_inheritance.Models
             EatsMiceYet = eatsMiceYet;
         }
 
+        /// <summary> Gets or sets the eats mice yet. </summary>
         public bool? EatsMiceYet { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace required_optional.Models
             Value = value;
         }
 
+        /// <summary> Gets the value. </summary>
         public int Value { get; }
     }
 }
