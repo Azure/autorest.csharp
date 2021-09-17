@@ -4,12 +4,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
-    internal class RawOperationSet : IReadOnlyCollection<Operation>
+    internal class RawOperationSet : IReadOnlyCollection<Operation>, IEquatable<RawOperationSet>
     {
         private IDictionary<Operation, OperationGroup> _operationGroupCache = new Dictionary<Operation, OperationGroup>();
         public string RequestPath { get; }
@@ -38,5 +39,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public IEnumerator<Operation> GetEnumerator() => Operations.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => Operations.GetEnumerator();
+
+        public override int GetHashCode()
+        {
+            return RequestPath.GetHashCode();
+        }
+
+        public bool Equals([AllowNull] RawOperationSet other)
+        {
+            if (other is null)
+                return false;
+
+            return RequestPath == other.RequestPath;
+        }
     }
 }

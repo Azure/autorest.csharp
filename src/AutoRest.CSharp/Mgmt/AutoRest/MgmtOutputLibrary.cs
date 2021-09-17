@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// considering of the extension resources, one resource name might correspond to multiple operation sets
         /// This must be initialized before other maps
         /// </summary>
-        private Dictionary<string, List<RawOperationSet>> _resourceNameToRawOperationSets;
+        private Dictionary<string, HashSet<RawOperationSet>> _resourceNameToRawOperationSets;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, TypeProvider> _nameToTypeProvider;
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <summary>
         /// This is a map from <see cref="OperationGroup"/> to the list of raw request path of its operations
         /// </summary>
-        private Dictionary<OperationGroup, List<string>> _operationGroupToRequestPaths;
+        private Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths;
 
         private Dictionary<string, List<Resource>>? _childResources;
 
@@ -87,9 +87,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             UpdateSubscriptionIdForTenantIdResource(codeModel);
             _codeModel = codeModel;
             _childNonResourceOperationGroups = new Dictionary<string, HashSet<OperationGroup>>();
-            _operationGroupToRequestPaths = new Dictionary<OperationGroup, List<string>>();
+            _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperations = new Dictionary<string, RawOperationSet>();
-            _resourceNameToRawOperationSets = new Dictionary<string, List<RawOperationSet>>();
+            _resourceNameToRawOperationSets = new Dictionary<string, HashSet<RawOperationSet>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _mergedOperations = _mgmtConfiguration.MergeOperations.SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key))).ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
@@ -694,10 +694,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private void AddOperationSetToResourceMap(string resourceName, RawOperationSet operationSet)
         {
-            List<RawOperationSet>? result;
+            HashSet<RawOperationSet>? result;
             if (!_resourceNameToRawOperationSets.TryGetValue(resourceName, out result))
             {
-                result = new List<RawOperationSet>();
+                result = new HashSet<RawOperationSet>();
                 _resourceNameToRawOperationSets.Add(resourceName, result);
             }
             result.Add(operationSet);
@@ -707,7 +707,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                var requestPathList = new List<string>();
+                var requestPathList = new HashSet<string>();
                 _operationGroupToRequestPaths.Add(operationGroup, requestPathList);
                 foreach (var operation in operationGroup.Operations)
                 {
