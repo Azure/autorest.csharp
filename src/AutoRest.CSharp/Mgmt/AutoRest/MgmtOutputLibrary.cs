@@ -199,7 +199,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
+        private IEnumerable<ResourceData>? _resourceDatas;
+
+        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= EnsureResourceData().Values.Distinct();
 
         public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values;
 

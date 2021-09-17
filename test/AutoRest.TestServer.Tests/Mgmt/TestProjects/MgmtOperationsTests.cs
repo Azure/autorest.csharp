@@ -57,7 +57,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             Assert.AreEqual(3, method.GetParameters().Length);
             var param1 = TypeAsserts.HasParameter(method, "parameters");
-            Assert.AreEqual(typeof(ConnectionSharedKeyData), param1.ParameterType);
+            Assert.AreEqual(typeof(ConnectionSharedKey), param1.ParameterType);
             Assert.False(param1.IsOptional);
             var param2 = TypeAsserts.HasParameter(method, "waitForCompletion");
             Assert.AreEqual(typeof(bool), param2.ParameterType);
