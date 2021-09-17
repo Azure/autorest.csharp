@@ -11,16 +11,16 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtOperations.Models
+namespace MgmtOperations
 {
-    /// <summary> Response for GetConnectionSharedKey API service call. </summary>
-    public partial class ConnectionSharedKey : TrackedResource
+    /// <summary> A class representing the ConnectionSharedKey data model. </summary>
+    public partial class ConnectionSharedKeyData : TrackedResource
     {
-        /// <summary> Initializes a new instance of ConnectionSharedKey. </summary>
+        /// <summary> Initializes a new instance of ConnectionSharedKeyData. </summary>
         /// <param name="location"> The location. </param>
         /// <param name="value"> The virtual network connection shared key value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public ConnectionSharedKey(Location location, string value) : base(location)
+        public ConnectionSharedKeyData(Location location, string value) : base(location)
         {
             if (value == null)
             {
@@ -30,14 +30,14 @@ namespace MgmtOperations.Models
             Value = value;
         }
 
-        /// <summary> Initializes a new instance of ConnectionSharedKey. </summary>
+        /// <summary> Initializes a new instance of ConnectionSharedKeyData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="value"> The virtual network connection shared key value. </param>
-        internal ConnectionSharedKey(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string value) : base(id, name, type, tags, location)
+        internal ConnectionSharedKeyData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string value) : base(id, name, type, tags, location)
         {
             Value = value;
         }

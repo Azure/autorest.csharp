@@ -19,5 +19,7 @@
   },
   "OperationGroupToParent": {
     "Usage": "subscriptions"
-  }
+  },
+  "DoesResourceModelRequireType": true,
+  "DoesResourceModelRequireName": true
 }

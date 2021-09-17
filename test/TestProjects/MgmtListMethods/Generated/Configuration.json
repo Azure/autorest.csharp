@@ -18,5 +18,7 @@
   },
   "OperationGroupToParent": {
     "Quotas": "subscriptions"
-  }
+  },
+  "DoesResourceModelRequireType": true,
+  "DoesResourceModelRequireName": true
 }

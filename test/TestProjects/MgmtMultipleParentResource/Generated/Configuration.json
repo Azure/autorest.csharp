@@ -17,5 +17,7 @@
   "OperationGroupIsExtension": [
     "Children",
     "AnotherChildren"
-  ]
+  ],
+  "DoesResourceModelRequireType": true,
+  "DoesResourceModelRequireName": true
 }

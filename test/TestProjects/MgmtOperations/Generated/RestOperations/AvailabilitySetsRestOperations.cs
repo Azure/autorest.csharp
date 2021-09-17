@@ -409,7 +409,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateTestSetSharedKeyRequest(string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters)
+        internal HttpMessage CreateTestSetSharedKeyRequest(string resourceGroupName, string availabilitySetName, ConnectionSharedKeyData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -440,7 +440,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> TestSetSharedKeyAsync(string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> TestSetSharedKeyAsync(string resourceGroupName, string availabilitySetName, ConnectionSharedKeyData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -472,7 +472,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response TestSetSharedKey(string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public Response TestSetSharedKey(string resourceGroupName, string availabilitySetName, ConnectionSharedKeyData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

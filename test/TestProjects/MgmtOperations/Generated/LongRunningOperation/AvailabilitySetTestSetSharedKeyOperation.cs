@@ -12,13 +12,14 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using MgmtOperations;
 
 namespace MgmtOperations.Models
 {
     /// <summary> Testing description. </summary>
-    public partial class AvailabilitySetTestSetSharedKeyOperation : Operation<ConnectionSharedKey>, IOperationSource<ConnectionSharedKey>
+    public partial class AvailabilitySetTestSetSharedKeyOperation : Operation<ConnectionSharedKeyData>, IOperationSource<ConnectionSharedKeyData>
     {
-        private readonly OperationInternals<ConnectionSharedKey> _operation;
+        private readonly OperationInternals<ConnectionSharedKeyData> _operation;
 
         /// <summary> Initializes a new instance of AvailabilitySetTestSetSharedKeyOperation for mocking. </summary>
         protected AvailabilitySetTestSetSharedKeyOperation()
@@ -27,14 +28,14 @@ namespace MgmtOperations.Models
 
         internal AvailabilitySetTestSetSharedKeyOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<ConnectionSharedKey>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "AvailabilitySetTestSetSharedKeyOperation");
+            _operation = new OperationInternals<ConnectionSharedKeyData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "AvailabilitySetTestSetSharedKeyOperation");
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override ConnectionSharedKey Value => _operation.Value;
+        public override ConnectionSharedKeyData Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,21 +53,21 @@ namespace MgmtOperations.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ConnectionSharedKey>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<ConnectionSharedKeyData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ConnectionSharedKey>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<ConnectionSharedKeyData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        ConnectionSharedKey IOperationSource<ConnectionSharedKey>.CreateResult(Response response, CancellationToken cancellationToken)
+        ConnectionSharedKeyData IOperationSource<ConnectionSharedKeyData>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return ConnectionSharedKey.DeserializeConnectionSharedKey(document.RootElement);
+            return ConnectionSharedKeyData.DeserializeConnectionSharedKeyData(document.RootElement);
         }
 
-        async ValueTask<ConnectionSharedKey> IOperationSource<ConnectionSharedKey>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<ConnectionSharedKeyData> IOperationSource<ConnectionSharedKeyData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return ConnectionSharedKey.DeserializeConnectionSharedKey(document.RootElement);
+            return ConnectionSharedKeyData.DeserializeConnectionSharedKeyData(document.RootElement);
         }
     }
 }

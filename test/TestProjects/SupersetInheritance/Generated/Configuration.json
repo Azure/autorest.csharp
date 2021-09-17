@@ -17,5 +17,7 @@
   "OperationGroupToParent": {
     "SupersetModel2s": "resourceGroups",
     "SupersetModel3s": "resourceGroups"
-  }
+  },
+  "DoesResourceModelRequireType": true,
+  "DoesResourceModelRequireName": true
 }

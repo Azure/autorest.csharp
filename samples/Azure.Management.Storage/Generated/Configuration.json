@@ -35,5 +35,7 @@
     "BlobServices": "blobServices/default",
     "ImmutabilityPolicies": "immutabilityPolicies/default",
     "FileServices": "fileServices/default"
-  }
+  },
+  "DoesResourceModelRequireType": true,
+  "DoesResourceModelRequireName": true
 }

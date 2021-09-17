@@ -11,9 +11,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtOperations.Models
+namespace MgmtOperations
 {
-    public partial class ConnectionSharedKey : IUtf8JsonSerializable
+    public partial class ConnectionSharedKeyData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,7 +33,7 @@ namespace MgmtOperations.Models
             writer.WriteEndObject();
         }
 
-        internal static ConnectionSharedKey DeserializeConnectionSharedKey(JsonElement element)
+        internal static ConnectionSharedKeyData DeserializeConnectionSharedKeyData(JsonElement element)
         {
             string value = default;
             IDictionary<string, string> tags = default;
@@ -79,7 +79,7 @@ namespace MgmtOperations.Models
                     continue;
                 }
             }
-            return new ConnectionSharedKey(id, name, type, tags, location, value);
+            return new ConnectionSharedKeyData(id, name, type, tags, location, value);
         }
     }
 }

@@ -23,7 +23,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? requestPathToResource = default,
             JsonElement? requestPathToResourceType = default,
             JsonElement? mergeOperations = default,
-            JsonElement? armCore = default)
+            JsonElement? armCore = default,
+            JsonElement? resourceModelRequiresType = default,
+            JsonElement? resourceModelRequiresName = default)
         {
             OperationGroupToResourceType = !IsValidJsonElement(operationGroupToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
             OperationGroupToResource = !IsValidJsonElement(operationGroupToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
@@ -46,8 +48,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupsToOmit = operationGroupsToOmit;
             RequestPathIsNonResource = requestPathIsNonResource;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
+            DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
+            DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
         }
 
+        /// <summary>
+        /// Will the resource model detection require type property? Defaults to true
+        /// </summary>
+        public bool DoesResourceModelRequireType { get; }
+        /// <summary>
+        /// Will the resource model detection require name property? Defaults to true
+        /// </summary>
+        public bool DoesResourceModelRequireName { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToResource { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
@@ -76,7 +88,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<JsonElement?>("request-path-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("request-path-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult());
+                autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
+                autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
+                autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -94,6 +108,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
+            writer.WriteBoolean(nameof(DoesResourceModelRequireType), DoesResourceModelRequireType);
+            writer.WriteBoolean(nameof(DoesResourceModelRequireName), DoesResourceModelRequireName);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -127,6 +143,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 : new string[0];
 
             root.TryGetProperty("ArmCore", out var isArmCore);
+            root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
+            root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
 
             return new MgmtConfiguration(
                 operationGroupIsTupleList,
@@ -140,7 +158,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToResource,
                 requestPathToResourceType,
                 mergeOperations,
-                isArmCore);
+                isArmCore,
+                resourceModelRequiresType,
+                resourceModelRequiresName);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

@@ -45,14 +45,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // TODO -- do we need this criteria?
 
             // try put operation to get the resource name
-            if (set.TryOperationWithMethod(HttpMethod.Put, out resourceName))
+            if (set.TryOperationWithMethod(HttpMethod.Put, config, out resourceName))
             {
                 _rawCache.TryAdd(set.RequestPath, resourceName);
                 return true;
             }
 
             // try get operation to get the resource name
-            if (set.TryOperationWithMethod(HttpMethod.Get, out resourceName))
+            if (set.TryOperationWithMethod(HttpMethod.Get, config, out resourceName))
             {
                 _rawCache.TryAdd(set.RequestPath, resourceName);
                 return true;
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return false;
         }
 
-        private static bool TryOperationWithMethod(this RawOperationSet set, HttpMethod method, [MaybeNullWhen(false)] out string resourceName)
+        private static bool TryOperationWithMethod(this RawOperationSet set, HttpMethod method, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
         {
             resourceName = null;
 
@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
 
             // we need to verify this schema has ID, type and name so that this is a resource model
-            if (!CheckSchemaIsResourceModel(schema))
+            if (!CheckSchemaIsResourceModel(schema, config))
                 return false;
 
             resourceName = schema.Name;
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        private static bool CheckSchemaIsResourceModel(Schema schema)
+        private static bool CheckSchemaIsResourceModel(Schema schema, MgmtConfiguration config)
         {
             if (schema is not ObjectSchema objSchema)
                 return false;
@@ -107,7 +107,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // union all the property on myself and all the properties from my parents
             var allProperties = objSchema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties)
                 .Concat(objSchema.Properties);
-            Property? idProperty = null, typeProperty = null, nameProperty = null;
+            bool idPropertyFound = false;
+            bool typePropertyFound = !config.DoesResourceModelRequireType;
+            bool namePropertyFound = !config.DoesResourceModelRequireName;
 
             foreach (var property in allProperties)
             {
@@ -119,20 +121,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     case "id":
                         if (property.Schema.Type == AllSchemaTypes.String)
-                            idProperty = property;
+                            idPropertyFound = true;
                         continue;
                     case "type":
                         if (property.Schema.Type == AllSchemaTypes.String)
-                            typeProperty = property;
+                            typePropertyFound = true;
                         continue;
                     case "name":
                         if (property.Schema.Type == AllSchemaTypes.String)
-                            nameProperty = property;
+                            namePropertyFound = true;
                         continue;
                 }
             }
 
-            return idProperty != null && typeProperty != null && nameProperty != null;
+            return idPropertyFound && typePropertyFound && namePropertyFound;
         }
     }
 }

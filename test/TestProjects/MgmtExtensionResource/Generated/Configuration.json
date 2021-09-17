@@ -12,5 +12,7 @@
   "skip-csproj-packagereference": true,
   "OperationGroupToParent": {
     "PolicyDefinitions": "tenant"
-  }
+  },
+  "DoesResourceModelRequireType": true,
+  "DoesResourceModelRequireName": true
 }
