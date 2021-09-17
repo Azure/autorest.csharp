@@ -43,12 +43,11 @@ namespace ResourceRename
 
         /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="path"> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </param>
-        /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
+        /// <param name="properties"> The SshPublicKeyProperties to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public virtual SshPublicKeyCreateOperation CreateOrUpdate(string sshPublicKeyName, string path = null, string keyData = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual SshPublicKeyCreateOperation CreateOrUpdate(string sshPublicKeyName, SshPublicKeyProperties properties = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -59,7 +58,7 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = _restClient.Create(Id.ResourceGroupName, sshPublicKeyName, path, keyData, cancellationToken);
+                var response = _restClient.Create(Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
                 var operation = new SshPublicKeyCreateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -74,12 +73,11 @@ namespace ResourceRename
 
         /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="path"> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </param>
-        /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
+        /// <param name="properties"> The SshPublicKeyProperties to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async virtual Task<SshPublicKeyCreateOperation> CreateOrUpdateAsync(string sshPublicKeyName, string path = null, string keyData = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<SshPublicKeyCreateOperation> CreateOrUpdateAsync(string sshPublicKeyName, SshPublicKeyProperties properties = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -90,7 +88,7 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = await _restClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, path, keyData, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
                 var operation = new SshPublicKeyCreateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);

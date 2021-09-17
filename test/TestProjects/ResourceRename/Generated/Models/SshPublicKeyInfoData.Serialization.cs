@@ -7,6 +7,8 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
+using ResourceRename.Models;
 
 namespace ResourceRename
 {
@@ -15,37 +17,49 @@ namespace ResourceRename
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Path))
+            if (Optional.IsDefined(Properties))
             {
-                writer.WritePropertyName("path");
-                writer.WriteStringValue(Path);
-            }
-            if (Optional.IsDefined(KeyData))
-            {
-                writer.WritePropertyName("keyData");
-                writer.WriteStringValue(KeyData);
+                writer.WritePropertyName("properties");
+                writer.WriteObjectValue(Properties);
             }
             writer.WriteEndObject();
         }
 
         internal static SshPublicKeyInfoData DeserializeSshPublicKeyInfoData(JsonElement element)
         {
-            Optional<string> path = default;
-            Optional<string> keyData = default;
+            Optional<SshPublicKeyProperties> properties = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("path"))
+                if (property.NameEquals("properties"))
                 {
-                    path = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    properties = SshPublicKeyProperties.DeserializeSshPublicKeyProperties(property.Value);
                     continue;
                 }
-                if (property.NameEquals("keyData"))
+                if (property.NameEquals("id"))
                 {
-                    keyData = property.Value.GetString();
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
             }
-            return new SshPublicKeyInfoData(path.Value, keyData.Value);
+            return new SshPublicKeyInfoData(id, name, type, properties.Value);
         }
     }
 }

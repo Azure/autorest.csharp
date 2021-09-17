@@ -5,10 +5,14 @@
 
 #nullable disable
 
+using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
+using ResourceRename.Models;
+
 namespace ResourceRename
 {
     /// <summary> A class representing the SshPublicKeyInfo data model. </summary>
-    public partial class SshPublicKeyInfoData
+    public partial class SshPublicKeyInfoData : Resource
     {
         /// <summary> Initializes a new instance of SshPublicKeyInfoData. </summary>
         public SshPublicKeyInfoData()
@@ -16,17 +20,16 @@ namespace ResourceRename
         }
 
         /// <summary> Initializes a new instance of SshPublicKeyInfoData. </summary>
-        /// <param name="path"> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </param>
-        /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
-        internal SshPublicKeyInfoData(string path, string keyData)
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="properties"></param>
+        internal SshPublicKeyInfoData(ResourceIdentifier id, string name, ResourceType type, SshPublicKeyProperties properties) : base(id, name, type)
         {
-            Path = path;
-            KeyData = keyData;
+            Properties = properties;
         }
 
-        /// <summary> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </summary>
-        public string Path { get; set; }
-        /// <summary> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </summary>
-        public string KeyData { get; set; }
+        /// <summary> Gets or sets the properties. </summary>
+        public SshPublicKeyProperties Properties { get; set; }
     }
 }
