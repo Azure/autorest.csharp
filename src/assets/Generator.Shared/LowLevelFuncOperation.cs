@@ -12,12 +12,12 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal class FuncOperation<T> : Operation<T>, IOperationSource<T> where T : notnull
+    internal class LowLevelFuncOperation<T> : Operation<T>, IOperationSource<T> where T : notnull
     {
         private readonly OperationInternals<T> _operation;
         private readonly Func<Response, T> _resultSelector;
 
-        internal FuncOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
+        internal LowLevelFuncOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
         {
             _operation = new OperationInternals<T>(this, clientDiagnostics, pipeline, request, response, finalStateVia, scopeName);
             _resultSelector = resultSelector;

@@ -2250,7 +2250,7 @@ namespace paging_LowLevel
             {
                 using HttpMessage message = _restClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
                 Response response = await _restClient.GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
-                return new FuncOperation<AsyncPageable<BinaryData>>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", (response) =>
+                return new LowLevelFuncOperation<AsyncPageable<BinaryData>>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", (response) =>
                 {
                     return PageableHelpers.CreateAsyncEnumerable((pageSizeHint) =>
                     {
@@ -2312,7 +2312,7 @@ namespace paging_LowLevel
             {
                 using HttpMessage message = _restClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
                 Response response = _restClient.GetMultiplePagesLRO(clientRequestId, maxresults, timeout, options);
-                return new FuncOperation<Pageable<BinaryData>>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", (response) =>
+                return new LowLevelFuncOperation<Pageable<BinaryData>>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", (response) =>
                 {
                     return PageableHelpers.CreateEnumerable((pageSizeHint) =>
                     {

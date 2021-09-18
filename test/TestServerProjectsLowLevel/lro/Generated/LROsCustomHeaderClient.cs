@@ -97,7 +97,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePutAsyncRetrySucceededRequest(content);
                 Response response = await _restClient.PutAsyncRetrySucceededAsync(content, options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -154,7 +154,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePutAsyncRetrySucceededRequest(content);
                 Response response = _restClient.PutAsyncRetrySucceeded(content, options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -211,7 +211,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePut201CreatingSucceeded200Request(content);
                 Response response = await _restClient.Put201CreatingSucceeded200Async(content, options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -268,7 +268,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePut201CreatingSucceeded200Request(content);
                 Response response = _restClient.Put201CreatingSucceeded200(content, options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -312,7 +312,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePost202Retry200Request(content);
                 Response response = await _restClient.Post202Retry200Async(content, options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -356,7 +356,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePost202Retry200Request(content);
                 Response response = _restClient.Post202Retry200(content, options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -400,7 +400,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePostAsyncRetrySucceededRequest(content);
                 Response response = await _restClient.PostAsyncRetrySucceededAsync(content, options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -444,7 +444,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePostAsyncRetrySucceededRequest(content);
                 Response response = _restClient.PostAsyncRetrySucceeded(content, options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {

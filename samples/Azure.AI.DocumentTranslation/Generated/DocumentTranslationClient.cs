@@ -1405,7 +1405,7 @@ namespace Azure.AI.DocumentTranslation
             {
                 using HttpMessage message = _restClient.CreateStartTranslationRequest(content);
                 Response response = await _restClient.StartTranslationAsync(content, options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -1489,7 +1489,7 @@ namespace Azure.AI.DocumentTranslation
             {
                 using HttpMessage message = _restClient.CreateStartTranslationRequest(content);
                 Response response = _restClient.StartTranslation(content, options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {

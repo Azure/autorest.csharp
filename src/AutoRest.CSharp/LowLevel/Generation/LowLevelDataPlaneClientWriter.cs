@@ -236,11 +236,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (clientMethod.PagingResponseInfo == null)
                     {
-                        writer.Line($"return new LowLevelBinaryDataOperation({ClientDiagnosticsField}, {PipelineField}, {messageVariable}.Request, {responseVariable}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostic.ScopeName:L});");
+                        writer.Line($"return new LowLevelFuncOperation<BinaryData>({ClientDiagnosticsField}, {PipelineField}, {messageVariable}.Request, {responseVariable}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostic.ScopeName:L}, LowLevelOperationHelpers.ResponseContentSelector);");
                     }
                     else
                     {
-                        writer.Line($"return new FuncOperation<{operationReturnType}> ({ClientDiagnosticsField}, {PipelineField}, {messageVariable}.Request, {responseVariable}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostic.ScopeName:L}, ({typeof(Response)} response) => {{");
+                        writer.Line($"return new LowLevelFuncOperation<{operationReturnType}>({ClientDiagnosticsField}, {PipelineField}, {messageVariable}.Request, {responseVariable}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostic.ScopeName:L}, ({typeof(Response)} response) => {{");
                         {
                             writer.Line($"return PageableHelpers.{enumerableFactoryMethod}((int? pageSizeHint) => {{");
                             {
@@ -359,6 +359,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string ScopesConstant = "AuthorizationScopes";
         private const string KeyAuthField = "_keyCredential";
         private const string TokenAuthField = "_tokenCredential";
+        private const string ResponseSelectorField = "_responseContentSelector";
         private new const string RestClientField = "_restClient";
 
         private void WriteClientFields(CodeWriter writer, LowLevelDataPlaneClient client, BuildContext context)
@@ -366,6 +367,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.");
             writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineProperty}");
             writer.LineRaw("{ get => " + PipelineField + "; }");
+
             writer.Line($"private {typeof(HttpPipeline)} {PipelineField};");
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
             writer.Line($"private readonly {client.RestClient.Declaration.Name} {RestClientField};");

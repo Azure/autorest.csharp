@@ -97,7 +97,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePut201CreatingSucceeded200Request(content);
                 Response response = await _restClient.Put201CreatingSucceeded200Async(content, options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -154,7 +154,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePut201CreatingSucceeded200Request(content);
                 Response response = _restClient.Put201CreatingSucceeded200(content, options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -211,7 +211,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePutAsyncRelativeRetrySucceededRequest(content);
                 Response response = await _restClient.PutAsyncRelativeRetrySucceededAsync(content, options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -268,7 +268,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePutAsyncRelativeRetrySucceededRequest(content);
                 Response response = _restClient.PutAsyncRelativeRetrySucceeded(content, options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -311,7 +311,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreateDeleteProvisioning202Accepted200SucceededRequest();
                 Response response = await _restClient.DeleteProvisioning202Accepted200SucceededAsync(options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -354,7 +354,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreateDeleteProvisioning202Accepted200SucceededRequest();
                 Response response = _restClient.DeleteProvisioning202Accepted200Succeeded(options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -384,7 +384,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreateDelete202Retry200Request();
                 Response response = await _restClient.Delete202Retry200Async(options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -414,7 +414,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreateDelete202Retry200Request();
                 Response response = _restClient.Delete202Retry200(options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -444,7 +444,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreateDeleteAsyncRelativeRetrySucceededRequest();
                 Response response = await _restClient.DeleteAsyncRelativeRetrySucceededAsync(options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -474,7 +474,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreateDeleteAsyncRelativeRetrySucceededRequest();
                 Response response = _restClient.DeleteAsyncRelativeRetrySucceeded(options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -518,7 +518,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePost202Retry200Request(content);
                 Response response = await _restClient.Post202Retry200Async(content, options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -562,7 +562,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePost202Retry200Request(content);
                 Response response = _restClient.Post202Retry200(content, options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -606,7 +606,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePostAsyncRelativeRetrySucceededRequest(content);
                 Response response = await _restClient.PostAsyncRelativeRetrySucceededAsync(content, options).ConfigureAwait(false);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -650,7 +650,7 @@ namespace lro_LowLevel
             {
                 using HttpMessage message = _restClient.CreatePostAsyncRelativeRetrySucceededRequest(content);
                 Response response = _restClient.PostAsyncRelativeRetrySucceeded(content, options);
-                return new LowLevelBinaryDataOperation(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
