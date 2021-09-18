@@ -95,6 +95,7 @@ namespace MgmtPropertyChooser
             Optional<IdentityWithNoUserIdentity> identityWithNoUserIdentity = default;
             Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
             Optional<IList<string>> zones = default;
+            Optional<IReadOnlyList<Resource>> fakeResources = default;
             IDictionary<string, string> tags = default;
             Location location = default;
             ResourceIdentifier id = default;
@@ -196,6 +197,21 @@ namespace MgmtPropertyChooser
                     zones = array;
                     continue;
                 }
+                if (property.NameEquals("fakeResources"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    List<Resource> array = new List<Resource>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(Resource.DeserializeResource(item));
+                    }
+                    fakeResources = array;
+                    continue;
+                }
                 if (property.NameEquals("tags"))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -259,7 +275,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), Optional.ToList(fakeResources), provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

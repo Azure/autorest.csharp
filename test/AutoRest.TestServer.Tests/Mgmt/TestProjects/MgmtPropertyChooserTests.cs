@@ -66,8 +66,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidatePropertyReplacement()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
-            var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var virtualMachineData = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
+            var properties = virtualMachineData.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            // Resource in the test swagger will be replaced by TrackedResource when used as the base class for inheritance,
+            // but is not replaced when used as a property.
+            Assert.AreEqual(virtualMachineData.BaseType, typeof(TrackedResource));
+            Assert.AreEqual(properties.First(p => p.Name == "FakeResources").PropertyType.GetGenericArguments().First(), typeof(MgmtPropertyChooser.Models.Resource));
             // VirtualMachineIdentity is replaced by ResourceIdentity, property name is unchanged, still called Identity.
             Assert.IsFalse(properties.Any(p => p.Name == "ResourceIdentity"));
             Assert.IsTrue(properties.Any(p => p.Name == "Identity"));
