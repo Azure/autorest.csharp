@@ -19,11 +19,10 @@ namespace header_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HeaderRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly string apiVersion;
-        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of HeaderClient for mocking. </summary>
         protected HeaderClient()
@@ -47,11 +46,12 @@ namespace header_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            apiVersion = options.Version;
+            _restClient = new HeaderRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -61,34 +61,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamExistingKeyRequest(userAgent);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamExistingKeyAsync(userAgent, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,6 +79,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -107,34 +90,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamExistingKey(string userAgent, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamExistingKeyRequest(userAgent);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamExistingKey(userAgent, options);
             }
             catch (Exception e)
             {
@@ -143,21 +107,8 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamExistingKeyRequest(string userAgent)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/existingkey", false);
-            request.Uri = uri;
-            request.Headers.Add("User-Agent", userAgent);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -167,33 +118,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseExistingKeyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseExistingKeyRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseExistingKeyAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -203,6 +136,7 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -212,33 +146,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseExistingKey(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseExistingKeyRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseExistingKey(options);
             }
             catch (Exception e)
             {
@@ -247,20 +163,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseExistingKeyRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/existingkey", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -270,34 +175,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamProtectedKeyRequest(contentType);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamProtectedKeyAsync(contentType, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -307,6 +193,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -316,34 +204,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamProtectedKey(string contentType, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamProtectedKeyRequest(contentType);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamProtectedKey(contentType, options);
             }
             catch (Exception e)
             {
@@ -352,20 +221,8 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamProtectedKeyRequest(string contentType)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/protectedkey", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -375,33 +232,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseProtectedKeyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseProtectedKeyRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseProtectedKeyAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -411,6 +250,7 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -420,33 +260,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseProtectedKey(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseProtectedKeyRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseProtectedKey(options);
             }
             catch (Exception e)
             {
@@ -455,20 +277,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseProtectedKeyRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/protectedkey", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="value"> Send a post request with header values 1 or -2. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -478,35 +290,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 1 or -2. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamIntegerRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamIntegerAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -516,6 +308,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="value"> Send a post request with header values 1 or -2. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -525,35 +320,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 1 or -2. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamInteger(string scenario, int value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamIntegerRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamInteger(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -562,22 +337,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamIntegerRequest(string scenario, int value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/integer", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -587,34 +349,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseIntegerRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseIntegerAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -624,6 +367,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -633,34 +378,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseInteger(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseIntegerRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseInteger(scenario, options);
             }
             catch (Exception e)
             {
@@ -669,21 +395,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseIntegerRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/integer", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="value"> Send a post request with header values 105 or -2. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -693,35 +408,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 105 or -2. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamLongRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamLongAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -731,6 +426,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="value"> Send a post request with header values 105 or -2. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -740,35 +438,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 105 or -2. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamLong(string scenario, long value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamLongRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamLong(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -777,22 +455,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamLongRequest(string scenario, long value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/long", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -802,34 +467,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseLongAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseLongRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseLongAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -839,6 +485,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -848,34 +496,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseLong(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseLongRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseLong(scenario, options);
             }
             catch (Exception e)
             {
@@ -884,21 +513,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseLongRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/long", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -908,35 +526,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamFloatRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamFloatAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -946,6 +544,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -955,35 +556,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamFloat(string scenario, float value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamFloatRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamFloat(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -992,22 +573,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamFloatRequest(string scenario, float value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/float", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1017,34 +585,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseFloatRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseFloatAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1054,6 +603,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1063,34 +614,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseFloat(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseFloatRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseFloat(scenario, options);
             }
             catch (Exception e)
             {
@@ -1099,21 +631,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseFloatRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/float", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1123,35 +644,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDoubleRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamDoubleAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1161,6 +662,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1170,35 +674,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamDouble(string scenario, double value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDoubleRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamDouble(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1207,22 +691,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamDoubleRequest(string scenario, double value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/double", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1232,34 +703,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDoubleRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseDoubleAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1269,6 +721,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1278,34 +732,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseDouble(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDoubleRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseDouble(scenario, options);
             }
             catch (Exception e)
             {
@@ -1314,21 +749,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseDoubleRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/double", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <param name="value"> Send a post request with header values true or false. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1338,35 +762,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="value"> Send a post request with header values true or false. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamBoolRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamBoolAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1376,6 +780,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <param name="value"> Send a post request with header values true or false. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1385,35 +792,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="value"> Send a post request with header values true or false. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamBool(string scenario, bool value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamBoolRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamBool(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1422,22 +809,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamBoolRequest(string scenario, bool value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/bool", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1447,34 +821,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseBoolRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseBoolAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1484,6 +839,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1493,34 +850,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseBool(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseBoolRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseBool(scenario, options);
             }
             catch (Exception e)
             {
@@ -1529,21 +867,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseBoolRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/bool", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1553,35 +880,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamStringRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamStringAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1591,6 +898,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1600,35 +910,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamString(string scenario, string value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamStringRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamString(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1637,25 +927,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamStringRequest(string scenario, string value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/string", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            if (value != null)
-            {
-                request.Headers.Add("value", value);
-            }
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1665,34 +939,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseStringAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseStringRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseStringAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1702,6 +957,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1711,34 +968,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseString(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseStringRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseString(scenario, options);
             }
             catch (Exception e)
             {
@@ -1747,21 +985,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseStringRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/string", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1771,35 +998,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDateRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamDateAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1809,6 +1016,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1818,35 +1028,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDateRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamDate(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -1855,22 +1045,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/date", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value, "D");
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1880,34 +1057,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDateAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDateRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseDateAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1917,6 +1075,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1926,34 +1086,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseDate(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDateRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseDate(scenario, options);
             }
             catch (Exception e)
             {
@@ -1962,21 +1103,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseDateRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/date", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1986,35 +1116,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDatetimeRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamDatetimeAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2024,6 +1134,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2033,35 +1146,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDatetimeRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamDatetime(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -2070,22 +1163,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/datetime", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value, "O");
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2095,34 +1175,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDatetimeRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseDatetimeAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2132,6 +1193,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2141,34 +1204,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseDatetime(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDatetimeRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseDatetime(scenario, options);
             }
             catch (Exception e)
             {
@@ -2177,21 +1221,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseDatetimeRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/datetime", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2201,35 +1234,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamDatetimeRfc1123Async(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2239,6 +1252,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2248,35 +1264,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamDatetimeRfc1123(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -2285,25 +1281,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/datetimerfc1123", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            if (value != null)
-            {
-                request.Headers.Add("value", value.Value, "R");
-            }
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2313,34 +1293,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseDatetimeRfc1123Async(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2350,6 +1311,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2359,34 +1322,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseDatetimeRfc1123(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseDatetimeRfc1123(scenario, options);
             }
             catch (Exception e)
             {
@@ -2395,21 +1339,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseDatetimeRfc1123Request(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/datetimerfc1123", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2419,35 +1352,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDurationRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamDurationAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2457,6 +1370,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2466,35 +1382,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamDuration(string scenario, TimeSpan value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamDurationRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamDuration(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -2503,22 +1399,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/duration", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value, "P");
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2528,34 +1411,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDurationRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseDurationAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2565,6 +1429,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2574,34 +1440,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseDuration(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseDurationRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseDuration(scenario, options);
             }
             catch (Exception e)
             {
@@ -2610,21 +1457,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseDurationRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/duration", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2634,35 +1470,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamByteRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamByteAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2672,6 +1488,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2681,35 +1500,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamByte(string scenario, byte[] value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamByteRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamByte(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -2718,22 +1517,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamByteRequest(string scenario, byte[] value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/byte", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value, "D");
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2743,34 +1529,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseByteAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseByteRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseByteAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2780,6 +1547,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2789,34 +1558,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseByte(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseByteRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseByte(scenario, options);
             }
             catch (Exception e)
             {
@@ -2825,21 +1575,10 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseByteRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/byte", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2849,35 +1588,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamEnumRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ParamEnumAsync(scenario, value, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2887,6 +1606,9 @@ namespace header_LowLevel
         }
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2896,35 +1618,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ParamEnum(string scenario, string value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateParamEnumRequest(scenario, value);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ParamEnum(scenario, value, options);
             }
             catch (Exception e)
             {
@@ -2933,25 +1635,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamEnumRequest(string scenario, string value)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/param/prim/enum", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            if (value != null)
-            {
-                request.Headers.Add("value", value);
-            }
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2961,34 +1647,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseEnumRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.ResponseEnumAsync(scenario, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2998,6 +1665,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
+        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3007,34 +1676,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ResponseEnum(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateResponseEnumRequest(scenario);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.ResponseEnum(scenario, options);
             }
             catch (Exception e)
             {
@@ -3043,21 +1693,8 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateResponseEnumRequest(string scenario)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/response/prim/enum", false);
-            request.Uri = uri;
-            request.Headers.Add("scenario", scenario);
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3067,33 +1704,15 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> CustomRequestIdAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateCustomRequestIdRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return await _restClient.CustomRequestIdAsync(options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3103,6 +1722,7 @@ namespace header_LowLevel
         }
 
         /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3112,52 +1732,21 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response CustomRequestId(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateCustomRequestIdRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                return _restClient.CustomRequestId(options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        private HttpMessage CreateCustomRequestIdRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
         }
     }
 }

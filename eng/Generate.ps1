@@ -92,11 +92,12 @@ $testNamesLowLevel =
     'body-file',
     'body-string',
     'custom-baseUrl',
+    'custom-baseUrl-paging',
     'header',
     'httpInfrastructure',
     'media_types',
     'lro',
-    #'paging',
+    'paging',
     'url-multi-collectionFormat',
     'url';
 

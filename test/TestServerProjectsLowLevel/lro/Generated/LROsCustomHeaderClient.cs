@@ -19,11 +19,10 @@ namespace lro_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
         private HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly LROsCustomHeaderRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly string apiVersion;
-        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of LROsCustomHeaderClient for mocking. </summary>
         protected LROsCustomHeaderClient()
@@ -47,11 +46,12 @@ namespace lro_LowLevel
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            apiVersion = options.Version;
+            _restClient = new LROsCustomHeaderRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -66,7 +66,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   id: string,
@@ -80,7 +79,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Error</c>:
         /// <code>{
         ///   code: number,
@@ -89,34 +87,17 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutAsyncRetrySucceededAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
-                }
+                using HttpMessage message = _restClient.CreatePutAsyncRetrySucceededRequest(content);
+                Response response = await _restClient.PutAsyncRetrySucceededAsync(content, options).ConfigureAwait(false);
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -126,6 +107,8 @@ namespace lro_LowLevel
         }
 
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -140,7 +123,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   id: string,
@@ -154,7 +136,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Error</c>:
         /// <code>{
         ///   code: number,
@@ -163,34 +144,17 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutAsyncRetrySucceeded(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
-                }
+                using HttpMessage message = _restClient.CreatePutAsyncRetrySucceededRequest(content);
+                Response response = _restClient.PutAsyncRetrySucceeded(content, options);
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -199,22 +163,9 @@ namespace lro_LowLevel
             }
         }
 
-        private HttpMessage CreatePutAsyncRetrySucceededRequest(RequestContent content)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Put;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/lro/customheader/putasync/retry/succeeded", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -229,7 +180,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   id: string,
@@ -243,7 +193,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Error</c>:
         /// <code>{
         ///   code: number,
@@ -252,35 +201,17 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Put201CreatingSucceeded200Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                        case 201:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
-                }
+                using HttpMessage message = _restClient.CreatePut201CreatingSucceeded200Request(content);
+                Response response = await _restClient.Put201CreatingSucceeded200Async(content, options).ConfigureAwait(false);
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -290,6 +221,8 @@ namespace lro_LowLevel
         }
 
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -304,7 +237,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   id: string,
@@ -318,7 +250,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Error</c>:
         /// <code>{
         ///   code: number,
@@ -327,35 +258,17 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Operation<BinaryData> Put201CreatingSucceeded200(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                        case 201:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
-                }
+                using HttpMessage message = _restClient.CreatePut201CreatingSucceeded200Request(content);
+                Response response = _restClient.Put201CreatingSucceeded200(content, options);
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -364,22 +277,9 @@ namespace lro_LowLevel
             }
         }
 
-        private HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Put;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/lro/customheader/put/201/creating/succeeded/200", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -394,7 +294,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Error</c>:
         /// <code>{
         ///   code: number,
@@ -403,34 +302,17 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Post202Retry200Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202Retry200Request(content);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 202:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
-                }
+                using HttpMessage message = _restClient.CreatePost202Retry200Request(content);
+                Response response = await _restClient.Post202Retry200Async(content, options).ConfigureAwait(false);
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -440,6 +322,8 @@ namespace lro_LowLevel
         }
 
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -454,7 +338,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Error</c>:
         /// <code>{
         ///   code: number,
@@ -463,34 +346,17 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Operation<BinaryData> Post202Retry200(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202Retry200Request(content);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 202:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
-                }
+                using HttpMessage message = _restClient.CreatePost202Retry200Request(content);
+                Response response = _restClient.Post202Retry200(content, options);
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -499,22 +365,9 @@ namespace lro_LowLevel
             }
         }
 
-        private HttpMessage CreatePost202Retry200Request(RequestContent content)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/lro/customheader/post/202/retry/200", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -529,7 +382,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Error</c>:
         /// <code>{
         ///   code: number,
@@ -538,34 +390,17 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PostAsyncRetrySucceededAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 202:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
-                }
+                using HttpMessage message = _restClient.CreatePostAsyncRetrySucceededRequest(content);
+                Response response = await _restClient.PostAsyncRetrySucceededAsync(content, options).ConfigureAwait(false);
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
@@ -575,6 +410,8 @@ namespace lro_LowLevel
         }
 
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -589,7 +426,6 @@ namespace lro_LowLevel
         ///   }
         /// }
         /// </code>
-        /// 
         /// Schema for <c>Response Error</c>:
         /// <code>{
         ///   code: number,
@@ -598,55 +434,23 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Operation<BinaryData> PostAsyncRetrySucceeded(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 202:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
-                }
+                using HttpMessage message = _restClient.CreatePostAsyncRetrySucceededRequest(content);
+                Response response = _restClient.PostAsyncRetrySucceeded(content, options);
+                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded", LowLevelOperationHelpers.ResponseContentSelector);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        private HttpMessage CreatePostAsyncRetrySucceededRequest(RequestContent content)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/lro/customheader/postasync/retry/succeeded", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
         }
     }
 }
