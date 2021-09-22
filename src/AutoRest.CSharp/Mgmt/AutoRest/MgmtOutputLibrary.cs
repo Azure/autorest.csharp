@@ -240,6 +240,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var resourceData in ResourceData)
             {
                 var temp = resourceData.Inherits;
+                var propTemp = resourceData.Properties;
             }
 
             //force inheritance evaluation on models

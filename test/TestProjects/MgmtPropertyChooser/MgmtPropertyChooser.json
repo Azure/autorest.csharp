@@ -410,6 +410,14 @@
                         "type": "string"
                     },
                     "description": "The virtual machine zones."
+                },
+                "fakeResources": {
+                    "readOnly": true,
+                    "type":"array",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    },
+                    "description": "The fake resources for the virtual machine."
                 }
             },
             "allOf": [

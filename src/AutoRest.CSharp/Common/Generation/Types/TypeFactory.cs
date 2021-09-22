@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -143,6 +144,11 @@ namespace AutoRest.CSharp.Generation.Types
             => type.IsFrameworkType &&
                (type.FrameworkType == typeof(IList<>) ||
                type.FrameworkType == typeof(ICollection<>));
+
+        internal static bool IsIEnumerableType(CSharpType type)
+            => type.IsFrameworkType &&
+            (type.FrameworkType == typeof(IEnumerable) ||
+            (type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>)));
 
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
         {

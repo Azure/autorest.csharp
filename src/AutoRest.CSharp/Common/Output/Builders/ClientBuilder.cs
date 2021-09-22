@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private const string OperationsSuffixValue = "Operations";
 
         public static string GetClientSuffix(BuildContext context) => context.Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
-        public static string GetRestClientSuffix(BuildContext context) => (!context.Configuration.LowLevelClient ? "Rest" : "") + GetClientSuffix(context);
+        public static string GetRestClientSuffix(BuildContext context) => "Rest" + GetClientSuffix(context);
 
         public static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

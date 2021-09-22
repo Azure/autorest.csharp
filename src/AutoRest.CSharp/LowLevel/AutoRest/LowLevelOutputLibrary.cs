@@ -17,16 +17,20 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
+        private CachedDictionary<OperationGroup, LowLevelRestClient> _internalRestClients;
+        private CachedDictionary<OperationGroup, LowLevelDataPlaneClient> _publicClients;
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
             _codeModel = codeModel;
             _context = context;
-            _restClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
+            _internalRestClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
+            _publicClients = new CachedDictionary<OperationGroup, LowLevelDataPlaneClient>(EnsureClients);
         }
 
-        public IEnumerable<LowLevelRestClient> RestClients => _restClients.Values;
+        public IEnumerable<LowLevelRestClient> RestClients => _internalRestClients.Values;
+
+        public IEnumerable<LowLevelDataPlaneClient> Clients => _publicClients.Values;
 
         private Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
         {
@@ -37,6 +41,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return restClients;
+        }
+
+        private Dictionary<OperationGroup, LowLevelDataPlaneClient> EnsureClients()
+        {
+            var clients = new Dictionary<OperationGroup, LowLevelDataPlaneClient>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                clients.Add(operationGroup, new LowLevelDataPlaneClient(operationGroup, _context));
+            }
+
+            return clients;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)
@@ -56,5 +71,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public override CSharpType? FindTypeByName(string originalName) => null;
+
+        public LowLevelRestClient FindRestClient(OperationGroup operationGroup)
+        {
+            return _internalRestClients[operationGroup];
+        }
     }
 }

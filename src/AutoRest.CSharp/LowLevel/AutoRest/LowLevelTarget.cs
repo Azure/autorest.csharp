@@ -16,10 +16,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
         {
             var context = new BuildContext<LowLevelOutputLibrary>(codeModel, configuration, sourceInputModel);
+
             foreach (var client in context.Library.RestClients)
             {
                 var codeWriter = new CodeWriter();
-                var lowLevelClientWriter = new LowLevelClientWriter ();
+                var lowLevelClientWriter = new LowLevelRestClientWriter();
+                lowLevelClientWriter.WriteClient(codeWriter, client);
+                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+            }
+
+            foreach (var client in context.Library.Clients)
+            {
+                var codeWriter = new CodeWriter();
+                var lowLevelClientWriter = new LowLevelDataPlaneClientWriter();
                 lowLevelClientWriter.WriteClient(codeWriter, client, context);
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
             }
