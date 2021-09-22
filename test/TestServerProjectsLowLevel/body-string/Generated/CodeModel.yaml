@@ -396,6 +396,7 @@ operationGroups:
           x-ms-examples:
             string_getNull:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/string_getNull.json
               responses:
                 '200': {}
         language: !Languages 
@@ -494,6 +495,7 @@ operationGroups:
           x-ms-examples:
             string_putNull:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/string_putNull.json
               responses:
                 '200': {}
         language: !Languages 
@@ -566,6 +568,7 @@ operationGroups:
           x-ms-examples:
             string_getEmpty:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/string_getEmpty.json
               responses:
                 '200':
                   body: ''
@@ -664,6 +667,7 @@ operationGroups:
             string_putEmpty:
               parameters:
                 stringBody: ''
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/string_putEmpty.json
               responses:
                 '200': {}
         language: !Languages 
@@ -736,6 +740,7 @@ operationGroups:
           x-ms-examples:
             string_getMbcs:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/string_getMbcs.json
               responses:
                 '200':
                   body: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
@@ -834,6 +839,7 @@ operationGroups:
             string_putMbcs:
               parameters:
                 stringBody: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/string_putMbcs.json
               responses:
                 '200': {}
         language: !Languages 
@@ -906,6 +912,7 @@ operationGroups:
           x-ms-examples:
             string_getWhitespace:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/string_getWhitespace.json
               responses:
                 '200':
                   body: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
@@ -1004,6 +1011,7 @@ operationGroups:
             string_putWhitespace:
               parameters:
                 stringBody: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/string_putWhitespace.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1076,6 +1084,7 @@ operationGroups:
           x-ms-examples:
             string_getNotProvided:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/string_getNotProvided.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1446,6 +1455,7 @@ operationGroups:
           x-ms-examples:
             enum_getNotExpandable:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/enum_getNotExpandable.json
               responses:
                 '200':
                   body: red color
@@ -1545,6 +1555,7 @@ operationGroups:
             enum_putNotExpandable:
               parameters:
                 stringBody: red color
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/enum_putNotExpandable.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1617,6 +1628,7 @@ operationGroups:
           x-ms-examples:
             enum_getReferenced:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/enum_getReferenced.json
               responses:
                 '200':
                   body: red color
@@ -1716,6 +1728,7 @@ operationGroups:
             enum_putReferenced:
               parameters:
                 enumStringBody: red color
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/enum_putReferenced.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1788,6 +1801,7 @@ operationGroups:
           x-ms-examples:
             enum_getReferencedConstant:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/enum_getReferencedConstant.json
               responses:
                 '200':
                   body: green-color
@@ -1887,6 +1901,7 @@ operationGroups:
             enum_putReferencedConstant:
               parameters:
                 enumStringBody: green-color
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/enum_putReferencedConstant.json
               responses:
                 '200': {}
         language: !Languages 

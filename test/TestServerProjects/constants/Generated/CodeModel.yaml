@@ -3,6 +3,23 @@ info: !Info
   description: Test Infrastructure for AutoRest Swagger Constant
   title: AutoRest Swagger Constant Service
 schemas: !Schemas 
+  booleans:
+    - !BooleanSchema &ref_1
+      type: boolean
+      language: !Languages 
+        default:
+          name: Bool
+          description: simple boolean
+      protocol: !Protocols {}
+  numbers:
+    - !NumberSchema &ref_2
+      type: integer
+      precision: 32
+      language: !Languages 
+        default:
+          name: Integer
+          description: ''
+      protocol: !Protocols {}
   strings:
     - !StringSchema &ref_0
       type: string
@@ -12,7 +29,7 @@ schemas: !Schemas
           description: simple string
       protocol: !Protocols {}
   choices:
-    - !ChoiceSchema &ref_30
+    - !ChoiceSchema &ref_35
       choices:
         - !ChoiceValue 
           value: value1
@@ -36,7 +53,7 @@ schemas: !Schemas
           name: ModelAsStringNoRequiredTwoValueNoDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_32
+    - !ChoiceSchema &ref_37
       choices:
         - !ChoiceValue 
           value: value1
@@ -60,7 +77,7 @@ schemas: !Schemas
           name: ModelAsStringNoRequiredTwoValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_34
+    - !ChoiceSchema &ref_39
       choices:
         - !ChoiceValue 
           value: value1
@@ -78,7 +95,7 @@ schemas: !Schemas
           name: ModelAsStringNoRequiredOneValueNoDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_36
+    - !ChoiceSchema &ref_41
       choices:
         - !ChoiceValue 
           value: value1
@@ -96,7 +113,7 @@ schemas: !Schemas
           name: ModelAsStringNoRequiredOneValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_38
+    - !ChoiceSchema &ref_43
       choices:
         - !ChoiceValue 
           value: value1
@@ -120,7 +137,7 @@ schemas: !Schemas
           name: ModelAsStringRequiredTwoValueNoDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_40
+    - !ChoiceSchema &ref_45
       choices:
         - !ChoiceValue 
           value: value1
@@ -144,7 +161,7 @@ schemas: !Schemas
           name: ModelAsStringRequiredTwoValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_42
+    - !ChoiceSchema &ref_47
       choices:
         - !ChoiceValue 
           value: value1
@@ -159,7 +176,7 @@ schemas: !Schemas
           name: ModelAsStringRequiredOneValueNoDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_44
+    - !ChoiceSchema &ref_49
       choices:
         - !ChoiceValue 
           value: value1
@@ -174,7 +191,52 @@ schemas: !Schemas
           name: ModelAsStringRequiredOneValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_9
+    - !ChoiceSchema &ref_19
+      choices:
+        - !ChoiceValue 
+          value: true
+          language:
+            default:
+              name: 'True'
+              description: ''
+      type: choice
+      choiceType: *ref_1
+      language: !Languages 
+        default:
+          name: Enum8
+          description: ''
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_20
+      choices:
+        - !ChoiceValue 
+          value: 100
+          language:
+            default:
+              name: OneHundred
+              description: ''
+      type: choice
+      choiceType: *ref_2
+      language: !Languages 
+        default:
+          name: Enum9
+          description: ''
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_21
+      choices:
+        - !ChoiceValue 
+          value: path
+          language:
+            default:
+              name: Path
+              description: ''
+      type: choice
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: Enum10
+          description: ''
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_11
       choices:
         - !ChoiceValue 
           value: value1
@@ -198,7 +260,7 @@ schemas: !Schemas
           name: ModelAsStringNoRequiredTwoValueNoDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_10
+    - !ChoiceSchema &ref_12
       choices:
         - !ChoiceValue 
           value: value1
@@ -224,7 +286,7 @@ schemas: !Schemas
           name: ModelAsStringNoRequiredTwoValueDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_11
+    - !ChoiceSchema &ref_13
       choices:
         - !ChoiceValue 
           value: value1
@@ -242,7 +304,7 @@ schemas: !Schemas
           name: ModelAsStringNoRequiredOneValueNoDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_12
+    - !ChoiceSchema &ref_14
       choices:
         - !ChoiceValue 
           value: value1
@@ -262,7 +324,7 @@ schemas: !Schemas
           name: ModelAsStringNoRequiredOneValueDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_13
+    - !ChoiceSchema &ref_15
       choices:
         - !ChoiceValue 
           value: value1
@@ -286,7 +348,7 @@ schemas: !Schemas
           name: ModelAsStringRequiredTwoValueNoDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_14
+    - !ChoiceSchema &ref_16
       choices:
         - !ChoiceValue 
           value: value1
@@ -312,7 +374,7 @@ schemas: !Schemas
           name: ModelAsStringRequiredTwoValueDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_15
+    - !ChoiceSchema &ref_17
       choices:
         - !ChoiceValue 
           value: value1
@@ -330,7 +392,7 @@ schemas: !Schemas
           name: ModelAsStringRequiredOneValueNoDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_16
+    - !ChoiceSchema &ref_18
       choices:
         - !ChoiceValue 
           value: value1
@@ -351,7 +413,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   sealedChoices:
-    - !SealedChoiceSchema &ref_18
+    - !SealedChoiceSchema &ref_23
       choices:
         - !ChoiceValue 
           value: value1
@@ -375,7 +437,7 @@ schemas: !Schemas
           name: NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_20
+    - !SealedChoiceSchema &ref_25
       choices:
         - !ChoiceValue 
           value: value1
@@ -399,7 +461,7 @@ schemas: !Schemas
           name: NoModelAsStringNoRequiredTwoValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_24
+    - !SealedChoiceSchema &ref_29
       choices:
         - !ChoiceValue 
           value: value1
@@ -423,7 +485,7 @@ schemas: !Schemas
           name: NoModelAsStringRequiredTwoValueNoDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_26
+    - !SealedChoiceSchema &ref_31
       choices:
         - !ChoiceValue 
           value: value1
@@ -447,7 +509,7 @@ schemas: !Schemas
           name: NoModelAsStringRequiredTwoValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_1
+    - !SealedChoiceSchema &ref_3
       choices:
         - !ChoiceValue 
           value: value1
@@ -471,7 +533,7 @@ schemas: !Schemas
           name: NoModelAsStringNoRequiredTwoValueNoDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_2
+    - !SealedChoiceSchema &ref_4
       choices:
         - !ChoiceValue 
           value: value1
@@ -497,7 +559,7 @@ schemas: !Schemas
           name: NoModelAsStringNoRequiredTwoValueDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_5
+    - !SealedChoiceSchema &ref_7
       choices:
         - !ChoiceValue 
           value: value1
@@ -521,7 +583,7 @@ schemas: !Schemas
           name: NoModelAsStringRequiredTwoValueNoDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_6
+    - !SealedChoiceSchema &ref_8
       choices:
         - !ChoiceValue 
           value: value1
@@ -548,7 +610,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_22
+    - !ConstantSchema &ref_27
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -561,7 +623,7 @@ schemas: !Schemas
           name: NoModelAsStringNoRequiredOneValueNoDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_23
+    - !ConstantSchema &ref_28
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -574,7 +636,7 @@ schemas: !Schemas
           name: NoModelAsStringNoRequiredOneValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_28
+    - !ConstantSchema &ref_33
       type: constant
       value: !ConstantValue 
         value: value1
@@ -584,7 +646,7 @@ schemas: !Schemas
           name: NoModelAsStringRequiredOneValueNoDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_29
+    - !ConstantSchema &ref_34
       type: constant
       value: !ConstantValue 
         value: value1
@@ -594,7 +656,7 @@ schemas: !Schemas
           name: NoModelAsStringRequiredOneValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_3
+    - !ConstantSchema &ref_5
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -607,7 +669,7 @@ schemas: !Schemas
           name: NoModelAsStringNoRequiredOneValueNoDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_4
+    - !ConstantSchema &ref_6
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -622,7 +684,7 @@ schemas: !Schemas
           name: NoModelAsStringNoRequiredOneValueDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_7
+    - !ConstantSchema &ref_9
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -635,7 +697,7 @@ schemas: !Schemas
           name: NoModelAsStringRequiredOneValueNoDefaultEnum
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_8
+    - !ConstantSchema &ref_10
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -658,49 +720,6 @@ schemas: !Schemas
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_1
-          serializedName: parameter
-          language: !Languages 
-            default:
-              name: parameter
-              description: ''
-          protocol: !Protocols {}
-      language: !Languages 
-        default:
-          name: NoModelAsStringNoRequiredTwoValueNoDefault
-          description: ''
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema 
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      properties:
-        - !Property 
-          schema: *ref_2
-          clientDefaultValue: value1
-          serializedName: parameter
-          extensions:
-            x-ms-client-default: value1
-          language: !Languages 
-            default:
-              name: parameter
-              description: ''
-          protocol: !Protocols {}
-      language: !Languages 
-        default:
-          name: NoModelAsStringNoRequiredTwoValueDefault
-          description: ''
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema 
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      properties:
-        - !Property 
           schema: *ref_3
           serializedName: parameter
           language: !Languages 
@@ -710,7 +729,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: NoModelAsStringNoRequiredOneValueNoDefault
+          name: NoModelAsStringNoRequiredTwoValueNoDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -733,7 +752,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: NoModelAsStringNoRequiredOneValueDefault
+          name: NoModelAsStringNoRequiredTwoValueDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -745,7 +764,6 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_5
-          required: true
           serializedName: parameter
           language: !Languages 
             default:
@@ -754,7 +772,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: NoModelAsStringRequiredTwoValueNoDefault
+          name: NoModelAsStringNoRequiredOneValueNoDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -767,7 +785,6 @@ schemas: !Schemas
         - !Property 
           schema: *ref_6
           clientDefaultValue: value1
-          required: true
           serializedName: parameter
           extensions:
             x-ms-client-default: value1
@@ -778,7 +795,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: NoModelAsStringRequiredTwoValueDefault
+          name: NoModelAsStringNoRequiredOneValueDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -799,7 +816,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: NoModelAsStringRequiredOneValueNoDefault
+          name: NoModelAsStringRequiredTwoValueNoDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -823,7 +840,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: NoModelAsStringRequiredOneValueDefault
+          name: NoModelAsStringRequiredTwoValueDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -835,6 +852,7 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_9
+          required: true
           serializedName: parameter
           language: !Languages 
             default:
@@ -843,7 +861,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: ModelAsStringNoRequiredTwoValueNoDefault
+          name: NoModelAsStringRequiredOneValueNoDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -856,6 +874,7 @@ schemas: !Schemas
         - !Property 
           schema: *ref_10
           clientDefaultValue: value1
+          required: true
           serializedName: parameter
           extensions:
             x-ms-client-default: value1
@@ -866,7 +885,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: ModelAsStringNoRequiredTwoValueDefault
+          name: NoModelAsStringRequiredOneValueDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -886,7 +905,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: ModelAsStringNoRequiredOneValueNoDefault
+          name: ModelAsStringNoRequiredTwoValueNoDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -909,7 +928,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: ModelAsStringNoRequiredOneValueDefault
+          name: ModelAsStringNoRequiredTwoValueDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -921,7 +940,6 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_13
-          required: true
           serializedName: parameter
           language: !Languages 
             default:
@@ -930,7 +948,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: ModelAsStringRequiredTwoValueNoDefault
+          name: ModelAsStringNoRequiredOneValueNoDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -943,7 +961,6 @@ schemas: !Schemas
         - !Property 
           schema: *ref_14
           clientDefaultValue: value1
-          required: true
           serializedName: parameter
           extensions:
             x-ms-client-default: value1
@@ -954,7 +971,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: ModelAsStringRequiredTwoValueDefault
+          name: ModelAsStringNoRequiredOneValueDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -975,7 +992,7 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
-          name: ModelAsStringRequiredOneValueNoDefault
+          name: ModelAsStringRequiredTwoValueNoDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
@@ -999,12 +1016,99 @@ schemas: !Schemas
           protocol: !Protocols {}
       language: !Languages 
         default:
+          name: ModelAsStringRequiredTwoValueDefault
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property 
+          schema: *ref_17
+          required: true
+          serializedName: parameter
+          language: !Languages 
+            default:
+              name: parameter
+              description: ''
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: ModelAsStringRequiredOneValueNoDefault
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property 
+          schema: *ref_18
+          clientDefaultValue: value1
+          required: true
+          serializedName: parameter
+          extensions:
+            x-ms-client-default: value1
+          language: !Languages 
+            default:
+              name: parameter
+              description: ''
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
           name: ModelAsStringRequiredOneValueDefault
           description: ''
           namespace: ''
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_17
+  - !Parameter &ref_51
+    schema: *ref_19
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 0
+    language: !Languages 
+      default:
+        name: HeaderConstant
+        description: Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'
+        serializedName: header-constant
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: header
+  - !Parameter &ref_52
+    schema: *ref_20
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 1
+    language: !Languages 
+      default:
+        name: QueryConstant
+        description: Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'
+        serializedName: query-constant
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: query
+  - !Parameter &ref_53
+    schema: *ref_21
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 2
+    language: !Languages 
+      default:
+        name: PathConstant
+        description: Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'
+        serializedName: path-constant
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: path
+  - !Parameter &ref_22
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -1029,9 +1133,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_19
-            schema: *ref_18
+          - *ref_22
+          - !Parameter &ref_24
+            schema: *ref_23
             implementation: Method
             language: !Languages 
               default:
@@ -1053,7 +1157,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_19
+          - *ref_24
         responses:
           - !Response 
             language: !Languages 
@@ -1075,9 +1179,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_21
-            schema: *ref_20
+          - *ref_22
+          - !Parameter &ref_26
+            schema: *ref_25
             clientDefaultValue: value1
             implementation: Method
             extensions:
@@ -1102,7 +1206,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_21
+          - *ref_26
         responses:
           - !Response 
             language: !Languages 
@@ -1124,9 +1228,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
+          - *ref_22
           - !Parameter 
-            schema: *ref_22
+            schema: *ref_27
             implementation: Method
             language: !Languages 
               default:
@@ -1169,9 +1273,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
+          - *ref_22
           - !Parameter 
-            schema: *ref_23
+            schema: *ref_28
             clientDefaultValue: value1
             implementation: Method
             extensions:
@@ -1217,9 +1321,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_25
-            schema: *ref_24
+          - *ref_22
+          - !Parameter &ref_30
+            schema: *ref_29
             implementation: Method
             required: true
             language: !Languages 
@@ -1242,7 +1346,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_25
+          - *ref_30
         responses:
           - !Response 
             language: !Languages 
@@ -1264,9 +1368,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_27
-            schema: *ref_26
+          - *ref_22
+          - !Parameter &ref_32
+            schema: *ref_31
             clientDefaultValue: value1
             implementation: Method
             required: true
@@ -1292,7 +1396,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_27
+          - *ref_32
         responses:
           - !Response 
             language: !Languages 
@@ -1314,9 +1418,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
+          - *ref_22
           - !Parameter 
-            schema: *ref_28
+            schema: *ref_33
             implementation: Method
             required: true
             language: !Languages 
@@ -1360,9 +1464,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
+          - *ref_22
           - !Parameter 
-            schema: *ref_29
+            schema: *ref_34
             clientDefaultValue: value1
             implementation: Method
             required: true
@@ -1409,9 +1513,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_31
-            schema: *ref_30
+          - *ref_22
+          - !Parameter &ref_36
+            schema: *ref_35
             implementation: Method
             language: !Languages 
               default:
@@ -1433,7 +1537,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_31
+          - *ref_36
         responses:
           - !Response 
             language: !Languages 
@@ -1455,9 +1559,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_33
-            schema: *ref_32
+          - *ref_22
+          - !Parameter &ref_38
+            schema: *ref_37
             clientDefaultValue: value1
             implementation: Method
             extensions:
@@ -1482,7 +1586,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_33
+          - *ref_38
         responses:
           - !Response 
             language: !Languages 
@@ -1504,9 +1608,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_35
-            schema: *ref_34
+          - *ref_22
+          - !Parameter &ref_40
+            schema: *ref_39
             implementation: Method
             language: !Languages 
               default:
@@ -1528,7 +1632,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_35
+          - *ref_40
         responses:
           - !Response 
             language: !Languages 
@@ -1550,9 +1654,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_37
-            schema: *ref_36
+          - *ref_22
+          - !Parameter &ref_42
+            schema: *ref_41
             clientDefaultValue: value1
             implementation: Method
             extensions:
@@ -1577,7 +1681,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_37
+          - *ref_42
         responses:
           - !Response 
             language: !Languages 
@@ -1599,9 +1703,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_39
-            schema: *ref_38
+          - *ref_22
+          - !Parameter &ref_44
+            schema: *ref_43
             implementation: Method
             required: true
             language: !Languages 
@@ -1624,7 +1728,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_39
+          - *ref_44
         responses:
           - !Response 
             language: !Languages 
@@ -1646,9 +1750,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_41
-            schema: *ref_40
+          - *ref_22
+          - !Parameter &ref_46
+            schema: *ref_45
             clientDefaultValue: value1
             implementation: Method
             required: true
@@ -1674,7 +1778,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_41
+          - *ref_46
         responses:
           - !Response 
             language: !Languages 
@@ -1696,9 +1800,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_43
-            schema: *ref_42
+          - *ref_22
+          - !Parameter &ref_48
+            schema: *ref_47
             implementation: Method
             required: true
             language: !Languages 
@@ -1721,7 +1825,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_43
+          - *ref_48
         responses:
           - !Response 
             language: !Languages 
@@ -1743,9 +1847,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - !Parameter &ref_45
-            schema: *ref_44
+          - *ref_22
+          - !Parameter &ref_50
+            schema: *ref_49
             clientDefaultValue: value1
             implementation: Method
             required: true
@@ -1771,7 +1875,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_45
+          - *ref_50
         responses:
           - !Response 
             language: !Languages 
@@ -1787,6 +1891,42 @@ operationGroups:
             name: PutModelAsStringRequiredOneValueDefault
             description: Puts constants to the testserver
             summary: Puts constants to the testserver
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_22
+          - *ref_51
+          - *ref_52
+          - *ref_53
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /constants/clientConstants/{path-constant}
+                method: put
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Indicates success.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: PutClientConstants
+            description: Pass constants from the client to this function. Will pass in constant path, query, and header parameters.
         protocol: !Protocols {}
     language: !Languages 
       default:

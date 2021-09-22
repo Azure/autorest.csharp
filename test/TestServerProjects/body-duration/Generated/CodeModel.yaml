@@ -185,6 +185,7 @@ operationGroups:
           x-ms-examples:
             duration_getNull:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/duration_getNull.json
               responses:
                 '200':
                   body: ''
@@ -284,6 +285,7 @@ operationGroups:
             duration_putPositiveDuration:
               parameters:
                 durationBody: P123DT22H14M12.011S
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/duration_putPositiveDuration.json
               responses:
                 '200': {}
         language: !Languages 

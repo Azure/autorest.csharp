@@ -198,6 +198,7 @@ operationGroups:
           x-ms-examples:
             date_getNull:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/date_getNull.json
               responses:
                 '200':
                   body: ''
@@ -495,6 +496,7 @@ operationGroups:
             date_putMaxDate:
               parameters:
                 dateBody: '9999-12-31'
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/date_putMaxDate.json
               responses:
                 '200': {}
         language: !Languages 
@@ -567,6 +569,7 @@ operationGroups:
           x-ms-examples:
             date_getMaxDate:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/date_getMaxDate.json
               responses:
                 '200':
                   body: '9999-12-31'
@@ -666,6 +669,7 @@ operationGroups:
             date_putMinDate:
               parameters:
                 dateBody: '0001-01-01'
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/date_putMinDate.json
               responses:
                 '200': {}
         language: !Languages 
@@ -738,6 +742,7 @@ operationGroups:
           x-ms-examples:
             date_getMinDate:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/date_getMinDate.json
               responses:
                 '200':
                   body: '0001-01-01'

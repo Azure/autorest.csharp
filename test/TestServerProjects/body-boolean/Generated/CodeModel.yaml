@@ -243,6 +243,7 @@ operationGroups:
           x-ms-examples:
             bool_getTrue:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/bool_getTrue.json
               responses:
                 '200':
                   body: true
@@ -341,6 +342,7 @@ operationGroups:
             bool_putTrue:
               parameters:
                 boolBody: true
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/bool_putTrue.json
               responses:
                 '200': {}
         language: !Languages 
@@ -413,6 +415,7 @@ operationGroups:
           x-ms-examples:
             bool_getFalse:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/bool_getFalse.json
               responses:
                 '200':
                   body: false
@@ -511,6 +514,7 @@ operationGroups:
             bool_putFalse:
               parameters:
                 boolBody: false
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/bool_putFalse.json
               responses:
                 '200': {}
         language: !Languages 
@@ -584,6 +588,7 @@ operationGroups:
           x-ms-examples:
             bool_getNull:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/bool_getNull.json
               responses:
                 '200': {}
         language: !Languages 

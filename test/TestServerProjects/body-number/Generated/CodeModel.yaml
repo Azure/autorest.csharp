@@ -389,6 +389,7 @@ operationGroups:
           x-ms-examples:
             number_getNull:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getNull.json
               responses:
                 '200':
                   body: ''
@@ -686,6 +687,7 @@ operationGroups:
             number_putBigFloat:
               parameters:
                 numberBody: 340282300000000000000
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putBigFloat.json
               responses:
                 '200': {}
         language: !Languages 
@@ -758,6 +760,7 @@ operationGroups:
           x-ms-examples:
             number_getBigFloat:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getBigFloat.json
               responses:
                 '200':
                   body: 340282300000000000000
@@ -857,6 +860,7 @@ operationGroups:
             number_putBigDouble:
               parameters:
                 numberBody: 2.5976931e+101
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putBigDouble.json
               responses:
                 '200': {}
         language: !Languages 
@@ -929,6 +933,7 @@ operationGroups:
           x-ms-examples:
             number_getBigDouble:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getBigDouble.json
               responses:
                 '200':
                   body: 2.5976931e+101
@@ -1027,6 +1032,7 @@ operationGroups:
             number_putBigDoublePositiveDecimal:
               parameters:
                 numberBody: 99999999.99
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putBigDoublePositiveDecimal.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1099,6 +1105,7 @@ operationGroups:
           x-ms-examples:
             number_getBigDoublePositiveDecimal:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getBigDoublePositiveDecimal.json
               responses:
                 '200':
                   body: 99999999.99
@@ -1197,6 +1204,7 @@ operationGroups:
             number_putBigDoubleNegativeDecimal:
               parameters:
                 numberBody: -99999999.99
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putBigDoubleNegativeDecimal.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1269,6 +1277,7 @@ operationGroups:
           x-ms-examples:
             number_getBigDoubleNegativeDecimal:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getBigDoubleNegativeDecimal.json
               responses:
                 '200':
                   body: -99999999.99
@@ -1368,6 +1377,7 @@ operationGroups:
             number_putBigDecimal:
               parameters:
                 numberBody: 2.5976931e+101
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putBigDecimal.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1440,6 +1450,7 @@ operationGroups:
           x-ms-examples:
             number_getBigDecimal:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getBigDecimal.json
               responses:
                 '200':
                   body: 2.5976931e+101
@@ -1538,6 +1549,7 @@ operationGroups:
             number_putBigDecimalPositiveDecimal:
               parameters:
                 numberBody: 99999999.99
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putBigDecimalPositiveDecimal.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1610,6 +1622,7 @@ operationGroups:
           x-ms-examples:
             number_getBigDecimalPositiveDecimal:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getBigDecimalPositiveDecimal.json
               responses:
                 '200':
                   body: 99999999.99
@@ -1708,6 +1721,7 @@ operationGroups:
             number_putBigDecimalNegativeDecimal:
               parameters:
                 numberBody: -99999999.99
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putBigDecimalNegativeDecimal.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1780,6 +1794,7 @@ operationGroups:
           x-ms-examples:
             number_getBigDecimalNegativeDecimal:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getBigDecimalNegativeDecimal.json
               responses:
                 '200':
                   body: -99999999.99
@@ -1879,6 +1894,7 @@ operationGroups:
             number_putSmallFloat:
               parameters:
                 numberBody: 3.402823e-20
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putSmallFloat.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1951,6 +1967,7 @@ operationGroups:
           x-ms-examples:
             number_getSmallFloat:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getSmallFloat.json
               responses:
                 '200':
                   body: 3.402823e-20
@@ -2050,6 +2067,7 @@ operationGroups:
             number_putSmallDouble:
               parameters:
                 numberBody: 2.5976931e-101
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putSmallDouble.json
               responses:
                 '200': {}
         language: !Languages 
@@ -2122,6 +2140,7 @@ operationGroups:
           x-ms-examples:
             number_getSmallDouble:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getSmallDouble.json
               responses:
                 '200':
                   body: 2.5976931e-101
@@ -2221,6 +2240,7 @@ operationGroups:
             number_putSmallDecimal:
               parameters:
                 numberBody: 2.5976931e-101
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_putSmallDecimal.json
               responses:
                 '200': {}
         language: !Languages 
@@ -2293,6 +2313,7 @@ operationGroups:
           x-ms-examples:
             number_getSmallDecimal:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/number_getSmallDecimal.json
               responses:
                 '200':
                   body: 2.5976931e-101

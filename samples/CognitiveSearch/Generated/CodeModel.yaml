@@ -2892,6 +2892,21 @@ schemas: !Schemas
           description: The method for the http request.
       protocol: !Protocols {}
   choices:
+    - !ChoiceSchema &ref_630
+      choices:
+        - !ChoiceValue 
+          value: return=representation
+          language:
+            default:
+              name: ReturnRepresentation
+              description: ''
+      type: choice
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: Enum0
+          description: ''
+      protocol: !Protocols {}
     - !ChoiceSchema &ref_116
       choices:
         - !ChoiceValue 
@@ -6864,16 +6879,6 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_630
-      type: constant
-      value: !ConstantValue 
-        value: return=representation
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: Constant39
-          description: ''
-      protocol: !Protocols {}
     - !ConstantSchema &ref_248
       type: constant
       apiVersions:
@@ -7334,9 +7339,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_634
+            - !Parameter &ref_635
               schema: *ref_8
-              groupedBy: !Parameter &ref_637
+              groupedBy: !Parameter &ref_638
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7355,9 +7360,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_639
+            - !Parameter &ref_640
               schema: *ref_8
-              groupedBy: !Parameter &ref_640
+              groupedBy: !Parameter &ref_641
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7376,9 +7381,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_642
+            - !Parameter &ref_643
               schema: *ref_8
-              groupedBy: !Parameter &ref_643
+              groupedBy: !Parameter &ref_644
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7397,9 +7402,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_646
+            - !Parameter &ref_647
               schema: *ref_8
-              groupedBy: !Parameter &ref_647
+              groupedBy: !Parameter &ref_648
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7418,9 +7423,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_649
+            - !Parameter &ref_650
               schema: *ref_8
-              groupedBy: !Parameter &ref_650
+              groupedBy: !Parameter &ref_651
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7439,9 +7444,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_652
+            - !Parameter &ref_653
               schema: *ref_8
-              groupedBy: !Parameter &ref_653
+              groupedBy: !Parameter &ref_654
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7460,9 +7465,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_655
+            - !Parameter &ref_656
               schema: *ref_8
-              groupedBy: !Parameter &ref_658
+              groupedBy: !Parameter &ref_659
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7481,9 +7486,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_661
+            - !Parameter &ref_663
               schema: *ref_8
-              groupedBy: !Parameter &ref_664
+              groupedBy: !Parameter &ref_666
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7502,9 +7507,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_666
+            - !Parameter &ref_668
               schema: *ref_8
-              groupedBy: !Parameter &ref_667
+              groupedBy: !Parameter &ref_669
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7523,9 +7528,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_669
+            - !Parameter &ref_671
               schema: *ref_8
-              groupedBy: !Parameter &ref_670
+              groupedBy: !Parameter &ref_672
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7544,9 +7549,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_673
+            - !Parameter &ref_675
               schema: *ref_8
-              groupedBy: !Parameter &ref_674
+              groupedBy: !Parameter &ref_676
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7565,9 +7570,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_676
+            - !Parameter &ref_678
               schema: *ref_8
-              groupedBy: !Parameter &ref_677
+              groupedBy: !Parameter &ref_679
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7586,9 +7591,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_680
+            - !Parameter &ref_682
               schema: *ref_8
-              groupedBy: !Parameter &ref_683
+              groupedBy: !Parameter &ref_685
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7607,28 +7612,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_686
-              schema: *ref_8
-              groupedBy: !Parameter &ref_689
-                schema: *ref_9
-                implementation: Method
-                language: !Languages 
-                  default:
-                    name: requestOptions
-                    description: Parameter group
-                protocol: !Protocols {}
-              implementation: Method
-              extensions:
-                x-ms-client-request-id: true
-              language: !Languages 
-                default:
-                  name: xMsClientRequestId
-                  description: The tracking ID sent with the request to help with debugging.
-                  serializedName: x-ms-client-request-id
-              protocol: !Protocols 
-                http: !HttpParameter 
-                  in: header
-            - !Parameter &ref_691
+            - !Parameter &ref_689
               schema: *ref_8
               groupedBy: !Parameter &ref_692
                 schema: *ref_9
@@ -7670,9 +7654,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_698
+            - !Parameter &ref_697
               schema: *ref_8
-              groupedBy: !Parameter &ref_699
+              groupedBy: !Parameter &ref_698
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7693,7 +7677,7 @@ schemas: !Schemas
                   in: header
             - !Parameter &ref_701
               schema: *ref_8
-              groupedBy: !Parameter &ref_704
+              groupedBy: !Parameter &ref_702
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7712,9 +7696,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_707
+            - !Parameter &ref_704
               schema: *ref_8
-              groupedBy: !Parameter &ref_710
+              groupedBy: !Parameter &ref_707
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7733,9 +7717,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_712
+            - !Parameter &ref_711
               schema: *ref_8
-              groupedBy: !Parameter &ref_713
+              groupedBy: !Parameter &ref_714
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7754,9 +7738,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_715
+            - !Parameter &ref_716
               schema: *ref_8
-              groupedBy: !Parameter &ref_716
+              groupedBy: !Parameter &ref_717
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7796,9 +7780,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_722
+            - !Parameter &ref_723
               schema: *ref_8
-              groupedBy: !Parameter &ref_723
+              groupedBy: !Parameter &ref_724
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7817,9 +7801,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_725
+            - !Parameter &ref_726
               schema: *ref_8
-              groupedBy: !Parameter &ref_726
+              groupedBy: !Parameter &ref_727
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7840,7 +7824,7 @@ schemas: !Schemas
                   in: header
             - !Parameter &ref_729
               schema: *ref_8
-              groupedBy: !Parameter &ref_732
+              groupedBy: !Parameter &ref_730
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7859,9 +7843,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_736
+            - !Parameter &ref_733
               schema: *ref_8
-              groupedBy: !Parameter &ref_739
+              groupedBy: !Parameter &ref_736
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7882,7 +7866,7 @@ schemas: !Schemas
                   in: header
             - !Parameter &ref_741
               schema: *ref_8
-              groupedBy: !Parameter &ref_742
+              groupedBy: !Parameter &ref_744
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7901,9 +7885,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_744
+            - !Parameter &ref_746
               schema: *ref_8
-              groupedBy: !Parameter &ref_745
+              groupedBy: !Parameter &ref_747
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7922,7 +7906,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_748
+            - !Parameter &ref_749
               schema: *ref_8
               groupedBy: !Parameter &ref_750
                 schema: *ref_9
@@ -7943,9 +7927,30 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_754
+            - !Parameter &ref_753
               schema: *ref_8
               groupedBy: !Parameter &ref_755
+                schema: *ref_9
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: requestOptions
+                    description: Parameter group
+                protocol: !Protocols {}
+              implementation: Method
+              extensions:
+                x-ms-client-request-id: true
+              language: !Languages 
+                default:
+                  name: xMsClientRequestId
+                  description: The tracking ID sent with the request to help with debugging.
+                  serializedName: x-ms-client-request-id
+              protocol: !Protocols 
+                http: !HttpParameter 
+                  in: header
+            - !Parameter &ref_759
+              schema: *ref_8
+              groupedBy: !Parameter &ref_760
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7994,6 +7999,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: includeTotalResultCount
@@ -8025,6 +8031,7 @@ schemas: !Schemas
               schema: *ref_13
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: facets
@@ -8048,6 +8055,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: filter
@@ -8079,6 +8087,7 @@ schemas: !Schemas
               schema: *ref_16
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: highlightFields
@@ -8101,6 +8110,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: highlightPostTag
@@ -8122,6 +8132,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: highlightPreTag
@@ -8143,6 +8154,7 @@ schemas: !Schemas
               schema: *ref_6
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: minimumCoverage
@@ -8178,6 +8190,7 @@ schemas: !Schemas
               schema: *ref_18
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: orderBy
@@ -8206,6 +8219,7 @@ schemas: !Schemas
               schema: *ref_19
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: queryType
@@ -8237,6 +8251,7 @@ schemas: !Schemas
               schema: *ref_21
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: scoringParameters
@@ -8264,6 +8279,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: scoringProfile
@@ -8295,6 +8311,7 @@ schemas: !Schemas
               schema: *ref_23
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: searchFields
@@ -8321,6 +8338,7 @@ schemas: !Schemas
               schema: *ref_24
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: searchMode
@@ -8352,6 +8370,7 @@ schemas: !Schemas
               schema: *ref_26
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: select
@@ -8374,6 +8393,7 @@ schemas: !Schemas
               schema: *ref_27
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: skip
@@ -8399,6 +8419,7 @@ schemas: !Schemas
               schema: *ref_27
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: top
@@ -8441,6 +8462,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: filter
@@ -8462,6 +8484,7 @@ schemas: !Schemas
               schema: *ref_10
               groupedBy: *ref_29
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: useFuzzyMatching
@@ -8487,6 +8510,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_29
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: highlightPostTag
@@ -8508,6 +8532,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_29
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: highlightPreTag
@@ -8529,6 +8554,7 @@ schemas: !Schemas
               schema: *ref_6
               groupedBy: *ref_29
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: minimumCoverage
@@ -8564,6 +8590,7 @@ schemas: !Schemas
               schema: *ref_31
               groupedBy: *ref_29
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: orderBy
@@ -8602,6 +8629,7 @@ schemas: !Schemas
               schema: *ref_32
               groupedBy: *ref_29
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: searchFields
@@ -8634,6 +8662,7 @@ schemas: !Schemas
               schema: *ref_34
               groupedBy: *ref_29
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: select
@@ -8656,6 +8685,7 @@ schemas: !Schemas
               schema: *ref_27
               groupedBy: *ref_29
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: top
@@ -8694,6 +8724,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: autocompleteMode
@@ -8715,6 +8746,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_37
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: filter
@@ -8736,6 +8768,7 @@ schemas: !Schemas
               schema: *ref_10
               groupedBy: *ref_37
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: useFuzzyMatching
@@ -8761,6 +8794,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_37
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: highlightPostTag
@@ -8782,6 +8816,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_37
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: highlightPreTag
@@ -8803,6 +8838,7 @@ schemas: !Schemas
               schema: *ref_6
               groupedBy: *ref_37
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: minimumCoverage
@@ -8838,6 +8874,7 @@ schemas: !Schemas
               schema: *ref_38
               groupedBy: *ref_37
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: searchFields
@@ -8860,6 +8897,7 @@ schemas: !Schemas
               schema: *ref_27
               groupedBy: *ref_37
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: top
@@ -8898,6 +8936,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -8906,7 +8945,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_635
+            - !Parameter &ref_636
               schema: *ref_7
               groupedBy: !Parameter &ref_41
                 schema: *ref_39
@@ -8917,6 +8956,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -8925,7 +8965,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_656
+            - !Parameter &ref_657
               schema: *ref_7
               groupedBy: !Parameter &ref_42
                 schema: *ref_39
@@ -8936,6 +8976,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -8944,7 +8985,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_662
+            - !Parameter &ref_664
               schema: *ref_7
               groupedBy: !Parameter &ref_43
                 schema: *ref_39
@@ -8955,6 +8996,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -8963,7 +9005,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_681
+            - !Parameter &ref_683
               schema: *ref_7
               groupedBy: !Parameter &ref_44
                 schema: *ref_39
@@ -8974,6 +9016,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -8982,7 +9025,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_687
+            - !Parameter &ref_690
               schema: *ref_7
               groupedBy: !Parameter &ref_45
                 schema: *ref_39
@@ -8993,6 +9036,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -9001,7 +9045,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_702
+            - !Parameter &ref_705
               schema: *ref_7
               groupedBy: !Parameter &ref_46
                 schema: *ref_39
@@ -9012,6 +9056,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -9020,7 +9065,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_708
+            - !Parameter &ref_712
               schema: *ref_7
               groupedBy: !Parameter &ref_47
                 schema: *ref_39
@@ -9031,6 +9076,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -9039,7 +9085,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_730
+            - !Parameter &ref_734
               schema: *ref_7
               groupedBy: !Parameter &ref_48
                 schema: *ref_39
@@ -9050,6 +9096,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -9058,7 +9105,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_737
+            - !Parameter &ref_742
               schema: *ref_7
               groupedBy: !Parameter &ref_49
                 schema: *ref_39
@@ -9069,6 +9116,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifMatch
@@ -9090,6 +9138,7 @@ schemas: !Schemas
               schema: *ref_7
               groupedBy: *ref_40
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -9098,10 +9147,11 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_636
+            - !Parameter &ref_637
               schema: *ref_7
               groupedBy: *ref_41
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -9110,10 +9160,11 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_657
+            - !Parameter &ref_658
               schema: *ref_7
               groupedBy: *ref_42
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -9122,10 +9173,11 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_663
+            - !Parameter &ref_665
               schema: *ref_7
               groupedBy: *ref_43
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -9134,10 +9186,11 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_682
+            - !Parameter &ref_684
               schema: *ref_7
               groupedBy: *ref_44
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -9146,10 +9199,11 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_688
+            - !Parameter &ref_691
               schema: *ref_7
               groupedBy: *ref_45
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -9158,10 +9212,11 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_703
+            - !Parameter &ref_706
               schema: *ref_7
               groupedBy: *ref_46
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -9170,10 +9225,11 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_709
+            - !Parameter &ref_713
               schema: *ref_7
               groupedBy: *ref_47
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -9182,10 +9238,11 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_731
+            - !Parameter &ref_735
               schema: *ref_7
               groupedBy: *ref_48
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -9194,10 +9251,11 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_738
+            - !Parameter &ref_743
               schema: *ref_7
               groupedBy: *ref_49
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: ifNoneMatch
@@ -10534,7 +10592,7 @@ schemas: !Schemas
           description: Describes an error condition for the Azure Cognitive Search API.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_645
+    - !ObjectSchema &ref_646
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10869,7 +10927,7 @@ schemas: !Schemas
     - *ref_156
     - *ref_152
     - *ref_157
-    - !ObjectSchema &ref_672
+    - !ObjectSchema &ref_674
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10905,7 +10963,7 @@ schemas: !Schemas
           description: Response from a List Indexers request. If successful, it includes the full definitions of all indexers.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_679
+    - !ObjectSchema &ref_681
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12273,7 +12331,7 @@ schemas: !Schemas
     - *ref_234
     - *ref_245
     - *ref_237
-    - !ObjectSchema &ref_697
+    - !ObjectSchema &ref_700
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12465,7 +12523,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_256
     - *ref_257
-    - !ObjectSchema &ref_718
+    - !ObjectSchema &ref_722
       type: object
       apiVersions:
         - !ApiVersion 
@@ -15995,7 +16053,7 @@ schemas: !Schemas
     - *ref_353
     - *ref_444
     - *ref_453
-    - !ObjectSchema &ref_728
+    - !ObjectSchema &ref_732
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16031,7 +16089,7 @@ schemas: !Schemas
           description: Response from a List Indexes request. If successful, it includes the full definitions of all indexes.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_747
+    - !ObjectSchema &ref_752
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16069,7 +16127,7 @@ schemas: !Schemas
           description: Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_749
+    - !ObjectSchema &ref_754
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16150,7 +16208,7 @@ schemas: !Schemas
           description: Specifies some text and analysis components used to break that text into tokens.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_753
+    - !ObjectSchema &ref_758
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16246,7 +16304,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_473
-    - !ObjectSchema &ref_756
+    - !ObjectSchema &ref_761
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16730,6 +16788,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexCountDocuments.json
               responses:
                 '200':
                   body: 427
@@ -16869,6 +16928,7 @@ operationGroups:
                   - title
                   - description
                 searchMode: any
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexSearchDocumentsGet.json
               responses:
                 '200':
                   body:
@@ -17023,6 +17083,7 @@ operationGroups:
                   select: docId,title,description
                   skip: 0
                   top: 10
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexSearchDocumentsPost.json
               responses:
                 '200':
                   body:
@@ -17179,6 +17240,7 @@ operationGroups:
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
                 key: '1'
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexGetDocument.json
               responses:
                 '200':
                   body:
@@ -17317,6 +17379,7 @@ operationGroups:
                 searchFields:
                   - title
                 suggesterName: sg
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexSuggestDocumentsGet.json
               responses:
                 '200':
                   body:
@@ -17448,6 +17511,7 @@ operationGroups:
                   select: docId,title,description
                   suggesterName: sg
                   top: 10
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexSuggestDocumentsPost.json
               responses:
                 '200':
                   body:
@@ -17595,6 +17659,7 @@ operationGroups:
                       docId: '4'
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexIndexDocuments.json
               responses:
                 '200':
                   body:
@@ -17761,6 +17826,7 @@ operationGroups:
                   - description
                 suggesterName: sg
                 top: 10
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexAutocompleteDocumentsGet.json
               responses:
                 '200':
                   body:
@@ -17888,6 +17954,7 @@ operationGroups:
                   top: 10
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexAutocompleteDocumentsPost.json
               responses:
                 '200':
                   body:
@@ -17932,7 +17999,7 @@ operationGroups:
           - *ref_627
           - *ref_628
           - *ref_629
-          - !Parameter 
+          - !Parameter &ref_634
             schema: *ref_630
             implementation: Method
             required: true
@@ -18006,6 +18073,7 @@ operationGroups:
                 uri: '{endpoint}'
         signatureParameters:
           - *ref_633
+          - *ref_634
         responses:
           - !SchemaResponse 
             schema: *ref_136
@@ -18071,6 +18139,7 @@ operationGroups:
                     softDeleteMarkerValue: 'true'
                 dataSourceName: mydatasource
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateDataSource.json
               responses:
                 '200':
                   body:
@@ -18118,7 +18187,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_638
+          - !Parameter &ref_639
             schema: *ref_7
             implementation: Method
             required: true
@@ -18130,9 +18199,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_634
           - *ref_635
           - *ref_636
+          - *ref_637
           - *ref_554
         requests:
           - !Request 
@@ -18150,10 +18219,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_637
+              - *ref_638
               - *ref_41
             signatureParameters:
-              - *ref_637
+              - *ref_638
               - *ref_41
             language: !Languages 
               default:
@@ -18165,7 +18234,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_638
+          - *ref_639
         responses:
           - !Response 
             language: !Languages 
@@ -18206,6 +18275,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 dataSourceName: mydatasource
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteDataSource.json
               responses:
                 '204': {}
                 '404': {}
@@ -18221,7 +18291,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_641
+          - !Parameter &ref_642
             schema: *ref_7
             implementation: Method
             required: true
@@ -18233,7 +18303,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_639
+          - *ref_640
           - *ref_554
         requests:
           - !Request 
@@ -18251,9 +18321,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_640
+              - *ref_641
             signatureParameters:
-              - *ref_640
+              - *ref_641
             language: !Languages 
               default:
                 name: ''
@@ -18264,7 +18334,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_641
+          - *ref_642
         responses:
           - !SchemaResponse 
             schema: *ref_136
@@ -18300,6 +18370,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 dataSourceName: mydatasource
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetDataSource.json
               responses:
                 '200':
                   body:
@@ -18330,7 +18401,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_644
+          - !Parameter &ref_645
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -18341,7 +18412,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_642
+          - *ref_643
           - *ref_554
         requests:
           - !Request 
@@ -18359,9 +18430,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_643
+              - *ref_644
             signatureParameters:
-              - *ref_643
+              - *ref_644
             language: !Languages 
               default:
                 name: ''
@@ -18372,10 +18443,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_644
+          - *ref_645
         responses:
           - !SchemaResponse 
-            schema: *ref_645
+            schema: *ref_646
             language: !Languages 
               default:
                 name: ''
@@ -18408,6 +18479,7 @@ operationGroups:
                 $select: '*'
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListDataSources.json
               responses:
                 '200':
                   body:
@@ -18439,7 +18511,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_646
+          - *ref_647
           - *ref_554
         requests:
           - !Request 
@@ -18457,7 +18529,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_648
+              - !Parameter &ref_649
                 schema: *ref_136
                 implementation: Method
                 required: true
@@ -18482,10 +18554,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_647
-            signatureParameters:
               - *ref_648
-              - *ref_647
+            signatureParameters:
+              - *ref_649
+              - *ref_648
             language: !Languages 
               default:
                 name: ''
@@ -18549,6 +18621,7 @@ operationGroups:
                     softDeleteColumnName: isDeleted
                     softDeleteMarkerValue: 'true'
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateDataSource.json
               responses:
                 '201':
                   body:
@@ -18587,7 +18660,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_651
+          - !Parameter &ref_652
             schema: *ref_7
             implementation: Method
             required: true
@@ -18599,7 +18672,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_649
+          - *ref_650
           - *ref_554
         requests:
           - !Request 
@@ -18617,9 +18690,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_650
+              - *ref_651
             signatureParameters:
-              - *ref_650
+              - *ref_651
             language: !Languages 
               default:
                 name: ''
@@ -18630,7 +18703,7 @@ operationGroups:
                 method: post
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_651
+          - *ref_652
         responses:
           - !Response 
             language: !Languages 
@@ -18662,6 +18735,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceResetIndexer.json
               responses:
                 '204': {}
           x-ms-request-id: request-id
@@ -18676,7 +18750,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_654
+          - !Parameter &ref_655
             schema: *ref_7
             implementation: Method
             required: true
@@ -18688,7 +18762,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_652
+          - *ref_653
           - *ref_554
         requests:
           - !Request 
@@ -18706,9 +18780,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_653
+              - *ref_654
             signatureParameters:
-              - *ref_653
+              - *ref_654
             language: !Languages 
               default:
                 name: ''
@@ -18719,7 +18793,7 @@ operationGroups:
                 method: post
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_654
+          - *ref_655
         responses:
           - !Response 
             language: !Languages 
@@ -18751,6 +18825,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceRunIndexer.json
               responses:
                 '202': {}
           x-ms-request-id: request-id
@@ -18765,7 +18840,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_660
+          - !Parameter &ref_661
             schema: *ref_7
             implementation: Method
             required: true
@@ -18777,10 +18852,10 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_655
           - *ref_656
           - *ref_657
-          - !Parameter 
+          - *ref_658
+          - !Parameter &ref_662
             schema: *ref_630
             implementation: Method
             required: true
@@ -18809,7 +18884,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_659
+              - !Parameter &ref_660
                 schema: *ref_158
                 implementation: Method
                 required: true
@@ -18834,11 +18909,11 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_658
+              - *ref_659
               - *ref_42
             signatureParameters:
+              - *ref_660
               - *ref_659
-              - *ref_658
               - *ref_42
             language: !Languages 
               default:
@@ -18853,7 +18928,8 @@ operationGroups:
                   - application/json
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_660
+          - *ref_661
+          - *ref_662
         responses:
           - !SchemaResponse 
             schema: *ref_158
@@ -18914,6 +18990,7 @@ operationGroups:
                     startTime: '2015-01-01T00:00:00Z'
                   targetIndexName: orders
                 indexerName: myindexer
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateIndexer.json
               responses:
                 '200':
                   body:
@@ -18955,7 +19032,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_665
+          - !Parameter &ref_667
             schema: *ref_7
             implementation: Method
             required: true
@@ -18967,9 +19044,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_661
-          - *ref_662
           - *ref_663
+          - *ref_664
+          - *ref_665
           - *ref_554
         requests:
           - !Request 
@@ -18987,10 +19064,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_664
+              - *ref_666
               - *ref_43
             signatureParameters:
-              - *ref_664
+              - *ref_666
               - *ref_43
             language: !Languages 
               default:
@@ -19002,7 +19079,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_665
+          - *ref_667
         responses:
           - !Response 
             language: !Languages 
@@ -19043,6 +19120,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteIndexer.json
               responses:
                 '204': {}
                 '404': {}
@@ -19058,7 +19136,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_668
+          - !Parameter &ref_670
             schema: *ref_7
             implementation: Method
             required: true
@@ -19070,7 +19148,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_666
+          - *ref_668
           - *ref_554
         requests:
           - !Request 
@@ -19088,9 +19166,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_667
+              - *ref_669
             signatureParameters:
-              - *ref_667
+              - *ref_669
             language: !Languages 
               default:
                 name: ''
@@ -19101,7 +19179,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_668
+          - *ref_670
         responses:
           - !SchemaResponse 
             schema: *ref_158
@@ -19137,6 +19215,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetIndexer.json
               responses:
                 '200':
                   body:
@@ -19164,7 +19243,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_671
+          - !Parameter &ref_673
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -19175,7 +19254,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_669
+          - *ref_671
           - *ref_554
         requests:
           - !Request 
@@ -19193,9 +19272,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_670
+              - *ref_672
             signatureParameters:
-              - *ref_670
+              - *ref_672
             language: !Languages 
               default:
                 name: ''
@@ -19206,10 +19285,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_671
+          - *ref_673
         responses:
           - !SchemaResponse 
-            schema: *ref_672
+            schema: *ref_674
             language: !Languages 
               default:
                 name: ''
@@ -19242,6 +19321,7 @@ operationGroups:
                 $select: '*'
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListIndexers.json
               responses:
                 '200':
                   body:
@@ -19294,7 +19374,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_673
+          - *ref_675
           - *ref_554
         requests:
           - !Request 
@@ -19312,7 +19392,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_675
+              - !Parameter &ref_677
                 schema: *ref_158
                 implementation: Method
                 required: true
@@ -19337,10 +19417,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_674
+              - *ref_676
             signatureParameters:
-              - *ref_675
-              - *ref_674
+              - *ref_677
+              - *ref_676
             language: !Languages 
               default:
                 name: ''
@@ -19399,6 +19479,7 @@ operationGroups:
                     interval: PT1H
                     startTime: '2015-01-01T00:00:00Z'
                   targetIndexName: orders
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateIndexer.json
               responses:
                 '201':
                   body:
@@ -19426,7 +19507,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_678
+          - !Parameter &ref_680
             schema: *ref_7
             implementation: Method
             required: true
@@ -19438,7 +19519,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_676
+          - *ref_678
           - *ref_554
         requests:
           - !Request 
@@ -19456,9 +19537,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_677
+              - *ref_679
             signatureParameters:
-              - *ref_677
+              - *ref_679
             language: !Languages 
               default:
                 name: ''
@@ -19469,10 +19550,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_678
+          - *ref_680
         responses:
           - !SchemaResponse 
-            schema: *ref_679
+            schema: *ref_681
             language: !Languages 
               default:
                 name: ''
@@ -19505,6 +19586,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetIndexerStatus.json
               responses:
                 '200':
                   body:
@@ -19587,7 +19669,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_685
+          - !Parameter &ref_687
             schema: *ref_7
             implementation: Method
             required: true
@@ -19599,10 +19681,10 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_680
-          - *ref_681
           - *ref_682
-          - !Parameter 
+          - *ref_683
+          - *ref_684
+          - !Parameter &ref_688
             schema: *ref_630
             implementation: Method
             required: true
@@ -19631,7 +19713,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_684
+              - !Parameter &ref_686
                 schema: *ref_246
                 implementation: Method
                 required: true
@@ -19656,11 +19738,11 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_683
+              - *ref_685
               - *ref_44
             signatureParameters:
-              - *ref_684
-              - *ref_683
+              - *ref_686
+              - *ref_685
               - *ref_44
             language: !Languages 
               default:
@@ -19675,7 +19757,8 @@ operationGroups:
                   - application/json
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_685
+          - *ref_687
+          - *ref_688
         responses:
           - !SchemaResponse 
             schema: *ref_246
@@ -19783,6 +19866,7 @@ operationGroups:
                       timeout: PT30S
                       uri: https://contoso.example.org
                 skillsetName: demoskillset
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateSkillset.json
               responses:
                 '200':
                   body:
@@ -19948,7 +20032,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_690
+          - !Parameter &ref_693
             schema: *ref_7
             implementation: Method
             required: true
@@ -19960,9 +20044,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_686
-          - *ref_687
-          - *ref_688
+          - *ref_689
+          - *ref_690
+          - *ref_691
           - *ref_554
         requests:
           - !Request 
@@ -19980,10 +20064,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_689
+              - *ref_692
               - *ref_45
             signatureParameters:
-              - *ref_689
+              - *ref_692
               - *ref_45
             language: !Languages 
               default:
@@ -19995,7 +20079,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_690
+          - *ref_693
         responses:
           - !Response 
             language: !Languages 
@@ -20036,6 +20120,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 skillsetName: demoskillset
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteSkillset.json
               responses:
                 '204': {}
                 '404': {}
@@ -20051,7 +20136,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_693
+          - !Parameter &ref_696
             schema: *ref_7
             implementation: Method
             required: true
@@ -20063,7 +20148,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_691
+          - *ref_694
           - *ref_554
         requests:
           - !Request 
@@ -20081,9 +20166,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_692
+              - *ref_695
             signatureParameters:
-              - *ref_692
+              - *ref_695
             language: !Languages 
               default:
                 name: ''
@@ -20094,7 +20179,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_693
+          - *ref_696
         responses:
           - !SchemaResponse 
             schema: *ref_246
@@ -20130,6 +20215,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 skillsetName: demoskillset
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetSkillset.json
               responses:
                 '200':
                   body:
@@ -20219,7 +20305,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_696
+          - !Parameter &ref_699
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -20230,7 +20316,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_694
+          - *ref_697
           - *ref_554
         requests:
           - !Request 
@@ -20248,9 +20334,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_695
+              - *ref_698
             signatureParameters:
-              - *ref_695
+              - *ref_698
             language: !Languages 
               default:
                 name: ''
@@ -20261,10 +20347,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_696
+          - *ref_699
         responses:
           - !SchemaResponse 
-            schema: *ref_697
+            schema: *ref_700
             language: !Languages 
               default:
                 name: ''
@@ -20297,6 +20383,7 @@ operationGroups:
                 $select: '*'
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListSkillsets.json
               responses:
                 '200':
                   body:
@@ -20387,7 +20474,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_698
+          - *ref_701
           - *ref_554
         requests:
           - !Request 
@@ -20405,7 +20492,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_700
+              - !Parameter &ref_703
                 schema: *ref_246
                 implementation: Method
                 required: true
@@ -20430,10 +20517,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_699
+              - *ref_702
             signatureParameters:
-              - *ref_700
-              - *ref_699
+              - *ref_703
+              - *ref_702
             language: !Languages 
               default:
                 name: ''
@@ -20541,6 +20628,7 @@ operationGroups:
                       timeout: PT30S
                       uri: https://contoso.example.org
                 skillsetName: demoskillset
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateSkillset.json
               responses:
                 '201':
                   body:
@@ -20638,7 +20726,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_706
+          - !Parameter &ref_709
             schema: *ref_7
             implementation: Method
             required: true
@@ -20650,10 +20738,10 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_701
-          - *ref_702
-          - *ref_703
-          - !Parameter 
+          - *ref_704
+          - *ref_705
+          - *ref_706
+          - !Parameter &ref_710
             schema: *ref_630
             implementation: Method
             required: true
@@ -20682,7 +20770,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_705
+              - !Parameter &ref_708
                 schema: *ref_258
                 implementation: Method
                 required: true
@@ -20707,11 +20795,11 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_704
+              - *ref_707
               - *ref_46
             signatureParameters:
-              - *ref_705
-              - *ref_704
+              - *ref_708
+              - *ref_707
               - *ref_46
             language: !Languages 
               default:
@@ -20726,7 +20814,8 @@ operationGroups:
                   - application/json
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_706
+          - *ref_709
+          - *ref_710
         responses:
           - !SchemaResponse 
             schema: *ref_258
@@ -20787,6 +20876,7 @@ operationGroups:
                     United States, United States of America, USA
                     Washington, Wash. => WA
                 synonymMapName: mysynonymmap
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateSynonymMap.json
               responses:
                 '200':
                   body:
@@ -20824,7 +20914,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_711
+          - !Parameter &ref_715
             schema: *ref_7
             implementation: Method
             required: true
@@ -20836,9 +20926,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_707
-          - *ref_708
-          - *ref_709
+          - *ref_711
+          - *ref_712
+          - *ref_713
           - *ref_554
         requests:
           - !Request 
@@ -20856,10 +20946,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_710
+              - *ref_714
               - *ref_47
             signatureParameters:
-              - *ref_710
+              - *ref_714
               - *ref_47
             language: !Languages 
               default:
@@ -20871,7 +20961,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_711
+          - *ref_715
         responses:
           - !Response 
             language: !Languages 
@@ -20912,6 +21002,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 synonymMapName: mysynonymmap
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteSynonymMap.json
               responses:
                 '204': {}
                 '404': {}
@@ -20927,7 +21018,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_714
+          - !Parameter &ref_718
             schema: *ref_7
             implementation: Method
             required: true
@@ -20939,7 +21030,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_712
+          - *ref_716
           - *ref_554
         requests:
           - !Request 
@@ -20957,9 +21048,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_713
+              - *ref_717
             signatureParameters:
-              - *ref_713
+              - *ref_717
             language: !Languages 
               default:
                 name: ''
@@ -20970,7 +21061,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_714
+          - *ref_718
         responses:
           - !SchemaResponse 
             schema: *ref_258
@@ -21006,6 +21097,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 synonymMapName: mysynonymmap
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetSynonymMap.json
               responses:
                 '200':
                   body:
@@ -21033,7 +21125,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_717
+          - !Parameter &ref_721
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -21044,7 +21136,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_715
+          - *ref_719
           - *ref_554
         requests:
           - !Request 
@@ -21062,9 +21154,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_716
+              - *ref_720
             signatureParameters:
-              - *ref_716
+              - *ref_720
             language: !Languages 
               default:
                 name: ''
@@ -21075,10 +21167,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_717
+          - *ref_721
         responses:
           - !SchemaResponse 
-            schema: *ref_718
+            schema: *ref_722
             language: !Languages 
               default:
                 name: ''
@@ -21110,6 +21202,7 @@ operationGroups:
               parameters:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListSynonymMaps.json
               responses:
                 '200':
                   body:
@@ -21143,7 +21236,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_719
+          - *ref_723
           - *ref_554
         requests:
           - !Request 
@@ -21161,7 +21254,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_721
+              - !Parameter &ref_725
                 schema: *ref_258
                 implementation: Method
                 required: true
@@ -21186,10 +21279,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_720
+              - *ref_724
             signatureParameters:
-              - *ref_721
-              - *ref_720
+              - *ref_725
+              - *ref_724
             language: !Languages 
               default:
                 name: ''
@@ -21250,6 +21343,7 @@ operationGroups:
                   synonyms: |-
                     United States, United States of America, USA
                     Washington, Wash. => WA
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateSynonymMap.json
               responses:
                 '201':
                   body:
@@ -21285,7 +21379,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_722
+          - *ref_726
           - *ref_554
         requests:
           - !Request 
@@ -21303,7 +21397,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_724
+              - !Parameter &ref_728
                 schema: *ref_465
                 implementation: Method
                 required: true
@@ -21328,10 +21422,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_723
+              - *ref_727
             signatureParameters:
-              - *ref_724
-              - *ref_723
+              - *ref_728
+              - *ref_727
             language: !Languages 
               default:
                 name: ''
@@ -21456,6 +21550,7 @@ operationGroups:
                       searchMode: analyzingInfixMatching
                       sourceFields:
                         - hotelName
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateIndex.json
               responses:
                 '201':
                   body:
@@ -21660,7 +21755,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_727
+          - !Parameter &ref_731
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -21671,7 +21766,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_725
+          - *ref_729
           - *ref_554
         requests:
           - !Request 
@@ -21689,9 +21784,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_726
+              - *ref_730
             signatureParameters:
-              - *ref_726
+              - *ref_730
             language: !Languages 
               default:
                 name: ''
@@ -21702,10 +21797,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_727
+          - *ref_731
         responses:
           - !SchemaResponse 
-            schema: *ref_728
+            schema: *ref_732
             language: !Languages 
               default:
                 name: ''
@@ -21738,6 +21833,7 @@ operationGroups:
                 $select: '*'
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListIndexes.json
               responses:
                 '200':
                   body:
@@ -21972,7 +22068,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_734
+          - !Parameter &ref_738
             schema: *ref_7
             implementation: Method
             required: true
@@ -21984,7 +22080,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_735
+          - !Parameter &ref_739
             schema: *ref_10
             implementation: Method
             language: !Languages 
@@ -21997,10 +22093,10 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_729
-          - *ref_730
-          - *ref_731
-          - !Parameter 
+          - *ref_733
+          - *ref_734
+          - *ref_735
+          - !Parameter &ref_740
             schema: *ref_630
             implementation: Method
             required: true
@@ -22029,7 +22125,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_733
+              - !Parameter &ref_737
                 schema: *ref_465
                 implementation: Method
                 required: true
@@ -22054,11 +22150,11 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_732
+              - *ref_736
               - *ref_48
             signatureParameters:
-              - *ref_733
-              - *ref_732
+              - *ref_737
+              - *ref_736
               - *ref_48
             language: !Languages 
               default:
@@ -22073,8 +22169,9 @@ operationGroups:
                   - application/json
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_734
-          - *ref_735
+          - *ref_738
+          - *ref_739
+          - *ref_740
         responses:
           - !SchemaResponse 
             schema: *ref_465
@@ -22198,6 +22295,7 @@ operationGroups:
                       sourceFields:
                         - hotelName
                 indexName: hotels
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateIndex.json
               responses:
                 '200':
                   body:
@@ -22583,7 +22681,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_740
+          - !Parameter &ref_745
             schema: *ref_7
             implementation: Method
             required: true
@@ -22595,9 +22693,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_736
-          - *ref_737
-          - *ref_738
+          - *ref_741
+          - *ref_742
+          - *ref_743
           - *ref_554
         requests:
           - !Request 
@@ -22615,10 +22713,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_739
+              - *ref_744
               - *ref_49
             signatureParameters:
-              - *ref_739
+              - *ref_744
               - *ref_49
             language: !Languages 
               default:
@@ -22630,7 +22728,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_740
+          - *ref_745
         responses:
           - !Response 
             language: !Languages 
@@ -22671,6 +22769,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteIndex.json
               responses:
                 '204': {}
                 '404': {}
@@ -22686,7 +22785,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_743
+          - !Parameter &ref_748
             schema: *ref_7
             implementation: Method
             required: true
@@ -22698,7 +22797,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_741
+          - *ref_746
           - *ref_554
         requests:
           - !Request 
@@ -22716,9 +22815,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_742
+              - *ref_747
             signatureParameters:
-              - *ref_742
+              - *ref_747
             language: !Languages 
               default:
                 name: ''
@@ -22729,7 +22828,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_743
+          - *ref_748
         responses:
           - !SchemaResponse 
             schema: *ref_465
@@ -22765,6 +22864,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexName: hotels
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetIndex.json
               responses:
                 '200':
                   body:
@@ -22965,7 +23065,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_746
+          - !Parameter &ref_751
             schema: *ref_7
             implementation: Method
             required: true
@@ -22977,7 +23077,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_744
+          - *ref_749
           - *ref_554
         requests:
           - !Request 
@@ -22995,9 +23095,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_745
+              - *ref_750
             signatureParameters:
-              - *ref_745
+              - *ref_750
             language: !Languages 
               default:
                 name: ''
@@ -23008,10 +23108,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_746
+          - *ref_751
         responses:
           - !SchemaResponse 
-            schema: *ref_747
+            schema: *ref_752
             language: !Languages 
               default:
                 name: ''
@@ -23044,6 +23144,7 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexName: hotels
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetIndexStatistics.json
               responses:
                 '200':
                   body:
@@ -23061,7 +23162,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_752
+          - !Parameter &ref_757
             schema: *ref_7
             implementation: Method
             required: true
@@ -23073,7 +23174,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_748
+          - *ref_753
           - *ref_554
         requests:
           - !Request 
@@ -23091,8 +23192,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_751
-                schema: *ref_749
+              - !Parameter &ref_756
+                schema: *ref_754
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -23116,10 +23217,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_750
+              - *ref_755
             signatureParameters:
-              - *ref_751
-              - *ref_750
+              - *ref_756
+              - *ref_755
             language: !Languages 
               default:
                 name: ''
@@ -23133,10 +23234,10 @@ operationGroups:
                   - application/json
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_752
+          - *ref_757
         responses:
           - !SchemaResponse 
-            schema: *ref_753
+            schema: *ref_758
             language: !Languages 
               default:
                 name: ''
@@ -23172,6 +23273,7 @@ operationGroups:
                 request:
                   analyzer: standard.lucene
                   text: Text to analyze
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceIndexAnalyze.json
               responses:
                 '200':
                   body:
@@ -23208,7 +23310,7 @@ operationGroups:
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_754
+          - *ref_759
           - *ref_554
         requests:
           - !Request 
@@ -23226,9 +23328,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_755
+              - *ref_760
             signatureParameters:
-              - *ref_755
+              - *ref_760
             language: !Languages 
               default:
                 name: ''
@@ -23241,7 +23343,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_756
+            schema: *ref_761
             language: !Languages 
               default:
                 name: ''
@@ -23273,6 +23375,7 @@ operationGroups:
               parameters:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
+              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetServiceStatistics.json
               responses:
                 '200':
                   body:

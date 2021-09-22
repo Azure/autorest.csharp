@@ -229,6 +229,7 @@ operationGroups:
           x-ms-examples:
             byte_getNull:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/byte_getNull.json
               responses:
                 '200': {}
         language: !Languages 

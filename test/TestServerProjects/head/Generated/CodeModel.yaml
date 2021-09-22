@@ -83,6 +83,7 @@ operationGroups:
           x-ms-examples:
             httpSuccess_head200:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/httpSuccess_head200.json
               responses:
                 '200': {}
         language: !Languages 
@@ -141,6 +142,7 @@ operationGroups:
           x-ms-examples:
             httpSuccess_head204:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/httpSuccess_head204.json
               responses:
                 '204': {}
         language: !Languages 
@@ -199,6 +201,7 @@ operationGroups:
           x-ms-examples:
             httpSuccess_head404:
               parameters: {}
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/httpSuccess_head404.json
               responses:
                 '204': {}
         language: !Languages 

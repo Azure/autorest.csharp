@@ -37,7 +37,7 @@ namespace CognitiveSearch
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string skillsetName, Skillset skillset, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateCreateOrUpdateRequest(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -57,7 +57,7 @@ namespace CognitiveSearch
             {
                 request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
-            request.Headers.Add("Prefer", "return=representation");
+            request.Headers.Add("Prefer", prefer.ToString());
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
@@ -68,12 +68,13 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> or <paramref name="skillset"/> is null. </exception>
-        public async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -84,7 +85,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(skillset));
             }
 
-            using var message = CreateCreateOrUpdateRequest(skillsetName, skillset, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(skillsetName, prefer, skillset, requestOptions, accessCondition);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -103,12 +104,13 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> or <paramref name="skillset"/> is null. </exception>
-        public Response<Skillset> CreateOrUpdate(string skillsetName, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response<Skillset> CreateOrUpdate(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -119,7 +121,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(skillset));
             }
 
-            using var message = CreateCreateOrUpdateRequest(skillsetName, skillset, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(skillsetName, prefer, skillset, requestOptions, accessCondition);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
