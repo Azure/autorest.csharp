@@ -34,7 +34,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private CodeModel _codeModel;
         private MgmtConfiguration _mgmtConfiguration;
 
-        private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
+        /// <summary>
+        /// This is a map from raw request path to the corresponding <see cref="MgmtRestClient"/>
+        /// </summary>
+        private Dictionary<string, MgmtRestClient>? _rawRequestPathToRestClient;
 
         private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>? _armResources;
         private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>? _resourceContainers;
@@ -203,7 +206,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= EnsureResourceData().Values.Distinct();
 
-        public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values;
+        public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values.Distinct();
 
         public IEnumerable<Resource> ArmResources => EnsureArmResources()[ResourceType.Default].Values;
 
@@ -317,26 +320,44 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         /// <param name="operationGroup">OperationGroup object.</param>
         /// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
-        public MgmtRestClient GetRestClient(OperationGroup operationGroup) => EnsureRestClients()[operationGroup];
+        public MgmtRestClient GetRestClient(OperationGroup operationGroup)
+        {
+            foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
+            {
+                if (TryGetRestClient(requestPath, out var restClient))
+                    return restClient;
+            }
+
+            throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {operationGroup}");
+        }
+
+        public bool TryGetRestClient(string requestPath, [MaybeNullWhen(false)] out MgmtRestClient restClient)
+        {
+            return EnsureRestClients().TryGetValue(requestPath, out restClient);
+        }
 
         internal LongRunningOperation GetLongRunningOperation(Operation op) => EnsureLongRunningOperations()[op];
 
         internal NonLongRunningOperation GetNonLongRunningOperation(Operation op) => EnsureNonLongRunningOperations()[op];
 
-        private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
+        private Dictionary<string, MgmtRestClient> EnsureRestClients()
         {
-            if (_restClients != null)
+            if (_rawRequestPathToRestClient != null)
             {
-                return _restClients;
+                return _rawRequestPathToRestClient;
             }
 
-            _restClients = new Dictionary<OperationGroup, MgmtRestClient>();
+            _rawRequestPathToRestClient = new Dictionary<string, MgmtRestClient>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                _restClients.Add(operationGroup, new MgmtRestClient(operationGroup, _context));
+                var restClient = new MgmtRestClient(operationGroup, _context);
+                foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
+                {
+                    _rawRequestPathToRestClient.Add(requestPath, restClient);
+                }
             }
 
-            return _restClients;
+            return _rawRequestPathToRestClient;
         }
 
         public IEnumerable<MgmtNonResourceOperation> GetNonResourceOperations(string parent)
