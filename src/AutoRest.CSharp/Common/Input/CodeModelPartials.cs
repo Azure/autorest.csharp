@@ -322,8 +322,8 @@ namespace AutoRest.CSharp.Input
 
     internal partial class CodeModel
     {
-        [YamlDotNet.Serialization.YamlMember(Alias = "testLayout")]
-        public TestLayout? TestLayout { get; set; }
+        [YamlDotNet.Serialization.YamlMember(Alias = "testModel")]
+        public TestModel? TestModel { get; set; }
     }
 
     internal partial class TestDefinitionModel {
@@ -409,7 +409,7 @@ namespace AutoRest.CSharp.Input
     };
 
 
-    internal partial class TestLayout
+    internal partial class TestModel
     {
         [YamlMember(Alias = "mockTest")]
         public MockTestDefinitionModel MockTest;
@@ -427,7 +427,7 @@ namespace AutoRest.CSharp.Input
     internal partial class ExampleGroup
     {
         [YamlMember(Alias = "operationId")]
-        public string Name;
+        public string OperationId;
 
         [YamlMember(Alias = "examples")]
         public System.Collections.Generic.ICollection<ExampleModel> Examples;

@@ -54,9 +54,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 // project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
             }
 
+            var extensionsWriter = new CodeWriter();
+            var mockExtensionWriter = new TestHelperWriter(extensionsWriter, context);
+            mockExtensionWriter.WriteMockExtension();
+            project.AddGeneratedFile($"Mock/TestHelper.cs", extensionsWriter.ToString());
+
             foreach (var resourceContainer in context.Library.ResourceContainers)
             {
-                if (!resourceContainer.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.ResourceGroups))
+                //if (!resourceContainer.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.ResourceGroups))
+                if (!ResourceContainerTestWriter.CanCreateParentResourceFromExample(context, resourceContainer))
                 {   // TODO: currently generate only resourceGroup's child containers
                     continue;
                 }

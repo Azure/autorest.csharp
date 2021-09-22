@@ -27,6 +27,8 @@ using Azure.ResourceManager.Management;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using System.Text.Json;
+using AutoRest.CSharp.Mgmt.Generation;
+using AutoRest.CSharp.MgmtTest.Output;
 
 namespace AutoRest.CSharp.Mgmt.TestGeneration
 {
@@ -39,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
     /// and the following builder methods:
     /// 1. Construct
     /// </summary>
-    internal class ResourceContainerTestWriter : MgmtTestBaseWriter
+    internal class ResourceContainerTestWriter : ResourceContainerWriter
     {
         private CodeWriter _writer;
         private CodeWriter _tagsWriter = new CodeWriter();
@@ -58,9 +60,11 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         protected string TestEnvironmentName => _context.DefaultLibraryName + "TestEnvironment";
         protected string TestBaseName => _context.DefaultLibraryName + "TestBase";
 
-        protected Dictionary<string, EnumType> EnumTypes => CollectEnumTypes(_context);
+        protected Dictionary<string, EnumType> EnumTypes => TestTool.CollectEnumTypes(_context);
 
-        public ResourceContainerTestWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
+        protected List<Parameter> containerInitiateParameters = new List<Parameter>();
+
+        public ResourceContainerTestWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context): base(writer, resourceContainer, context)
         {
             _writer = writer;
             _resourceContainer = resourceContainer;
@@ -92,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                     // WriteFields(_writer, _restClient!);
                     WriteContainerTesterCtors();
 
-                    WriteCreateContainerFromResourceGroup();
+                    WriteCreateContainerMethod();
                     WriteCreateOrUpdate();
                     // WriteCreateResourceGroup();
                 }
@@ -107,14 +111,108 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             { }
         }
 
-        protected void WriteCreateContainerFromResourceGroup()
+        protected string GenContainerVariableName(ResourceContainer resourceContainer)
         {
-            // write protected default constructor
-            _writer.Line();
-            using (_writer.Scope($"private async Task<{TypeNameOfContainer}> Get{TypeNameOfContainer}Async()"))
+            return resourceContainer.Type.Name.FirstCharToLowerCase();
+        }
+
+        protected void EnsureContainerInitiateParameters()
+        {
+            void EnsureByContainer(ResourceContainer resourceContainer)
             {
-                _writer.Line($"var resourceGroup = await CreateResourceGroupAsync();");
-                _writer.Line($"return resourceGroup.Get{_resourceContainer.Resource.Type.Name.ToPlural()}();");
+                var parentOperationGroup = resourceContainer.OperationGroup.ParentOperationGroup(_context);
+                if (parentOperationGroup is null)
+                {
+                    var parentResourceType = resourceContainer.OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
+                    switch (parentResourceType)
+                    {
+                        case ResourceTypeBuilder.ResourceGroups:
+                            containerInitiateParameters.Add(new Parameter("resourceGroupName", "", new CSharpType(typeof(string)), null, true));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    var parentResourceContainer = _context.Library.GetResourceContainer(parentOperationGroup);
+                    if (parentResourceContainer is null)
+                        throw new Exception($"Can't get resourceContainer for operationGroup {parentOperationGroup.Key}");
+                    EnsureByContainer(parentResourceContainer);
+                    containerInitiateParameters.AddRange(GenExampleInstanceMethodParameters(parentResourceContainer.CreateMethod!));
+                }
+            }
+
+            if (containerInitiateParameters.Count > 0)
+                return;
+            EnsureByContainer(_resourceContainer);
+        }
+
+
+        protected void WriteCreateContainerMethod()
+        {
+            var asyncContent = false;
+            void WriteContainerDeclaration(ResourceContainer resourceContainer)
+            {
+                var containerVariable = GenContainerVariableName(resourceContainer);
+                var parentResourceType = resourceContainer.OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
+                var parentOperationGroup = resourceContainer.OperationGroup.ParentOperationGroup(_context);
+                if (parentOperationGroup is null)
+                {
+                    switch (parentResourceType)
+                    {
+                        case ResourceTypeBuilder.ResourceGroups:
+                            _writer.Line($"ResourceGroup resourceGroup = await TestHelper.CreateResourceGroupAsync(resourceGroupName, Client);");
+                            _writer.Line($"{resourceContainer.Type.Name} {containerVariable} = resourceGroup.Get{resourceContainer.Resource.Type.Name.ToPlural()}();");
+                            asyncContent = true;
+                            break;
+                        case ResourceTypeBuilder.Subscriptions:
+                            _writer.Line($"{resourceContainer.Type.Name} {containerVariable} = Client.DefaultSubscription.Get{resourceContainer.Resource.Type.Name.ToPlural()}();");
+                            break;
+                        default:
+                            throw new Exception("TODO: Can't create container from tenant");
+                    }
+                }
+                else
+                {
+                    var parentResourceContainer = _context.Library.GetResourceContainer(parentOperationGroup);
+                    if (parentResourceContainer is null)
+                        throw new Exception($"Can't get resourceContainer for operationGroup {parentOperationGroup.Key}");
+                    WriteContainerDeclaration(parentResourceContainer);
+
+                    var createParentParameters = GenExampleInstanceMethodParameters(parentResourceContainer.CreateMethod!);
+                    var resourceVariableName = parentResourceContainer.Resource.ResourceName.FirstCharToLowerCase();
+                    _writer.Append($"{parentResourceContainer.Resource.Type.Name} {resourceVariableName} = await TestHelper.{GenExampleInstanceMethodName(parentResourceContainer.CreateMethod!)}({GenContainerVariableName(parentResourceContainer)}, ");
+                    foreach (var parameter in createParentParameters)
+                    {
+                        _writer.Append($"{parameter.Name}, ");
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.Line($");");
+                    _writer.Line($"{resourceContainer.Type.Name} {containerVariable} = {resourceVariableName}.Get{resourceContainer.Resource.Type.Name.ToPlural()}();");
+                    asyncContent = true;
+                }
+            }
+
+            EnsureContainerInitiateParameters();
+            _writer.Line();
+            _writer.Append($"private async Task<{TypeNameOfContainer}> Get{TypeNameOfContainer}Async(");
+            foreach (var parameter in containerInitiateParameters)
+            {
+                _writer.Append($"{parameter.Type} {parameter.Name}, ");
+            }
+            _writer.RemoveTrailingComma();
+            using (_writer.Scope($")"))
+            {
+                WriteContainerDeclaration(_resourceContainer);
+                if (asyncContent)
+                {
+                    _writer.Append($"return {GenContainerVariableName(_resourceContainer)};");
+                }
+                else
+                {
+                    _writer.Append($"return await Task.FromResult({GenContainerVariableName(_resourceContainer)});");
+                }
             }
         }
 
@@ -147,16 +245,29 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
 
         private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
         {
-            WriteFirstLROMethodTest(clientMethod, _context, false, true, "CreateOrUpdate");
+            // WriteFirstLROMethodTest(clientMethod, _context, false, true, "CreateOrUpdate");
             WriteFirstLROMethodTest(clientMethod, _context, true, true, "CreateOrUpdate");
 
             //WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate", clientMethods);
             //WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate", clientMethods);
         }
 
-        protected void WriteGetContainer()
+        protected void WriteGetContainer(ExampleModel exampleModel)
         {
-            _writer.Line($"var container = await Get{TypeNameOfContainer}Async();");
+            _writer.Append($"var container = await Get{TypeNameOfContainer}Async(");
+            foreach (var parameter in containerInitiateParameters)
+            {
+                foreach (var methodParameter in exampleModel.MethodParameters)
+                {
+                    if (methodParameter.Parameter.CSharpName()==parameter.Name)
+                    {
+                        WriteExampleValue(_writer, parameter.Type, methodParameter.ExampleValue, parameter.Name);
+                        _writer.Append($", ");
+                    }
+                }
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($");");
         }
 
         protected string WriteParameter(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, ExampleParameter exampleParameter, Parameter parameter) {
@@ -315,7 +426,7 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             else if (cst.Name == "Object")
             {
                 writer.UseNamespace("System.Text.Json");
-                writer.Append($"JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(ConvertToStringDictionary(exampleValue.RawValue!)):L})");
+                writer.Append($"JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(TestTool.ConvertToStringDictionary(exampleValue.RawValue!)):L})");
             }
             else if (cst.Name == "ResourceIdentifier")
             {
@@ -448,24 +559,25 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         {
             Debug.Assert(clientMethod.Operation != null);
 
+            var exampleGroup = FindExampleGroup(_context, _resourceContainer, clientMethod);
+            if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
+                return;
+
             methodName = methodName ?? clientMethod.Name;
             // CSharpType returnType = isAsync? typeof(Task): typeof(void);
             var parameterMapping = BuildParameterMapping(clientMethod);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
-            WriteTestDecorator(_writer);
+            TestTool.WriteTestDecorator(_writer);
             var testMethodName = CreateMethodName(methodName, isAsync);
             _writer.Append($"public async Task {testMethodName}()");
             var paramNames = new List<string>();
             using (_writer.Scope())
             {
-                WriteGetContainer();
-
-                var exampleGroup = (from x in context.CodeModel.TestLayout?.MockTest.ExampleGroups where x.Name == $"{_resourceContainer.OperationGroup.Key}_{clientMethod.Operation.Language.Default.Name}" select x).FirstOrDefault();
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
-                    // do something with entry.Value or entry.Key
                     _writer.LineRaw($"// Example: {exampleModel.Name}");
+                    WriteGetContainer(exampleModel);
                     foreach (var passThruParameter in passThruParameters)
                     {
                         string? paramName = null;
@@ -486,7 +598,7 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                             else
                             {
                                 paramName = passThruParameter.Name;
-                                _writer.LineRaw($"var {paramName} = null;");
+                                _writer.LineRaw($"{passThruParameter.Type.Name}? {paramName} = null;");
                             }
                         }
                         paramNames.Add(paramName);
@@ -557,41 +669,142 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             //}
         }
 
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod restMethod, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        public  void WriteExampleInstanceMethod(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, string? methodName = null)
         {
-            // if the method needs resource name (typically all non-list methods), we should make it pass-thru by
-            // making the last string-like mandatory parameter (typically the resource name) pass-through
-            if (!restMethod.IsListMethod())
+            Debug.Assert(clientMethod.Operation != null);
+
+            var exampleGroup = FindExampleGroup(_context, _resourceContainer, clientMethod);
+            if (exampleGroup is null || exampleGroup.Examples.Count()==0)
+                return;
+
+            methodName = methodName ?? clientMethod.Name;
+
+            var parameterMapping = BuildParameterMapping(clientMethod);
+            var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+            var isAsync = true;
+            var methodParameters = GenExampleInstanceMethodParameters(clientMethod);
+            var testMethodName = CreateMethodName(methodName, isAsync);
+
+            _writer.Append($"public static async Task<{_resource.Type.Name}> {GenExampleInstanceMethodName(clientMethod)}({_resourceContainer.Type.Name} container, ");
+            foreach (var methodParameter in methodParameters)
             {
-                var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
-                if (lastString?.Parameter != null)
+                _writer.Append($"{methodParameter.Type} {methodParameter.Name}, ");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Append($")");
+            var paramNames = new List<string>();
+            using (_writer.Scope())
+            {
+                foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
-                    var paramName = lastString.Parameter.Name;
-                    if (!paramName.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+                    _writer.LineRaw($"// Example: {exampleModel.Name}");
+                    foreach (var passThruParameter in passThruParameters)
                     {
-                        lastString.IsPassThru = true;
-                        parentNameStack.Pop();
+                        if (methodParameters.Contains(passThruParameter))
+                        {
+                            paramNames.Add(passThruParameter.Name);
+                            continue;
+                        }
+                        string? paramName = null;
+                        foreach (ExampleParameter exampleParameter in exampleModel.MethodParameters)
+                        {
+                            if (passThruParameter.Name == exampleParameter.Parameter.CSharpName())
+                            {
+                                paramName = WriteExampleParameterDeclaration(exampleParameter, passThruParameter);
+                            }
+                        }
+                        if (paramName is null)
+                        {
+                            if (passThruParameter.ValidateNotNull)
+                            {
+                                throw new Exception($"parameter {passThruParameter.Name} not found in example {exampleModel.Name}");
+                            }
+                            else
+                            {
+                                paramName = passThruParameter.Name;
+                                _writer.LineRaw($"{passThruParameter.Type.Name}? {paramName} = null;");
+                            }
+                        }
+                        paramNames.Add(paramName);
                     }
+
+                    _writer.Line();
+                    _writer.Append($"return {(isAsync ? ("await ") : "")}container.{testMethodName}(");
+                    foreach (var paramName in paramNames)
+                    {
+                        _writer.Append($"{paramName},");
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.LineRaw(");");
+                    break;
                 }
             }
+            _writer.Line();
         }
 
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
+        public static string GenExampleInstanceMethodName(RestClientMethod clientMethod)
         {
-            bool passThru = false;
-            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(_context);
-            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
-            {
-                valueExpression = "Id.ResourceGroupName";
-            }
-            else
-            {
-                // container.Id is the ID of parent resource, so the first name should just be `Id.Name`
-                parentNameStack.Push($"Id{dotParent}.Name");
-                dotParent += ".Parent";
-            }
+            return $"{clientMethod.Name}ExampleInstanceAsync";
+        }
 
-            return passThru;
+        public IEnumerable<Parameter> GenExampleInstanceMethodParameters(RestClientMethod clientMethod)
+        {
+            var parameterMapping = BuildParameterMapping(clientMethod);
+            var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+            return passThruParameters.Where(p => p.ValidateNotNull && p.Type.IsFrameworkType && (p.Type.FrameworkType.IsPrimitive || p.Type.FrameworkType == typeof(String))); // define all primitive parameters as method parameter
+        }
+
+
+
+
+        public static ExampleGroup? FindExampleGroup(BuildContext<MgmtOutputLibrary> context, ResourceContainer resourceContainer, RestClientMethod? clientMethod)
+        {
+            if (clientMethod is null)
+                return null;
+            return (from x in context.CodeModel.TestModel?.MockTest.ExampleGroups where x.OperationId == $"{resourceContainer.OperationGroup.Key}_{clientMethod.Operation.Language.Default.Name}" select x).FirstOrDefault();
+        }
+
+        public static bool HasCreateExample(BuildContext<MgmtOutputLibrary> context, ResourceContainer resourceContainer)
+        {
+            var exampleGroup = FindExampleGroup(context, resourceContainer, resourceContainer.CreateMethod);
+            return exampleGroup is not null && exampleGroup.Examples.Count() > 0;
+        }
+
+        public static bool IsRootResourceType(string resourceType)
+        {
+            return resourceType.Equals(ResourceTypeBuilder.ResourceGroupResources) || resourceType.Equals(ResourceTypeBuilder.Subscriptions) || resourceType.Equals(ResourceTypeBuilder.Tenant);
+        }
+        public static bool CanCreateResourceFromExample(BuildContext<MgmtOutputLibrary> context, ResourceContainer resourceContainer)
+        {
+            if (IsRootResourceType(resourceContainer.OperationGroup.ResourceType(context.Configuration.MgmtConfiguration)))
+                return true;
+            var hasCreateExample = HasCreateExample(context, resourceContainer);
+            if (!hasCreateExample)
+                return false;
+
+            var parentResourceType = resourceContainer.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration);
+            if (IsRootResourceType(parentResourceType))
+                return true;
+
+            var parentOperationGroup = resourceContainer.OperationGroup.ParentOperationGroup(context);
+            if (parentOperationGroup is null)
+                return true;
+            var parentResourceContainer = context.Library.GetResourceContainer(parentOperationGroup);
+            if (parentResourceContainer is null)
+                return true;
+
+            return CanCreateResourceFromExample(context, parentResourceContainer);
+        }
+
+        public static bool CanCreateParentResourceFromExample(BuildContext<MgmtOutputLibrary> context, ResourceContainer resourceContainer)
+        {
+            var parentOperationGroup = resourceContainer.OperationGroup.ParentOperationGroup(context);
+            if (parentOperationGroup is null)
+                return true;
+            var parentResourceContainer = context.Library.GetResourceContainer(parentOperationGroup);
+            if (parentResourceContainer is null)
+                return true;
+            return CanCreateResourceFromExample(context, parentResourceContainer);
         }
     }
 }
