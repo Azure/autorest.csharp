@@ -16,7 +16,7 @@ namespace constants.Models
     {
         private readonly int _value;
 
-        /// <summary> Determines if two <see cref="Enum9"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="Enum9"/>. </summary>
         public Enum9(int value)
         {
             _value = value;

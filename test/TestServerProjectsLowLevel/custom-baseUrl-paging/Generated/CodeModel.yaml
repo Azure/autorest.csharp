@@ -334,6 +334,7 @@ operationGroups:
             Paging_getPagesPartialUrl:
               parameters:
                 accountName: testaccount
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/Paging_getPagesPartialUrl.json
               responses:
                 '200':
                   body:
@@ -434,6 +435,7 @@ operationGroups:
             Paging_getPagesPartialUrlOperation:
               parameters:
                 accountName: testaccount
+              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/Paging_getPagesPartialUrlOperation.json
               responses:
                 '200':
                   body:

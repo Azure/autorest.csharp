@@ -15,7 +15,7 @@ namespace constants.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="Enum10"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="Enum10"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Enum10(string value)
         {

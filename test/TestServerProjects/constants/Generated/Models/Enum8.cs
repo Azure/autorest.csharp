@@ -16,7 +16,7 @@ namespace constants.Models
     {
         private readonly bool _value;
 
-        /// <summary> Determines if two <see cref="Enum8"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="Enum8"/>. </summary>
         public Enum8(bool value)
         {
             _value = value;

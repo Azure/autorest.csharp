@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="Enum2"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="Enum2"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Enum2(string value)
         {

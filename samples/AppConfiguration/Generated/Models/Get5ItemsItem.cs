@@ -15,7 +15,7 @@ namespace AppConfiguration.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="Get5ItemsItem"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="Get5ItemsItem"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Get5ItemsItem(string value)
         {

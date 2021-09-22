@@ -15,7 +15,9 @@ namespace FlattenedParameters.Models
         {
         }
 
+        /// <summary> Gets or sets the required. </summary>
         public string Required { get; set; }
+        /// <summary> Gets or sets the non required. </summary>
         public string NonRequired { get; set; }
     }
 }

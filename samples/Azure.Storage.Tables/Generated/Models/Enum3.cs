@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables.Models
     {
         private readonly string _value;
 
-        /// <summary> Determines if two <see cref="Enum3"/> values are the same. </summary>
+        /// <summary> Initializes a new instance of <see cref="Enum3"/>. </summary>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Enum3(string value)
         {
