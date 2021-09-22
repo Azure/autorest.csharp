@@ -232,7 +232,9 @@ namespace AutoRest.CSharp.Output.Models
                         reference,
                         GetSerializationStyle(requestParameter),
                         !requestParameter.Extensions!.SkipEncoding,
-                        GetSerializationFormat(requestParameter)));
+                        GetSerializationFormat(requestParameter),
+                        GetExplode(requestParameter)
+                    ));
                 }
             }
 
@@ -453,6 +455,12 @@ namespace AutoRest.CSharp.Output.Models
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private static bool GetExplode(RequestParameter requestParameter)
+        {
+            var httpParameter = requestParameter.Protocol.Http as HttpParameter;
+            return httpParameter?.Explode ?? false;
         }
 
         private static Schema GetValueSchema(RequestParameter requestParameter)

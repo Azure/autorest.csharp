@@ -334,21 +334,36 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter)
         {
             string? delimiter = GetSerializationStyleDelimiter(queryParameter.SerializationStyle);
-            string method = delimiter != null
+            bool explode = queryParameter.Explode;
+            string method = delimiter != null && !explode
                 ? nameof(RequestUriBuilderExtensions.AppendQueryDelimited)
                 : nameof(RequestUriBuilderExtensions.AppendQuery);
 
             ReferenceOrConstant value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
             {
-                writer.Append($"{uri}.{method}({queryParameter.Name:L}, ");
-                WriteConstantOrParameter(writer, value, enumAsString: true);
-                if (delimiter != null)
+                if (explode)
                 {
-                    writer.Append($", {delimiter:L}");
+                    writer.Line($"foreach(var param in {queryParameter.Name})");
+                    using (writer.Scope())
+                    {
+                        writer.Append($"{uri}.{method}({queryParameter.Name:L}, ");
+                        WriteConstantOrParameter(writer, new Reference("param", value.Type.Arguments.Length > 0 ? value.Type.Arguments[0]: value.Type), enumAsString: true);
+                        WriteSerializationFormat(writer, queryParameter.SerializationFormat);
+                        writer.Line($", {queryParameter.Escape:L});");
+                    }
                 }
-                WriteSerializationFormat(writer, queryParameter.SerializationFormat);
-                writer.Line($", {queryParameter.Escape:L});");
+                else
+                {
+                    writer.Append($"{uri}.{method}({queryParameter.Name:L}, ");
+                    WriteConstantOrParameter(writer, value, enumAsString: true);
+                    if (delimiter != null)
+                    {
+                        writer.Append($", {delimiter:L}");
+                    }
+                    WriteSerializationFormat(writer, queryParameter.SerializationFormat);
+                    writer.Line($", {queryParameter.Escape:L});");
+                }
             }
         }
 
