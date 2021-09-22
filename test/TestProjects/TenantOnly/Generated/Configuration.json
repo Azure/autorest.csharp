@@ -19,7 +19,5 @@
   },
   "RequestPathToResource": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": "Agreement"
-  },
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  }
 }

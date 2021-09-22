@@ -31,7 +31,5 @@
     "SubResourceModel2s": "resourceGroups",
     "WritableSubResourceModel1s": "resourceGroups",
     "WritableSubResourceModel2s": "resourceGroups"
-  },
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  }
 }

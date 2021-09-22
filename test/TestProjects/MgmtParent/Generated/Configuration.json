@@ -17,7 +17,5 @@
   },
   "OperationGroupToParent": {
     "VirtualMachineExtensionImages": "subscriptions"
-  },
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  }
 }

@@ -10,7 +10,5 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "ArmCore": true,
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  "ArmCore": true
 }

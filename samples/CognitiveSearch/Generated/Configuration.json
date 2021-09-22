@@ -7,7 +7,5 @@
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
   ],
   "public-clients": true,
-  "skip-csproj-packagereference": true,
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  "skip-csproj-packagereference": true
 }

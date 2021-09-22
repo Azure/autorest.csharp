@@ -19,7 +19,5 @@
     "ExactMatchModel2s": "resourceGroups",
     "ExactMatchModel3s": "resourceGroups",
     "ExactMatchModel4s": "resourceGroups"
-  },
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  }
 }

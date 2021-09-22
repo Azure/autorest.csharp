@@ -21,7 +21,5 @@
     "AzureResourceFlattenModel3s": "resourceGroups",
     "AzureResourceFlattenModel4s": "resourceGroups",
     "AzureResourceFlattenModel5s": "resourceGroups"
-  },
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  }
 }

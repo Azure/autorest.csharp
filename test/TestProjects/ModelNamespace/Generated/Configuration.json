@@ -8,7 +8,5 @@
   ],
   "public-clients": true,
   "model-namespace": false,
-  "skip-csproj-packagereference": true,
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  "skip-csproj-packagereference": true
 }

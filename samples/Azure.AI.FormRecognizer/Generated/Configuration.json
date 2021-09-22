@@ -6,7 +6,5 @@
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
   ],
-  "skip-csproj-packagereference": true,
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  "skip-csproj-packagereference": true
 }

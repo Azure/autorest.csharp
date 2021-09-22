@@ -23,7 +23,5 @@
   },
   "OperationGroupToSingletonResource": {
     "SingletonResources2": "singletonResources2/default"
-  },
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  }
 }

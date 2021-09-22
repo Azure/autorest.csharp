@@ -37,7 +37,5 @@
   "OperationGroupIsExtension": [
     "VirtualMachineScaleSetVMExtensions",
     "VirtualMachineExtensions"
-  ],
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  ]
 }

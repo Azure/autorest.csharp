@@ -12,7 +12,5 @@
   "skip-csproj-packagereference": true,
   "OperationGroupToResource": {
     "Bars": "Bar"
-  },
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  }
 }

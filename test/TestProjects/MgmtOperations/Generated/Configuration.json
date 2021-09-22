@@ -12,7 +12,5 @@
   "skip-csproj-packagereference": true,
   "RequestPathIsNonResource": [
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/sharedkey"
-  ],
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  ]
 }

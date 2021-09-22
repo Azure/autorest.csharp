@@ -108,8 +108,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
-            writer.WriteBoolean(nameof(DoesResourceModelRequireType), DoesResourceModelRequireType);
-            writer.WriteBoolean(nameof(DoesResourceModelRequireName), DoesResourceModelRequireName);
+            if (!DoesResourceModelRequireType)
+                writer.WriteBoolean(nameof(DoesResourceModelRequireType), DoesResourceModelRequireType);
+            if (!DoesResourceModelRequireName)
+                writer.WriteBoolean(nameof(DoesResourceModelRequireName), DoesResourceModelRequireName);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)

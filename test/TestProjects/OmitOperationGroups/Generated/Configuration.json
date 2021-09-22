@@ -19,7 +19,5 @@
   },
   "OperationGroupsToOmit": [
     "Model1s"
-  ],
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  ]
 }

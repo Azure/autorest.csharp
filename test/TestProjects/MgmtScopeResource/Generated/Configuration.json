@@ -36,7 +36,5 @@
   "RequestPathToResource": {
     "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": "DeploymentOperation",
     "/{linkId}": "ResourceLink"
-  },
-  "DoesResourceModelRequireType": true,
-  "DoesResourceModelRequireName": true
+  }
 }
