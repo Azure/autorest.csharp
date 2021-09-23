@@ -228,7 +228,6 @@ operationGroups:
           x-ms-examples:
             queries_ArrayStringMultiNull:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/queries_ArrayStringMultiNull.json
               responses:
                 '200': {}
         language: !Languages 
@@ -312,7 +311,6 @@ operationGroups:
             queries_ArrayStringMultiEmpty:
               parameters:
                 arrayQuery: ''
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/queries_ArrayStringMultiEmpty.json
               responses:
                 '200': {}
         language: !Languages 
@@ -396,7 +394,6 @@ operationGroups:
             queries_ArrayStringMultiValid:
               parameters:
                 arrayQuery: ArrayQuery1,begin!*'();:@ &=+$,/?#[]end,,
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/queries_ArrayStringMultiValid.json
               responses:
                 '200': {}
         language: !Languages 
