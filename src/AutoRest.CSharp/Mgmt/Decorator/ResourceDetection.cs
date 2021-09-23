@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -16,6 +17,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static bool IsResource(this RawOperationSet set, MgmtConfiguration config)
         {
             return set.TryGetResourceName(config, out _);
+        }
+
+        public static string Resource(this RawOperationSet set, MgmtConfiguration config)
+        {
+            if (set.TryGetResourceName(config, out var resourceName))
+                return resourceName;
+
+            throw new InvalidOperationException($"Operation set {set.RequestPath} does not correspond to a resource");
         }
 
         public static bool TryGetResourceName(this RawOperationSet set, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)

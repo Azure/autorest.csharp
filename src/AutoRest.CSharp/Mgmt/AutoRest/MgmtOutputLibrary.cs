@@ -12,7 +12,6 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
@@ -39,8 +38,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private Dictionary<string, MgmtRestClient>? _rawRequestPathToRestClient;
 
-        private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>? _armResources;
+        //private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>? _armResources;
         private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>? _resourceContainers;
+
+        /// <summary>
+        /// This is a map from raw request path to the corresponding <see cref="Resource"/>
+        /// </summary>
+        private Dictionary<string, Resource>? _requestPathToArmResource;
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="ResourceData"/>
@@ -66,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <summary>
         /// A mapping of parent resource type to child operation groups that are not resources.
         /// </summary>
-        private Dictionary<string, HashSet<OperationGroup>> _childNonResourceOperationGroups;
+        private Dictionary<string, HashSet<OperationGroup>> _childNonResourceOperationGroups; // TODO -- will deprecate
 
         /// <summary>
         /// This is a map from raw request path to their corresponding <see cref="RawOperationSet"/>,
@@ -184,23 +188,138 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        public IEnumerable<Resource> ManagementGroupChildResources => GetChildren(ResourceTypeBuilder.ManagementGroups);
-        public IEnumerable<Resource> TenantChildResources => GetChildren(ResourceTypeBuilder.Tenant);
+        //public IEnumerable<Resource> ManagementGroupChildResources => GetChildren(ResourceTypeBuilder.ManagementGroups);
+        //public IEnumerable<Resource> TenantChildResources => GetChildren(ResourceTypeBuilder.Tenant);
 
-        private IEnumerable<Resource> GetChildren(string parent)
+        //private IEnumerable<Resource> GetChildren(string parent)
+        //{
+        //    if (EnsureChildResources().TryGetValue(parent, out var children))
+        //    {
+        //        foreach (var child in children)
+        //        {
+        //            yield return child;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        yield break;
+        //    }
+        //}
+
+        private IEnumerable<RawOperationSet>? _resourceOperationSets;
+
+        public IEnumerable<RawOperationSet> ResourceOperationSets => _resourceOperationSets ??= _resourceNameToRawOperationSets.SelectMany(pair => pair.Value);
+        public IEnumerable<RawOperationSet> OperationSets => _rawRequestPathToOperations.Values;
+
+        public IDictionary<Operation, RestClientMethod> RestClientMethods => EnsureRestClientMethods();
+        public IDictionary<RestClientMethod, ClientMethod> ClientMethods => EnsureClientMethods();
+        public IDictionary<RestClientMethod, PagingMethod> PagingMethods => EnsurePagingMethods();
+        //public IDictionary<RequestPath, IList<RestClientMethod>> OperationSets => EnsureOperationSets();
+
+        private IDictionary<Operation, RestClientMethod>? _restClientMethods;
+        private IDictionary<RestClientMethod, ClientMethod>? _clientMethods;
+        private IDictionary<RestClientMethod, PagingMethod>? _pagingMethods;
+
+        private IDictionary<RestClientMethod, ClientMethod> EnsureClientMethods()
         {
-            if (EnsureChildResources().TryGetValue(parent, out var children))
+            if (_clientMethods != null)
+                return _clientMethods;
+
+            _clientMethods = new Dictionary<RestClientMethod, ClientMethod>();
+            var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
+            foreach (var restClient in RestClients)
             {
-                foreach (var child in children)
+                var methods = ClientBuilder.BuildMethods(restClient.OperationGroup, restClient, placeholder);
+                foreach (var method in methods)
                 {
-                    yield return child;
+                    _clientMethods.Add(method.RestClientMethod, method);
                 }
             }
-            else
-            {
-                yield break;
-            }
+
+            return _clientMethods;
         }
+
+        private IDictionary<RestClientMethod, PagingMethod> EnsurePagingMethods()
+        {
+            if (_pagingMethods != null)
+                return _pagingMethods;
+
+            _pagingMethods = new Dictionary<RestClientMethod, PagingMethod>();
+            var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
+            foreach (var restClient in RestClients)
+            {
+                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder);
+                foreach (var method in methods)
+                {
+                    _pagingMethods.Add(method.Method, method);
+                }
+            }
+
+            return _pagingMethods;
+        }
+
+        //private IDictionary<RequestPath, IList<RestClientMethod>>? _operationSets;
+
+        //private IDictionary<RequestPath, IList<RestClientMethod>> EnsureOperationSets()
+        //{
+        //    if (_operationSets != null)
+        //        return _operationSets;
+
+        //    _operationSets = new Dictionary<RequestPath, IList<RestClientMethod>>();
+
+        //    foreach (var restClient in RestClients)
+        //    {
+        //        foreach (var restClientMethod in restClient.Methods)
+        //        {
+        //            // skip all the internal methods
+        //            if (restClientMethod.Accessibility != "public")
+        //                continue;
+        //            var requestPath = new RequestPath(restClientMethod);
+        //            if (_operationSets.TryGetValue(requestPath, out var restClientMethods))
+        //            {
+        //                restClientMethods.Add(restClientMethod);
+        //            }
+        //            else
+        //            {
+        //                _operationSets.Add(requestPath, new List<RestClientMethod> { restClientMethod });
+        //            }
+        //        }
+        //    }
+        //    return _operationSets;
+        //}
+
+        public IDictionary<Operation, RestClientMethod> EnsureRestClientMethods()
+        {
+            if (_restClientMethods != null)
+                return _restClientMethods;
+
+            _restClientMethods = new Dictionary<Operation, RestClientMethod>();
+            foreach (var restClient in RestClients)
+            {
+                foreach (var restClientMethod in restClient.Methods)
+                {
+                    // skipp all internal methods
+                    if (restClientMethod.Accessibility != "public")
+                        continue;
+                    _restClientMethods.Add(restClientMethod.Operation, restClientMethod);
+                }
+            }
+
+            return _restClientMethods;
+        }
+
+        private ArmClientExtensions? _armClientExtensions;
+        private SubscriptionExtensions? _subscriptionExtensions;
+        private ResourceGroupExtensions? _resourceGroupsExtensions;
+        private ManagementGroupExtensions? _managementGroupExtensions;
+
+        public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= new ArmClientExtensions(_context);
+
+        public SubscriptionExtensions SubscriptionExtensions => _subscriptionExtensions ??= new SubscriptionExtensions(_context);
+
+        public ResourceGroupExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= new ResourceGroupExtensions(_context);
+
+        public ManagementGroupExtensions ManagementGroupExtensions => _managementGroupExtensions ??= new ManagementGroupExtensions(_context);
 
         private IEnumerable<ResourceData>? _resourceDatas;
 
@@ -208,9 +327,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values.Distinct();
 
-        public IEnumerable<Resource> ArmResources => EnsureArmResources()[ResourceType.Default].Values;
+        public IEnumerable<Resource> ArmResources => EnsureRequestPathToArmResourcesMap().Values;
 
-        public IEnumerable<Resource> TupleResources => EnsureArmResources()[ResourceType.Tuple].Values;
+        //public IEnumerable<Resource> TupleResources => EnsureArmResources()[ResourceType.Tuple].Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers()[ResourceType.Default].Values;
 
@@ -279,6 +398,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return null;
         }
 
+        public ResourceData GetResourceData(string requestPath)
+        {
+            if (TryGetResourceData(requestPath, out var resourceData))
+                return resourceData;
+
+            throw new InvalidOperationException($"Request path {requestPath} does not correspond to a ResourceData");
+        }
+
         public ResourceData GetResourceData(OperationGroup operationGroup)
         {
             if (TryGetResourceData(operationGroup, out var resourceData))
@@ -300,19 +427,37 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return false;
         }
 
-        public Resource GetArmResource(OperationGroup operationGroup)
+        public bool TryGetResourceData(string requestPath, [MaybeNullWhen(false)] out ResourceData resourceData)
         {
-            Resource? result;
-            if (!EnsureArmResources()[ResourceType.Default].TryGetValue(operationGroup, out result))
-            {
-                result = EnsureArmResources()[ResourceType.Tuple][operationGroup];
-            }
-            return result;
+            return EnsureResourceData().TryGetValue(requestPath, out resourceData);
         }
 
-        public bool TryGetArmResource(OperationGroup operationGroup, [MaybeNullWhen(false)] out Resource resource)
+        public Resource GetArmResource(string requestPath)
         {
-            return EnsureArmResources()[ResourceType.Default].TryGetValue(operationGroup, out resource);
+            if (TryGetArmResource(requestPath, out var resource))
+                return resource;
+
+            throw new InvalidOperationException($"Cannot get Resource corresponding to {requestPath}");
+        }
+
+        //public Resource GetArmResource(OperationGroup operationGroup)
+        //{
+        //    Resource? result;
+        //    if (!EnsureArmResources()[ResourceType.Default].TryGetValue(operationGroup, out result))
+        //    {
+        //        result = EnsureArmResources()[ResourceType.Tuple][operationGroup];
+        //    }
+        //    return result;
+        //}
+
+        //public bool TryGetArmResource(OperationGroup operationGroup, [MaybeNullWhen(false)] out Resource resource)
+        //{
+        //    return EnsureArmResources()[ResourceType.Default].TryGetValue(operationGroup, out resource);
+        //}
+
+        public bool TryGetArmResource(string requestPath, [MaybeNullWhen(false)] out Resource resource)
+        {
+            return EnsureRequestPathToArmResourcesMap().TryGetValue(requestPath, out resource);
         }
 
         /// <summary>
@@ -329,6 +474,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {operationGroup}");
+        }
+
+        public MgmtRestClient GetRestClient(string requestPath)
+        {
+            if (TryGetRestClient(requestPath, out var restClient))
+                return restClient;
+
+            throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {requestPath}");
         }
 
         public bool TryGetRestClient(string requestPath, [MaybeNullWhen(false)] out MgmtRestClient restClient)
@@ -371,43 +524,80 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return Enumerable.Empty<MgmtNonResourceOperation>();
         }
 
-        private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>> EnsureArmResources()
+        private Dictionary<string, Resource> EnsureRequestPathToArmResourcesMap()
         {
-            if (_armResources != null)
-            {
-                return _armResources;
-            }
+            if (_requestPathToArmResource != null)
+                return _requestPathToArmResource;
 
-            _armResources = new Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>();
-            _armResources.Add(ResourceType.Default, new Dictionary<OperationGroup, Resource>());
-            _armResources.Add(ResourceType.Tuple, new Dictionary<OperationGroup, Resource>());
-            foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
+            _requestPathToArmResource = new Dictionary<string, Resource>();
+            foreach ((var resourceName, var rawOperationSets) in _resourceNameToRawOperationSets)
             {
-                var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
-                var childOperationGroups = _childNonResourceOperationGroups.GetValueOrDefault(operationGroup.ResourceType(_mgmtConfiguration));
-                var resource = new Resource(operationGroup, _context, childOperationGroups);
-                // validate to ensure that all the resource operations here have unique names
-                EnsureUniqueName(_armResources, resource);
-                _armResources[resourceType].Add(operationGroup, resource);
-            }
-
-            return _armResources;
-        }
-
-        private static void EnsureUniqueName<T, V>(IDictionary<ResourceType, V> mapToSearchIn, T value) where T : Resource where V : IDictionary<OperationGroup, T>
-        {
-            // we need to iterate over the existing items (including Default resource type and Tuple resource type)
-            // to see if there are already any resource operations are returning the same resource as this new one
-            foreach (var pair in mapToSearchIn.SelectMany(p => p.Value))
-            {
-                var existing = pair.Value;
-                if (value.Type.Name.Equals(existing.Type.Name))
+                if (DoWeNeedMultipleResources(rawOperationSets))
                 {
-                    throw new Exception($"Operation Group {existing.OperationGroup.Key} and {value.OperationGroup.Key} return the same resource {existing.ResourceName}, please consider mark these operation groups as extension resource in the `operation-group-is-extension` section");
+                    foreach (var operationSet in rawOperationSets)
+                    {
+                        var resource = new Resource(operationSet, _context);
+                        _requestPathToArmResource.Add(operationSet.RequestPath, resource);
+                    }
+                }
+                else
+                {
+                    // TODO -- Temporarily comment the following since the flag in this condition will never go into this branch
+                    //var resource = new Resource(rawOperationSets, _context);
+                    //foreach (var operationSet in rawOperationSets)
+                    //{
+                    //    _requestPathToArmResource.Add(operationSet.RequestPath, resource);
+                    //}
                 }
             }
+
+            return _requestPathToArmResource;
         }
 
+        private bool DoWeNeedMultipleResources(IEnumerable<RawOperationSet> rawOperationSets)
+        {
+            // TODO -- temporary, we create multiple resources when one resource data corresponds to multiple resources
+            return true;
+        }
+
+        //private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>> EnsureArmResources()
+        //{
+        //    if (_armResources != null)
+        //    {
+        //        return _armResources;
+        //    }
+
+        //    _armResources = new Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>();
+        //    _armResources.Add(ResourceType.Default, new Dictionary<OperationGroup, Resource>());
+        //    _armResources.Add(ResourceType.Tuple, new Dictionary<OperationGroup, Resource>());
+        //    foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
+        //    {
+        //        var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
+        //        var childOperationGroups = _childNonResourceOperationGroups.GetValueOrDefault(operationGroup.ResourceType(_mgmtConfiguration));
+        //        var resource = new Resource(operationGroup, _context, childOperationGroups);
+        //        // validate to ensure that all the resource operations here have unique names
+        //        EnsureUniqueName(_armResources, resource);
+        //        _armResources[resourceType].Add(operationGroup, resource);
+        //    }
+
+        //    return _armResources;
+        //}
+
+        //private static void EnsureUniqueName<T, V>(IDictionary<ResourceType, V> mapToSearchIn, T value) where T : Resource where V : IDictionary<OperationGroup, T>
+        //{
+        //    // we need to iterate over the existing items (including Default resource type and Tuple resource type)
+        //    // to see if there are already any resource operations are returning the same resource as this new one
+        //    foreach (var pair in mapToSearchIn.SelectMany(p => p.Value))
+        //    {
+        //        var existing = pair.Value;
+        //        if (value.Type.Name.Equals(existing.Type.Name))
+        //        {
+        //            throw new Exception($"Operation Group {existing.OperationGroup.Key} and {value.OperationGroup.Key} return the same resource {existing.ResourceName}, please consider mark these operation groups as extension resource in the `operation-group-is-extension` section");
+        //        }
+        //    }
+        //}
+
+        // TODO -- refactor this one to make sure this does not couple with OperationGroup
         private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>> EnsureResourceContainers()
         {
             if (_resourceContainers != null)
@@ -461,33 +651,33 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToResourceData;
         }
 
-        private Dictionary<string, List<Resource>> EnsureChildResources()
-        {
-            if (_childResources != null)
-            {
-                return _childResources;
-            }
+        //private Dictionary<string, List<Resource>> EnsureChildResources()
+        //{
+        //    if (_childResources != null)
+        //    {
+        //        return _childResources;
+        //    }
 
-            _childResources = new Dictionary<string, List<Resource>>();
-            var parentResourceTypes = new HashSet<string> { ResourceTypeBuilder.Tenant, ResourceTypeBuilder.ManagementGroups, ResourceTypeBuilder.Subscriptions, ResourceTypeBuilder.ResourceGroups };
-            foreach (var resource in ArmResources)
-            {
-                var parents = resource.OperationGroup.Operations.Where(op => parentResourceTypes.Contains(op.ParentResourceType())).Select(op => op.ParentResourceType()).Distinct().ToList();
-                foreach (var parent in parents)
-                {
-                    if (_childResources.TryGetValue(parent, out var resources))
-                    {
-                        resources.Add(resource);
-                    }
-                    else
-                    {
-                        _childResources.Add(parent, new List<Resource> { resource });
-                    }
-                }
-            }
+        //    _childResources = new Dictionary<string, List<Resource>>();
+        //    var parentResourceTypes = new HashSet<string> { ResourceTypeBuilder.Tenant, ResourceTypeBuilder.ManagementGroups, ResourceTypeBuilder.Subscriptions, ResourceTypeBuilder.ResourceGroups };
+        //    foreach (var resource in ArmResources)
+        //    {
+        //        var parents = resource.OperationGroup.Operations.Where(op => parentResourceTypes.Contains(op.ParentResourceType())).Select(op => op.ParentResourceType()).Distinct().ToList();
+        //        foreach (var parent in parents)
+        //        {
+        //            if (_childResources.TryGetValue(parent, out var resources))
+        //            {
+        //                resources.Add(resource);
+        //            }
+        //            else
+        //            {
+        //                _childResources.Add(parent, new List<Resource> { resource });
+        //            }
+        //        }
+        //    }
 
-            return _childResources;
-        }
+        //    return _childResources;
+        //}
 
         internal bool IsLongRunningReallyLong(RestClientMethod clientMethod)
         {

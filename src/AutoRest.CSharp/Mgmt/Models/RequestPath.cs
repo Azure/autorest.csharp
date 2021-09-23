@@ -38,22 +38,19 @@ namespace AutoRest.CSharp.Mgmt.Models
         });
 
         private IReadOnlyList<Segment> _segments;
-        private string _stringValue;
 
         public RequestPath(RestClientMethod method)
         {
             _segments = method.Request.PathSegments
                 .SelectMany(pathSegment => ParsePathSegment(pathSegment))
                 .ToList();
-            _stringValue = $"/{string.Join('/', _segments)}";
-            SerializedPath = GetHttpRequest(method.Operation.Requests.First()!)!.Path;
+            SerializedPath = method.Operation.GetHttpPath();
         }
 
         private RequestPath(IReadOnlyList<Segment> segments)
         {
             _segments = segments;
-            _stringValue = $"/{string.Join('/', _segments)}";
-            SerializedPath = _stringValue; // TODO -- fix this
+            SerializedPath = BuildSerializedPath(segments);
         }
 
         public string SerializedPath { get; }
@@ -98,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new Segment(pathSegment.Value).SingleItemAsIEnumerate();
         }
 
-        public bool Equals(RequestPath other) => _stringValue.Equals(other._stringValue, StringComparison.InvariantCultureIgnoreCase);
+        public bool Equals(RequestPath other) => SerializedPath.Equals(other.SerializedPath, StringComparison.InvariantCultureIgnoreCase);
 
         public override bool Equals(object? obj)
         {
@@ -112,13 +109,24 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         IEnumerator IEnumerable.GetEnumerator() => _segments.GetEnumerator();
 
-        public override int GetHashCode() => _stringValue.GetHashCode();
+        public override int GetHashCode() => SerializedPath.GetHashCode();
 
-        public override string? ToString() => _stringValue;
+        public override string? ToString() => SerializedPath;
 
-        private static HttpRequest? GetHttpRequest(ServiceRequest request)
+        public static bool operator ==(RequestPath left, RequestPath right)
         {
-            return request.Protocol.Http as HttpRequest;
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(RequestPath left, RequestPath right)
+        {
+            return !(left == right);
+        }
+
+        private static string BuildSerializedPath(IEnumerable<Segment> segments)
+        {
+            var strings = segments.Select(segment => segment.IsConstant ? segment.Constant : $"{{{segment.ReferenceName}}}");
+            return $"/{string.Join('/', strings)}";
         }
     }
 }

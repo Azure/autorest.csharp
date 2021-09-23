@@ -34,6 +34,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             _operationGroupCache.TryAdd(operation, operationGroup);
         }
 
+        public Operation? GetOperation(HttpMethod method)
+        {
+            foreach (var operation in Operations)
+            {
+                if (operation.GetHttpRequest()!.Method == method)
+                    return operation;
+            }
+
+            return null;
+        }
+
         public OperationGroup this[Operation operation] => _operationGroupCache[operation];
 
         public IEnumerator<Operation> GetEnumerator() => Operations.GetEnumerator();

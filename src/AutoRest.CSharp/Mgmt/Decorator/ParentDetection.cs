@@ -23,6 +23,101 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ConcurrentDictionary<string, string> _operationPathAncestorCache = new ConcurrentDictionary<string, string>();
         private static ConcurrentDictionary<string, string> _operationPathParentCache = new ConcurrentDictionary<string, string>();
 
+        private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
+        private static ConcurrentDictionary<RawOperationSet, TypeProvider> _operationSetToParentTypeProviderCache = new ConcurrentDictionary<RawOperationSet, TypeProvider>();
+
+        /// <summary>
+        /// Returns which TypeProvider this <see cref="RawOperationSet"/> belongs.
+        /// The result can be Resource, ResourceContainer, ManagementGroupExtension, ResourceGroupExtension, SubscriptionExtension or ArmClientExtension
+        /// </summary>
+        /// <param name="operationSet"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static TypeProvider ParentTypeProvider(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (_operationSetToParentTypeProviderCache.TryGetValue(operationSet, out var parentTypeProvider))
+                return parentTypeProvider;
+
+            parentTypeProvider = operationSet.GetParentTypeProvider(context);
+            _operationSetToParentTypeProviderCache.TryAdd(operationSet, parentTypeProvider);
+            return parentTypeProvider;
+        }
+
+        private static TypeProvider GetParentTypeProvider(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        {
+            // if this operation set corresponds to a resource, return the corresponding resource
+            if (operationSet.IsResource(context.Configuration.MgmtConfiguration))
+                return context.Library.GetArmResource(operationSet.RequestPath);
+
+            // if this operation set is a resource collection operation, return the corresponding resource container
+            if (operationSet.IsResourceCollection(context))
+            {
+                // TODO -- change this to use request path as parameter
+                var operationGroup = operationSet[operationSet.First()];
+                return context.Library.GetResourceContainer(operationGroup)!;
+            }
+
+            // if this operation set is neither, return the resource or extension which is the direct parent of this operation set
+            var parentRequestPath = operationSet.GetRequestPath(context).ParentRequestPath(context);
+            // try to get a resource from this parentRequestPath
+            if (context.Library.TryGetArmResource(parentRequestPath.SerializedPath, out var resource))
+            {
+                return resource;
+            }
+            // if we cannot, this must be one of the extensions
+            if (parentRequestPath == RequestPath.ManagementGroup)
+                return context.Library.ManagementGroupExtensions;
+            if (parentRequestPath == RequestPath.ResourceGroup)
+                return context.Library.ResourceGroupExtensions;
+            if (parentRequestPath == RequestPath.Subscription)
+                return context.Library.SubscriptionExtensions;
+            if (parentRequestPath == RequestPath.Tenant)
+                return context.Library.ArmClientExtensions;
+
+            throw new InvalidOperationException($"Cannot get parent type provider for operation set {operationSet.RequestPath}");
+        }
+
+        //public static RequestPath ParentRequestPath(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        //{
+        //    return operationSet.GetRequestPath(context).ParentRequestPath(context);
+        //}
+
+        public static RequestPath ParentRequestPath(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (_requestPathToParentCache.TryGetValue(requestPath, out var result))
+            {
+                return result;
+            }
+
+            result = GetParent(requestPath, context);
+            _requestPathToParentCache.TryAdd(requestPath, result);
+
+            return result;
+        }
+
+        private static RequestPath GetParent(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        {
+            // find a parent resource in the resource list
+            // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
+            // or null if none matched
+            var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
+                .Where(r => r.IsParentOf(requestPath)).OrderBy(r => r.Count);
+            if (candidates.Any())
+                return candidates.Last();
+            // if we cannot find one, we try the 4 extensions
+            // first try management group
+            if (RequestPath.ManagementGroup.IsParentOf(requestPath))
+                return RequestPath.ManagementGroup;
+            // then try resourceGroup
+            if (RequestPath.ResourceGroup.IsParentOf(requestPath))
+                return RequestPath.ResourceGroup;
+            // then try subscriptions
+            if (RequestPath.Subscription.IsParentOf(requestPath))
+                return RequestPath.Subscription;
+            // we do not have much choice to make, return tenant as the parent
+            return RequestPath.Tenant;
+        }
+
         public static string ParentResourceType(this OperationGroup operationGroup, MgmtConfiguration config)
         {
             string? result = null;

@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return method.RestClientMethod.Request.HttpMethod.Equals(RequestMethod.Put);
         }
 
-        protected override string CreateDescription(OperationGroup operationGroup, string clientPrefix)
+        protected override string CreateDescription(string clientPrefix)
         {
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
                 $"A class representing collection of {clientPrefix} and their operations over a {GetParentResourceName()}." :
