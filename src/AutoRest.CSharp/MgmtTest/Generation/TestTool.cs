@@ -72,5 +72,20 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             }
             return ret;
         }
+
+        public static string FormatResourceId(string resourceId)
+        {
+            resourceId = resourceId.Replace("{", "{{").Replace("}", "}}");
+            var elements = resourceId.Split("/");
+            for (int i = 2; i< elements.Length; i+=2)
+            {
+                if (elements[i-1].ToLower()== "subscriptions")
+                {
+                    //elements[i] = "{TestEnvironment.SubscriptionId}";
+                    elements[i] = "00000000-0000-0000-0000-000000000000";
+                }
+            }
+            return String.Join("/", elements);
+        }
     }
 }

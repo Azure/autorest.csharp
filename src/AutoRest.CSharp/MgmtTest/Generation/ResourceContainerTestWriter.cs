@@ -55,10 +55,10 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         protected CSharpType TypeOfContainer => _resourceContainer.Type;
         protected string TypeNameOfContainer => TypeOfContainer.Name;
 
-        protected string TestNamespace => TypeOfContainer.Namespace + ".Tests";
+        protected string TestNamespace => TypeOfContainer.Namespace + ".Tests.Mock";
         protected override string TypeNameOfThis => TypeOfContainer.Name + "MockTests";
         protected string TestEnvironmentName => _context.DefaultLibraryName + "TestEnvironment";
-        protected string TestBaseName => _context.DefaultLibraryName + "TestBase";
+        protected string TestBaseName => $"MockTestBase";
 
         protected Dictionary<string, EnumType> EnumTypes => TestTool.CollectEnumTypes(_context);
 
@@ -80,7 +80,9 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             WriteUsings(_writer);
             _writer.UseNamespace(TypeOfContainer.Namespace);
             _writer.UseNamespace($"{TypeOfContainer.Namespace}.Models");
+            _writer.UseNamespace(TypeOfContainer.Namespace + ".Tests");
             _writer.UseNamespace("NUnit.Framework");
+            _writer.UseNamespace("System.Net");
             _writer.UseNamespace("Azure.Core.TestFramework");
             _writer.UseNamespace("Azure.ResourceManager.TestFramework");
             _writer.UseNamespace("Azure.ResourceManager.Resources");
@@ -107,8 +109,10 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         {
             // write protected default constructor
             _writer.Line();
-            using (_writer.Scope($"public {TypeNameOfThis}(bool isAsync): base(isAsync)"))
-            { }
+            using (_writer.Scope($"public {TypeNameOfThis}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
+            {
+                _writer.Line($"ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
+            }
         }
 
         protected string GenContainerVariableName(ResourceContainer resourceContainer)
@@ -162,15 +166,18 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                     switch (parentResourceType)
                     {
                         case ResourceTypeBuilder.ResourceGroups:
-                            _writer.Line($"ResourceGroup resourceGroup = await TestHelper.CreateResourceGroupAsync(resourceGroupName, Client);");
+                            _writer.Line($"ResourceGroup resourceGroup = await TestHelper.CreateResourceGroupAsync(resourceGroupName, GetArmClient());");
                             _writer.Line($"{resourceContainer.Type.Name} {containerVariable} = resourceGroup.Get{resourceContainer.Resource.Type.Name.ToPlural()}();");
                             asyncContent = true;
                             break;
                         case ResourceTypeBuilder.Subscriptions:
-                            _writer.Line($"{resourceContainer.Type.Name} {containerVariable} = Client.DefaultSubscription.Get{resourceContainer.Resource.Type.Name.ToPlural()}();");
+                            _writer.Line($"{resourceContainer.Type.Name} {containerVariable} = GetArmClient().DefaultSubscription.Get{resourceContainer.Resource.Type.Name.ToPlural()}();");
+                            break;
+                        case ResourceTypeBuilder.Tenant:
+                            _writer.Line($"{resourceContainer.Type.Name} {containerVariable} = GetArmClient().GetTenants().GetAll().GetEnumerator().Current.Get{resourceContainer.Resource.Type.Name.ToPlural()}();");
                             break;
                         default:
-                            throw new Exception("TODO: Can't create container from tenant");
+                            throw new Exception($"TODO: Can't create container from {parentResourceType}");
                     }
                 }
                 else
@@ -430,7 +437,7 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             }
             else if (cst.Name == "ResourceIdentifier")
             {
-                writer.Append($"new {cst}({exampleValue.RawValue:L})");
+                writer.Append($"new {cst}(${TestTool.FormatResourceId(exampleValue.RawValue!.ToString()!):L})");
             }
             else if (cst.Name == "DateTimeOffset")
             {
