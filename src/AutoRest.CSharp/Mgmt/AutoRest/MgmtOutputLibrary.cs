@@ -23,11 +23,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 {
     internal class MgmtOutputLibrary : OutputLibrary
     {
-        private enum ResourceType
-        {
-            Default,
-            Tuple
-        }
+        //private enum ResourceType
+        //{
+        //    Default,
+        //    Tuple
+        //}
 
         private BuildContext<MgmtOutputLibrary> _context;
         private CodeModel _codeModel;
@@ -39,12 +39,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, MgmtRestClient>? _rawRequestPathToRestClient;
 
         //private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>? _armResources;
-        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>? _resourceContainers;
+        //private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>? _resourceContainers;
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="Resource"/>
         /// </summary>
         private Dictionary<string, Resource>? _requestPathToArmResource;
+
+        /// <summary>
+        /// This is a map from raw request path to the corresponding <see cref="ResourceContainer"/>
+        /// </summary>
+        private Dictionary<string, ResourceContainer>? _requestPathToResourceContainer;
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="ResourceData"/>
@@ -327,13 +332,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values.Distinct();
 
-        public IEnumerable<Resource> ArmResources => EnsureRequestPathToArmResourcesMap().Values;
+        public IEnumerable<Resource> ArmResources => EnsureRequestPathToArmResourcesMap().Values.Distinct();
 
         //public IEnumerable<Resource> TupleResources => EnsureArmResources()[ResourceType.Tuple].Values;
 
-        public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers()[ResourceType.Default].Values;
+        public IEnumerable<ResourceContainer> ResourceContainers => EnsureRequestPathToResourceContainers().Values.Distinct();
 
-        public IEnumerable<ResourceContainer> TupleResourceContainers => EnsureResourceContainers()[ResourceType.Tuple].Values;
+        //public IEnumerable<ResourceContainer> TupleResourceContainers => EnsureResourceContainers()[ResourceType.Tuple].Values;
 
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
@@ -597,7 +602,36 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         //    }
         //}
 
-        // TODO -- refactor this one to make sure this does not couple with OperationGroup
+        private Dictionary<string, ResourceContainer> EnsureRequestPathToResourceContainers()
+        {
+            if (_requestPathToResourceContainer != null)
+                return _requestPathToResourceContainer;
+
+            _requestPathToResourceContainer = new Dictionary<string, ResourceContainer>();
+            foreach ((var resourceName, var rawOperationSets) in _resourceNameToRawOperationSets)
+            {
+                if (DoWeNeedMultipleResources(rawOperationSets))
+                {
+                    foreach (var operationSet in rawOperationSets)
+                    {
+                        var container = new ResourceContainer(operationSet, _context);
+                        _requestPathToResourceContainer.Add(operationSet.RequestPath, container);
+                    }
+                }
+                else
+                {
+                    // TODO -- Temporarily comment the following since the flag in this condition will never go into this branch
+                    //var resource = new Resource(rawOperationSets, _context);
+                    //foreach (var operationSet in rawOperationSets)
+                    //{
+                    //    _requestPathToArmResource.Add(operationSet.RequestPath, resource);
+                    //}
+                }
+            }
+
+            return _requestPathToResourceContainer;
+        }
+
         private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>> EnsureResourceContainers()
         {
             if (_resourceContainers != null)

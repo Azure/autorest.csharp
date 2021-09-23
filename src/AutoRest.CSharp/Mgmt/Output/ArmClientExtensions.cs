@@ -9,9 +9,9 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ArmClientExtensions : TypeProvider
+    internal class ArmClientExtensions : MgmtTypeProvider
     {
-        public RequestPath ContextualPath => RequestPath.Tenant;
+        public override RequestPath ContextualPath => RequestPath.Tenant;
 
         public ArmClientExtensions(BuildContext context) : base(context)
         {

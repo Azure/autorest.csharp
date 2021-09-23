@@ -22,9 +22,9 @@ using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class Resource : TypeProvider
+    internal class Resource : MgmtTypeProvider
     {
-        private BuildContext<MgmtOutputLibrary> _context;
+        protected BuildContext<MgmtOutputLibrary> _context;
         //private IEnumerable<ClientMethod>? _methods;
         //private IEnumerable<PagingMethod>? _pagingMethods;
         //private ClientMethod? _getByIdMethod;
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string RequestPath => OperationSet.RequestPath;
         public RawOperationSet OperationSet { get; }
 
-        public virtual RequestPath ContextualPath => OperationSet.GetRequestPath(_context);
+        public override RequestPath ContextualPath => OperationSet.GetRequestPath(_context);
 
         public Resource(RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         //public IEnumerable<RestClientMethod> ResourceLROMethods => GetResourceLROMethods();
 
         private IEnumerable<Operation>? _childOperations;
-        public IEnumerable<Operation> ChildOperations => _childOperations ??= EnsureChildOperations();
+        public virtual IEnumerable<Operation> ChildOperations => _childOperations ??= EnsureChildOperations();
 
         private IEnumerable<Operation> EnsureChildOperations()
         {

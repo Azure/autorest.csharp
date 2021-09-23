@@ -8,6 +8,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -19,7 +20,6 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class ResourceContainer : Resource
     {
         private const string _suffixValue = "Container";
-        private BuildContext<MgmtOutputLibrary> _context;
         public const string ResourceGroupResourceType = "ResourceGroup.ResourceType";
         public const string SubscriptionResourceType = "Subscription.ResourceType";
         public const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
@@ -35,30 +35,61 @@ namespace AutoRest.CSharp.Mgmt.Output
         private List<ClientMethod>? _getMethods;
         private ClientMethod? _getByIdMethod;
 
-        public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-            : base(operationGroup, context)
+        public override RequestPath ContextualPath => OperationSet.ParentTypeProvider(_context).ContextualPath;
+
+        public ResourceContainer(RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+            : base(operationSet, context)
         {
-            _context = context;
+            CreateMethod = GetCreateMethod();
         }
 
-        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod && !IsPutMethod(m.RestClientMethod)
-        && !ListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !SubscriptionExtensionsListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !ResourceListMethods.Any(r => r.GetRestClientMethod() == m.RestClientMethod));
+        private RestClientMethod? GetCreateMethod()
+        {
+            var operation = OperationSet.GetOperation(HttpMethod.Put);
+            if (operation is null)
+                return null;
 
-        public Resource Resource => _context.Library.GetArmResource(OperationGroup);
+            return _context.Library.RestClientMethods[operation];
+        }
+
+        //public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod && !IsPutMethod(m.RestClientMethod)
+        //&& !ListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !SubscriptionExtensionsListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !ResourceListMethods.Any(r => r.GetRestClientMethod() == m.RestClientMethod));
+
+        public Resource Resource => _context.Library.GetArmResource(RequestPath);
 
         public override string ResourceName => Resource.ResourceName;
 
-        public RestClientMethod? CreateMethod => _createMethod ??= GetCreateMethod();
+        public RestClientMethod? CreateMethod { get; }
 
-        public List<RestClientMethod> PutMethods => _putMethods ??= GetPutMethods();
+        private IEnumerable<Operation>? _childOperations;
+        public override IEnumerable<Operation> ChildOperations => _childOperations ??= EnsureChildOperations();
 
-        public RestClientMethod? PutByIdMethod => _putByIdMethod ??= GetPutByIdMethod();
+        private IEnumerable<Operation> EnsureChildOperations()
+        {
+            var result = new List<Operation>();
 
-        public IEnumerable<ResourceListMethod> ListMethods => FindContainerListMethods(); // TODO: should only call once with lazy init
+            foreach (var operationSet in _context.Library.OperationSets)
+            {
+                if (operationSet == OperationSet)
+                    continue;
+                if (operationSet.ParentTypeProvider(_context) == this)
+                {
+                    result.AddRange(operationSet);
+                }
+            }
 
-        public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetArmResource(OperationGroup).GetMethod;
+            return result;
+        }
 
-        public override List<ClientMethod> GetMethods => _getMethods ??= _context.Library.GetArmResource(OperationGroup).GetMethods;
+        //public List<RestClientMethod> PutMethods => _putMethods ??= GetPutMethods();
+
+        //public RestClientMethod? PutByIdMethod => _putByIdMethod ??= GetPutByIdMethod();
+
+        //public IEnumerable<ResourceListMethod> ListMethods => FindContainerListMethods(); // TODO: should only call once with lazy init
+
+        //public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetArmResource(OperationGroup).GetMethod;
+
+        //public override List<ClientMethod> GetMethods => _getMethods ??= _context.Library.GetArmResource(OperationGroup).GetMethods;
 
         public override ClientMethod? GetByIdMethod => _getByIdMethod ??= _context.Library.GetArmResource(OperationGroup).GetByIdMethod;
 
@@ -88,11 +119,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         private RestClientMethod? GetPutByIdMethod()
         {
             return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put) && m.IsByIdMethod());
-        }
-
-        private RestClientMethod? GetCreateMethod()
-        {
-            return RestClient.Methods.FirstOrDefault(m => IsCreateResourceMethod(m) && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? RestClient.Methods.OrderBy(m => m.Name.Length).FirstOrDefault(m => IsCreateResourceMethod(m));
         }
 
         private bool IsPutMethod(RestClientMethod method)

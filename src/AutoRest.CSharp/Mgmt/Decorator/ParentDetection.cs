@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ConcurrentDictionary<string, string> _operationPathParentCache = new ConcurrentDictionary<string, string>();
 
         private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
-        private static ConcurrentDictionary<RawOperationSet, TypeProvider> _operationSetToParentTypeProviderCache = new ConcurrentDictionary<RawOperationSet, TypeProvider>();
+        private static ConcurrentDictionary<RawOperationSet, MgmtTypeProvider> _operationSetToParentTypeProviderCache = new ConcurrentDictionary<RawOperationSet, MgmtTypeProvider>();
 
         /// <summary>
         /// Returns which TypeProvider this <see cref="RawOperationSet"/> belongs.
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="operationSet"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static TypeProvider ParentTypeProvider(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        public static MgmtTypeProvider ParentTypeProvider(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
         {
             if (_operationSetToParentTypeProviderCache.TryGetValue(operationSet, out var parentTypeProvider))
                 return parentTypeProvider;
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parentTypeProvider;
         }
 
-        private static TypeProvider GetParentTypeProvider(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        private static MgmtTypeProvider GetParentTypeProvider(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
         {
             // if this operation set corresponds to a resource, return the corresponding resource
             if (operationSet.IsResource(context.Configuration.MgmtConfiguration))
