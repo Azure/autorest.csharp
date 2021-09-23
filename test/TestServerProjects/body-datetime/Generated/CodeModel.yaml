@@ -225,7 +225,6 @@ operationGroups:
           x-ms-examples:
             datetime_getNull:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_getNull.json
               responses:
                 '200':
                   body: ''
@@ -523,7 +522,6 @@ operationGroups:
             datetime_putUtcMaxDateTime:
               parameters:
                 datetimeBody: '9999-12-31T23:59:59.999Z'
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_putUtcMaxDateTime.json
               responses:
                 '200': {}
         language: !Languages 
@@ -688,7 +686,6 @@ operationGroups:
           x-ms-examples:
             datetime_getUtcLowercaseMaxDateTime:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_getUtcLowercaseMaxDateTime.json
               responses:
                 '200':
                   body: 9999-12-31t23:59:59.999z
@@ -762,7 +759,6 @@ operationGroups:
           x-ms-examples:
             datetime_getUtcUppercaseMaxDateTime:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_getUtcUppercaseMaxDateTime.json
               responses:
                 '200':
                   body: '9999-12-31T23:59:59.999Z'
@@ -929,7 +925,6 @@ operationGroups:
             datetime_putLocalPositiveOffsetMaxDateTime:
               parameters:
                 datetimeBody: '9999-12-31T23:59:59.999+14:00'
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_putLocalPositiveOffsetMaxDateTime.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1002,7 +997,6 @@ operationGroups:
           x-ms-examples:
             datetime_getLocalPositiveOffsetLowercaseMaxDateTime:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_getLocalPositiveOffsetLowercaseMaxDateTime.json
               responses:
                 '200':
                   body: '9999-12-31t23:59:59.999+14:00'
@@ -1076,7 +1070,6 @@ operationGroups:
           x-ms-examples:
             datetime_getLocalPositiveOffsetUppercaseMaxDateTime:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_getLocalPositiveOffsetUppercaseMaxDateTime.json
               responses:
                 '200':
                   body: '9999-12-31T23:59:59.999+14:00'
@@ -1399,7 +1392,6 @@ operationGroups:
             datetime_putUtcMinDateTime:
               parameters:
                 datetimeBody: '0001-01-01T00:00:00Z'
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_putUtcMinDateTime.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1472,7 +1464,6 @@ operationGroups:
           x-ms-examples:
             datetime_getUtcMinDateTime:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_getUtcMinDateTime.json
               responses:
                 '200':
                   body: '0001-01-01T00:00:00Z'
@@ -1729,7 +1720,6 @@ operationGroups:
             datetime_putLocalNegativeOffsetMinDateTime:
               parameters:
                 datetimeBody: '0001-01-01T00:00:00-14:00'
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_putLocalNegativeOffsetMinDateTime.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1802,7 +1792,6 @@ operationGroups:
           x-ms-examples:
             datetime_getLocalNegativeOffsetMinDateTime:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_getLocalNegativeOffsetMinDateTime.json
               responses:
                 '200':
                   body: '0001-01-01T00:00:00-14:00'
@@ -1876,7 +1865,6 @@ operationGroups:
           x-ms-examples:
             datetime_getLocalNoOffsetMinDateTime:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetime_getLocalNoOffsetMinDateTime.json
               responses:
                 '200':
                   body: '0001-01-01T00:00:00'

@@ -194,7 +194,6 @@ operationGroups:
           x-ms-examples:
             time_get:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/time_get.json
               responses:
                 '200':
                   body: '11:34:56'
@@ -298,7 +297,6 @@ operationGroups:
             time_put:
               parameters:
                 timeBody: '08:07:56'
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/time_put.json
               responses:
                 '200': {}
         language: !Languages 

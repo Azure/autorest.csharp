@@ -194,7 +194,6 @@ operationGroups:
             paths_getEmpty:
               parameters:
                 accountName: testaccount
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/paths_getEmpty.json
               responses:
                 '200':
                   body: ''

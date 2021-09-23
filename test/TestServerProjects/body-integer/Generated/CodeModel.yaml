@@ -207,7 +207,6 @@ operationGroups:
           x-ms-examples:
             int_getNull:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/int_getNull.json
               responses:
                 '200':
                   body: ''
@@ -637,7 +636,6 @@ operationGroups:
             int_putMax32:
               parameters:
                 intBody: 2147483647
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/int_putMax32.json
               responses:
                 '200': {}
         language: !Languages 
@@ -736,7 +734,6 @@ operationGroups:
             int_putMax64:
               parameters:
                 intBody: 9223372036854776000
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/int_putMax64.json
               responses:
                 '200': {}
         language: !Languages 
@@ -835,7 +832,6 @@ operationGroups:
             int_putMin32:
               parameters:
                 intBody: -2147483648
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/int_putMin32.json
               responses:
                 '200': {}
         language: !Languages 
@@ -934,7 +930,6 @@ operationGroups:
             int_putMin64:
               parameters:
                 intBody: -9223372036854776000
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/int_putMin64.json
               responses:
                 '200': {}
         language: !Languages 
@@ -1007,7 +1002,6 @@ operationGroups:
           x-ms-examples:
             int_getUnixTime:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/int_getUnixTime.json
               responses:
                 '200':
                   body: 1460505600
@@ -1239,7 +1233,6 @@ operationGroups:
           x-ms-examples:
             int_getNullUnixTime:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/int_getNullUnixTime.json
               responses:
                 '200':
                   body: ''

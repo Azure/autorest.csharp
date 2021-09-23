@@ -199,7 +199,6 @@ operationGroups:
           x-ms-examples:
             datetimerfc1123_getNull:
               parameters: {}
-              x-ms-original-file: file:///C:/GitHub/autorest.csharp/node_modules/@microsoft.azure/autorest.testserver/swagger/examples/datetimerfc1123_getNull.json
               responses:
                 '200':
                   body: ''
