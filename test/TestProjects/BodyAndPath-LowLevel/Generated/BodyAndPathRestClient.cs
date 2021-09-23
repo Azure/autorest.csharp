@@ -130,7 +130,10 @@ namespace BodyAndPath_LowLevel
             uri.AppendPath(itemNameStream, true);
             if (excluded != null)
             {
-                uri.AppendQueryDelimited("excluded", excluded, ",", true);
+                foreach (var param in excluded)
+                {
+                    uri.AppendQuery("excluded", param, true);
+                }
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", contentType.ToString());

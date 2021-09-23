@@ -119,7 +119,10 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$count", searchOptions.IncludeTotalResultCount.Value, true);
             }
-            uri.AppendQueryDelimited("facet", searchOptions.Facets, ",", true);
+            foreach (var param in searchOptions.Facets)
+            {
+                uri.AppendQuery("facet", param, true);
+            }
             if (searchOptions?.Filter != null)
             {
                 uri.AppendQuery("$filter", searchOptions.Filter, true);
@@ -142,7 +145,10 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("queryType", searchOptions.QueryType.Value.ToSerialString(), true);
             }
-            uri.AppendQueryDelimited("scoringParameter", searchOptions.ScoringParameters, ",", true);
+            foreach (var param in searchOptions.ScoringParameters)
+            {
+                uri.AppendQuery("scoringParameter", param, true);
+            }
             if (searchOptions?.ScoringProfile != null)
             {
                 uri.AppendQuery("scoringProfile", searchOptions.ScoringProfile, true);
