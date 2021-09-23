@@ -344,7 +344,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (explode)
                 {
-                    writer.Line($"foreach(var param in {queryParameter.Name})");
+                    writer.Append($"foreach(var param in ");
+                    WriteConstantOrParameter(writer, value, enumAsString: true);
+                    writer.Line($")");
                     using (writer.Scope())
                     {
                         writer.Append($"{uri}.{method}({queryParameter.Name:L}, ");
