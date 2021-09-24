@@ -232,6 +232,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: maxresults
@@ -253,6 +254,7 @@ schemas: !Schemas
               schema: *ref_4
               groupedBy: *ref_5
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: timeout
@@ -291,6 +293,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: maxresults
@@ -312,6 +315,7 @@ schemas: !Schemas
               schema: *ref_4
               groupedBy: *ref_7
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: timeout
@@ -351,6 +355,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: maxresults
@@ -373,6 +378,7 @@ schemas: !Schemas
               groupedBy: *ref_9
               implementation: Method
               required: true
+              extensions: {}
               language: !Languages 
                 default:
                   name: offset
@@ -395,6 +401,7 @@ schemas: !Schemas
               schema: *ref_4
               groupedBy: *ref_9
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: timeout
@@ -435,6 +442,7 @@ schemas: !Schemas
                 protocol: !Protocols {}
               implementation: Method
               required: true
+              extensions: {}
               language: !Languages 
                 default:
                   name: apiVersion
@@ -456,6 +464,7 @@ schemas: !Schemas
                 protocol: !Protocols {}
               implementation: Method
               required: true
+              extensions: {}
               language: !Languages 
                 default:
                   name: apiVersion
@@ -479,6 +488,7 @@ schemas: !Schemas
               groupedBy: *ref_12
               implementation: Method
               required: true
+              extensions: {}
               language: !Languages 
                 default:
                   name: tenant
@@ -492,6 +502,7 @@ schemas: !Schemas
               groupedBy: *ref_13
               implementation: Method
               required: true
+              extensions: {}
               language: !Languages 
                 default:
                   name: tenant
@@ -531,6 +542,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: maxresults
@@ -552,6 +564,7 @@ schemas: !Schemas
               schema: *ref_4
               groupedBy: *ref_15
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: timeout

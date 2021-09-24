@@ -97,7 +97,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static string CreateDescription(ChoiceValue choiceValue)
         {
-            return string.IsNullOrWhiteSpace(choiceValue.Language.Default.Description) ? choiceValue.Value : BuilderHelpers.EscapeXmlDescription(choiceValue.Language.Default.Description);
+            var description = string.IsNullOrWhiteSpace(choiceValue.Language.Default.Description)
+                ? choiceValue.Value
+                : choiceValue.Language.Default.Description;
+            return BuilderHelpers.EscapeXmlDescription(description);
         }
     }
 }
