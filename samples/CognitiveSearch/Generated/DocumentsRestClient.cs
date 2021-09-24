@@ -145,9 +145,9 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("queryType", searchOptions.QueryType.Value.ToSerialString(), true);
             }
-            foreach (var param in searchOptions.ScoringParameters)
+            foreach (var param0 in searchOptions.ScoringParameters)
             {
-                uri.AppendQuery("scoringParameter", param, true);
+                uri.AppendQuery("scoringParameter", param0, true);
             }
             if (searchOptions?.ScoringProfile != null)
             {
