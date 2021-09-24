@@ -93,8 +93,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 using (_writer.Scope())
                 {
                     WriteContainerTesterCtors();
-                    WriteCreateContainerMethod();
+                    WriteCreateContainerMethod(true);
+                    WriteCreateContainerMethod(false);
                     WriteCreateOrUpdateTest();
+                    WriteGetTest();
                 }
             }
         }
@@ -147,7 +149,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         }
 
 
-        protected void WriteCreateContainerMethod()
+        protected void WriteCreateContainerMethod(bool isAsync)
         {
             var asyncContent = false;
             void WriteContainerDeclaration(ResourceContainer resourceContainer)
@@ -160,7 +162,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     switch (parentResourceType)
                     {
                         case ResourceTypeBuilder.ResourceGroups:
-                            _writer.Line($"ResourceGroup resourceGroup = await TestHelper.CreateResourceGroupAsync(resourceGroupName, GetArmClient());");
+                            _writer.Line($"ResourceGroup resourceGroup = {GetAwait(isAsync)} TestHelper.CreateResourceGroup{GetAsyncSuffix(isAsync)}(resourceGroupName, GetArmClient());");
                             _writer.Line($"{resourceContainer.Type.Name} {containerVariable} = resourceGroup.Get{resourceContainer.Resource.Type.Name.ToPlural()}();");
                             asyncContent = true;
                             break;
@@ -183,7 +185,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                     var createParentParameters = GenExampleInstanceMethodParameters(parentResourceContainer.CreateMethod!);
                     var resourceVariableName = parentResourceContainer.Resource.ResourceName.FirstCharToLowerCase();
-                    _writer.Append($"{parentResourceContainer.Resource.Type.Name} {resourceVariableName} = await TestHelper.{GenExampleInstanceMethodName(parentResourceContainer.CreateMethod!)}({GenContainerVariableName(parentResourceContainer)}, ");
+                    _writer.Append($"{parentResourceContainer.Resource.Type.Name} {resourceVariableName} = {GetAwait(isAsync)} TestHelper.{GenExampleInstanceMethodName(parentResourceContainer.CreateMethod!, isAsync)}({GenContainerVariableName(parentResourceContainer)}, ");
                     foreach (var parameter in createParentParameters)
                     {
                         _writer.Append($"{parameter.Name}, ");
@@ -197,7 +199,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             EnsureContainerInitiateParameters();
             _writer.Line();
-            _writer.Append($"private async Task<{TypeNameOfContainer}> Get{TypeNameOfContainer}Async(");
+            _writer.Append($"private {GetAsyncKeyword(isAsync)} {TypeOfContainer.WrapAsync(isAsync)} Get{TypeNameOfContainer}{GetAsyncSuffix(isAsync)}(");
             foreach (var parameter in containerInitiateParameters)
             {
                 _writer.Append($"{parameter.Type} {parameter.Name}, ");
@@ -206,7 +208,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             using (_writer.Scope($")"))
             {
                 WriteContainerDeclaration(_resourceContainer);
-                if (asyncContent)
+                if (asyncContent || !isAsync)
                 {
                     _writer.Append($"return {GenContainerVariableName(_resourceContainer)};");
                 }
@@ -222,48 +224,56 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (_resourceContainer.CreateMethod != null)
             {
                 _writer.Line();
-                WriteFirstLROMethodTest(_resourceContainer.CreateMethod, _context, true, true, "CreateOrUpdate");
+                WriteMethodTest(_resourceContainer.CreateMethod, _context, true, "CreateOrUpdate");
+                WriteMethodTest(_resourceContainer.CreateMethod, _context, false, "CreateOrUpdate");
             }
         }
 
         protected void WriteGetTest()
         {
-            //if (_resourceContainer.GetMethods != null)
-            //{
-            //    _writer.Line();
-            //    WriteFirstLROMethodTest(_resourceContainer.CreateMethod, _context, true, true, "CreateOrUpdate");
-            //}
-        }
-
-        protected void WriteCreateResourceGroup()
-        {
-            // write protected default constructor
-            _writer.Line();
-            using (_writer.Scope($"protected async Task<ResourceGroup> CreateResourceGroupAsync()"))
+            if (_resourceContainer.GetMethod != null)
             {
-                _writer.Line($"var resourceGroupName = Recording.GenerateAssetName(\"testRG - \");");
-                _writer.Append($"return await DefaultSubscription.GetResourceGroups().CreateOrUpdateAsync(resourceGroupName");
-                using (_writer.Scope($"new ResourceGroupData(DefaultLocation)"))
-                {
-                    using (_writer.Scope($"Tags ="))
-                    {
-                        _writer.Line($"{{ \"test\", \"env\" }}");
-                    }
-                }
+                _writer.Line();
+                WriteMethodTest(_resourceContainer.GetMethod.RestClientMethod, _context, true, "Get");
+                WriteMethodTest(_resourceContainer.GetMethod.RestClientMethod, _context, false, "Get");
             }
         }
 
-        protected void WriteGetContainer(ExampleModel exampleModel)
+        protected void WriteGetContainer(RestClientMethod clientMethod, ExampleModel exampleModel, bool isAsync)
         {
-            _writer.Append($"var container = await Get{TypeNameOfContainer}Async(");
+            _writer.Append($"var container = {GetAwait(isAsync)} Get{TypeNameOfContainer}{GetAsyncSuffix(isAsync)}(");
+            var methodParameters = GenExampleInstanceMethodParameters(clientMethod);
+            var usedParameters = new HashSet<ExampleParameter>();
+            var allMethodParameters = new HashSet<string>();
+            foreach (var methodParameter in methodParameters)
+            {
+                allMethodParameters.Add(methodParameter.Name);
+            }
             foreach (var parameter in containerInitiateParameters)
             {
-                foreach (var methodParameter in exampleModel.MethodParameters)
+                var found = false;
+                foreach (var exampleMethodParameter in exampleModel.MethodParameters)
                 {
-                    if (methodParameter.Parameter.CSharpName()==parameter.Name)
+                    if (exampleMethodParameter.Parameter.CSharpName()==parameter.Name)
                     {
-                        WriteExampleValue(_writer, parameter.Type, methodParameter.ExampleValue, parameter.Name);
+                        WriteExampleValue(_writer, parameter.Type, exampleMethodParameter.ExampleValue, parameter.Name);
                         _writer.Append($", ");
+                        usedParameters.Add(exampleMethodParameter);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    foreach (var exampleMethodParameter in exampleModel.MethodParameters)
+                    {
+                        if (!usedParameters.Contains(exampleMethodParameter) && !allMethodParameters.Contains(exampleMethodParameter.Parameter.CSharpName()))
+                        {
+                            WriteExampleValue(_writer, parameter.Type, exampleMethodParameter.ExampleValue, parameter.Name);
+                            _writer.Append($", ");
+                            usedParameters.Add(exampleMethodParameter);
+                            break;
+                        }
                     }
                 }
             }
@@ -513,7 +523,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return $"\"{exampleValue.RawValue}\"";
         }
 
-        protected void WriteFirstLROMethodTest(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool isAsync, bool isVirtual, string? methodName = null)
+        protected void WriteMethodTest(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool isAsync, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 
@@ -527,20 +537,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             TestTool.WriteTestDecorator(_writer);
             var testMethodName = CreateMethodName(methodName, isAsync);
-            _writer.Append($"public async Task {testMethodName}()");
+            _writer.Append($"public {GetAsyncKeyword(isAsync)} {TestTool.GetTaskOrVoid(isAsync)} {testMethodName}()");
             var paramNames = new List<string>();
             using (_writer.Scope())
             {
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
                     _writer.LineRaw($"// Example: {exampleModel.Name}");
-                    WriteGetContainer(exampleModel);
+                    WriteGetContainer(clientMethod, exampleModel, isAsync);
 
                     var parameters = GenExampleInstanceMethodParameters(clientMethod);
-                    _writer.Append($"await TestHelper.{GenExampleInstanceMethodName(clientMethod)}(container, ");
+                    _writer.Append($"{GetAwait(isAsync)} TestHelper.{GenExampleInstanceMethodName(clientMethod, isAsync)}(container, ");
                     foreach (var parameter in parameters)
                     {
-                        // _writer.Append($"{parameter.Name}, ");
                         foreach (var methodParameter in exampleModel.MethodParameters)
                         {
                             if (methodParameter.Parameter.CSharpName() == parameter.Name)
@@ -556,9 +565,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     break;
                 }
             }
+            _writer.Line();
         }
 
-        public  void WriteExampleInstanceMethod(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, string? methodName = null)
+        public  void WriteExampleInstanceMethod(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool isAsync, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 
@@ -570,11 +580,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             var parameterMapping = BuildParameterMapping(clientMethod);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
-            var isAsync = true;
             var methodParameters = GenExampleInstanceMethodParameters(clientMethod);
             var testMethodName = CreateMethodName(methodName, isAsync);
 
-            _writer.Append($"public static async Task<{_resource.Type.Name}> {GenExampleInstanceMethodName(clientMethod)}({_resourceContainer.Type.Name} container, ");
+            _writer.Append($"public static {GetAsyncKeyword(isAsync)} {_resource.Type.WrapAsync(isAsync)} {GenExampleInstanceMethodName(clientMethod, isAsync)}({_resourceContainer.Type.Name} container, ");
             foreach (var methodParameter in methodParameters)
             {
                 _writer.Append($"{methodParameter.Type} {methodParameter.Name}, ");
@@ -618,7 +627,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
 
                     _writer.Line();
-                    _writer.Append($"return {(isAsync ? ("await ") : "")}container.{testMethodName}(");
+                    _writer.Append($"return {GetAwait(isAsync)} container.{testMethodName}(");
                     foreach (var paramName in paramNames)
                     {
                         _writer.Append($"{paramName},");
@@ -631,9 +640,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line();
         }
 
-        public static string GenExampleInstanceMethodName(RestClientMethod clientMethod)
+        public string GenExampleInstanceMethodName(RestClientMethod clientMethod, bool isAsync)
         {
-            return $"{clientMethod.Name}ExampleInstanceAsync";
+            return $"{clientMethod.Name}ExampleInstance{GetAsyncSuffix(isAsync)}";
         }
 
         public IEnumerable<Parameter> GenExampleInstanceMethodParameters(RestClientMethod clientMethod)

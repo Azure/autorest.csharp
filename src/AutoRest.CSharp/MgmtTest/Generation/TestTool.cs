@@ -65,5 +65,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             return String.Join("/", elements);
         }
+
+        public static string GetTaskOrVoid(bool isAsync)
+        {
+            return isAsync ? "Task" : "void";
+        }
     }
 }

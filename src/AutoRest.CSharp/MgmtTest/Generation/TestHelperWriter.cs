@@ -75,9 +75,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         var containerWriter = new ResourceContainerTestWriter(_writer, resourceContainer, _context);
                         if (resourceContainer.CreateMethod is not null)
-                            containerWriter.WriteExampleInstanceMethod(resourceContainer.CreateMethod, _context, "CreateOrUpdate");
+                        {
+                            containerWriter.WriteExampleInstanceMethod(resourceContainer.CreateMethod, _context, true, "CreateOrUpdate");
+                            containerWriter.WriteExampleInstanceMethod(resourceContainer.CreateMethod, _context, false, "CreateOrUpdate");
+                        }
                         if (resourceContainer.GetMethod is not null)
-                            containerWriter.WriteExampleInstanceMethod(resourceContainer.GetMethod.RestClientMethod, _context, "Get");
+                        {
+                            containerWriter.WriteExampleInstanceMethod(resourceContainer.GetMethod.RestClientMethod, _context, true, "Get");
+                            containerWriter.WriteExampleInstanceMethod(resourceContainer.GetMethod.RestClientMethod, _context, false, "Get");
+                        }
                     }
 
                     WriteCreateResourceGroupMethod();
@@ -97,6 +103,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 _writer.Append($";");
             }
             _writer.Line();
+            using (_writer.Scope($"public static ResourceGroup CreateResourceGroup(string resourceGroupName, ArmClient client)"))
+            {
+                using (_writer.Scope($"return client.DefaultSubscription.GetResourceGroups().CreateOrUpdate", start: "(", end: ")", newLine: false))
+                {
+                    _writer.Line($"resourceGroupName,");
+                    _writer.Line($"new ResourceGroupData(client.DefaultSubscription.ToString()) {{ Tags = {{ {{ \"test\", \"env\" }} }} }}");
+                }
+                _writer.Append($";");
+            }
         }
     }
 }
