@@ -10,7 +10,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
-    internal class RawOperationSet : IReadOnlyCollection<Operation>, IEquatable<RawOperationSet>
+    internal class OperationSet : IReadOnlyCollection<Operation>, IEquatable<OperationSet>
     {
         private IDictionary<Operation, OperationGroup> _operationGroupCache = new Dictionary<Operation, OperationGroup>();
         public string RequestPath { get; }
@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public int Count => Operations.Count;
 
-        public RawOperationSet(string requestPath)
+        public OperationSet(string requestPath)
         {
             RequestPath = requestPath;
             Operations = new HashSet<Operation>();
@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return RequestPath.GetHashCode();
         }
 
-        public bool Equals([AllowNull] RawOperationSet other)
+        public bool Equals([AllowNull] OperationSet other)
         {
             if (other is null)
                 return false;

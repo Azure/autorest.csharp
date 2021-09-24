@@ -14,12 +14,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static ConcurrentDictionary<string, string?> _rawCache = new ConcurrentDictionary<string, string?>();
 
-        public static bool IsResource(this RawOperationSet set, MgmtConfiguration config)
+        public static bool IsResource(this OperationSet set, MgmtConfiguration config)
         {
             return set.TryGetResourceName(config, out _);
         }
 
-        public static bool TryGetResourceName(this RawOperationSet set, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
+        public static bool TryGetResourceName(this OperationSet set, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
         {
             resourceName = null;
             // get the result from cache
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return false;
         }
 
-        private static bool TryOperationWithMethod(this RawOperationSet set, HttpMethod method, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
+        private static bool TryOperationWithMethod(this OperationSet set, HttpMethod method, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
         {
             resourceName = null;
 
@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return true;
         }
 
-        private static Operation? FindOperation(this RawOperationSet set, HttpMethod method)
+        private static Operation? FindOperation(this OperationSet set, HttpMethod method)
         {
             foreach (var operation in set)
             {
