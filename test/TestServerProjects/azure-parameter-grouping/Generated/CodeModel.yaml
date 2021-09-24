@@ -106,6 +106,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: customHeader
@@ -127,6 +128,7 @@ schemas: !Schemas
               schema: *ref_3
               groupedBy: *ref_4
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: query
@@ -149,6 +151,7 @@ schemas: !Schemas
               groupedBy: *ref_4
               implementation: Method
               required: true
+              extensions: {}
               language: !Languages 
                 default:
                   name: path
@@ -172,6 +175,7 @@ schemas: !Schemas
               groupedBy: *ref_4
               implementation: Method
               required: true
+              extensions: {}
               language: !Languages 
                 default:
                   name: body
@@ -211,6 +215,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: customHeader
@@ -232,6 +237,7 @@ schemas: !Schemas
               schema: *ref_3
               groupedBy: *ref_7
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: query
@@ -270,6 +276,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: from
@@ -291,6 +298,7 @@ schemas: !Schemas
               schema: *ref_1
               groupedBy: *ref_9
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: accept
@@ -329,6 +337,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: headerOne
@@ -348,6 +357,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: headerOne
@@ -369,6 +379,7 @@ schemas: !Schemas
               schema: *ref_3
               groupedBy: *ref_11
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: queryOne
@@ -381,6 +392,7 @@ schemas: !Schemas
               schema: *ref_3
               groupedBy: *ref_12
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: queryOne
@@ -419,6 +431,7 @@ schemas: !Schemas
                     description: Parameter group
                 protocol: !Protocols {}
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: headerTwo
@@ -440,6 +453,7 @@ schemas: !Schemas
               schema: *ref_3
               groupedBy: *ref_14
               implementation: Method
+              extensions: {}
               language: !Languages 
                 default:
                   name: queryTwo

@@ -40,17 +40,18 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new synonym map or updates a synonym map if it already exists. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return await RestClient.CreateOrUpdateAsync(synonymMapName, synonymMap, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateOrUpdateAsync(synonymMapName, prefer, synonymMap, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -61,17 +62,18 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new synonym map or updates a synonym map if it already exists. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SynonymMap> CreateOrUpdate(string synonymMapName, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<SynonymMap> CreateOrUpdate(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return RestClient.CreateOrUpdate(synonymMapName, synonymMap, requestOptions, accessCondition, cancellationToken);
+                return RestClient.CreateOrUpdate(synonymMapName, prefer, synonymMap, requestOptions, accessCondition, cancellationToken);
             }
             catch (Exception e)
             {

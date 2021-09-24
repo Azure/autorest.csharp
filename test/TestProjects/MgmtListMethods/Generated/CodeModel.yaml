@@ -57,7 +57,17 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_57
+    - !StringSchema &ref_61
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: FakeBar
+          description: specifies the bar
+      protocol: !Protocols {}
+    - !StringSchema &ref_56
       type: string
       apiVersions:
         - !ApiVersion 
@@ -67,7 +77,7 @@ schemas: !Schemas
           name: ResourceId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_58
+    - !StringSchema &ref_57
       type: string
       apiVersions:
         - !ApiVersion 
@@ -77,7 +87,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_59
+    - !StringSchema &ref_58
       type: string
       apiVersions:
         - !ApiVersion 
@@ -87,7 +97,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_60
+    - !StringSchema &ref_59
       type: string
       apiVersions:
         - !ApiVersion 
@@ -96,16 +106,6 @@ schemas: !Schemas
         default:
           name: ResourceLocation
           description: Resource location
-      protocol: !Protocols {}
-    - !StringSchema &ref_3
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: FakeBar
-          description: specifies the bar
       protocol: !Protocols {}
     - !StringSchema &ref_62
       type: string
@@ -890,7 +890,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_61
+    - !DictionarySchema &ref_60
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -904,944 +904,944 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_30
+          - !ObjectSchema &ref_3
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_2
+                - !ObjectSchema &ref_30
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_4
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: FakeParentWithAncestorWithNonResChWithLoc
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_31
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_5
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: FakeParentWithAncestorWithNonResCh
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_32
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_6
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: FakeParentWithAncestorWithLoc
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_33
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_7
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: FakeParentWithAncestor
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_34
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_8
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: FakeParentWithNonResCh
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_35
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_9
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: FakeParent
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_36
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_10
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ResGrpParentWithAncestorWithNonResChWithLoc
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_37
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_11
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ResGrpParentWithAncestorWithNonResCh
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_38
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_12
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ResGrpParentWithAncestorWithLoc
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_39
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_13
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ResGrpParentWithAncestor
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_40
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_14
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ResGrpParentWithNonResCh
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_41
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_15
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ResGrpParent
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_42
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_16
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: SubParentWithNonResChWithLoc
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_43
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_17
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: SubParentWithNonResCh
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_44
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_18
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: SubParentWithLoc
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_45
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_19
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: SubParent
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_46
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_20
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - output
+                    - input
+                  language: !Languages 
+                    default:
+                      name: ManagementGroup
+                      description: >-
+                        Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about
+                        fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br>
+                        For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in
+                        Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at
+                        creation time. An existing VM cannot be added to an fake.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_47
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_21
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: MgmtGrpParentWithNonResChWithLoc
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_48
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_22
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: MgmtGrpParentWithNonResCh
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_49
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_23
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: MgmtGrpParentWithLoc
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_50
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_24
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: MgmtGroupParent
+                      description: Specifies information.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_51
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_25
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - output
+                    - input
+                  language: !Languages 
+                    default:
+                      name: TenantTest
+                      description: >-
+                        Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about
+                        fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br>
+                        For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in
+                        Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at
+                        creation time. An existing VM cannot be added to an fake.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_52
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_26
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: TenantParentWithNonResChWithLoc
+                      description: >-
+                        Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about
+                        fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br>
+                        For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in
+                        Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at
+                        creation time. An existing VM cannot be added to an fake.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_53
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_27
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: TenantParentWithNonResCh
+                      description: >-
+                        Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about
+                        fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br>
+                        For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in
+                        Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at
+                        creation time. An existing VM cannot be added to an fake.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_54
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_28
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: TenantParentWithLoc
+                      description: >-
+                        Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about
+                        fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br>
+                        For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in
+                        Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at
+                        creation time. An existing VM cannot be added to an fake.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_55
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_29
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: TenantParent
+                      description: >-
+                        Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about
+                        fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br>
+                        For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in
+                        Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at
+                        creation time. An existing VM cannot be added to an fake.
+                      namespace: ''
+                  protocol: !Protocols {}
               immediate:
                 - *ref_2
+                - *ref_30
+                - *ref_31
+                - *ref_32
+                - *ref_33
+                - *ref_34
+                - *ref_35
+                - *ref_36
+                - *ref_37
+                - *ref_38
+                - *ref_39
+                - *ref_40
+                - *ref_41
+                - *ref_42
+                - *ref_43
+                - *ref_44
+                - *ref_45
+                - *ref_46
+                - *ref_47
+                - *ref_48
+                - *ref_49
+                - *ref_50
+                - *ref_51
+                - *ref_52
+                - *ref_53
+                - *ref_54
+                - *ref_55
             properties:
               - !Property 
-                schema: *ref_3
-                serializedName: bar
+                schema: *ref_56
+                readOnly: true
+                required: false
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: bar
-                    description: specifies the bar
+                    name: id
+                    description: Resource Id
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_57
+                readOnly: true
+                required: false
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: Resource name
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_58
+                readOnly: true
+                required: false
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: Resource type
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_59
+                required: true
+                serializedName: location
+                language: !Languages 
+                  default:
+                    name: location
+                    description: Resource location
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_60
+                required: false
+                serializedName: tags
+                language: !Languages 
+                  default:
+                    name: tags
+                    description: Resource tags
                 protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
               - input
               - output
+            extensions:
+              x-ms-azure-resource: true
             language: !Languages 
               default:
-                name: Fake
-                description: >-
-                  Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes,
-                  see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more
-                  information on Azure planned maintenance, see [Planned maintenance for virtual machines in
-                  Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation
-                  time. An existing VM cannot be added to an fake.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_31
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_4
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: FakeParentWithAncestorWithNonResChWithLoc
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_32
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_5
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: FakeParentWithAncestorWithNonResCh
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_33
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_6
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: FakeParentWithAncestorWithLoc
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_34
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_7
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: FakeParentWithAncestor
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_35
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_8
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: FakeParentWithNonResCh
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_36
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_9
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: FakeParent
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_37
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_10
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: ResGrpParentWithAncestorWithNonResChWithLoc
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_38
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_11
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: ResGrpParentWithAncestorWithNonResCh
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_39
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_12
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: ResGrpParentWithAncestorWithLoc
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_40
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_13
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: ResGrpParentWithAncestor
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_41
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_14
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: ResGrpParentWithNonResCh
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_42
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_15
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: ResGrpParent
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_43
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_16
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: SubParentWithNonResChWithLoc
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_44
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_17
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: SubParentWithNonResCh
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_45
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_18
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: SubParentWithLoc
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_46
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_19
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: SubParent
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_47
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_20
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - output
-              - input
-            language: !Languages 
-              default:
-                name: ManagementGroup
-                description: >-
-                  Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes,
-                  see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more
-                  information on Azure planned maintenance, see [Planned maintenance for virtual machines in
-                  Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation
-                  time. An existing VM cannot be added to an fake.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_48
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_21
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: MgmtGrpParentWithNonResChWithLoc
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_49
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_22
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: MgmtGrpParentWithNonResCh
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_50
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_23
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: MgmtGrpParentWithLoc
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_51
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_24
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: MgmtGroupParent
-                description: Specifies information.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_52
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_25
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - output
-              - input
-            language: !Languages 
-              default:
-                name: TenantTest
-                description: >-
-                  Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes,
-                  see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more
-                  information on Azure planned maintenance, see [Planned maintenance for virtual machines in
-                  Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation
-                  time. An existing VM cannot be added to an fake.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_53
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_26
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: TenantParentWithNonResChWithLoc
-                description: >-
-                  Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes,
-                  see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more
-                  information on Azure planned maintenance, see [Planned maintenance for virtual machines in
-                  Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation
-                  time. An existing VM cannot be added to an fake.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_54
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_27
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: TenantParentWithNonResCh
-                description: >-
-                  Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes,
-                  see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more
-                  information on Azure planned maintenance, see [Planned maintenance for virtual machines in
-                  Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation
-                  time. An existing VM cannot be added to an fake.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_55
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_28
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: TenantParentWithLoc
-                description: >-
-                  Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes,
-                  see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more
-                  information on Azure planned maintenance, see [Planned maintenance for virtual machines in
-                  Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation
-                  time. An existing VM cannot be added to an fake.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_56
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_29
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: TenantParent
-                description: >-
-                  Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes,
-                  see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more
-                  information on Azure planned maintenance, see [Planned maintenance for virtual machines in
-                  Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation
-                  time. An existing VM cannot be added to an fake.
+                name: Resource
+                description: The Resource model definition.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_30
-          - *ref_31
-          - *ref_32
-          - *ref_33
-          - *ref_34
-          - *ref_35
-          - *ref_36
-          - *ref_37
-          - *ref_38
-          - *ref_39
-          - *ref_40
-          - *ref_41
-          - *ref_42
-          - *ref_43
-          - *ref_44
-          - *ref_45
-          - *ref_46
-          - *ref_47
-          - *ref_48
-          - *ref_49
-          - *ref_50
-          - *ref_51
-          - *ref_52
-          - *ref_53
-          - *ref_54
-          - *ref_55
-          - *ref_56
+          - *ref_3
       properties:
         - !Property 
-          schema: *ref_57
-          readOnly: true
-          required: false
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: Resource Id
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_58
-          readOnly: true
-          required: false
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: Resource name
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_59
-          readOnly: true
-          required: false
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: Resource type
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_60
-          required: true
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: Resource location
-          protocol: !Protocols {}
-        - !Property 
           schema: *ref_61
-          required: false
-          serializedName: tags
+          serializedName: bar
           language: !Languages 
             default:
-              name: tags
-              description: Resource tags
+              name: bar
+              description: specifies the bar
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - input
         - output
-      extensions:
-        x-ms-azure-resource: true
       language: !Languages 
         default:
-          name: Resource
-          description: The Resource model definition.
+          name: Fake
+          description: >-
+            Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see
+            [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on
+            Azure planned maintenance, see [Planned maintenance for virtual machines in
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An
+            existing VM cannot be added to an fake.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_30
+    - *ref_3
     - !ObjectSchema &ref_155
       type: object
       apiVersions:
@@ -1854,7 +1854,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_30
+            elementType: *ref_2
             language: !Languages 
               default:
                 name: FakeListResultValue
@@ -1886,7 +1886,7 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_31
+    - *ref_30
     - !ObjectSchema &ref_162
       type: object
       apiVersions:
@@ -1899,7 +1899,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_31
+            elementType: *ref_30
             language: !Languages 
               default:
                 name: FakeParentWithAncestorWithNonResChWithLocListResultValue
@@ -1997,7 +1997,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_66
-    - *ref_32
+    - *ref_31
     - !ObjectSchema &ref_174
       type: object
       apiVersions:
@@ -2010,7 +2010,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_32
+            elementType: *ref_31
             language: !Languages 
               default:
                 name: FakeParentWithAncestorWithNonResChListResultValue
@@ -2042,7 +2042,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_33
+    - *ref_32
     - !ObjectSchema &ref_183
       type: object
       apiVersions:
@@ -2055,7 +2055,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_33
+            elementType: *ref_32
             language: !Languages 
               default:
                 name: FakeParentWithAncestorWithLocListResultValue
@@ -2087,7 +2087,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_34
+    - *ref_33
     - !ObjectSchema &ref_191
       type: object
       apiVersions:
@@ -2100,7 +2100,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_34
+            elementType: *ref_33
             language: !Languages 
               default:
                 name: FakeParentWithAncestorListResultValue
@@ -2132,7 +2132,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_35
+    - *ref_34
     - !ObjectSchema &ref_200
       type: object
       apiVersions:
@@ -2145,7 +2145,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_35
+            elementType: *ref_34
             language: !Languages 
               default:
                 name: FakeParentWithNonResChListResultValue
@@ -2177,7 +2177,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_36
+    - *ref_35
     - !ObjectSchema &ref_207
       type: object
       apiVersions:
@@ -2190,7 +2190,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_36
+            elementType: *ref_35
             language: !Languages 
               default:
                 name: FakeParentListResultValue
@@ -2222,7 +2222,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_37
+    - *ref_36
     - !ObjectSchema &ref_214
       type: object
       apiVersions:
@@ -2235,7 +2235,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_37
+            elementType: *ref_36
             language: !Languages 
               default:
                 name: ResGrpParentWithAncestorWithNonResChWithLocListResultValue
@@ -2267,7 +2267,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_38
+    - *ref_37
     - !ObjectSchema &ref_225
       type: object
       apiVersions:
@@ -2280,7 +2280,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_38
+            elementType: *ref_37
             language: !Languages 
               default:
                 name: ResGrpParentWithAncestorWithNonResChListResultValue
@@ -2312,7 +2312,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_39
+    - *ref_38
     - !ObjectSchema &ref_235
       type: object
       apiVersions:
@@ -2325,7 +2325,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_39
+            elementType: *ref_38
             language: !Languages 
               default:
                 name: ResGrpParentWithAncestorWithLocListResultValue
@@ -2357,7 +2357,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_40
+    - *ref_39
     - !ObjectSchema &ref_243
       type: object
       apiVersions:
@@ -2370,7 +2370,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_40
+            elementType: *ref_39
             language: !Languages 
               default:
                 name: ResGrpParentWithAncestorListResultValue
@@ -2402,7 +2402,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_41
+    - *ref_40
     - !ObjectSchema &ref_250
       type: object
       apiVersions:
@@ -2415,7 +2415,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_41
+            elementType: *ref_40
             language: !Languages 
               default:
                 name: ResGrpParentWithNonResChListResultValue
@@ -2447,7 +2447,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_42
+    - *ref_41
     - !ObjectSchema &ref_259
       type: object
       apiVersions:
@@ -2460,7 +2460,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_42
+            elementType: *ref_41
             language: !Languages 
               default:
                 name: ResGrpParentListResultValue
@@ -2492,7 +2492,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_43
+    - *ref_42
     - !ObjectSchema &ref_263
       type: object
       apiVersions:
@@ -2505,7 +2505,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_43
+            elementType: *ref_42
             language: !Languages 
               default:
                 name: SubParentWithNonResChWithLocListResultValue
@@ -2537,7 +2537,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_44
+    - *ref_43
     - !ObjectSchema &ref_268
       type: object
       apiVersions:
@@ -2550,7 +2550,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_44
+            elementType: *ref_43
             language: !Languages 
               default:
                 name: SubParentWithNonResChListResultValue
@@ -2582,7 +2582,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_45
+    - *ref_44
     - !ObjectSchema &ref_273
       type: object
       apiVersions:
@@ -2595,7 +2595,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_45
+            elementType: *ref_44
             language: !Languages 
               default:
                 name: SubParentWithLocListResultValue
@@ -2627,7 +2627,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_46
+    - *ref_45
     - !ObjectSchema &ref_277
       type: object
       apiVersions:
@@ -2640,7 +2640,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_46
+            elementType: *ref_45
             language: !Languages 
               default:
                 name: SubParentListResultValue
@@ -2672,7 +2672,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_47
+    - *ref_46
     - !ObjectSchema &ref_281
       type: object
       apiVersions:
@@ -2685,7 +2685,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_47
+            elementType: *ref_46
             language: !Languages 
               default:
                 name: ManagementGroupListResultValue
@@ -2855,7 +2855,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_89
     - *ref_90
-    - *ref_48
+    - *ref_47
     - !ObjectSchema &ref_290
       type: object
       apiVersions:
@@ -2868,7 +2868,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_48
+            elementType: *ref_47
             language: !Languages 
               default:
                 name: MgmtGrpParentWithNonResChWithLocListResultValue
@@ -2900,7 +2900,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_49
+    - *ref_48
     - !ObjectSchema &ref_299
       type: object
       apiVersions:
@@ -2913,7 +2913,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_49
+            elementType: *ref_48
             language: !Languages 
               default:
                 name: MgmtGrpParentWithNonResChListResultValue
@@ -2945,7 +2945,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_50
+    - *ref_49
     - !ObjectSchema &ref_308
       type: object
       apiVersions:
@@ -2958,7 +2958,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_50
+            elementType: *ref_49
             language: !Languages 
               default:
                 name: MgmtGrpParentWithLocListResultValue
@@ -2990,7 +2990,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_51
+    - *ref_50
     - !ObjectSchema &ref_315
       type: object
       apiVersions:
@@ -3003,7 +3003,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_51
+            elementType: *ref_50
             language: !Languages 
               default:
                 name: MgmtGroupParentListResultValue
@@ -3035,7 +3035,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_52
+    - *ref_51
     - !ObjectSchema &ref_322
       type: object
       apiVersions:
@@ -3048,7 +3048,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_52
+            elementType: *ref_51
             language: !Languages 
               default:
                 name: TenantTestListResultValue
@@ -3080,7 +3080,7 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_53
+    - *ref_52
     - !ObjectSchema &ref_329
       type: object
       apiVersions:
@@ -3093,7 +3093,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_53
+            elementType: *ref_52
             language: !Languages 
               default:
                 name: TenantParentWithNonResChWithLocListResultValue
@@ -3125,7 +3125,7 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_54
+    - *ref_53
     - !ObjectSchema &ref_338
       type: object
       apiVersions:
@@ -3138,7 +3138,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_54
+            elementType: *ref_53
             language: !Languages 
               default:
                 name: TenantParentWithNonResChListResultValue
@@ -3170,7 +3170,7 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_55
+    - *ref_54
     - !ObjectSchema &ref_347
       type: object
       apiVersions:
@@ -3183,7 +3183,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_55
+            elementType: *ref_54
             language: !Languages 
               default:
                 name: TenantParentWithLocListResultValue
@@ -3215,7 +3215,7 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_56
+    - *ref_55
     - !ObjectSchema &ref_354
       type: object
       apiVersions:
@@ -3228,7 +3228,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_56
+            elementType: *ref_55
             language: !Languages 
               default:
                 name: TenantParentListResultValue
@@ -3571,7 +3571,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_149
-                schema: *ref_30
+                schema: *ref_2
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3613,7 +3613,7 @@ operationGroups:
           - *ref_150
         responses:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -3692,7 +3692,7 @@ operationGroups:
           - *ref_152
         responses:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -3850,7 +3850,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_156
-                schema: *ref_31
+                schema: *ref_30
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3893,7 +3893,7 @@ operationGroups:
           - *ref_158
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -3973,7 +3973,7 @@ operationGroups:
           - *ref_160
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -4335,7 +4335,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_168
-                schema: *ref_32
+                schema: *ref_31
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4378,7 +4378,7 @@ operationGroups:
           - *ref_170
         responses:
           - !SchemaResponse 
-            schema: *ref_32
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -4458,7 +4458,7 @@ operationGroups:
           - *ref_172
         responses:
           - !SchemaResponse 
-            schema: *ref_32
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -4748,7 +4748,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_177
-                schema: *ref_33
+                schema: *ref_32
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4791,7 +4791,7 @@ operationGroups:
           - *ref_179
         responses:
           - !SchemaResponse 
-            schema: *ref_33
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -4871,7 +4871,7 @@ operationGroups:
           - *ref_181
         responses:
           - !SchemaResponse 
-            schema: *ref_33
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -5148,7 +5148,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_185
-                schema: *ref_34
+                schema: *ref_33
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5191,7 +5191,7 @@ operationGroups:
           - *ref_187
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -5271,7 +5271,7 @@ operationGroups:
           - *ref_189
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -5476,7 +5476,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_192
-                schema: *ref_35
+                schema: *ref_34
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5519,7 +5519,7 @@ operationGroups:
           - *ref_194
         responses:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_34
             language: !Languages 
               default:
                 name: ''
@@ -5599,7 +5599,7 @@ operationGroups:
           - *ref_196
         responses:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_34
             language: !Languages 
               default:
                 name: ''
@@ -5825,7 +5825,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_201
-                schema: *ref_36
+                schema: *ref_35
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5868,7 +5868,7 @@ operationGroups:
           - *ref_203
         responses:
           - !SchemaResponse 
-            schema: *ref_36
+            schema: *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -5948,7 +5948,7 @@ operationGroups:
           - *ref_205
         responses:
           - !SchemaResponse 
-            schema: *ref_36
+            schema: *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -6094,7 +6094,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_208
-                schema: *ref_37
+                schema: *ref_36
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6137,7 +6137,7 @@ operationGroups:
           - *ref_210
         responses:
           - !SchemaResponse 
-            schema: *ref_37
+            schema: *ref_36
             language: !Languages 
               default:
                 name: ''
@@ -6217,7 +6217,7 @@ operationGroups:
           - *ref_212
         responses:
           - !SchemaResponse 
-            schema: *ref_37
+            schema: *ref_36
             language: !Languages 
               default:
                 name: ''
@@ -6591,7 +6591,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_219
-                schema: *ref_38
+                schema: *ref_37
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6634,7 +6634,7 @@ operationGroups:
           - *ref_221
         responses:
           - !SchemaResponse 
-            schema: *ref_38
+            schema: *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -6714,7 +6714,7 @@ operationGroups:
           - *ref_223
         responses:
           - !SchemaResponse 
-            schema: *ref_38
+            schema: *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -7016,7 +7016,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_229
-                schema: *ref_39
+                schema: *ref_38
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -7059,7 +7059,7 @@ operationGroups:
           - *ref_231
         responses:
           - !SchemaResponse 
-            schema: *ref_39
+            schema: *ref_38
             language: !Languages 
               default:
                 name: ''
@@ -7139,7 +7139,7 @@ operationGroups:
           - *ref_233
         responses:
           - !SchemaResponse 
-            schema: *ref_39
+            schema: *ref_38
             language: !Languages 
               default:
                 name: ''
@@ -7416,7 +7416,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_237
-                schema: *ref_40
+                schema: *ref_39
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -7459,7 +7459,7 @@ operationGroups:
           - *ref_239
         responses:
           - !SchemaResponse 
-            schema: *ref_40
+            schema: *ref_39
             language: !Languages 
               default:
                 name: ''
@@ -7539,7 +7539,7 @@ operationGroups:
           - *ref_241
         responses:
           - !SchemaResponse 
-            schema: *ref_40
+            schema: *ref_39
             language: !Languages 
               default:
                 name: ''
@@ -7739,7 +7739,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_244
-                schema: *ref_41
+                schema: *ref_40
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -7782,7 +7782,7 @@ operationGroups:
           - *ref_246
         responses:
           - !SchemaResponse 
-            schema: *ref_41
+            schema: *ref_40
             language: !Languages 
               default:
                 name: ''
@@ -7862,7 +7862,7 @@ operationGroups:
           - *ref_248
         responses:
           - !SchemaResponse 
-            schema: *ref_41
+            schema: *ref_40
             language: !Languages 
               default:
                 name: ''
@@ -8093,7 +8093,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_253
-                schema: *ref_42
+                schema: *ref_41
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -8136,7 +8136,7 @@ operationGroups:
           - *ref_255
         responses:
           - !SchemaResponse 
-            schema: *ref_42
+            schema: *ref_41
             language: !Languages 
               default:
                 name: ''
@@ -8216,7 +8216,7 @@ operationGroups:
           - *ref_257
         responses:
           - !SchemaResponse 
-            schema: *ref_42
+            schema: *ref_41
             language: !Languages 
               default:
                 name: ''
@@ -8345,7 +8345,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_260
-                schema: *ref_43
+                schema: *ref_42
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -8387,7 +8387,7 @@ operationGroups:
           - *ref_261
         responses:
           - !SchemaResponse 
-            schema: *ref_43
+            schema: *ref_42
             language: !Languages 
               default:
                 name: ''
@@ -8454,7 +8454,7 @@ operationGroups:
           - *ref_262
         responses:
           - !SchemaResponse 
-            schema: *ref_43
+            schema: *ref_42
             language: !Languages 
               default:
                 name: ''
@@ -8647,7 +8647,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_265
-                schema: *ref_44
+                schema: *ref_43
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -8689,7 +8689,7 @@ operationGroups:
           - *ref_266
         responses:
           - !SchemaResponse 
-            schema: *ref_44
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -8756,7 +8756,7 @@ operationGroups:
           - *ref_267
         responses:
           - !SchemaResponse 
-            schema: *ref_44
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -8949,7 +8949,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_270
-                schema: *ref_45
+                schema: *ref_44
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -8991,7 +8991,7 @@ operationGroups:
           - *ref_271
         responses:
           - !SchemaResponse 
-            schema: *ref_45
+            schema: *ref_44
             language: !Languages 
               default:
                 name: ''
@@ -9058,7 +9058,7 @@ operationGroups:
           - *ref_272
         responses:
           - !SchemaResponse 
-            schema: *ref_45
+            schema: *ref_44
             language: !Languages 
               default:
                 name: ''
@@ -9179,7 +9179,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_274
-                schema: *ref_46
+                schema: *ref_45
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -9221,7 +9221,7 @@ operationGroups:
           - *ref_275
         responses:
           - !SchemaResponse 
-            schema: *ref_46
+            schema: *ref_45
             language: !Languages 
               default:
                 name: ''
@@ -9288,7 +9288,7 @@ operationGroups:
           - *ref_276
         responses:
           - !SchemaResponse 
-            schema: *ref_46
+            schema: *ref_45
             language: !Languages 
               default:
                 name: ''
@@ -9421,7 +9421,7 @@ operationGroups:
           - *ref_278
         responses:
           - !SchemaResponse 
-            schema: *ref_47
+            schema: *ref_46
             language: !Languages 
               default:
                 name: ''
@@ -9475,7 +9475,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_279
-                schema: *ref_47
+                schema: *ref_46
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -9517,7 +9517,7 @@ operationGroups:
           - *ref_280
         responses:
           - !SchemaResponse 
-            schema: *ref_47
+            schema: *ref_46
             language: !Languages 
               default:
                 name: ''
@@ -9727,7 +9727,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_284
-                schema: *ref_48
+                schema: *ref_47
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -9770,7 +9770,7 @@ operationGroups:
           - *ref_286
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_47
             language: !Languages 
               default:
                 name: ''
@@ -9849,7 +9849,7 @@ operationGroups:
           - *ref_288
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_47
             language: !Languages 
               default:
                 name: ''
@@ -10077,7 +10077,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_293
-                schema: *ref_49
+                schema: *ref_48
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -10120,7 +10120,7 @@ operationGroups:
           - *ref_295
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -10199,7 +10199,7 @@ operationGroups:
           - *ref_297
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -10427,7 +10427,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_302
-                schema: *ref_50
+                schema: *ref_49
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -10470,7 +10470,7 @@ operationGroups:
           - *ref_304
         responses:
           - !SchemaResponse 
-            schema: *ref_50
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -10549,7 +10549,7 @@ operationGroups:
           - *ref_306
         responses:
           - !SchemaResponse 
-            schema: *ref_50
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -10693,7 +10693,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_309
-                schema: *ref_51
+                schema: *ref_50
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -10736,7 +10736,7 @@ operationGroups:
           - *ref_311
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_50
             language: !Languages 
               default:
                 name: ''
@@ -10815,7 +10815,7 @@ operationGroups:
           - *ref_313
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_50
             language: !Languages 
               default:
                 name: ''
@@ -10972,7 +10972,7 @@ operationGroups:
           - *ref_317
         responses:
           - !SchemaResponse 
-            schema: *ref_52
+            schema: *ref_51
             language: !Languages 
               default:
                 name: ''
@@ -11025,7 +11025,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_318
-                schema: *ref_52
+                schema: *ref_51
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -11067,7 +11067,7 @@ operationGroups:
           - *ref_319
         responses:
           - !SchemaResponse 
-            schema: *ref_52
+            schema: *ref_51
             language: !Languages 
               default:
                 name: ''
@@ -11227,7 +11227,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_323
-                schema: *ref_53
+                schema: *ref_52
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -11270,7 +11270,7 @@ operationGroups:
           - *ref_325
         responses:
           - !SchemaResponse 
-            schema: *ref_53
+            schema: *ref_52
             language: !Languages 
               default:
                 name: ''
@@ -11349,7 +11349,7 @@ operationGroups:
           - *ref_327
         responses:
           - !SchemaResponse 
-            schema: *ref_53
+            schema: *ref_52
             language: !Languages 
               default:
                 name: ''
@@ -11577,7 +11577,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_332
-                schema: *ref_54
+                schema: *ref_53
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -11620,7 +11620,7 @@ operationGroups:
           - *ref_334
         responses:
           - !SchemaResponse 
-            schema: *ref_54
+            schema: *ref_53
             language: !Languages 
               default:
                 name: ''
@@ -11699,7 +11699,7 @@ operationGroups:
           - *ref_336
         responses:
           - !SchemaResponse 
-            schema: *ref_54
+            schema: *ref_53
             language: !Languages 
               default:
                 name: ''
@@ -11927,7 +11927,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_341
-                schema: *ref_55
+                schema: *ref_54
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -11970,7 +11970,7 @@ operationGroups:
           - *ref_343
         responses:
           - !SchemaResponse 
-            schema: *ref_55
+            schema: *ref_54
             language: !Languages 
               default:
                 name: ''
@@ -12049,7 +12049,7 @@ operationGroups:
           - *ref_345
         responses:
           - !SchemaResponse 
-            schema: *ref_55
+            schema: *ref_54
             language: !Languages 
               default:
                 name: ''
@@ -12193,7 +12193,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_348
-                schema: *ref_56
+                schema: *ref_55
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -12236,7 +12236,7 @@ operationGroups:
           - *ref_350
         responses:
           - !SchemaResponse 
-            schema: *ref_56
+            schema: *ref_55
             language: !Languages 
               default:
                 name: ''
@@ -12315,7 +12315,7 @@ operationGroups:
           - *ref_352
         responses:
           - !SchemaResponse 
-            schema: *ref_56
+            schema: *ref_55
             language: !Languages 
               default:
                 name: ''

@@ -31,7 +31,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   numbers:
-    - !NumberSchema &ref_29
+    - !NumberSchema &ref_35
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -60,47 +60,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_40
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ResourceId
-          description: Resource Id
-      protocol: !Protocols {}
-    - !StringSchema &ref_41
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ResourceName
-          description: Resource name
-      protocol: !Protocols {}
-    - !StringSchema &ref_42
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ResourceType
-          description: Resource type
-      protocol: !Protocols {}
-    - !StringSchema &ref_43
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ResourceLocation
-          description: Resource location
-      protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_23
       type: string
       apiVersions:
         - !ApiVersion 
@@ -110,7 +70,7 @@ schemas: !Schemas
           name: PlanName
           description: The plan ID.
       protocol: !Protocols {}
-    - !StringSchema &ref_17
+    - !StringSchema &ref_24
       type: string
       apiVersions:
         - !ApiVersion 
@@ -120,7 +80,7 @@ schemas: !Schemas
           name: PlanPublisher
           description: The publisher ID.
       protocol: !Protocols {}
-    - !StringSchema &ref_18
+    - !StringSchema &ref_25
       type: string
       apiVersions:
         - !ApiVersion 
@@ -130,7 +90,7 @@ schemas: !Schemas
           name: PlanProduct
           description: Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element.
       protocol: !Protocols {}
-    - !StringSchema &ref_19
+    - !StringSchema &ref_26
       type: string
       apiVersions:
         - !ApiVersion 
@@ -140,7 +100,7 @@ schemas: !Schemas
           name: PlanPromotionCode
           description: The promotion code.
       protocol: !Protocols {}
-    - !StringSchema &ref_35
+    - !StringSchema &ref_41
       type: string
       apiVersions:
         - !ApiVersion 
@@ -150,7 +110,7 @@ schemas: !Schemas
           name: VirtualMachinePropertiesProvisioningState
           description: The provisioning state, which only appears in the response.
       protocol: !Protocols {}
-    - !StringSchema &ref_36
+    - !StringSchema &ref_42
       type: string
       apiVersions:
         - !ApiVersion 
@@ -163,7 +123,7 @@ schemas: !Schemas
             Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows
             Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15
       protocol: !Protocols {}
-    - !StringSchema &ref_37
+    - !StringSchema &ref_43
       type: string
       apiVersions:
         - !ApiVersion 
@@ -173,7 +133,7 @@ schemas: !Schemas
           name: VirtualMachinePropertiesVmId
           description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
       protocol: !Protocols {}
-    - !StringSchema &ref_38
+    - !StringSchema &ref_44
       type: string
       apiVersions:
         - !ApiVersion 
@@ -235,7 +195,47 @@ schemas: !Schemas
           name: VirtualMachineExtensionPropertiesProvisioningState
           description: The provisioning state, which only appears in the response.
       protocol: !Protocols {}
+    - !StringSchema &ref_18
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceId
+          description: Resource Id
+      protocol: !Protocols {}
+    - !StringSchema &ref_19
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceName
+          description: Resource name
+      protocol: !Protocols {}
+    - !StringSchema &ref_20
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceType
+          description: Resource type
+      protocol: !Protocols {}
     - !StringSchema &ref_21
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceLocation
+          description: Resource location
+      protocol: !Protocols {}
+    - !StringSchema &ref_27
       type: string
       apiVersions:
         - !ApiVersion 
@@ -245,7 +245,7 @@ schemas: !Schemas
           name: VirtualMachineIdentityPrincipalId
           description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_22
+    - !StringSchema &ref_28
       type: string
       apiVersions:
         - !ApiVersion 
@@ -275,7 +275,7 @@ schemas: !Schemas
           name: String
           description: The client id of user assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_25
+    - !StringSchema &ref_31
       type: string
       apiVersions:
         - !ApiVersion 
@@ -285,7 +285,7 @@ schemas: !Schemas
           name: IdentityWithRenamedPropertyTestPrincipalId
           description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_26
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
@@ -305,7 +305,7 @@ schemas: !Schemas
           name: IdentityWithRenamedPropertyUserAssignedIdentitiesProperties
           description: The principal id of user assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_28
+    - !StringSchema &ref_34
       type: string
       apiVersions:
         - !ApiVersion 
@@ -325,7 +325,7 @@ schemas: !Schemas
           name: IdentityWithDifferentPropertyTypeUserAssignedIdentitiesProperties
           description: The principal id of user assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_31
+    - !StringSchema &ref_37
       type: string
       apiVersions:
         - !ApiVersion 
@@ -335,7 +335,7 @@ schemas: !Schemas
           name: IdentityWithNoUserIdentityPrincipalId
           description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_32
+    - !StringSchema &ref_38
       type: string
       apiVersions:
         - !ApiVersion 
@@ -355,7 +355,7 @@ schemas: !Schemas
           name: IdentityWithNoSystemIdentityUserAssignedIdentitiesProperties
           description: The principal id of user assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_34
+    - !StringSchema &ref_40
       type: string
       apiVersions:
         - !ApiVersion 
@@ -435,7 +435,7 @@ schemas: !Schemas
           name: ErrorResponseWithAnotherNameTarget
           description: The error target.
       protocol: !Protocols {}
-    - !StringSchema &ref_66
+    - !StringSchema &ref_68
       type: string
       apiVersions:
         - !ApiVersion 
@@ -456,7 +456,7 @@ schemas: !Schemas
           description: The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
       protocol: !Protocols {}
   sealedChoices:
-    - !SealedChoiceSchema &ref_23
+    - !SealedChoiceSchema &ref_29
       choices:
         - !ChoiceValue 
           value: SystemAssigned
@@ -539,7 +539,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_44
+    - !DictionarySchema &ref_22
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -547,7 +547,7 @@ schemas: !Schemas
           name: ResourceTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_24
+    - !DictionarySchema &ref_30
       type: dictionary
       elementType: !ObjectSchema &ref_47
         type: object
@@ -591,7 +591,7 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_27
+    - !DictionarySchema &ref_33
       type: dictionary
       elementType: !ObjectSchema &ref_49
         type: object
@@ -635,7 +635,7 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_30
+    - !DictionarySchema &ref_36
       type: dictionary
       elementType: !ObjectSchema &ref_51
         type: object
@@ -679,7 +679,7 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_33
+    - !DictionarySchema &ref_39
       type: dictionary
       elementType: !ObjectSchema &ref_54
         type: object
@@ -723,7 +723,7 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_68
+    - !DictionarySchema &ref_66
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -740,186 +740,132 @@ schemas: !Schemas
           description: Any object
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_7
+    - !ObjectSchema &ref_16
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_20
+          - !ObjectSchema &ref_7
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
-                - *ref_7
-              immediate:
-                - *ref_7
-            properties:
-              - !Property 
-                schema: *ref_8
-                flattenedNames:
-                  - properties
-                  - forceUpdateTag
-                serializedName: forceUpdateTag
-                language: !Languages 
-                  default:
-                    name: forceUpdateTag
-                    description: How the extension handler should be forced to update even if the extension configuration has not changed.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_9
-                flattenedNames:
-                  - properties
-                  - publisher
-                serializedName: publisher
-                language: !Languages 
-                  default:
-                    name: publisher
-                    description: The name of the extension handler publisher.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_10
-                flattenedNames:
-                  - properties
-                  - type
-                serializedName: type
-                language: !Languages 
-                  default:
-                    name: typePropertiesType
-                    description: Specifies the type of the extension; an example is "CustomScriptExtension".
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_11
-                flattenedNames:
-                  - properties
-                  - typeHandlerVersion
-                serializedName: typeHandlerVersion
-                language: !Languages 
-                  default:
-                    name: typeHandlerVersion
-                    description: Specifies the version of the script handler.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_12
-                flattenedNames:
-                  - properties
-                  - autoUpgradeMinorVersion
-                serializedName: autoUpgradeMinorVersion
-                language: !Languages 
-                  default:
-                    name: autoUpgradeMinorVersion
-                    description: >-
-                      Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property
-                      set to true.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_13
-                flattenedNames:
-                  - properties
-                  - enableAutomaticUpgrade
-                serializedName: enableAutomaticUpgrade
-                language: !Languages 
-                  default:
-                    name: enableAutomaticUpgrade
-                    description: Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_14
-                flattenedNames:
-                  - properties
-                  - settings
-                serializedName: settings
-                language: !Languages 
-                  default:
-                    name: settings
-                    description: Json formatted public settings for the extension.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_14
-                flattenedNames:
-                  - properties
-                  - protectedSettings
-                serializedName: protectedSettings
-                language: !Languages 
-                  default:
-                    name: protectedSettings
-                    description: The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_15
-                flattenedNames:
-                  - properties
-                  - provisioningState
-                readOnly: true
-                serializedName: provisioningState
-                language: !Languages 
-                  default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: VirtualMachineExtension
-                description: Describes a Virtual Machine Extension.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_39
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_7
-              immediate:
-                - *ref_7
-            properties:
-              - !Property 
-                schema: !ObjectSchema &ref_45
+                - !ObjectSchema &ref_17
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_7
+                    immediate:
+                      - *ref_7
                   properties:
                     - !Property 
-                      schema: *ref_16
-                      serializedName: name
+                      schema: *ref_8
+                      flattenedNames:
+                        - properties
+                        - forceUpdateTag
+                      serializedName: forceUpdateTag
                       language: !Languages 
                         default:
-                          name: name
-                          description: The plan ID.
+                          name: forceUpdateTag
+                          description: How the extension handler should be forced to update even if the extension configuration has not changed.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: *ref_17
+                      schema: *ref_9
+                      flattenedNames:
+                        - properties
+                        - publisher
                       serializedName: publisher
                       language: !Languages 
                         default:
                           name: publisher
-                          description: The publisher ID.
+                          description: The name of the extension handler publisher.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: *ref_18
-                      serializedName: product
+                      schema: *ref_10
+                      flattenedNames:
+                        - properties
+                        - type
+                      serializedName: type
                       language: !Languages 
                         default:
-                          name: product
-                          description: Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element.
+                          name: typePropertiesType
+                          description: Specifies the type of the extension; an example is "CustomScriptExtension".
                       protocol: !Protocols {}
                     - !Property 
-                      schema: *ref_19
-                      serializedName: promotionCode
+                      schema: *ref_11
+                      flattenedNames:
+                        - properties
+                        - typeHandlerVersion
+                      serializedName: typeHandlerVersion
                       language: !Languages 
                         default:
-                          name: promotionCode
-                          description: The promotion code.
+                          name: typeHandlerVersion
+                          description: Specifies the version of the script handler.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_12
+                      flattenedNames:
+                        - properties
+                        - autoUpgradeMinorVersion
+                      serializedName: autoUpgradeMinorVersion
+                      language: !Languages 
+                        default:
+                          name: autoUpgradeMinorVersion
+                          description: >-
+                            Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this
+                            property set to true.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_13
+                      flattenedNames:
+                        - properties
+                        - enableAutomaticUpgrade
+                      serializedName: enableAutomaticUpgrade
+                      language: !Languages 
+                        default:
+                          name: enableAutomaticUpgrade
+                          description: Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_14
+                      flattenedNames:
+                        - properties
+                        - settings
+                      serializedName: settings
+                      language: !Languages 
+                        default:
+                          name: settings
+                          description: Json formatted public settings for the extension.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_14
+                      flattenedNames:
+                        - properties
+                        - protectedSettings
+                      serializedName: protectedSettings
+                      language: !Languages 
+                        default:
+                          name: protectedSettings
+                          description: The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_15
+                      flattenedNames:
+                        - properties
+                        - provisioningState
+                      readOnly: true
+                      serializedName: provisioningState
+                      language: !Languages 
+                        default:
+                          name: provisioningState
+                          description: The provisioning state, which only appears in the response.
                       protocol: !Protocols {}
                   serializationFormats:
                     - json
@@ -928,409 +874,117 @@ schemas: !Schemas
                     - output
                   language: !Languages 
                     default:
-                      name: Plan
-                      description: >-
-                        Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image
-                        for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
+                      name: VirtualMachineExtension
+                      description: Describes a Virtual Machine Extension.
                       namespace: ''
                   protocol: !Protocols {}
-                serializedName: plan
-                language: !Languages 
-                  default:
-                    name: plan
-                    description: >-
-                      Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for
-                      programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
-                protocol: !Protocols {}
+                - *ref_16
+              immediate:
+                - *ref_17
+                - *ref_16
+            properties:
               - !Property 
-                schema: !ArraySchema &ref_70
-                  type: array
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  elementType: *ref_20
-                  language: !Languages 
-                    default:
-                      name: VirtualMachineResources
-                      description: The virtual machine child extension resources.
-                  protocol: !Protocols {}
+                schema: *ref_18
                 readOnly: true
-                serializedName: resources
+                required: false
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: resources
-                    description: The virtual machine child extension resources.
+                    name: id
+                    description: Resource Id
                 protocol: !Protocols {}
               - !Property 
-                schema: !ObjectSchema &ref_46
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  properties:
-                    - !Property 
-                      schema: *ref_21
-                      readOnly: true
-                      serializedName: principalId
-                      language: !Languages 
-                        default:
-                          name: principalId
-                          description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_22
-                      readOnly: true
-                      serializedName: tenantId
-                      language: !Languages 
-                        default:
-                          name: tenantId
-                          description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_23
-                      serializedName: type
-                      language: !Languages 
-                        default:
-                          name: type
-                          description: >-
-                            The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any
-                            identities from the virtual machine.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_24
-                      serializedName: userAssignedIdentities
-                      language: !Languages 
-                        default:
-                          name: userAssignedIdentities
-                          description: >-
-                            The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
-                            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
-                  language: !Languages 
-                    default:
-                      name: VirtualMachineIdentity
-                      description: Identity for the virtual machine.
-                      namespace: ''
-                  protocol: !Protocols {}
-                serializedName: identity
-                language: !Languages 
-                  default:
-                    name: identity
-                    description: The identity of the virtual machine, if configured.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ObjectSchema &ref_48
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  properties:
-                    - !Property 
-                      schema: *ref_25
-                      readOnly: true
-                      serializedName: testPrincipalId
-                      language: !Languages 
-                        default:
-                          name: testPrincipalId
-                          description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_26
-                      readOnly: true
-                      serializedName: tenantId
-                      language: !Languages 
-                        default:
-                          name: tenantId
-                          description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_23
-                      serializedName: type
-                      language: !Languages 
-                        default:
-                          name: type
-                          description: >-
-                            The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any
-                            identities from the virtual machine.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_27
-                      serializedName: userAssignedIdentities
-                      language: !Languages 
-                        default:
-                          name: userAssignedIdentities
-                          description: >-
-                            The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
-                            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
-                  language: !Languages 
-                    default:
-                      name: IdentityWithRenamedProperty
-                      description: Identity for the virtual machine.
-                      namespace: ''
-                  protocol: !Protocols {}
-                serializedName: identityWithRenamedProperty
-                language: !Languages 
-                  default:
-                    name: identityWithRenamedProperty
-                    description: The identity of the virtual machine, if configured.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ObjectSchema &ref_50
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  properties:
-                    - !Property 
-                      schema: *ref_28
-                      readOnly: true
-                      serializedName: principalId
-                      language: !Languages 
-                        default:
-                          name: principalId
-                          description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_29
-                      readOnly: true
-                      serializedName: tenantId
-                      language: !Languages 
-                        default:
-                          name: tenantId
-                          description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_23
-                      serializedName: type
-                      language: !Languages 
-                        default:
-                          name: type
-                          description: >-
-                            The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any
-                            identities from the virtual machine.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_30
-                      serializedName: userAssignedIdentities
-                      language: !Languages 
-                        default:
-                          name: userAssignedIdentities
-                          description: >-
-                            The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
-                            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
-                  language: !Languages 
-                    default:
-                      name: IdentityWithDifferentPropertyType
-                      description: Identity for the virtual machine.
-                      namespace: ''
-                  protocol: !Protocols {}
-                serializedName: identityWithDifferentPropertyType
-                language: !Languages 
-                  default:
-                    name: identityWithDifferentPropertyType
-                    description: The identity of the virtual machine, if configured.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ObjectSchema &ref_52
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  properties:
-                    - !Property 
-                      schema: *ref_31
-                      readOnly: true
-                      serializedName: principalId
-                      language: !Languages 
-                        default:
-                          name: principalId
-                          description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_32
-                      readOnly: true
-                      serializedName: tenantId
-                      language: !Languages 
-                        default:
-                          name: tenantId
-                          description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_23
-                      serializedName: type
-                      language: !Languages 
-                        default:
-                          name: type
-                          description: >-
-                            The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any
-                            identities from the virtual machine.
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
-                  language: !Languages 
-                    default:
-                      name: IdentityWithNoUserIdentity
-                      description: Identity for the virtual machine.
-                      namespace: ''
-                  protocol: !Protocols {}
-                serializedName: identityWithNoUserIdentity
-                language: !Languages 
-                  default:
-                    name: identityWithNoUserIdentity
-                    description: The identity of the virtual machine, if configured.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ObjectSchema &ref_53
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  properties:
-                    - !Property 
-                      schema: *ref_23
-                      serializedName: type
-                      language: !Languages 
-                        default:
-                          name: type
-                          description: >-
-                            The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any
-                            identities from the virtual machine.
-                      protocol: !Protocols {}
-                    - !Property 
-                      schema: *ref_33
-                      serializedName: userAssignedIdentities
-                      language: !Languages 
-                        default:
-                          name: userAssignedIdentities
-                          description: >-
-                            The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
-                            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
-                  language: !Languages 
-                    default:
-                      name: IdentityWithNoSystemIdentity
-                      description: Identity for the virtual machine.
-                      namespace: ''
-                  protocol: !Protocols {}
-                serializedName: identityWithNoSystemIdentity
-                language: !Languages 
-                  default:
-                    name: identityWithNoSystemIdentity
-                    description: The identity of the virtual machine, if configured.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ArraySchema &ref_71
-                  type: array
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  elementType: *ref_34
-                  language: !Languages 
-                    default:
-                      name: VirtualMachineZones
-                      description: The virtual machine zones.
-                  protocol: !Protocols {}
-                serializedName: zones
-                language: !Languages 
-                  default:
-                    name: zones
-                    description: The virtual machine zones.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ArraySchema &ref_72
-                  type: array
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  elementType: *ref_7
-                  language: !Languages 
-                    default:
-                      name: VirtualMachineFakeResources
-                      description: The fake resources for the virtual machine.
-                  protocol: !Protocols {}
+                schema: *ref_19
                 readOnly: true
-                serializedName: fakeResources
+                required: false
+                serializedName: name
                 language: !Languages 
                   default:
-                    name: fakeResources
-                    description: The fake resources for the virtual machine.
+                    name: name
+                    description: Resource name
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_35
-                flattenedNames:
-                  - properties
-                  - provisioningState
+                schema: *ref_20
                 readOnly: true
-                serializedName: provisioningState
+                required: false
+                serializedName: type
                 language: !Languages 
                   default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
+                    name: type
+                    description: Resource type
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_36
-                flattenedNames:
-                  - properties
-                  - licenseType
-                serializedName: licenseType
+                schema: *ref_21
+                required: true
+                serializedName: location
                 language: !Languages 
                   default:
-                    name: licenseType
-                    description: >-
-                      Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client
-                      <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use
-                      Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version:
-                      2015-06-15
+                    name: location
+                    description: Resource location
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_37
-                flattenedNames:
-                  - properties
-                  - vmId
-                readOnly: true
-                serializedName: vmId
+                schema: *ref_22
+                required: false
+                serializedName: tags
                 language: !Languages 
                   default:
-                    name: vmId
-                    description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
+                    name: tags
+                    description: Resource tags
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            extensions:
+              x-ms-azure-resource: true
+            language: !Languages 
+              default:
+                name: Resource
+                description: The Resource model definition.
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_7
+      properties:
+        - !Property 
+          schema: !ObjectSchema &ref_45
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_23
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: The plan ID.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_38
-                flattenedNames:
-                  - properties
-                  - extensionsTimeBudget
-                serializedName: extensionsTimeBudget
+                schema: *ref_24
+                serializedName: publisher
                 language: !Languages 
                   default:
-                    name: extensionsTimeBudget
-                    description: >-
-                      Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M).
-                      <br><br> Minimum api-version: 2020-06-01
+                    name: publisher
+                    description: The publisher ID.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_25
+                serializedName: product
+                language: !Languages 
+                  default:
+                    name: product
+                    description: Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_26
+                serializedName: promotionCode
+                language: !Languages 
+                  default:
+                    name: promotionCode
+                    description: The promotion code.
                 protocol: !Protocols {}
             serializationFormats:
               - json
@@ -1339,78 +993,423 @@ schemas: !Schemas
               - output
             language: !Languages 
               default:
-                name: VirtualMachine
-                description: Describes a Virtual Machine.
+                name: Plan
+                description: >-
+                  Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for
+                  programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
                 namespace: ''
             protocol: !Protocols {}
-        immediate:
-          - *ref_20
-          - *ref_39
-      properties:
-        - !Property 
-          schema: *ref_40
-          readOnly: true
-          required: false
-          serializedName: id
+          serializedName: plan
           language: !Languages 
             default:
-              name: id
-              description: Resource Id
+              name: plan
+              description: >-
+                Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for
+                programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_70
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_17
+            language: !Languages 
+              default:
+                name: VirtualMachineResources
+                description: The virtual machine child extension resources.
+            protocol: !Protocols {}
+          readOnly: true
+          serializedName: resources
+          language: !Languages 
+            default:
+              name: resources
+              description: The virtual machine child extension resources.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_46
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_27
+                readOnly: true
+                serializedName: principalId
+                language: !Languages 
+                  default:
+                    name: principalId
+                    description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_28
+                readOnly: true
+                serializedName: tenantId
+                language: !Languages 
+                  default:
+                    name: tenantId
+                    description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_29
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: >-
+                      The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities
+                      from the virtual machine.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_30
+                serializedName: userAssignedIdentities
+                language: !Languages 
+                  default:
+                    name: userAssignedIdentities
+                    description: >-
+                      The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
+                      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: VirtualMachineIdentity
+                description: Identity for the virtual machine.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: identity
+          language: !Languages 
+            default:
+              name: identity
+              description: The identity of the virtual machine, if configured.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_48
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_31
+                readOnly: true
+                serializedName: testPrincipalId
+                language: !Languages 
+                  default:
+                    name: testPrincipalId
+                    description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_32
+                readOnly: true
+                serializedName: tenantId
+                language: !Languages 
+                  default:
+                    name: tenantId
+                    description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_29
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: >-
+                      The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities
+                      from the virtual machine.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_33
+                serializedName: userAssignedIdentities
+                language: !Languages 
+                  default:
+                    name: userAssignedIdentities
+                    description: >-
+                      The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
+                      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: IdentityWithRenamedProperty
+                description: Identity for the virtual machine.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: identityWithRenamedProperty
+          language: !Languages 
+            default:
+              name: identityWithRenamedProperty
+              description: The identity of the virtual machine, if configured.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_50
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_34
+                readOnly: true
+                serializedName: principalId
+                language: !Languages 
+                  default:
+                    name: principalId
+                    description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_35
+                readOnly: true
+                serializedName: tenantId
+                language: !Languages 
+                  default:
+                    name: tenantId
+                    description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_29
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: >-
+                      The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities
+                      from the virtual machine.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_36
+                serializedName: userAssignedIdentities
+                language: !Languages 
+                  default:
+                    name: userAssignedIdentities
+                    description: >-
+                      The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
+                      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: IdentityWithDifferentPropertyType
+                description: Identity for the virtual machine.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: identityWithDifferentPropertyType
+          language: !Languages 
+            default:
+              name: identityWithDifferentPropertyType
+              description: The identity of the virtual machine, if configured.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_52
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_37
+                readOnly: true
+                serializedName: principalId
+                language: !Languages 
+                  default:
+                    name: principalId
+                    description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_38
+                readOnly: true
+                serializedName: tenantId
+                language: !Languages 
+                  default:
+                    name: tenantId
+                    description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_29
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: >-
+                      The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities
+                      from the virtual machine.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: IdentityWithNoUserIdentity
+                description: Identity for the virtual machine.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: identityWithNoUserIdentity
+          language: !Languages 
+            default:
+              name: identityWithNoUserIdentity
+              description: The identity of the virtual machine, if configured.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_53
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_29
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: >-
+                      The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities
+                      from the virtual machine.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_39
+                serializedName: userAssignedIdentities
+                language: !Languages 
+                  default:
+                    name: userAssignedIdentities
+                    description: >-
+                      The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
+                      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: IdentityWithNoSystemIdentity
+                description: Identity for the virtual machine.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: identityWithNoSystemIdentity
+          language: !Languages 
+            default:
+              name: identityWithNoSystemIdentity
+              description: The identity of the virtual machine, if configured.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_71
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_40
+            language: !Languages 
+              default:
+                name: VirtualMachineZones
+                description: The virtual machine zones.
+            protocol: !Protocols {}
+          serializedName: zones
+          language: !Languages 
+            default:
+              name: zones
+              description: The virtual machine zones.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_72
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_7
+            language: !Languages 
+              default:
+                name: VirtualMachineFakeResources
+                description: The fake resources for the virtual machine.
+            protocol: !Protocols {}
+          readOnly: true
+          serializedName: fakeResources
+          language: !Languages 
+            default:
+              name: fakeResources
+              description: The fake resources for the virtual machine.
           protocol: !Protocols {}
         - !Property 
           schema: *ref_41
+          flattenedNames:
+            - properties
+            - provisioningState
           readOnly: true
-          required: false
-          serializedName: name
+          serializedName: provisioningState
           language: !Languages 
             default:
-              name: name
-              description: Resource name
+              name: provisioningState
+              description: The provisioning state, which only appears in the response.
           protocol: !Protocols {}
         - !Property 
           schema: *ref_42
-          readOnly: true
-          required: false
-          serializedName: type
+          flattenedNames:
+            - properties
+            - licenseType
+          serializedName: licenseType
           language: !Languages 
             default:
-              name: type
-              description: Resource type
+              name: licenseType
+              description: >-
+                Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client
+                <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for
+                Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15
           protocol: !Protocols {}
         - !Property 
           schema: *ref_43
-          required: true
-          serializedName: location
+          flattenedNames:
+            - properties
+            - vmId
+          readOnly: true
+          serializedName: vmId
           language: !Languages 
             default:
-              name: location
-              description: Resource location
+              name: vmId
+              description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
           protocol: !Protocols {}
         - !Property 
           schema: *ref_44
-          required: false
-          serializedName: tags
+          flattenedNames:
+            - properties
+            - extensionsTimeBudget
+          serializedName: extensionsTimeBudget
           language: !Languages 
             default:
-              name: tags
-              description: Resource tags
+              name: extensionsTimeBudget
+              description: >-
+                Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M).
+                <br><br> Minimum api-version: 2020-06-01
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - input
         - output
-      extensions:
-        x-ms-azure-resource: true
       language: !Languages 
         default:
-          name: Resource
-          description: The Resource model definition.
+          name: VirtualMachine
+          description: Describes a Virtual Machine.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_39
     - *ref_45
-    - *ref_20
+    - *ref_17
+    - *ref_7
     - *ref_46
     - *ref_47
     - *ref_48
@@ -1659,106 +1658,26 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
           - !ObjectSchema &ref_67
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_65
               immediate:
                 - *ref_65
             properties:
               - !Property 
-                schema: *ref_45
-                serializedName: plan
+                schema: *ref_66
+                serializedName: tags
                 language: !Languages 
                   default:
-                    name: plan
-                    description: >-
-                      Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for
-                      programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_46
-                serializedName: identity
-                language: !Languages 
-                  default:
-                    name: identity
-                    description: The identity of the virtual machine, if configured.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ArraySchema &ref_77
-                  type: array
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  elementType: *ref_66
-                  language: !Languages 
-                    default:
-                      name: VirtualMachineUpdateZones
-                      description: The virtual machine zones.
-                  protocol: !Protocols {}
-                serializedName: zones
-                language: !Languages 
-                  default:
-                    name: zones
-                    description: The virtual machine zones.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_35
-                flattenedNames:
-                  - properties
-                  - provisioningState
-                readOnly: true
-                serializedName: provisioningState
-                language: !Languages 
-                  default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_36
-                flattenedNames:
-                  - properties
-                  - licenseType
-                serializedName: licenseType
-                language: !Languages 
-                  default:
-                    name: licenseType
-                    description: >-
-                      Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client
-                      <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use
-                      Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version:
-                      2015-06-15
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_37
-                flattenedNames:
-                  - properties
-                  - vmId
-                readOnly: true
-                serializedName: vmId
-                language: !Languages 
-                  default:
-                    name: vmId
-                    description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_38
-                flattenedNames:
-                  - properties
-                  - extensionsTimeBudget
-                serializedName: extensionsTimeBudget
-                language: !Languages 
-                  default:
-                    name: extensionsTimeBudget
-                    description: >-
-                      Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M).
-                      <br><br> Minimum api-version: 2020-06-01
+                    name: tags
+                    description: Resource tags
                 protocol: !Protocols {}
             serializationFormats:
               - json
@@ -1766,20 +1685,99 @@ schemas: !Schemas
               - input
             language: !Languages 
               default:
-                name: VirtualMachineUpdate
-                description: Describes a Virtual Machine Update.
+                name: UpdateResource
+                description: The Update Resource model definition.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
           - *ref_67
       properties:
         - !Property 
-          schema: *ref_68
-          serializedName: tags
+          schema: *ref_45
+          serializedName: plan
           language: !Languages 
             default:
-              name: tags
-              description: Resource tags
+              name: plan
+              description: >-
+                Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for
+                programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_46
+          serializedName: identity
+          language: !Languages 
+            default:
+              name: identity
+              description: The identity of the virtual machine, if configured.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_77
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_68
+            language: !Languages 
+              default:
+                name: VirtualMachineUpdateZones
+                description: The virtual machine zones.
+            protocol: !Protocols {}
+          serializedName: zones
+          language: !Languages 
+            default:
+              name: zones
+              description: The virtual machine zones.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_41
+          flattenedNames:
+            - properties
+            - provisioningState
+          readOnly: true
+          serializedName: provisioningState
+          language: !Languages 
+            default:
+              name: provisioningState
+              description: The provisioning state, which only appears in the response.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_42
+          flattenedNames:
+            - properties
+            - licenseType
+          serializedName: licenseType
+          language: !Languages 
+            default:
+              name: licenseType
+              description: >-
+                Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client
+                <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for
+                Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_43
+          flattenedNames:
+            - properties
+            - vmId
+          readOnly: true
+          serializedName: vmId
+          language: !Languages 
+            default:
+              name: vmId
+              description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_44
+          flattenedNames:
+            - properties
+            - extensionsTimeBudget
+          serializedName: extensionsTimeBudget
+          language: !Languages 
+            default:
+              name: extensionsTimeBudget
+              description: >-
+                Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M).
+                <br><br> Minimum api-version: 2020-06-01
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -1787,8 +1785,8 @@ schemas: !Schemas
         - input
       language: !Languages 
         default:
-          name: UpdateResource
-          description: The Update Resource model definition.
+          name: VirtualMachineUpdate
+          description: Describes a Virtual Machine Update.
           namespace: ''
       protocol: !Protocols {}
     - *ref_67
@@ -1804,7 +1802,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_39
+            elementType: *ref_16
             language: !Languages 
               default:
                 name: VirtualMachineListResultValue
@@ -1939,7 +1937,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_85
-                schema: *ref_39
+                schema: *ref_16
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1982,7 +1980,7 @@ operationGroups:
           - *ref_87
         responses:
           - !SchemaResponse 
-            schema: *ref_39
+            schema: *ref_16
             language: !Languages 
               default:
                 name: ''
@@ -1995,7 +1993,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_39
+            schema: *ref_16
             language: !Languages 
               default:
                 name: ''
@@ -2077,7 +2075,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_89
-                schema: *ref_67
+                schema: *ref_65
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2120,7 +2118,7 @@ operationGroups:
           - *ref_91
         responses:
           - !SchemaResponse 
-            schema: *ref_39
+            schema: *ref_16
             language: !Languages 
               default:
                 name: ''
@@ -2133,7 +2131,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_39
+            schema: *ref_16
             language: !Languages 
               default:
                 name: ''
@@ -2319,7 +2317,7 @@ operationGroups:
           - *ref_98
         responses:
           - !SchemaResponse 
-            schema: *ref_39
+            schema: *ref_16
             language: !Languages 
               default:
                 name: ''

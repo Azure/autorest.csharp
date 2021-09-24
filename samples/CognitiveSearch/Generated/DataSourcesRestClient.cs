@@ -37,7 +37,7 @@ namespace CognitiveSearch
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, DataSource dataSource, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -57,7 +57,7 @@ namespace CognitiveSearch
             {
                 request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
-            request.Headers.Add("Prefer", "return=representation");
+            request.Headers.Add("Prefer", prefer.ToString());
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
@@ -68,12 +68,13 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> or <paramref name="dataSource"/> is null. </exception>
-        public async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -84,7 +85,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(dataSource));
             }
 
-            using var message = CreateCreateOrUpdateRequest(dataSourceName, dataSource, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(dataSourceName, prefer, dataSource, requestOptions, accessCondition);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -103,12 +104,13 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> or <paramref name="dataSource"/> is null. </exception>
-        public Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response<DataSource> CreateOrUpdate(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -119,7 +121,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(dataSource));
             }
 
-            using var message = CreateCreateOrUpdateRequest(dataSourceName, dataSource, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(dataSourceName, prefer, dataSource, requestOptions, accessCondition);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

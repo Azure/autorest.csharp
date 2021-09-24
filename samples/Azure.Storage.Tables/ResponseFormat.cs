@@ -5,7 +5,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables
 {
-    [CodeGenModel("Enum0")]
+    [CodeGenModel("Enum2")]
     public partial struct ResponseFormat
     {
     }
