@@ -457,11 +457,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private static bool GetExplode(RequestParameter requestParameter)
-        {
-            var httpParameter = requestParameter.Protocol.Http as HttpParameter;
-            return httpParameter?.Explode ?? false;
-        }
+        private static bool GetExplode(RequestParameter requestParameter) => requestParameter.Protocol.Http is HttpParameter httpParameter && httpParameter.Explode == true;
 
         private static Schema GetValueSchema(RequestParameter requestParameter)
         {

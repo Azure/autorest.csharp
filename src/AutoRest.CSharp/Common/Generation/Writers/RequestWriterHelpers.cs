@@ -344,7 +344,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (explode)
                 {
-                    writer.Append($"foreach(var param in ");
+                    var paramVariable = new CodeWriterDeclaration("param");
+                    writer.Append($"foreach(var {paramVariable:D} in ");
                     WriteConstantOrParameter(writer, value, enumAsString: true);
                     writer.Line($")");
                     using (writer.Scope())
