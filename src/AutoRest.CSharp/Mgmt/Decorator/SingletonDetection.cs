@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -17,14 +18,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<OperationGroup, string?> _valueCache = new ConcurrentDictionary<OperationGroup, string?>();
 
-        private static ConcurrentDictionary<RawOperationSet, string?> _singletonResourceCache = new ConcurrentDictionary<RawOperationSet, string?>();
+        private static ConcurrentDictionary<OperationSet, string?> _singletonResourceCache = new ConcurrentDictionary<OperationSet, string?>();
 
-        public static bool IsSingletonResource(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        public static bool IsSingletonResource(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
         {
             return operationSet.TryGetSingletonResourceSuffix(context, out _);
         }
 
-        public static bool TryGetSingletonResourceSuffix(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string singletonIdSuffix)
+        public static bool TryGetSingletonResourceSuffix(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string singletonIdSuffix)
         {
             singletonIdSuffix = null;
             if (_singletonResourceCache.TryGetValue(operationSet, out singletonIdSuffix))
@@ -53,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        private static bool IsSingleton(RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string singletonIdSuffix)
+        private static bool IsSingleton(OperationSet operationSet, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string singletonIdSuffix)
         {
             // we should first check the configuration for the singleton settings
             if (context.Configuration.MgmtConfiguration.RequestPathToSingletonResource.TryGetValue(operationSet.RequestPath, out singletonIdSuffix))

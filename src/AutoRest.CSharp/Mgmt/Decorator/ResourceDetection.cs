@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -14,12 +15,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static ConcurrentDictionary<string, string?> _rawCache = new ConcurrentDictionary<string, string?>();
 
-        public static bool IsResource(this RawOperationSet set, MgmtConfiguration config)
+        public static bool IsResource(this OperationSet set, MgmtConfiguration config)
         {
             return set.TryGetResourceName(config, out _);
         }
 
-        public static string Resource(this RawOperationSet set, MgmtConfiguration config)
+        public static string Resource(this OperationSet set, MgmtConfiguration config)
         {
             if (set.TryGetResourceName(config, out var resourceName))
                 return resourceName;
@@ -27,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             throw new InvalidOperationException($"Operation set {set.RequestPath} does not correspond to a resource");
         }
 
-        public static bool TryGetResourceName(this RawOperationSet set, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
+        public static bool TryGetResourceName(this OperationSet set, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
         {
             resourceName = null;
             // get the result from cache
@@ -72,7 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return false;
         }
 
-        private static bool TryOperationWithMethod(this RawOperationSet set, HttpMethod method, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
+        private static bool TryOperationWithMethod(this OperationSet set, HttpMethod method, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
         {
             resourceName = null;
 
@@ -96,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return true;
         }
 
-        private static Operation? FindOperation(this RawOperationSet set, HttpMethod method)
+        private static Operation? FindOperation(this OperationSet set, HttpMethod method)
         {
             foreach (var operation in set)
             {

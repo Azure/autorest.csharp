@@ -5,6 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -12,7 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static ConcurrentDictionary<OperationGroup, Dictionary<HttpMethod, List<ServiceRequest>>> _operationGroupCache = new ConcurrentDictionary<OperationGroup, Dictionary<HttpMethod, List<ServiceRequest>>>();
 
-        public static Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping(this RawOperationSet operations)
+        public static Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping(this OperationSet operations)
         {
             var result = new Dictionary<HttpMethod, List<ServiceRequest>>();
             foreach (var operation in operations)

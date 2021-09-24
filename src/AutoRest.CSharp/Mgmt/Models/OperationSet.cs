@@ -1,40 +1,56 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
-    internal struct OperationSet : IReadOnlyList<RestClientMethod>
+    internal class OperationSet : IReadOnlyCollection<Operation>, IEquatable<OperationSet>
     {
-        public RequestPath RequestPath { get; }
-        // only for backward compatibility
-        public OperationGroup OperationGroup { get; }
-        public IReadOnlyList<RestClientMethod> RestClientMethods { get; }
+        private IDictionary<Operation, OperationGroup> _operationGroupCache = new Dictionary<Operation, OperationGroup>();
+        public string RequestPath { get; }
 
-        public int Count => RestClientMethods.Count;
+        public HashSet<Operation> Operations { get; }
 
-        public RestClientMethod this[int index] => RestClientMethods[index];
+        public int Count => Operations.Count;
 
-        public OperationSet(RequestPath requestPath, IReadOnlyList<RestClientMethod> restClientMethods, OperationGroup operationGroup)
+        public OperationSet(string requestPath)
         {
             RequestPath = requestPath;
-            OperationGroup = operationGroup;
-            RestClientMethods = restClientMethods;
+            Operations = new HashSet<Operation>();
         }
 
-        public IEnumerator<RestClientMethod> GetEnumerator() => RestClientMethods.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => RestClientMethods.GetEnumerator();
-
-        public override string? ToString()
+        public void Add(Operation operation, OperationGroup operationGroup)
         {
-            return RequestPath.ToString();
+            var path = operation.GetHttpPath();
+            if (path != RequestPath)
+                throw new InvalidOperationException($"Cannot add operation with path {path} to OperationSet with path {RequestPath}");
+            Operations.Add(operation);
+            _operationGroupCache.TryAdd(operation, operationGroup);
+        }
+
+        public OperationGroup this[Operation operation] => _operationGroupCache[operation];
+
+        public IEnumerator<Operation> GetEnumerator() => Operations.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => Operations.GetEnumerator();
+
+        public override int GetHashCode()
+        {
+            return RequestPath.GetHashCode();
+        }
+
+        public bool Equals([AllowNull] OperationSet other)
+        {
+            if (other is null)
+                return false;
+
+            return RequestPath == other.RequestPath;
         }
     }
 }

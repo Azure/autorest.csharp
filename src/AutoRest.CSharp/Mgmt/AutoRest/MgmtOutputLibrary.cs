@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
@@ -49,11 +50,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IDictionary<string, ResourceData>? _rawRequestPathToResourceData;
 
         /// <summary>
-        /// This is a map from resource name to a list of <see cref="RawOperationSet"/>
+        /// This is a map from resource name to a list of <see cref="OperationSet"/>
         /// considering of the extension resources, one resource name might correspond to multiple operation sets
         /// This must be initialized before other maps
         /// </summary>
-        private Dictionary<string, HashSet<RawOperationSet>> _resourceNameToRawOperationSets;
+        private Dictionary<string, HashSet<OperationSet>> _resourceNameToOperationSets;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, TypeProvider> _nameToTypeProvider;
@@ -69,10 +70,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, HashSet<OperationGroup>> _childNonResourceOperationGroups; // TODO -- will deprecate
 
         /// <summary>
-        /// This is a map from raw request path to their corresponding <see cref="RawOperationSet"/>,
+        /// This is a map from raw request path to their corresponding <see cref="OperationSet"/>,
         /// which is a collection of the operations with the same raw request path
         /// </summary>
-        private Dictionary<string, RawOperationSet> _rawRequestPathToOperationSets;
+        private Dictionary<string, OperationSet> _rawRequestPathToOperationSets;
 
         /// <summary>
         /// This is a map from <see cref="OperationGroup"/> to the list of raw request path of its operations
@@ -91,8 +92,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _codeModel = codeModel;
             _childNonResourceOperationGroups = new Dictionary<string, HashSet<OperationGroup>>();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
-            _rawRequestPathToOperationSets = new Dictionary<string, RawOperationSet>();
-            _resourceNameToRawOperationSets = new Dictionary<string, HashSet<RawOperationSet>>();
+            _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
+            _resourceNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _mergedOperations = _mgmtConfiguration.MergeOperations.SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key))).ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
@@ -202,12 +203,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         //    }
         //}
 
-        private IEnumerable<RawOperationSet>? _resourceOperationSets;
+        private IEnumerable<OperationSet>? _resourceOperationSets;
 
-        public IEnumerable<RawOperationSet> ResourceOperationSets => _resourceOperationSets ??= _resourceNameToRawOperationSets.SelectMany(pair => pair.Value);
-        public IEnumerable<RawOperationSet> OperationSets => _rawRequestPathToOperationSets.Values;
+        public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= _resourceNameToOperationSets.SelectMany(pair => pair.Value);
+        public IEnumerable<OperationSet> OperationSets => _rawRequestPathToOperationSets.Values;
 
-        public RawOperationSet GetOperationSet(string requestPath)
+        public OperationSet GetOperationSet(string requestPath)
         {
             return _rawRequestPathToOperationSets[requestPath];
         }
@@ -475,9 +476,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return _rawRequestPathToArmResource;
 
             _rawRequestPathToArmResource = new Dictionary<string, Resource>();
-            foreach ((var resourceName, var rawOperationSets) in _resourceNameToRawOperationSets)
+            foreach ((var resourceName, var operationSets) in _resourceNameToOperationSets)
             {
-                var resourceOperationsList = FindResourceToChildOperationsMap(rawOperationSets);
+                var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach (var resourceOperations in resourceOperationsList)
                 {
                     // TODO -- we need to give them different names
@@ -499,9 +500,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return _rawRequestPathToResourceContainer;
 
             _rawRequestPathToResourceContainer = new Dictionary<string, ResourceContainer>();
-            foreach ((var resourceName, var rawOperationSets) in _resourceNameToRawOperationSets)
+            foreach ((var resourceName, var operationSets) in _resourceNameToOperationSets)
             {
-                var resourceOperationsList = FindResourceToChildOperationsMap(rawOperationSets);
+                var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach (var resourceOperations in resourceOperationsList)
                 {
                     // ensure this set of OperationSets are either all singletons, or none of them is singleton
@@ -522,15 +523,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToResourceContainer;
         }
 
-        private List<Dictionary<RawOperationSet, HashSet<Operation>>> FindResourceToChildOperationsMap(IEnumerable<RawOperationSet> resourceOperationSets)
+        private List<Dictionary<OperationSet, HashSet<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
         { 
-            var result = new List<Dictionary<RawOperationSet, HashSet<Operation>>>();
+            var result = new List<Dictionary<OperationSet, HashSet<Operation>>>();
 
             foreach (var resourceOperationSet in resourceOperationSets)
             {
                 // get all the child operations from the map
                 var childOperations = ChildOperations[resourceOperationSet.RequestPath];
-                result.Add(new Dictionary<RawOperationSet, HashSet<Operation>>
+                result.Add(new Dictionary<OperationSet, HashSet<Operation>>
                 {
                     { resourceOperationSet, childOperations }
                 });
@@ -576,7 +577,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                if (_resourceNameToRawOperationSets.TryGetValue(schema.Name, out var operationSets))
+                if (_resourceNameToOperationSets.TryGetValue(schema.Name, out var operationSets))
                 {
                     // we are iterating over the ResourceSchemaMap, the value can only be [ResourceData]s
                     var resourceData = (ResourceData)entry.Value;
@@ -641,11 +642,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             if (_context.Configuration.PublicClients)
             {
-                foreach ((_, var rawOperationSet) in _rawRequestPathToOperationSets)
+                foreach ((_, var operationSet) in _rawRequestPathToOperationSets)
                 {
-                    if (rawOperationSet.IsResource(_mgmtConfiguration))
+                    if (operationSet.IsResource(_mgmtConfiguration))
                     {
-                        foreach (var operation in rawOperationSet)
+                        foreach (var operation in operationSet)
                         {
                             if (!operation.IsLongRunning
                                 && operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest
@@ -654,10 +655,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 _nonLongRunningOperations.Add(
                                     operation,
                                     new NonLongRunningOperation(
-                                        rawOperationSet[operation],
+                                        operationSet[operation],
                                         operation,
                                         _context,
-                                        FindLongRunningOperationInfo(rawOperationSet[operation], operation)
+                                        FindLongRunningOperationInfo(operationSet[operation], operation)
                                     )
                                 );
                             }
@@ -709,7 +710,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_resourceNameToRawOperationSets.ContainsKey(schema.Name))
+                if (_resourceNameToOperationSets.ContainsKey(schema.Name))
                 {
                     continue;
                 }
@@ -726,7 +727,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_resourceNameToRawOperationSets.ContainsKey(schema.Name))
+                if (_resourceNameToOperationSets.ContainsKey(schema.Name))
                 {
                     TypeProvider typeOfModel = BuildResourceModel(schema);
                     resourceModels.Add(schema, typeOfModel);
@@ -820,13 +821,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private void AddOperationSetToResourceMap(string resourceName, RawOperationSet operationSet)
+        private void AddOperationSetToResourceMap(string resourceName, OperationSet operationSet)
         {
-            HashSet<RawOperationSet>? result;
-            if (!_resourceNameToRawOperationSets.TryGetValue(resourceName, out result))
+            HashSet<OperationSet>? result;
+            if (!_resourceNameToOperationSets.TryGetValue(resourceName, out result))
             {
-                result = new HashSet<RawOperationSet>();
-                _resourceNameToRawOperationSets.Add(resourceName, result);
+                result = new HashSet<OperationSet>();
+                _resourceNameToOperationSets.Add(resourceName, result);
             }
             result.Add(operationSet);
         }
@@ -841,17 +842,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     var path = operation.GetHttpPath();
                     requestPathList.Add(path);
-                    if (_rawRequestPathToOperationSets.TryGetValue(path, out var rawOperationSet))
+                    if (_rawRequestPathToOperationSets.TryGetValue(path, out var operationSet))
                     {
-                        rawOperationSet.Add(operation, operationGroup);
+                        operationSet.Add(operation, operationGroup);
                     }
                     else
                     {
-                        rawOperationSet = new RawOperationSet(path)
+                        operationSet = new OperationSet(path)
                         {
                             {operation, operationGroup }
                         };
-                        _rawRequestPathToOperationSets.Add(path, rawOperationSet);
+                        _rawRequestPathToOperationSets.Add(path, operationSet);
                     }
                 }
             }

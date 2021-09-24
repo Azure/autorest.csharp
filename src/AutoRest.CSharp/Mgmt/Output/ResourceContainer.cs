@@ -36,12 +36,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         private List<ClientMethod>? _getMethods;
         private ClientMethod? _getByIdMethod;
 
-        private IDictionary<RawOperationSet, RequestPath>? _contextualPaths;
-        public override IDictionary<RawOperationSet, RequestPath> ContextualPaths => _contextualPaths ??= OperationSets.Keys.ToDictionary(
+        private IDictionary<OperationSet, RequestPath>? _contextualPaths;
+        public override IDictionary<OperationSet, RequestPath> ContextualPaths => _contextualPaths ??= OperationSets.Keys.ToDictionary(
                 operationSet => operationSet,
                 operationSet => operationSet.ParentRequestPath(_context));
 
-        public ResourceContainer(IReadOnlyDictionary<RawOperationSet, HashSet<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
+        public ResourceContainer(IReadOnlyDictionary<OperationSet, HashSet<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
             : base(operationSets, resourceName, context)
         {
             CreateMethods = GetMethodsWithVerb(HttpMethod.Put);
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override string ResourceName => Resource.ResourceName;
 
-        public IDictionary<RawOperationSet, RestClientMethod?> CreateMethods { get; }
+        public IDictionary<OperationSet, RestClientMethod?> CreateMethods { get; }
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {

@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return requestPath;
         }
 
-        public static bool IsResourceCollectionOperation(this Operation operation, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out RawOperationSet operationSetOfResource)
+        public static bool IsResourceCollectionOperation(this Operation operation, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out OperationSet operationSetOfResource)
         {
             // first check if its path is a prefix of which resource's operationSet
             var requestPath = operation.GetRequestPath(context);
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return valueType.EqualsByName(resourceData.Type);
         }
 
-        private static RawOperationSet? FindOperationSetOfResource(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        private static OperationSet? FindOperationSetOfResource(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
             // we need to iterate all resources to find if this is the parent of that
             foreach (var operationSet in context.Library.ResourceOperationSets)

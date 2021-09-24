@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<Operation, RequestPath> _operationToParentRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
 
-        public static RequestPath ParentRequestPath(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        public static RequestPath ParentRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
         {
             // escape the calculation if this is configured in the configuration
             if (context.Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operationSet.RequestPath, out var rawPath))

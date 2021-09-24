@@ -38,22 +38,22 @@ namespace AutoRest.CSharp.Mgmt.Output
         //internal OperationGroup OperationGroup { get; }
         public bool IsScopeOrExtension { get; }
 
-        public IReadOnlyDictionary<RawOperationSet, HashSet<Operation>> OperationSets { get; }
+        public IReadOnlyDictionary<OperationSet, HashSet<Operation>> OperationSets { get; }
 
-        private IDictionary<RawOperationSet, RequestPath>? _contextualPaths;
-        public virtual IDictionary<RawOperationSet, RequestPath> ContextualPaths => _contextualPaths ??= OperationSets.Keys.ToDictionary(
+        private IDictionary<OperationSet, RequestPath>? _contextualPaths;
+        public virtual IDictionary<OperationSet, RequestPath> ContextualPaths => _contextualPaths ??= OperationSets.Keys.ToDictionary(
                 operationSet => operationSet,
                 operationSet => operationSet.GetRequestPath(_context));
 
         private IEnumerable<string>? _requestPaths;
         public IEnumerable<string> RequestPaths => _requestPaths ??= OperationSets.Keys.Select(operationSet => operationSet.RequestPath);
 
-        private IDictionary<RawOperationSet, MgmtRestClient>? _restClients;
-        public IDictionary<RawOperationSet, MgmtRestClient> RestClients => _restClients ??= OperationSets.Keys.ToDictionary(
+        private IDictionary<OperationSet, MgmtRestClient>? _restClients;
+        public IDictionary<OperationSet, MgmtRestClient> RestClients => _restClients ??= OperationSets.Keys.ToDictionary(
                 operationSet => operationSet,
                 operationSet => _context.Library.GetRestClient(operationSet.RequestPath));
 
-        public Resource(IReadOnlyDictionary<RawOperationSet, HashSet<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context)
+        public Resource(IReadOnlyDictionary<OperationSet, HashSet<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _context = context;
             OperationSets = operationSets;
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             DeleteMethods = GetMethodsWithVerb(HttpMethod.Delete);
         }
 
-        protected IDictionary<RawOperationSet, RestClientMethod?> GetMethodsWithVerb(HttpMethod method)
+        protected IDictionary<OperationSet, RestClientMethod?> GetMethodsWithVerb(HttpMethod method)
         {
             return OperationSets.Keys.ToDictionary(
                 operationSet => operationSet,
@@ -143,11 +143,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         //public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.IsGetResourceMethod(ResourceData) && m.RestClientMethod.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? Methods.OrderBy(m => m.Name.Length).FirstOrDefault(m => m.IsGetResourceMethod(ResourceData));
 
-        public virtual IDictionary<RawOperationSet, RestClientMethod?> GetMethods { get; }
-        public virtual IDictionary<RawOperationSet, RestClientMethod?> DeleteMethods { get; }
+        public virtual IDictionary<OperationSet, RestClientMethod?> GetMethods { get; }
+        public virtual IDictionary<OperationSet, RestClientMethod?> DeleteMethods { get; }
 
-        private IDictionary<RawOperationSet, IEnumerable<Operation>>? _operations;
-        public IDictionary<RawOperationSet, IEnumerable<Operation>> Operations => _operations ??= OperationSets.ToDictionary(
+        private IDictionary<OperationSet, IEnumerable<Operation>>? _operations;
+        public IDictionary<OperationSet, IEnumerable<Operation>> Operations => _operations ??= OperationSets.ToDictionary(
             pair => pair.Key,
             pair => pair.Value.Where(operation => ShouldIncludeOperation(operation)));
 
@@ -164,8 +164,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public IEnumerable<MgmtRestClient> OperationRestClients => _operationRestClients ??=
             OperationSets.Values.SelectMany(o => o).Select(operation => _context.Library.GetRestClient(operation.GetHttpPath())).Distinct();
 
-        private IDictionary<RawOperationSet, Models.ResourceType>? _resourceTypes;
-        public IDictionary<RawOperationSet, Models.ResourceType> ResourceTypes => _resourceTypes ??= ContextualPaths.ToDictionary(
+        private IDictionary<OperationSet, Models.ResourceType>? _resourceTypes;
+        public IDictionary<OperationSet, Models.ResourceType> ResourceTypes => _resourceTypes ??= ContextualPaths.ToDictionary(
             pair => pair.Key,
             pair => new Models.ResourceType(pair.Value));
 

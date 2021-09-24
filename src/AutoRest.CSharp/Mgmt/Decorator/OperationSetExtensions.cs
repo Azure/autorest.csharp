@@ -17,9 +17,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OperationSetExtensions
     {
-        private static readonly ConcurrentDictionary<RawOperationSet, RequestPath> _cache = new ConcurrentDictionary<RawOperationSet, RequestPath>();
+        private static readonly ConcurrentDictionary<OperationSet, RequestPath> _cache = new ConcurrentDictionary<OperationSet, RequestPath>();
 
-        public static RequestPath GetRequestPath(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        public static RequestPath GetRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
         {
             if (_cache.TryGetValue(operationSet, out var requestPath))
                 return requestPath;
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return requestPath;
         }
 
-        //public static bool IsResourceCollection(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        //public static bool IsResourceCollection(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
         //{
         //    // TODO -- should we change this check from OperationSet to Operation???
         //    var requestPath = operationSet.GetRequestPath(context);
@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         //    return false;
         //}
 
-        private static Operation GetOperation(this RawOperationSet operationSet)
+        private static Operation GetOperation(this OperationSet operationSet)
         {
             // find PUT operation for the path
             var putOperation = operationSet.FirstOrDefault(operation => operation.GetHttpRequest()!.Method == HttpMethod.Put);
