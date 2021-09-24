@@ -26,12 +26,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<Operation, RequestPath> _operationToParentRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
 
-        // TODO -- will be removed
-        private static ConcurrentDictionary<RawOperationSet, MgmtTypeProvider> _operationSetToParentTypeProviderCache = new ConcurrentDictionary<RawOperationSet, MgmtTypeProvider>();
-
         public static RequestPath ParentRequestPath(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
         {
+            // escape the calculation if this is configured in the configuration
+            if (context.Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operationSet.RequestPath, out var rawPath))
+                return GetRequestPathFromRawPath(rawPath, context);
+
             return operationSet.GetRequestPath(context).ParentRequestPath(context);
+        }
+
+        private static RequestPath GetRequestPathFromRawPath(string rawPath, BuildContext<MgmtOutputLibrary> context)
+        {
+            var parentSet = context.Library.GetOperationSet(rawPath);
+            return parentSet.GetRequestPath(context);
         }
 
         /// <summary>
@@ -45,6 +52,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static RequestPath ParentRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
+            // escape the calculation if this is configured in the configuration
+            if (context.Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
+                return GetRequestPathFromRawPath(rawPath, context);
+
             if (_operationToParentRequestPathCache.TryGetValue(operation, out var result))
                 return result;
 
@@ -69,58 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return currentRequestPath.ParentRequestPath(context);
         }
 
-        /// <summary>
-        /// Returns which TypeProvider this <see cref="RawOperationSet"/> belongs.
-        /// The result can be Resource, ResourceContainer, ManagementGroupExtension, ResourceGroupExtension, SubscriptionExtension or ArmClientExtension
-        /// </summary>
-        /// <param name="operationSet"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static MgmtTypeProvider ParentTypeProvider(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
-        {
-            if (_operationSetToParentTypeProviderCache.TryGetValue(operationSet, out var parentTypeProvider))
-                return parentTypeProvider;
-
-            parentTypeProvider = operationSet.GetParentTypeProvider(context);
-            _operationSetToParentTypeProviderCache.TryAdd(operationSet, parentTypeProvider);
-            return parentTypeProvider;
-        }
-
-        private static MgmtTypeProvider GetParentTypeProvider(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
-        {
-            // if this operation set corresponds to a resource, return the corresponding resource
-            if (operationSet.IsResource(context.Configuration.MgmtConfiguration))
-                return context.Library.GetArmResource(operationSet.RequestPath);
-
-            // if this operation set is a resource collection operation, return the corresponding resource container
-            if (operationSet.IsResourceCollection(context))
-            {
-                // TODO -- change this to use request path as parameter
-                var operationGroup = operationSet[operationSet.First()];
-                return context.Library.GetResourceContainer(operationGroup)!;
-            }
-
-            // if this operation set is neither, return the resource or extension which is the direct parent of this operation set
-            var parentRequestPath = operationSet.GetRequestPath(context).ParentRequestPath(context);
-            // try to get a resource from this parentRequestPath
-            if (context.Library.TryGetArmResource(parentRequestPath.SerializedPath, out var resource))
-            {
-                return resource;
-            }
-            // if we cannot, this must be one of the extensions
-            if (parentRequestPath == RequestPath.ManagementGroup)
-                return context.Library.ManagementGroupExtensions;
-            if (parentRequestPath == RequestPath.ResourceGroup)
-                return context.Library.ResourceGroupExtensions;
-            if (parentRequestPath == RequestPath.Subscription)
-                return context.Library.SubscriptionExtensions;
-            if (parentRequestPath == RequestPath.Tenant)
-                return context.Library.ArmClientExtensions;
-
-            throw new InvalidOperationException($"Cannot get parent type provider for operation set {operationSet.RequestPath}");
-        }
-
-        public static RequestPath ParentRequestPath(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        private static RequestPath ParentRequestPath(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
             if (_requestPathToParentCache.TryGetValue(requestPath, out var result))
             {
@@ -144,7 +104,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return candidates.Last();
             // if we cannot find one, we try the 4 extensions
             // first try management group
-            if (RequestPath.ManagementGroup.IsParentOf(requestPath))
+            // We use strict = false because we usually see the name of management group is different in different RPs. Some of them are groupId, some of them are groupName, etc
+            if (RequestPath.ManagementGroup.IsParentOf(requestPath, false))
                 return RequestPath.ManagementGroup;
             // then try resourceGroup
             if (RequestPath.ResourceGroup.IsParentOf(requestPath))

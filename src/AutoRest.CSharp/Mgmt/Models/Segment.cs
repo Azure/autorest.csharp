@@ -36,6 +36,19 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public string ReferenceName => _value.Reference.Name;
 
+        public bool Equals(Segment other, bool strict)
+        {
+            if (strict)
+                return this.Equals(other);
+            if (this.IsConstant)
+                return this.Equals(other);
+            // this is a reference, we will only test if the Type is the same
+            if (other.IsConstant)
+                return this.Equals(other);
+            // now other is also a reference
+            return this._value.Reference.Type.Equals(other._value.Reference.Type);
+        }
+
         public bool Equals(Segment other) => _stringValue.Equals(other._stringValue, StringComparison.InvariantCultureIgnoreCase);
 
         public override bool Equals(object? obj)

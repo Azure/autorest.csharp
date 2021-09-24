@@ -63,15 +63,19 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// Check if this <see cref="RequestPath"/> is the parent (aka prefix) of <code other/>
         /// </summary>
         /// <param name="other"></param>
+        /// <param name="strict">if true, we will require the parameter name to be the same during the detection</param>
         /// <returns></returns>
-        public bool IsParentOf(RequestPath other)
+        public bool IsParentOf(RequestPath other, bool strict = true)
         {
             // To be the parent of other, you must at least be shorter than other.
             if (other.Count <= Count)
                 return false;
             for (int i = 0; i < Count; i++)
             {
-                if (!this[i].Equals(other[i]))
+                // we need the segment to be identical if it is constant.
+                // but if it is a reference, we only require they have the same type, do not require they have the same variable name.
+                // This case happens a lot during the management group parent detection - different RP calls the name of mgmt group differently
+                if (!this[i].Equals(other[i], strict))
                     return false;
             }
             return true;

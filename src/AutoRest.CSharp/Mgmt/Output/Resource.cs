@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IDictionary<RawOperationSet, Models.ResourceType>? _resourceTypes;
         public IDictionary<RawOperationSet, Models.ResourceType> ResourceTypes => _resourceTypes ??= ContextualPaths.ToDictionary(
             pair => pair.Key,
-            pair => new Models.ResourceType(pair.Value)); //TODO -- make a decarator for this and cache the result
+            pair => new Models.ResourceType(pair.Value));
 
         //protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         //{

@@ -192,6 +192,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
             // TODO -- what should we do if we have multiple types? or it contains variables?
+            // NOTE: we are possible to test if this resource type contains variables using `IsContant` property
             _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.ResourceTypes.Values.First()}\";");
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for the operations");

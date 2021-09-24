@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? operationGroupToResource = default,
             JsonElement? operationGroupToParent = default,
             JsonElement? operationGroupToSingletonResource = default,
+            JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResource = default,
             JsonElement? requestPathToResourceType = default,
             JsonElement? requestPathToSingletonResource = default,
@@ -32,6 +33,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupToResource = !IsValidJsonElement(operationGroupToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
             OperationGroupToParent = !IsValidJsonElement(operationGroupToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
             OperationGroupToSingletonResource = !IsValidJsonElement(operationGroupToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToSingletonResource.ToString());
+            RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
             RequestPathToResource = !IsValidJsonElement(requestPathToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResource.ToString());
             RequestPathToResourceType = !IsValidJsonElement(requestPathToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceType.ToString());
             RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
@@ -66,6 +68,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> OperationGroupToResource { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToSingletonResource { get; }
+        public IReadOnlyDictionary<string, string> RequestPathToParent { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResource { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
@@ -88,6 +91,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-singleton-resource").GetAwaiter().GetResult(),
+                autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("request-path-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("request-path-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
@@ -108,6 +112,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(OperationGroupIsExtension), OperationGroupIsExtension);
             WriteNonEmptySettings(writer, nameof(RequestPathIsNonResource), RequestPathIsNonResource);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
+            WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
             WriteNonEmptySettings(writer, nameof(RequestPathToResource), RequestPathToResource);
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
@@ -129,6 +134,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(OperationGroupToResource), out var operationGroupToResource);
             root.TryGetProperty(nameof(OperationGroupToParent), out var operationGroupToParent);
             root.TryGetProperty(nameof(OperationGroupToSingletonResource), out var singletonResource);
+            root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResource), out var requestPathToResource);
             root.TryGetProperty(nameof(RequestPathToResourceType), out var requestPathToResourceType);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
@@ -163,6 +169,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 operationGroupToResource,
                 operationGroupToParent,
                 singletonResource,
+                requestPathToParent,
                 requestPathToResource,
                 requestPathToResourceType,
                 requestPathToSingletonResource,
