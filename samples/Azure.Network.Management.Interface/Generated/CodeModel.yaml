@@ -8174,7 +8174,6 @@ operationGroups:
                 networkInterfaceName: test-nic
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceDelete.json
               responses:
                 '200': {}
                 '202': {}
@@ -8296,7 +8295,6 @@ operationGroups:
                 networkInterfaceName: test-nic
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceGet.json
               responses:
                 '200':
                   body:
@@ -8486,7 +8484,6 @@ operationGroups:
                             id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceCreate.json
               responses:
                 '200':
                   body:
@@ -8678,7 +8675,6 @@ operationGroups:
                     tag2: value2
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceUpdateTags.json
               responses:
                 '200':
                   body:
@@ -8783,7 +8779,6 @@ operationGroups:
               parameters:
                 api-version: '2019-11-01'
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceListAll.json
               responses:
                 '200':
                   body:
@@ -8935,7 +8930,6 @@ operationGroups:
                 api-version: '2019-11-01'
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceList.json
               responses:
                 '200':
                   body:
@@ -9110,7 +9104,6 @@ operationGroups:
                 networkInterfaceName: nic1
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceEffectiveRouteTableList.json
               responses:
                 '200':
                   body:
@@ -9266,7 +9259,6 @@ operationGroups:
                 networkInterfaceName: nic1
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceEffectiveNSGList.json
               responses:
                 '200':
                   body:
@@ -9425,7 +9417,6 @@ operationGroups:
                 networkInterfaceName: nic1
                 resourceGroupName: testrg
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceIPConfigurationList.json
               responses:
                 '200':
                   body:
@@ -9561,7 +9552,6 @@ operationGroups:
                 networkInterfaceName: mynic
                 resourceGroupName: testrg
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceIPConfigurationGet.json
               responses:
                 '200':
                   body:
@@ -9692,7 +9682,6 @@ operationGroups:
                 networkInterfaceName: nic1
                 resourceGroupName: testrg
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceLoadBalancerList.json
               responses:
                 '200':
                   body:
@@ -9918,7 +9907,6 @@ operationGroups:
                 resourceGroupName: rg1
                 subscriptionId: subid
                 tapConfigurationName: test-tapconfiguration
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceTapConfigurationDelete.json
               responses:
                 '200': {}
                 '202': {}
@@ -10042,7 +10030,6 @@ operationGroups:
                 resourceGroupName: testrg
                 subscriptionId: subid
                 tapConfigurationName: tapconfiguration1
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceTapConfigurationGet.json
               responses:
                 '200':
                   body:
@@ -10216,7 +10203,6 @@ operationGroups:
                   properties:
                     virtualNetworkTap:
                       id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceTapConfigurationCreate.json
               responses:
                 '200':
                   body:
@@ -10343,7 +10329,6 @@ operationGroups:
                 networkInterfaceName: mynic
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/examples/NetworkInterfaceTapConfigurationList.json
               responses:
                 '200':
                   body:

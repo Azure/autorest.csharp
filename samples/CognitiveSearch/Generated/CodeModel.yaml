@@ -16788,7 +16788,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexCountDocuments.json
               responses:
                 '200':
                   body: 427
@@ -16928,7 +16927,6 @@ operationGroups:
                   - title
                   - description
                 searchMode: any
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexSearchDocumentsGet.json
               responses:
                 '200':
                   body:
@@ -17083,7 +17081,6 @@ operationGroups:
                   select: docId,title,description
                   skip: 0
                   top: 10
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexSearchDocumentsPost.json
               responses:
                 '200':
                   body:
@@ -17240,7 +17237,6 @@ operationGroups:
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
                 key: '1'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexGetDocument.json
               responses:
                 '200':
                   body:
@@ -17379,7 +17375,6 @@ operationGroups:
                 searchFields:
                   - title
                 suggesterName: sg
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexSuggestDocumentsGet.json
               responses:
                 '200':
                   body:
@@ -17511,7 +17506,6 @@ operationGroups:
                   select: docId,title,description
                   suggesterName: sg
                   top: 10
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexSuggestDocumentsPost.json
               responses:
                 '200':
                   body:
@@ -17659,7 +17653,6 @@ operationGroups:
                       docId: '4'
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexIndexDocuments.json
               responses:
                 '200':
                   body:
@@ -17826,7 +17819,6 @@ operationGroups:
                   - description
                 suggesterName: sg
                 top: 10
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexAutocompleteDocumentsGet.json
               responses:
                 '200':
                   body:
@@ -17954,7 +17946,6 @@ operationGroups:
                   top: 10
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchIndexAutocompleteDocumentsPost.json
               responses:
                 '200':
                   body:
@@ -18139,7 +18130,6 @@ operationGroups:
                     softDeleteMarkerValue: 'true'
                 dataSourceName: mydatasource
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateDataSource.json
               responses:
                 '200':
                   body:
@@ -18275,7 +18265,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 dataSourceName: mydatasource
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteDataSource.json
               responses:
                 '204': {}
                 '404': {}
@@ -18370,7 +18359,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 dataSourceName: mydatasource
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetDataSource.json
               responses:
                 '200':
                   body:
@@ -18479,7 +18467,6 @@ operationGroups:
                 $select: '*'
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListDataSources.json
               responses:
                 '200':
                   body:
@@ -18621,7 +18608,6 @@ operationGroups:
                     softDeleteColumnName: isDeleted
                     softDeleteMarkerValue: 'true'
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateDataSource.json
               responses:
                 '201':
                   body:
@@ -18735,7 +18721,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceResetIndexer.json
               responses:
                 '204': {}
           x-ms-request-id: request-id
@@ -18825,7 +18810,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceRunIndexer.json
               responses:
                 '202': {}
           x-ms-request-id: request-id
@@ -18990,7 +18974,6 @@ operationGroups:
                     startTime: '2015-01-01T00:00:00Z'
                   targetIndexName: orders
                 indexerName: myindexer
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateIndexer.json
               responses:
                 '200':
                   body:
@@ -19120,7 +19103,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteIndexer.json
               responses:
                 '204': {}
                 '404': {}
@@ -19215,7 +19197,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetIndexer.json
               responses:
                 '200':
                   body:
@@ -19321,7 +19302,6 @@ operationGroups:
                 $select: '*'
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListIndexers.json
               responses:
                 '200':
                   body:
@@ -19479,7 +19459,6 @@ operationGroups:
                     interval: PT1H
                     startTime: '2015-01-01T00:00:00Z'
                   targetIndexName: orders
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateIndexer.json
               responses:
                 '201':
                   body:
@@ -19586,7 +19565,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexerName: myindexer
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetIndexerStatus.json
               responses:
                 '200':
                   body:
@@ -19866,7 +19844,6 @@ operationGroups:
                       timeout: PT30S
                       uri: https://contoso.example.org
                 skillsetName: demoskillset
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateSkillset.json
               responses:
                 '200':
                   body:
@@ -20120,7 +20097,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 skillsetName: demoskillset
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteSkillset.json
               responses:
                 '204': {}
                 '404': {}
@@ -20215,7 +20191,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 skillsetName: demoskillset
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetSkillset.json
               responses:
                 '200':
                   body:
@@ -20383,7 +20358,6 @@ operationGroups:
                 $select: '*'
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListSkillsets.json
               responses:
                 '200':
                   body:
@@ -20628,7 +20602,6 @@ operationGroups:
                       timeout: PT30S
                       uri: https://contoso.example.org
                 skillsetName: demoskillset
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateSkillset.json
               responses:
                 '201':
                   body:
@@ -20876,7 +20849,6 @@ operationGroups:
                     United States, United States of America, USA
                     Washington, Wash. => WA
                 synonymMapName: mysynonymmap
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateSynonymMap.json
               responses:
                 '200':
                   body:
@@ -21002,7 +20974,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 synonymMapName: mysynonymmap
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteSynonymMap.json
               responses:
                 '204': {}
                 '404': {}
@@ -21097,7 +21068,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 synonymMapName: mysynonymmap
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetSynonymMap.json
               responses:
                 '200':
                   body:
@@ -21202,7 +21172,6 @@ operationGroups:
               parameters:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListSynonymMaps.json
               responses:
                 '200':
                   body:
@@ -21343,7 +21312,6 @@ operationGroups:
                   synonyms: |-
                     United States, United States of America, USA
                     Washington, Wash. => WA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateSynonymMap.json
               responses:
                 '201':
                   body:
@@ -21550,7 +21518,6 @@ operationGroups:
                       searchMode: analyzingInfixMatching
                       sourceFields:
                         - hotelName
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateIndex.json
               responses:
                 '201':
                   body:
@@ -21833,7 +21800,6 @@ operationGroups:
                 $select: '*'
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceListIndexes.json
               responses:
                 '200':
                   body:
@@ -22295,7 +22261,6 @@ operationGroups:
                       sourceFields:
                         - hotelName
                 indexName: hotels
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceCreateOrUpdateIndex.json
               responses:
                 '200':
                   body:
@@ -22769,7 +22734,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexName: myindex
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceDeleteIndex.json
               responses:
                 '204': {}
                 '404': {}
@@ -22864,7 +22828,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexName: hotels
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetIndex.json
               responses:
                 '200':
                   body:
@@ -23144,7 +23107,6 @@ operationGroups:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
                 indexName: hotels
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetIndexStatistics.json
               responses:
                 '200':
                   body:
@@ -23273,7 +23235,6 @@ operationGroups:
                 request:
                   analyzer: standard.lucene
                   text: Text to analyze
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceIndexAnalyze.json
               responses:
                 '200':
                   body:
@@ -23375,7 +23336,6 @@ operationGroups:
               parameters:
                 api-version: 2019-05-06-Preview
                 endpoint: https://myservice.search.windows.net
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/examples/SearchServiceGetServiceStatistics.json
               responses:
                 '200':
                   body:

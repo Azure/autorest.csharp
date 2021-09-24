@@ -1485,7 +1485,6 @@ operationGroups:
               parameters:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/GetKeys.json
               responses:
                 '200':
                   body:
@@ -1596,7 +1595,6 @@ operationGroups:
               parameters:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/CheckKeys.json
               responses:
                 '200':
                   headers:
@@ -1749,7 +1747,6 @@ operationGroups:
               parameters:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/GetKeyValues.json
               responses:
                 '200':
                   body:
@@ -1915,7 +1912,6 @@ operationGroups:
               parameters:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/CheckKeyValues.json
               responses:
                 '200':
                   headers:
@@ -2096,7 +2092,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/GetKeyValue.json
               responses:
                 '200':
                   body:
@@ -2119,7 +2114,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/GetKeyValue_IfMatch.json
               responses:
                 '200':
                   body:
@@ -2142,7 +2136,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/GetKeyValue_IfNoneMatch.json
               responses:
                 '200':
                   body:
@@ -2337,7 +2330,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/PutKeyValue.json
               responses:
                 '200':
                   body:
@@ -2360,7 +2352,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/PutKeyValue_IfMatch.json
               responses:
                 '200':
                   body:
@@ -2526,7 +2517,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/DeleteKeyValue.json
               responses:
                 '200':
                   body:
@@ -2550,7 +2540,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/DeleteKeyValue_IfMatch.json
               responses:
                 '200':
                   body:
@@ -2717,7 +2706,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/CheckKeyValue.json
               responses:
                 '200':
                   headers:
@@ -2731,7 +2719,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/CheckKeyValue_IfMatch.json
               responses:
                 '200':
                   headers:
@@ -2745,7 +2732,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/CheckKeyValue_IfNoneMatch.json
               responses:
                 '200':
                   headers:
@@ -2889,7 +2875,6 @@ operationGroups:
               parameters:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/GetLabels.json
               responses:
                 '200':
                   body:
@@ -3016,7 +3001,6 @@ operationGroups:
               parameters:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/CheckLabels.json
               responses:
                 '200':
                   headers:
@@ -3165,7 +3149,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/PutLock.json
               responses:
                 '200':
                   body:
@@ -3188,7 +3171,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/PutLock_IfMatch.json
               responses:
                 '200':
                   body:
@@ -3349,7 +3331,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/DeleteLock.json
               responses:
                 '200':
                   body:
@@ -3372,7 +3353,6 @@ operationGroups:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/DeleteLock_IfMatch.json
               responses:
                 '200':
                   body:
@@ -3537,7 +3517,6 @@ operationGroups:
               parameters:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/GetRevisions.json
               responses:
                 '200':
                   body:
@@ -3695,7 +3674,6 @@ operationGroups:
               parameters:
                 api-version: '1.0'
                 endpoint: https://{exampleAppConfigurationName}.azconfig.io
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/examples/CheckRevisions.json
               responses:
                 '200':
                   headers:

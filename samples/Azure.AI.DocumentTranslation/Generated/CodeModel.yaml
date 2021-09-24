@@ -2073,7 +2073,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 resourceGroupName: TestResourceGroup
                 subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/examples/batch.json
               responses:
                 '202':
                   headers:
@@ -2388,7 +2387,6 @@ operationGroups:
                 statuses:
                   - Succeeded
                 subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/examples/operations.json
               responses:
                 '200':
                   body:
@@ -2643,7 +2641,6 @@ operationGroups:
                 id: 727BF148-F327-47A0-9481-ABAE6362F11E
                 resourceGroupName: TestResourceGroup
                 subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/examples/document.json
               responses:
                 '200':
                   body:
@@ -2876,7 +2873,6 @@ operationGroups:
                 id: 727BF148-F327-47A0-9481-ABAE6362F11E
                 resourceGroupName: TestResourceGroup
                 subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/examples/operation.json
               responses:
                 '200':
                   body:
@@ -3097,7 +3093,6 @@ operationGroups:
                 id: 727BF148-F327-47A0-9481-ABAE6362F11E
                 resourceGroupName: TestResourceGroup
                 subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/examples/cancel.json
               responses:
                 '200':
                   body:
@@ -3456,7 +3451,6 @@ operationGroups:
                 statuses:
                   - Succeeded
                 subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/examples/documents.json
               responses:
                 '200':
                   body:
@@ -3655,7 +3649,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 resourceGroupName: TestResourceGroup
                 subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/examples/format.json
               responses:
                 '200':
                   body:
@@ -3837,7 +3830,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 resourceGroupName: TestResourceGroup
                 subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/examples/glossary.json
               responses:
                 '200':
                   body:
@@ -4008,7 +4000,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 resourceGroupName: TestResourceGroup
                 subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/3196a62202976da192d6da86f44b02246ca2aa97/specification/cognitiveservices/data-plane/TranslatorText/preview/v1.0-preview.1/examples/storage.json
               responses:
                 '200':
                   body:

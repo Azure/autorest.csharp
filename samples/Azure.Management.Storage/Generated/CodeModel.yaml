@@ -9762,7 +9762,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res4410
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobServicesList.json
               responses:
                 '200':
                   body:
@@ -10008,7 +10007,6 @@ operationGroups:
                     isVersioningEnabled: true
                 resourceGroupName: res4410
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobServicesPut.json
               responses:
                 '200':
                   body:
@@ -10170,7 +10168,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res4410
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobServicesGet.json
               responses:
                 '200':
                   body:
@@ -10350,7 +10347,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res9290
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersList.json
               responses:
                 '200':
                   body:
@@ -10534,7 +10530,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res3376
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersPutDefaultEncryptionScope.json
               responses:
                 '200':
                   body:
@@ -10561,7 +10556,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res3376
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersPut.json
               responses:
                 '200':
                   body:
@@ -10712,7 +10706,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res3376
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersPatch.json
               responses:
                 '200':
                   body:
@@ -10830,7 +10823,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res9871
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersGet.json
               responses:
                 '200':
                   body:
@@ -10976,7 +10968,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res4079
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersDelete.json
               responses:
                 '200': {}
                 '204': {}
@@ -11119,7 +11110,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res4303
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersSetLegalHold.json
               responses:
                 '200':
                   body:
@@ -11267,7 +11257,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res4303
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersClearLegalHold.json
               responses:
                 '200':
                   body:
@@ -11413,7 +11402,6 @@ operationGroups:
                   proposedLeaseId: null
                 resourceGroupName: res3376
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersLease_Acquire.json
               responses:
                 '200':
                   body:
@@ -11432,7 +11420,6 @@ operationGroups:
                   proposedLeaseId: null
                 resourceGroupName: res3376
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersLease_Break.json
               responses:
                 '200':
                   body:
@@ -11619,7 +11606,6 @@ operationGroups:
                     immutabilityPeriodSinceCreationInDays: 3
                 resourceGroupName: res1782
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersPutImmutabilityPolicy.json
               responses:
                 '200':
                   body:
@@ -11772,7 +11758,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res5221
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersGetImmutabilityPolicy.json
               responses:
                 '200':
                   body:
@@ -11927,7 +11912,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res1581
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersDeleteImmutabilityPolicy.json
               responses:
                 '200':
                   body:
@@ -12069,7 +12053,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res2702
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersLockImmutabilityPolicy.json
               responses:
                 '200':
                   body:
@@ -12241,7 +12224,6 @@ operationGroups:
                     immutabilityPeriodSinceCreationInDays: 100
                 resourceGroupName: res6238
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobContainersExtendImmutabilityPolicy.json
               responses:
                 '200':
                   body:
@@ -12363,7 +12345,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res9290
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileServicesList.json
               responses:
                 '200':
                   body:
@@ -12605,7 +12586,6 @@ operationGroups:
                           maxAgeInSeconds: 2000
                 resourceGroupName: res4410
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileServicesPut.json
               responses:
                 '200':
                   body:
@@ -12774,7 +12754,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res4410
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileServicesGet.json
               responses:
                 '200':
                   body:
@@ -12973,7 +12952,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res9290
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/DeletedFileSharesList.json
               responses:
                 '200':
                   body:
@@ -13003,7 +12981,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res9290
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileSharesList.json
               responses:
                 '200':
                   body:
@@ -13192,7 +13169,6 @@ operationGroups:
                 resourceGroupName: res346
                 shareName: share1235
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileSharesPut_NFS.json
               responses:
                 '200':
                   body:
@@ -13217,7 +13193,6 @@ operationGroups:
                 resourceGroupName: res3376
                 shareName: share6185
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileSharesPut.json
               responses:
                 '200':
                   body:
@@ -13240,7 +13215,6 @@ operationGroups:
                 resourceGroupName: res346
                 shareName: share1235
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileSharesPut_AccessTier.json
               responses:
                 '200':
                   body:
@@ -13408,7 +13382,6 @@ operationGroups:
                 resourceGroupName: res3376
                 shareName: share6185
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileSharesPatch.json
               responses:
                 '200':
                   body:
@@ -13549,7 +13522,6 @@ operationGroups:
                 resourceGroupName: res9871
                 shareName: share1634
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileSharesGet_Stats.json
               responses:
                 '200':
                   body:
@@ -13569,7 +13541,6 @@ operationGroups:
                 resourceGroupName: res9871
                 shareName: share1634
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileSharesGet.json
               responses:
                 '200':
                   body:
@@ -13704,7 +13675,6 @@ operationGroups:
                 resourceGroupName: res4079
                 shareName: share9689
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileSharesDelete.json
               responses:
                 '200': {}
                 '204': {}
@@ -13855,7 +13825,6 @@ operationGroups:
                 resourceGroupName: res3376
                 shareName: share1249
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/FileSharesRestore.json
               responses:
                 '200': {}
         language: !Languages 
@@ -13924,7 +13893,6 @@ operationGroups:
             OperationsList:
               parameters:
                 api-version: '2019-06-01'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/OperationsList.json
               responses:
                 '200':
                   body:
@@ -14320,7 +14288,6 @@ operationGroups:
               parameters:
                 api-version: '2019-06-01'
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/SKUList.json
               responses:
                 '200':
                   body:
@@ -18145,7 +18112,6 @@ operationGroups:
                   type: Microsoft.Storage/storageAccounts
                 api-version: '2019-06-01'
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountCheckNameAvailability.json
               responses:
                 '200':
                   body:
@@ -18299,7 +18265,6 @@ operationGroups:
                     key2: value2
                 resourceGroupName: res9101
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountCreate.json
               responses:
                 '200':
                   body:
@@ -18440,7 +18405,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res4228
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountDelete.json
               responses:
                 '200': {}
                 '204': {}
@@ -18545,7 +18509,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res9407
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountGetProperties.json
               responses:
                 '200':
                   body:
@@ -18619,7 +18582,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res9407
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountGetPropertiesCMKEnabled.json
               responses:
                 '200':
                   body:
@@ -18825,7 +18787,6 @@ operationGroups:
                       directoryServiceOptions: AD
                 resourceGroupName: res9407
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountEnableAD.json
               responses:
                 '200':
                   body:
@@ -18886,7 +18847,6 @@ operationGroups:
                           keyType: Account
                 resourceGroupName: res9407
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountEnableCMK.json
               responses:
                 '200':
                   body:
@@ -18961,7 +18921,6 @@ operationGroups:
                       routingChoice: MicrosoftRouting
                 resourceGroupName: res9407
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountUpdate.json
               responses:
                 '200':
                   body:
@@ -19088,7 +19047,6 @@ operationGroups:
                 api-version: '2019-06-01'
                 monitor: 'true'
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountList.json
               responses:
                 '200':
                   body:
@@ -19406,7 +19364,6 @@ operationGroups:
                 api-version: '2019-06-01'
                 resourceGroupName: res6117
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountListByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -19566,7 +19523,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res418
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountListKeys.json
               responses:
                 '200':
                   body:
@@ -19697,7 +19653,6 @@ operationGroups:
                   keyName: kerb1
                 resourceGroupName: res4167
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountRegenerateKerbKey.json
               responses:
                 '200':
                   body:
@@ -19720,7 +19675,6 @@ operationGroups:
                   keyName: key2
                 resourceGroupName: res4167
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountRegenerateKey.json
               responses:
                 '200':
                   body:
@@ -19857,7 +19811,6 @@ operationGroups:
                   signedStart: '2017-05-24T10:42:03.1567373Z'
                 resourceGroupName: res7985
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountListAccountSAS.json
               responses:
                 '200':
                   body:
@@ -19985,7 +19938,6 @@ operationGroups:
                   signedResource: c
                 resourceGroupName: res7439
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountListServiceSAS.json
               responses:
                 '200':
                   body:
@@ -20069,7 +20021,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res4228
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountFailover.json
               responses:
                 '200': {}
                 '202': {}
@@ -20215,7 +20166,6 @@ operationGroups:
                   timeToRestore: '2019-04-20T15:30:00.0000000Z'
                 resourceGroupName: res9101
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/BlobRangesRestore.json
               responses:
                 '200':
                   body:
@@ -20311,7 +20261,6 @@ operationGroups:
                 api-version: '2019-06-01'
                 resourceGroupName: res4167
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountRevokeUserDelegationKeys.json
               responses:
                 '200': {}
         language: !Languages 
@@ -20396,7 +20345,6 @@ operationGroups:
                 api-version: '2019-06-01'
                 location: eastus2(stage)
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountListLocationUsage.json
               responses:
                 '200':
                   body:
@@ -20522,7 +20470,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res6977
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountGetManagementPolicy.json
               responses:
                 '200':
                   body:
@@ -20733,7 +20680,6 @@ operationGroups:
                           enabled: true
                 resourceGroupName: res7687
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountSetManagementPolicy.json
               responses:
                 '200':
                   body:
@@ -20881,7 +20827,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res6977
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountDeleteManagementPolicy.json
               responses:
                 '200': {}
                 '204': {}
@@ -21010,7 +20955,6 @@ operationGroups:
                 privateEndpointConnectionName: '{privateEndpointConnectionName}'
                 resourceGroupName: res6977
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountGetPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -21176,7 +21120,6 @@ operationGroups:
                       status: Approved
                 resourceGroupName: res7687
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountPutPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -21313,8 +21256,6 @@ operationGroups:
                 privateEndpointConnectionName: '{privateEndpointConnectionName}'
                 resourceGroupName: res6977
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountDeletePrivateEndpointConnection.json
               responses:
                 '200': {}
                 '204': {}
@@ -21415,7 +21356,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res6977
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountListPrivateLinkResources.json
               responses:
                 '200':
                   body:
@@ -21585,7 +21525,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: res6977
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountListObjectReplicationPolicies.json
               responses:
                 '200':
                   body:
@@ -21723,7 +21662,6 @@ operationGroups:
                 objectReplicationPolicyId: '{objectReplicationPolicy-Id}'
                 resourceGroupName: res6977
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountGetObjectReplicationPolicy.json
               responses:
                 '200':
                   body:
@@ -21905,8 +21843,6 @@ operationGroups:
                     sourceAccount: src1122
                 resourceGroupName: res7687
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountCreateObjectReplicationPolicyOnDestination.json
               responses:
                 '200':
                   body:
@@ -21946,8 +21882,6 @@ operationGroups:
                     sourceAccount: src1122
                 resourceGroupName: res7687
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountCreateObjectReplicationPolicyOnSource.json
               responses:
                 '200':
                   body:
@@ -21990,8 +21924,6 @@ operationGroups:
                     sourceAccount: src1122
                 resourceGroupName: res7687
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountUpdateObjectReplicationPolicyOnDestination.json
               responses:
                 '200':
                   body:
@@ -22036,8 +21968,6 @@ operationGroups:
                     sourceAccount: src1122
                 resourceGroupName: res7687
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountUpdateObjectReplicationPolicyOnSource.json
               responses:
                 '200':
                   body:
@@ -22182,7 +22112,6 @@ operationGroups:
                 objectReplicationPolicyId: '{objectReplicationPolicy-Id}'
                 resourceGroupName: res6977
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountDeleteObjectReplicationPolicy.json
               responses:
                 '200': {}
                 '204': {}
@@ -22356,7 +22285,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: resource-group-name
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountPutEncryptionScope.json
               responses:
                 '200':
                   body:
@@ -22533,7 +22461,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: resource-group-name
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountPatchEncryptionScope.json
               responses:
                 '200':
                   body:
@@ -22666,7 +22593,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: resource-group-name
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountGetEncryptionScope.json
               responses:
                 '200':
                   body:
@@ -22767,7 +22693,6 @@ operationGroups:
                 monitor: 'true'
                 resourceGroupName: resource-group-name
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/examples/StorageAccountEncryptionScopeList.json
               responses:
                 '200':
                   body:

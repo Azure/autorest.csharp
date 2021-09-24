@@ -3015,7 +3015,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 trainRequest:
                   source: /input/data1
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/TrainBatch.json
               responses:
                 '201':
                   headers:
@@ -3032,7 +3031,6 @@ operationGroups:
                     includeSubFolders: false
                     prefix: ''
                   useLabelFile: false
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/TrainBatchWithSubFolders.json
               responses:
                 '201':
                   headers:
@@ -3142,7 +3140,6 @@ operationGroups:
                 body: {}
                 endpoint: '{endpoint}'
                 modelId: '{Model Id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/GetModel.json
               responses:
                 '200':
                   body:
@@ -3249,7 +3246,6 @@ operationGroups:
                 body: {}
                 endpoint: '{endpoint}'
                 modelId: '{Model Id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/DeleteModel.json
               responses:
                 '204': {}
         language: !Languages 
@@ -3444,7 +3440,6 @@ operationGroups:
                 body: {}
                 endpoint: '{endpoint}'
                 modelId: '{Model Id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/AnalyzeBatch.json
               responses:
                 '202':
                   headers:
@@ -3555,7 +3550,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 modelId: '{model Id}'
                 resultId: '{result Id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/AnalyzeOperationResult.json
               responses:
                 '200':
                   body:
@@ -3697,7 +3691,6 @@ operationGroups:
                   targetResourceRegion: westus2
                 endpoint: '{endpoint}'
                 modelId: '{modelId}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/CopyModel.json
               responses:
                 '202':
                   headers:
@@ -3806,7 +3799,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 modelId: '{modelId}'
                 resultId: '{resultId}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/CopyOperationResult.json
               responses:
                 '200':
                   body:
@@ -3824,7 +3816,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 modelId: '{modelId}'
                 resultId: '{resultId}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/CopyOperationResultWithErrors.json
               responses:
                 '200':
                   body:
@@ -3919,7 +3910,6 @@ operationGroups:
                 Ocp-Apim-Subscription-Key: '{API key}'
                 body: {}
                 endpoint: '{endpoint}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/CopyModelAuthorization.json
               responses:
                 '201':
                   body:
@@ -4106,7 +4096,6 @@ operationGroups:
                 Ocp-Apim-Subscription-Key: '{API key}'
                 body: {}
                 endpoint: '{endpoint}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/ReceiptsBatch.json
               responses:
                 '202':
                   headers:
@@ -4204,7 +4193,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 modelId: '{model Id}'
                 resultId: '{result Id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/ReceiptsBatchResult.json
               responses:
                 '200':
                   body:
@@ -4384,7 +4372,6 @@ operationGroups:
                 body: {}
                 endpoint: '{endpoint}'
                 language: en
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/LayoutBatch.json
               responses:
                 '202':
                   headers:
@@ -4482,7 +4469,6 @@ operationGroups:
                 endpoint: '{endpoint}'
                 modelId: '{model Id}'
                 resultId: '{result Id}'
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/LayoutBatchResult.json
               responses:
                 '200':
                   body:
@@ -4582,7 +4568,6 @@ operationGroups:
                 body: {}
                 endpoint: '{endpoint}'
                 op: full
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/GetModels.json
               responses:
                 '200':
                   body:
@@ -4691,7 +4676,6 @@ operationGroups:
                 body: {}
                 endpoint: '{endpoint}'
                 op: summary
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/cognitiveservices/data-plane/FormRecognizer/preview/v2.0/examples/GetModelsSummary.json
               responses:
                 '200':
                   body:

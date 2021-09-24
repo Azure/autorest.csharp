@@ -2559,7 +2559,6 @@ operationGroups:
                     - id: '3'
                       text: I visited Space Needle 2 times.
                       language: en
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/c00cf4ad1e2c44ccddb08b98a472cf9822b4d687/specification/cognitiveservices/data-plane/TextAnalytics/stable/v3.0/examples/SuccessfulEntitiesRequest.json
               responses:
                 '200':
                   body:
@@ -2745,7 +2744,6 @@ operationGroups:
                     - id: '3'
                       text: I visited Space Needle 2 times.
                       language: en
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/c00cf4ad1e2c44ccddb08b98a472cf9822b4d687/specification/cognitiveservices/data-plane/TextAnalytics/stable/v3.0/examples/SuccessfulEntityLinkingRequest.json
               responses:
                 '200':
                   body:
@@ -2932,7 +2930,6 @@ operationGroups:
                     - id: '3'
                       text: La carretera estaba atascada. Había mucho tráfico el día de ayer.
                       language: es
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/c00cf4ad1e2c44ccddb08b98a472cf9822b4d687/specification/cognitiveservices/data-plane/TextAnalytics/stable/v3.0/examples/SuccessfulKeyPhrasesRequest.json
               responses:
                 '200':
                   body:
@@ -3093,7 +3090,6 @@ operationGroups:
                       text: Bonjour tout le monde
                     - id: '3'
                       text: La carretera estaba atascada. Había mucho tráfico el día de ayer.
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/c00cf4ad1e2c44ccddb08b98a472cf9822b4d687/specification/cognitiveservices/data-plane/TextAnalytics/stable/v3.0/examples/SuccessfulLanguagesRequest.json
               responses:
                 '200':
                   body:
@@ -3261,7 +3257,6 @@ operationGroups:
                     - id: '3'
                       text: Pike place market is my favorite Seattle attraction.
                       language: en
-              x-ms-original-file: https://github.com/Azure/azure-rest-api-specs/blob/c00cf4ad1e2c44ccddb08b98a472cf9822b4d687/specification/cognitiveservices/data-plane/TextAnalytics/stable/v3.0/examples/SuccessfulSentimentRequest.json
               responses:
                 '200':
                   body:
