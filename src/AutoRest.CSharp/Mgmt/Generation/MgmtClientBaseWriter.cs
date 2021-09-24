@@ -45,10 +45,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             writer.UseNamespace(typeof(Task).Namespace!);
         }
-        protected void WriteFields(CodeWriter writer, RestClient client)
+
+        protected void WriteFields(CodeWriter writer, IEnumerable<RestClient> clients)
         {
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            writer.Line($"{RestClientAccessibility} readonly {client.Type} {RestClientField};");
+            foreach (var client in clients)
+            {
+                // we might have multiple rest client field, if we combined multiple request together in one resource in case of extension resources
+                writer.Line($"{RestClientAccessibility} readonly {client.Type} {RestClientField}{client.OperationGroup.Key.ToVariableName()};");
+            }
         }
 
         protected void WriteEndOfGet(CodeWriter writer, CSharpType resourcetype, bool isAsync)

@@ -24,7 +24,50 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ConcurrentDictionary<string, string> _operationPathParentCache = new ConcurrentDictionary<string, string>();
 
         private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
+        private static ConcurrentDictionary<Operation, RequestPath> _operationToParentRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
+
+        // TODO -- will be removed
         private static ConcurrentDictionary<RawOperationSet, MgmtTypeProvider> _operationSetToParentTypeProviderCache = new ConcurrentDictionary<RawOperationSet, MgmtTypeProvider>();
+
+        public static RequestPath ParentRequestPath(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        {
+            return operationSet.GetRequestPath(context).ParentRequestPath(context);
+        }
+
+        /// <summary>
+        /// This method gives the proper grouping of the given operation by testing the following:
+        /// 1. If this operation comes from a resource operation set, return the request path of the resource
+        /// 2. If this operation is a collection operation of a resource, return the request path of the resource
+        /// 3. If neither of above meets, return the parent request path of an existing resource
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static RequestPath ParentRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (_operationToParentRequestPathCache.TryGetValue(operation, out var result))
+                return result;
+
+            result = operation.GetParentRequestPath(context);
+            _operationToParentRequestPathCache.TryAdd(operation, result);
+            return result;
+        }
+
+        private static RequestPath GetParentRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        {
+            var currentRequestPath = operation.GetRequestPath(context);
+            var currentOperationSet = context.Library.GetOperationSet(currentRequestPath);
+            // if this operation comes from a resource, return itself
+            if (currentOperationSet.IsResource(context.Configuration.MgmtConfiguration))
+                return currentRequestPath;
+
+            // if this operation corresponds to a collection operation of a resource, return the path of the resource
+            if (operation.IsResourceCollectionOperation(context, out var operationSetOfResource))
+                return operationSetOfResource.GetRequestPath(context);
+
+            // if neither of the above, we find a request path that is the longest parent of this, and belongs to a resource
+            return currentRequestPath.ParentRequestPath(context);
+        }
 
         /// <summary>
         /// Returns which TypeProvider this <see cref="RawOperationSet"/> belongs.
@@ -76,11 +119,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             throw new InvalidOperationException($"Cannot get parent type provider for operation set {operationSet.RequestPath}");
         }
-
-        //public static RequestPath ParentRequestPath(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
-        //{
-        //    return operationSet.GetRequestPath(context).ParentRequestPath(context);
-        //}
 
         public static RequestPath ParentRequestPath(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {

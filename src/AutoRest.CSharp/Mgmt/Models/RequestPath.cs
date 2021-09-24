@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private RequestPath(IReadOnlyList<Segment> segments)
         {
             _segments = segments;
-            SerializedPath = BuildSerializedPath(segments);
+            SerializedPath = Segment.BuildSerializedSegments(segments);
         }
 
         public string SerializedPath { get; }
@@ -59,8 +59,14 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Segment this[int index] => _segments[index];
 
+        /// <summary>
+        /// Check if this <see cref="RequestPath"/> is the parent (aka prefix) of <code other/>
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool IsParentOf(RequestPath other)
         {
+            // To be the parent of other, you must at least be shorter than other.
             if (other.Count <= Count)
                 return false;
             for (int i = 0; i < Count; i++)
@@ -69,6 +75,20 @@ namespace AutoRest.CSharp.Mgmt.Models
                     return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// Trim this from the other and return the <see cref="Segment"/> that remain.
+        /// Return null if this is not a parent of the other
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public IEnumerable<Segment>? TrimParentFrom(RequestPath other)
+        {
+            if (!this.IsParentOf(other))
+                return null;
+            // this is a parent, we can safely just return from the length of this
+            return other._segments.Skip(this.Count);
         }
 
         private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)
@@ -123,10 +143,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             return !(left == right);
         }
 
-        private static string BuildSerializedPath(IEnumerable<Segment> segments)
+        public static implicit operator string(RequestPath requestPath)
         {
-            var strings = segments.Select(segment => segment.IsConstant ? segment.Constant : $"{{{segment.ReferenceName}}}");
-            return $"/{string.Join('/', strings)}";
+            return requestPath.SerializedPath;
         }
     }
 }

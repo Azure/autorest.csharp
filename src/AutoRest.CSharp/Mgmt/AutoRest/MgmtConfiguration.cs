@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? operationGroupToSingletonResource = default,
             JsonElement? requestPathToResource = default,
             JsonElement? requestPathToResourceType = default,
+            JsonElement? requestPathToSingletonResource = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
             JsonElement? resourceModelRequiresType = default,
@@ -33,6 +34,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupToSingletonResource = !IsValidJsonElement(operationGroupToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToSingletonResource.ToString());
             RequestPathToResource = !IsValidJsonElement(requestPathToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResource.ToString());
             RequestPathToResourceType = !IsValidJsonElement(requestPathToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceType.ToString());
+            RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
             // TODO: A unified way to load from both readme and configuration.json
             try
             {
@@ -66,6 +68,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> OperationGroupToSingletonResource { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResource { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
+        public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
         public string[] OperationGroupIsTuple { get; }
         public string[] OperationGroupIsExtension { get; }
@@ -87,6 +90,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<JsonElement?>("operation-group-to-singleton-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("request-path-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("request-path-to-resource-type").GetAwaiter().GetResult(),
+                autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
@@ -106,6 +110,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToResource), RequestPathToResource);
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
+            WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
             if (!DoesResourceModelRequireType)
@@ -126,6 +131,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(OperationGroupToSingletonResource), out var singletonResource);
             root.TryGetProperty(nameof(RequestPathToResource), out var requestPathToResource);
             root.TryGetProperty(nameof(RequestPathToResourceType), out var requestPathToResourceType);
+            root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
 
             var operationGroupIsTupleList = operationGroupIsTuple.ValueKind == JsonValueKind.Array
@@ -159,6 +165,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 singletonResource,
                 requestPathToResource,
                 requestPathToResourceType,
+                requestPathToSingletonResource,
                 mergeOperations,
                 isArmCore,
                 resourceModelRequiresType,

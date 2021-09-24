@@ -6,6 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -14,6 +16,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static string[] SingletonKeywords = { "/default", "/latest" };
 
         private static ConcurrentDictionary<OperationGroup, string?> _valueCache = new ConcurrentDictionary<OperationGroup, string?>();
+
+        private static ConcurrentDictionary<RawOperationSet, string?> _singletonResourceCache = new ConcurrentDictionary<RawOperationSet, string?>();
+
+        public static bool IsSingletonResource(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        {
+            return operationSet.TryGetSingletonResourceSuffix(context, out _);
+        }
+
+        public static bool TryGetSingletonResourceSuffix(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string singletonIdSuffix)
+        {
+            singletonIdSuffix = null;
+            if (_singletonResourceCache.TryGetValue(operationSet, out singletonIdSuffix))
+                return singletonIdSuffix != null;
+
+            bool result = IsSingleton(operationSet, context, out singletonIdSuffix);
+            _singletonResourceCache.TryAdd(operationSet, singletonIdSuffix);
+            return result;
+        }
 
         public static bool IsSingletonResource(this OperationGroup operationGroup, MgmtConfiguration config)
         {
@@ -31,6 +51,39 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             bool result = IsSingleton(operationGroup, config, out resourceSuffix);
             _valueCache.TryAdd(operationGroup, resourceSuffix);
             return result;
+        }
+
+        private static bool IsSingleton(RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string singletonIdSuffix)
+        {
+            // we should first check the configuration for the singleton settings
+            if (context.Configuration.MgmtConfiguration.RequestPathToSingletonResource.TryGetValue(operationSet.RequestPath, out singletonIdSuffix))
+            {
+                // ensure the singletonIdSuffix does not have a slash at the beginning
+                singletonIdSuffix = singletonIdSuffix.TrimStart('/');
+                return true;
+            }
+
+            // we cannot find the corresponding request path in the configuration, trying to deduce from the path
+            // return false if this is not a resource
+            if (!operationSet.IsResource(context.Configuration.MgmtConfiguration))
+                return false;
+            // get the request path
+            var currentRequestPath = operationSet.GetRequestPath(context);
+            // ensure the last segment of the path is a constant
+            var lastSegment = currentRequestPath.Last();
+            if (lastSegment.IsConstant && SingletonKeywords.Any(w => lastSegment.Constant == w))
+            {
+                // we are a singleton resource. We need to find the suffix which should be the difference between our path and our parent resource
+                var parentRequestPath = operationSet.ParentRequestPath(context);
+                var diff = parentRequestPath.TrimParentFrom(currentRequestPath);
+                // TODO -- not all of the segment in difference are constant
+                if (!diff.All(s => s.IsConstant))
+                    throw new System.NotImplementedException($"The difference between {currentRequestPath.SerializedPath} and {parentRequestPath.SerializedPath} is not constant, we does not support this yet");
+                singletonIdSuffix = string.Join('/', diff.Select(s => s.Constant));
+                return true;
+            }
+
+            return false;
         }
 
         private static bool IsSingleton(OperationGroup operationGroup, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceSuffix)

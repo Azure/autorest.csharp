@@ -55,9 +55,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer = writer;
             _resource = resource;
             _context = context;
-            _resourceData = _context.Library.GetResourceData(_resource.OperationGroup);
+            _resourceData = resource.ResourceData;
 
-            IsSingleton = _resource.OperationGroup.IsSingletonResource(Config);
+            IsSingleton = resource.IsSingleton;
         }
 
         public void WriteResource()
@@ -69,12 +69,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{_resource.Description}");
                 _writer.Append($"{_resource.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
-                _inheritArmResourceBase = _resource.GetMethod != null;
+                if (_resource.GetMethods.Values.Any(method => method == null))
+                    ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
+Check the swagger definition, and use 'request-path-to-resource' or 'request-path-is-non-resource' directive to specify the correct resource if necessary.");
+
+                //_inheritArmResourceBase = _resource.GetMethod != null;
                 _writer.Append($"{BaseClass.Name}, ");
 
-                if (_resource.GetMethod == null)
-                    ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under operation group '{_resource.OperationGroup.Key}'.
-Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
+//                if (_resource.GetMethod == null)
+//                    ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
+//Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
                 CSharpType inheritType = new CSharpType(typeof(TrackedResource));
                 if (_resourceData.Inherits != null && _resourceData.Inherits.Name == inheritType.Name)
@@ -82,9 +86,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     _isITaggableResource = true;
                 }
 
-                var httpMethodsMap = _resource.OperationGroup.OperationHttpMethodMapping();
-                httpMethodsMap.TryGetValue(HttpMethod.Delete, out var deleteMethods);
-                if (deleteMethods != null && deleteMethods.Count > 0)
+                if (_resource.DeleteMethods.Values.Any(method => method != null))
                 {
                     _isDeletableResource = true;
                 }
@@ -106,15 +108,15 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteClientFields()
         {
-            WriteFields(_writer, _resource.RestClient);
+            WriteFields(_writer, _resource.RestClients.Values.Distinct());
             _writer.Line($"private readonly {_resourceData.Type} _data;");
         }
 
         private void WriteChildRestClients()
         {
-            foreach (var operationGroup in _resource.ChildOperations.Keys)
+            foreach (var client in _resource.OperationRestClients)
             {
-                _writer.Append($"private {_context.Library.GetRestClient(operationGroup).Type} {GetRestClientName(operationGroup)}").LineRaw(" { get; }");
+                _writer.Append($"private {client.Type} {GetRestClientName(client)}").LineRaw(" { get; }");
             }
         }
 
@@ -140,29 +142,19 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 if (IsSingleton)
                     _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                foreach (var operationGroup in _resource.ChildOperations.Keys)
-                {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                }
+                WriteRestClientAssignments();
             }
 
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.");
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resource.ResourceIdentifierType} id) : base(options, id)"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {typeof(ResourceIdentifier)} id) : base(options, id)"))
             {
                 if (IsSingleton)
                     _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                foreach (var operationGroup in _resource.ChildOperations.Keys)
-                {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                }
+                WriteRestClientAssignments();
             }
 
             _writer.Line();
@@ -172,15 +164,26 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             _writer.WriteXmlDocumentationParameter("uri", $"The uri to build client context.");
             _writer.WriteXmlDocumentationParameter("pipeline", $"The pipeline to build client context.");
             _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmClientOptions)} clientOptions, {typeof(TokenCredential)} credential, {typeof(Uri)} uri, {typeof(HttpPipeline)} pipeline, {_resource.ResourceIdentifierType} id) : base(clientOptions, credential, uri, pipeline, id)"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmClientOptions)} clientOptions, {typeof(TokenCredential)} credential, {typeof(Uri)} uri, {typeof(HttpPipeline)} pipeline, {typeof(ResourceIdentifier)} id) : base(clientOptions, credential, uri, pipeline, id)"))
             {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                foreach (var operationGroup in _resource.ChildOperations.Keys)
-                {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                }
+                WriteRestClientAssignments();
+            }
+        }
+
+        private void WriteRestClientAssignments()
+        {
+            // write assignment statements of the rest clients of this resource
+            foreach (var client in _resource.RestClients.Values.Distinct())
+            {
+                var subscriptionParamString = client.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                _writer.Line($"{RestClientField}{client.OperationGroup} = new {client.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
+            }
+            // write assignment statements of the rest clients of the child operations
+            foreach (var client in _resource.OperationRestClients)
+            {
+                var subscriptionParamString = client.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                _writer.Line($"{GetRestClientName(client)} = new {client.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
             }
         }
 
@@ -188,7 +191,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
-            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.OperationGroup.ResourceType(Config)}\";");
+            // TODO -- what should we do if we have multiple types? or it contains variables?
+            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.ResourceTypes.Values.First()}\";");
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for the operations");
             _writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
@@ -358,9 +362,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private string GetRestClientName(OperationGroup operationGroup)
+        private string GetRestClientName(RestClient client)
         {
-            return $"_{operationGroup.Key.ToVariableName()}RestClient";
+            return $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
         }
 
         private void WriteGetMethod(ClientMethod method, bool async, List<ClientMethod> methods, string? methodName = null)

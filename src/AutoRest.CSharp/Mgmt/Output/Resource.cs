@@ -22,7 +22,7 @@ using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class Resource : MgmtTypeProvider
+    internal class Resource : TypeProvider
     {
         protected BuildContext<MgmtOutputLibrary> _context;
         //private IEnumerable<ClientMethod>? _methods;
@@ -38,36 +38,41 @@ namespace AutoRest.CSharp.Mgmt.Output
         //internal OperationGroup OperationGroup { get; }
         public bool IsScopeOrExtension { get; }
 
-        public string RequestPath => OperationSet.RequestPath;
-        public RawOperationSet OperationSet { get; }
+        public IReadOnlyDictionary<RawOperationSet, HashSet<Operation>> OperationSets { get; }
 
-        public override RequestPath ContextualPath => OperationSet.GetRequestPath(_context);
+        private IDictionary<RawOperationSet, RequestPath>? _contextualPaths;
+        public virtual IDictionary<RawOperationSet, RequestPath> ContextualPaths => _contextualPaths ??= OperationSets.Keys.ToDictionary(
+                operationSet => operationSet,
+                operationSet => operationSet.GetRequestPath(_context));
 
-        public Resource(RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context) : base(context)
+        private IEnumerable<string>? _requestPaths;
+        public IEnumerable<string> RequestPaths => _requestPaths ??= OperationSets.Keys.Select(operationSet => operationSet.RequestPath);
+
+        private IDictionary<RawOperationSet, MgmtRestClient>? _restClients;
+        public IDictionary<RawOperationSet, MgmtRestClient> RestClients => _restClients ??= OperationSets.Keys.ToDictionary(
+                operationSet => operationSet,
+                operationSet => _context.Library.GetRestClient(operationSet.RequestPath));
+
+        public Resource(IReadOnlyDictionary<RawOperationSet, HashSet<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _context = context;
-            OperationSet = operationSet;
-            DefaultName = operationSet.Resource(context.Configuration.MgmtConfiguration);
-            GetMethod = GetGetMethod();
-            DeleteMethod = GetDeleteMethod();
+            OperationSets = operationSets;
+            DefaultName = resourceName + SuffixValue;
+            IsSingleton = operationSets.Keys.First().IsSingletonResource(context);
+
+            GetMethods = GetMethodsWithVerb(HttpMethod.Get);
+            DeleteMethods = GetMethodsWithVerb(HttpMethod.Delete);
         }
 
-        private RestClientMethod? GetGetMethod()
+        protected IDictionary<RawOperationSet, RestClientMethod?> GetMethodsWithVerb(HttpMethod method)
         {
-            var operation = OperationSet.GetOperation(HttpMethod.Get);
-            if (operation is null)
-                return null;
-
-            return _context.Library.RestClientMethods[operation];
-        }
-
-        private RestClientMethod? GetDeleteMethod()
-        {
-            var operation = OperationSet.GetOperation(HttpMethod.Delete);
-            if (operation is null)
-                return null;
-
-            return _context.Library.RestClientMethods[operation];
+            return OperationSets.Keys.ToDictionary(
+                operationSet => operationSet,
+                operationSet =>
+                {
+                    var operation = operationSet.GetOperation(method);
+                    return operation != null ? _context.Library.RestClientMethods[operation] : null;
+                });
         }
 
         //public Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context,
@@ -99,17 +104,22 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(ResourceName));
 
-        // TODO -- refactor this one
-        public ResourceContainer ResourceContainer => _context.Library.GetResourceContainer(RequestPath);
+        public bool IsSingleton { get; }
+
+        /// <summary>
+        /// Finds the corresponding <see cref="ResourceContainer"/> of this <see cref="Resource"/>
+        /// Return null when this resource is a singleton.
+        /// </summary>
+        public ResourceContainer? ResourceContainer => _context.Library.GetResourceContainer(RequestPaths.First());
+
+        /// <summary>
+        /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
+        /// </summary>
+        public ResourceData ResourceData => _context.Library.GetResourceData(RequestPaths.First());
 
         public virtual string ResourceName => Type.Name;
-
-        //protected virtual string SuffixValue => string.Empty;
-
-        protected MgmtRestClient? _restClient;
-        public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(RequestPath);
-
-        public ResourceData ResourceData => _context.Library.GetResourceData(RequestPath);
+        
+        protected virtual string SuffixValue => string.Empty;
 
         //public Type ResourceIdentifierType => typeof(ResourceIdentifier);
 
@@ -118,26 +128,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         //public IEnumerable<ClientMethod> ResourceClientMethods => GetResourceClientMethods();
 
         //public IEnumerable<RestClientMethod> ResourceLROMethods => GetResourceLROMethods();
-
-        private IEnumerable<Operation>? _childOperations;
-        public virtual IEnumerable<Operation> ChildOperations => _childOperations ??= EnsureChildOperations();
-
-        private IEnumerable<Operation> EnsureChildOperations()
-        {
-            var result = new List<Operation>();
-
-            foreach (var operationSet in _context.Library.OperationSets)
-            {
-                if (operationSet == OperationSet)
-                    continue;
-                if (operationSet.ParentTypeProvider(_context) == this)
-                {
-                    result.AddRange(operationSet);
-                }
-            }
-
-            return result;
-        }
 
         //public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration);
 
@@ -153,8 +143,31 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         //public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.IsGetResourceMethod(ResourceData) && m.RestClientMethod.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? Methods.OrderBy(m => m.Name.Length).FirstOrDefault(m => m.IsGetResourceMethod(ResourceData));
 
-        public virtual RestClientMethod? GetMethod { get; }
-        public virtual RestClientMethod? DeleteMethod { get; }
+        public virtual IDictionary<RawOperationSet, RestClientMethod?> GetMethods { get; }
+        public virtual IDictionary<RawOperationSet, RestClientMethod?> DeleteMethods { get; }
+
+        private IDictionary<RawOperationSet, IEnumerable<Operation>>? _operations;
+        public IDictionary<RawOperationSet, IEnumerable<Operation>> Operations => _operations ??= OperationSets.ToDictionary(
+            pair => pair.Key,
+            pair => pair.Value.Where(operation => ShouldIncludeOperation(operation)));
+
+        protected virtual bool ShouldIncludeOperation(Operation operation)
+        {
+            // In the resource class, we need to exclude the List operations
+            var restClientMethod = _context.Library.RestClientMethods[operation];
+            if (restClientMethod.IsListMethod(out var valueType, out _))
+                return !valueType.EqualsByName(ResourceData.Type);
+            return true;
+        }
+
+        private IEnumerable<MgmtRestClient>? _operationRestClients;
+        public IEnumerable<MgmtRestClient> OperationRestClients => _operationRestClients ??=
+            OperationSets.Values.SelectMany(o => o).Select(operation => _context.Library.GetRestClient(operation.GetHttpPath())).Distinct();
+
+        private IDictionary<RawOperationSet, Models.ResourceType>? _resourceTypes;
+        public IDictionary<RawOperationSet, Models.ResourceType> ResourceTypes => _resourceTypes ??= ContextualPaths.ToDictionary(
+            pair => pair.Key,
+            pair => new Models.ResourceType(pair.Value)); //TODO -- make a decarator for this and cache the result
 
         //protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         //{

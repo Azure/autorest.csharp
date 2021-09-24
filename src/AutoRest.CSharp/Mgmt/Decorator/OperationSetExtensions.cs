@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -23,41 +24,40 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_cache.TryGetValue(operationSet, out var requestPath))
                 return requestPath;
 
-            requestPath = new RequestPath(operationSet.GetMethod(context));
+            requestPath = operationSet.GetOperation().GetRequestPath(context);
             _cache.TryAdd(operationSet, requestPath);
             return requestPath;
         }
 
-        public static bool IsResourceCollection(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        //public static bool IsResourceCollection(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        //{
+        //    // TODO -- should we change this check from OperationSet to Operation???
+        //    var requestPath = operationSet.GetRequestPath(context);
+        //    foreach (var operation in operationSet)
+        //    {
+        //        var restClientMethod = context.Library.RestClientMethods[operation];
+        //        (_, var isList, var isResourceData) = restClientMethod.GetBodyTypeForList(operationSet[operation], context);
+        //        if (isList && isResourceData)
+        //            return true;
+        //    }
+
+        //    return false;
+        //}
+
+        private static Operation GetOperation(this RawOperationSet operationSet)
         {
-            // TODO -- should we change this check from OperationSet to Operation???
-            var requestPath = operationSet.GetRequestPath(context);
-            foreach (var operation in operationSet)
-            {
-                var restClientMethod = context.Library.RestClientMethods[operation];
-                (_, var isList, var isResourceData) = restClientMethod.GetBodyTypeForList(operationSet[operation], context);
-                if (isList && isResourceData)
-                    return true;
-            }
+            // find PUT operation for the path
+            var putOperation = operationSet.FirstOrDefault(operation => operation.GetHttpRequest()!.Method == HttpMethod.Put);
+            if (putOperation is not null)
+                return putOperation;
 
-            return false;
-        }
-
-        private static RestClientMethod GetMethod(this RawOperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
-        {
-            var restClientMethods = operationSet.Select(operation => context.Library.RestClientMethods[operation]);
-            // find PUT method for the path
-            var putRestClientMethod = restClientMethods.FirstOrDefault(method => method.Request.HttpMethod == RequestMethod.Put);
-            if (putRestClientMethod is not null)
-                return putRestClientMethod;
-
-            // then find Get method for the path if we do not have a put
-            var getRestClientMethod = restClientMethods.FirstOrDefault(method => method.Request.HttpMethod == RequestMethod.Get);
-            if (getRestClientMethod is not null)
-                return getRestClientMethod;
+            // then find GET operation for the path
+            var getOperation = operationSet.FirstOrDefault(operation => operation.GetHttpRequest()!.Method == HttpMethod.Get);
+            if (getOperation is not null)
+                return getOperation;
 
             // we found nothing! just whatever on the first slot
-            return restClientMethods.First();
+            return operationSet.First();
         }
     }
 }

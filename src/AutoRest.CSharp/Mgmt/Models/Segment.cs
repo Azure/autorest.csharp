@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -48,5 +49,13 @@ namespace AutoRest.CSharp.Mgmt.Models
         public override int GetHashCode() => _stringValue.GetHashCode();
 
         public override string? ToString() => _stringValue;
+
+        internal static string BuildSerializedSegments(IEnumerable<Segment> segments)
+        {
+            var strings = segments.Select(segment => segment.IsConstant ? segment.Constant : $"{{{segment.ReferenceName}}}");
+            return $"/{string.Join('/', strings)}";
+        }
+
+        public static implicit operator Segment(string value) => new Segment(value);
     }
 }
