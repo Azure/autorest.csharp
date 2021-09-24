@@ -28,7 +28,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using System.Text.Json;
 
-namespace AutoRest.CSharp.Mgmt.TestGeneration
+namespace AutoRest.CSharp.MgmtTest.Generation
 {
     /// <summary>
     /// Code writer for resource container.

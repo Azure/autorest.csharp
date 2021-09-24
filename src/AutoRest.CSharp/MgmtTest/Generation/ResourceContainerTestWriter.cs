@@ -28,9 +28,8 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using System.Text.Json;
 using AutoRest.CSharp.Mgmt.Generation;
-using AutoRest.CSharp.MgmtTest.Output;
 
-namespace AutoRest.CSharp.Mgmt.TestGeneration
+namespace AutoRest.CSharp.MgmtTest.Generation
 {
     /// <summary>
     /// Code writer for resource container.
@@ -59,8 +58,6 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         protected override string TypeNameOfThis => TypeOfContainer.Name + "MockTests";
         protected string TestEnvironmentName => _context.DefaultLibraryName + "TestEnvironment";
         protected string TestBaseName => $"MockTestBase";
-
-        protected Dictionary<string, EnumType> EnumTypes => TestTool.CollectEnumTypes(_context);
 
         protected List<Parameter> containerInitiateParameters = new List<Parameter>();
 
@@ -95,12 +92,9 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                 _writer.Line($"{TestBaseName}");
                 using (_writer.Scope())
                 {
-                    // WriteFields(_writer, _restClient!);
                     WriteContainerTesterCtors();
-
                     WriteCreateContainerMethod();
-                    WriteCreateOrUpdate();
-                    // WriteCreateResourceGroup();
+                    WriteCreateOrUpdateTest();
                 }
             }
         }
@@ -223,13 +217,22 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             }
         }
 
-        protected void WriteCreateOrUpdate()
+        protected void WriteCreateOrUpdateTest()
         {
-            _writer.Line();
             if (_resourceContainer.CreateMethod != null)
             {
-                WriteCreateOrUpdateVariants(_resourceContainer.CreateMethod, _resourceContainer.PutMethods);
+                _writer.Line();
+                WriteFirstLROMethodTest(_resourceContainer.CreateMethod, _context, true, true, "CreateOrUpdate");
             }
+        }
+
+        protected void WriteGetTest()
+        {
+            //if (_resourceContainer.GetMethods != null)
+            //{
+            //    _writer.Line();
+            //    WriteFirstLROMethodTest(_resourceContainer.CreateMethod, _context, true, true, "CreateOrUpdate");
+            //}
         }
 
         protected void WriteCreateResourceGroup()
@@ -248,15 +251,6 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                     }
                 }
             }
-        }
-
-        private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
-        {
-            // WriteFirstLROMethodTest(clientMethod, _context, false, true, "CreateOrUpdate");
-            WriteFirstLROMethodTest(clientMethod, _context, true, true, "CreateOrUpdate");
-
-            //WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate", clientMethods);
-            //WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate", clientMethods);
         }
 
         protected void WriteGetContainer(ExampleModel exampleModel)
@@ -325,18 +319,14 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             }
             HashSet<ObjectTypeProperty> consumedProperties = new HashSet<ObjectTypeProperty>();
             var signature = constructor.Signature;
-            // var variableName = sot.Declaration.Name;
+
             writer.Append($"new {signature.Name}(");
             foreach (var p in signature.Parameters)
             {
-                // _writer.WriteParameter(parameter);
-                // var property2 = sot.Properties.Where(x => x.Declaration.Name.ToVariableName() == p.Name).FirstOrDefault().SchemaProperty;
-                // var property = constructor.FindPropertyInitializedByParameter(p)?.SchemaProperty;
                 var targetProperty = constructor.FindPropertyInitializedByParameter(p);
                 var paramValue = FindPropertyValue(sot, ev, targetProperty!);
                 if (paramValue is not null)
                 {
-                    // _writer.Append($"var ");
                     WriteExampleValue(writer, p.Type, paramValue!, $"{variableName}.{targetProperty!.Declaration.Name}");
                     writer.AppendRaw(",");
                 }
@@ -415,7 +405,6 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             }
             else if (cst.Name == "IDictionary")
             {
-                // <{cst.Arguments[0]}, {cst.Arguments[1]}>
                 using (writer.Scope($"new {new CSharpType(typeof(Dictionary<,>), cst.Arguments)}()", newLine: false))
                 {
                     foreach (var entry in exampleValue.Properties!)
@@ -476,7 +465,6 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         protected void WriteEnumTypeExampleValue(CodeWriter writer, EnumType enumType, ExampleValue exampleValue)
         {
             writer.AppendEnumFromString(enumType, w => w.Append($"{exampleValue.RawValue:L}"));
-            //  _writer.Append($"{ModelWriter.GetValueFieldName(enumType.Declaration.Name, (string)exampleValue.RawValue!, enumType.Values)}");
         }
 
         protected void WriteExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, string variableName)
@@ -501,36 +489,9 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             var variableName = exampleParameter.Parameter.CSharpName();
             if (parameter.Type.Name == _resourceData.Declaration.Name)
             {
-                // var jsonSerialization = _resourceData.Serializations.Where(x => typeof(JsonSerialization).IsInstanceOfType(x)).First();
                 _writer.Append($"var {variableName} = ");
-                // _writer.Append($"var ");
-                //DeserializeExampleValue (_resourceData, exampleParameter.ExampleValue, variableName);
                 WriteSchemaObjectExampleValue(_writer, _resourceData, exampleParameter.ExampleValue, variableName);
                 _writer.Line($";");
-                // _writer.Line($";");
-                // var constructor = _resourceData.Constructors[0];
-                //foreach (var c in _resourceData.Constructors)
-                //{
-                //    if (c.Signature.Parameters.Length > constructor.Signature.Parameters.Length)
-                //        constructor = c;
-                //}
-
-                //var signature = constructor.Signature;
-                //_writer.Append($"var {variableName} = new {signature.Name}(");
-                //foreach (var p in signature.Parameters)
-                //{
-                //    // _writer.WriteParameter(parameter);
-                //    // var property2 = _resourceData.Properties.Where(x => x.Declaration.Name.ToVariableName() == p.Name).FirstOrDefault().SchemaProperty;
-                //    var property = constructor.FindPropertyInitializedByParameter(p)?.SchemaProperty;
-
-                //    if (exampleParameter.ExampleValue.CSharpName() == property?.CSharpName())
-                //    {
-                //        _writer.Append($"{BuildValueString(exampleParameter.ExampleValue, exampleParameter.ExampleValue.Schema)},");
-                //    }
-                //}
-                //_writer.RemoveTrailingComma();
-                //_writer.Line($");");
-
             }
             else
             {
@@ -538,16 +499,6 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                 WriteExampleValue(_writer, parameter.Type, exampleParameter.ExampleValue, variableName);
                 _writer.Line($";");
             }
-            //else if (parameter.Type.Name == "String")
-            //{
-            //    _writer.Append($"var {variableName} = \"{exampleParameter.ExampleValue.RawValue}\";");
-            //    _writer.Line();
-            //}
-            //else
-            //{
-            //    _writer.LineRaw($"var {variableName} = {exampleParameter.ExampleValue.RawValue};");
-            //    _writer.Line();
-            //}
 
             foreach (var tagLine in _tagsWriter.ToString(false).Split(Environment.NewLine))
             {
@@ -571,7 +522,6 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                 return;
 
             methodName = methodName ?? clientMethod.Name;
-            // CSharpType returnType = isAsync? typeof(Task): typeof(void);
             var parameterMapping = BuildParameterMapping(clientMethod);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
@@ -585,95 +535,27 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                 {
                     _writer.LineRaw($"// Example: {exampleModel.Name}");
                     WriteGetContainer(exampleModel);
-                    foreach (var passThruParameter in passThruParameters)
-                    {
-                        string? paramName = null;
-                        foreach (ExampleParameter exampleParameter in exampleModel.MethodParameters)
-                        {
-                            if (passThruParameter.Name == exampleParameter.Parameter.CSharpName())
-                            {
-                                // paramName = WriteParameter(clientMethod, context, exampleParameter, passThruParameter);
-                                paramName = WriteExampleParameterDeclaration(exampleParameter, passThruParameter);
-                            }
-                        }
-                        if (paramName is null)
-                        {
-                            if (passThruParameter.ValidateNotNull)
-                            {
-                                throw new Exception($"parameter {passThruParameter.Name} not found in example {exampleModel.Name}");
-                            }
-                            else
-                            {
-                                paramName = passThruParameter.Name;
-                                _writer.LineRaw($"{passThruParameter.Type.Name}? {paramName} = null;");
-                            }
-                        }
-                        paramNames.Add(paramName);
-                    }
 
-                    _writer.Line();
-                    _writer.Append($"{(isAsync ? ("await ") : "")}container.{testMethodName}(");
-                    foreach (var paramName in paramNames)
+                    var parameters = GenExampleInstanceMethodParameters(clientMethod);
+                    _writer.Append($"await TestHelper.{GenExampleInstanceMethodName(clientMethod)}(container, ");
+                    foreach (var parameter in parameters)
                     {
-                        _writer.Append($"{paramName},");
+                        // _writer.Append($"{parameter.Name}, ");
+                        foreach (var methodParameter in exampleModel.MethodParameters)
+                        {
+                            if (methodParameter.Parameter.CSharpName() == parameter.Name)
+                            {
+                                WriteExampleValue(_writer, parameter.Type, methodParameter.ExampleValue, parameter.Name);
+                                _writer.Append($", ");
+                                break;
+                            }
+                        }
                     }
                     _writer.RemoveTrailingComma();
-                    _writer.LineRaw(");");
+                    _writer.Line($");");
                     break;
                 }
             }
-
-            // ///////////////////
-
-
-            //writer.Line();
-            //writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
-
-            //var parameterMapping = BuildParameterMapping(clientMethod);
-            //var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
-
-            //foreach (var parameter in passThruParameters)
-            //{
-            //    writer.WriteXmlDocumentationParameter(parameter);
-            //}
-
-            //writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            //writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
-
-            //CSharpType? returnType = GetLROReturnType(clientMethod, context);
-            //CSharpType responseType = returnType != null ?
-            //    new CSharpType(typeof(Response<>), returnType) :
-            //    typeof(Response);
-            //responseType = responseType.WrapAsync(isAsync);
-
-            //writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, isAsync)}(");
-            //foreach (var parameter in passThruParameters)
-            //{
-            //    writer.WriteParameter(parameter);
-            //}
-            //writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            //using (writer.Scope())
-            //{
-            //    writer.WriteParameterNullChecks(passThruParameters.ToArray());
-
-            //    Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
-            //    WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
-            //    {
-            //        var operation = new CodeWriterDeclaration("operation");
-            //        writer.Append($"var {operation:D} = {GetAwait(isAsync)}");
-            //        writer.Append($"{CreateMethodName($"Start{methodName}", isAsync)}(");
-            //        WriteArguments(writer, parameterMapping.Where(p => p.IsPassThru));
-            //        writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
-
-            //        writer.Append($"return {GetAwait(isAsync)}");
-            //        var waitForCompletionMethod = returnType == null && isAsync ?
-            //        "WaitForCompletionResponse" :
-            //        "WaitForCompletion";
-            //        writer.Line($"{operation}.{CreateMethodName(waitForCompletionMethod, isAsync)}(cancellationToken){GetConfigureAwait(isAsync)};");
-            //    });
-            //    writer.Line();
-            //}
         }
 
         public  void WriteExampleInstanceMethod(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, string? methodName = null)
@@ -760,9 +642,6 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
             return passThruParameters.Where(p => p.ValidateNotNull && p.Type.IsFrameworkType && (p.Type.FrameworkType.IsPrimitive || p.Type.FrameworkType == typeof(String))); // define all primitive parameters as method parameter
         }
-
-
-
 
         public static ExampleGroup? FindExampleGroup(BuildContext<MgmtOutputLibrary> context, ResourceContainer resourceContainer, RestClientMethod? clientMethod)
         {

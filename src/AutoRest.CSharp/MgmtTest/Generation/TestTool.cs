@@ -26,7 +26,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using AutoRest.CSharp.Mgmt.Generation;
 
-namespace AutoRest.CSharp.Mgmt.TestGeneration
+namespace AutoRest.CSharp.MgmtTest.Generation
 {
     internal partial class TestTool
     {
@@ -34,27 +34,6 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         {
             writer.Line($"[TestCase]");
             writer.Line($"[RecordedTest]");
-        }
-
-        public static Dictionary<string, EnumType> CollectEnumTypes(BuildContext<MgmtOutputLibrary> context)
-        {
-            var ret = new Dictionary<string, EnumType>();
-            foreach (var model in context.Library.Models)
-            {
-                if (model is EnumType)
-                {
-                    var enumType = (EnumType)model;
-                    ret.Add(enumType.Description!, enumType);
-                }
-            }
-            return ret;
-        }
-
-        public static string GetEnumValue(Dictionary<string, EnumType> EnumTypes, Schema schema, ExampleValue ev)
-        {
-            EnumType t = EnumTypes[schema.CSharpName()]!;
-
-            return ModelWriter.GetValueFieldName(t.Declaration.Name, (string)ev.RawValue!, t.Values);
         }
 
         public static object ConvertToStringDictionary(object dict)
@@ -81,7 +60,6 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             {
                 if (elements[i-1].ToLower()== "subscriptions")
                 {
-                    //elements[i] = "{TestEnvironment.SubscriptionId}";
                     elements[i] = "00000000-0000-0000-0000-000000000000";
                 }
             }
