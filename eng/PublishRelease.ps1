@@ -33,11 +33,11 @@ finally {
 
 Push-Location $RepoRoot
 try {
-    # set the version in the root package.json so coverage-push can pick it up
+    # set the version in the root package.json so coverage can pick it up
 
     npm version --no-git-tag-version $devVersion | Out-Null;
    
-    npm run coverage -- publish --repo=autorest.csharp --ref=refs/heads/feature/v3 --githubToken=$GitHubToken --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass
+    npm run coverage --prefix node_modules/@microsoft.azure/autorest.testserver -- publish --repo=autorest.csharp --ref=refs/heads/feature/v3 --githubToken=$GitHubToken --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass
 }
 finally {
     Pop-Location
