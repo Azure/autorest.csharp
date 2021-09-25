@@ -5,14 +5,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ParameterMappingBuilder
     {
+        /// <summary>
+        /// Builds the parameter mapping for contextual paths. The parameters in the contextual path will be treated as "known information"
+        /// when writing other operations in the same resource or resource container class and be passed into the corresponding RestOperation
+        /// method using their "value expression"s
+        /// </summary>
+        /// <param name="requestPath">The contextual path, which is usually the path creating a resource</param>
+        /// <param name="context">The <see cref="BuildContext"/></param>
+        /// <param name="idVariableName">The variable name of the Id variable</param>
+        /// <returns></returns>
         public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context, string idVariableName = "Id")
         {
             var stack = new Stack<ContextualParameterMapping>();
@@ -30,20 +41,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (current == RequestPath.Subscription)
             {
                 // using the reference name of the last segment as the parameter name, aka, subscriptionId
-                parameterMappingStack.Push(new ContextualParameterMapping(current.Last().ReferenceName, $"{idVariableName}.SubscriptionId"));
-                //return;
+                parameterMappingStack.Push(new ContextualParameterMapping(current.Last().Reference, $"{idVariableName}.SubscriptionId"));
             }
             else if (current == RequestPath.ManagementGroup)
             {
-                // using the reference name of the last segment as the parameter name, aka, subscriptionId
-                parameterMappingStack.Push(new ContextualParameterMapping(current.Last().ReferenceName, $"{idVariableName}{invocationSuffix}.Parent.Name", false));
-                //return;
+                // using the reference name of the last segment as the parameter name, aka, groupId
+                parameterMappingStack.Push(new ContextualParameterMapping(current.Last().Reference, $"{idVariableName}{invocationSuffix}.Parent.Name", false));
             }
             // ResourceGroup is not terminal state - Subscription is its parent
             else if (current == RequestPath.ResourceGroup)
             {
-                parameterMappingStack.Push(new ContextualParameterMapping("resourceGroupName", $"{idVariableName}.ResourceGroupName"));
-                //return;
+                // using the reference name of the last segment as the parameter name, aka, resourceGroupName
+                parameterMappingStack.Push(new ContextualParameterMapping(current.Last().Reference, $"{idVariableName}.ResourceGroupName"));
             }
             // this branch is for every other cases - all the request path that corresponds to a resource in this swagger
             else
@@ -69,16 +78,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         throw new NotImplementedException($"Key is variable scenario is not supported yet. RequestPath: {current} and key {pair[0]}");
                     if (pair[1].IsReference)
                     {
-                        var referenceName = pair[1].ReferenceName;
+                        var reference = pair[1].Reference;
                         if (pair[0] == Segment.Providers) // if the key is providers and the value is a parameter
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(referenceName, $"{idVariableName}.Namespace"));
+                            parameterMappingStack.Push(new ContextualParameterMapping(reference, $"{idVariableName}.Namespace"));
                             // do not append a new .Parent to the id
                             continue;
                         }
                         else // for all other normal keys
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(referenceName, $"{idVariableName}{invocationSuffix}.Name"));
+                            parameterMappingStack.Push(new ContextualParameterMapping(reference, $"{idVariableName}{invocationSuffix}.Name"));
                             invocationSuffix += ".Parent";
                             continue;
                         }
@@ -103,9 +112,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public record ContextualParameterMapping
         {
             /// <summary>
-            /// The parameter name.
+            /// The parameter name
             /// </summary>
             public string ParameterName;
+            /// <summary>
+            /// The parameter type
+            /// </summary>
+            public CSharpType ParameterType;
             /// <summary>
             /// This is the value expression to pass in a method
             /// </summary>
@@ -117,9 +130,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// </summary>
             public bool Strict;
 
-            public ContextualParameterMapping(string parameterName, string valueExpression, bool strict = true)
+            public ContextualParameterMapping(Reference reference, string valueExpression, bool strict = true) : this(reference.Name, reference.Type, valueExpression, strict)
+            {
+            }
+
+            public ContextualParameterMapping(string parameterName, CSharpType parameterType, string valueExpression, bool strict = true)
             {
                 ParameterName = parameterName;
+                ParameterType = parameterType;
                 ValueExpression = valueExpression;
                 Strict = strict;
             }

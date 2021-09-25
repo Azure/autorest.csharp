@@ -34,7 +34,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         public bool IsConstant => _value.IsConstant;
         public bool IsReference => !IsConstant;
 
-        public string Constant => (string)_value.Constant.Value!;
+        public Constant Constant => _value.Constant;
+
+        public string ConstantValue => _value.Constant.Value?.ToString() ?? "null";
+
+        public Reference Reference => _value.Reference;
 
         public string ReferenceName => _value.Reference.Name;
 
@@ -67,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         internal static string BuildSerializedSegments(IEnumerable<Segment> segments)
         {
-            var strings = segments.Select(segment => segment.IsConstant ? segment.Constant : $"{{{segment.ReferenceName}}}");
+            var strings = segments.Select(segment => segment.IsConstant ? segment.ConstantValue : $"{{{segment.ReferenceName}}}");
             return $"/{string.Join('/', strings)}";
         }
 

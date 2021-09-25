@@ -70,17 +70,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
             // get the request path
             var currentRequestPath = operationSet.GetRequestPath(context);
-            // ensure the last segment of the path is a constant
+            // if we are a singleton resource,
+            // we need to find the suffix which should be the difference between our path and our parent resource
+            var parentRequestPath = operationSet.ParentRequestPath(context);
+            var diff = parentRequestPath.TrimParentFrom(currentRequestPath);
+            // if not all of the segment in difference are constant, we cannot be a singleton resource
+            if (!diff.All(s => s.IsConstant))
+                return false;
+            // now we can ensure the last segment of the path is a constant
             var lastSegment = currentRequestPath.Last();
-            if (lastSegment.IsConstant && SingletonKeywords.Any(w => lastSegment.Constant == w))
+            if (SingletonKeywords.Any(w => lastSegment.Constant.Type.Equals(typeof(string)) && lastSegment.ConstantValue == w))
             {
-                // we are a singleton resource. We need to find the suffix which should be the difference between our path and our parent resource
-                var parentRequestPath = operationSet.ParentRequestPath(context);
-                var diff = parentRequestPath.TrimParentFrom(currentRequestPath);
-                // TODO -- not all of the segment in difference are constant
-                if (!diff.All(s => s.IsConstant))
-                    throw new System.NotImplementedException($"The difference between {currentRequestPath.SerializedPath} and {parentRequestPath.SerializedPath} is not constant, we does not support this yet");
-                singletonIdSuffix = string.Join('/', diff.Select(s => s.Constant));
+                singletonIdSuffix = string.Join('/', diff.Select(s => s.ConstantValue));
                 return true;
             }
 
