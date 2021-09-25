@@ -101,8 +101,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             foreach (var restMethod in _resourceContainer.RemainingMethods)
             {
-                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, true);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, false);
             }
         }
 
@@ -197,8 +197,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
         {
-            WriteLROMethod(_writer, clientMethod, _context, false, false, true, "CreateOrUpdate", clientMethods);
-            WriteLROMethod(_writer, clientMethod, _context, false, true, true, "CreateOrUpdate", clientMethods);
+            WriteLROMethod(_writer, clientMethod, false, false, true, "CreateOrUpdate", clientMethods);
+            WriteLROMethod(_writer, clientMethod, false, true, true, "CreateOrUpdate", clientMethods);
         }
 
         /// <summary>
@@ -429,8 +429,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (clientMethod != null)
                 {
                     //TODO: merge methods like WriteList
-                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
-                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
+                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, true);
+                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, false);
                 }
             }
             else
@@ -446,8 +446,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (listMethod.ClientMethod != null)
                     {
                         _writer.Line();
-                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
-                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
+                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, true);
+                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, false);
                     }
                 }
             }

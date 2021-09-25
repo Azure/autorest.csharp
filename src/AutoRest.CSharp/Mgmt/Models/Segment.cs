@@ -13,6 +13,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal struct Segment : IEquatable<Segment>
     {
+        public static readonly Segment Providers = "providers";
+
         private ReferenceOrConstant _value;
         private string _stringValue;
 
@@ -70,5 +72,15 @@ namespace AutoRest.CSharp.Mgmt.Models
         }
 
         public static implicit operator Segment(string value) => new Segment(value);
+
+        public static bool operator ==(Segment left, Segment right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Segment left, Segment right)
+        {
+            return !(left == right);
+        }
     }
 }

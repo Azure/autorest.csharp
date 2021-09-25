@@ -11,6 +11,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -27,6 +28,7 @@ using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
+using ResourceType = Azure.ResourceManager.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -34,9 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private CodeWriter _writer;
         private Resource _resource;
-        private BuildContext<MgmtOutputLibrary> _context;
         private ResourceData _resourceData;
-        private bool _inheritArmResourceBase = false;
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
 
@@ -47,14 +47,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CSharpType TypeOfThis => _resource.Type;
         protected override string TypeNameOfThis => TypeOfThis.Name;
 
-        private MgmtConfiguration Config => _context.Configuration.MgmtConfiguration;
         private bool IsSingleton { get; }
 
-        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
+        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _writer = writer;
             _resource = resource;
-            _context = context;
             _resourceData = resource.ResourceData;
 
             IsSingleton = resource.IsSingleton;
@@ -69,16 +67,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{_resource.Description}");
                 _writer.Append($"{_resource.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
-                if (_resource.GetMethods.Values.Any(method => method == null))
+                if (_resource.GetMethods.Count == 0)
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
 Check the swagger definition, and use 'request-path-to-resource' or 'request-path-is-non-resource' directive to specify the correct resource if necessary.");
 
-                //_inheritArmResourceBase = _resource.GetMethod != null;
                 _writer.Append($"{BaseClass.Name}, ");
 
-//                if (_resource.GetMethod == null)
-//                    ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
-//Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
+                //                if (_resource.GetMethod == null)
+                //                    ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
+                //Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
                 CSharpType inheritType = new CSharpType(typeof(TrackedResource));
                 if (_resourceData.Inherits != null && _resourceData.Inherits.Name == inheritType.Name)
@@ -86,7 +83,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
                     _isITaggableResource = true;
                 }
 
-                if (_resource.DeleteMethods.Values.Any(method => method != null))
+                if (_resource.DeleteMethods.Count > 0)
                 {
                     _isDeletableResource = true;
                 }
@@ -226,22 +223,17 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             var clientMethodsList = new List<RestClientMethod>();
 
             _writer.Line();
-            if (_inheritArmResourceBase && _resource.GetMethod != null)
-            {
-                // write inherited get method
-                WriteGetMethod(_resource.GetMethod, true, _resource.GetMethods, "Get");
-                WriteGetMethod(_resource.GetMethod, false, _resource.GetMethods, "Get");
+            // write get method
+            WriteGetMethod(_resource.GetMethods, true, "Get");
+            WriteGetMethod(_resource.GetMethods, false, "Get");
 
-                clientMethodsList.AddRange(_resource.GetMethods.Select(m => m.RestClientMethod).ToList());
+            clientMethodsList.AddRange(_resource.GetMethods.Select(m => m.RestClientMethod).ToList());
 
-                WriteListAvailableLocationsMethod(true);
-                WriteListAvailableLocationsMethod(false);
-            }
+            WriteListAvailableLocationsMethod(true);
+            WriteListAvailableLocationsMethod(false);
 
             if (_isDeletableResource)
             {
-                var deleteMethod = _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true).FirstOrDefault() ?? _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).OrderBy(m => m.Name.Length).FirstOrDefault();
-                var deleteMethods = _resource.IsScopeOrExtension ? _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).ToList() : new List<RestClientMethod> { deleteMethod };
                 // write delete method
                 WriteLRO(deleteMethod, "Delete", deleteMethods);
                 clientMethodsList.AddRange(deleteMethods);
@@ -259,14 +251,14 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // 2. Listing myself at ancestor scope -> extension method if the ancestor is not in this RP, or follow #3 by listing myself as the children of the ancestor in the operations of the ancestor
             // 3. Listing children (might be resource or not) -> on the operations
 
+            // write all the methods that should belong to this resouce
             // write rest of the methods
-            var resourceContainer = _context.Library.GetResourceContainer(_resource.OperationGroup);
             foreach (var clientMethod in _resource.ResourceClientMethods)
             {
                 if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
                 {
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, _context, true);
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, _context, false);
+                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, true);
+                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, false);
                 }
             }
 
@@ -289,8 +281,8 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
                     var originalName = clientMethod.Name;
                     var methodName = originalName.EndsWith($"By{TypeOfThis.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
                     Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, _context, true, restClientName);
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, _context, false, restClientName);
+                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, true, restClientName);
+                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, false, restClientName);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
@@ -308,7 +300,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             {
                 if (!clientMethodsList.Contains(clientMethod))
                 {
-                    if (_context.Library.TryGetMethodForMergedOperation($"{_resource.OperationGroup.Key}_{clientMethod.Name}_{clientMethod.Request.HttpMethod}", out var mergedMethodName))
+                    if (Context.Library.TryGetMethodForMergedOperation($"{_resource.OperationGroup.Key}_{clientMethod.Name}_{clientMethod.Request.HttpMethod}", out var mergedMethodName))
                     {
                         if (mergedMethods.TryGetValue(mergedMethodName, out var methods))
                         {
@@ -368,9 +360,8 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             return $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
         }
 
-        private void WriteGetMethod(ClientMethod method, bool async, List<ClientMethod> methods, string? methodName = null)
+        private void WriteGetMethod(IDictionary<OperationSet, RestClientMethod> method, bool async, string methodName)
         {
-            methodName = methodName ?? method.Name;
             _writer.Line();
             var nonPathParameters = method.RestClientMethod.NonPathParameters;
             _writer.WriteXmlDocumentationSummary($"{method.Description}");
@@ -689,7 +680,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             {
                 _writer.Append($"await ");
             }
-            var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, _context).ToList();
+            var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, Context).ToList();
             _writer.Append($"{RestClientField}.{CreateMethodName(_resource.GetMethod.Name, async)}( ");
             foreach (string paramNames in pathParamNames)
             {
@@ -712,13 +703,13 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
 
         private void WriteLRO(RestClientMethod clientMethod, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
-            WriteLROMethod(_writer, clientMethod, _context, _context.Library.IsLongRunningReallyLong(clientMethod), true, true, methodName: methodName, methods: clientMethods);
-            WriteLROMethod(_writer, clientMethod, _context, _context.Library.IsLongRunningReallyLong(clientMethod), false, true, methodName: methodName, methods: clientMethods);
+            WriteLROMethod(_writer, clientMethod, Context.Library.IsLongRunningReallyLong(clientMethod), true, true, methodName: methodName, methods: clientMethods);
+            WriteLROMethod(_writer, clientMethod, Context.Library.IsLongRunningReallyLong(clientMethod), false, true, methodName: methodName, methods: clientMethods);
         }
 
         private void WriteChildResourceEntries()
         {
-            foreach (var item in _context.CodeModel.OperationGroups)
+            foreach (var item in Context.CodeModel.OperationGroups)
             {
                 if (item.ParentResourceType(Config).Equals(_resource.OperationGroup.ResourceType(Config)))
                 {
@@ -736,7 +727,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
 
         private void WriteChildNonSingletonResourceEntry(OperationGroup operationGroupOfChildResource)
         {
-            var container = _context.Library.GetResourceContainer(operationGroupOfChildResource);
+            var container = Context.Library.GetResourceContainer(operationGroupOfChildResource);
             if (container == null)
                 return;
             _writer.Line();
@@ -750,7 +741,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
 
         private void WriteChildSingletonResourceEntry(OperationGroup operationGroupOfChildSingleton, string singletonResourceSuffix)
         {
-            var singletonResource = _context.Library.GetArmResource(operationGroupOfChildSingleton);
+            var singletonResource = Context.Library.GetArmResource(operationGroupOfChildSingleton);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {singletonResource.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{singletonResource.Type.Name}\" /> object.");
@@ -770,7 +761,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
             bool passThru = false;
-            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(_context);
+            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(Context);
             if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
             {
                 valueExpression = "Id.ResourceGroupName";

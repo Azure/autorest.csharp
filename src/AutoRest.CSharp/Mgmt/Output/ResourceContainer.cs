@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override string ResourceName => Resource.ResourceName;
 
-        public IDictionary<OperationSet, RestClientMethod?> CreateMethods { get; }
+        public IDictionary<OperationSet, RestClientMethod> CreateMethods { get; }
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {

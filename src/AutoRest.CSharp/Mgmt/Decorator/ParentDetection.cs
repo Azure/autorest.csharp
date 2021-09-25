@@ -52,10 +52,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static RequestPath ParentRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
-            // escape the calculation if this is configured in the configuration
-            if (context.Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
-                return GetRequestPathFromRawPath(rawPath, context);
-
             if (_operationToParentRequestPathCache.TryGetValue(operation, out var result))
                 return result;
 
@@ -66,6 +62,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static RequestPath GetParentRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
+            // escape the calculation if this is configured in the configuration
+            if (context.Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
+                return GetRequestPathFromRawPath(rawPath, context);
+
             var currentRequestPath = operation.GetRequestPath(context);
             var currentOperationSet = context.Library.GetOperationSet(currentRequestPath);
             // if this operation comes from a resource, return itself
@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return currentRequestPath.ParentRequestPath(context);
         }
 
-        private static RequestPath ParentRequestPath(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        internal static RequestPath ParentRequestPath(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
             if (_requestPathToParentCache.TryGetValue(requestPath, out var result))
             {
@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        private static RequestPath GetParent(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        private static RequestPath GetParent(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
             // find a parent resource in the resource list
             // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate

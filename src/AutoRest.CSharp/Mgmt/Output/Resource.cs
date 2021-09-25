@@ -64,15 +64,17 @@ namespace AutoRest.CSharp.Mgmt.Output
             DeleteMethods = GetMethodsWithVerb(HttpMethod.Delete);
         }
 
-        protected IDictionary<OperationSet, RestClientMethod?> GetMethodsWithVerb(HttpMethod method)
+        protected IDictionary<OperationSet, RestClientMethod> GetMethodsWithVerb(HttpMethod method)
         {
-            return OperationSets.Keys.ToDictionary(
-                operationSet => operationSet,
-                operationSet =>
-                {
-                    var operation = operationSet.GetOperation(method);
-                    return operation != null ? _context.Library.RestClientMethods[operation] : null;
-                });
+            var result = new Dictionary<OperationSet, RestClientMethod>();
+            foreach (var operationSet in OperationSets.Keys)
+            {
+                var operation = operationSet.GetOperation(method);
+                if (operation is not null)
+                    result.Add(operationSet, _context.Library.RestClientMethods[operation]);
+            }
+
+            return result;
         }
 
         //public Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context,
@@ -143,8 +145,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         //public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.IsGetResourceMethod(ResourceData) && m.RestClientMethod.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? Methods.OrderBy(m => m.Name.Length).FirstOrDefault(m => m.IsGetResourceMethod(ResourceData));
 
-        public virtual IDictionary<OperationSet, RestClientMethod?> GetMethods { get; }
-        public virtual IDictionary<OperationSet, RestClientMethod?> DeleteMethods { get; }
+        public virtual IDictionary<OperationSet, RestClientMethod> GetMethods { get; }
+        public virtual IDictionary<OperationSet, RestClientMethod> DeleteMethods { get; }
 
         private IDictionary<OperationSet, IEnumerable<Operation>>? _operations;
         public IDictionary<OperationSet, IEnumerable<Operation>> Operations => _operations ??= OperationSets.ToDictionary(
@@ -167,7 +169,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IDictionary<OperationSet, Models.ResourceType>? _resourceTypes;
         public IDictionary<OperationSet, Models.ResourceType> ResourceTypes => _resourceTypes ??= ContextualPaths.ToDictionary(
             pair => pair.Key,
-            pair => new Models.ResourceType(pair.Value));
+            pair => pair.Value.GetResourceType(_context.Configuration.MgmtConfiguration));
 
         //protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         //{

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -32,6 +33,26 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         private static ConcurrentDictionary<string, string> _operationPathValueCache = new ConcurrentDictionary<string, string>();
+
+        private static ConcurrentDictionary<RequestPath, ResourceType> _requestPathToResourceTypeCache = new ConcurrentDictionary<RequestPath, ResourceType>();
+
+        public static ResourceType GetResourceType(this RequestPath requestPath, MgmtConfiguration config)
+        {
+            if (_requestPathToResourceTypeCache.TryGetValue(requestPath, out var resourceType))
+                return resourceType;
+
+            resourceType = CalculateResourceType(requestPath, config);
+            _requestPathToResourceTypeCache.TryAdd(requestPath, resourceType);
+            return resourceType;
+        }
+
+        private static ResourceType CalculateResourceType(RequestPath requestPath, MgmtConfiguration config)
+        {
+            if (config.RequestPathToResourceType.TryGetValue(requestPath.SerializedPath, out var resourceType))
+                return new ResourceType(resourceType);
+
+            return new ResourceType(requestPath);
+        }
 
         public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)
         {

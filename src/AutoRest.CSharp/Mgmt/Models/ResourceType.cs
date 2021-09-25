@@ -12,8 +12,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal struct ResourceType : IEquatable<ResourceType>, IReadOnlyList<Segment>
     {
-        private static readonly Segment ProviderSegment = "providers";
         private IReadOnlyList<Segment> _segments;
+
+        public ResourceType(string path)
+            : this(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => new Segment(segment)).ToList())
+        {
+        }
 
         public ResourceType(RequestPath path) : this(ParseRequestPath(path))
         {
@@ -30,9 +34,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             var segment = new List<Segment>();
             // find providers
-            int index = path.ToList().IndexOf(ProviderSegment);
+            int index = path.ToList().IndexOf(Segment.Providers);
             if (index < 0)
-                throw new ArgumentException($"Could not set ResourceType for operations group {path}. No {ProviderSegment} string found in the URI");
+                throw new ArgumentException($"Could not set ResourceType for operations group {path}. No {Segment.Providers} string found in the URI");
             segment.Add(path[index + 1]);
             segment.AddRange(path.Skip(index + 1).TakeWhile((_, index) => index % 2 != 0));
 

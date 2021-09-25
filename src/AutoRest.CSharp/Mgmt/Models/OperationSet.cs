@@ -52,5 +52,16 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             return RequestPath == other.RequestPath;
         }
+
+        public Operation? GetOperation(HttpMethod method)
+        {
+            foreach (var operation in Operations)
+            {
+                if (operation.GetHttpRequest()!.Method == method)
+                    return operation;
+            }
+
+            return null;
+        }
     }
 }

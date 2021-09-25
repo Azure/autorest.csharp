@@ -24,27 +24,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_cache.TryGetValue(operationSet, out var requestPath))
                 return requestPath;
 
-            requestPath = operationSet.GetOperation().GetRequestPath(context);
+            requestPath = GetOperation(operationSet).GetRequestPath(context);
             _cache.TryAdd(operationSet, requestPath);
             return requestPath;
         }
 
-        //public static bool IsResourceCollection(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
-        //{
-        //    // TODO -- should we change this check from OperationSet to Operation???
-        //    var requestPath = operationSet.GetRequestPath(context);
-        //    foreach (var operation in operationSet)
-        //    {
-        //        var restClientMethod = context.Library.RestClientMethods[operation];
-        //        (_, var isList, var isResourceData) = restClientMethod.GetBodyTypeForList(operationSet[operation], context);
-        //        if (isList && isResourceData)
-        //            return true;
-        //    }
-
-        //    return false;
-        //}
-
-        private static Operation GetOperation(this OperationSet operationSet)
+        private static Operation GetOperation(OperationSet operationSet)
         {
             // find PUT operation for the path
             var putOperation = operationSet.FirstOrDefault(operation => operation.GetHttpRequest()!.Method == HttpMethod.Put);
