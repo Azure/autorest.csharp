@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             SerializedPath = method.Operation.GetHttpPath();
         }
 
-        private RequestPath(IReadOnlyList<Segment> segments)
+        public RequestPath(IReadOnlyList<Segment> segments)
         {
             _segments = segments;
             SerializedPath = Segment.BuildSerializedSegments(segments);

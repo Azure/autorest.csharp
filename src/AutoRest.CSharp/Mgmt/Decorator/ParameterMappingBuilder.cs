@@ -6,10 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -33,6 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static void BuildContextualParameterMappingHierarchy(RequestPath current, BuildContext<MgmtOutputLibrary> context, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
         {
+            // TODO -- we are still missing the "scope" parameters
             // RequestPath of tenant does not have any parameter in it (actually it does not have anything), we take this as an exit
             if (current == RequestPath.Tenant)
                 return;
@@ -141,6 +145,103 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 ValueExpression = valueExpression;
                 Strict = strict;
             }
+
+            /// <summary>
+            /// Returns true if the given <see cref="Parameter"/> can match this <see cref="ContextualParameterMapping"/>
+            /// </summary>
+            /// <param name="parameter"></param>
+            /// <returns></returns>
+            public bool MatchesParameter(Parameter parameter)
+            {
+                if (Strict)
+                    return ParameterName == parameter.Name && ParameterType.Equals(parameter.Type);
+
+                // if not strict, we only check the type ignoring the name of the parameter
+                return ParameterType.Equals(parameter.Type);
+            }
+        }
+
+        public static IEnumerable<ParameterMapping> BuildParameterMapping(this Operation operation, IEnumerable<ContextualParameterMapping> contextualParameterMappings, BuildContext<MgmtOutputLibrary> context)
+        {
+            return context.Library.RestClientMethods[operation].BuildParameterMapping(contextualParameterMappings);
+        }
+
+        public static IEnumerable<ParameterMapping> BuildParameterMapping(this RestClientMethod method, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
+        {
+            var contextualParameterMappingCache = new List<ContextualParameterMapping>(contextualParameterMappings);
+            foreach (var parameter in method.Parameters)
+            {
+                // Update parameter type if the method is a `ById` method
+                // TODO -- we might no longer needs this since we are not generating "ById" methods
+                var p = UpdateParameterTypeOfByIdMethod(method, parameter);
+                // find this parameter name in the contextual parameter mappings
+                // if there is one, this parameter should use the same value expression
+                // if there is none of this, this parameter should be a pass through parameter
+                var mapping = FindContextualParameterForMethod(p, contextualParameterMappingCache, method);
+                if (mapping == null)
+                {
+                    yield return new ParameterMapping(p, true, "");
+                }
+                else
+                {
+                    yield return new ParameterMapping(p, false, mapping.ValueExpression);
+                }
+            }
+        }
+
+        // TODO -- this needs refinement
+        private static Parameter UpdateParameterTypeOfByIdMethod(RestClientMethod method, Parameter parameter)
+        {
+            if (method.IsByIdMethod() && parameter.Name.Equals(method.Parameters[0].Name, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return parameter with { Type = typeof(ResourceIdentifier) };
+            }
+
+            return parameter;
+        }
+
+        /// <summary>
+        /// Represents how a parameter of rest operation is mapped to a parameter of a container method or an expression.
+        /// </summary>
+        public record ParameterMapping
+        {
+            /// <summary>
+            /// The parameter object in <see cref="RestClientMethod"/>.
+            /// </summary>
+            public Parameter Parameter;
+            /// <summary>
+            /// Should the parameter be passed through from the method in container class?
+            /// </summary>
+            public bool IsPassThru;
+            /// <summary>
+            /// if not pass-through, this is the value to pass in <see cref="RestClientMethod"/>.
+            /// </summary>
+            public string ValueExpression;
+
+            public ParameterMapping(Parameter parameter, bool isPassThru, string valueExpression)
+            {
+                Parameter = parameter;
+                IsPassThru = isPassThru;
+                ValueExpression = valueExpression;
+            }
+        }
+
+        private static ContextualParameterMapping? FindContextualParameterForMethod(Parameter pathParameter,
+            List<ContextualParameterMapping> contextualParameterMappings, RestClientMethod method)
+        {
+            // skip non-path parameters
+            if (!pathParameter.IsInPathOf(method))
+                return null;
+            var result = contextualParameterMappings.FirstOrDefault(mapping => mapping.MatchesParameter(pathParameter));
+            // if we match one parameter, we need to remove the matching ContextualParameterMapping from the list to avoid multiple matching
+            if (result != null)
+                contextualParameterMappings.Remove(result);
+            return result;
+        }
+
+        public static IReadOnlyList<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
+        {
+            return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
         }
     }
 }

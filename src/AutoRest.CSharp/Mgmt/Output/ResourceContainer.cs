@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceContainer(IReadOnlyDictionary<OperationSet, HashSet<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
             : base(operationSets, resourceName, context)
         {
-            CreateMethods = GetMethodsWithVerb(HttpMethod.Put);
+            CreateOperation = GetOperationWithVerb(HttpMethod.Put);
         }
 
         //public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod && !IsPutMethod(m.RestClientMethod)
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override string ResourceName => Resource.ResourceName;
 
-        public IDictionary<OperationSet, RestClientMethod> CreateMethods { get; }
+        public MgmtClientOperation CreateOperation { get; }
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {

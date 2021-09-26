@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -192,6 +193,44 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static bool IsGetResourceMethod(this ClientMethod method, ResourceData resourceData)
         {
             return method.RestClientMethod.Operation.IsGetResourceOperation(method.RestClientMethod.Responses[0].ResponseBody?.Type.Name, resourceData);
+        }
+
+        public static bool IsPagingOperation(this MgmtClientOperation clientOperation, BuildContext<MgmtOutputLibrary> context)
+        {
+            return clientOperation.Any(restOperation => restOperation.IsPagingOperation(context));
+        }
+
+        public static bool IsLongRunningOperation(this MgmtClientOperation clientOperation)
+        {
+            return clientOperation.Any(restOperation => restOperation.IsLongRunningOperation());
+        }
+
+        public static bool IsLongRunningReallyLong(this MgmtClientOperation clientOperation)
+        {
+            return clientOperation.Any(restOperation => restOperation.IsLongRunningReallyLong());
+        }
+
+        public static bool IsPagingOperation(this MgmtRestOperation restOperation, BuildContext<MgmtOutputLibrary> context)
+        {
+            return restOperation.GetPagingMethod(context) != null;
+        }
+
+        public static PagingMethod? GetPagingMethod(this MgmtRestOperation restOperation, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (context.Library.PagingMethods.TryGetValue(restOperation.Method, out var pagingMethod))
+                return pagingMethod;
+
+            return null;
+        }
+
+        public static bool IsLongRunningOperation(this MgmtRestOperation restOperation)
+        {
+            return restOperation.Operation.IsLongRunning;
+        }
+
+        public static bool IsLongRunningReallyLong(this MgmtRestOperation restOperation)
+        {
+            return restOperation.Operation.IsLongRunningReallyLong ?? false;
         }
     }
 }

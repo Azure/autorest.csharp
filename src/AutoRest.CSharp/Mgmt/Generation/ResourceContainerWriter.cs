@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (_resourceContainer.GetMethod != null)
             {
-                var getMethods = _resourceContainer.GetMethods.Select(m => m.RestClientMethod).ToList();
+                var getMethods = _resourceContainer.GetOperation.Select(m => m.Method).ToList();
                 WriteGetVariants(_resourceContainer.GetMethod.RestClientMethod, getMethods);
                 WriteGetIfExistsVariants(_resourceContainer.GetMethod.RestClientMethod);
                 WriteCheckIfExistsVariants(_resourceContainer.GetMethod.RestClientMethod);
@@ -197,8 +197,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
         {
-            WriteLROMethod(_writer, clientMethod, false, false, true, "CreateOrUpdate", clientMethods);
-            WriteLROMethod(_writer, clientMethod, false, true, true, "CreateOrUpdate", clientMethods);
+            WriteLROMethodOld(clientMethod, "CreateOrUpdate", false, clientMethods);
+            WriteLROMethodOld(clientMethod, "CreateOrUpdate", true, clientMethods);
         }
 
         /// <summary>
@@ -388,7 +388,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"var response = {GetAwait(async)} {RestClientField}.{CreateMethodName($"{method.Name}", async)}(");
             BuildAndWriteParameters(writer, method, parameterMapping, isResourceLevel);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-            WriteEndOfGet(_writer, _resource.Type, async);
+            WriteGetResponse(_writer, _resource.Type, async);
         }
 
         private void WriteGetByIdVariants(RestClientMethod method, bool isAsync)
@@ -407,7 +407,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"var response = {GetAwait(isAsync)} {RestClientField}.{method.Name}{GetAsyncSuffix(isAsync)}(");
                 BuildAndWriteParameters(writer, method, parameterMapping);
                 _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
-                WriteEndOfGet(_writer, _resource.Type, isAsync);
+                WriteGetResponse(_writer, _resource.Type, isAsync);
             }, isOverride: false);
         }
 

@@ -214,32 +214,34 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public IDictionary<Operation, RestClientMethod> RestClientMethods => EnsureRestClientMethods();
-        public IDictionary<RestClientMethod, ClientMethod> ClientMethods => EnsureClientMethods();
+        //public IDictionary<RestClientMethod, ClientMethod> ClientMethods => EnsureClientMethods();
         public IDictionary<RestClientMethod, PagingMethod> PagingMethods => EnsurePagingMethods();
 
         private IDictionary<Operation, RestClientMethod>? _restClientMethods;
-        private IDictionary<RestClientMethod, ClientMethod>? _clientMethods;
+        //private IDictionary<RestClientMethod, ClientMethod>? _clientMethods;
         private IDictionary<RestClientMethod, PagingMethod>? _pagingMethods;
 
-        private IDictionary<RestClientMethod, ClientMethod> EnsureClientMethods()
-        {
-            if (_clientMethods != null)
-                return _clientMethods;
+        // Current implementation does not require we have ClientMethods. RestClientMethod can do the same and even more - ClientMethods exclude the LRO methods.
+        //private IDictionary<RestClientMethod, ClientMethod> EnsureClientMethods()
+        //{
+        //    if (_clientMethods != null)
+        //        return _clientMethods;
 
-            _clientMethods = new Dictionary<RestClientMethod, ClientMethod>();
-            var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
-            foreach (var restClient in RestClients)
-            {
-                var methods = ClientBuilder.BuildMethods(restClient.OperationGroup, restClient, placeholder);
-                foreach (var method in methods)
-                {
-                    _clientMethods.Add(method.RestClientMethod, method);
-                }
-            }
+        //    _clientMethods = new Dictionary<RestClientMethod, ClientMethod>();
+        //    var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
+        //    foreach (var restClient in RestClients)
+        //    {
+        //        var methods = ClientBuilder.BuildMethods(restClient.OperationGroup, restClient, placeholder);
+        //        foreach (var method in methods)
+        //        {
+        //            _clientMethods.Add(method.RestClientMethod, method);
+        //        }
+        //    }
 
-            return _clientMethods;
-        }
+        //    return _clientMethods;
+        //}
 
+        // but we still need PagingMethod to help us handle the paging mechanism
         private IDictionary<RestClientMethod, PagingMethod> EnsurePagingMethods()
         {
             if (_pagingMethods != null)
@@ -259,7 +261,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _pagingMethods;
         }
 
-        public IDictionary<Operation, RestClientMethod> EnsureRestClientMethods()
+        private IDictionary<Operation, RestClientMethod> EnsureRestClientMethods()
         {
             if (_restClientMethods != null)
                 return _restClientMethods;
@@ -523,7 +525,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToResourceContainer;
         }
 
-        private List<Dictionary<OperationSet, HashSet<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
+        private IEnumerable<Dictionary<OperationSet, HashSet<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
         { 
             var result = new List<Dictionary<OperationSet, HashSet<Operation>>>();
 
@@ -538,8 +540,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // TODO -- we need to categrize the above list to see if some of the resources have the operation list and we can combine them.
-
-            return result;
+            // Now we are just combining all of them together without categorizing
+            yield return result.Aggregate((l, r) => l.Union(r).ToDictionary(pair => pair.Key, pair => pair.Value));
         }
 
         private Dictionary<string, HashSet<Operation>>? _childOperations;
@@ -592,11 +594,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _rawRequestPathToResourceData;
-        }
-
-        internal bool IsLongRunningReallyLong(RestClientMethod clientMethod)
-        {
-            return clientMethod.Operation.IsLongRunningReallyLong ?? false;
         }
 
         private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
