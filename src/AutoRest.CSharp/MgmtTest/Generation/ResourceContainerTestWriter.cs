@@ -318,8 +318,20 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             return null;
         }
+
+
         protected void WriteSchemaObjectExampleValue(CodeWriter writer, SchemaObjectType sot, ExampleValue ev, string variableName)
         {
+            // Find Polimophismed schema
+            if (_context.Library.SchemaMap.ContainsKey(ev.Schema))
+            {
+                var mappedTypeProvider = _context.Library.SchemaMap[ev.Schema];
+                if (mappedTypeProvider is SchemaObjectType)
+                {
+                    sot = (SchemaObjectType)mappedTypeProvider;
+                }
+            }
+
             var constructor = sot.Constructors[0];
             // find the simplest constructor
             foreach (var c in sot.Constructors)
