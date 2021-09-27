@@ -181,6 +181,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<OperationSet>? _resourceOperationSets;
 
         public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= _resourceNameToOperationSets.SelectMany(pair => pair.Value);
+        /// <summary>
+        /// Returns the full list of the operation sets in this swagger
+        /// </summary>
         public IEnumerable<OperationSet> OperationSets => _rawRequestPathToOperationSets.Values;
 
         public OperationSet GetOperationSet(string requestPath)
@@ -364,21 +367,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRequestPathToArmResources().TryGetValue(requestPath, out resource);
         }
 
-        /// <summary>
-        /// Looks up a <see cref="RestClient" /> object by <see cref="OperationGroup" />.
-        /// </summary>
-        /// <param name="operationGroup">OperationGroup object.</param>
-        /// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
-        public MgmtRestClient GetRestClient(OperationGroup operationGroup)
-        {
-            foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
-            {
-                if (TryGetRestClient(requestPath, out var restClient))
-                    return restClient;
-            }
+        ///// <summary>
+        ///// Looks up a <see cref="RestClient" /> object by <see cref="OperationGroup" />.
+        ///// </summary>
+        ///// <param name="operationGroup">OperationGroup object.</param>
+        ///// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
+        //public MgmtRestClient GetRestClient(OperationGroup operationGroup)
+        //{
+        //    foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
+        //    {
+        //        if (TryGetRestClient(requestPath, out var restClient))
+        //            return restClient;
+        //    }
 
-            throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {operationGroup}");
-        }
+        //    throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {operationGroup}");
+        //}
 
         public MgmtRestClient GetRestClient(string requestPath)
         {
@@ -471,7 +474,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private IEnumerable<Dictionary<OperationSet, HashSet<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
-        { 
+        {
             var result = new List<Dictionary<OperationSet, HashSet<Operation>>>();
 
             foreach (var resourceOperationSet in resourceOperationSets)
@@ -552,19 +555,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             if (_context.Configuration.PublicClients)
             {
-                foreach (var operationGroup in _codeModel.OperationGroups)
+                foreach (var operationSet in OperationSets)
                 {
-                    foreach (var operation in operationGroup.Operations)
+                    foreach (var operation in operationSet)
                     {
                         if (operation.IsLongRunning)
                         {
                             _longRunningOperations.Add(
                                 operation,
                                 new MgmtLongRunningOperation(
-                                    operationGroup,
                                     operation,
-                                    _context,
-                                    FindLongRunningOperationInfo(operationGroup, operation)));
+                                    operationSet[operation],
+                                    FindLongRunningOperationInfo(operation),
+                                    _context));
                         }
                     }
                 }
@@ -590,19 +593,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     {
                         foreach (var operation in operationSet)
                         {
-                            if (!operation.IsLongRunning
-                                && operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest
-                                && desiredHttpMethods.Contains(httpRequest.Method))
+                            var httpRequest = operation.GetHttpRequest();
+                            if (!operation.IsLongRunning && httpRequest != null && desiredHttpMethods.Contains(httpRequest.Method))
                             {
                                 _nonLongRunningOperations.Add(
                                     operation,
                                     new NonLongRunningOperation(
-                                        operationSet[operation],
                                         operation,
-                                        _context,
-                                        FindLongRunningOperationInfo(operationSet[operation], operation)
-                                    )
-                                );
+                                        FindLongRunningOperationInfo(operation),
+                                        _context));
                             }
                         }
                     }
@@ -630,11 +629,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return provider?.Type;
         }
 
-        public LongRunningOperationInfo FindLongRunningOperationInfo(OperationGroup operationGroup, Operation operation)
+        public LongRunningOperationInfo FindLongRunningOperationInfo(Operation operation)
         {
-            var mgmtRestClient = GetRestClient(operationGroup);
-
-            Debug.Assert(mgmtRestClient != null, "Unexpected. Unable find matching rest client.");
+            var mgmtRestClient = GetRestClient(operation.GetHttpPath());
 
             var nextOperationMethod = operation?.Language?.Default?.Paging != null
                 ? mgmtRestClient.GetNextOperationMethod(operation.Requests.Single())

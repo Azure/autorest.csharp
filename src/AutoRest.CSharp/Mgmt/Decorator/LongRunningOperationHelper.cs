@@ -16,20 +16,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// Decides if we want to wrap the LRO result type with a [Resource] type.
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="operationGroup"></param>
         /// <param name="operation"></param>
         /// <param name="resultType">Result type of the LRO.</param>
+        /// 
         /// <returns></returns>
-        public static bool ShouldWrapResultType(BuildContext<MgmtOutputLibrary> context, OperationGroup operationGroup, Input.Operation operation, CSharpType? resultType)
+        public static bool ShouldWrapResultType(BuildContext<MgmtOutputLibrary> context, Input.Operation operation, CSharpType? resultType)
         {
-            if (resultType != null
-                && operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest
+            var httpRequest = operation.GetHttpRequest();
+            if (resultType != null && httpRequest != null
                 && (httpRequest.Method == HttpMethod.Put || httpRequest.Method == HttpMethod.Patch))
             {
                 // need to check result type is [Resource]Data because:
                 // 1. some PUT operation returns differently and we don't want to wrap that with [Resource]
                 // 2. some operations belong to non-resource
-                if (context.Library.TryGetResourceData(operationGroup, out var resourceData))
+                if (context.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
                 {
                     return resultType.Name.Equals(resourceData.Type.Name);
                 }
