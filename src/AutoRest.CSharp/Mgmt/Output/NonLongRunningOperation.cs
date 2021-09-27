@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(responseSchema, false));
             }
 
-            if (LongRunningOperationHelper.ShouldWrapResultType(context, operation, ResultType))
+            if (operation.ShouldWrapResultType(ResultType, context))
             {
                 ResultType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
                 ResultDataType = context.Library.GetResourceData(operation.GetHttpPath()).Type;

@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             _lroInfo = lroInfo;
             _operation = operation;
-            if (LongRunningOperationHelper.ShouldWrapResultType(context, operation, ResultType))
+            if (operation.ShouldWrapResultType(ResultType, context))
             {
                 WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
             }

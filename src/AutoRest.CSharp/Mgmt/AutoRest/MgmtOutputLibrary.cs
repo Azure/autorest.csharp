@@ -566,7 +566,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 new MgmtLongRunningOperation(
                                     operation,
                                     operationSet[operation],
-                                    FindLongRunningOperationInfo(operation),
+                                    operation.FindLongRunningOperationInfo(_context),
                                     _context));
                         }
                     }
@@ -587,7 +587,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             if (_context.Configuration.PublicClients)
             {
-                foreach ((_, var operationSet) in _rawRequestPathToOperationSets)
+                foreach (var operationSet in OperationSets)
                 {
                     if (operationSet.IsResource(_mgmtConfiguration))
                     {
@@ -600,7 +600,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                     operation,
                                     new NonLongRunningOperation(
                                         operation,
-                                        FindLongRunningOperationInfo(operation),
+                                        operation.FindLongRunningOperationInfo(_context),
                                         _context));
                             }
                         }
@@ -627,20 +627,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _nameToTypeProvider.TryGetValue(originalName, out TypeProvider? provider);
             provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
-        }
-
-        public LongRunningOperationInfo FindLongRunningOperationInfo(Operation operation)
-        {
-            var mgmtRestClient = GetRestClient(operation.GetHttpPath());
-
-            var nextOperationMethod = operation?.Language?.Default?.Paging != null
-                ? mgmtRestClient.GetNextOperationMethod(operation.Requests.Single())
-                : null;
-
-            return new LongRunningOperationInfo(
-                "public",
-                mgmtRestClient.ClientPrefix,
-                nextOperationMethod);
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()
