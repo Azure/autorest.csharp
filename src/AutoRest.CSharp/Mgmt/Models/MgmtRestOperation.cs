@@ -9,35 +9,47 @@ using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
+    /// <summary>
+    /// A <see cref="MgmtRestOperation"/> includes some invocation information of a <see cref="RestClientMethod"/>
+    /// We have the <see cref="RestClientMethod"/> that will be invoked, also we have the "Contextual Path" of this method,
+    /// which records the context of this method invocation,
+    /// providing you the information that which part of the `Id` we should pass to the parameter of <see cref="RestClientMethod"/>
+    /// </summary>
     internal record MgmtRestOperation
     {
+        /// <summary>
+        /// The underlying <see cref="Operation"/> object.
+        /// </summary>
         public Operation Operation => Method.Operation;
-        public string Name => Operation.CSharpName();
+        /// <summary>
+        /// The name of this operation
+        /// </summary>
+        public string Name => Operation.CSharpName(); // TODO -- introduce some mechanism to determine this name
         /// <summary>
         /// The actual operation
         /// </summary>
         public RestClientMethod Method { get; }
         /// <summary>
-        /// Which version of resource this operation belongs?
+        /// The contextual path of this operation
         /// </summary>
-        public OperationSet ResourceOperationSet { get; }
+        public RequestPath ContextualPath { get; }
         /// <summary>
         /// From which RestClient is this operation invoked
         /// </summary>
         public MgmtRestClient RestClient { get; }
 
-        public MgmtRestOperation(RestClientMethod method, OperationSet resourceOperationSet, MgmtRestClient restClient)
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath contextualPath)
         {
             Method = method;
-            ResourceOperationSet = resourceOperationSet;
+            ContextualPath = contextualPath;
             RestClient = restClient;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void Deconstruct(out RestClientMethod method, out OperationSet operationSet, out MgmtRestClient restClient)
+        public void Deconstruct(out RestClientMethod method, out MgmtRestClient restClient, out RequestPath contextualPath)
         {
             method = Method;
-            operationSet = ResourceOperationSet;
+            contextualPath = ContextualPath;
             restClient = RestClient;
         }
     }

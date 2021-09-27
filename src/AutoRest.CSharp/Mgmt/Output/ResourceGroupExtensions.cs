@@ -9,10 +9,8 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ResourceGroupExtensions : MgmtTypeProvider
+    internal class ResourceGroupExtensions : TypeProvider
     {
-        public override RequestPath ContextualPath => RequestPath.Subscription;
-
         public ResourceGroupExtensions(BuildContext context) : base(context)
         {
         }

@@ -23,11 +23,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IReadOnlyDictionary<OperationSet, HashSet<Operation>> OperationSets { get; }
 
-        private IDictionary<OperationSet, RequestPath>? _contextualPaths;
-        public virtual IDictionary<OperationSet, RequestPath> ContextualPaths => _contextualPaths ??= OperationSets.Keys.ToDictionary(
-                operationSet => operationSet,
-                operationSet => operationSet.GetRequestPath(_context));
-
         private IEnumerable<string>? _requestPaths;
         public IEnumerable<string> RequestPaths => _requestPaths ??= OperationSets.Keys.Select(operationSet => operationSet.RequestPath);
 
@@ -54,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (operation is not null)
                 {
                     var clientOperation = new MgmtRestOperation(_context.Library.RestClientMethods[operation],
-                        operationSet, _context.Library.GetRestClient(operation.GetHttpPath()));
+                        _context.Library.GetRestClient(operation.GetHttpPath()), GetContextualPath(operationSet));
                     result.Add(clientOperation);
                 }
             }
@@ -106,6 +101,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         public IEnumerable<MgmtClientOperation> ClientOperations => EnsureClientOperationMap().Values;
 
         /// <summary>
+        /// This method returns the contextual path from one resource <see cref="OperationSet"/>
+        /// In the <see cref="Resource"/> class, we just use the RequestPath of the OperationSet as its contextual path
+        /// </summary>
+        /// <param name="operationSet"></param>
+        /// <returns></returns>
+        protected virtual RequestPath GetContextualPath(OperationSet operationSet)
+        {
+            return operationSet.GetRequestPath(_context);
+        }
+
+        /// <summary>
         /// This is a map from the diff request path between the operation and the contextual path to the actual operations
         /// </summary>
         private IDictionary<RequestPath, MgmtClientOperation>? _clientOperationMap;
@@ -122,10 +128,10 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     if (!ShouldIncludeOperation(operation))
                         continue; // meaning this operation will be included in the container
-                    var contextualPath = ContextualPaths[operationSet];
+                    var contextualPath = operationSet.GetRequestPath(_context);
                     var diff = new RequestPath(contextualPath.TrimParentFrom(operation.GetRequestPath(_context)).ToList());
                     var restClient = _context.Library.GetRestClient(operation.GetHttpPath());
-                    var restOperation = new MgmtRestOperation(_context.Library.RestClientMethods[operation], operationSet, restClient);
+                    var restOperation = new MgmtRestOperation(_context.Library.RestClientMethods[operation], restClient, GetContextualPath(operationSet));
                     if (result.TryGetValue(diff, out var list))
                     {
                         list.Add(restOperation);
@@ -157,9 +163,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private IDictionary<OperationSet, ResourceType>? _resourceTypes;
-        public IDictionary<OperationSet, ResourceType> ResourceTypes => _resourceTypes ??= ContextualPaths.ToDictionary(
-            pair => pair.Key,
-            pair => pair.Value.GetResourceType(_context.Configuration.MgmtConfiguration));
+        public IDictionary<OperationSet, ResourceType> ResourceTypes => _resourceTypes ??= OperationSets.Keys.ToDictionary(
+            operationSet => operationSet,
+            operationSet => operationSet.GetRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration));
 
         //protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         //{

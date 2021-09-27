@@ -29,17 +29,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string TenantCommentName = "Tenant";
         private const string ManagementGroupCommentName = "ManagementGroup";
 
-        private RestClientMethod? _createMethod;
-        private List<RestClientMethod>? _putMethods;
-        private RestClientMethod? _putByIdMethod;
-        private ClientMethod? _getMethod;
-        private List<ClientMethod>? _getMethods;
-        private ClientMethod? _getByIdMethod;
-
-        private IDictionary<OperationSet, RequestPath>? _contextualPaths;
-        public override IDictionary<OperationSet, RequestPath> ContextualPaths => _contextualPaths ??= OperationSets.Keys.ToDictionary(
-                operationSet => operationSet,
-                operationSet => operationSet.ParentRequestPath(_context));
+        //private RestClientMethod? _createMethod;
+        //private List<RestClientMethod>? _putMethods;
+        //private RestClientMethod? _putByIdMethod;
+        //private ClientMethod? _getMethod;
+        //private List<ClientMethod>? _getMethods;
+        //private ClientMethod? _getByIdMethod;
 
         public ResourceContainer(IReadOnlyDictionary<OperationSet, HashSet<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
             : base(operationSets, resourceName, context)
@@ -59,6 +54,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override bool ShouldIncludeOperation(Operation operation)
         {
             return !base.ShouldIncludeOperation(operation);
+        }
+
+        /// <summary>
+        /// This method returns the contextual path from one resource <see cref="OperationSet"/>
+        /// In the <see cref="ResourceContainer"/> class, we need to use the parent RequestPath of the OperationSet as its contextual path
+        /// </summary>
+        /// <param name="operationSet"></param>
+        /// <returns></returns>
+        protected override RequestPath GetContextualPath(OperationSet operationSet)
+        {
+            return operationSet.ParentRequestPath(_context);
         }
 
         //public List<RestClientMethod> PutMethods => _putMethods ??= GetPutMethods();

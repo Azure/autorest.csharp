@@ -42,7 +42,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual CSharpType TypeOfThis => _resource.Type;
         protected override string TypeNameOfThis => TypeOfThis.Name;
-        protected virtual IDictionary<OperationSet, RequestPath> ContextualPaths => _resource.ContextualPaths;
         private bool IsSingleton => _resource.IsSingleton;
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, context)
@@ -269,12 +268,12 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Line();
             // get the corresponding MgmtClientOperation mapping
             var operationMappings = clientOperation.ToDictionary(
-                clientOperation => clientOperation.ResourceOperationSet,
-                clientOperation => clientOperation);
+                operation => operation.ContextualPath,
+                operation => operation);
             // build contextual parameters
-            var contextualParameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -310,8 +309,8 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         }
 
         private void WritePagingMethodBody(CodeWriter writer, CSharpType itemType, Diagnostic diagnostic,
-            IDictionary<OperationSet, MgmtRestOperation> operationMappings,
-            IDictionary<OperationSet,IEnumerable<ParameterMapping>> parameterMappings, bool async)
+            IDictionary<RequestPath, MgmtRestOperation> operationMappings,
+            IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
             // we need to write multiple branches for a paging method
             if (operationMappings.Count == 1)
@@ -388,12 +387,12 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Line();
             // get the corresponding MgmtClientOperation mapping
             var operationMappings = clientOperation.ToDictionary(
-                clientOperation => clientOperation.ResourceOperationSet,
-                clientOperation => clientOperation);
+                operation => operation.ContextualPath,
+                operation => operation);
             // build contextual parameters
-            var contextualParameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -426,7 +425,8 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             }
         }
 
-        private void WriteNormalMethodBody(CodeWriter writer, IDictionary<OperationSet, MgmtRestOperation> operationMappings, IDictionary<OperationSet, IEnumerable<ParameterMapping>> parameterMappings, bool async)
+        private void WriteNormalMethodBody(CodeWriter writer, IDictionary<RequestPath, MgmtRestOperation> operationMappings,
+            IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
             // we need to write multiple branches for a normal method
             if (operationMappings.Count == 1)
@@ -458,12 +458,12 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Line();
             // get the corresponding MgmtClientOperation mapping
             var operationMappings = clientOperation.ToDictionary(
-                clientOperation => clientOperation.ResourceOperationSet,
-                clientOperation => clientOperation);
+                operation => operation.ContextualPath,
+                operation => operation);
             // build contextual parameters
-            var contextualParameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -507,14 +507,15 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             }
         }
 
-        private void WriteLROMethodBody(CodeWriter writer, CSharpType lroObjectType, IDictionary<OperationSet, MgmtRestOperation> operationMapping, IDictionary<OperationSet, IEnumerable<ParameterMapping>> parameterMappings, bool async)
+        private void WriteLROMethodBody(CodeWriter writer, CSharpType lroObjectType, IDictionary<RequestPath, MgmtRestOperation> operationMapping,
+            IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
             // TODO -- we need to write multiple branches for a LRO operation
             if (operationMapping.Count == 1)
             {
                 // if we only have one branch, we would not need those if-else statements
                 var branch = operationMapping.Keys.First();
-                WriteLROMethodBranch(writer, lroObjectType, branch, operationMapping[branch], parameterMappings[branch], async);
+                WriteLROMethodBranch(writer, lroObjectType, operationMapping[branch], parameterMappings[branch], async);
             }
             else
             {
@@ -523,7 +524,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             }
         }
 
-        private void WriteLROMethodBranch(CodeWriter writer, CSharpType lroObjectType, OperationSet branch, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        private void WriteLROMethodBranch(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             writer.Append($"var response = {GetAwait(async)} ");
             writer.Append($"{GetRestClientFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
@@ -672,12 +673,12 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Line($"{GetAwait(async)} TagContainer.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
             // get the corresponding MgmtClientOperation mapping
             var operationMappings = _resource.GetOperation.ToDictionary(
-                clientOperation => clientOperation.ResourceOperationSet,
+                clientOperation => clientOperation.ContextualPath,
                 clientOperation => clientOperation);
             // build contextual parameters
-            var contextualParameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,

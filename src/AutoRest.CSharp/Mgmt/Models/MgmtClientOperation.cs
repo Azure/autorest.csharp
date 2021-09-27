@@ -9,6 +9,13 @@ using System.Text;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
+    /// <summary>
+    /// A <see cref="MgmtClientOperation"/> includes at least one <see cref="MgmtRestOperation"/>.
+    /// This is a collection of multiple methods with the same purpose but belong to different parents.
+    /// For instance, one resource might how two different parents, and we can invoke the `CreateOrUpdate` under either of those parents.
+    /// To make the SDK more user-friendly and considering that our SDK has been built in the "context aware" way,
+    /// we group these methods together and invoke them by the current context
+    /// </summary>
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
         public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)

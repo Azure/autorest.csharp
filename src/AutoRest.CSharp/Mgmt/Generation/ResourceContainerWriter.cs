@@ -47,7 +47,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override CSharpType TypeOfThis => _resourceContainer.Type;
         protected override string TypeNameOfThis => TypeOfThis.Name;
-        protected override IDictionary<OperationSet, RequestPath> ContextualPaths => _resourceContainer.ContextualPaths;
 
         public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
             : base(writer, resourceContainer.Resource, context)
@@ -201,12 +200,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // get the corresponding MgmtClientOperation mapping
             var operationMappings = clientOperation.ToDictionary(
-                operation => operation.ResourceOperationSet,
+                operation => operation.ContextualPath,
                 operation => operation);
             // build contextual parameters
-            var contextualParameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -238,12 +237,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // get the corresponding MgmtClientOperation mapping
             var operationMappings = clientOperation.ToDictionary(
-                operation => operation.ResourceOperationSet,
+                operation => operation.ContextualPath,
                 operation => operation);
             // build contextual parameters
-            var contextualParameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -256,7 +255,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }, async, isOverride: false);
         }
 
-        private void WriteGetMethodBody(CodeWriter writer, IDictionary<OperationSet, MgmtRestOperation> operationMappings, IDictionary<OperationSet, IEnumerable<ParameterMapping>> parameterMappings, bool async)
+        private void WriteGetMethodBody(CodeWriter writer, IDictionary<RequestPath, MgmtRestOperation> operationMappings,
+            IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
             // we need to write multiple branches for a normal method
             if (operationMappings.Count == 1)
