@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var containerWriter = new ResourceContainerWriter(codeWriter, resourceContainer, context);
-                containerWriter.WriteContainer();
+                containerWriter.Write();
 
                 project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
             }
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var armResourceWriter = new ResourceWriter(codeWriter, resource, context);
-                armResourceWriter.WriteResource();
+                armResourceWriter.Write();
 
                 project.AddGeneratedFile($"{resource.Type.Name}.cs", codeWriter.ToString());
             }

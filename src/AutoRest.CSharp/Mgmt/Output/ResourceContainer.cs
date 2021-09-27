@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override string ResourceName => Resource.ResourceName;
 
-        public MgmtClientOperation CreateOperation { get; }
+        public MgmtClientOperation? CreateOperation { get; }
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {

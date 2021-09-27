@@ -31,8 +31,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
-        private Resource _resource;
-        private ResourceData _resourceData;
+        protected Resource _resource;
+        protected ResourceData _resourceData;
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
 
@@ -40,33 +40,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ContextProperty => "this";
 
-        protected CSharpType TypeOfThis => _resource.Type;
+        protected virtual CSharpType TypeOfThis => _resource.Type;
         protected override string TypeNameOfThis => TypeOfThis.Name;
-
-        private bool IsSingleton { get; }
+        protected virtual IDictionary<OperationSet, RequestPath> ContextualPaths => _resource.ContextualPaths;
+        private bool IsSingleton => _resource.IsSingleton;
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, context)
         {
             _resource = resource;
             _resourceData = resource.ResourceData;
-
-            IsSingleton = resource.IsSingleton;
         }
 
-        public void WriteResource()
+        public virtual void Write()
         {
             WriteUsings(_writer);
 
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{_resource.Description}");
-                _writer.Append($"{_resource.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
+                _writer.Line($"{_resource.Declaration.Accessibility} partial class {TypeNameOfThis}: {BaseClass}");
 
-                if (_resource.GetOperation.Count == 0)
+                if (_resource.GetOperation == null)
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
 Check the swagger definition, and use 'request-path-to-resource' or 'request-path-is-non-resource' directive to specify the correct resource if necessary.");
-
-                _writer.Append($"{BaseClass.Name}, ");
 
                 CSharpType inheritType = new CSharpType(typeof(TrackedResource));
                 if (_resourceData.Inherits != null && _resourceData.Inherits.Name == inheritType.Name)
@@ -74,19 +70,17 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
                     _isITaggableResource = true;
                 }
 
-                if (_resource.DeleteOperation.Count > 0)
+                if (_resource.DeleteOperation != null)
                 {
                     _isDeletableResource = true;
                 }
-                _writer.RemoveTrailingCharacter();
 
                 using (_writer.Scope())
                 {
-                    WriteClientFields();
-                    WriteChildRestClients();
-                    WriteClientCtors();
-                    WriteClientProperties();
-                    WriteClientMethods();
+                    WriteFields();
+                    WriteCtors();
+                    WriteProperties();
+                    WriteMethods();
 
                     // write children
                     WriteChildResourceEntries();
@@ -94,24 +88,16 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             }
         }
 
-        private void WriteClientFields()
+        protected virtual void WriteFields()
         {
-            WriteFields(_writer, _resource.RestClients.Values.Distinct());
+            WriteFields(_writer, _resource.RestClients);
             _writer.Line($"private readonly {_resourceData.Type} _data;");
         }
 
-        private void WriteChildRestClients()
-        {
-            foreach (var client in _resource.OperationRestClients)
-            {
-                _writer.Append($"private {client.Type} {GetRestClientFieldName(client)}").LineRaw(" { get; }");
-            }
-        }
-
-        private void WriteClientCtors()
+        protected virtual void WriteCtors()
         {
             _writer.Line();
-            // write an internal default constructor
+            // write protected default constructor
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis}\"/> class for mocking.");
             using (_writer.Scope($"protected {TypeOfThis.Name}()"))
             { }
@@ -159,23 +145,17 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             }
         }
 
-        private void WriteRestClientAssignments()
+        protected void WriteRestClientAssignments()
         {
             // write assignment statements of the rest clients of this resource
-            foreach (var client in _resource.RestClients.Values.Distinct())
+            foreach (var client in _resource.RestClients)
             {
                 var subscriptionParamString = client.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{RestClientField}{client.OperationGroup} = new {client.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-            }
-            // write assignment statements of the rest clients of the child operations
-            foreach (var client in _resource.OperationRestClients)
-            {
-                var subscriptionParamString = client.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{GetRestClientFieldName(client)} = new {client.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
+                _writer.Line($"{GetRestClientFieldName(client)} = new {client.Type.Name}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, {BaseUriField});");
             }
         }
 
-        private void WriteClientProperties()
+        protected virtual void WriteProperties()
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
@@ -209,14 +189,12 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             }
         }
 
-        private void WriteClientMethods()
+        protected virtual void WriteMethods()
         {
-            //var clientMethodsList = new List<RestClientMethod>();
-
             _writer.Line();
             // write get method
-            WriteGetMethod(_resource.GetOperation, true);
-            WriteGetMethod(_resource.GetOperation, false);
+            WriteGetMethod(_resource.GetOperation!, true);
+            WriteGetMethod(_resource.GetOperation!, false);
 
             WriteListAvailableLocationsMethod(true);
             WriteListAvailableLocationsMethod(false);
@@ -224,8 +202,8 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             if (_isDeletableResource)
             {
                 // write delete method
-                WriteDeleteMethod(_resource.DeleteOperation, true);
-                WriteDeleteMethod(_resource.DeleteOperation, false);
+                WriteDeleteMethod(_resource.DeleteOperation!, true);
+                WriteDeleteMethod(_resource.DeleteOperation!, false);
             }
 
             if (_isITaggableResource)
@@ -275,22 +253,20 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             //    WriteLRO(kv.Value.OrderBy(m => m.Name.Length).First(), kv.Key, kv.Value);
             //}
         }
+
         private void WriteGetMethod(MgmtClientOperation operation, bool async)
         {
-            WriteNormalMethod(operation, "Get", true);
-            WriteNormalMethod(operation, "Get", false);
+            WriteNormalMethod(operation, "Get", async);
         }
 
         private void WriteDeleteMethod(MgmtClientOperation operation, bool async)
         {
-            WriteLROMethod(operation, "Delete", true);
-            WriteLROMethod(operation, "Delete", false);
+            WriteLROMethod(operation, "Delete", async);
         }
 
-        private void WritePagingMethod(MgmtClientOperation clientOperation, string methodName, bool async)
+        protected void WritePagingMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
-            methodName = CreateMethodName(methodName, async);
             // get the corresponding MgmtClientOperation mapping
             var operationMappings = clientOperation.ToDictionary(
                 clientOperation => clientOperation.ResourceOperationSet,
@@ -298,7 +274,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // build contextual parameters
             var contextualParameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
-                pair => _resource.ContextualPaths[pair.Key].BuildContextualParameters(Context));
+                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -319,7 +295,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
 
             var returnType = itemType.WrapPageable(async);
 
-            _writer.Append($"public virtual {returnType} {methodName}(");
+            _writer.Append($"public virtual {returnType} {CreateMethodName(methodName, async)}(");
             foreach (var parameter in methodParameters)
             {
                 _writer.WriteParameter(parameter);
@@ -407,10 +383,9 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
         }
 
-        private void WriteNormalMethod(MgmtClientOperation clientOperation, string methodName, bool async)
+        protected void WriteNormalMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
-            methodName = CreateMethodName(methodName, async);
             // get the corresponding MgmtClientOperation mapping
             var operationMappings = clientOperation.ToDictionary(
                 clientOperation => clientOperation.ResourceOperationSet,
@@ -418,7 +393,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // build contextual parameters
             var contextualParameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
-                pair => _resource.ContextualPaths[pair.Key].BuildContextualParameters(Context));
+                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -434,7 +409,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             var responseType = TypeOfThis.WrapResponse(async);
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {methodName}(");
+            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName(methodName, async)}(");
 
             foreach (Parameter parameter in methodParameters)
             {
@@ -478,7 +453,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         }
 
 
-        private void WriteLROMethod(MgmtClientOperation clientOperation, string methodName, bool async)
+        protected void WriteLROMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
             // get the corresponding MgmtClientOperation mapping
@@ -488,7 +463,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // build contextual parameters
             var contextualParameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
-                pair => _resource.ContextualPaths[pair.Key].BuildContextualParameters(Context));
+                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -499,7 +474,6 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // we can only make this an SLRO when all of the methods are not really long
             bool isSLRO = !clientOperation.IsLongRunningReallyLong();
             methodName = isSLRO ? methodName : $"Start{methodName}";
-            methodName = CreateMethodName(methodName, async);
 
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
             _writer.WriteXmlDocumentationSummary($"{clientOperation.First().Method.Description}");
@@ -513,7 +487,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
             var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
             var responseType = lroObjectType.WrapAsync(async);
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {methodName}(");
+            _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName(methodName, async)}(");
             foreach (var parameter in methodParameters)
             {
                 _writer.WriteParameter(parameter);
@@ -703,7 +677,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // build contextual parameters
             var contextualParameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
-                pair => _resource.ContextualPaths[pair.Key].BuildContextualParameters(Context));
+                pair => ContextualPaths[pair.Key].BuildContextualParameters(Context));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,

@@ -19,6 +19,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
+    // TODO -- move some of the code in this class to a OperationNameOverrider extension class (maybe? and provide some configuration to let us conveniently override the name of an operation
     internal class MgmtNonResourceOperation : TypeProvider
     {
         private BuildContext<MgmtOutputLibrary> _context;

@@ -65,11 +65,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, string> _mergedOperations;
 
         /// <summary>
-        /// A mapping of parent resource type to child operation groups that are not resources.
-        /// </summary>
-        private Dictionary<string, HashSet<OperationGroup>> _childNonResourceOperationGroups; // TODO -- will deprecate
-
-        /// <summary>
         /// This is a map from raw request path to their corresponding <see cref="OperationSet"/>,
         /// which is a collection of the operations with the same raw request path
         /// </summary>
@@ -80,8 +75,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths;
 
-        private Dictionary<string, List<Resource>>? _childResources;
-
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             CodeModelValidator.Validate(codeModel);
@@ -90,7 +83,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             UpdateSubscriptionIdForTenantIdResource(codeModel);
             _codeModel = codeModel;
-            _childNonResourceOperationGroups = new Dictionary<string, HashSet<OperationGroup>>();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
             _resourceNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
@@ -185,24 +177,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        //public IEnumerable<Resource> ManagementGroupChildResources => GetChildren(ResourceTypeBuilder.ManagementGroups);
-        //public IEnumerable<Resource> TenantChildResources => GetChildren(ResourceTypeBuilder.Tenant);
-
-        //private IEnumerable<Resource> GetChildren(string parent)
-        //{
-        //    if (EnsureChildResources().TryGetValue(parent, out var children))
-        //    {
-        //        foreach (var child in children)
-        //        {
-        //            yield return child;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        yield break;
-        //    }
-        //}
-
         private IEnumerable<OperationSet>? _resourceOperationSets;
 
         public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= _resourceNameToOperationSets.SelectMany(pair => pair.Value);
@@ -282,16 +256,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private ArmClientExtensions? _armClientExtensions;
-        private SubscriptionExtensions? _subscriptionExtensions;
-        private ResourceGroupExtensions? _resourceGroupsExtensions;
-        private ManagementGroupExtensions? _managementGroupExtensions;
-
         public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= new ArmClientExtensions(_context);
 
+        private SubscriptionExtensions? _subscriptionExtensions;
         public SubscriptionExtensions SubscriptionExtensions => _subscriptionExtensions ??= new SubscriptionExtensions(_context);
 
+        private ResourceGroupExtensions? _resourceGroupsExtensions;
         public ResourceGroupExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= new ResourceGroupExtensions(_context);
 
+        private ManagementGroupExtensions? _managementGroupExtensions;
         public ManagementGroupExtensions ManagementGroupExtensions => _managementGroupExtensions ??= new ManagementGroupExtensions(_context);
 
         private IEnumerable<ResourceData>? _resourceDatas;
@@ -307,13 +280,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
         public IEnumerable<NonLongRunningOperation> NonLongRunningOperations => EnsureNonLongRunningOperations().Values;
-
-        private static HashSet<string> ResourceTypes = new HashSet<string>
-        {
-            "resourceGroups",
-            "subscriptions",
-            "tenant"
-        };
 
         private Dictionary<Schema, TypeProvider>? _models;
 
@@ -459,17 +425,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _rawRequestPathToRestClient;
-        }
-
-        public IEnumerable<MgmtNonResourceOperation> GetNonResourceOperations(string parent)
-        {
-            if (_childNonResourceOperationGroups.TryGetValue(parent, out var operationGroups))
-            {
-                return operationGroups.Select(operationGroup => new MgmtNonResourceOperation(operationGroup, _context,
-                    ResourceTypeBuilder.TypeToExtensionName.GetValueOrDefault(parent) ?? parent));
-            }
-
-            return Enumerable.Empty<MgmtNonResourceOperation>();
         }
 
         private Dictionary<string, Resource> EnsureRequestPathToArmResources()
@@ -779,54 +734,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var operation in operationSet)
                 {
-                    var operationGroup = operationSet[operation];
-                    ResourceTypes.Add(operationGroup.ResourceType(_mgmtConfiguration));
-
-                    string? parent;
-                    if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out parent))
-                    {
-                        // If overridden, add parent to known types list (trusting user input)
-                        ResourceTypes.Add(parent);
-                    }
                     if (operationSet.TryGetResourceName(_mgmtConfiguration, out var resourceName))
                     {
-                        AddOperationSetToResourceMap(resourceName, operationSet);
-                    }
-                    else
-                    {
-                        // TODO -- this will be removed after everything is based on request path
-                        if (operationGroup.IsResource(_mgmtConfiguration))
-                            continue;
-                        AddToChildNonResourceOperationGroupMap(operationGroup);
+                        // if this operation set corresponds to a SDK resource, we add it to the map
+                        HashSet<OperationSet>? result;
+                        if (!_resourceNameToOperationSets.TryGetValue(resourceName, out result))
+                        {
+                            result = new HashSet<OperationSet>();
+                            _resourceNameToOperationSets.Add(resourceName, result);
+                        }
+                        result.Add(operationSet);
                     }
                 }
             }
-            ParentDetection.VerifyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
-        }
-
-        // TODO -- change this to use operation or request path instead of using operation group
-        private void AddToChildNonResourceOperationGroupMap(OperationGroup operationGroup)
-        {
-            var parent = operationGroup.ParentResourceType(_mgmtConfiguration);
-            if (_childNonResourceOperationGroups.ContainsKey(parent))
-            {
-                _childNonResourceOperationGroups[parent].Add(operationGroup);
-            }
-            else
-            {
-                _childNonResourceOperationGroups[parent] = new HashSet<OperationGroup>() { operationGroup };
-            }
-        }
-
-        private void AddOperationSetToResourceMap(string resourceName, OperationSet operationSet)
-        {
-            HashSet<OperationSet>? result;
-            if (!_resourceNameToOperationSets.TryGetValue(resourceName, out result))
-            {
-                result = new HashSet<OperationSet>();
-                _resourceNameToOperationSets.Add(resourceName, result);
-            }
-            result.Add(operationSet);
         }
 
         private void CategorizeOperationGroups()

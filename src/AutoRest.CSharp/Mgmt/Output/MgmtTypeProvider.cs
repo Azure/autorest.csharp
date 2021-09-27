@@ -11,9 +11,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal abstract class MgmtTypeProvider : TypeProvider
     {
-        public abstract RequestPath ContextualPath { get; }
+        public abstract IDictionary<OperationSet, RequestPath> ContextualPaths { get; }
 
-        protected MgmtTypeProvider(BuildContext context) : base(context)
+        public MgmtTypeProvider(BuildContext context) : base(context)
         {
         }
     }

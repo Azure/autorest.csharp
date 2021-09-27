@@ -11,9 +11,17 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
+        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
+        {
+            if (operations.Count > 0)
+                return new MgmtClientOperation(operations);
+
+            return null;
+        }
+
         private IReadOnlyList<MgmtRestOperation> _operations;
 
-        public MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations)
         {
             _operations = operations;
         }

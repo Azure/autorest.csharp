@@ -99,46 +99,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
         }
 
-        protected void WriteGetResponse(CodeWriter writer, CSharpType resourcetype, bool isAsync)
+        protected void WriteGetResponse(CodeWriter writer, CSharpType resourceType, bool isAsync)
         {
             writer.Line($"if (response.Value == null)");
             writer.Line($"throw {GetAwait(isAsync)} {ClientDiagnosticsField}.CreateRequestFailedException{GetAsyncSuffix(isAsync)}(response.GetRawResponse()){GetConfigureAwait(isAsync)};");
-            writer.Line($"return {typeof(Response)}.FromValue(new {resourcetype}({ContextProperty}, response.Value), response.GetRawResponse());");
+            writer.Line($"return {typeof(Response)}.FromValue(new {resourceType}({ContextProperty}, response.Value), response.GetRawResponse());");
         }
-
-        protected void WriteContainerCtors(CodeWriter writer, RestClient restClient, Type contextArgumentType, string parentArguments)
-        {
-            // write protected default constructor
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class for mocking.");
-            using (writer.Scope($"protected {TypeNameOfThis}()"))
-            { }
-
-            // write "parent resource" constructor
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {TypeNameOfThis} class.");
-            writer.WriteXmlDocumentationParameter("parent", $"The resource representing the parent resource.");
-            using (writer.Scope($"internal {TypeNameOfThis}({contextArgumentType} parent) : base({parentArguments})"))
-            {
-                writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-                writer.Line($"{RestClientField} = new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subIdIfNeeded}, {BaseUriField});");
-            }
-        }
-
-        protected void WriteContainerProperties(CodeWriter writer, string resourceType)
-        {
-            // TODO: Remove this if condition after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5800
-            if (!resourceType.Contains(".ResourceType"))
-            {
-                resourceType = $"\"{resourceType}\"";
-            }
-
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
-            writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {resourceType};");
-        }
-
 
         protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string methodName, FormattableString converter, List<PagingMethod>? listMethods = null)
         {
