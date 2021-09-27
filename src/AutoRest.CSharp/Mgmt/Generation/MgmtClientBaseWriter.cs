@@ -407,85 +407,85 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(writer, parameterMappings);
         }
 
-        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, bool isAsync, string? restClientName = null)
-        {
-            RestClientMethod restClientMethod = clientMethod.RestClientMethod;
-            (var bodyType, bool isListFunction, bool wasResourceData) = restClientMethod.GetBodyTypeForList(operationGroup, Context);
-            var responseType = bodyType != null ?
-                new CSharpType(typeof(Response<>), bodyType) :
-                typeof(Response);
-            responseType = responseType.WrapAsync(isAsync);
+        //protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, bool isAsync, string? restClientName = null)
+        //{
+        //    RestClientMethod restClientMethod = clientMethod.RestClientMethod;
+        //    (var bodyType, bool isListFunction, bool wasResourceData) = restClientMethod.GetBodyTypeForList(operationGroup, Context);
+        //    var responseType = bodyType != null ?
+        //        new CSharpType(typeof(Response<>), bodyType) :
+        //        typeof(Response);
+        //    responseType = responseType.WrapAsync(isAsync);
 
-            writer.WriteXmlDocumentationSummary($"{restClientMethod.Description}");
+        //    writer.WriteXmlDocumentationSummary($"{restClientMethod.Description}");
 
-            var nonPathParameters = restClientMethod.NonPathParameters;
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter);
-            }
+        //    var nonPathParameters = restClientMethod.NonPathParameters;
+        //    foreach (Parameter parameter in nonPathParameters)
+        //    {
+        //        writer.WriteXmlDocumentationParameter(parameter);
+        //    }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
+        //    writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+        //    writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
-            writer.Append($"{restClientMethod.Accessibility} {GetVirtual(true)} {GetAsyncKeyword(isAsync)} {responseType} {CreateMethodName(methodName, isAsync)}(");
+        //    writer.Append($"{restClientMethod.Accessibility} {GetVirtual(true)} {GetAsyncKeyword(isAsync)} {responseType} {CreateMethodName(methodName, isAsync)}(");
 
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+        //    foreach (Parameter parameter in nonPathParameters)
+        //    {
+        //        writer.WriteParameter(parameter);
+        //    }
+        //    writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
 
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(nonPathParameters);
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
-                {
-                    writer.Append($"var response = {GetAwait(isAsync)}");
-                    writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, isAsync)}(");
-                    BuildAndWriteParameters(writer, restClientMethod);
-                    writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
+        //    using (writer.Scope())
+        //    {
+        //        writer.WriteParameterNullChecks(nonPathParameters);
+        //        WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+        //        {
+        //            writer.Append($"var response = {GetAwait(isAsync)}");
+        //            writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, isAsync)}(");
+        //            BuildAndWriteParameters(writer, restClientMethod);
+        //            writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
-                    if (isListFunction)
-                    {
-                        // first we need to validate that is this function listing this resource itself, or list something else
-                        var elementType = bodyType!.Arguments.First();
-                        if (Context.Library.TryGetArmResource(operationGroup, out var resource)
-                            && resource.Type.EqualsByName(elementType))
-                        {
-                            writer.UseNamespace("System.Linq");
+        //            if (isListFunction)
+        //            {
+        //                // first we need to validate that is this function listing this resource itself, or list something else
+        //                var elementType = bodyType!.Arguments.First();
+        //                if (Context.Library.TryGetArmResource(operationGroup, out var resource)
+        //                    && resource.Type.EqualsByName(elementType))
+        //                {
+        //                    writer.UseNamespace("System.Linq");
 
-                            var converter = $".Select(data => new {Context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)).ToArray()";
-                            writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value{converter} as {bodyType}, response.GetRawResponse())");
-                        }
-                        else
-                        {
-                            writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value, response.GetRawResponse())");
-                        }
-                    }
-                    else
-                    {
-                        Context.Library.TryGetArmResource(operationGroup, out var resource);
-                        if (wasResourceData && resource != null && bodyType != null)
-                        {
-                            writer.Append($"return Response.FromValue(new {bodyType}(this, response.Value), response.GetRawResponse())");
-                        }
-                        else
-                        {
-                            writer.Append($"return response");
-                        }
-                    }
+        //                    var converter = $".Select(data => new {Context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)).ToArray()";
+        //                    writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value{converter} as {bodyType}, response.GetRawResponse())");
+        //                }
+        //                else
+        //                {
+        //                    writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value, response.GetRawResponse())");
+        //                }
+        //            }
+        //            else
+        //            {
+        //                Context.Library.TryGetArmResource(operationGroup, out var resource);
+        //                if (wasResourceData && resource != null && bodyType != null)
+        //                {
+        //                    writer.Append($"return Response.FromValue(new {bodyType}(this, response.Value), response.GetRawResponse())");
+        //                }
+        //                else
+        //                {
+        //                    writer.Append($"return response");
+        //                }
+        //            }
 
-                    if (bodyType == null && restClientMethod.HeaderModel != null)
-                    {
-                        writer.Append($".GetRawResponse()");
-                    }
+        //            if (bodyType == null && restClientMethod.HeaderModel != null)
+        //            {
+        //                writer.Append($".GetRawResponse()");
+        //            }
 
-                    writer.Line($";");
-                });
-            }
+        //            writer.Line($";");
+        //        });
+        //    }
 
-            writer.Line();
-        }
+        //    writer.Line();
+        //}
 
         protected CSharpType? GetLROResultType(Input.Operation operation)
         {

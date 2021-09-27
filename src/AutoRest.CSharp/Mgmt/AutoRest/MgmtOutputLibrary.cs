@@ -148,6 +148,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
+        // TODO -- move this to the corresponding extension type provider
         private void UpdateSubscriptionIdForTenantIdResource(CodeModel codeModel)
         {
             foreach (var operationGroup in codeModel.OperationGroups)
@@ -258,6 +259,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private ArmClientExtensions? _armClientExtensions;
         public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= new ArmClientExtensions(_context);
 
+        private TenantExtensions? _tenantExtensions;
+        public TenantExtensions TenantExtensions => _tenantExtensions ??= new TenantExtensions(_context);
+
         private SubscriptionExtensions? _subscriptionExtensions;
         public SubscriptionExtensions SubscriptionExtensions => _subscriptionExtensions ??= new SubscriptionExtensions(_context);
 
@@ -331,20 +335,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             return EnsureRequestPathToResourceContainers().TryGetValue(requestPath, out container);
         }
-
-        //public ResourceContainer? GetResourceContainer(OperationGroup operationGroup)
-        //{
-        //    if (EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out var result))
-        //    {
-        //        return result;
-        //    }
-        //    if (EnsureResourceContainers()[ResourceType.Tuple].TryGetValue(operationGroup, out result))
-        //    {
-        //        return result;
-        //    }
-
-        //    return null;
-        //}
 
         public ResourceData GetResourceData(string requestPath)
         {

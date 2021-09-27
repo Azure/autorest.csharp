@@ -99,23 +99,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
-            //foreach (var tupleResource in context.Library.TupleResources)
-            //{
-            //    var codeWriter = new CodeWriter();
-            //    var resourceWriter = new TupleResourceWriter(codeWriter, tupleResource, context);
-            //    resourceWriter.WriteResource();
-
-            //    project.AddGeneratedFile($"{tupleResource.Type.Name}.cs", codeWriter.ToString());
-            //}
-
-            //foreach (var tupleResourceContainer in context.Library.TupleResourceContainers)
-            //{
-            //    var codeWriter = new CodeWriter();
-            //    new TupleResourceContainerWriter(codeWriter, tupleResourceContainer, context).WriteContainer();
-
-            //    project.AddGeneratedFile($"{tupleResourceContainer.Type.Name}.cs", codeWriter.ToString());
-            //}
-
             var resourceGroupExtensionsCodeWriter = new CodeWriter();
             new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).WriteExtension();
             //new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context).WriteExtension();
@@ -130,26 +113,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile($"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
 
             var tenantExtensionsCodeWriter = new CodeWriter();
-            new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.ArmClientExtensions, context).WriteExtension();
-            project.AddGeneratedFile($"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", tenantExtensionsCodeWriter.ToString());
-
-            //if (context.Library.ManagementGroupChildResources.Count() > 0)
-            //{
-            //    var managementGroupExtensionsCodeWriter = new CodeWriter();
-            //    new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context).WriteExtension();
-            //    project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups]}.cs", managementGroupExtensionsCodeWriter.ToString());
-            //}
-
-            //if (context.Library.TenantChildResources.Count() > 0)
-            //{
-            //    var tenantExtensionsCodeWriter = new CodeWriter();
-            //    new TenantExtensionsWriter(tenantExtensionsCodeWriter, context).WriteExtension();
-            //    project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Tenant]}.cs", tenantExtensionsCodeWriter.ToString());
-            //}
+            new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.TenantExtensions, context).WriteExtension();
+            project.AddGeneratedFile($"Extensions/{context.Library.TenantExtensions.Type.Name}.cs", tenantExtensionsCodeWriter.ToString());
 
             var armClientExtensionsCodeWriter = new CodeWriter();
-            new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context).WriteExtension();
-            project.AddGeneratedFile($"Extensions/ArmClientExtensions.cs", armClientExtensionsCodeWriter.ToString());
+            new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context.Library.ArmClientExtensions, context).WriteExtension();
+            project.AddGeneratedFile($"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
         }
 
         private static bool ShouldSkipModelGeneration(TypeProvider model, BuildContext<MgmtOutputLibrary> context)

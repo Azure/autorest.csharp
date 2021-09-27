@@ -13,29 +13,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static ConcurrentDictionary<OperationGroup, Dictionary<HttpMethod, List<ServiceRequest>>> _operationGroupCache = new ConcurrentDictionary<OperationGroup, Dictionary<HttpMethod, List<ServiceRequest>>>();
 
-        public static Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping(this OperationSet operations)
-        {
-            var result = new Dictionary<HttpMethod, List<ServiceRequest>>();
-            foreach (var operation in operations)
-            {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
-                    {
-                        List<ServiceRequest>? list;
-                        if (!result.TryGetValue(httpRequest.Method, out list))
-                        {
-                            list = new List<ServiceRequest>();
-                            result.Add(httpRequest.Method, list);
-                        }
-                        list.Add(serviceRequest);
-                    }
-                }
-            }
-
-            return result;
-        }
-
         public static Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping(this OperationGroup operationGroup)
         {
             Dictionary<HttpMethod, List<ServiceRequest>>? result;

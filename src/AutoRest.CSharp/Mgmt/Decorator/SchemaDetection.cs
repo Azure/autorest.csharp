@@ -18,14 +18,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
-        public static string Resource(this OperationGroup operationGroup, MgmtConfiguration config)
-        {
-            if (operationGroup.TryGetResourceName(config, out var name))
-                return name;
-
-            // otherwise we throw exception to notify the user to modify their readme.md
-            throw new Exception($"Resource schema not found! Please add the {operationGroup.Key} to its schema name mapping in the `operation-group-to-resource` section of readme.md.");
-        }
 
         public static bool TryGetResourceName(this OperationGroup operationGroup, MgmtConfiguration config, [MaybeNullWhen(false)] out string name)
         {

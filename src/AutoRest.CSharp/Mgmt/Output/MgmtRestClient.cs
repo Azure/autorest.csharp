@@ -25,12 +25,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             Func<string?, bool> f = delegate (string? responseBodyType)
             {
-                if (!_context.Library.TryGetResourceData(OperationGroup, out var resourceData))
+                if (!_context.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
                     return false;
-                if (OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
+                if (!operation.IsGetResourceOperation(responseBodyType, resourceData, _context))
                     return false;
-                if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
-                    return false;
+                // if we are a GET for a resource, we do not need to check whether this is a singleton. This condition is included above
+                //if (OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
+                //    return false;
 
                 return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
             };
