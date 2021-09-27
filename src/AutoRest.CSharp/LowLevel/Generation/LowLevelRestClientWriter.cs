@@ -192,7 +192,6 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"case int s when s >= {statusCode.Family * 100:L} && s < {statusCode.Family * 100 + 100:L}:");
                         }
                     }
-
                     var returnType = clientMethod.ReturnType;
                     if (responseBody != null && responseBody is ConstantResponseBody body && returnType != null)
                     {
