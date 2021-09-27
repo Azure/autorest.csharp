@@ -14,6 +14,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -106,7 +107,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using var methodScope = writer.AmbientScope();
 
-            CSharpType responseType = new CSharpType(typeof(Azure.Response));
+            CSharpType? returnType = operation.ReturnType;
+            var isConstantResponseBody = operation.Responses.All(response => response.ResponseBody is ConstantResponseBody body);
+            CSharpType responseType = isConstantResponseBody && returnType != null ? new CSharpType(typeof(Response<>), returnType) : new CSharpType(typeof(Response));
 
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
             var parameters = operation.Parameters.Concat(new Parameter[] { RequestOptionsParameter }).ToArray();
@@ -120,8 +123,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
             var methodName = CreateMethodName(operation.Name, async);
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public {asyncText} {responseType} {methodName}(");
+            writer.Append($"public {GetAsyncKeyword(async)} {responseType} {methodName}(");
 
             foreach (Parameter parameter in parameters)
             {
@@ -148,30 +150,29 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($");");
 
                 writer.Line($"{typeof(RequestOptions)}.{nameof(RequestOptions.Apply)}(options, {messageVariable});");
-
-                if (async)
-                {
-                    writer.Line($"await {PipelineField:I}.SendAsync({messageVariable}, options.CancellationToken).ConfigureAwait(false);");
-                }
-                else
-                {
-                    writer.Line($"{PipelineField:I}.Send({messageVariable}, options.CancellationToken);");
-                }
+                writer.Line($"{GetAwait(async)}{PipelineField:I}.Send{GetAsyncSuffix(async)}({messageVariable}, options.CancellationToken){GetConfigureAwait(async)};");
 
                 using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
                 {
-                    WriteStatusCodeSwitch(writer, operation, async, messageVariable);
+                    WriteStatusCodeSwitch(writer, operation, async, messageVariable, false);
                 }
                 using (writer.Scope($"else"))
                 {
-                    writer.Line($"return {messageVariable}.{nameof(HttpMessage.Response)};");
+                    if (isConstantResponseBody && returnType != null)
+                    {
+                        WriteStatusCodeSwitch(writer, operation, async, messageVariable, true);
+                    }
+                    else
+                    {
+                        writer.Line($"return {messageVariable}.{nameof(HttpMessage.Response)};");
+                    }
                 }
             }
 
             writer.Line();
         }
 
-        private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async, CodeWriterDeclaration messageVariable)
+        private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async, CodeWriterDeclaration messageVariable, bool isNoThrow)
         {
             using (writer.Scope($"switch ({messageVariable}.{nameof(HttpMessage.Response)}.Status)"))
             {
@@ -191,19 +192,50 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"case int s when s >= {statusCode.Family * 100:L} && s < {statusCode.Family * 100 + 100:L}:");
                         }
                     }
-                    writer.Line($"return {messageVariable}.{nameof(HttpMessage.Response)};");
+
+                    var returnType = clientMethod.ReturnType;
+                    if (responseBody != null && responseBody is ConstantResponseBody body && returnType != null)
+                    {
+                        writer.Append($"return {typeof(Response)}.FromValue(");
+                        writer.WriteReferenceOrConstant(body.Value);
+                        writer.Append($", {messageVariable}.{nameof(HttpMessage.Response)});");
+                    }
+                    else
+                    {
+                        writer.Line($"return {messageVariable}.{nameof(HttpMessage.Response)};");
+                    }
                 }
 
                 writer.Line($"default:");
-                if (async)
+                if (isNoThrow)
                 {
-                    writer.Line($"throw await {ClientDiagnosticsField}.CreateRequestFailedExceptionAsync({messageVariable}.{nameof(HttpMessage.Response)}).ConfigureAwait(false);");
+                    writer.Append($"return {typeof(ResponseWithError)}.FromError<{clientMethod.ReturnType}>({messageVariable}.{nameof(HttpMessage.Response)}, {GetAwait(async)}{ClientDiagnosticsField}.CreateRequestFailedException{GetAsyncSuffix(async)}({messageVariable}.{nameof(HttpMessage.Response)}){GetConfigureAwait(async)});");
                 }
                 else
                 {
-                    writer.Line($"throw {ClientDiagnosticsField}.CreateRequestFailedException({messageVariable}.{nameof(HttpMessage.Response)});");
+                    writer.Append($"throw {GetAwait(async)}{ClientDiagnosticsField}.CreateRequestFailedException{GetAsyncSuffix(async)}({messageVariable}.{nameof(HttpMessage.Response)}){GetConfigureAwait(async)};");
                 }
             }
+        }
+
+        internal string GetConfigureAwait(bool isAsync)
+        {
+            return isAsync ? ".ConfigureAwait(false)" : string.Empty;
+        }
+
+        internal string GetAsyncKeyword(bool isAsync)
+        {
+            return isAsync ? "async" : string.Empty;
+        }
+
+        internal string GetAsyncSuffix(bool isAsync)
+        {
+            return isAsync ? "Async" : string.Empty;
+        }
+
+        internal string GetAwait(bool isAsync)
+        {
+            return isAsync ? "await " : string.Empty;
         }
     }
 }

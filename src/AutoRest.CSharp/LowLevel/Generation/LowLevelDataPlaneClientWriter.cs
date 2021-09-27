@@ -21,6 +21,8 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Generation.Writers;
 using System.Text;
 using System.Collections;
+using AutoRest.CSharp.Output.Models.Responses;
+using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -317,12 +319,13 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteClientMethodDecleration(CodeWriter writer, RestClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, bool async)
         {
             var parameters = clientMethod.Parameters.Concat(new Parameter[] { RequestOptionsParameter });
+            var isConstantResponseBody = clientMethod.Responses.All(response => response.ResponseBody is ConstantResponseBody body);
 
             var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning, clientMethod.Operation.Language.Default.Paging != null) switch
             {
-                (false, false, false) => typeof(Response),
+                (false, false, false) => isConstantResponseBody && clientMethod.ReturnType != null ? typeof(Response<bool>) : typeof(Response),
                 (false, true, false) => typeof(Operation<BinaryData>),
-                (true, false, false) => typeof(Task<Response>),
+                (true, false, false) => isConstantResponseBody && clientMethod.ReturnType != null ? typeof(Task<Response<bool>>) : typeof(Task<Response>),
                 (true, true, false) => typeof(Task<Operation<BinaryData>>),
                 (false, false, true) => typeof(Pageable<BinaryData>),
                 (false, true, true) => typeof(Operation<Pageable<BinaryData>>),
