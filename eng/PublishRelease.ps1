@@ -1,4 +1,4 @@
-param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $CoverageUser, $CoveragePass)
+param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
 
 $WorkingDirectory = Resolve-Path $WorkingDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
@@ -37,7 +37,7 @@ try {
 
     npm version --no-git-tag-version $devVersion | Out-Null;
    
-    $CoverageDirectory = Join-Path $WorkingDirectory "artifacts" "coverage"
+    $CoverageDirectory = Resolve-Path $CoverageDirectory
 
     npm run coverage --prefix node_modules/@microsoft.azure/autorest.testserver -- publish --repo=autorest.csharp --ref=refs/heads/feature/v3 --githubToken=skip --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass --coverageDirectory=$CoverageDirectory
 }
