@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -20,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelRestClientWriter
     {
-        public void WriteClient(CodeWriter writer, RestClient restClient)
+        public void WriteClient(CodeWriter writer, RestClient restClient, Configuration configuration)
         {
             var cs = restClient.Type;
             var @namespace = cs.Namespace;
@@ -36,8 +37,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     foreach (var method in restClient.Methods)
                     {
                         WriteRequestCreation(writer, method);
-                        WriteOperation(writer, method, true);
-                        WriteOperation(writer, method, false);
+                        WriteOperation(writer, method, configuration, true);
+                        WriteOperation(writer, method, configuration, false);
                     }
                 }
             }
@@ -103,13 +104,12 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly CSharpType RequestOptionsParameterType = new CSharpType(typeof(RequestOptions), true);
         private static readonly Parameter RequestOptionsParameter = new Parameter("options", "The request options", RequestOptionsParameterType, Constant.Default(RequestOptionsParameterType), false);
 
-        private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)
+        private void WriteOperation(CodeWriter writer, RestClientMethod operation, Configuration configuration, bool async)
         {
             using var methodScope = writer.AmbientScope();
 
-            CSharpType? returnType = operation.ReturnType;
-            var isConstantResponseBody = operation.Responses.All(response => response.ResponseBody is ConstantResponseBody body);
-            CSharpType responseType = isConstantResponseBody && returnType != null ? new CSharpType(typeof(Response<>), returnType) : new CSharpType(typeof(Response));
+            var headAsBoolean = operation.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean == true;
+            CSharpType responseType = headAsBoolean == true ? typeof(Response<bool>) : new CSharpType(typeof(Response));
 
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
             var parameters = operation.Parameters.Concat(new Parameter[] { RequestOptionsParameter }).ToArray();
@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 using (writer.Scope($"else"))
                 {
-                    if (isConstantResponseBody && returnType != null)
+                    if (headAsBoolean == true)
                     {
                         WriteStatusCodeSwitch(writer, operation, async, messageVariable, true);
                     }
