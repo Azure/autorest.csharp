@@ -138,5 +138,122 @@ namespace FlattenedParameters
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateOperationNotRequiredRequest(string required, string nonRequired)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/OperationNotRequired/", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            var model = new Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema()
+            {
+                Required = required,
+                NonRequired = nonRequired
+            };
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(model);
+            request.Content = content;
+            return message;
+        }
+
+        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
+        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> OperationNotRequiredAsync(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationNotRequiredRequest(required, nonRequired);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
+        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response OperationNotRequired(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationNotRequiredRequest(required, nonRequired);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateOperationRequiredRequest(string required, string nonRequired)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/OperationRequired/", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            var model = new Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(required)
+            {
+                NonRequired = nonRequired
+            };
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(model);
+            request.Content = content;
+            return message;
+        }
+
+        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
+        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
+        public async Task<Response> OperationRequiredAsync(string required, string nonRequired = null, CancellationToken cancellationToken = default)
+        {
+            if (required == null)
+            {
+                throw new ArgumentNullException(nameof(required));
+            }
+
+            using var message = CreateOperationRequiredRequest(required, nonRequired);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
+        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
+        public Response OperationRequired(string required, string nonRequired = null, CancellationToken cancellationToken = default)
+        {
+            if (required == null)
+            {
+                throw new ArgumentNullException(nameof(required));
+            }
+
+            using var message = CreateOperationRequiredRequest(required, nonRequired);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }

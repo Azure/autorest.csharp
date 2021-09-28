@@ -116,18 +116,19 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="index"> The definition of the index to create or update. </param>
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return await RestClient.CreateOrUpdateAsync(indexName, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateOrUpdateAsync(indexName, prefer, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -138,18 +139,19 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
         /// <param name="indexName"> The definition of the index to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="index"> The definition of the index to create or update. </param>
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Models.Index> CreateOrUpdate(string indexName, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<Models.Index> CreateOrUpdate(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexesClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return RestClient.CreateOrUpdate(indexName, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken);
+                return RestClient.CreateOrUpdate(indexName, prefer, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken);
             }
             catch (Exception e)
             {

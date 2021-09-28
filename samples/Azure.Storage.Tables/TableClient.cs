@@ -26,7 +26,7 @@ namespace Azure.Storage.Tables
         public async Task<Response<IReadOnlyDictionary<string, object>>> InsertAsync(IDictionary<string, object> entity, CancellationToken cancellationToken = default)
         {
             Response<IReadOnlyDictionary<string, object>> response =
-                await _tableOperations.InsertEntityAsync(_table,
+                await _tableOperations.InsertEntityAsync(Enum1.Three0, _table,
                         tableEntityProperties: entity,
                         queryOptions: new QueryOptions() { Format = _format },cancellationToken: cancellationToken)
                     .ConfigureAwait(false);
@@ -36,7 +36,7 @@ namespace Azure.Storage.Tables
 
         public async Task<Response> UpdateAsync(string partitionKey, string rowKey, IDictionary<string, object> entity, CancellationToken cancellationToken= default)
         {
-            return await _tableOperations.UpdateEntityAsync(_table, partitionKey, rowKey,
+            return await _tableOperations.UpdateEntityAsync(Enum1.Three0, _table, partitionKey, rowKey,
                 tableEntityProperties: entity,
                 queryOptions:new QueryOptions() { Format = _format },
                 cancellationToken: cancellationToken);
@@ -46,7 +46,7 @@ namespace Azure.Storage.Tables
         {
             return PageableHelpers.CreateAsyncEnumerable(async tableName =>
             {
-                var response = await _tableOperations.RestClient.QueryEntitiesAsync(_table,
+                var response = await _tableOperations.RestClient.QueryEntitiesAsync(Enum1.Three0, _table,
                     queryOptions: new QueryOptions() { Format = _format, Top = limit, Filter = filter, Select = @select},
                     cancellationToken: cancellationToken);
                 return Page.FromValues(response.Value.Value, response.Headers.XMsContinuationNextPartitionKey, response.GetRawResponse());
