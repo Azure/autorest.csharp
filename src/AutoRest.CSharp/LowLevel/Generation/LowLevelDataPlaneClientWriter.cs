@@ -320,7 +320,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteClientMethodDecleration(CodeWriter writer, RestClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, Configuration configuration, bool async)
         {
             var parameters = clientMethod.Parameters.Concat(new Parameter[] { RequestOptionsParameter });
-            var headAsBoolean = clientMethod.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean == true;
+            var headAsBoolean = clientMethod.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean;
 
             var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning, clientMethod.Operation.Language.Default.Paging != null) switch
             {

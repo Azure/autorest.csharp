@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using var methodScope = writer.AmbientScope();
 
-            var headAsBoolean = operation.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean == true;
+            var headAsBoolean = operation.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean;
             CSharpType responseType = headAsBoolean == true ? typeof(Response<bool>) : new CSharpType(typeof(Response));
 
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
