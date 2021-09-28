@@ -1402,7 +1402,7 @@ operationGroups:
           - *ref_51
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_5
             language: !Languages 
               default:
                 name: ''
@@ -1415,7 +1415,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_5
             language: !Languages 
               default:
                 name: ''
