@@ -68,13 +68,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     continue;
 
                 if (resource.IsSingleton)
-                    WriteChildSingletonResourceEntry(resource, current);
+                    WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, current);
                 else
-                    WriteChildNonSingletonResourceEntry(resource, current);
+                    WriteResourceContainerEntry(resource, current);
             }
         }
 
-        private void WriteChildNonSingletonResourceEntry(Resource resource, string current)
+        private void WriteResourceContainerEntry(Resource resource, string current)
         {
             var container = resource.ResourceContainer;
             if (container == null)
@@ -88,16 +88,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteChildSingletonResourceEntry(Resource singletonResource, string current)
+        private void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, string current)
         {
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {singletonResource.Type.Name} along with the instance operations that can be performed on it.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{singletonResource.Type.Name}\" /> object.");
-            using (_writer.Scope($"public {singletonResource.Type} Get{singletonResource.Type.Name}()"))
+            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {current}.");
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
+            using (_writer.Scope($"public {resource.Type} Get{resource.Type.Name}()"))
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {singletonResource.Type.Name}(this, Id + \"/{singletonResource.SingletonResourceIdSuffix!}\");");
+                _writer.Line($"return new {resource.Type.Name}(this, Id + \"/{singletonResourceIdSuffix}\");");
             }
         }
 
@@ -119,13 +119,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual string GetRestClientVariableName(RestClient client)
         {
             return $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
-        }
-
-        protected void WriteGetResponse(CodeWriter writer, CSharpType resourceType, bool isAsync)
-        {
-            writer.Line($"if (response.Value == null)");
-            writer.Line($"throw {GetAwait(isAsync)} {ClientDiagnosticsField}.CreateRequestFailedException{GetAsyncSuffix(isAsync)}(response.GetRawResponse()){GetConfigureAwait(isAsync)};");
-            writer.Line($"return {typeof(Response)}.FromValue(new {resourceType}({ContextProperty}, response.Value), response.GetRawResponse());");
         }
 
         //protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string methodName, FormattableString converter, List<PagingMethod>? listMethods = null)
@@ -160,6 +153,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         //        WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>()), ClientDiagnosticsField, converter, async, listMethods);
         //    }
         //}
+
+        protected internal CSharpType GetResponseType(CSharpType? returnType, bool async)
+        {
+            if (returnType == null)
+                return typeof(Response).WrapAsync(async);
+
+            return returnType.WrapResponse(async);
+        }
 
         protected internal string GetConfigureAwait(bool isAsync)
         {
@@ -387,7 +388,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     writer.Append($"{ContextProperty}, ");
                 }
-                writer.Append($"{ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.{RequestWriterHelpers.CreateRequestMethodName(operation.Name)}(");
+                writer.Append($"{ClientDiagnosticsField}, {PipelineProperty}, {GetRestClientVariableName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Name)}(");
                 WriteArguments(writer, parameterMapping);
                 writer.RemoveTrailingComma();
                 writer.Append($").Request, ");

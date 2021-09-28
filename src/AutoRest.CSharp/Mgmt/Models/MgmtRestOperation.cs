@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.ComponentModel;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
@@ -26,6 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public string Name => Operation.CSharpName(); // TODO -- introduce some mechanism to determine this name
         public string? Description => Method.Description;
+        public CSharpType? ReturnType => Method.ReturnType;
         /// <summary>
         /// The actual operation
         /// </summary>

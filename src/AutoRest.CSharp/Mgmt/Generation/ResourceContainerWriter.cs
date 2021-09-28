@@ -104,6 +104,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteValidate()
         {
+            if (_resourceContainer.ResourceTypes.Count == 1)
+                return;
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid container for this type.");
             _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
@@ -121,10 +123,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             //    resourceType = $"\"{resourceType}\"";
             //}
 
-            var resourceType = _resourceContainer.ResourceTypes.Values.First();
+            string validResourceType;
+            if (_resourceContainer.ResourceTypes.Count == 1)
+                validResourceType = "\"Single\"";
+            else
+                validResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
-            _writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {resourceType.SerializedType};");
+            _writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {validResourceType};");
         }
 
         protected override void WriteMethods()
@@ -134,18 +140,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (_resourceContainer.CreateOperation != null)
             {
-                WriteCreateOrUpdateMethod(_resourceContainer.CreateOperation, true);
                 WriteCreateOrUpdateMethod(_resourceContainer.CreateOperation, false);
+                WriteCreateOrUpdateMethod(_resourceContainer.CreateOperation, true);
             }
 
             if (_resourceContainer.GetOperation != null)
             {
-                WriteGetMethod(_resourceContainer.GetOperation, true);
                 WriteGetMethod(_resourceContainer.GetOperation, false);
-                WriteGetIfExists(_resourceContainer.GetOperation, true);
+                WriteGetMethod(_resourceContainer.GetOperation, true);
                 WriteGetIfExists(_resourceContainer.GetOperation, false);
-                WriteCheckIfExists(_resourceContainer.GetOperation, true);
+                WriteGetIfExists(_resourceContainer.GetOperation, true);
                 WriteCheckIfExists(_resourceContainer.GetOperation, false);
+                WriteCheckIfExists(_resourceContainer.GetOperation, true);
             }
 
             // TODO: Add back code with refactored base method as in WriteCreateOrUpdateVariants
@@ -162,8 +168,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // write all the methods that should belong to this resouce container
             foreach (var clientOperation in _resourceContainer.ClientOperations)
             {
-                WriteMethod(clientOperation, clientOperation.Name, true);
                 WriteMethod(clientOperation, clientOperation.Name, false);
+                WriteMethod(clientOperation, clientOperation.Name, true);
             }
 
             // TODO -- add ListAsGenericResources back

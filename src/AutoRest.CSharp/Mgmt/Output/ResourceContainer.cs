@@ -137,12 +137,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         //    return method.RestClientMethod.Request.HttpMethod.Equals(RequestMethod.Put);
         //}
 
-        //protected override string CreateDescription(string clientPrefix)
-        //{
-        //    return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
-        //        $"A class representing collection of {clientPrefix} and their operations over a {GetParentResourceName()}." :
-        //        BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
-        //}
+        protected override string CreateDescription(string clientPrefix)
+        {
+            // TODO -- add the parents here
+            return $"A class representing collection of {clientPrefix} and their operations over its parent.";
+        }
 
         //private string GetParentResourceName()
         //{

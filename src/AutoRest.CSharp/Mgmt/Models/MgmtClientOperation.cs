@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -45,6 +46,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         // TODO -- we need a better way to get the description of this
         public string? Description => _operations.First().Description;
+
+        public CSharpType? ReturnType => _operations.First().ReturnType;
 
         public int Count => _operations.Count;
 

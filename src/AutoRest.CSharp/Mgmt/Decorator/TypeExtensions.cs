@@ -67,6 +67,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return isAsync ? new CSharpType(typeof(Task<>), type) : type;
         }
 
+        public static CSharpType WrapAsync(this Type type, bool isAsync)
+        {
+            return new CSharpType(type).WrapAsync(isAsync);
+        }
+
         public static CSharpType WrapResponse(this CSharpType type, bool isAsync)
         {
             var response = new CSharpType(typeof(Response<>), type);

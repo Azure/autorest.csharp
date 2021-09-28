@@ -263,6 +263,19 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             WriteLROMethod(operation, "Delete", async);
         }
 
+        private CSharpType? WrapResourceDataType(CSharpType? returnType)
+        {
+            if (IsResourceDataType(returnType))
+                return _resource.Type;
+
+            return returnType;
+        }
+
+        protected bool IsResourceDataType(CSharpType? returnType)
+        {
+            return _resourceData.Type.Equals(returnType);
+        }
+
         protected void WriteNormalMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
@@ -282,16 +295,17 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
             _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            foreach (Parameter parameter in methodParameters)
+            foreach (var parameter in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var responseType = TypeOfThis.WrapResponse(async);
+            var returnType = WrapResourceDataType(clientOperation.ReturnType);
+            var responseType = GetResponseType(returnType, async);
             _writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName(methodName, async)}(");
 
-            foreach (Parameter parameter in methodParameters)
+            foreach (var parameter in methodParameters)
             {
                 _writer.WriteParameter(parameter);
             }
@@ -330,7 +344,21 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            WriteGetResponse(writer, TypeOfThis, async);
+            WriteGetResponse(writer, operation, async);
+        }
+
+        protected void WriteGetResponse(CodeWriter writer, MgmtRestOperation operation, bool isAsync)
+        {
+            if (IsResourceDataType(operation.ReturnType))
+            {
+                writer.Line($"if (response.Value == null)");
+                writer.Line($"throw {GetAwait(isAsync)} {ClientDiagnosticsField}.{CreateMethodName("CreateRequestFailedException", isAsync)}(response.GetRawResponse()){GetConfigureAwait(isAsync)};");
+                writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({ContextProperty}, response.Value), response.GetRawResponse());");
+            }
+            else
+            {
+                writer.Line($"return response;");
+            }
         }
 
 
@@ -358,7 +386,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
 
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
             _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
-            foreach (Parameter parameter in methodParameters)
+            foreach (var parameter in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
             }
