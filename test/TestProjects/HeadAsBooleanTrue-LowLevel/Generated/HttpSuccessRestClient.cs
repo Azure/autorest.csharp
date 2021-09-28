@@ -72,7 +72,7 @@ namespace HeadAsBooleanTrue_LowLevel
                     case int s when s >= 400 && s < 500:
                         return Response.FromValue(false, message.Response);
                     default:
-                        return ResponseWithError.FromError<bool>(message.Response, await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false));
+                        return new ErrorResponse<bool>(message.Response, await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false));
                 }
             }
         }
@@ -106,7 +106,7 @@ namespace HeadAsBooleanTrue_LowLevel
                     case int s when s >= 400 && s < 500:
                         return Response.FromValue(false, message.Response);
                     default:
-                        return ResponseWithError.FromError<bool>(message.Response, _clientDiagnostics.CreateRequestFailedException(message.Response));
+                        return new ErrorResponse<bool>(message.Response, _clientDiagnostics.CreateRequestFailedException(message.Response));
                 }
             }
         }
@@ -152,7 +152,7 @@ namespace HeadAsBooleanTrue_LowLevel
                     case int s when s >= 400 && s < 500:
                         return Response.FromValue(false, message.Response);
                     default:
-                        return ResponseWithError.FromError<bool>(message.Response, await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false));
+                        return new ErrorResponse<bool>(message.Response, await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false));
                 }
             }
         }
@@ -186,7 +186,7 @@ namespace HeadAsBooleanTrue_LowLevel
                     case int s when s >= 400 && s < 500:
                         return Response.FromValue(false, message.Response);
                     default:
-                        return ResponseWithError.FromError<bool>(message.Response, _clientDiagnostics.CreateRequestFailedException(message.Response));
+                        return new ErrorResponse<bool>(message.Response, _clientDiagnostics.CreateRequestFailedException(message.Response));
                 }
             }
         }
@@ -232,7 +232,7 @@ namespace HeadAsBooleanTrue_LowLevel
                     case int s when s >= 400 && s < 500:
                         return Response.FromValue(false, message.Response);
                     default:
-                        return ResponseWithError.FromError<bool>(message.Response, await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false));
+                        return new ErrorResponse<bool>(message.Response, await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false));
                 }
             }
         }
@@ -266,7 +266,7 @@ namespace HeadAsBooleanTrue_LowLevel
                     case int s when s >= 400 && s < 500:
                         return Response.FromValue(false, message.Response);
                     default:
-                        return ResponseWithError.FromError<bool>(message.Response, _clientDiagnostics.CreateRequestFailedException(message.Response));
+                        return new ErrorResponse<bool>(message.Response, _clientDiagnostics.CreateRequestFailedException(message.Response));
                 }
             }
         }
