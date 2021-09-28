@@ -16,6 +16,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     public class TestServerV1 : IDisposable
     {
         private static readonly Regex _scenariosRegex = new Regex("(coverage|optionalCoverage|optCoverage)\\[(\"|')(?<name>\\w+)(\"|')\\]", RegexOptions.Compiled);
+        private static Lazy<BuildPropertiesAttribute> _buildProperties = new(() => (BuildPropertiesAttribute)typeof(TestServerV1).Assembly.GetCustomAttributes(typeof(BuildPropertiesAttribute), false)[0]);
 
         private readonly Process _process;
         public HttpClient Client { get; }
@@ -25,7 +26,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         {
             var portPhrase = "Started server on port ";
             var startup = Path.Combine(GetBaseDirectory(), "dist", "cli", "cli.js");
-            var coverageDirectory = Path.Combine(GetArtifactsDirectory(), "coverage");
+            var coverageDirectory = Path.Combine(_buildProperties.Value.ArtifactsDirectory, "coverage");
 
             var processStartInfo = new ProcessStartInfo("node", $"{startup} --port 0 --coverageDirectory {coverageDirectory}")
             {
@@ -61,35 +62,22 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         }
 
-        public static string FindNodeModulesDirectory()
-        {
-            var assemblyFile = new DirectoryInfo(typeof(TestServerV1).Assembly.Location);
-            var directory = assemblyFile.Parent;
-
-            do
-            {
-                var testServerDirectory = Path.Combine(directory.FullName, "node_modules");
-                if (Directory.Exists(testServerDirectory))
-                {
-                    return testServerDirectory;
-                }
-
-                directory = directory.Parent;
-            } while (directory != null);
-
-            throw new InvalidOperationException($"Cannot find 'node_modules' in parent directories of {typeof(TestServerV1).Assembly.Location}.");
-        }
-
         internal static string GetBaseDirectory()
         {
-            var nodeModules = FindNodeModulesDirectory();
+            var nodeModules = GetNodeModulesDirectory();
             return Path.Combine(nodeModules, "@microsoft.azure", "autorest.testserver");
         }
 
-        private static string GetArtifactsDirectory()
+        private static string GetNodeModulesDirectory()
         {
-            var buildProperties = (BuildPropertiesAttribute)typeof(TestServerV1).Assembly.GetCustomAttributes(typeof(BuildPropertiesAttribute), false)[0];
-            return buildProperties.ArtifactsDirectory;
+            var repoRoot = _buildProperties.Value.RepoRoot;
+            var testServerDirectory = Path.Combine(repoRoot, "node_modules");
+            if (Directory.Exists(testServerDirectory))
+            {
+                return testServerDirectory;
+            }
+
+            throw new InvalidOperationException($"Cannot find 'node_modules' in parent directories of {typeof(TestServerV1).Assembly.Location}.");
         }
 
         private void ReadOutput()

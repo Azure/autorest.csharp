@@ -9,7 +9,8 @@
   
   <ItemGroup>
     <AssemblyAttribute Include="AutoRest.TestServer.Tests.Infrastructure.BuildProperties">
-      <_Parameter1>$(ArtifactsDir)</_Parameter1>
+      <_Parameter1>$(RepoRoot)</_Parameter1>
+      <_Parameter2>$(ArtifactsDir)</_Parameter2>
     </AssemblyAttribute>
   </ItemGroup>
 

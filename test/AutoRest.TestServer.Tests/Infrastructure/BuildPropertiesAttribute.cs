@@ -8,10 +8,12 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     [AttributeUsage(AttributeTargets.Assembly)]
     internal sealed class BuildPropertiesAttribute : Attribute
     {
+        public string RepoRoot { get; }
         public string ArtifactsDirectory { get; }
 
-        public BuildPropertiesAttribute(string artifactsDirectory)
+        public BuildPropertiesAttribute(string repoRoot, string artifactsDirectory)
         {
+            RepoRoot = repoRoot;
             ArtifactsDirectory = artifactsDirectory;
         }
     }
