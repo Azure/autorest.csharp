@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <AssemblyAttribute Include="AutoRest.TestServer.Tests.Infrastructure.BuildProperties">
+      <_Parameter1>$(RepoRoot)</_Parameter1>
+      <_Parameter2>$(ArtifactsDir)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.19.0" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.15" />
     <PackageReference Include="Azure.Identity" Version="1.0.0" />
