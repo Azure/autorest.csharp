@@ -21,6 +21,9 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Generation.Writers;
 using System.Text;
 using System.Collections;
+using AutoRest.CSharp.Output.Models.Responses;
+using Response = Azure.Response;
+using AutoRest.CSharp.AutoRest.Plugins;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -39,39 +42,39 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var clientMethod in client.Methods)
                     {
-                        WriteClientMethod(writer, clientMethod, true);
-                        WriteClientMethod(writer, clientMethod, false);
+                        WriteClientMethod(writer, clientMethod, context.Configuration, true);
+                        WriteClientMethod(writer, clientMethod, context.Configuration, false);
                     }
 
                     foreach (var pagingMethod in client.PagingMethods)
                     {
-                        WritePagingMethod(writer, pagingMethod, true);
-                        WritePagingMethod(writer, pagingMethod, false);
+                        WritePagingMethod(writer, pagingMethod, context.Configuration, true);
+                        WritePagingMethod(writer, pagingMethod, context.Configuration, false);
                     }
 
                     foreach (var longRunningOperationMethod in client.LongRunningOperationMethods)
                     {
-                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, true);
-                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, false);
+                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, context.Configuration, true);
+                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, context.Configuration, false);
                     }
                 }
             }
         }
 
-        private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
+        private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, Configuration configuration, bool async)
         {
-            WriteClientMethodDecleration(writer, clientMethod.RestMethod, clientMethod.OperationSchemas, async);
+            WriteClientMethodDecleration(writer, clientMethod.RestMethod, clientMethod.OperationSchemas, configuration, async);
             WriteClientMethodBody(writer, clientMethod, async);
         }
 
-        private void WritePagingMethod(CodeWriter writer, LowLevelPagingMethod clientMethod, bool async)
+        private void WritePagingMethod(CodeWriter writer, LowLevelPagingMethod clientMethod, Configuration configuration, bool async)
         {
             var pageMethodReturnType = async ? new CSharpType(typeof(Task<Page<BinaryData>>)) : new CSharpType(typeof(Page<BinaryData>));
             var asyncText = async ? "async " : string.Empty;
             var awaitText = async ? "await " : string.Empty;
             var enumerableFactoryMethod = async ? "CreateAsyncEnumerable" : "CreateEnumerable";
 
-            WriteClientMethodDecleration(writer, clientMethod.FirstPageMethod, clientMethod.OperationSchemas, async);
+            WriteClientMethodDecleration(writer, clientMethod.FirstPageMethod, clientMethod.OperationSchemas, configuration, async);
 
             using (writer.Scope())
             {
@@ -167,11 +170,11 @@ namespace AutoRest.CSharp.Generation.Writers
             });
         }
 
-        private void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelLongRunningOperationMethod clientMethod, bool async)
+        private void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelLongRunningOperationMethod clientMethod, Configuration configuration, bool async)
         {
             var finalStateVia = clientMethod.StartMethod.Operation.LongRunningFinalStateVia;
 
-            WriteClientMethodDecleration(writer, clientMethod.StartMethod, clientMethod.OperationSchemas, async);
+            WriteClientMethodDecleration(writer, clientMethod.StartMethod, clientMethod.OperationSchemas, configuration, async);
             WriteLongRunningOperationMethodBody(writer, clientMethod, async);
         }
 
@@ -314,15 +317,16 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly CSharpType RequestOptionsParameterType = new CSharpType(typeof(RequestOptions), true);
         private static readonly Parameter RequestOptionsParameter = new Parameter("options", "The request options", RequestOptionsParameterType, Constant.Default(RequestOptionsParameterType), false);
 
-        private void WriteClientMethodDecleration(CodeWriter writer, RestClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, bool async)
+        private void WriteClientMethodDecleration(CodeWriter writer, RestClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, Configuration configuration, bool async)
         {
             var parameters = clientMethod.Parameters.Concat(new Parameter[] { RequestOptionsParameter });
+            var headAsBoolean = clientMethod.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean;
 
             var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning, clientMethod.Operation.Language.Default.Paging != null) switch
             {
-                (false, false, false) => typeof(Response),
+                (false, false, false) => headAsBoolean == true ? typeof(Response<bool>) : typeof(Response),
                 (false, true, false) => typeof(Operation<BinaryData>),
-                (true, false, false) => typeof(Task<Response>),
+                (true, false, false) => headAsBoolean == true ? typeof(Task<Response<bool>>) : typeof(Task<Response>),
                 (true, true, false) => typeof(Task<Operation<BinaryData>>),
                 (false, false, true) => typeof(Pageable<BinaryData>),
                 (false, true, true) => typeof(Operation<Pageable<BinaryData>>),

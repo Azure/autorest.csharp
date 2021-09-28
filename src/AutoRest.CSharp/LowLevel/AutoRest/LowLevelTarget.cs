@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var lowLevelClientWriter = new LowLevelRestClientWriter();
-                lowLevelClientWriter.WriteClient(codeWriter, client);
+                lowLevelClientWriter.WriteClient(codeWriter, client, context.Configuration);
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
             }
 
