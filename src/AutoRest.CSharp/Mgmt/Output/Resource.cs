@@ -21,18 +21,21 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected BuildContext<MgmtOutputLibrary> _context;
         //public bool IsScopeOrExtension { get; } // will be back soon
 
-        public IReadOnlyDictionary<OperationSet, HashSet<Operation>> OperationSets { get; }
+        public IEnumerable<OperationSet> OperationSets { get; }
+
+        private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperations;
 
         private IEnumerable<string>? _requestPaths;
-        public IEnumerable<string> RequestPaths => _requestPaths ??= OperationSets.Keys.Select(operationSet => operationSet.RequestPath);
+        public IEnumerable<string> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.RequestPath);
 
-        public Resource(IReadOnlyDictionary<OperationSet, HashSet<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context)
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _context = context;
-            OperationSets = operationSets;
+            _allOperations = allOperations;
+            OperationSets = allOperations.Keys;
             DefaultName = resourceName + SuffixValue;
 
-            if (operationSets.Keys.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
+            if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
 
             GetOperation = GetOperationWithVerb(HttpMethod.Get);
@@ -43,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method)
         {
             var result = new List<MgmtRestOperation>();
-            foreach (var operationSet in OperationSets.Keys)
+            foreach (var operationSet in OperationSets)
             {
                 var operation = operationSet.GetOperation(method);
                 if (operation is not null)
@@ -121,24 +124,32 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return _clientOperationMap;
 
             var result = new Dictionary<RequestPath, List<MgmtRestOperation>>();
-            foreach ((var operationSet, var operations) in OperationSets)
+            foreach ((var operationSet, var operations) in _allOperations)
             {
                 // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
                 foreach (var operation in operations)
                 {
                     if (!ShouldIncludeOperation(operation))
                         continue; // meaning this operation will be included in the container
-                    var contextualPath = operationSet.GetRequestPath(_context);
-                    var diff = new RequestPath(contextualPath.TrimParentFrom(operation.GetRequestPath(_context)).ToList());
-                    var restClient = _context.Library.GetRestClient(operation.GetHttpPath());
-                    var restOperation = new MgmtRestOperation(_context.Library.RestClientMethods[operation], restClient, GetContextualPath(operationSet));
-                    if (result.TryGetValue(diff, out var list))
+                    // first we need to see if this operation is a collection operation. Collection operation is not literally a child of the corresponding resource
+                    RequestPath key;
+                    if (operation.IsResourceCollectionOperation(_context, out var resourceOperationSet) && resourceOperationSet == operationSet)
+                        // we just use the contextual path as key if this is a resource collection operation
+                        key = GetContextualPath(operationSet);
+                    else
+                        // for other child operations, they should be child of the corresponding contextual path
+                        key = new RequestPath(GetContextualPath(operationSet).TrimParentFrom(operation.GetRequestPath(_context)).ToList());
+                    var restOperation = new MgmtRestOperation(
+                        _context.Library.RestClientMethods[operation],
+                        _context.Library.GetRestClient(operation.GetHttpPath()),
+                        GetContextualPath(operationSet));
+                    if (result.TryGetValue(key, out var list))
                     {
                         list.Add(restOperation);
                     }
                     else
                     {
-                        result.Add(diff, new List<MgmtRestOperation> { restOperation });
+                        result.Add(key, new List<MgmtRestOperation> { restOperation });
                     }
                 }
             }
@@ -157,13 +168,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<MgmtRestClient> EnsureRestClients()
         {
             var childRestClients = ClientOperations.SelectMany(clientOperation => clientOperation.Select(restOperation => restOperation.RestClient)).Distinct();
-            var resourceRestClients = OperationSets.Keys.Select(operationSet => _context.Library.GetRestClient(operationSet.RequestPath)).Distinct();
+            var resourceRestClients = OperationSets.Select(operationSet => _context.Library.GetRestClient(operationSet.RequestPath)).Distinct();
 
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
 
         private IDictionary<OperationSet, ResourceType>? _resourceTypes;
-        public IDictionary<OperationSet, ResourceType> ResourceTypes => _resourceTypes ??= OperationSets.Keys.ToDictionary(
+        public IDictionary<OperationSet, ResourceType> ResourceTypes => _resourceTypes ??= OperationSets.ToDictionary(
             operationSet => operationSet,
             operationSet => operationSet.GetRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration));
 

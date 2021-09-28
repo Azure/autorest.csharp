@@ -40,7 +40,31 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IEnumerable<TypeProvider> GetParent(this Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
-            return Enumerable.Empty<TypeProvider>();
+            var result = new List<TypeProvider>();
+            foreach (var resourceOperationSet in resource.OperationSets)
+            {
+                result.Add(resourceOperationSet.GetParent(context));
+            }
+
+            return result;
+        }
+
+        private static TypeProvider GetParent(this OperationSet resourceOperationSet, BuildContext<MgmtOutputLibrary> context)
+        {
+            var parentRequestPath = resourceOperationSet.ParentRequestPath(context);
+            if (context.Library.TryGetArmResource(parentRequestPath, out var parent))
+            {
+                return parent;
+            }
+            // if we cannot find a resource as its parent, its parent must be one of the Extensions
+            if (parentRequestPath.Equals(RequestPath.ManagementGroup, false))
+                return context.Library.ManagementGroupExtensions;
+            if (parentRequestPath.Equals(RequestPath.ResourceGroup))
+                return context.Library.ResourceGroupExtensions;
+            if (parentRequestPath.Equals(RequestPath.Subscription))
+                return context.Library.SubscriptionExtensions;
+            return context.Library.TenantExtensions;
+            // TODO -- what is the difference between ArmClientExtensions and TenantExtensions?
         }
 
         public static RequestPath ParentRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)

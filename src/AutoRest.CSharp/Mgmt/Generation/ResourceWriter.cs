@@ -40,8 +40,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ContextProperty => "this";
 
-        protected virtual CSharpType TypeOfThis => _resource.Type;
-        protected override string TypeNameOfThis => TypeOfThis.Name;
+        protected override TypeProvider This => _resource;
+        protected override CSharpType TypeOfThis => _resource.Type;
         private bool IsSingleton => _resource.IsSingleton;
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, context)
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _resourceData = resource.ResourceData;
         }
 
-        public virtual void Write()
+        public override void Write()
         {
             WriteUsings(_writer);
 
@@ -82,7 +82,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
                     WriteMethods();
 
                     // write children
-                    WriteChildResourceEntries();
+                    WriteChildResourceEntries(TypeNameOfThis);
                 }
             }
         }
@@ -150,7 +150,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             foreach (var client in _resource.RestClients)
             {
                 var subscriptionParamString = client.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{GetRestClientFieldName(client)} = new {client.Type.Name}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, {BaseUriField});");
+                _writer.Line($"{GetRestClientVariableName(client)} = new {client.Type.Name}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, {BaseUriField});");
             }
         }
 
@@ -222,28 +222,8 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // write all the methods that should belong to this resouce
             foreach (var clientOperation in _resource.ClientOperations)
             {
-                // we need to identify this operation belongs to which category: NormalMethod, LROMethod or PagingMethod
-                if (clientOperation.IsLongRunningOperation())
-                {
-                    // this is a long-running operation
-                    // TODO -- how to determine a name for this?
-                    WriteLROMethod(clientOperation, clientOperation.First().Name, true);
-                    WriteLROMethod(clientOperation, clientOperation.First().Name, false);
-                }
-                else if (clientOperation.IsPagingOperation(Context))
-                {
-                    // this is a paging operation
-                    // TODO -- how to determine a name for this?
-                    WritePagingMethod(clientOperation, clientOperation.First().Name, true);
-                    WritePagingMethod(clientOperation, clientOperation.First().Name, false);
-                }
-                else
-                {
-                    // this is a normal operation
-                    // TODO -- how to determine a name for this?
-                    WriteNormalMethod(clientOperation, clientOperation.First().Name, true);
-                    WriteNormalMethod(clientOperation, clientOperation.First().Name, false);
-                }
+                WriteMethod(clientOperation, clientOperation.Name, true);
+                WriteMethod(clientOperation, clientOperation.Name, false);
             }
 
             // TODO -- what does this used for?
@@ -251,6 +231,26 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             //{
             //    WriteLRO(kv.Value.OrderBy(m => m.Name.Length).First(), kv.Key, kv.Value);
             //}
+        }
+
+        protected void WriteMethod(MgmtClientOperation clientOperation, string methodName, bool async)
+        {
+            // we need to identify this operation belongs to which category: NormalMethod, LROMethod or PagingMethod
+            if (clientOperation.IsLongRunningOperation())
+            {
+                // this is a long-running operation
+                WriteLROMethod(clientOperation, methodName, async);
+            }
+            else if (clientOperation.IsPagingOperation(Context))
+            {
+                // this is a paging operation
+                WritePagingMethod(clientOperation, methodName, async);
+            }
+            else
+            {
+                // this is a normal operation
+                WriteNormalMethod(clientOperation, methodName, async);
+            }
         }
 
         private void WriteGetMethod(MgmtClientOperation operation, bool async)
@@ -261,125 +261,6 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         private void WriteDeleteMethod(MgmtClientOperation operation, bool async)
         {
             WriteLROMethod(operation, "Delete", async);
-        }
-
-        protected void WritePagingMethod(MgmtClientOperation clientOperation, string methodName, bool async)
-        {
-            _writer.Line();
-            // get the corresponding MgmtClientOperation mapping
-            var operationMappings = clientOperation.ToDictionary(
-                operation => operation.ContextualPath,
-                operation => operation);
-            // build contextual parameters
-            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
-                contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context));
-            // build parameter mapping
-            var parameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => pair.Value.Method.BuildParameterMapping(contextualParameterMappings[pair.Key]));
-            // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
-            var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
-            // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.First().Method.Description}");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-
-            // TODO -- find a better way to get this type
-            var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
-            _writer.WriteXmlDocumentationReturns($"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.");
-
-            var returnType = itemType.WrapPageable(async);
-
-            _writer.Append($"public virtual {returnType} {CreateMethodName(methodName, async)}(");
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteParameter(parameter);
-            }
-            _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (_writer.Scope())
-            {
-                Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                WritePagingMethodBody(_writer, itemType, diagnostic, operationMappings, parameterMappings, async);
-            }
-        }
-
-        private void WritePagingMethodBody(CodeWriter writer, CSharpType itemType, Diagnostic diagnostic,
-            IDictionary<RequestPath, MgmtRestOperation> operationMappings,
-            IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
-        {
-            // we need to write multiple branches for a paging method
-            if (operationMappings.Count == 1)
-            {
-                // if we only have one branch, we would not need those if-else statements
-                var branch = operationMappings.Keys.First();
-                WritePagingMethodBranch(writer, itemType, diagnostic, operationMappings[branch], parameterMappings[branch], async);
-            }
-            else
-            {
-                // branches go here
-                throw new NotImplementedException("multi-branch GET not supported yet");
-            }
-        }
-
-        private void WritePagingMethodBranch(CodeWriter writer, CSharpType resourceType, Diagnostic diagnostic, MgmtRestOperation operation,
-            IEnumerable<ParameterMapping> parameterMappings, bool async)
-        {
-            var pagingMethod = operation.GetPagingMethod(Context)!;
-            var returnType = new CSharpType(typeof(Page<>), resourceType).WrapAsync(async);
-
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-
-            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-            using (writer.Scope($"{GetAsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
-            {
-                // no null-checks because all are optional
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
-                {
-                    WritePageFunctionBody(writer, pagingMethod, operation, parameterMappings, async, false);
-                });
-            }
-
-            var nextPageFunctionName = "null";
-            if (pagingMethod.NextPageMethod != null)
-            {
-                nextPageFunctionName = "NextPageFunc";
-                var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                using (writer.Scope($"{GetAsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
-                {
-                    WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
-                    {
-                        WritePageFunctionBody(writer, pagingMethod, operation, parameterMappings, async, true);
-                    });
-                }
-            }
-            writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
-        }
-
-        private void WritePageFunctionBody(CodeWriter writer, PagingMethod pagingMethod, MgmtRestOperation operation,
-            IEnumerable<ParameterMapping> parameterMappings, bool isAsync, bool isNextPageFunc)
-        {
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-
-            writer.Append($"var response = {GetAwait(isAsync)} {GetRestClientFieldName(operation.RestClient)}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
-            WriteArguments(writer, parameterMappings);
-            writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
-
-            // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
-            var converter = string.Empty;
-            // TODO -- implement converter
-            //if (!string.IsNullOrEmpty(converter.ToString()))
-            //{
-            //    writer.UseNamespace("System.Linq");
-            //}
-            writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
         }
 
         protected void WriteNormalMethod(MgmtClientOperation clientOperation, string methodName, bool async)
@@ -400,7 +281,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
             var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.First().Method.Description}");
+            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
             foreach (Parameter parameter in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
@@ -445,7 +326,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         private void WriteNormalMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             writer.Append($"var response = {GetAwait(async)} ");
-            writer.Append($"{GetRestClientFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -453,7 +334,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         }
 
 
-        protected void WriteLROMethod(MgmtClientOperation clientOperation, string methodName, bool async)
+        protected virtual void WriteLROMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
             // get the corresponding MgmtClientOperation mapping
@@ -476,7 +357,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             methodName = isSLRO ? methodName : $"Start{methodName}";
 
             // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
-            _writer.WriteXmlDocumentationSummary($"{clientOperation.First().Method.Description}");
+            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
             foreach (Parameter parameter in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
@@ -527,7 +408,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         private void WriteLROMethodBranch(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             writer.Append($"var response = {GetAwait(async)} ");
-            writer.Append($"{GetRestClientFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(writer, parameterMapping);
             writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -702,52 +583,10 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Append($"var originalResponse = {GetAwait(async)} ");
             // TODO -- we need to implement the branches here as well
             //var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, Context).ToList();
-            _writer.Append($"{GetRestClientFieldName(operation.RestClient)}.{CreateMethodName("Get", async)}( ");
+            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName("Get", async)}( ");
             WriteArguments(_writer, parameterMapping, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
             _writer.Line($"return {typeof(Response)}.FromValue(new {TypeOfThis}(this, originalResponse.Value), originalResponse.GetRawResponse());");
-        }
-
-        private void WriteChildResourceEntries()
-        {
-            foreach (var resource in Context.Library.ArmResources)
-            {
-                var parents = resource.Parent(Context);
-                if (!parents.Contains(_resource))
-                    continue;
-
-                if (resource.IsSingleton)
-                    WriteChildSingletonResourceEntry(resource);
-                else
-                    WriteChildNonSingletonResourceEntry(resource);
-            }
-        }
-
-        private void WriteChildNonSingletonResourceEntry(Resource resource)
-        {
-            var container = resource.ResourceContainer;
-            if (container == null)
-                throw new InvalidOperationException($"We are about to write a {resource.ResourceName} resource entry in {_resource.ResourceName} resource, but it does not have a container, this cannot happen");
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
-            _writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
-            using (_writer.Scope($"public {container.Type} Get{container.ResourceName.ToPlural()}()"))
-            {
-                _writer.Line($"return new {container.Type}(this);");
-            }
-        }
-
-        private void WriteChildSingletonResourceEntry(Resource singletonResource)
-        {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {singletonResource.Type.Name} along with the instance operations that can be performed on it.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{singletonResource.Type.Name}\" /> object.");
-            using (_writer.Scope($"public {singletonResource.Type} Get{singletonResource.Type.Name}()"))
-            {
-                // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
-                // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {singletonResource.Type.Name}(this, Id + \"/{singletonResource.SingletonResourceIdSuffix!}\");");
-            }
         }
     }
 }

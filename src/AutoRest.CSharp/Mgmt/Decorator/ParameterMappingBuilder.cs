@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// </summary>
             public string ValueExpression;
             /// <summary>
-            /// Mark if the parameter matching will be strict. 
+            /// Mark if the parameter matching will be strict.
             /// If true, we will match both the type and parameter name
             /// If false, we will only match the type
             /// </summary>

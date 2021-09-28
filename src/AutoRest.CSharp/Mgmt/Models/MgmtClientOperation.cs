@@ -26,6 +26,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             return null;
         }
 
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation)
+        {
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation });
+        }
+
         private IReadOnlyList<MgmtRestOperation> _operations;
 
         private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations)
@@ -34,6 +39,12 @@ namespace AutoRest.CSharp.Mgmt.Models
         }
 
         public MgmtRestOperation this[int index] => _operations[index];
+
+        // TODO -- we need a better way to get the name of this
+        public string Name => _operations.First().Name;
+
+        // TODO -- we need a better way to get the description of this
+        public string? Description => _operations.First().Description;
 
         public int Count => _operations.Count;
 

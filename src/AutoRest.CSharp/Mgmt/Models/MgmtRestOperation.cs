@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// The name of this operation
         /// </summary>
         public string Name => Operation.CSharpName(); // TODO -- introduce some mechanism to determine this name
+        public string? Description => Method.Description;
         /// <summary>
         /// The actual operation
         /// </summary>

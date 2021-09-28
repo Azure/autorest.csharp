@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
-            UpdateSubscriptionIdForTenantIdResource(codeModel);
+            //UpdateSubscriptionIdForTenantIdResource(codeModel);
             _codeModel = codeModel;
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
@@ -148,35 +148,35 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        // TODO -- move this to the corresponding extension type provider
-        private void UpdateSubscriptionIdForTenantIdResource(CodeModel codeModel)
-        {
-            foreach (var operationGroup in codeModel.OperationGroups)
-            {
-                var subscriptionParameters = operationGroup.Operations
-                        .SelectMany(op => op.Parameters)
-                        .Where(p => p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase));
-                if (operationGroup.IsAncestorResourceTypeTenant(_context) && subscriptionParameters.Count() > 0)
-                {
-                    // subscriptionParameters all reference to the same object, so we need a copy of it.
-                    // We only need to change enum value of Implementation, ShallowCopy is enough.
-                    var newSubParam = subscriptionParameters.First().ShallowCopy();
-                    newSubParam.Implementation = ImplementationLocation.Method;
-                    foreach (var op in operationGroup.Operations)
-                    {
-                        var newParams = op.Parameters.ToList();
-                        for (int i = 0; i < newParams.Count; i++)
-                        {
-                            if (newParams[i].Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                newParams[i] = newSubParam;
-                            }
-                        }
-                        op.Parameters = newParams;
-                    }
-                }
-            }
-        }
+        //// TODO -- move this to the corresponding extension type provider
+        //private void UpdateSubscriptionIdForTenantIdResource(CodeModel codeModel)
+        //{
+        //    foreach (var operationGroup in codeModel.OperationGroups)
+        //    {
+        //        var subscriptionParameters = operationGroup.Operations
+        //                .SelectMany(op => op.Parameters)
+        //                .Where(p => p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase));
+        //        if (operationGroup.IsAncestorResourceTypeTenant(_context) && subscriptionParameters.Count() > 0)
+        //        {
+        //            // subscriptionParameters all reference to the same object, so we need a copy of it.
+        //            // We only need to change enum value of Implementation, ShallowCopy is enough.
+        //            var newSubParam = subscriptionParameters.First().ShallowCopy();
+        //            newSubParam.Implementation = ImplementationLocation.Method;
+        //            foreach (var op in operationGroup.Operations)
+        //            {
+        //                var newParams = op.Parameters.ToList();
+        //                for (int i = 0; i < newParams.Count; i++)
+        //                {
+        //                    if (newParams[i].Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+        //                    {
+        //                        newParams[i] = newSubParam;
+        //                    }
+        //                }
+        //                op.Parameters = newParams;
+        //            }
+        //        }
+        //    }
+        //}
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
 
@@ -268,11 +268,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private SubscriptionExtensions? _subscriptionExtensions;
         public SubscriptionExtensions SubscriptionExtensions => _subscriptionExtensions ??= new SubscriptionExtensions(_context);
 
-        private ResourceGroupExtensions? _resourceGroupsExtensions;
-        public ResourceGroupExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= new ResourceGroupExtensions(_context);
+        public ResourceGroupExtensions ResourceGroupExtensions => EnsureResourceGroupExtensions();
 
         private ManagementGroupExtensions? _managementGroupExtensions;
         public ManagementGroupExtensions ManagementGroupExtensions => _managementGroupExtensions ??= new ManagementGroupExtensions(_context);
+
+        private ResourceGroupExtensions? _resourceGroupsExtensions;
+        private ResourceGroupExtensions EnsureResourceGroupExtensions()
+        {
+            if (_resourceGroupsExtensions != null)
+                return _resourceGroupsExtensions;
+
+            // accumulate all the operations of resource group extensions
+            _resourceGroupsExtensions = new ResourceGroupExtensions(GetChildOperations(RequestPath.ResourceGroup), _context);
+            return _resourceGroupsExtensions;
+        }
 
         private IEnumerable<ResourceData>? _resourceDatas;
 
@@ -473,17 +483,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToResourceContainer;
         }
 
-        private IEnumerable<Dictionary<OperationSet, HashSet<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
+        private IEnumerable<Dictionary<OperationSet, IEnumerable<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
         {
-            var result = new List<Dictionary<OperationSet, HashSet<Operation>>>();
+            var result = new List<Dictionary<OperationSet, IEnumerable<Operation>>>();
 
             foreach (var resourceOperationSet in resourceOperationSets)
             {
-                // get all the child operations from the map
-                var childOperations = ChildOperations[resourceOperationSet.RequestPath];
-                result.Add(new Dictionary<OperationSet, HashSet<Operation>>
+                // all the child operations with the parent of current request path
+                result.Add(new Dictionary<OperationSet, IEnumerable<Operation>>
                 {
-                    { resourceOperationSet, childOperations }
+                    { resourceOperationSet, GetChildOperations(resourceOperationSet.RequestPath) }
                 });
             }
 
@@ -492,28 +501,36 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             yield return result.Aggregate((l, r) => l.Union(r).ToDictionary(pair => pair.Key, pair => pair.Value));
         }
 
+        public IEnumerable<Operation> GetChildOperations(string requestPath)
+        {
+            if (EnsureResourceChildOperations().TryGetValue(requestPath, out var operations))
+                return operations;
+
+            return Enumerable.Empty<Operation>();
+        }
+
         private Dictionary<string, HashSet<Operation>>? _childOperations;
-
-        internal Dictionary<string, HashSet<Operation>> ChildOperations => _childOperations ??= EnsureResourceChildOperations();
-
         private Dictionary<string, HashSet<Operation>> EnsureResourceChildOperations()
         {
-            var result = new Dictionary<string, HashSet<Operation>>();
+            if (_childOperations != null)
+                return _childOperations;
+
+            _childOperations = new Dictionary<string, HashSet<Operation>>();
             foreach ((var requestPath, var operationSet) in _rawRequestPathToOperationSets)
             {
-                if (operationSet.IsResource(_context.Configuration.MgmtConfiguration))
+                if (operationSet.IsResource(_mgmtConfiguration))
                     continue;
                 foreach (var operation in operationSet)
                 {
                     var parentRequestPath = operation.ParentRequestPath(_context);
-                    if (result.TryGetValue(parentRequestPath, out var list))
+                    if (_childOperations.TryGetValue(parentRequestPath, out var list))
                         list.Add(operation);
                     else
-                        result.Add(parentRequestPath, new HashSet<Operation> { operation });
+                        _childOperations.Add(parentRequestPath, new HashSet<Operation> { operation });
                 }
             }
 
-            return result;
+            return _childOperations;
         }
 
         private IDictionary<string, ResourceData> EnsureResourceData()

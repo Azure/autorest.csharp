@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         //private List<ClientMethod>? _getMethods;
         //private ClientMethod? _getByIdMethod;
 
-        public ResourceContainer(IReadOnlyDictionary<OperationSet, HashSet<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
+        public ResourceContainer(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
             : base(operationSets, resourceName, context)
         {
             CreateOperation = GetOperationWithVerb(HttpMethod.Put);

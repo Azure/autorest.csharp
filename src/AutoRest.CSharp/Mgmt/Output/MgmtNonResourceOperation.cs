@@ -19,76 +19,76 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    // TODO -- move some of the code in this class to a OperationNameOverrider extension class (maybe? and provide some configuration to let us conveniently override the name of an operation
-    internal class MgmtNonResourceOperation : TypeProvider
-    {
-        private BuildContext<MgmtOutputLibrary> _context;
-        private IEnumerable<ClientMethod>? _clientMethods;
-        private IEnumerable<PagingMethod>? _pagingMethods;
+    //// TODO -- move some of the code in this class to a OperationNameOverrider extension class (maybe? and provide some configuration to let us conveniently override the name of an operation
+    //internal class MgmtNonResourceOperation : TypeProvider
+    //{
+    //    private BuildContext<MgmtOutputLibrary> _context;
+    //    private IEnumerable<ClientMethod>? _clientMethods;
+    //    private IEnumerable<PagingMethod>? _pagingMethods;
 
-        internal OperationGroup OperationGroup { get; }
-        protected MgmtRestClient? _restClient;
+    //    internal OperationGroup OperationGroup { get; }
+    //    protected MgmtRestClient? _restClient;
 
-        public MgmtNonResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string defaultName) : base(context)
-        {
-            _context = context;
-            OperationGroup = operationGroup;
-            DefaultName = defaultName;
+    //    public MgmtNonResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string defaultName) : base(context)
+    //    {
+    //        _context = context;
+    //        OperationGroup = operationGroup;
+    //        DefaultName = defaultName;
 
-            SchemaName = operationGroup.Key.ToSingular(false);
-        }
+    //        SchemaName = operationGroup.Key.ToSingular(false);
+    //    }
 
-        protected override string DefaultName { get; }
+    //    protected override string DefaultName { get; }
 
-        public string SchemaName { get; }
+    //    public string SchemaName { get; }
 
-        protected override string DefaultAccessibility { get; } = "public";
+    //    protected override string DefaultAccessibility { get; } = "public";
 
-        public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
+    //    public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
-        public IEnumerable<ClientMethod> ClientMethods => _clientMethods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration, OverrideMethodName);
+    //    public IEnumerable<ClientMethod> ClientMethods => _clientMethods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration, OverrideMethodName);
 
-        public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, OverrideMethodName);
+    //    public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, OverrideMethodName);
 
-        private string OverrideMethodName(OperationGroup operationGroup, Operation operation, RestClientMethod restClientMethod)
-        {
-            var operationName = operation.CSharpName();
-            var schemaName = SchemaName;
-            // Change GetAll -> Get
-            const string getAll = "GetAll";
-            if (operationName.StartsWith(getAll, StringComparison.InvariantCultureIgnoreCase))
-            {
-                operationName = $"Get{operationName.Substring(getAll.Length)}";
-            }
-            // Split the Camel Case verb into words
-            var words = operationName.SplitByCamelCase();
-            // We assume the first word is the verb, and insert the schema name after it
-            var verb = words.First();
-            var wordsLeft = words.Skip(1);
-            if (ShouldUsePlural(wordsLeft, restClientMethod))
-            {
-                schemaName = schemaName.ToPlural();
-            }
-            return $"{verb}{schemaName}{string.Join("", wordsLeft)}";
-        }
+    //    private string OverrideMethodName(OperationGroup operationGroup, Operation operation, RestClientMethod restClientMethod)
+    //    {
+    //        var operationName = operation.CSharpName();
+    //        var schemaName = SchemaName;
+    //        // Change GetAll -> Get
+    //        const string getAll = "GetAll";
+    //        if (operationName.StartsWith(getAll, StringComparison.InvariantCultureIgnoreCase))
+    //        {
+    //            operationName = $"Get{operationName.Substring(getAll.Length)}";
+    //        }
+    //        // Split the Camel Case verb into words
+    //        var words = operationName.SplitByCamelCase();
+    //        // We assume the first word is the verb, and insert the schema name after it
+    //        var verb = words.First();
+    //        var wordsLeft = words.Skip(1);
+    //        if (ShouldUsePlural(wordsLeft, restClientMethod))
+    //        {
+    //            schemaName = schemaName.ToPlural();
+    //        }
+    //        return $"{verb}{schemaName}{string.Join("", wordsLeft)}";
+    //    }
 
-        // If the method is not returning a collection, we just return false.
-        // If the method name only has one word, we need plural
-        // If the second word falls into the escape word list, we need plural
-        // For instance, the original operation name is `GetByLocation`, and the schema is `Usage`, we need to ensure the result is `GetUsagesByLocation`
-        // otherwise we do not need plural. For instance, the original operation name is `GetTypes`, we need to ensure the result is `GetUsageTypes` instead of `GetUsagesTypes`
-        private bool ShouldUsePlural(IEnumerable<string> wordsLeft, RestClientMethod restClientMethod)
-        {
-            if (!restClientMethod.IsListMethod())
-                return false;
-            if (!wordsLeft.Any())
-                return true;
-            if (escapeWords.Contains(wordsLeft.First(), StringComparer.InvariantCultureIgnoreCase))
-                return true;
+    //    // If the method is not returning a collection, we just return false.
+    //    // If the method name only has one word, we need plural
+    //    // If the second word falls into the escape word list, we need plural
+    //    // For instance, the original operation name is `GetByLocation`, and the schema is `Usage`, we need to ensure the result is `GetUsagesByLocation`
+    //    // otherwise we do not need plural. For instance, the original operation name is `GetTypes`, we need to ensure the result is `GetUsageTypes` instead of `GetUsagesTypes`
+    //    private bool ShouldUsePlural(IEnumerable<string> wordsLeft, RestClientMethod restClientMethod)
+    //    {
+    //        if (!restClientMethod.IsListMethod())
+    //            return false;
+    //        if (!wordsLeft.Any())
+    //            return true;
+    //        if (escapeWords.Contains(wordsLeft.First(), StringComparer.InvariantCultureIgnoreCase))
+    //            return true;
 
-            return false;
-        }
+    //        return false;
+    //    }
 
-        private static readonly string[] escapeWords = { "By" };
-    }
+    //    private static readonly string[] escapeWords = { "By" };
+    //}
 }

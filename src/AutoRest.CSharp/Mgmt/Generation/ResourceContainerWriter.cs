@@ -46,7 +46,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string ContextProperty => "Parent";
 
         protected override CSharpType TypeOfThis => _resourceContainer.Type;
-        protected override string TypeNameOfThis => TypeOfThis.Name;
+
+        protected override TypeProvider This => _resourceContainer;
 
         public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
             : base(writer, resourceContainer.Resource, context)
@@ -161,28 +162,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // write all the methods that should belong to this resouce container
             foreach (var clientOperation in _resourceContainer.ClientOperations)
             {
-                // we need to identify this operation belongs to which category: NormalMethod, LROMethod or PagingMethod
-                if (clientOperation.IsLongRunningOperation())
-                {
-                    // this is a long-running operation
-                    // TODO -- how to determine a name for this?
-                    WriteLROMethod(clientOperation, clientOperation.First().Name, true);
-                    WriteLROMethod(clientOperation, clientOperation.First().Name, false);
-                }
-                else if (clientOperation.IsPagingOperation(Context))
-                {
-                    // this is a paging operation
-                    // TODO -- how to determine a name for this?
-                    WritePagingMethod(clientOperation, clientOperation.First().Name, true);
-                    WritePagingMethod(clientOperation, clientOperation.First().Name, false);
-                }
-                else
-                {
-                    // this is a normal operation
-                    // TODO -- how to determine a name for this?
-                    WriteNormalMethod(clientOperation, clientOperation.First().Name, true);
-                    WriteNormalMethod(clientOperation, clientOperation.First().Name, false);
-                }
+                WriteMethod(clientOperation, clientOperation.Name, true);
+                WriteMethod(clientOperation, clientOperation.Name, false);
             }
 
             // TODO -- add ListAsGenericResources back
@@ -275,7 +256,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteGetMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientFieldName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(writer, parameterMappings);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
             WriteGetIfExistsResponse(writer, _resource.Type);

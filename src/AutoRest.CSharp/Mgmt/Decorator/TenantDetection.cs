@@ -28,34 +28,34 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        // True when it's a main resource or sub resource under tenant.
-        // False for extension/scope resource whose parent/ancestor is set to tenant in readme.
-        public static bool IsAncestorTenant(this OperationGroup operationGroup, BuildContext context)
-        {
-            while (operationGroup.ParentOperationGroup(context) != null)
-            {
-                operationGroup = operationGroup.ParentOperationGroup(context)!;
-            }
-            // This does not check readme config.
-            return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
-        }
+        //// True when it's a main resource or sub resource under tenant.
+        //// False for extension/scope resource whose parent/ancestor is set to tenant in readme.
+        //public static bool IsAncestorTenant(this OperationGroup operationGroup, BuildContext context)
+        //{
+        //    while (operationGroup.ParentOperationGroup(context) != null)
+        //    {
+        //        operationGroup = operationGroup.ParentOperationGroup(context)!;
+        //    }
+        //    // This does not check readme config.
+        //    return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
+        //}
 
-        // True when it's a main resource directly under tenant or extension/scope main resource whose parent is set to tenant in readme.
-        public static bool IsParentResourceTypeTenant(this OperationGroup operationGroup, MgmtConfiguration config)
-        {
-            return operationGroup.ParentResourceType(config) == TenantDetection.TenantName;
-        }
+        //// True when it's a main resource directly under tenant or extension/scope main resource whose parent is set to tenant in readme.
+        //public static bool IsParentResourceTypeTenant(this OperationGroup operationGroup, MgmtConfiguration config)
+        //{
+        //    return operationGroup.ParentResourceType(config) == TenantDetection.TenantName;
+        //}
 
-        // True when it's a main resource or sub resource under tenant or extension/scope resource whose parent/ancestor is set to tenant in readme.
-        public static bool IsAncestorResourceTypeTenant(this OperationGroup operationGroup, BuildContext context)
-        {
-            while (operationGroup.ParentOperationGroup(context) != null)
-            {
-                operationGroup = operationGroup.ParentOperationGroup(context)!;
-            }
-            // This checks the parent configuration in readme.
-            return operationGroup.IsParentResourceTypeTenant(context.Configuration.MgmtConfiguration);
-        }
+        //// True when it's a main resource or sub resource under tenant or extension/scope resource whose parent/ancestor is set to tenant in readme.
+        //public static bool IsAncestorResourceTypeTenant(this OperationGroup operationGroup, BuildContext context)
+        //{
+        //    while (operationGroup.ParentOperationGroup(context) != null)
+        //    {
+        //        operationGroup = operationGroup.ParentOperationGroup(context)!;
+        //    }
+        //    // This checks the parent configuration in readme.
+        //    return operationGroup.IsParentResourceTypeTenant(context.Configuration.MgmtConfiguration);
+        //}
 
         private static bool IsTenantOnly(OperationGroup operationGroup, MgmtConfiguration config)
         {

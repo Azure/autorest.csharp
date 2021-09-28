@@ -120,7 +120,19 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new Segment(pathSegment.Value).SingleItemAsIEnumerate();
         }
 
-        public bool Equals(RequestPath other) => SerializedPath.Equals(other.SerializedPath, StringComparison.InvariantCultureIgnoreCase);
+        public bool Equals(RequestPath other, bool strict)
+        {
+            if (Count != other.Count)
+                return false;
+            for (int i = 0; i < Count; i++)
+            {
+                if (!this[i].Equals(other[i], strict))
+                    return false;
+            }
+            return true;
+        }
+
+        public bool Equals(RequestPath other) => this.Equals(other, true);
 
         public override bool Equals(object? obj)
         {
