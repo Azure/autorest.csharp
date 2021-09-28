@@ -796,7 +796,7 @@ schemas: !Schemas
       elementType: *ref_14
       language: !Languages 
         default:
-          name: ArrayOfEnum0
+          name: ArrayOfpathsMvtlqmArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems
           description: The array value ['foo1', 'foo2', 'foo3']
       protocol: !Protocols {}
     - !ArraySchema &ref_80
@@ -807,7 +807,7 @@ schemas: !Schemas
       elementType: *ref_15
       language: !Languages 
         default:
-          name: ArrayOfEnum1
+          name: ArrayOfpathsBqqpc7ArrayPrimStringEnumFoo1Foo2Foo3PutRequestbodyContentApplicationJsonSchemaItems
           description: The array value ['foo1', 'foo2', 'foo3']
       protocol: !Protocols {}
     - !ArraySchema &ref_82

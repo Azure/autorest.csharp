@@ -37,7 +37,7 @@ try {
 
     npm version --no-git-tag-version $devVersion | Out-Null;
    
-    npm run coverage-push --prefix node_modules/@microsoft.azure/autorest.testserver -- Azure/autorest.csharp refs/heads/feature/v3 skip $CoverageUser $CoveragePass
+    npm run coverage -- publish --repo=autorest.csharp --ref=refs/heads/feature/v3 --githubToken=$GitHubToken --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass
 }
 finally {
     Pop-Location

@@ -470,21 +470,22 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"var {authPolicy:D} = new {typeof(BearerTokenAuthenticationPolicy)}({TokenAuthField}, {ScopesConstant});");
                 }
 
-                writer.Append($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new HttpPipelinePolicy[] ");
+                writer.Append($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(HttpPipelinePolicy)}[] ");
                 writer.AppendRaw("{");
                 writer.Append($" new {typeof(LowLevelCallbackPolicy)}() ");
                 writer.AppendRaw("}, ");
                 if (securityScheme is NoAuthSecurity)
                 {
-                    writer.AppendRaw("Array.Empty<HttpPipelinePolicy>()");
+                    writer.Append($"Array.Empty<{typeof(HttpPipelinePolicy)}>()");
                 }
                 else
                 {
-                    writer.AppendRaw("new HttpPipelinePolicy[] {");
-                    writer.Append($" {authPolicy:I} ");
-                    writer.AppendRaw("}");
+                    writer
+                        .Append($"new {typeof(HttpPipelinePolicy)}[] {{")
+                        .Append($" {authPolicy:I} ")
+                        .AppendRaw("}");
                 }
-                writer.LineRaw(", new ResponseClassifier());");
+                writer.Line($", new {typeof(ResponseClassifier)}());");
 
                 writer.Append($"this.{RestClientField} = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
                 foreach (var parameter in client.RestClient.Parameters)

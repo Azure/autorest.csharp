@@ -122,7 +122,7 @@ schemas: !Schemas
           name: DoubleWrapperField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_37
+    - !NumberSchema &ref_35
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -262,10 +262,10 @@ schemas: !Schemas
           version: '2016-02-29'
       language: !Languages 
         default:
-          name: PetName
+          name: SiameseBreed
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_35
+    - !StringSchema &ref_37
       type: string
       apiVersions:
         - !ApiVersion 
@@ -275,7 +275,7 @@ schemas: !Schemas
           name: CatColor
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_31
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
@@ -285,14 +285,14 @@ schemas: !Schemas
           name: DogFood
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_33
+    - !StringSchema &ref_36
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2016-02-29'
       language: !Languages 
         default:
-          name: SiameseBreed
+          name: PetName
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_44
@@ -1166,63 +1166,77 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2016-02-29'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_36
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2016-02-29'
-            parents: !Relations 
-              all:
-                - *ref_30
-              immediate:
-                - *ref_30
-            properties:
-              - !Property 
-                schema: *ref_31
-                serializedName: food
-                language: !Languages 
-                  default:
-                    name: food
-                    description: ''
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - output
-              - input
-            language: !Languages 
-              default:
-                name: Dog
-                description: ''
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_32
+          - !ObjectSchema &ref_33
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2016-02-29'
             children: !Relations 
               all:
-                - !ObjectSchema &ref_34
+                - *ref_30
+              immediate:
+                - *ref_30
+            parents: !Relations 
+              all:
+                - !ObjectSchema &ref_31
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2016-02-29'
-                  parents: !Relations 
+                  children: !Relations 
                     all:
-                      - *ref_32
+                      - !ObjectSchema &ref_34
+                        type: object
+                        apiVersions:
+                          - !ApiVersion 
+                            version: '2016-02-29'
+                        parents: !Relations 
+                          all:
+                            - *ref_31
+                          immediate:
+                            - *ref_31
+                        properties:
+                          - !Property 
+                            schema: *ref_32
+                            serializedName: food
+                            language: !Languages 
+                              default:
+                                name: food
+                                description: ''
+                            protocol: !Protocols {}
+                        serializationFormats:
+                          - json
+                        usage:
+                          - output
+                          - input
+                        language: !Languages 
+                          default:
+                            name: Dog
+                            description: ''
+                            namespace: ''
+                        protocol: !Protocols {}
+                      - *ref_33
                       - *ref_30
                     immediate:
-                      - *ref_32
+                      - *ref_34
+                      - *ref_33
                   properties:
                     - !Property 
-                      schema: *ref_33
-                      serializedName: breed
+                      schema: *ref_35
+                      serializedName: id
                       language: !Languages 
                         default:
-                          name: breed
+                          name: id
+                          description: ''
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_36
+                      serializedName: name
+                      language: !Languages 
+                        default:
+                          name: name
                           description: ''
                       protocol: !Protocols {}
                   serializationFormats:
@@ -1232,20 +1246,15 @@ schemas: !Schemas
                     - input
                   language: !Languages 
                     default:
-                      name: Siamese
+                      name: Pet
                       description: ''
                       namespace: ''
                   protocol: !Protocols {}
               immediate:
-                - *ref_34
-            parents: !Relations 
-              all:
-                - *ref_30
-              immediate:
-                - *ref_30
+                - *ref_31
             properties:
               - !Property 
-                schema: *ref_35
+                schema: *ref_37
                 serializedName: color
                 language: !Languages 
                   default:
@@ -1258,7 +1267,7 @@ schemas: !Schemas
                   apiVersions:
                     - !ApiVersion 
                       version: '2016-02-29'
-                  elementType: *ref_36
+                  elementType: *ref_34
                   language: !Languages 
                     default:
                       name: CatHates
@@ -1281,25 +1290,16 @@ schemas: !Schemas
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
-          - *ref_34
+          - *ref_31
         immediate:
-          - *ref_36
-          - *ref_32
+          - *ref_33
       properties:
         - !Property 
-          schema: *ref_37
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
           schema: *ref_38
-          serializedName: name
+          serializedName: breed
           language: !Languages 
             default:
-              name: name
+              name: breed
               description: ''
           protocol: !Protocols {}
       serializationFormats:
@@ -1309,13 +1309,13 @@ schemas: !Schemas
         - input
       language: !Languages 
         default:
-          name: Pet
+          name: Siamese
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_32
-    - *ref_36
+    - *ref_33
     - *ref_34
+    - *ref_31
     - !ObjectSchema &ref_41
       type: object
       apiVersions:
@@ -5002,7 +5002,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -5056,7 +5056,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_114
-                schema: *ref_34
+                schema: *ref_30
                 implementation: Method
                 required: true
                 language: !Languages 

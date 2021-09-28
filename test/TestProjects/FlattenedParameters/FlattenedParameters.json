@@ -70,6 +70,76 @@
           }
         }
       }
+    },
+    "/OperationNotRequired/": {
+      "patch": {
+        "operationId": "OperationNotRequired",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "x-ms-client-flatten": true,
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "flattened": {
+                  "x-ms-client-flatten": true,
+                  "$ref": "#/definitions/FlattenedProperties"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/OperationRequired/": {
+      "patch": {
+        "operationId": "OperationRequired",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "x-ms-client-flatten": true,
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["flattened"], 
+              "properties": {
+                "flattened": {
+                  "x-ms-client-flatten": true,
+                  "$ref": "#/definitions/FlattenedProperties"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FlattenedProperties": {
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "required": ["required"],
+      "properties": {
+        "required": {
+          "type": "string"
+        },
+        "non_required": {
+          "type": "string"
+        }
+      }
     }
   }
 }

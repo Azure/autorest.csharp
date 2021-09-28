@@ -746,7 +746,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateGetLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
+        internal HttpMessage CreateGetLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<Get5ItemsItem> select)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -786,7 +786,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<LabelListResult, AppConfigurationGetLabelsHeaders>> GetLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LabelListResult, AppConfigurationGetLabelsHeaders>> GetLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Get5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -811,7 +811,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LabelListResult, AppConfigurationGetLabelsHeaders> GetLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LabelListResult, AppConfigurationGetLabelsHeaders> GetLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Get5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
             _pipeline.Send(message, cancellationToken);
@@ -830,7 +830,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateCheckLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
+        internal HttpMessage CreateCheckLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<Head5ItemsItem> select)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -869,7 +869,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<AppConfigurationCheckLabelsHeaders>> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AppConfigurationCheckLabelsHeaders>> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Head5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -889,7 +889,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<AppConfigurationCheckLabelsHeaders> CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AppConfigurationCheckLabelsHeaders> CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<Head5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
             _pipeline.Send(message, cancellationToken);
@@ -1089,7 +1089,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateGetRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
+        internal HttpMessage CreateGetRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum6> select)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1134,7 +1134,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<KeyValueListResult, AppConfigurationGetRevisionsHeaders>> GetRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<KeyValueListResult, AppConfigurationGetRevisionsHeaders>> GetRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum6> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1160,7 +1160,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, AppConfigurationGetRevisionsHeaders> GetRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, AppConfigurationGetRevisionsHeaders> GetRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum6> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
             _pipeline.Send(message, cancellationToken);
@@ -1179,7 +1179,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateCheckRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum5> select)
+        internal HttpMessage CreateCheckRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum7> select)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1223,7 +1223,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<AppConfigurationCheckRevisionsHeaders>> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AppConfigurationCheckRevisionsHeaders>> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum7> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1244,7 +1244,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<AppConfigurationCheckRevisionsHeaders> CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AppConfigurationCheckRevisionsHeaders> CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum7> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
             _pipeline.Send(message, cancellationToken);
@@ -1428,7 +1428,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateGetLabelsNextPageRequest(string nextLink, string name, string after, string acceptDatetime, IEnumerable<string> select)
+        internal HttpMessage CreateGetLabelsNextPageRequest(string nextLink, string name, string after, string acceptDatetime, IEnumerable<Get5ItemsItem> select)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1457,7 +1457,7 @@ namespace AppConfiguration
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<ResponseWithHeaders<LabelListResult, AppConfigurationGetLabelsHeaders>> GetLabelsNextPageAsync(string nextLink, string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LabelListResult, AppConfigurationGetLabelsHeaders>> GetLabelsNextPageAsync(string nextLink, string name = null, string after = null, string acceptDatetime = null, IEnumerable<Get5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1489,7 +1489,7 @@ namespace AppConfiguration
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public ResponseWithHeaders<LabelListResult, AppConfigurationGetLabelsHeaders> GetLabelsNextPage(string nextLink, string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LabelListResult, AppConfigurationGetLabelsHeaders> GetLabelsNextPage(string nextLink, string name = null, string after = null, string acceptDatetime = null, IEnumerable<Get5ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1513,7 +1513,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateGetRevisionsNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
+        internal HttpMessage CreateGetRevisionsNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum6> select)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1543,7 +1543,7 @@ namespace AppConfiguration
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValueListResult, AppConfigurationGetRevisionsHeaders>> GetRevisionsNextPageAsync(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<KeyValueListResult, AppConfigurationGetRevisionsHeaders>> GetRevisionsNextPageAsync(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum6> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1576,7 +1576,7 @@ namespace AppConfiguration
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public ResponseWithHeaders<KeyValueListResult, AppConfigurationGetRevisionsHeaders> GetRevisionsNextPage(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValueListResult, AppConfigurationGetRevisionsHeaders> GetRevisionsNextPage(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum6> select = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {

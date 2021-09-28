@@ -3,7 +3,7 @@ info: !Info
   title: ExactMatchInheritance
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_23
+    - !NumberSchema &ref_21
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -32,37 +32,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_5
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ExactMatchModel6Id
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_6
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ExactMatchModel6Name
-          description: ''
-      protocol: !Protocols {}
     - !StringSchema &ref_7
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ExactMatchModel6Type
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_3
       type: string
       apiVersions:
         - !ApiVersion 
@@ -72,24 +42,34 @@ schemas: !Schemas
           name: ExactMatchModel1New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_3
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel7ID
+          name: ExactMatchModel6Id
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_4
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel7Name
+          name: ExactMatchModel6Name
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel6Type
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_13
@@ -99,7 +79,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel7Type
+          name: ExactMatchModel2New
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_9
@@ -109,27 +89,27 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel2New
+          name: ExactMatchModel7ID
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_17
+    - !StringSchema &ref_10
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel8Id
+          name: ExactMatchModel7Name
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_18
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel8Name
+          name: ExactMatchModel7Type
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_19
@@ -139,7 +119,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel8NEW
+          name: ExactMatchModel3New
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_15
@@ -149,17 +129,27 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel3New
+          name: ExactMatchModel8Id
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_24
+    - !StringSchema &ref_16
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel9Name
+          name: ExactMatchModel8Name
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_17
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel8NEW
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_25
@@ -169,27 +159,27 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel9Type
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_21
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
           name: ExactMatchModel4New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_33
+    - !StringSchema &ref_22
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel11Name
+          name: ExactMatchModel9Name
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_23
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel9Type
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_34
@@ -199,10 +189,10 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel11Type
+          name: ExactMatchModel5New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_30
+    - !StringSchema &ref_31
       type: string
       apiVersions:
         - !ApiVersion 
@@ -212,7 +202,7 @@ schemas: !Schemas
           name: ExactMatchModel10Id
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_31
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
@@ -229,7 +219,17 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel5New
+          name: ExactMatchModel11Name
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_29
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel11Type
           description: ''
       protocol: !Protocols {}
   constants:
@@ -264,7 +264,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_32
+    - !DictionarySchema &ref_33
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -278,14 +278,14 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_4
+          - !ObjectSchema &ref_6
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_2
               immediate:
@@ -293,10 +293,29 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_3
-                serializedName: new
+                readOnly: true
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: new
+                    name: id
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_4
+                readOnly: true
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_5
+                readOnly: true
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
                     description: ''
                 protocol: !Protocols {}
             serializationFormats:
@@ -306,38 +325,19 @@ schemas: !Schemas
               - output
             language: !Languages 
               default:
-                name: ExactMatchModel1
+                name: ExactMatchModel6
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_4
+          - *ref_6
       properties:
         - !Property 
-          schema: *ref_5
-          readOnly: true
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_6
-          readOnly: true
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
           schema: *ref_7
-          readOnly: true
-          serializedName: type
+          serializedName: new
           language: !Languages 
             default:
-              name: type
+              name: new
               description: ''
           protocol: !Protocols {}
       serializationFormats:
@@ -347,24 +347,24 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: ExactMatchModel6
+          name: ExactMatchModel1
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_4
+    - *ref_6
     - !ObjectSchema &ref_8
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_10
+          - !ObjectSchema &ref_12
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_8
               immediate:
@@ -372,10 +372,26 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_9
-                serializedName: new
+                serializedName: iD
                 language: !Languages 
                   default:
-                    name: new
+                    name: iD
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_10
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_11
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
                     description: ''
                 protocol: !Protocols {}
             serializationFormats:
@@ -385,35 +401,19 @@ schemas: !Schemas
               - output
             language: !Languages 
               default:
-                name: ExactMatchModel2
+                name: ExactMatchModel7
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_10
+          - *ref_12
       properties:
         - !Property 
-          schema: *ref_11
-          serializedName: iD
-          language: !Languages 
-            default:
-              name: iD
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_12
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
           schema: *ref_13
-          serializedName: type
+          serializedName: new
           language: !Languages 
             default:
-              name: type
+              name: new
               description: ''
           protocol: !Protocols {}
       serializationFormats:
@@ -423,24 +423,24 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: ExactMatchModel7
+          name: ExactMatchModel2
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_10
+    - *ref_12
     - !ObjectSchema &ref_14
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_16
+          - !ObjectSchema &ref_18
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_14
               immediate:
@@ -448,10 +448,26 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_15
-                serializedName: new
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: new
+                    name: id
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_16
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_17
+                serializedName: NEW
+                language: !Languages 
+                  default:
+                    name: NEW
                     description: ''
                 protocol: !Protocols {}
             serializationFormats:
@@ -461,35 +477,19 @@ schemas: !Schemas
               - output
             language: !Languages 
               default:
-                name: ExactMatchModel3
+                name: ExactMatchModel8
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_16
+          - *ref_18
       properties:
         - !Property 
-          schema: *ref_17
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_18
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
           schema: *ref_19
-          serializedName: NEW
+          serializedName: new
           language: !Languages 
             default:
-              name: NEW
+              name: new
               description: ''
           protocol: !Protocols {}
       serializationFormats:
@@ -499,24 +499,24 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: ExactMatchModel8
+          name: ExactMatchModel3
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_16
+    - *ref_18
     - !ObjectSchema &ref_20
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_22
+          - !ObjectSchema &ref_24
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_20
               immediate:
@@ -524,10 +524,26 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_21
-                serializedName: new
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: new
+                    name: id
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_22
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_23
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
                     description: ''
                 protocol: !Protocols {}
             serializationFormats:
@@ -537,35 +553,19 @@ schemas: !Schemas
               - output
             language: !Languages 
               default:
-                name: ExactMatchModel4
+                name: ExactMatchModel9
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_22
+          - *ref_24
       properties:
         - !Property 
-          schema: *ref_23
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_24
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
           schema: *ref_25
-          serializedName: type
+          serializedName: new
           language: !Languages 
             default:
-              name: type
+              name: new
               description: ''
           protocol: !Protocols {}
       serializationFormats:
@@ -575,43 +575,58 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: ExactMatchModel9
+          name: ExactMatchModel4
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_22
-    - !ObjectSchema &ref_27
+    - *ref_24
+    - !ObjectSchema &ref_26
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_26
+          - !ObjectSchema &ref_27
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             children: !Relations 
               all:
-                - !ObjectSchema &ref_29
+                - *ref_26
+              immediate:
+                - *ref_26
+            parents: !Relations 
+              all:
+                - !ObjectSchema &ref_30
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  parents: !Relations 
+                  children: !Relations 
                     all:
-                      - *ref_26
                       - *ref_27
-                    immediate:
                       - *ref_26
+                    immediate:
+                      - *ref_27
                   properties:
                     - !Property 
                       schema: *ref_28
-                      serializedName: new
+                      readOnly: true
+                      serializedName: name
                       language: !Languages 
                         default:
-                          name: new
+                          name: name
+                          description: ''
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_29
+                      readOnly: true
+                      serializedName: type
+                      language: !Languages 
+                        default:
+                          name: type
                           description: ''
                       protocol: !Protocols {}
                   serializationFormats:
@@ -621,20 +636,15 @@ schemas: !Schemas
                     - output
                   language: !Languages 
                     default:
-                      name: ExactMatchModel5
+                      name: ExactMatchModel11
                       description: ''
                       namespace: ''
                   protocol: !Protocols {}
               immediate:
-                - *ref_29
-            parents: !Relations 
-              all:
-                - *ref_27
-              immediate:
-                - *ref_27
+                - *ref_30
             properties:
               - !Property 
-                schema: *ref_30
+                schema: *ref_31
                 readOnly: true
                 serializedName: id
                 language: !Languages 
@@ -643,7 +653,7 @@ schemas: !Schemas
                     description: ''
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_31
+                schema: *ref_32
                 serializedName: location
                 language: !Languages 
                   default:
@@ -651,7 +661,7 @@ schemas: !Schemas
                     description: ''
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_32
+                schema: *ref_33
                 serializedName: tags
                 language: !Languages 
                   default:
@@ -669,26 +679,16 @@ schemas: !Schemas
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
-          - *ref_29
+          - *ref_30
         immediate:
-          - *ref_26
+          - *ref_27
       properties:
         - !Property 
-          schema: *ref_33
-          readOnly: true
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
           schema: *ref_34
-          readOnly: true
-          serializedName: type
+          serializedName: new
           language: !Languages 
             default:
-              name: type
+              name: new
               description: ''
           protocol: !Protocols {}
       serializationFormats:
@@ -698,12 +698,12 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: ExactMatchModel11
+          name: ExactMatchModel5
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_26
-    - *ref_29
+    - *ref_27
+    - *ref_30
 globalParameters:
   - !Parameter &ref_38
     schema: *ref_1
@@ -801,7 +801,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_41
-                schema: *ref_4
+                schema: *ref_2
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -844,7 +844,7 @@ operationGroups:
           - *ref_43
         responses:
           - !SchemaResponse 
-            schema: *ref_4
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -924,7 +924,7 @@ operationGroups:
           - *ref_45
         responses:
           - !SchemaResponse 
-            schema: *ref_4
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -998,7 +998,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_46
-                schema: *ref_10
+                schema: *ref_8
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1041,7 +1041,7 @@ operationGroups:
           - *ref_48
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_8
             language: !Languages 
               default:
                 name: ''
@@ -1115,7 +1115,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_49
-                schema: *ref_16
+                schema: *ref_14
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1158,7 +1158,7 @@ operationGroups:
           - *ref_51
         responses:
           - !SchemaResponse 
-            schema: *ref_16
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -1238,7 +1238,7 @@ operationGroups:
           - *ref_53
         responses:
           - !SchemaResponse 
-            schema: *ref_16
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -1312,7 +1312,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_54
-                schema: *ref_22
+                schema: *ref_20
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1355,7 +1355,7 @@ operationGroups:
           - *ref_56
         responses:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_20
             language: !Languages 
               default:
                 name: ''
@@ -1429,7 +1429,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_57
-                schema: *ref_29
+                schema: *ref_26
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1472,7 +1472,7 @@ operationGroups:
           - *ref_59
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_26
             language: !Languages 
               default:
                 name: ''
@@ -1552,7 +1552,7 @@ operationGroups:
           - *ref_61
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_26
             language: !Languages 
               default:
                 name: ''

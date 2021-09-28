@@ -104,5 +104,77 @@ namespace FlattenedParameters
                 throw;
             }
         }
+
+        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
+        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> OperationNotRequiredAsync(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationNotRequired");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationNotRequiredAsync(required, nonRequired, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
+        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response OperationNotRequired(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationNotRequired");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationNotRequired(required, nonRequired, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
+        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> OperationRequiredAsync(string required, string nonRequired = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationRequired");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationRequiredAsync(required, nonRequired, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="required"> The FlattenedPropertiesRequired to use. </param>
+        /// <param name="nonRequired"> The FlattenedPropertiesNonRequired to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response OperationRequired(string required, string nonRequired = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationRequired");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationRequired(required, nonRequired, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

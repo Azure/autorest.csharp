@@ -29,10 +29,13 @@ namespace constants
         /// <summary> Initializes a new instance of ContantsClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="headerConstant"> Constant header property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
+        /// <param name="queryConstant"> Constant query property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
+        /// <param name="pathConstant"> Constant path property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="endpoint"> server parameter. </param>
-        internal ContantsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        internal ContantsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Enum8 headerConstant, Enum9 queryConstant, Enum10 pathConstant, Uri endpoint = null)
         {
-            RestClient = new ContantsRestClient(clientDiagnostics, pipeline, endpoint);
+            RestClient = new ContantsRestClient(clientDiagnostics, pipeline, headerConstant, queryConstant, pathConstant, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -597,6 +600,40 @@ namespace constants
             try
             {
                 return RestClient.PutModelAsStringRequiredOneValueDefault(input, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Pass constants from the client to this function. Will pass in constant path, query, and header parameters. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> PutClientConstantsAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutClientConstants");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutClientConstantsAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Pass constants from the client to this function. Will pass in constant path, query, and header parameters. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response PutClientConstants(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutClientConstants");
+            scope.Start();
+            try
+            {
+                return RestClient.PutClientConstants(cancellationToken);
             }
             catch (Exception e)
             {

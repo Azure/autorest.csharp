@@ -40,17 +40,18 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return await RestClient.CreateOrUpdateAsync(skillsetName, skillset, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateOrUpdateAsync(skillsetName, prefer, skillset, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -61,17 +62,18 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
         /// <param name="skillsetName"> The name of the skillset to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Skillset> CreateOrUpdate(string skillsetName, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<Skillset> CreateOrUpdate(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return RestClient.CreateOrUpdate(skillsetName, skillset, requestOptions, accessCondition, cancellationToken);
+                return RestClient.CreateOrUpdate(skillsetName, prefer, skillset, requestOptions, accessCondition, cancellationToken);
             }
             catch (Exception e)
             {
