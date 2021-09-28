@@ -25,13 +25,15 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         {
             var portPhrase = "Started server on port ";
             var startup = Path.Combine(GetBaseDirectory(), "dist", "cli", "cli.js");
+            var coverageDirectory = Path.Combine(GetArtifactsDirectory(), "coverage");
 
-            var processStartInfo = new ProcessStartInfo("node", $"{startup} --port 0");
-
-            // Use random port
-            processStartInfo.Environment["PORT"] = "0";
-            processStartInfo.RedirectStandardOutput = true;
-            processStartInfo.RedirectStandardError = true;
+            var processStartInfo = new ProcessStartInfo("node", $"{startup} --port 0 --coverageDirectory {coverageDirectory}")
+            {
+                // Use random port
+                Environment = {["PORT"] = "0"},
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
 
             _process = Process.Start(processStartInfo);
             ProcessTracker.Add(_process);
@@ -82,6 +84,12 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         {
             var nodeModules = FindNodeModulesDirectory();
             return Path.Combine(nodeModules, "@microsoft.azure", "autorest.testserver");
+        }
+
+        private static string GetArtifactsDirectory()
+        {
+            var buildProperties = (BuildPropertiesAttribute)typeof(TestServerV1).Assembly.GetCustomAttributes(typeof(BuildPropertiesAttribute), false)[0];
+            return buildProperties.ArtifactsDirectory;
         }
 
         private void ReadOutput()
