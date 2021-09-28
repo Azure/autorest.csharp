@@ -33,7 +33,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDecimalModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeDecimalModel(ArmResource options, PageSizeDecimalModelData resource) : base(options, resource.Id)
+        internal PageSizeDecimalModel(ArmResource options, PageSizeDecimalModelData resource)
         {
             HasData = true;
             _data = resource;

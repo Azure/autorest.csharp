@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
@@ -27,12 +26,17 @@ namespace MgmtScopeResource
 
         internal static ResourceLinkData DeserializeResourceLinkData(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<object> type = default;
             Optional<ResourceLinkProperties> properties = default;
-            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
@@ -58,13 +62,8 @@ namespace MgmtScopeResource
                     properties = ResourceLinkProperties.DeserializeResourceLinkProperties(property.Value);
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new ResourceLinkData(id, name.Value, type.Value, properties.Value);
+            return new ResourceLinkData(id.Value, name.Value, type.Value, properties.Value);
         }
     }
 }

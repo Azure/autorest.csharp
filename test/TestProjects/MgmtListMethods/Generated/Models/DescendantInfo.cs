@@ -7,6 +7,7 @@
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListMethods.Models
 {
@@ -24,7 +25,7 @@ namespace MgmtListMethods.Models
         /// <param name="type"> The type. </param>
         /// <param name="displayName"> The friendly name of the management group. </param>
         /// <param name="parent"> The ID of the parent management group. </param>
-        internal DescendantInfo(ResourceIdentifier id, string name, ResourceType type, string displayName, DescendantParentGroupInfo parent) : base(id, name, type)
+        internal DescendantInfo(ResourceIdentifier id, string name, ResourceType type, string displayName, SubResource parent) : base(id, name, type)
         {
             DisplayName = displayName;
             Parent = parent;
@@ -33,6 +34,6 @@ namespace MgmtListMethods.Models
         /// <summary> The friendly name of the management group. </summary>
         public string DisplayName { get; }
         /// <summary> The ID of the parent management group. </summary>
-        public DescendantParentGroupInfo Parent { get; }
+        public SubResource Parent { get; }
     }
 }

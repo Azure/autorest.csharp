@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Resources.Models;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
     /// <summary> A class representing the DeploymentOperation data model. </summary>
-    public partial class DeploymentOperationData : SubResource
+    public partial class DeploymentOperationData
     {
         /// <summary> Initializes a new instance of DeploymentOperationData. </summary>
         internal DeploymentOperationData()
@@ -19,15 +18,18 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Initializes a new instance of DeploymentOperationData. </summary>
-        /// <param name="id"> The id. </param>
+        /// <param name="id"> Full deployment operation ID. </param>
         /// <param name="operationId"> Deployment operation ID. </param>
         /// <param name="properties"> Deployment properties. </param>
-        internal DeploymentOperationData(string id, string operationId, DeploymentOperationProperties properties) : base(id)
+        internal DeploymentOperationData(string id, string operationId, DeploymentOperationProperties properties)
         {
+            Id = id;
             OperationId = operationId;
             Properties = properties;
         }
 
+        /// <summary> Full deployment operation ID. </summary>
+        public string Id { get; }
         /// <summary> Deployment operation ID. </summary>
         public string OperationId { get; }
         /// <summary> Deployment properties. </summary>

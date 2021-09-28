@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 
 namespace ExactMatchInheritance
 {
@@ -21,6 +20,11 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("new");
                 writer.WriteStringValue(New);
             }
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
@@ -31,22 +35,25 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("NEW");
                 writer.WriteStringValue(NEW);
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 
         internal static ExactMatchModel3Data DeserializeExactMatchModel3Data(JsonElement element)
         {
             Optional<string> @new = default;
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> nEW = default;
-            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))
                 {
                     @new = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -59,13 +66,8 @@ namespace ExactMatchInheritance
                     nEW = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new ExactMatchModel3Data(id, name.Value, nEW.Value, @new.Value);
+            return new ExactMatchModel3Data(id.Value, name.Value, nEW.Value, @new.Value);
         }
     }
 }

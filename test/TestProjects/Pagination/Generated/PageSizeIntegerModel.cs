@@ -33,7 +33,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeIntegerModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeIntegerModel(ArmResource options, PageSizeIntegerModelData resource) : base(options, resource.Id)
+        internal PageSizeIntegerModel(ArmResource options, PageSizeIntegerModelData resource)
         {
             HasData = true;
             _data = resource;
