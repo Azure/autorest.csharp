@@ -82,6 +82,7 @@ stages:
             - pwsh: >
                 ./eng/PublishRelease.ps1
                 -WorkingDirectory ./artifacts/bin/AutoRest.CSharp/Release/netcoreapp3.1/
+                -CoverageDirectory ./artifacts/coverage
                 -GitHubToken $(azuresdk-github-pat)
                 -NpmToken $(azure-sdk-npm-token)
                 -BuildNumber $(Build.BuildNumber)
