@@ -338,7 +338,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
             foreach (var parameter in parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
+                var description = parameter.Description;
+                if (parameter.AllowedValues != null && parameter.AllowedValues.Count > 0)
+                {
+                    if (description?.EndsWith(".") == false)
+                        description += ".";
+                    var allowedValues = string.Join(" | ", parameter.AllowedValues.Select(c => $"\"{c}\""));
+                    description = $"{description} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
+                }
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{description}");
             }
 
             WriteSchemaDocumentationRemarks(writer, operationSchemas);

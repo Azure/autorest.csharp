@@ -1577,7 +1577,7 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
+        /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1607,7 +1607,7 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
+        /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:

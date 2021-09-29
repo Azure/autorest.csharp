@@ -95,7 +95,7 @@ namespace BodyAndPath_LowLevel
         /// <summary> Resets products. </summary>
         /// <param name="itemNameStream"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -118,7 +118,7 @@ namespace BodyAndPath_LowLevel
         /// <summary> Resets products. </summary>
         /// <param name="itemNameStream"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -130,6 +130,50 @@ namespace BodyAndPath_LowLevel
             try
             {
                 return _restClient.CreateStream(itemNameStream, content, contentType, excluded, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Resets products. </summary>
+        /// <param name="enumName1"> The name of the vulnerability assessment. Allowed values: &quot;master&quot; | &quot;default&quot;. </param>
+        /// <param name="enumName2"> The name of the vulnerability assessment. Allowed values: &quot;default&quot;. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
+            scope.Start();
+            try
+            {
+                return await _restClient.CreateEnumAsync(enumName1, enumName2, content, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Resets products. </summary>
+        /// <param name="enumName1"> The name of the vulnerability assessment. Allowed values: &quot;master&quot; | &quot;default&quot;. </param>
+        /// <param name="enumName2"> The name of the vulnerability assessment. Allowed values: &quot;default&quot;. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
+            scope.Start();
+            try
+            {
+                return _restClient.CreateEnum(enumName1, enumName2, content, options);
             }
             catch (Exception e)
             {

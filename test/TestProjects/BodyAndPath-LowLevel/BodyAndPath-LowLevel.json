@@ -84,6 +84,56 @@
             }
           }
         }
+      },
+      "/{enumName1}/{enumName2}": {
+        "post": {
+          "operationId": "createEnum",
+          "summary": "Create products",
+          "description": "Resets products.",
+          "parameters": [
+            {
+              "name": "enumName1",
+              "in": "path",
+              "description": "The name of the vulnerability assessment.",
+              "required": true,
+              "type": "string",
+              "enum": [
+                "master",
+                "default"
+              ],
+              "x-ms-enum": {
+                "name": "EnumName1",
+                "modelAsString": false
+              }
+            },
+            {
+              "name": "enumName2",
+              "in": "path",
+              "description": "The name of the vulnerability assessment.",
+              "required": true,
+              "type": "string",
+              "enum": [
+                "default"
+              ],
+              "x-ms-enum": {
+                "name": "EnumName2",
+                "modelAsString": true
+              }
+            },
+            {
+              "name": "bodyParameter",
+              "in": "body",
+              "description": "body Parameter",
+              "required": true,
+              "schema": {}
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ok"
+            }
+          }
+        }
       }      
     },
     "definitions": {},

@@ -31,6 +31,46 @@ schemas: !Schemas
           name: Post1ItemsItem
           description: ''
       protocol: !Protocols {}
+  choices:
+    - !ChoiceSchema &ref_16
+      choices:
+        - !ChoiceValue 
+          value: default
+          language:
+            default:
+              name: Default
+              description: ''
+      type: choice
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: EnumName2
+          description: ''
+      protocol: !Protocols {}
+    - !ChoiceSchema 
+      choices:
+        - !ChoiceValue 
+          value: AzureOne
+          language:
+            default:
+              name: AzureOne
+              description: ''
+        - !ChoiceValue 
+          value: AzureTwo
+          language:
+            default:
+              name: AzureTwo
+              description: ''
+      type: choice
+      apiVersions:
+        - !ApiVersion 
+          version: 2014-04-01-preview
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: EnumName
+          description: Name of enum
+      protocol: !Protocols {}
   sealedChoices:
     - !SealedChoiceSchema &ref_9
       choices:
@@ -52,6 +92,30 @@ schemas: !Schemas
         default:
           name: ContentType
           description: Content type for upload
+      protocol: !Protocols {}
+    - !SealedChoiceSchema &ref_15
+      choices:
+        - !ChoiceValue 
+          value: master
+          language:
+            default:
+              name: Master
+              description: ''
+        - !ChoiceValue 
+          value: default
+          language:
+            default:
+              name: Default
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: 2014-04-01-preview
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: EnumName1
+          description: ''
       protocol: !Protocols {}
   constants:
     - !ConstantSchema &ref_4
@@ -286,6 +350,97 @@ operationGroups:
         language: !Languages 
           default:
             name: CreateStream
+            description: Resets products.
+            summary: Create products
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 2014-04-01-preview
+        parameters:
+          - *ref_2
+          - !Parameter &ref_18
+            schema: *ref_15
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: enumName1
+                description: The name of the vulnerability assessment.
+                serializedName: enumName1
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_19
+            schema: *ref_16
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: enumName2
+                description: The name of the vulnerability assessment.
+                serializedName: enumName2
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_4
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_17
+                schema: *ref_5
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: bodyParameter
+                    description: body Parameter
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_17
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /{enumName1}/{enumName2}
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_18
+          - *ref_19
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: ok
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateEnum
             description: Resets products.
             summary: Create products
         protocol: !Protocols {}
