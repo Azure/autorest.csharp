@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -17,11 +18,11 @@ using MgmtParent.Models;
 
 namespace MgmtParent
 {
-    /// <summary> A class representing collection of DedicatedHost and their operations over its parent. </summary>
+    /// <summary> A class representing collection of DedicatedHost and their operations over a DedicatedHostGroup. </summary>
     public partial class DedicatedHostContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DedicatedHostsRestOperations _dedicatedHostsRestClient;
+        private readonly DedicatedHostsRestOperations _restClient;
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostContainer"/> class for mocking. </summary>
         protected DedicatedHostContainer()
@@ -33,11 +34,11 @@ namespace MgmtParent
         internal DedicatedHostContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _dedicatedHostsRestClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Single";
+        protected override ResourceType ValidResourceType => DedicatedHostGroup.ResourceType;
 
         // Container level operations.
 
@@ -62,8 +63,8 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = _dedicatedHostsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken);
-                var operation = new DedicatedHostCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _dedicatedHostsRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken);
+                var operation = new DedicatedHostCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -96,8 +97,8 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = await _dedicatedHostsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new DedicatedHostCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _dedicatedHostsRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new DedicatedHostCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -109,22 +110,21 @@ namespace MgmtParent
             }
         }
 
-        /// <summary> Retrieves information about a dedicated host. </summary>
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public virtual Response<DedicatedHost> Get(string hostName, CancellationToken cancellationToken = default)
         {
-            if (hostName == null)
-            {
-                throw new ArgumentNullException(nameof(hostName));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.Get");
             scope.Start();
             try
             {
-                var response = _dedicatedHostsRestClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken);
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHost(Parent, response.Value), response.GetRawResponse());
@@ -136,22 +136,21 @@ namespace MgmtParent
             }
         }
 
-        /// <summary> Retrieves information about a dedicated host. </summary>
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async virtual Task<Response<DedicatedHost>> GetAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            if (hostName == null)
-            {
-                throw new ArgumentNullException(nameof(hostName));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.Get");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken).ConfigureAwait(false);
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHost(Parent, response.Value), response.GetRawResponse());
@@ -165,8 +164,7 @@ namespace MgmtParent
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public virtual Response<DedicatedHost> GetIfExists(string hostName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetIfExists");
@@ -178,7 +176,7 @@ namespace MgmtParent
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                var response = _dedicatedHostsRestClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
                     : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
@@ -192,11 +190,10 @@ namespace MgmtParent
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async virtual Task<Response<DedicatedHost>> GetIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -205,7 +202,7 @@ namespace MgmtParent
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                var response = await _dedicatedHostsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
                     : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
@@ -219,8 +216,7 @@ namespace MgmtParent
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public virtual Response<bool> CheckIfExists(string hostName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CheckIfExists");
@@ -244,11 +240,10 @@ namespace MgmtParent
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -269,17 +264,17 @@ namespace MgmtParent
 
         /// <summary> Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DedicatedHostData" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DedicatedHostData> GetAllByHostGroup(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<DedicatedHost> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<DedicatedHostData> FirstPageFunc(int? pageSizeHint)
+            Page<DedicatedHost> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAllByHostGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _dedicatedHostsRestClient.GetAllByHostGroup(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    var response = _restClient.GetAllByHostGroup(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -287,14 +282,14 @@ namespace MgmtParent
                     throw;
                 }
             }
-            Page<DedicatedHostData> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<DedicatedHost> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAllByHostGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _dedicatedHostsRestClient.GetAllByHostGroupNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    var response = _restClient.GetAllByHostGroupNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -307,17 +302,17 @@ namespace MgmtParent
 
         /// <summary> Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DedicatedHostData" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DedicatedHostData> GetAllByHostGroupAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<DedicatedHost> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<DedicatedHostData>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<DedicatedHost>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAllByHostGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _dedicatedHostsRestClient.GetAllByHostGroupAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    var response = await _restClient.GetAllByHostGroupAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -325,14 +320,14 @@ namespace MgmtParent
                     throw;
                 }
             }
-            async Task<Page<DedicatedHostData>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<DedicatedHost>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAllByHostGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _dedicatedHostsRestClient.GetAllByHostGroupNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    var response = await _restClient.GetAllByHostGroupNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -344,6 +339,6 @@ namespace MgmtParent
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DedicatedHost, DedicatedHostData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, DedicatedHost, DedicatedHostData> Construct() { }
     }
 }
