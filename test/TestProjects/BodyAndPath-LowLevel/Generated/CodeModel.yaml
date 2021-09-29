@@ -35,10 +35,10 @@ schemas: !Schemas
     - !ChoiceSchema &ref_16
       choices:
         - !ChoiceValue 
-          value: default
+          value: latest
           language:
             default:
-              name: Default
+              name: Latest
               description: ''
       type: choice
       choiceType: *ref_0
@@ -46,30 +46,6 @@ schemas: !Schemas
         default:
           name: EnumName2
           description: ''
-      protocol: !Protocols {}
-    - !ChoiceSchema 
-      choices:
-        - !ChoiceValue 
-          value: AzureOne
-          language:
-            default:
-              name: AzureOne
-              description: ''
-        - !ChoiceValue 
-          value: AzureTwo
-          language:
-            default:
-              name: AzureTwo
-              description: ''
-      type: choice
-      apiVersions:
-        - !ApiVersion 
-          version: 2014-04-01-preview
-      choiceType: *ref_0
-      language: !Languages 
-        default:
-          name: EnumName
-          description: Name of enum
       protocol: !Protocols {}
   sealedChoices:
     - !SealedChoiceSchema &ref_9
@@ -96,10 +72,10 @@ schemas: !Schemas
     - !SealedChoiceSchema &ref_15
       choices:
         - !ChoiceValue 
-          value: master
+          value: current
           language:
             default:
-              name: Master
+              name: Current
               description: ''
         - !ChoiceValue 
           value: default
@@ -366,7 +342,7 @@ operationGroups:
             language: !Languages 
               default:
                 name: enumName1
-                description: The name of the vulnerability assessment.
+                description: The first name
                 serializedName: enumName1
             protocol: !Protocols 
               http: !HttpParameter 
@@ -378,7 +354,7 @@ operationGroups:
             language: !Languages 
               default:
                 name: enumName2
-                description: The name of the vulnerability assessment.
+                description: The second name
                 serializedName: enumName2
             protocol: !Protocols 
               http: !HttpParameter 
@@ -442,7 +418,7 @@ operationGroups:
           default:
             name: CreateEnum
             description: Resets products.
-            summary: Create products
+            summary: Create another product
         protocol: !Protocols {}
     language: !Languages 
       default:

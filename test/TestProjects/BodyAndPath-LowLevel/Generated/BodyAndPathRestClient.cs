@@ -232,8 +232,8 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary> Resets products. </summary>
-        /// <param name="enumName1"> The name of the vulnerability assessment. </param>
-        /// <param name="enumName2"> The name of the vulnerability assessment. </param>
+        /// <param name="enumName1"> The first name. </param>
+        /// <param name="enumName2"> The second name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>
@@ -273,8 +273,8 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary> Resets products. </summary>
-        /// <param name="enumName1"> The name of the vulnerability assessment. </param>
-        /// <param name="enumName2"> The name of the vulnerability assessment. </param>
+        /// <param name="enumName1"> The first name. </param>
+        /// <param name="enumName2"> The second name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>

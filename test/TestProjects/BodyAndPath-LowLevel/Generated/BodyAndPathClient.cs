@@ -139,8 +139,8 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary> Resets products. </summary>
-        /// <param name="enumName1"> The name of the vulnerability assessment. Allowed values: &quot;master&quot; | &quot;default&quot;. </param>
-        /// <param name="enumName2"> The name of the vulnerability assessment. Allowed values: &quot;default&quot;. </param>
+        /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
+        /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -161,8 +161,8 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary> Resets products. </summary>
-        /// <param name="enumName1"> The name of the vulnerability assessment. Allowed values: &quot;master&quot; | &quot;default&quot;. </param>
-        /// <param name="enumName2"> The name of the vulnerability assessment. Allowed values: &quot;default&quot;. </param>
+        /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
+        /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002

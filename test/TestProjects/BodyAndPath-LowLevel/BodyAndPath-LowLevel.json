@@ -88,17 +88,17 @@
       "/{enumName1}/{enumName2}": {
         "post": {
           "operationId": "createEnum",
-          "summary": "Create products",
+          "summary": "Create another product",
           "description": "Resets products.",
           "parameters": [
             {
               "name": "enumName1",
               "in": "path",
-              "description": "The name of the vulnerability assessment.",
+              "description": "The first name",
               "required": true,
               "type": "string",
               "enum": [
-                "master",
+                "current",
                 "default"
               ],
               "x-ms-enum": {
@@ -109,11 +109,11 @@
             {
               "name": "enumName2",
               "in": "path",
-              "description": "The name of the vulnerability assessment.",
+              "description": "The second name",
               "required": true,
               "type": "string",
               "enum": [
-                "default"
+                "latest"
               ],
               "x-ms-enum": {
                 "name": "EnumName2",
