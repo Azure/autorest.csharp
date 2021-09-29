@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -35,7 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="ipTags"> The list of IP tags associated with the public IP address. </param>
         /// <param name="publicIPPrefix"> The PublicIPPrefix from which to allocate publicIP addresses. </param>
         /// <param name="publicIPAddressVersion"> Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;. </param>
-        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIpTag> ipTags, SubResource publicIPPrefix, IPVersion? publicIPAddressVersion)
+        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIpTag> ipTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion)
         {
             Name = name;
             IdleTimeoutInMinutes = idleTimeoutInMinutes;
@@ -54,7 +55,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The list of IP tags associated with the public IP address. </summary>
         public IList<VirtualMachineScaleSetIpTag> IpTags { get; }
         /// <summary> The PublicIPPrefix from which to allocate publicIP addresses. </summary>
-        public SubResource PublicIPPrefix { get; set; }
+        public WritableSubResource PublicIPPrefix { get; set; }
         /// <summary> Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;. </summary>
         public IPVersion? PublicIPAddressVersion { get; set; }
     }

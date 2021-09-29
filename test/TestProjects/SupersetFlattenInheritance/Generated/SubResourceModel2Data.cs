@@ -5,12 +5,10 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Resources.Models;
-
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the SubResourceModel2 data model. </summary>
-    public partial class SubResourceModel2Data : SubResource
+    public partial class SubResourceModel2Data
     {
         /// <summary> Initializes a new instance of SubResourceModel2Data. </summary>
         public SubResourceModel2Data()
@@ -18,13 +16,16 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of SubResourceModel2Data. </summary>
-        /// <param name="id"> The id. </param>
+        /// <param name="id"></param>
         /// <param name="foo"></param>
-        internal SubResourceModel2Data(string id, string foo) : base(id)
+        internal SubResourceModel2Data(string id, string foo)
         {
+            Id = id;
             Foo = foo;
         }
 
+        /// <summary> Gets the id. </summary>
+        public string Id { get; }
         /// <summary> Gets or sets the foo. </summary>
         public string Foo { get; set; }
     }

@@ -33,7 +33,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDoubleModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeDoubleModel(ArmResource options, PageSizeDoubleModelData resource) : base(options, resource.Id)
+        internal PageSizeDoubleModel(ArmResource options, PageSizeDoubleModelData resource)
         {
             HasData = true;
             _data = resource;

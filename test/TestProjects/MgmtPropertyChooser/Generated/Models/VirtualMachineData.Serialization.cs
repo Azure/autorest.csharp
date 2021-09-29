@@ -59,6 +59,16 @@ namespace MgmtPropertyChooser
                 }
                 writer.WriteEndArray();
             }
+            if (Optional.IsDefined(FakeSubResource))
+            {
+                writer.WritePropertyName("fakeSubResource");
+                JsonSerializer.Serialize(writer, FakeSubResource);
+            }
+            if (Optional.IsDefined(FakeWritableSubResource))
+            {
+                writer.WritePropertyName("fakeWritableSubResource");
+                JsonSerializer.Serialize(writer, FakeWritableSubResource);
+            }
             writer.WritePropertyName("tags");
             writer.WriteStartObject();
             foreach (var item in Tags)
@@ -96,6 +106,8 @@ namespace MgmtPropertyChooser
             Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
             Optional<IList<string>> zones = default;
             Optional<IReadOnlyList<Resource>> fakeResources = default;
+            Optional<SubResource> fakeSubResource = default;
+            Optional<WritableSubResource> fakeWritableSubResource = default;
             IDictionary<string, string> tags = default;
             Location location = default;
             ResourceIdentifier id = default;
@@ -212,6 +224,26 @@ namespace MgmtPropertyChooser
                     fakeResources = array;
                     continue;
                 }
+                if (property.NameEquals("fakeSubResource"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    fakeSubResource = JsonSerializer.Deserialize<SubResource>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("fakeWritableSubResource"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    fakeWritableSubResource = JsonSerializer.Deserialize<WritableSubResource>(property.Value.ToString());
+                    continue;
+                }
                 if (property.NameEquals("tags"))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -275,7 +307,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), Optional.ToList(fakeResources), provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

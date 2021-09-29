@@ -15,6 +15,11 @@ namespace MgmtListMethods.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Type))
             {
                 writer.WritePropertyName("type");
@@ -30,8 +35,6 @@ namespace MgmtListMethods.Models
                 writer.WritePropertyName("unit");
                 writer.WriteStringValue(Unit.Value.ToString());
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
     }

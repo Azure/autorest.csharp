@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 
 namespace ExactMatchFlattenInheritance.Models
 {
@@ -16,6 +15,11 @@ namespace ExactMatchFlattenInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
@@ -26,18 +30,21 @@ namespace ExactMatchFlattenInheritance.Models
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 
         internal static AzureResourceFlattenModel7 DeserializeAzureResourceFlattenModel7(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
@@ -48,13 +55,8 @@ namespace ExactMatchFlattenInheritance.Models
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new AzureResourceFlattenModel7(id, name.Value, type.Value);
+            return new AzureResourceFlattenModel7(id.Value, name.Value, type.Value);
         }
     }
 }
