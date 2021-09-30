@@ -210,11 +210,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"var {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, credential, options, pipeline{subIdIfNeeded}, baseUri);");
         }
 
-        protected override void WritePagingMethodBranch(CodeWriter writer, CSharpType resourceType, Diagnostic diagnostic, MgmtRestOperation operation,
+        protected override void WritePagingMethodBranch(CodeWriter writer, CSharpType itemType, Diagnostic diagnostic, MgmtRestOperation operation,
             IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             var pagingMethod = operation.GetPagingMethod(Context)!;
-            var returnType = new CSharpType(typeof(Page<>), resourceType).WrapAsync(async);
+            var returnType = new CSharpType(typeof(Page<>), itemType).WrapAsync(async);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
@@ -230,7 +230,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // no null-checks because all are optional
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsVariable, writer =>
                 {
-                    WritePageFunctionBody(writer, pagingMethod, operation, parameterMappings, async, false);
+                    WritePageFunctionBody(writer, itemType, pagingMethod, operation, parameterMappings, async, false);
                 });
             }
 
@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsVariable, writer =>
                     {
-                        WritePageFunctionBody(writer, pagingMethod, operation, parameterMappings, async, true);
+                        WritePageFunctionBody(writer, itemType, pagingMethod, operation, parameterMappings, async, true);
                     });
                 }
             }

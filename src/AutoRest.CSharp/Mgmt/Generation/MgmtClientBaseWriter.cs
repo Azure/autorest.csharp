@@ -172,6 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // TODO -- find a better way to get this type
             var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
+            itemType = WrapResourceDataType(itemType)!;
             _writer.WriteXmlDocumentationReturns($"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.");
 
             WritePagingMethodSignature(_writer, itemType.WrapPageable(async), methodName, methodParameters, async, clientOperation.Accessibility, true);
@@ -203,11 +204,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WritePagingMethodBranch(CodeWriter writer, CSharpType resourceType, Diagnostic diagnostic, MgmtRestOperation operation,
+        protected virtual void WritePagingMethodBranch(CodeWriter writer, CSharpType itemType, Diagnostic diagnostic, MgmtRestOperation operation,
             IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             var pagingMethod = operation.GetPagingMethod(Context)!;
-            var returnType = new CSharpType(typeof(Page<>), resourceType).WrapAsync(async);
+            var returnType = new CSharpType(typeof(Page<>), itemType).WrapAsync(async);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
@@ -218,7 +219,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // no null-checks because all are optional
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
-                    WritePageFunctionBody(writer, pagingMethod, operation, parameterMappings, async, false);
+                    WritePageFunctionBody(writer, itemType, pagingMethod, operation, parameterMappings, async, false);
                 });
             }
 
@@ -231,14 +232,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                     {
-                        WritePageFunctionBody(writer, pagingMethod, operation, parameterMappings, async, true);
+                        WritePageFunctionBody(writer, itemType, pagingMethod, operation, parameterMappings, async, true);
                     });
                 }
             }
             writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
-        protected void WritePageFunctionBody(CodeWriter writer, PagingMethod pagingMethod, MgmtRestOperation operation,
+        protected void WritePageFunctionBody(CodeWriter writer, CSharpType itemType, PagingMethod pagingMethod, MgmtRestOperation operation,
             IEnumerable<ParameterMapping> parameterMappings, bool isAsync, bool isNextPageFunc)
         {
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
@@ -251,11 +252,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
             var converter = string.Empty;
-            // TODO -- implement converter
-            //if (!string.IsNullOrEmpty(converter.ToString()))
-            //{
-            //    writer.UseNamespace("System.Linq");
-            //}
+            if (itemType != pagingMethod.PagingResponse.ItemType)
+            {
+                writer.UseNamespace("System.Linq");
+                converter = $".Select(value => new {itemType.Name}({ContextProperty}, value))";
+            }
             writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
         }
 
