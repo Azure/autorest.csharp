@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string ContextProperty => "this";
 
         protected override TypeProvider This => _resource;
-        protected override CSharpType TypeOfThis => _resource.Type;
         private bool IsSingleton => _resource.IsSingleton;
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, context)

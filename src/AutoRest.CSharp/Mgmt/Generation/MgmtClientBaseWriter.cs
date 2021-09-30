@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected MgmtConfiguration Config => Context.Configuration.MgmtConfiguration;
 
         protected abstract TypeProvider This { get; }
-        protected abstract CSharpType TypeOfThis { get; }
+        protected virtual CSharpType TypeOfThis => This.Type;
         /// <summary>
         /// ClassName is the name of the class which this writer is writing
         /// </summary>

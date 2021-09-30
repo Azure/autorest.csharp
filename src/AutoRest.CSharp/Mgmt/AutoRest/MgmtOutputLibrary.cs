@@ -315,11 +315,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private ArmClientExtensions? _armClientExtensions;
         private ArmClientExtensions EnsureArmClientExtensions()
         {
-            if (_armClientExtensions != null)
-                return _armClientExtensions;
+           if (_armClientExtensions != null)
+               return _armClientExtensions;
 
-            _armClientExtensions = new ArmClientExtensions(Enumerable.Empty<Operation>(), _context);
-            return _armClientExtensions;
+           _armClientExtensions = new ArmClientExtensions(GetChildOperations(RequestPath.Tenant), _context);
+           return _armClientExtensions;
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;

@@ -46,8 +46,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ContextProperty => "Parent";
 
-        protected override CSharpType TypeOfThis => _resourceContainer.Type;
-
         protected override TypeProvider This => _resourceContainer;
 
         public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)

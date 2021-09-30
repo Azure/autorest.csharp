@@ -32,8 +32,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override TypeProvider This => _extensions;
 
-        protected override CSharpType TypeOfThis => _extensions.Type;
-
         public override void Write()
         {
             using (_writer.Namespace(Context.DefaultNamespace))

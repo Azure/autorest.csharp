@@ -20,8 +20,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string Description => "A class to add extension methods to ResourceGroup.";
 
-        protected override CSharpType TypeOfThis => _extensions.Type;
-
         protected override string ExtensionOperationVariableName => "resourceGroup";
 
         protected override Type ExtensionOperationVariableType => typeof(ResourceGroup);
