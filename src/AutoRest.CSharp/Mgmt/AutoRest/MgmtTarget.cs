@@ -103,9 +103,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
             project.AddGeneratedFile($"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
 
-            //var managementGroupExtensionsCodeWriter = new CodeWriter();
-            //new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context.Library.ManagementGroupExtensions, context).Write();
-            //project.AddGeneratedFile($"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
+            var managementGroupExtensionsCodeWriter = new CodeWriter();
+            new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context.Library.ManagementGroupExtensions, context).Write();
+            project.AddGeneratedFile($"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
 
             //var tenantExtensionsCodeWriter = new CodeWriter();
             //new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.TenantExtensions, context).Write();

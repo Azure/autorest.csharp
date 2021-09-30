@@ -50,30 +50,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteMethod(clientOperation, clientOperation.Name, true);
                         WriteMethod(clientOperation, clientOperation.Name, false);
                     }
-
-                    //var mgmtExtensionOperations = Context.Library.GetNonResourceOperations(ResourceTypeBuilder.ResourceGroups);
-
-                    //foreach (var mgmtExtensionOperation in mgmtExtensionOperations)
-                    //{
-                    //    _writer.Line($"#region {mgmtExtensionOperation.SchemaName}");
-                    //WriteGetRestOperations(_writer, mgmtExtensionOperation.RestClient);
-
-                    //    // despite that we should only have one method, but we still using an IEnumerable
-                    //    foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
-                    //    {
-                    //WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
-                    //        WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
-                    //    }
-
-                    //    foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
-                    //    {
-                    //WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, true, mgmtExtensionOperation.RestClient);
-                    //        WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, false, mgmtExtensionOperation.RestClient);
-                    //    }
-
-                    //    _writer.LineRaw("#endregion");
-                    //    _writer.Line();
-                    //}
                 }
             }
         }

@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public SubscriptionExtensionsWriter(CodeWriter writer, SubscriptionExtensions subscriptionExtensions, BuildContext<MgmtOutputLibrary> context)
             : base(writer, subscriptionExtensions, context)
         {
-            _extensions = subscriptionExtensions;
         }
 
         protected override string Description => "A class to add extension methods to Subscription.";
