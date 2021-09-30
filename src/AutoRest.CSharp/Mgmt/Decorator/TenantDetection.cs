@@ -12,21 +12,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class TenantDetection
     {
-        internal static readonly string TenantName = "tenant";
-        private static ConcurrentDictionary<OperationGroup, bool> _valueCache = new ConcurrentDictionary<OperationGroup, bool>();
+        //internal static readonly string TenantName = "tenant";
+        //private static ConcurrentDictionary<OperationGroup, bool> _valueCache = new ConcurrentDictionary<OperationGroup, bool>();
 
-        // True when it's a main resource directly under tenant.
-        // False for extension/scope main resource whose parent is set to tenant in readme.
-        public static bool IsTenantResource(this OperationGroup operationGroup, MgmtConfiguration config)
-        {
-            bool result;
-            if (_valueCache.TryGetValue(operationGroup, out result))
-                return result;
+        //// True when it's a main resource directly under tenant.
+        //// False for extension/scope main resource whose parent is set to tenant in readme.
+        //public static bool IsTenantResource(this OperationGroup operationGroup, MgmtConfiguration config)
+        //{
+        //    bool result;
+        //    if (_valueCache.TryGetValue(operationGroup, out result))
+        //        return result;
 
-            result = IsTenantOnly(operationGroup, config);
-            _valueCache.TryAdd(operationGroup, result);
-            return result;
-        }
+        //    result = IsTenantOnly(operationGroup, config);
+        //    _valueCache.TryAdd(operationGroup, result);
+        //    return result;
+        //}
 
         //// True when it's a main resource or sub resource under tenant.
         //// False for extension/scope resource whose parent/ancestor is set to tenant in readme.
@@ -57,57 +57,57 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         //    return operationGroup.IsParentResourceTypeTenant(context.Configuration.MgmtConfiguration);
         //}
 
-        private static bool IsTenantOnly(OperationGroup operationGroup, MgmtConfiguration config)
-        {
-            bool foundTenant = false;
-            foreach (var keyValue in operationGroup.OperationHttpMethodMapping())
-            {
-                foreach (var httpRequest in keyValue.Value)
-                {
-                    var providerSegmentsList = ((HttpRequest?)httpRequest?.Protocol?.Http)?.ProviderSegments();
-                    for (int i = 0; i < providerSegmentsList?.Count; i++)
-                    {
-                        var segment = providerSegmentsList[i];
-                        if (segment.TokenValue.Trim('/').Equals(operationGroup.ResourceType(config)) && segment.IsFullProvider)
-                        {
-                            foundTenant = foundTenant || segment.NoPredecessor;
-                            if (!segment.NoPredecessor)
-                            {
-                                return false;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-            return foundTenant;
-        }
+        //private static bool IsTenantOnly(OperationGroup operationGroup, MgmtConfiguration config)
+        //{
+        //    bool foundTenant = false;
+        //    foreach (var keyValue in operationGroup.OperationHttpMethodMapping())
+        //    {
+        //        foreach (var httpRequest in keyValue.Value)
+        //        {
+        //            var providerSegmentsList = ((HttpRequest?)httpRequest?.Protocol?.Http)?.ProviderSegments();
+        //            for (int i = 0; i < providerSegmentsList?.Count; i++)
+        //            {
+        //                var segment = providerSegmentsList[i];
+        //                if (segment.TokenValue.Trim('/').Equals(operationGroup.ResourceType(config)) && segment.IsFullProvider)
+        //                {
+        //                    foundTenant = foundTenant || segment.NoPredecessor;
+        //                    if (!segment.NoPredecessor)
+        //                    {
+        //                        return false;
+        //                    }
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return foundTenant;
+        //}
 
-        public static bool IsParentTenant(this Operation operation)
-        {
-            if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
-            {
-                throw new ArgumentException($"The operation does not have an HttpRequest.");
-            }
-            var path = httpRequest.Path;
-            bool foundTenant = false;
+        //public static bool IsParentTenant(this Operation operation)
+        //{
+        //    if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
+        //    {
+        //        throw new ArgumentException($"The operation does not have an HttpRequest.");
+        //    }
+        //    var path = httpRequest.Path;
+        //    bool foundTenant = false;
 
-            var providerSegmentsList = httpRequest.ProviderSegments();
-            for (int i = 0; i < providerSegmentsList?.Count; i++)
-            {
-                var segment = providerSegmentsList[i];
-                if (segment.TokenValue.Trim('/').Equals(operation.ResourceType()) && segment.IsFullProvider)
-                {
-                    foundTenant = foundTenant || segment.NoPredecessor;
-                    if (!segment.NoPredecessor)
-                    {
-                        return false;
-                    }
-                    break;
-                }
-            }
+        //    var providerSegmentsList = httpRequest.ProviderSegments();
+        //    for (int i = 0; i < providerSegmentsList?.Count; i++)
+        //    {
+        //        var segment = providerSegmentsList[i];
+        //        if (segment.TokenValue.Trim('/').Equals(operation.ResourceType()) && segment.IsFullProvider)
+        //        {
+        //            foundTenant = foundTenant || segment.NoPredecessor;
+        //            if (!segment.NoPredecessor)
+        //            {
+        //                return false;
+        //            }
+        //            break;
+        //        }
+        //    }
 
-            return foundTenant;
-        }
+        //    return foundTenant;
+        //}
     }
 }
