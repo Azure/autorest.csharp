@@ -120,13 +120,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <summary>
         /// This is a map from the diff request path between the operation and the contextual path to the actual operations
         /// </summary>
-        private IDictionary<RequestPath, MgmtClientOperation>? _clientOperationMap;
-        private IDictionary<RequestPath, MgmtClientOperation> EnsureClientOperationMap()
+        private IDictionary<string, MgmtClientOperation>? _clientOperationMap;
+        private IDictionary<string, MgmtClientOperation> EnsureClientOperationMap()
         {
             if (_clientOperationMap != null)
                 return _clientOperationMap;
 
-            var result = new Dictionary<RequestPath, List<MgmtRestOperation>>();
+            var result = new Dictionary<string, List<MgmtRestOperation>>();
             foreach ((var operationSet, var operations) in _allOperations)
             {
                 // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
@@ -135,13 +135,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                     if (!ShouldIncludeOperation(operation))
                         continue; // meaning this operation will be included in the container
                     // first we need to see if this operation is a collection operation. Collection operation is not literally a child of the corresponding resource
-                    RequestPath key;
+                    string key;
                     if (operation.IsResourceCollectionOperation(_context, out var resourceOperationSet) && resourceOperationSet == operationSet)
-                        // we just use the contextual path as key if this is a resource collection operation
-                        key = GetContextualPath(operationSet);
+                        // if this operation is a collection operation, it should be the parent of its corresponding resource request path
+                        key = new RequestPath(operation.GetRequestPath(_context).TrimParentFrom(operationSet.GetRequestPath(_context)).ToList());
                     else
-                        // for other child operations, they should be child of the corresponding contextual path
-                        key = new RequestPath(GetContextualPath(operationSet).TrimParentFrom(operation.GetRequestPath(_context)).ToList());
+                        // for other child operations, they should be child of the corresponding resource request path
+                        key = new RequestPath(operationSet.GetRequestPath(_context).TrimParentFrom(operation.GetRequestPath(_context)).ToList());
                     var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
                         _context.Library.GetRestClient(operation.GetHttpPath()),

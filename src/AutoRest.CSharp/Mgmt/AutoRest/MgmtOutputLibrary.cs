@@ -324,7 +324,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private IEnumerable<ResourceData>? _resourceDatas;
 
-        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= EnsureResourceData().Values.Distinct();
+        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= EnsureRequestPathToResourceData().Values.Distinct();
 
         public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values.Distinct();
 
@@ -399,7 +399,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public bool TryGetResourceData(string requestPath, [MaybeNullWhen(false)] out ResourceData resourceData)
         {
-            return EnsureResourceData().TryGetValue(requestPath, out resourceData);
+            return EnsureRequestPathToResourceData().TryGetValue(requestPath, out resourceData);
         }
 
         public Resource GetArmResource(string requestPath)
@@ -572,7 +572,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _childOperations;
         }
 
-        private IDictionary<string, ResourceData> EnsureResourceData()
+        private IDictionary<string, ResourceData> EnsureRequestPathToResourceData()
         {
             if (_rawRequestPathToResourceData != null)
             {
@@ -692,6 +692,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             provider = ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider != null;
+        }
+
+        public IEnumerable<Resource> FindResources(ResourceData resourceData)
+        {
+            var requestPaths = EnsureRequestPathToResourceData().Where(pair => pair.Value == resourceData).Select(pair => pair.Key).ToHashSet();
+            return EnsureRequestPathToArmResources().Where(pair => requestPaths.Contains(pair.Key)).Select(pair => pair.Value);
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()

@@ -271,8 +271,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
-        protected virtual void WritePagingMethodSignature(CodeWriter writer, CSharpType responseType, string methodName,
-            IEnumerable<Parameter> methodParameters, bool async, string accessibility = "public", bool isVirtual = true)
+        protected virtual void WritePagingMethodSignature(CodeWriter writer, CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,
+            bool async, string accessibility = "public", bool isVirtual = true)
         {
             writer.Append($"{accessibility} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
 
@@ -335,7 +335,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteNormalMethodBody(CodeWriter writer, IDictionary<RequestPath, MgmtRestOperation> operationMappings,
+        protected virtual void WriteNormalMethodBody(CodeWriter writer, IDictionary<RequestPath, MgmtRestOperation> operationMappings,
             IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             // we need to write multiple branches for a normal method
@@ -352,7 +352,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteNormalMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async, bool shouldThrowExceptionWhenNull = false)
+        protected virtual void WriteNormalMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             writer.Append($"var response = {GetAwait(async)} ");
             writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
@@ -362,7 +362,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteNormalMethodResponse(writer, operation, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull);
         }
 
-        protected void WriteNormalMethodResponse(CodeWriter writer, MgmtRestOperation operation, bool async, bool shouldThrowExceptionWhenNull = false)
+        protected virtual void WriteNormalMethodResponse(CodeWriter writer, MgmtRestOperation operation, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             if (IsResourceDataType(operation.ReturnType))
             {

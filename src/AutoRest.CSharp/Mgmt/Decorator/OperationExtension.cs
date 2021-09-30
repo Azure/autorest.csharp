@@ -32,16 +32,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static bool IsResourceCollectionOperation(this Operation operation, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out OperationSet operationSetOfResource)
         {
-            // first check if its path is a prefix of which resource's operationSet
+            operationSetOfResource = null;
+            // first we need to ensure this operation at least returns a collection of something
+            var restClientMethod = context.Library.RestClientMethods[operation];
+            if (!restClientMethod.IsListMethod(out var valueType, out _))
+                return false;
+
+            // then check if its path is a prefix of which resource's operationSet
+            // if there are multiple resources that share the same prefix of request path, we choose the shortest one
             var requestPath = operation.GetRequestPath(context);
             operationSetOfResource = FindOperationSetOfResource(requestPath, context);
+            // if we find none, this cannot be a resource collection operation
             if (operationSetOfResource is null)
                 return false;
 
             // then check if this method returns a collection of the corresponding resource data
-            var restClientMethod = context.Library.RestClientMethods[operation];
-            if (!restClientMethod.IsListMethod(out var valueType, out _))
-                return false;
             // check if valueType is the current resource data type
             var resourceData = context.Library.GetResourceData(operationSetOfResource.RequestPath);
             return valueType.EqualsByName(resourceData.Type);
@@ -49,18 +54,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static OperationSet? FindOperationSetOfResource(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
+            var candidates = new List<OperationSet>();
             // we need to iterate all resources to find if this is the parent of that
             foreach (var operationSet in context.Library.ResourceOperationSets)
             {
                 var segments = requestPath.TrimParentFrom(operationSet.GetRequestPath(context));
                 if (segments is null)
                     continue;
-                // the collection operation always have one segment less than the request path of the corresponding resource.
-                if (segments.Count() == 1)
-                    return operationSet;
+                // some tuple resources (a resource that accepts a tuple to uniquely determine its ID from its parent resource) might have multiple list operation in different levels
+                // therefore here we are adding this to the candidate list, and finds a resource with the shortest path as the operation set of this operation
+                candidates.Add(operationSet);
             }
 
-            return null;
+            if (candidates.Count == 0)
+                return null;
+
+            // choose the shortest as the resource to hold this operation
+            return candidates.OrderBy(operationSet => operationSet.GetRequestPath(context).Count).First();
         }
 
         public static string GetHttpPath(this Operation operation)

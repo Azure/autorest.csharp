@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 inner(_writer);
             }
-            _writer.Append($");");
+            _writer.Append($"){GetConfigureAwait(async)};");
         }
 
         /// <summary>
@@ -194,9 +194,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                     WritePagingMethodBody(_writer, itemType, diagnostic, operationMappings, parameterMappings, async);
-                }, async);
+                }, false); // the wrapper for paging method will never be async
             }
             _writer.Line();
+        }
+
+        private void WriteClientDiagnosticsAssignment(CodeWriter writer, string optionsVariable)
+        {
+            writer.Line($"var {ClientDiagnosticsVariable} = new {typeof(ClientDiagnostics)}({optionsVariable});");
+        }
+
+        private void WriteRestOperationAssignment(CodeWriter writer, MgmtRestClient restClient)
+        {
+            var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? $", {ExtensionOperationVariableName}.Id.SubscriptionId" : "";
+            writer.Line($"var {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, credential, options, pipeline{subIdIfNeeded}, baseUri);");
         }
 
         protected override void WritePagingMethodBranch(CodeWriter writer, CSharpType resourceType, Diagnostic diagnostic, MgmtRestOperation operation,
@@ -210,9 +221,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
 
-            writer.Line($"var {ClientDiagnosticsVariable} = new {typeof(ClientDiagnostics)}(options);");
-            var subIdIfNeeded = operation.RestClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? $", {ExtensionOperationVariableName}.Id.SubscriptionId" : "";
-            writer.Line($"var {GetRestClientVariableName(operation.RestClient)} = Get{operation.RestClient.Type.Name}(clientDiagnostics, credential, options, pipeline{subIdIfNeeded}, baseUri);");
+            WriteClientDiagnosticsAssignment(writer, "options");
+
+            WriteRestOperationAssignment(writer, operation.RestClient);
 
             using (writer.Scope($"{GetAsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
@@ -230,13 +241,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (writer.Scope($"{GetAsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
-                    WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+                    WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsVariable, writer =>
                     {
                         WritePageFunctionBody(writer, pagingMethod, operation, parameterMappings, async, true);
                     });
                 }
             }
             writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
+        }
+
+        protected override void WritePagingMethodSignature(CodeWriter writer, CSharpType responseType, string methodName,
+            IEnumerable<Parameter> methodParameters, bool async, string accessibility = "public", bool isVirtual = true)
+        {
+            writer.Append($"{accessibility} static {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            foreach (var parameter in methodParameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
         protected override void WriteNormalMethod(MgmtClientOperation clientOperation, string methodName, bool async, bool shouldThrowExceptionWhenNull = false)
@@ -281,11 +303,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteExtensionContextScope(writer =>
                 {
                     var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField,
+                    WriteClientDiagnosticsAssignment(_writer, "options");
+
+                    WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable,
                         writer => WriteNormalMethodBody(writer, operationMappings, parameterMappings, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull));
                     _writer.Line();
                 }, async);
             }
+        }
+
+        protected override void WriteNormalMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async, bool shouldThrowExceptionWhenNull = false)
+        {
+            WriteRestOperationAssignment(writer, operation.RestClient);
+
+            writer.Append($"var response = {GetAwait(async)} ");
+            writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            WriteArguments(writer, parameterMappings);
+            writer.Line($"cancellationToken){GetConfigureAwait(async)};");
+
+            WriteNormalMethodResponse(writer, operation, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull);
         }
 
         protected override void WriteNormalMethodSignature(CodeWriter writer, CSharpType responseType, string methodName,
@@ -293,16 +329,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
 
-            foreach (var parameter in methodParameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-        }
-
-        protected override void WritePagingMethodSignature(CodeWriter writer, CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters, bool async, string accessibility = "public", bool isVirtual = true)
-        {
-            writer.Append($"{accessibility} static {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)
             {
                 writer.WriteParameter(parameter);

@@ -22,6 +22,7 @@ using AutoRest.CSharp.Generation.Types;
 using SubscriptionExtensions = AutoRest.CSharp.Mgmt.Output.SubscriptionExtensions;
 using AutoRest.CSharp.Mgmt.Models;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -51,66 +52,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     // Write resource container entries
                     WriteChildResourceEntries();
-                    //foreach (var resource in Context.Library.ArmResources)
-                    //{
-                    //    if (ParentDetection.ParentResourceType(resource.OperationGroup, Config).Equals(ResourceTypeBuilder.Subscriptions)
-                    //        || ParentDetection.ParentResourceType(resource.OperationGroup, Config).Equals(ResourceTypeBuilder.Tenant) && resource.OperationGroup.Operations.Any(op => op.ParentResourceType().Equals(ResourceTypeBuilder.Subscriptions, StringComparison.InvariantCultureIgnoreCase)))
-                    //    {
-                    //        _writer.Line($"#region {resource.Type.Name}");
-                    //        if (resource.OperationGroup.TryGetSingletonResourceSuffix(Config, out var singletonResourceSuffix))
-                    //        {
-                    //            WriteGetSingletonResourceMethod(_writer, resource, singletonResourceSuffix);
-                    //        }
-                    //        else
-                    //        {
-                    //            // a non-singleton resource must have a resource container
-                    //            WriteGetResourceContainerMethod(_writer, resource.ResourceContainer!);
-                    //        }
-                    //        _writer.LineRaw("#endregion");
-                    //        _writer.Line();
-                    //    }
-                    //    else
-                    //    {
-                    //        if (resource.SubscriptionExtensionsListMethods != null && resource.SubscriptionExtensionsListMethods.Count() > 0)
-                    //        {
-                    //            _writer.Line($"#region {resource.Type.Name}");
-                    //            WriteGetRestOperations(_writer, resource.RestClient);
-
-                    //            foreach (var listMethod in resource.SubscriptionExtensionsListMethods)
-                    //            {
-                    //                var methodName = $"Get{resource.Type.Name.ToPlural()}";
-                    //                var count = resource.SubscriptionExtensionsListMethods.Count();
-                    //                if (listMethod.PagingMethod != null)
-                    //                {
-                    //                    if (count > 1 && listMethod.PagingMethod.Name == "GetAllByLocation")
-                    //                    {
-                    //                        methodName = $"Get{resource.Type.Name.ToPlural()}ByLocation";
-                    //                    }
-
-                    //                    WriteListResourceMethod(_writer, resource, listMethod.PagingMethod, methodName, Config, true);
-                    //                    WriteListResourceMethod(_writer, resource, listMethod.PagingMethod, methodName, Config, false);
-                    //                }
-
-                    //                if (listMethod.ClientMethod != null)
-                    //                {
-                    //                    if (count > 1 && listMethod.ClientMethod.Name == "GetAllByLocation")
-                    //                    {
-                    //                        methodName = $"Get{resource.Type.Name.ToPlural()}ByLocation";
-                    //                    }
-
-                    //                    WriteExtensionClientMethod(_writer, resource.OperationGroup, listMethod.ClientMethod, methodName, true, resource.RestClient);
-                    //                    WriteExtensionClientMethod(_writer, resource.OperationGroup, listMethod.ClientMethod, methodName, false, resource.RestClient);
-                    //                }
-
-                    //            }
-
-                    //            WriteListResourceByNameMethod(_writer, resource, true);
-                    //            WriteListResourceByNameMethod(_writer, resource, false);
-                    //            _writer.LineRaw("#endregion");
-                    //        }
-                    //    }
-                    //    _writer.Line();
-                    //}
 
                     // Write RestOperations
                     foreach (var restClient in _extensions.RestClients)
@@ -124,36 +65,40 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         var methodName = GetMethodName(clientOperation);
                         WriteMethod(clientOperation, methodName, true);
                         WriteMethod(clientOperation, methodName, false);
+
+                        // we only check if a resource needs a GetByName method when it has a List operation in the subscription extension.
+                        // If its parent is Subscription, we will have a GetContainer method of that resource, which contains a GetAllAsGenericResource serves the same purpose.
+                        if (CheckGetByNameMethod(clientOperation, out var resource))
+                        {
+                            WriteListResourceByNameMethod(resource, true);
+                            WriteListResourceByNameMethod(resource, false);
+                        }
                     }
-
-                    // Write list GenericResourceByName methods
-                    WriteListResourceByNameMethods();
-
-                    //var mgmtExtensionOperations = Context.Library.GetNonResourceOperations(ResourceTypeBuilder.Subscriptions);
-
-                    //foreach (var mgmtExtensionOperation in mgmtExtensionOperations)
-                    //{
-                    //    _writer.Line($"#region {mgmtExtensionOperation.SchemaName}");
-                    //    WriteGetRestOperations(_writer, mgmtExtensionOperation.RestClient);
-
-                    //    // despite that we should only have one method, but we still using an IEnumerable
-                    //    foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
-                    //    {
-                    //        WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
-                    //        WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
-                    //    }
-
-                    //    foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
-                    //    {
-                    //        WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, true, mgmtExtensionOperation.RestClient);
-                    //        WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, false, mgmtExtensionOperation.RestClient);
-                    //    }
-
-                    //    _writer.LineRaw("#endregion");
-                    //    _writer.Line();
-                    //}
                 }
             }
+        }
+
+        // this method checks if the giving opertion corresponding to a list of resources. If it does, this resource will need a GetByName method.
+        private bool CheckGetByNameMethod(MgmtClientOperation clientOperation, [MaybeNullWhen(false)] out Resource resource)
+        {
+            resource = null;
+            if (clientOperation.First().IsListMethod(out var itemType, out _))
+            {
+                if (Context.Library.TryGetTypeProvider(itemType.Name, out var provider) && provider is ResourceData data)
+                {
+                    var resourcesOfResourceData = Context.Library.FindResources(data);
+                    // TODO -- what if we have multiple resources corresponds to the same resource data?
+                    // We are not able to determine which resource this opertion belongs, since the list in subsrcirption operation does not have any parenting relationship with other operations.
+                    // temporarily directly return and doing nothing when this happens
+                    if (resourcesOfResourceData.Count() > 1)
+                        return false;
+                    // only one resource, this needs a GetByName method
+                    resource = resourcesOfResourceData.First();
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         protected string GetMethodName(MgmtClientOperation clientOperation)
@@ -169,44 +114,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 if (provider is ResourceData data)
                 {
-                    return $"Get{data.Type.Name.Substring(0, data.Type.Name.Length - 4).ToPlural()}";
+                    var resourcesOfResourceData = Context.Library.FindResources(data);
+                    return $"Get{resourcesOfResourceData.First().ResourceName.ToPlural()}";
                 }
             }
 
             return operation.Name;
-        }
-
-        //private void WriteListResourceMethod(CodeWriter writer, Resource resource, PagingMethod pagingMethod, string methodName, MgmtConfiguration config, bool async)
-        //{
-        //    if (pagingMethod.PagingResponse.ItemType.Name.Equals(resource.ResourceData.Type.Name))
-        //    {
-        //        WriteExtensionPagingMethod(writer, resource.Type, resource.RestClient, pagingMethod, methodName,
-        //        $".Select(value => new {resource.Type.Name}(subscription, value))", async);
-        //    }
-        //    else
-        //    {
-        //        WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, resource.RestClient, pagingMethod, methodName,
-        //        $"", async);
-        //    }
-        //}
-
-        private void WriteListResourceByNameMethods()
-        {
-            foreach (var resource in Context.Library.ArmResources)
-            {
-                var parents = resource.Parent(Context);
-                if (!parents.Contains(This))
-                    continue;
-
-                if (!resource.IsSingleton)
-                {
-                    _writer.Line();
-                    _writer.Line($"#region {resource.ResourceName}");
-                    WriteListResourceByNameMethod(resource, true);
-                    WriteListResourceByNameMethod(resource, false);
-                    _writer.Line($"#endregion");
-                }
-            }
         }
 
         private void WriteListResourceByNameMethod(Resource resource, bool async)
