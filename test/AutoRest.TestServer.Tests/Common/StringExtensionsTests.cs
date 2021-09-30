@@ -53,6 +53,8 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("IPAddress", new[] { "IP", "Address" })]
         [TestCase("HTTPIsURL", new[] { "HTTP", "Is", "URL" })]
         [TestCase("GetAllByLocation", new[] { "Get", "All", "By", "Location" })]
+        [TestCase("snake_case", new[] { "Snake", "Case" })]
+        [TestCase("single", new[] { "Single" })]
         public void ValidateSplitByCamelCase(string camelCase, string[] expected)
         {
             var result = camelCase.SplitByCamelCase().ToArray();

@@ -217,7 +217,7 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        internal HttpMessage CreateCreateEnumRequest(string enumName1, string enumName2, RequestContent content)
+        internal HttpMessage CreateGetAllByNameRequest(string enumName1, string enumName2, RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -234,13 +234,13 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        /// <summary> Resets products. </summary>
+        /// <summary> List products by the name. </summary>
         /// <param name="enumName1"> The first name. </param>
         /// <param name="enumName2"> The second name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>
-        public async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+        public async Task<Response> GetAllByNameAsync(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
         {
             if (enumName1 == null)
             {
@@ -256,7 +256,7 @@ namespace BodyAndPath_LowLevel
             }
 
             options ??= new RequestOptions();
-            using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content);
+            using HttpMessage message = CreateGetAllByNameRequest(enumName1, enumName2, content);
             RequestOptions.Apply(options, message);
             await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
             if (options.StatusOption == ResponseStatusOption.Default)
@@ -275,13 +275,13 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Resets products. </summary>
+        /// <summary> List products by the name. </summary>
         /// <param name="enumName1"> The first name. </param>
         /// <param name="enumName2"> The second name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>
-        public Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+        public Response GetAllByName(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
         {
             if (enumName1 == null)
             {
@@ -297,7 +297,7 @@ namespace BodyAndPath_LowLevel
             }
 
             options ??= new RequestOptions();
-            using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content);
+            using HttpMessage message = CreateGetAllByNameRequest(enumName1, enumName2, content);
             RequestOptions.Apply(options, message);
             _pipeline.Send(message, options.CancellationToken);
             if (options.StatusOption == ResponseStatusOption.Default)

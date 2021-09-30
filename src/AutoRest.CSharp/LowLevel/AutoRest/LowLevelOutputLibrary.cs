@@ -24,8 +24,35 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _codeModel = codeModel;
             _context = context;
+            UpdateListMethodNames();
             _internalRestClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
             _publicClients = new CachedDictionary<OperationGroup, LowLevelDataPlaneClient>(EnsureClients);
+        }
+
+        private void UpdateListMethodNames()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var curName = operation.Language.Default.Name;
+                    if (curName.Equals("List") || curName.Equals("ListAll"))
+                    {
+                        operation.Language.Default.Name = "GetAll";
+                    }
+                    else if (curName.StartsWith("ListBy"))
+                    {
+                        operation.Language.Default.Name = curName.Replace("List", "GetAll");
+                    }
+                    else if (curName.StartsWith("List"))
+                    {
+                        var lastNoun = curName.SplitByCamelCase().LastOrDefault();
+                        if (lastNoun != null)
+                            curName = curName.Replace(lastNoun, lastNoun.ToPlural(inputIsKnownToBeSingular: false));
+                        operation.Language.Default.Name = curName.Replace("List", "Get");
+                    }
+                }
+            }
         }
 
         public IEnumerable<LowLevelRestClient> RestClients => _internalRestClients.Values;

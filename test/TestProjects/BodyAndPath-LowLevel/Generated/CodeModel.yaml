@@ -416,9 +416,9 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: CreateEnum
-            description: Resets products.
-            summary: Create another product
+            name: ListByName
+            description: List products by the name.
+            summary: List products
         protocol: !Protocols {}
     language: !Languages 
       default:

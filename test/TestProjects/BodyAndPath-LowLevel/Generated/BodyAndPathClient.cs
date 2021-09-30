@@ -138,20 +138,20 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Resets products. </summary>
+        /// <summary> List products by the name. </summary>
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> GetAllByNameAsync(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetAllByName");
             scope.Start();
             try
             {
-                return await _restClient.CreateEnumAsync(enumName1, enumName2, content, options).ConfigureAwait(false);
+                return await _restClient.GetAllByNameAsync(enumName1, enumName2, content, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -160,20 +160,20 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Resets products. </summary>
+        /// <summary> List products by the name. </summary>
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+        public virtual Response GetAllByName(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetAllByName");
             scope.Start();
             try
             {
-                return _restClient.CreateEnum(enumName1, enumName2, content, options);
+                return _restClient.GetAllByName(enumName1, enumName2, content, options);
             }
             catch (Exception e)
             {

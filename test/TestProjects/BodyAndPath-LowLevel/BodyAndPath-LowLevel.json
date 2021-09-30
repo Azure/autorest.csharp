@@ -87,9 +87,9 @@
       },
       "/{enumName1}/{enumName2}": {
         "post": {
-          "operationId": "createEnum",
-          "summary": "Create another product",
-          "description": "Resets products.",
+          "operationId": "listByName",
+          "summary": "List products",
+          "description": "List products by the name.",
           "parameters": [
             {
               "name": "enumName1",
