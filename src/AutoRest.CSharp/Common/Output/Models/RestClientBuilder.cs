@@ -573,7 +573,7 @@ namespace AutoRest.CSharp.Output.Models
                 isRequired,
                 IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
                 SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                allowedValues);
+                AllowedValues: allowedValues);
         }
 
         private Constant ParseConstant(ConstantSchema constant) =>

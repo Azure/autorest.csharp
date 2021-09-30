@@ -343,7 +343,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (description?.EndsWith(".") == false)
                         description += ".";
-                    var allowedValues = string.Join(" | ", parameter.AllowedValues.Select(c => $"\"{c}\""));
+                    var allowedValues = string.Join(" | ", parameter.AllowedValues.Select(v => $"\"{v}\""));
                     description = $"{description} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
                 }
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{description}");
