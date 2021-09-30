@@ -563,7 +563,12 @@ namespace AutoRest.CSharp.Output.Models
             {
                 defaultValue = Constant.Default(type);
             }
-
+            var allowedValues = requestParameter.Schema switch
+            {
+                ChoiceSchema choiceSchema => choiceSchema.Choices.Select(c => c.Value).ToList(),
+                SealedChoiceSchema sealedChoiceSchema => sealedChoiceSchema.Choices.Select(c => c.Value).ToList(),
+                _ => null
+            };
             return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),
@@ -571,7 +576,8 @@ namespace AutoRest.CSharp.Output.Models
                 defaultValue,
                 isRequired,
                 IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
-                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false);
+                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
+                AllowedValues: allowedValues);
         }
 
         private Constant ParseConstant(ConstantSchema constant) =>

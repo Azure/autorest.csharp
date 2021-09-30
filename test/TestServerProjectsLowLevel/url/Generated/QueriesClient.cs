@@ -1127,7 +1127,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
+        /// <param name="enumQuery"> &apos;green color&apos; enum value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1156,7 +1156,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
+        /// <param name="enumQuery"> &apos;green color&apos; enum value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1185,7 +1185,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (no query parameter in url). </summary>
-        /// <param name="enumQuery"> null string value. </param>
+        /// <param name="enumQuery"> null string value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1214,7 +1214,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (no query parameter in url). </summary>
-        /// <param name="enumQuery"> null string value. </param>
+        /// <param name="enumQuery"> null string value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
