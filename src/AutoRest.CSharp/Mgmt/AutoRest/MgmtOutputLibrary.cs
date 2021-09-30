@@ -259,19 +259,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _restClientMethods;
         }
 
-        private ArmClientExtensions? _armClientExtensions;
-        public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= new ArmClientExtensions(_context);
+        public ArmClientExtensions ArmClientExtensions => EnsureArmClientExtensions();
 
-        private TenantExtensions? _tenantExtensions;
-        public TenantExtensions TenantExtensions => _tenantExtensions ??= new TenantExtensions(_context);
+        public TenantExtensions TenantExtensions => EnsureTenantExtensions();
 
-        private SubscriptionExtensions? _subscriptionExtensions;
-        public SubscriptionExtensions SubscriptionExtensions => _subscriptionExtensions ??= new SubscriptionExtensions(_context);
+        public SubscriptionExtensions SubscriptionExtensions => EnsureSubscriptionExtensions();
 
         public ResourceGroupExtensions ResourceGroupExtensions => EnsureResourceGroupExtensions();
 
-        private ManagementGroupExtensions? _managementGroupExtensions;
-        public ManagementGroupExtensions ManagementGroupExtensions => _managementGroupExtensions ??= new ManagementGroupExtensions(_context);
+        public ManagementGroupExtensions ManagementGroupExtensions => EnsureManagementExtensions();
 
         private ResourceGroupExtensions? _resourceGroupsExtensions;
         private ResourceGroupExtensions EnsureResourceGroupExtensions()
@@ -282,6 +278,48 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // accumulate all the operations of resource group extensions
             _resourceGroupsExtensions = new ResourceGroupExtensions(GetChildOperations(RequestPath.ResourceGroup), _context);
             return _resourceGroupsExtensions;
+        }
+
+        private SubscriptionExtensions? _subscriptionExtensions;
+        private SubscriptionExtensions EnsureSubscriptionExtensions()
+        {
+            if (_subscriptionExtensions != null)
+                return _subscriptionExtensions;
+
+            // accumulate all the operations of subscription extensions
+            _subscriptionExtensions = new SubscriptionExtensions(GetChildOperations(RequestPath.Subscription), _context);
+            return _subscriptionExtensions;
+        }
+
+        private ManagementGroupExtensions? _managementGroupExtensions;
+        private ManagementGroupExtensions EnsureManagementExtensions()
+        {
+            if (_managementGroupExtensions != null)
+                return _managementGroupExtensions;
+
+            // accumulate all the operations of subscription extensions
+            _managementGroupExtensions = new ManagementGroupExtensions(GetChildOperations(RequestPath.ManagementGroup), _context);
+            return _managementGroupExtensions;
+        }
+
+        private TenantExtensions? _tenantExtensions;
+        private TenantExtensions EnsureTenantExtensions()
+        {
+            if (_tenantExtensions != null)
+                return _tenantExtensions;
+
+            _tenantExtensions = new TenantExtensions(GetChildOperations(RequestPath.Tenant), _context);
+            return _tenantExtensions;
+        }
+
+        private ArmClientExtensions? _armClientExtensions;
+        private ArmClientExtensions EnsureArmClientExtensions()
+        {
+            if (_armClientExtensions != null)
+                return _armClientExtensions;
+
+            _armClientExtensions = new ArmClientExtensions(Enumerable.Empty<Operation>(), _context);
+            return _armClientExtensions;
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
@@ -497,8 +535,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // TODO -- we need to categrize the above list to see if some of the resources have the operation list and we can combine them.
-            // Now we are just combining all of them together without categorizing
-            yield return result.Aggregate((l, r) => l.Union(r).ToDictionary(pair => pair.Key, pair => pair.Value));
+            //yield return result.Aggregate((l, r) => l.Union(r).ToDictionary(pair => pair.Key, pair => pair.Value));
+            // now by default we will never combine any of them
+            return result;
         }
 
         public IEnumerable<Operation> GetChildOperations(string requestPath)
@@ -644,6 +683,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _nameToTypeProvider.TryGetValue(originalName, out TypeProvider? provider);
             provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
+        }
+
+        public bool TryGetTypeProvider(string originalName, [MaybeNullWhen(false)] out TypeProvider provider)
+        {
+            if (_nameToTypeProvider.TryGetValue(originalName, out provider))
+                return true;
+
+            provider = ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
+            return provider != null;
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()

@@ -16,21 +16,21 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
     {
-        public static readonly RequestPath ResourceGroup = new RequestPath(new[] {
+        public static readonly RequestPath ResourceGroup = new(new[] {
             new Segment("subscriptions"),
             new Segment(new Reference("subscriptionId", typeof(string))),
             new Segment("resourceGroups"),
             new Segment(new Reference("resourceGroupName", typeof(string)))
         });
 
-        public static readonly RequestPath Subscription = new RequestPath(new[] {
+        public static readonly RequestPath Subscription = new(new[] {
             new Segment("subscriptions"),
             new Segment(new Reference("subscriptionId", typeof(string)))
         });
 
-        public static readonly RequestPath Tenant = new RequestPath(new Segment[] { });
+        public static readonly RequestPath Tenant = new(new Segment[] { });
 
-        public static readonly RequestPath ManagementGroup = new RequestPath(new[] {
+        public static readonly RequestPath ManagementGroup = new(new[] {
             new Segment("providers"),
             new Segment("Microsoft.ManagementGroups"),
             new Segment("managementGroups"),

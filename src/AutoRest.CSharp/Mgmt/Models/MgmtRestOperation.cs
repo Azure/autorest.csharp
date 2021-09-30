@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string Name => Operation.CSharpName(); // TODO -- introduce some mechanism to determine this name
         public string? Description => Method.Description;
         public CSharpType? ReturnType => Method.ReturnType;
+        public string Accessibility => Method.Accessibility;
         /// <summary>
         /// The actual operation
         /// </summary>

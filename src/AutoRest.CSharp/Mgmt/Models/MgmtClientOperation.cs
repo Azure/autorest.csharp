@@ -49,6 +49,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public CSharpType? ReturnType => _operations.First().ReturnType;
 
+        public string Accessibility => _operations.First().Accessibility;
+
         public int Count => _operations.Count;
 
         public IEnumerator<MgmtRestOperation> GetEnumerator() => _operations.GetEnumerator();

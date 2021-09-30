@@ -12,6 +12,26 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal struct ResourceType : IEquatable<ResourceType>, IReadOnlyList<Segment>
     {
+        public static readonly ResourceType ResourceGroup = new(new[] {
+            new Segment("Microsoft.Resources"),
+            new Segment("resourceGroups")
+        });
+
+        public static readonly ResourceType Subscription = new(new[] {
+            new Segment("Microsoft.Resources"),
+            new Segment("subscriptions")
+        });
+
+        public static readonly ResourceType Tenant = new(new Segment[] {
+            new Segment("Microsoft.Resources"),
+            new Segment("tenants")
+        });
+
+        public static readonly ResourceType ManagementGroup = new(new[] {
+            new Segment("Microsoft.ManagementGroups"),
+            new Segment("managementGroups")
+        });
+
         private IReadOnlyList<Segment> _segments;
 
         public ResourceType(string path)
@@ -26,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private ResourceType(IReadOnlyList<Segment> segments)
         {
             _segments = segments;
-            SerializedType = Segment.BuildSerializedSegments(segments);
+            SerializedType = Segment.BuildSerializedSegments(segments, false);
             IsConstant = _segments.All(segment => segment.IsConstant);
         }
 
@@ -38,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (index < 0)
                 throw new ArgumentException($"Could not set ResourceType for operations group {path}. No {Segment.Providers} string found in the URI");
             segment.Add(path[index + 1]);
-            segment.AddRange(path.Skip(index + 1).TakeWhile((_, index) => index % 2 != 0));
+            segment.AddRange(path.Skip(index + 1).Where((_, index) => index % 2 != 0));
 
             return segment;
         }
@@ -68,5 +88,15 @@ namespace AutoRest.CSharp.Mgmt.Models
         public override int GetHashCode() => SerializedType.GetHashCode();
 
         public override string? ToString() => SerializedType;
+
+        public static bool operator ==(ResourceType left, ResourceType right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ResourceType left, ResourceType right)
+        {
+            return !(left == right);
+        }
     }
 }

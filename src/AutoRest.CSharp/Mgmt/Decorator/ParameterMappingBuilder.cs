@@ -162,9 +162,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         public static IEnumerable<ParameterMapping> BuildParameterMapping(this Operation operation, IEnumerable<ContextualParameterMapping> contextualParameterMappings, BuildContext<MgmtOutputLibrary> context)
-        {
-            return context.Library.RestClientMethods[operation].BuildParameterMapping(contextualParameterMappings);
-        }
+            => context.Library.RestClientMethods[operation].BuildParameterMapping(contextualParameterMappings);
+
+        public static IEnumerable<ParameterMapping> BuildParameterMapping(this MgmtRestOperation method, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
+            => method.Method.BuildParameterMapping(contextualParameterMappings);
 
         public static IEnumerable<ParameterMapping> BuildParameterMapping(this RestClientMethod method, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
         {

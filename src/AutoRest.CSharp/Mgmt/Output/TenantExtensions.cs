@@ -1,21 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
-using System;
 using System.Collections.Generic;
-using System.Text;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class TenantExtensions : TypeProvider
+    internal class TenantExtensions : MgmtExtensions
     {
-        public TenantExtensions(BuildContext context) : base(context)
+        public TenantExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, context)
         {
         }
 
         protected override string DefaultName => "TenantExtensions";
-
-        protected override string DefaultAccessibility => "public";
     }
 }

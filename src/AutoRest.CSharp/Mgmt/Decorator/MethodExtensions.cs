@@ -68,7 +68,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         //    return (new CSharpType(typeof(IReadOnlyList<>), valueProperty), true, wasResourceData);
         //}
 
-        public static bool IsListMethod(this RestClientMethod method, [MaybeNullWhen(false)] out CSharpType valueProperty, out CSharpType? returnType)
+        public static bool IsListMethod(this MgmtRestOperation operation, [MaybeNullWhen(false)] out CSharpType valueProperty, [MaybeNullWhen(false)] out CSharpType returnType)
+        {
+            return IsListMethod(operation.Method, out valueProperty, out returnType);
+        }
+
+        public static bool IsListMethod(this RestClientMethod method, [MaybeNullWhen(false)] out CSharpType valueProperty, [MaybeNullWhen(false)] out CSharpType returnType)
         {
             valueProperty = null;
             returnType = method.ReturnType;
@@ -92,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static bool IsListMethod(this RestClientMethod method)
         {
-            return IsListMethod(method, out var valueMethod, out var returnType);
+            return IsListMethod(method, out var _, out var _);
         }
 
 

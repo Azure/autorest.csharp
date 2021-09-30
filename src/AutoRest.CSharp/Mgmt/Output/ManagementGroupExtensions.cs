@@ -1,22 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ManagementGroupExtensions : TypeProvider
+    internal class ManagementGroupExtensions : MgmtExtensions
     {
-        public ManagementGroupExtensions(BuildContext context) : base(context)
+        public ManagementGroupExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, context)
         {
         }
 
         protected override string DefaultName => "ManagementGroupExtensions";
-
-        protected override string DefaultAccessibility => "public";
     }
 }

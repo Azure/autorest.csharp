@@ -40,7 +40,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             GetOperation = GetOperationWithVerb(HttpMethod.Get);
             DeleteOperation = GetOperationWithVerb(HttpMethod.Delete);
-            // TODO -- currently we are ignoring the PATCH and POST methods in the resource operation sets. We will add them back soon.
+            UpdateOperation = GetOperationWithVerb(HttpMethod.Patch);
+            PostOperation = GetOperationWithVerb(HttpMethod.Post);
         }
 
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method)
@@ -87,6 +88,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual MgmtClientOperation? GetOperation { get; }
         public virtual MgmtClientOperation? DeleteOperation { get; }
+        public virtual MgmtClientOperation? UpdateOperation { get; }
+        public virtual MgmtClientOperation? PostOperation { get; }
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
@@ -176,7 +179,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IDictionary<OperationSet, ResourceType>? _resourceTypes;
         public IDictionary<OperationSet, ResourceType> ResourceTypes => _resourceTypes ??= OperationSets.ToDictionary(
             operationSet => operationSet,
-            operationSet => operationSet.GetRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration));
+            operationSet => GetContextualPath(operationSet).GetResourceType(_context.Configuration.MgmtConfiguration));
 
         //protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         //{

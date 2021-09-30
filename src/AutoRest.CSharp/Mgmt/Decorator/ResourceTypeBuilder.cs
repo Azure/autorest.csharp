@@ -28,6 +28,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<RequestPath, ResourceType> _requestPathToResourceTypeCache = new ConcurrentDictionary<RequestPath, ResourceType>();
 
+        static ResourceTypeBuilder()
+        {
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.Subscription, Models.ResourceType.Subscription);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.ResourceGroup, Models.ResourceType.ResourceGroup);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.Tenant, Models.ResourceType.Tenant);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.ManagementGroup, Models.ResourceType.ManagementGroup);
+        }
+
         public static ResourceType GetResourceType(this RequestPath requestPath, MgmtConfiguration config)
         {
             if (_requestPathToResourceTypeCache.TryGetValue(requestPath, out var resourceType))

@@ -25,6 +25,7 @@ using Azure.ResourceManager.Management;
 using Azure.Core.Pipeline;
 using AutoRest.CSharp.Mgmt.Models;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -125,12 +126,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             string validResourceType;
             if (_resourceContainer.ResourceTypes.Count == 1)
-                validResourceType = "\"Single\"";
+                validResourceType = GetResourceTypeExpression(_resourceContainer.ResourceTypes.Values.First());
             else
                 validResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
             _writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {validResourceType};");
+        }
+
+        private string GetResourceTypeExpression(ResourceType resourceType)
+        {
+            if (resourceType == ResourceType.ResourceGroup)
+                return "ResourceGroup.ResourceType";
+            if (resourceType == ResourceType.Subscription)
+                return "Subscription.ResourceType";
+            if (resourceType == ResourceType.Tenant)
+                return "Tenant.ResourceType";
+            if (resourceType == ResourceType.ManagementGroup)
+                return "ManagementGroup.ResourceType";
+
+            if (!resourceType.IsConstant)
+                throw new NotImplementedException($"ResourceType that contains variables are not supported yet");
+
+            return $"\"{resourceType.SerializedType}\"";
         }
 
         protected override void WriteMethods()
@@ -172,12 +190,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteMethod(clientOperation, clientOperation.Name, true);
             }
 
-            // TODO -- add ListAsGenericResources back
-            //    if (_resourceContainer.GetValidResourceValue().Equals(ResourceContainer.ResourceGroupResourceType) || _resourceContainer.GetValidResourceValue().Equals(ResourceContainer.SubscriptionResourceType))
-            //    {
-            //        WriteListAsGenericResource(isAsync: false);
-            //        WriteListAsGenericResource(isAsync: true);
-            //    }
+            var parents = _resource.Parent(Context);
+            if (parents.Contains(Context.Library.ResourceGroupExtensions) || parents.Contains(Context.Library.SubscriptionExtensions))
+            {
+                WriteListAsGenericResource(false);
+                WriteListAsGenericResource(true);
+            }
         }
 
         private void WriteCheckIfExists(MgmtClientOperation clientOperation, bool async)
@@ -196,7 +214,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
-                pair => pair.Value.Method.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
             // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
             var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
             WriteContainerMethodScope(typeof(bool).WrapResponse(async), "CheckIfExists", methodParameters, writer =>
@@ -233,7 +251,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
-                pair => pair.Value.Method.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
             // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
             var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
             WriteContainerMethodScope(_resource.Type.WrapResponse(async), "GetIfExists", methodParameters, writer =>
@@ -261,18 +279,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteGetMethodBranch(CodeWriter writer, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
-            _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            writer.Append($"var response = {GetAwait(async)} ");
+            writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(writer, parameterMappings);
-            _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-            WriteGetIfExistsResponse(writer, _resource.Type);
+            writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+
+            writer.Line($"return response.Value == null");
+            writer.Line($"\t? Response.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse())");
+            writer.Line($"\t: Response.FromValue(new {_resource.Type.Name}(this, response.Value), response.GetRawResponse());");
         }
 
         private void WriteGetIfExistsResponse(CodeWriter writer, CSharpType resourceType)
         {
-            _writer.Line($"return response.Value == null");
-            _writer.Line($"\t? Response.FromValue<{resourceType.Name}>(null, response.GetRawResponse())");
-            _writer.Line($"\t: Response.FromValue(new {resourceType.Name}(this, response.Value), response.GetRawResponse());");
         }
 
         private void WriteCreateOrUpdateMethod(MgmtClientOperation operation, bool async)
@@ -320,73 +338,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteGetMethod(MgmtClientOperation operation, bool async)
-        {
-            WriteNormalMethod(operation, "Get", async);
-        }
-
-        //private void WriteListVariants()
-        //{
-        //    var pagingMethods = _resourceContainer.ListMethods.Where(m => m.PagingMethod != null).Select(m => m.PagingMethod!).ToList();
-        //    var pagingMethod = pagingMethods.OrderBy(m => m.Name.Length).FirstOrDefault();
-        //    var clientMethods = _resourceContainer.ListMethods.Where(m => m.ClientMethod != null).Select(m => m.ClientMethod!).ToList();
-        //    var clientMethod = clientMethods.OrderBy(m => m.Name.Length).FirstOrDefault();
-        //    if (_resourceContainer.IsScopeOrExtension)
-        //    {
-        //        if (pagingMethod != null)
-        //        {
-        //            WriteList(_writer, false, _resource.Type, pagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
-        //            WriteList(_writer, true, _resource.Type, pagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
-        //        }
-
-        //        _writer.Line();
-        //        if (clientMethod != null)
-        //        {
-        //            //TODO: merge methods like WriteList
-        //            WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, true);
-        //            WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, false);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        foreach (var listMethod in _resourceContainer.ListMethods)
-        //        {
-        //            if (listMethod.PagingMethod != null)
-        //            {
-        //                WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-        //                WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-        //            }
-
-        //            if (listMethod.ClientMethod != null)
-        //            {
-        //                _writer.Line();
-        //                WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, true);
-        //                WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, false);
-        //            }
-        //        }
-        //    }
-        //    if (_resourceContainer.GetValidResourceValue().Equals(ResourceContainer.ResourceGroupResourceType) || _resourceContainer.GetValidResourceValue().Equals(ResourceContainer.SubscriptionResourceType))
-        //    {
-        //        WriteListAsGenericResource(isAsync: false);
-        //        WriteListAsGenericResource(isAsync: true);
-        //    }
-        //}
-
-        private void WriteListAsGenericResource(bool isAsync)
+        private void WriteListAsGenericResource(bool async)
         {
             const string syncMethodName = "GetAllAsGenericResources";
-            //string listScope = _resourceContainer.GetValidResourceValue() == ResourceContainer.ResourceGroupResourceType ? "resource group" : "subscription";
-            // TODO -- fix this
-            var listScope = "resource group";
-            var methodName = CreateMethodName(syncMethodName, isAsync);
+            var listScope = _resource.Parent(Context).Contains(Context.Library.ResourceGroupExtensions) ? "resource group" : "subscription";
+            var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this {listScope} represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", $"The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
             _writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            _writer.WriteXmlDocumentation("returns", $"{(isAsync ? "An async" : "A")} collection of resource that may take multiple service requests to iterate over.");
-            CSharpType returnType = typeof(GenericResource).WrapPageable(isAsync);
+            _writer.WriteXmlDocumentation("returns", $"{(async ? "An async" : "A")} collection of resource that may take multiple service requests to iterate over.");
+            CSharpType returnType = typeof(GenericResource).WrapPageable(async);
             using (_writer.Scope($"public {GetVirtual(true)} {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
                 WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField, writer =>
@@ -395,11 +359,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
                     if (listScope.Equals("resource group"))
                     {
-                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", isAsync)}({ContextProperty} as {typeof(ResourceGroup)}, filters, expand, top, cancellationToken);");
+                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(ResourceGroup)}, filters, expand, top, cancellationToken);");
                     }
                     else
                     {
-                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", isAsync)}({ContextProperty} as {typeof(Subscription)}, filters, expand, top, cancellationToken);");
+                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(Subscription)}, filters, expand, top, cancellationToken);");
                     }
                 });
             }

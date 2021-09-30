@@ -69,10 +69,11 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public override string? ToString() => _stringValue;
 
-        internal static string BuildSerializedSegments(IEnumerable<Segment> segments)
+        internal static string BuildSerializedSegments(IEnumerable<Segment> segments, bool slashPrefix = true)
         {
             var strings = segments.Select(segment => segment.IsConstant ? segment.ConstantValue : $"{{{segment.ReferenceName}}}");
-            return $"/{string.Join('/', strings)}";
+            var prefix = slashPrefix ? "/" : string.Empty;
+            return $"{prefix}{string.Join('/', strings)}";
         }
 
         public static implicit operator Segment(string value) => new Segment(value);
