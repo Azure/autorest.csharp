@@ -290,9 +290,12 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 UseNamespace(type.Namespace);
 
-                AppendRaw("global::");
-                AppendRaw(type.Namespace);
-                AppendRaw(".");
+                if (_currentNamespace != type.Namespace)
+                {
+                    AppendRaw("global::");
+                    AppendRaw(type.Namespace);
+                    AppendRaw(".");
+                }
                 AppendRaw(type.Name);
             }
             else
