@@ -11,7 +11,6 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -24,9 +23,6 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Management;
-using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Operation = AutoRest.CSharp.Input.Operation;
 
@@ -43,7 +39,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected BuildContext<MgmtOutputLibrary> Context { get; }
         protected MgmtConfiguration Config => Context.Configuration.MgmtConfiguration;
 
-        protected abstract TypeProvider This { get; }
+        private MgmtTypeProvider _provider;
+        protected virtual MgmtTypeProvider This => _provider;
         protected virtual CSharpType TypeOfThis => This.Type;
         /// <summary>
         /// ClassName is the name of the class which this writer is writing
@@ -52,15 +49,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual string Accessibility => "public";
 
-        protected MgmtClientBaseWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
+        protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;
             Context = context;
+            _provider = provider;
         }
 
         public abstract void Write();
 
-        protected abstract void WriteChildResourceEntries();
+        protected virtual void WriteChildResourceEntries()
+        {
+            foreach (var resource in This.ChildResources)
+            {
+                _writer.Line();
+                _writer.Line($"#region {resource.ResourceName}");
+                if (resource.IsSingleton)
+                    WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!);
+                else
+                    WriteResourceContainerEntry(resource);
+                _writer.Line($"#endregion");
+            }
+        }
+
+        protected abstract void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix);
+
+        protected abstract void WriteResourceContainerEntry(Resource resource);
 
         protected void WriteUsings(CodeWriter writer)
         {

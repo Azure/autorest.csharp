@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -16,9 +15,8 @@ using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class Resource : TypeProvider
+    internal class Resource : MgmtTypeProvider
     {
-        protected BuildContext<MgmtOutputLibrary> _context;
         //public bool IsScopeOrExtension { get; } // will be back soon
 
         public IEnumerable<OperationSet> OperationSets { get; }
@@ -104,18 +102,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// A collection of ClientOperations.
         /// The List of <see cref="MgmtRestOperation"/> represents a set of the same operations under different parent (OperationSet)
         /// </summary>
-        public IEnumerable<MgmtClientOperation> ClientOperations => EnsureClientOperationMap().Values;
-
-        /// <summary>
-        /// This method returns the contextual path from one resource <see cref="OperationSet"/>
-        /// In the <see cref="Resource"/> class, we just use the RequestPath of the OperationSet as its contextual path
-        /// </summary>
-        /// <param name="operationSet"></param>
-        /// <returns></returns>
-        protected virtual RequestPath GetContextualPath(OperationSet operationSet)
-        {
-            return operationSet.GetRequestPath(_context);
-        }
+        public override IEnumerable<MgmtClientOperation> ClientOperations => EnsureClientOperationMap().Values;
 
         /// <summary>
         /// This is a map from the diff request path between the operation and the contextual path to the actual operations
@@ -137,8 +124,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                     // first we need to see if this operation is a collection operation. Collection operation is not literally a child of the corresponding resource
                     string key;
                     if (operation.IsResourceCollectionOperation(_context, out var resourceOperationSet) && resourceOperationSet == operationSet)
+                    {
                         // if this operation is a collection operation, it should be the parent of its corresponding resource request path
-                        key = new RequestPath(operation.GetRequestPath(_context).TrimParentFrom(operationSet.GetRequestPath(_context)).ToList());
+                        var diff = new RequestPath(operation.GetRequestPath(_context).TrimParentFrom(operationSet.GetRequestPath(_context)).ToList());
+                        // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
+                        key = $"-{diff}";
+                    }
                     else
                         // for other child operations, they should be child of the corresponding resource request path
                         key = new RequestPath(operationSet.GetRequestPath(_context).TrimParentFrom(operation.GetRequestPath(_context)).ToList());
@@ -163,6 +154,17 @@ namespace AutoRest.CSharp.Mgmt.Output
                 pair => pair.Key,
                 pair => MgmtClientOperation.FromOperations(pair.Value)!); // We first filtered the ones with at least one operation, therefore this will never be null
             return _clientOperationMap;
+        }
+
+        /// <summary>
+        /// This method returns the contextual path from one resource <see cref="OperationSet"/>
+        /// In the <see cref="Resource"/> class, we just use the RequestPath of the OperationSet as its contextual path
+        /// </summary>
+        /// <param name="operationSet"></param>
+        /// <returns></returns>
+        protected virtual RequestPath GetContextualPath(OperationSet operationSet)
+        {
+            return operationSet.GetRequestPath(_context);
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;

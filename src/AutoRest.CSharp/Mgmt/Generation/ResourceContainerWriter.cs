@@ -5,25 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Management;
 using Azure.Core.Pipeline;
-using AutoRest.CSharp.Mgmt.Models;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
 
@@ -46,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ContextProperty => "Parent";
 
-        protected override TypeProvider This => _resourceContainer;
+        protected override MgmtTypeProvider This => _resourceContainer;
 
         public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
             : base(writer, resourceContainer.Resource, context)
@@ -61,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{_resourceContainer.Description}");
-                _writer.Line($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : {BaseClass}");
+                _writer.Line($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis} : {BaseClass}");
                 using (_writer.Scope())
                 {
                     WriteFields();

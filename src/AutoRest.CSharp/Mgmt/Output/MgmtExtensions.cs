@@ -13,10 +13,8 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal abstract class MgmtExtensions : TypeProvider
+    internal abstract class MgmtExtensions : MgmtTypeProvider
     {
-        protected BuildContext<MgmtOutputLibrary> _context;
-
         protected IEnumerable<Operation> _allOperations;
 
         public MgmtExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(context)
@@ -27,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultAccessibility => "public";
 
-        public virtual IEnumerable<MgmtClientOperation> ClientOperations => _clientOperations ??= EnsureClientOperations();
+        public override IEnumerable<MgmtClientOperation> ClientOperations => _clientOperations ??= EnsureClientOperations();
 
         private IEnumerable<MgmtClientOperation>? _clientOperations;
         private IEnumerable<MgmtClientOperation> EnsureClientOperations()

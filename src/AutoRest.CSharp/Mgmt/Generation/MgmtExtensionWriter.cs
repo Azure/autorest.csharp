@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal abstract class MgmtExtensionWriter : MgmtClientBaseWriter
     {
         protected MgmtExtensions _extensions;
-        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, context)
+        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
         {
             _extensions = extensions;
         }
@@ -71,43 +71,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        protected override void WriteChildResourceEntries()
-        {
-            foreach (var resource in Context.Library.ArmResources)
-            {
-                var parents = resource.Parent(Context);
-                if (!parents.Contains(This))
-                    continue;
-
-                _writer.Line();
-                _writer.Line($"#region {resource.ResourceName}");
-                if (resource.IsSingleton)
-                    WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!);
-                else
-                    WriteResourceContainerEntry(resource);
-                _writer.Line($"#endregion");
-            }
-        }
-
-        private void WriteResourceContainerEntry(Resource resource)
+        protected override void WriteResourceContainerEntry(Resource resource)
         {
             var container = resource.ResourceContainer;
             if (container == null)
                 throw new InvalidOperationException($"We are about to write a {resource.ResourceName} resource entry, but it does not have a container, this cannot happen");
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type}\" /> object.");
             using (_writer.Scope($"public static {container.Type} Get{container.Resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
                 _writer.Line($"return new {container.Type}({ExtensionOperationVariableName});");
             }
         }
 
-        private void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix)
+        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix)
         {
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
             using (_writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
                 _writer.Line($"return new {resource.Type}({ExtensionOperationVariableName}, {ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\");");

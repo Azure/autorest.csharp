@@ -2,27 +2,21 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
-using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using AutoRest.CSharp.Generation.Types;
+using Core = Azure.ResourceManager.Core;
 using SubscriptionExtensions = AutoRest.CSharp.Mgmt.Output.SubscriptionExtensions;
-using AutoRest.CSharp.Mgmt.Models;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -37,8 +31,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string ExtensionOperationVariableName => "subscription";
 
         protected override Type ExtensionOperationVariableType => typeof(Subscription);
-
-        protected override TypeProvider This => _extensions;
 
         public override void Write()
         {

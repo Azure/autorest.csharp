@@ -29,8 +29,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override Type ExtensionOperationVariableType => typeof(ArmClient);
 
-        protected override TypeProvider This => _extensions;
-
         public override void Write()
         {
             using (_writer.Namespace(Context.DefaultNamespace))

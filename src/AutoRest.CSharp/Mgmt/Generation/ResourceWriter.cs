@@ -38,11 +38,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual Type BaseClass => typeof(ArmResource);
 
         protected override string ContextProperty => "this";
-
-        protected override TypeProvider This => _resource;
         private bool IsSingleton => _resource.IsSingleton;
 
-        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, context)
+        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
         {
             _resource = resource;
             _resourceData = resource.ResourceData;
@@ -436,25 +434,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Line($"return {typeof(Response)}.FromValue(new {TypeOfThis}(this, originalResponse.Value), originalResponse.GetRawResponse());");
         }
 
-        protected override void WriteChildResourceEntries()
-        {
-            foreach (var resource in Context.Library.ArmResources)
-            {
-                var parents = resource.Parent(Context);
-                if (!parents.Contains(This))
-                    continue;
-
-                _writer.Line();
-                _writer.Line($"#region {resource.ResourceName}");
-                if (resource.IsSingleton)
-                    WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!);
-                else
-                    WriteResourceContainerEntry(resource);
-                _writer.Line($"#endregion");
-            }
-        }
-
-        private void WriteResourceContainerEntry(Resource resource)
+        protected override void WriteResourceContainerEntry(Resource resource)
         {
             var container = resource.ResourceContainer;
             if (container == null)
@@ -468,16 +448,16 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             }
         }
 
-        private void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix)
+        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix)
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {_resource.ResourceName}.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
             using (_writer.Scope($"public {resource.Type} Get{resource.Type.Name}()"))
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {resource.Type.Name}(this, Id + \"/{singletonResourceIdSuffix}\");");
+                _writer.Line($"return new {resource.Type}(this, Id + \"/{singletonResourceIdSuffix}\");");
             }
         }
     }

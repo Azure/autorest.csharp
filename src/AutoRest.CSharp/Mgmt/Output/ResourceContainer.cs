@@ -21,13 +21,13 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Container";
 
-        public const string ResourceGroupResourceType = "ResourceGroup.ResourceType";
-        public const string SubscriptionResourceType = "Subscription.ResourceType";
-        public const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
-        private const string ResourceGroupCommentName = "ResourceGroup";
-        private const string SubscriptionCommentName = "Subscription";
-        private const string TenantCommentName = "Tenant";
-        private const string ManagementGroupCommentName = "ManagementGroup";
+        //public const string ResourceGroupResourceType = "ResourceGroup.ResourceType";
+        //public const string SubscriptionResourceType = "Subscription.ResourceType";
+        //public const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
+        //private const string ResourceGroupCommentName = "ResourceGroup";
+        //private const string SubscriptionCommentName = "Subscription";
+        //private const string TenantCommentName = "Tenant";
+        //private const string ManagementGroupCommentName = "ManagementGroup";
 
         //private RestClientMethod? _createMethod;
         //private List<RestClientMethod>? _putMethods;
