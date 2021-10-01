@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         //        (method.Name.StartsWith("CreateOrUpdate") || method.Name.StartsWith("Create") || method.Name.StartsWith("Put"));
         //}
 
-        protected override string SuffixValue => _suffixValue;
+        protected override string DefaultName => base.DefaultName + _suffixValue;
 
         //protected override IEnumerable<ClientMethod> GetMethodsInScope()
         //{

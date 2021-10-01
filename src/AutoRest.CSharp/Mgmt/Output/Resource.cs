@@ -31,7 +31,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
             _allOperations = allOperations;
             OperationSets = allOperations.Keys;
-            DefaultName = resourceName + SuffixValue;
+            ResourceName = resourceName;
+            //DefaultName = resourceName + SuffixValue;
 
             if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
@@ -59,7 +60,15 @@ namespace AutoRest.CSharp.Mgmt.Output
             return MgmtClientOperation.FromOperations(result);
         }
 
-        protected override string DefaultName { get; }
+        private string? _defaultName;
+        protected override string DefaultName => _defaultName ??= EnsureResourceDefaultName();
+
+        private string EnsureResourceDefaultName()
+        {
+            // TODO -- sometimes we might have multiple resources with the same name, we need to resolve this here
+            // But temporarily, we just return the ResourceName and assume we will not hit on any issues
+            return ResourceName;
+        }
 
         protected override string DefaultAccessibility => "public";
 
@@ -80,9 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public ResourceData ResourceData => _context.Library.GetResourceData(RequestPaths.First());
 
-        public virtual string ResourceName => Type.Name;
-
-        protected virtual string SuffixValue => string.Empty;
+        public virtual string ResourceName { get; }
 
         public virtual MgmtClientOperation? GetOperation { get; }
         public virtual MgmtClientOperation? DeleteOperation { get; }

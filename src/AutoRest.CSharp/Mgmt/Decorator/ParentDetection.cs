@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<Operation, RequestPath> _operationToParentRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
 
-        private static ConcurrentDictionary<TypeProvider, IEnumerable<TypeProvider>> _resourceParentCache = new ConcurrentDictionary<TypeProvider, IEnumerable<TypeProvider>>();
+        private static ConcurrentDictionary<MgmtTypeProvider, IEnumerable<MgmtTypeProvider>> _resourceParentCache = new ConcurrentDictionary<MgmtTypeProvider, IEnumerable<MgmtTypeProvider>>();
 
         /// <summary>
         /// Returns the collection of the parent of the given resource.
@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="resource"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static IEnumerable<TypeProvider> Parent(this Resource resource, BuildContext<MgmtOutputLibrary> context)
+        public static IEnumerable<MgmtTypeProvider> Parent(this Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
             if (_resourceParentCache.TryGetValue(resource, out var parentList))
                 return parentList;
@@ -38,9 +38,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parentList;
         }
 
-        private static IEnumerable<TypeProvider> GetParent(this Resource resource, BuildContext<MgmtOutputLibrary> context)
+        private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
-            var result = new List<TypeProvider>();
+            var result = new List<MgmtTypeProvider>();
             foreach (var resourceOperationSet in resource.OperationSets)
             {
                 result.Add(resourceOperationSet.GetParent(context));
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        private static TypeProvider GetParent(this OperationSet resourceOperationSet, BuildContext<MgmtOutputLibrary> context)
+        private static MgmtTypeProvider GetParent(this OperationSet resourceOperationSet, BuildContext<MgmtOutputLibrary> context)
         {
             var parentRequestPath = resourceOperationSet.ParentRequestPath(context);
             if (context.Library.TryGetArmResource(parentRequestPath, out var parent))
@@ -64,7 +64,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (parentRequestPath.Equals(RequestPath.Subscription))
                 return context.Library.SubscriptionExtensions;
             return context.Library.TenantExtensions;
-            // TODO -- what is the difference between ArmClientExtensions and TenantExtensions?
         }
 
         public static RequestPath ParentRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)

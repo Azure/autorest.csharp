@@ -290,12 +290,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 UseNamespace(type.Namespace);
 
-                if (_currentNamespace != type.Namespace)
-                {
-                    AppendRaw("global::");
-                    AppendRaw(type.Namespace);
-                    AppendRaw(".");
-                }
+                AppendRaw("global::");
+                AppendRaw(type.Namespace);
+                AppendRaw(".");
                 AppendRaw(type.Name);
             }
             else
@@ -524,7 +521,7 @@ namespace AutoRest.CSharp.Generation.Writers
             string[] namespaces = _usingNamespaces
                     .Distinct()
                     .OrderByDescending(ns => ns.StartsWith("System"))
-                    .ThenBy(ns=>ns)
+                    .ThenBy(ns => ns)
                     .ToArray();
             if (header)
             {
@@ -640,7 +637,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public CodeWriterScope AmbientScope()
         {
-            var codeWriterScope =new CodeWriterScope(this, null, false);
+            var codeWriterScope = new CodeWriterScope(this, null, false);
             _scopes.Push(codeWriterScope);
             return codeWriterScope;
         }

@@ -442,9 +442,9 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
             _writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
-            using (_writer.Scope($"public {container.Type} Get{container.ResourceName.ToPlural()}()"))
+            using (_writer.Scope($"public {container.Type.Name} Get{container.ResourceName.ToPlural()}()"))
             {
-                _writer.Line($"return new {container.Type}(this);");
+                _writer.Line($"return new {container.Type.Name}(this);");
             }
         }
 
@@ -453,11 +453,11 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {_resource.ResourceName}.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
-            using (_writer.Scope($"public {resource.Type} Get{resource.Type.Name}()"))
+            using (_writer.Scope($"public {resource.Type.Name} Get{resource.Type.Name}()"))
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {resource.Type}(this, Id + \"/{singletonResourceIdSuffix}\");");
+                _writer.Line($"return new {resource.Type.Name}(this, Id + \"/{singletonResourceIdSuffix}\");");
             }
         }
     }
