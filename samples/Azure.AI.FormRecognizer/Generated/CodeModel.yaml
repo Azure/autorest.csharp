@@ -688,6 +688,36 @@ schemas: !Schemas
           name: Language
           description: Language code
       protocol: !Protocols {}
+    - !ChoiceSchema &ref_162
+      choices:
+        - !ChoiceValue 
+          value: full
+          language:
+            default:
+              name: Full
+              description: ''
+      type: choice
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: Enum1
+          description: ''
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_165
+      choices:
+        - !ChoiceValue 
+          value: summary
+          language:
+            default:
+              name: Summary
+              description: ''
+      type: choice
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: Enum2
+          description: ''
+      protocol: !Protocols {}
   sealedChoices:
     - !SealedChoiceSchema &ref_25
       choices:
@@ -922,26 +952,6 @@ schemas: !Schemas
         default:
           name: Accept
           description: 'Accept: application/json'
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_162
-      type: constant
-      value: !ConstantValue 
-        value: full
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: Constant9
-          description: ''
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_164
-      type: constant
-      value: !ConstantValue 
-        value: summary
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: Constant10
-          description: ''
       protocol: !Protocols {}
   dictionaries:
     - !DictionarySchema &ref_28
@@ -2755,7 +2765,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_89
-    - !ObjectSchema &ref_163
+    - !ObjectSchema &ref_164
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4481,7 +4491,7 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter 
+          - !Parameter &ref_163
             schema: *ref_162
             implementation: Method
             required: true
@@ -4519,10 +4529,11 @@ operationGroups:
                 path: /custom/models
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
-        signatureParameters: []
+        signatureParameters:
+          - *ref_163
         responses:
           - !SchemaResponse 
-            schema: *ref_163
+            schema: *ref_164
             language: !Languages 
               default:
                 name: ''
@@ -4588,8 +4599,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter 
-            schema: *ref_164
+          - !Parameter &ref_166
+            schema: *ref_165
             implementation: Method
             required: true
             language: !Languages 
@@ -4626,10 +4637,11 @@ operationGroups:
                 path: /custom/models
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
-        signatureParameters: []
+        signatureParameters:
+          - *ref_166
         responses:
           - !SchemaResponse 
-            schema: *ref_163
+            schema: *ref_164
             language: !Languages 
               default:
                 name: ''

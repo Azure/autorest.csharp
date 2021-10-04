@@ -116,17 +116,18 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
         /// <param name="indexerName"> The name of the indexer to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return await RestClient.CreateOrUpdateAsync(indexerName, indexer, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateOrUpdateAsync(indexerName, prefer, indexer, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -137,17 +138,18 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new indexer or updates an indexer if it already exists. </summary>
         /// <param name="indexerName"> The name of the indexer to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Indexer> CreateOrUpdate(string indexerName, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<Indexer> CreateOrUpdate(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return RestClient.CreateOrUpdate(indexerName, indexer, requestOptions, accessCondition, cancellationToken);
+                return RestClient.CreateOrUpdate(indexerName, prefer, indexer, requestOptions, accessCondition, cancellationToken);
             }
             catch (Exception e)
             {

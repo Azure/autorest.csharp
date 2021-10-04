@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 
 namespace SupersetFlattenInheritance
 {
@@ -29,7 +28,7 @@ namespace SupersetFlattenInheritance
 
         internal static SubResourceModel2Data DeserializeSubResourceModel2Data(JsonElement element)
         {
-            ResourceIdentifier id = default;
+            Optional<string> id = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -56,7 +55,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new SubResourceModel2Data(id, foo.Value);
+            return new SubResourceModel2Data(id.Value, foo.Value);
         }
     }
 }

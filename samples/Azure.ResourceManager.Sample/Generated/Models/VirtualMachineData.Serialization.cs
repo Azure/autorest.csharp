@@ -89,17 +89,17 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(AvailabilitySet))
             {
                 writer.WritePropertyName("availabilitySet");
-                writer.WriteObjectValue(AvailabilitySet);
+                JsonSerializer.Serialize(writer, AvailabilitySet);
             }
             if (Optional.IsDefined(VirtualMachineScaleSet))
             {
                 writer.WritePropertyName("virtualMachineScaleSet");
-                writer.WriteObjectValue(VirtualMachineScaleSet);
+                JsonSerializer.Serialize(writer, VirtualMachineScaleSet);
             }
             if (Optional.IsDefined(ProximityPlacementGroup))
             {
                 writer.WritePropertyName("proximityPlacementGroup");
-                writer.WriteObjectValue(ProximityPlacementGroup);
+                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
             if (Optional.IsDefined(Priority))
             {
@@ -119,12 +119,12 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(Host))
             {
                 writer.WritePropertyName("host");
-                writer.WriteObjectValue(Host);
+                JsonSerializer.Serialize(writer, Host);
             }
             if (Optional.IsDefined(HostGroup))
             {
                 writer.WritePropertyName("hostGroup");
-                writer.WriteObjectValue(HostGroup);
+                JsonSerializer.Serialize(writer, HostGroup);
             }
             if (Optional.IsDefined(LicenseType))
             {
@@ -158,14 +158,14 @@ namespace Azure.ResourceManager.Sample
             Optional<NetworkProfile> networkProfile = default;
             Optional<SecurityProfile> securityProfile = default;
             Optional<DiagnosticsProfile> diagnosticsProfile = default;
-            Optional<Models.SubResource> availabilitySet = default;
-            Optional<Models.SubResource> virtualMachineScaleSet = default;
-            Optional<Models.SubResource> proximityPlacementGroup = default;
+            Optional<WritableSubResource> availabilitySet = default;
+            Optional<WritableSubResource> virtualMachineScaleSet = default;
+            Optional<WritableSubResource> proximityPlacementGroup = default;
             Optional<VirtualMachinePriorityTypes> priority = default;
             Optional<VirtualMachineEvictionPolicyTypes> evictionPolicy = default;
             Optional<BillingProfile> billingProfile = default;
-            Optional<Models.SubResource> host = default;
-            Optional<Models.SubResource> hostGroup = default;
+            Optional<WritableSubResource> host = default;
+            Optional<WritableSubResource> hostGroup = default;
             Optional<string> provisioningState = default;
             Optional<VirtualMachineInstanceView> instanceView = default;
             Optional<string> licenseType = default;
@@ -339,7 +339,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            availabilitySet = Models.SubResource.DeserializeSubResource(property0.Value);
+                            availabilitySet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.ToString());
                             continue;
                         }
                         if (property0.NameEquals("virtualMachineScaleSet"))
@@ -349,7 +349,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            virtualMachineScaleSet = Models.SubResource.DeserializeSubResource(property0.Value);
+                            virtualMachineScaleSet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.ToString());
                             continue;
                         }
                         if (property0.NameEquals("proximityPlacementGroup"))
@@ -359,7 +359,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            proximityPlacementGroup = Models.SubResource.DeserializeSubResource(property0.Value);
+                            proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.ToString());
                             continue;
                         }
                         if (property0.NameEquals("priority"))
@@ -399,7 +399,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            host = Models.SubResource.DeserializeSubResource(property0.Value);
+                            host = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.ToString());
                             continue;
                         }
                         if (property0.NameEquals("hostGroup"))
@@ -409,7 +409,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            hostGroup = Models.SubResource.DeserializeSubResource(property0.Value);
+                            hostGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.ToString());
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -446,7 +446,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, tags, location, plan.Value, Optional.ToList(resources), identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet.Value, virtualMachineScaleSet.Value, proximityPlacementGroup.Value, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host.Value, hostGroup.Value, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, tags, location, plan.Value, Optional.ToList(resources), identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

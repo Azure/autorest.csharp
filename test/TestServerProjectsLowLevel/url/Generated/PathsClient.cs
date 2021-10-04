@@ -895,7 +895,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
-        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -924,7 +924,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
-        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -953,7 +953,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
-        /// <param name="enumPath"> send null should throw. </param>
+        /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -982,7 +982,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
-        /// <param name="enumPath"> send null should throw. </param>
+        /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:

@@ -130,7 +130,10 @@ namespace BodyAndPath_LowLevel
             uri.AppendPath(itemNameStream, true);
             if (excluded != null)
             {
-                uri.AppendQueryDelimited("excluded", excluded, ",", true);
+                foreach (var param in excluded)
+                {
+                    uri.AppendQuery("excluded", param, true);
+                }
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", contentType.ToString());
@@ -196,6 +199,105 @@ namespace BodyAndPath_LowLevel
 
             options ??= new RequestOptions();
             using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
+            RequestOptions.Apply(options, message);
+            _pipeline.Send(message, options.CancellationToken);
+            if (options.StatusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
+        }
+
+        internal HttpMessage CreateCreateEnumRequest(string enumName1, string enumName2, RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(enumName1, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(enumName2, true);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Resets products. </summary>
+        /// <param name="enumName1"> The first name. </param>
+        /// <param name="enumName2"> The second name. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>
+        public async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+        {
+            if (enumName1 == null)
+            {
+                throw new ArgumentNullException(nameof(enumName1));
+            }
+            if (enumName2 == null)
+            {
+                throw new ArgumentNullException(nameof(enumName2));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
+            options ??= new RequestOptions();
+            using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content);
+            RequestOptions.Apply(options, message);
+            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+            if (options.StatusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
+        }
+
+        /// <summary> Resets products. </summary>
+        /// <param name="enumName1"> The first name. </param>
+        /// <param name="enumName2"> The second name. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>
+        public Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+        {
+            if (enumName1 == null)
+            {
+                throw new ArgumentNullException(nameof(enumName1));
+            }
+            if (enumName2 == null)
+            {
+                throw new ArgumentNullException(nameof(enumName2));
+            }
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
+            options ??= new RequestOptions();
+            using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content);
             RequestOptions.Apply(options, message);
             _pipeline.Send(message, options.CancellationToken);
             if (options.StatusOption == ResponseStatusOption.Default)

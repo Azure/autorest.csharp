@@ -4,7 +4,7 @@ info: !Info
   title: RunCommandsClient
 schemas: !Schemas 
   booleans:
-    - !BooleanSchema &ref_3
+    - !BooleanSchema &ref_4
       type: boolean
       defaultValue: false
       language: !Languages 
@@ -13,7 +13,7 @@ schemas: !Schemas
           description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
       protocol: !Protocols {}
   numbers:
-    - !NumberSchema &ref_6
+    - !NumberSchema &ref_33
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -24,7 +24,7 @@ schemas: !Schemas
           name: AnotherParentPropertiesTimeoutInSeconds
           description: The timeout in seconds to execute the run command.
       protocol: !Protocols {}
-    - !NumberSchema &ref_12
+    - !NumberSchema &ref_7
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -35,7 +35,7 @@ schemas: !Schemas
           name: ChildBodyPropertiesTimeoutInSeconds
           description: The timeout in seconds to execute the run command.
       protocol: !Protocols {}
-    - !NumberSchema &ref_18
+    - !NumberSchema &ref_13
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -46,7 +46,7 @@ schemas: !Schemas
           name: ParentPropertiesTimeoutInSeconds
           description: The timeout in seconds to execute the run command.
       protocol: !Protocols {}
-    - !NumberSchema &ref_24
+    - !NumberSchema &ref_19
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -75,47 +75,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_32
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-03-01'
-      language: !Languages 
-        default:
-          name: ResourceId
-          description: Resource Id
-      protocol: !Protocols {}
-    - !StringSchema &ref_33
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-03-01'
-      language: !Languages 
-        default:
-          name: ResourceName
-          description: Resource name
-      protocol: !Protocols {}
-    - !StringSchema &ref_34
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-03-01'
-      language: !Languages 
-        default:
-          name: ResourceType
-          description: Resource type
-      protocol: !Protocols {}
-    - !StringSchema &ref_35
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-03-01'
-      language: !Languages 
-        default:
-          name: ResourceLocation
-          description: Resource location
-      protocol: !Protocols {}
-    - !StringSchema &ref_4
+    - !StringSchema &ref_31
       type: string
       apiVersions:
         - !ApiVersion 
@@ -125,7 +85,7 @@ schemas: !Schemas
           name: AnotherParentPropertiesRunAsUser
           description: Specifies the user account on the VM when executing the run command.
       protocol: !Protocols {}
-    - !StringSchema &ref_5
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
@@ -135,7 +95,7 @@ schemas: !Schemas
           name: AnotherParentPropertiesRunAsPassword
           description: Specifies the user account password on the VM when executing the run command.
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_34
       type: string
       apiVersions:
         - !ApiVersion 
@@ -145,7 +105,7 @@ schemas: !Schemas
           name: AnotherParentPropertiesOutputBlobUri
           description: Specifies the Azure storage blob where script output stream will be uploaded.
       protocol: !Protocols {}
-    - !StringSchema &ref_8
+    - !StringSchema &ref_35
       type: string
       apiVersions:
         - !ApiVersion 
@@ -155,7 +115,7 @@ schemas: !Schemas
           name: AnotherParentPropertiesErrorBlobUri
           description: Specifies the Azure storage blob where script error stream will be uploaded.
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_36
       type: string
       apiVersions:
         - !ApiVersion 
@@ -164,6 +124,46 @@ schemas: !Schemas
         default:
           name: AnotherParentPropertiesProvisioningState
           description: The provisioning state, which only appears in the response.
+      protocol: !Protocols {}
+    - !StringSchema &ref_26
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-03-01'
+      language: !Languages 
+        default:
+          name: ResourceId
+          description: Resource Id
+      protocol: !Protocols {}
+    - !StringSchema &ref_27
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-03-01'
+      language: !Languages 
+        default:
+          name: ResourceName
+          description: Resource name
+      protocol: !Protocols {}
+    - !StringSchema &ref_28
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-03-01'
+      language: !Languages 
+        default:
+          name: ResourceType
+          description: Resource type
+      protocol: !Protocols {}
+    - !StringSchema &ref_29
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-03-01'
+      language: !Languages 
+        default:
+          name: ResourceLocation
+          description: Resource location
       protocol: !Protocols {}
     - !StringSchema &ref_37
       type: string
@@ -255,7 +255,7 @@ schemas: !Schemas
           name: AnotherParentsListResultNextLink
           description: The uri to fetch the next page of run commands.
       protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_5
       type: string
       apiVersions:
         - !ApiVersion 
@@ -265,7 +265,7 @@ schemas: !Schemas
           name: ChildBodyPropertiesRunAsUser
           description: Specifies the user account on the VM when executing the run command.
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_6
       type: string
       apiVersions:
         - !ApiVersion 
@@ -275,7 +275,7 @@ schemas: !Schemas
           name: ChildBodyPropertiesRunAsPassword
           description: Specifies the user account password on the VM when executing the run command.
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_8
       type: string
       apiVersions:
         - !ApiVersion 
@@ -285,7 +285,7 @@ schemas: !Schemas
           name: ChildBodyPropertiesOutputBlobUri
           description: Specifies the Azure storage blob where script output stream will be uploaded.
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -295,7 +295,7 @@ schemas: !Schemas
           name: ChildBodyPropertiesErrorBlobUri
           description: Specifies the Azure storage blob where script error stream will be uploaded.
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_10
       type: string
       apiVersions:
         - !ApiVersion 
@@ -315,7 +315,7 @@ schemas: !Schemas
           name: ChildBodiesListResultNextLink
           description: The uri to fetch the next page of run commands.
       protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
@@ -325,7 +325,7 @@ schemas: !Schemas
           name: ParentPropertiesRunAsUser
           description: Specifies the user account on the VM when executing the run command.
       protocol: !Protocols {}
-    - !StringSchema &ref_17
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -335,7 +335,7 @@ schemas: !Schemas
           name: ParentPropertiesRunAsPassword
           description: Specifies the user account password on the VM when executing the run command.
       protocol: !Protocols {}
-    - !StringSchema &ref_19
+    - !StringSchema &ref_14
       type: string
       apiVersions:
         - !ApiVersion 
@@ -345,7 +345,7 @@ schemas: !Schemas
           name: ParentPropertiesOutputBlobUri
           description: Specifies the Azure storage blob where script output stream will be uploaded.
       protocol: !Protocols {}
-    - !StringSchema &ref_20
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -355,7 +355,7 @@ schemas: !Schemas
           name: ParentPropertiesErrorBlobUri
           description: Specifies the Azure storage blob where script error stream will be uploaded.
       protocol: !Protocols {}
-    - !StringSchema &ref_21
+    - !StringSchema &ref_16
       type: string
       apiVersions:
         - !ApiVersion 
@@ -375,7 +375,7 @@ schemas: !Schemas
           name: ParentsListResultNextLink
           description: The uri to fetch the next page of run commands.
       protocol: !Protocols {}
-    - !StringSchema &ref_22
+    - !StringSchema &ref_17
       type: string
       apiVersions:
         - !ApiVersion 
@@ -385,7 +385,7 @@ schemas: !Schemas
           name: SubParentPropertiesRunAsUser
           description: Specifies the user account on the VM when executing the run command.
       protocol: !Protocols {}
-    - !StringSchema &ref_23
+    - !StringSchema &ref_18
       type: string
       apiVersions:
         - !ApiVersion 
@@ -395,7 +395,7 @@ schemas: !Schemas
           name: SubParentPropertiesRunAsPassword
           description: Specifies the user account password on the VM when executing the run command.
       protocol: !Protocols {}
-    - !StringSchema &ref_25
+    - !StringSchema &ref_20
       type: string
       apiVersions:
         - !ApiVersion 
@@ -405,7 +405,7 @@ schemas: !Schemas
           name: SubParentPropertiesOutputBlobUri
           description: Specifies the Azure storage blob where script output stream will be uploaded.
       protocol: !Protocols {}
-    - !StringSchema &ref_26
+    - !StringSchema &ref_21
       type: string
       apiVersions:
         - !ApiVersion 
@@ -415,7 +415,7 @@ schemas: !Schemas
           name: SubParentPropertiesErrorBlobUri
           description: Specifies the Azure storage blob where script error stream will be uploaded.
       protocol: !Protocols {}
-    - !StringSchema &ref_27
+    - !StringSchema &ref_22
       type: string
       apiVersions:
         - !ApiVersion 
@@ -467,7 +467,7 @@ schemas: !Schemas
           description: 'Accept: application/json, text/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_36
+    - !DictionarySchema &ref_30
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -489,476 +489,476 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-03-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_28
+          - !ObjectSchema &ref_3
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-03-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_2
+                - !ObjectSchema &ref_23
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-03-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_4
+                      flattenedNames:
+                        - properties
+                        - asyncExecution
+                      serializedName: asyncExecution
+                      language: !Languages 
+                        default:
+                          name: asyncExecution
+                          description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_5
+                      flattenedNames:
+                        - properties
+                        - runAsUser
+                      serializedName: runAsUser
+                      language: !Languages 
+                        default:
+                          name: runAsUser
+                          description: Specifies the user account on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_6
+                      flattenedNames:
+                        - properties
+                        - runAsPassword
+                      serializedName: runAsPassword
+                      language: !Languages 
+                        default:
+                          name: runAsPassword
+                          description: Specifies the user account password on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_7
+                      flattenedNames:
+                        - properties
+                        - timeoutInSeconds
+                      serializedName: timeoutInSeconds
+                      language: !Languages 
+                        default:
+                          name: timeoutInSeconds
+                          description: The timeout in seconds to execute the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_8
+                      flattenedNames:
+                        - properties
+                        - outputBlobUri
+                      serializedName: outputBlobUri
+                      language: !Languages 
+                        default:
+                          name: outputBlobUri
+                          description: Specifies the Azure storage blob where script output stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_9
+                      flattenedNames:
+                        - properties
+                        - errorBlobUri
+                      serializedName: errorBlobUri
+                      language: !Languages 
+                        default:
+                          name: errorBlobUri
+                          description: Specifies the Azure storage blob where script error stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_10
+                      flattenedNames:
+                        - properties
+                        - provisioningState
+                      readOnly: true
+                      serializedName: provisioningState
+                      language: !Languages 
+                        default:
+                          name: provisioningState
+                          description: The provisioning state, which only appears in the response.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ChildBody
+                      description: Describes a Virtual Machine run command.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_24
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-03-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_4
+                      flattenedNames:
+                        - properties
+                        - asyncExecution
+                      serializedName: asyncExecution
+                      language: !Languages 
+                        default:
+                          name: asyncExecution
+                          description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_11
+                      flattenedNames:
+                        - properties
+                        - runAsUser
+                      serializedName: runAsUser
+                      language: !Languages 
+                        default:
+                          name: runAsUser
+                          description: Specifies the user account on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_12
+                      flattenedNames:
+                        - properties
+                        - runAsPassword
+                      serializedName: runAsPassword
+                      language: !Languages 
+                        default:
+                          name: runAsPassword
+                          description: Specifies the user account password on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_13
+                      flattenedNames:
+                        - properties
+                        - timeoutInSeconds
+                      serializedName: timeoutInSeconds
+                      language: !Languages 
+                        default:
+                          name: timeoutInSeconds
+                          description: The timeout in seconds to execute the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_14
+                      flattenedNames:
+                        - properties
+                        - outputBlobUri
+                      serializedName: outputBlobUri
+                      language: !Languages 
+                        default:
+                          name: outputBlobUri
+                          description: Specifies the Azure storage blob where script output stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_15
+                      flattenedNames:
+                        - properties
+                        - errorBlobUri
+                      serializedName: errorBlobUri
+                      language: !Languages 
+                        default:
+                          name: errorBlobUri
+                          description: Specifies the Azure storage blob where script error stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_16
+                      flattenedNames:
+                        - properties
+                        - provisioningState
+                      readOnly: true
+                      serializedName: provisioningState
+                      language: !Languages 
+                        default:
+                          name: provisioningState
+                          description: The provisioning state, which only appears in the response.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: Parent
+                      description: Describes a Virtual Machine run command.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_25
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-03-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_4
+                      flattenedNames:
+                        - properties
+                        - asyncExecution
+                      serializedName: asyncExecution
+                      language: !Languages 
+                        default:
+                          name: asyncExecution
+                          description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_17
+                      flattenedNames:
+                        - properties
+                        - runAsUser
+                      serializedName: runAsUser
+                      language: !Languages 
+                        default:
+                          name: runAsUser
+                          description: Specifies the user account on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_18
+                      flattenedNames:
+                        - properties
+                        - runAsPassword
+                      serializedName: runAsPassword
+                      language: !Languages 
+                        default:
+                          name: runAsPassword
+                          description: Specifies the user account password on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_19
+                      flattenedNames:
+                        - properties
+                        - timeoutInSeconds
+                      serializedName: timeoutInSeconds
+                      language: !Languages 
+                        default:
+                          name: timeoutInSeconds
+                          description: The timeout in seconds to execute the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_20
+                      flattenedNames:
+                        - properties
+                        - outputBlobUri
+                      serializedName: outputBlobUri
+                      language: !Languages 
+                        default:
+                          name: outputBlobUri
+                          description: Specifies the Azure storage blob where script output stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_21
+                      flattenedNames:
+                        - properties
+                        - errorBlobUri
+                      serializedName: errorBlobUri
+                      language: !Languages 
+                        default:
+                          name: errorBlobUri
+                          description: Specifies the Azure storage blob where script error stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_22
+                      flattenedNames:
+                        - properties
+                        - provisioningState
+                      readOnly: true
+                      serializedName: provisioningState
+                      language: !Languages 
+                        default:
+                          name: provisioningState
+                          description: The provisioning state, which only appears in the response.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: SubParent
+                      description: Describes a Virtual Machine run command.
+                      namespace: ''
+                  protocol: !Protocols {}
               immediate:
                 - *ref_2
+                - *ref_23
+                - *ref_24
+                - *ref_25
             properties:
-              - !Property 
-                schema: *ref_3
-                flattenedNames:
-                  - properties
-                  - asyncExecution
-                serializedName: asyncExecution
-                language: !Languages 
-                  default:
-                    name: asyncExecution
-                    description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_4
-                flattenedNames:
-                  - properties
-                  - runAsUser
-                serializedName: runAsUser
-                language: !Languages 
-                  default:
-                    name: runAsUser
-                    description: Specifies the user account on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_5
-                flattenedNames:
-                  - properties
-                  - runAsPassword
-                serializedName: runAsPassword
-                language: !Languages 
-                  default:
-                    name: runAsPassword
-                    description: Specifies the user account password on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_6
-                flattenedNames:
-                  - properties
-                  - timeoutInSeconds
-                serializedName: timeoutInSeconds
-                language: !Languages 
-                  default:
-                    name: timeoutInSeconds
-                    description: The timeout in seconds to execute the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_7
-                flattenedNames:
-                  - properties
-                  - outputBlobUri
-                serializedName: outputBlobUri
-                language: !Languages 
-                  default:
-                    name: outputBlobUri
-                    description: Specifies the Azure storage blob where script output stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_8
-                flattenedNames:
-                  - properties
-                  - errorBlobUri
-                serializedName: errorBlobUri
-                language: !Languages 
-                  default:
-                    name: errorBlobUri
-                    description: Specifies the Azure storage blob where script error stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_9
-                flattenedNames:
-                  - properties
-                  - provisioningState
-                readOnly: true
-                serializedName: provisioningState
-                language: !Languages 
-                  default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: AnotherParent
-                description: Describes a Virtual Machine run command.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_29
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2021-03-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_3
-                flattenedNames:
-                  - properties
-                  - asyncExecution
-                serializedName: asyncExecution
-                language: !Languages 
-                  default:
-                    name: asyncExecution
-                    description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_10
-                flattenedNames:
-                  - properties
-                  - runAsUser
-                serializedName: runAsUser
-                language: !Languages 
-                  default:
-                    name: runAsUser
-                    description: Specifies the user account on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_11
-                flattenedNames:
-                  - properties
-                  - runAsPassword
-                serializedName: runAsPassword
-                language: !Languages 
-                  default:
-                    name: runAsPassword
-                    description: Specifies the user account password on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_12
-                flattenedNames:
-                  - properties
-                  - timeoutInSeconds
-                serializedName: timeoutInSeconds
-                language: !Languages 
-                  default:
-                    name: timeoutInSeconds
-                    description: The timeout in seconds to execute the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_13
-                flattenedNames:
-                  - properties
-                  - outputBlobUri
-                serializedName: outputBlobUri
-                language: !Languages 
-                  default:
-                    name: outputBlobUri
-                    description: Specifies the Azure storage blob where script output stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_14
-                flattenedNames:
-                  - properties
-                  - errorBlobUri
-                serializedName: errorBlobUri
-                language: !Languages 
-                  default:
-                    name: errorBlobUri
-                    description: Specifies the Azure storage blob where script error stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_15
-                flattenedNames:
-                  - properties
-                  - provisioningState
-                readOnly: true
-                serializedName: provisioningState
-                language: !Languages 
-                  default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: ChildBody
-                description: Describes a Virtual Machine run command.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_30
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2021-03-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_3
-                flattenedNames:
-                  - properties
-                  - asyncExecution
-                serializedName: asyncExecution
-                language: !Languages 
-                  default:
-                    name: asyncExecution
-                    description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_16
-                flattenedNames:
-                  - properties
-                  - runAsUser
-                serializedName: runAsUser
-                language: !Languages 
-                  default:
-                    name: runAsUser
-                    description: Specifies the user account on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_17
-                flattenedNames:
-                  - properties
-                  - runAsPassword
-                serializedName: runAsPassword
-                language: !Languages 
-                  default:
-                    name: runAsPassword
-                    description: Specifies the user account password on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_18
-                flattenedNames:
-                  - properties
-                  - timeoutInSeconds
-                serializedName: timeoutInSeconds
-                language: !Languages 
-                  default:
-                    name: timeoutInSeconds
-                    description: The timeout in seconds to execute the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_19
-                flattenedNames:
-                  - properties
-                  - outputBlobUri
-                serializedName: outputBlobUri
-                language: !Languages 
-                  default:
-                    name: outputBlobUri
-                    description: Specifies the Azure storage blob where script output stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_20
-                flattenedNames:
-                  - properties
-                  - errorBlobUri
-                serializedName: errorBlobUri
-                language: !Languages 
-                  default:
-                    name: errorBlobUri
-                    description: Specifies the Azure storage blob where script error stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_21
-                flattenedNames:
-                  - properties
-                  - provisioningState
-                readOnly: true
-                serializedName: provisioningState
-                language: !Languages 
-                  default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: Parent
-                description: Describes a Virtual Machine run command.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_31
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2021-03-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_3
-                flattenedNames:
-                  - properties
-                  - asyncExecution
-                serializedName: asyncExecution
-                language: !Languages 
-                  default:
-                    name: asyncExecution
-                    description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_22
-                flattenedNames:
-                  - properties
-                  - runAsUser
-                serializedName: runAsUser
-                language: !Languages 
-                  default:
-                    name: runAsUser
-                    description: Specifies the user account on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_23
-                flattenedNames:
-                  - properties
-                  - runAsPassword
-                serializedName: runAsPassword
-                language: !Languages 
-                  default:
-                    name: runAsPassword
-                    description: Specifies the user account password on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_24
-                flattenedNames:
-                  - properties
-                  - timeoutInSeconds
-                serializedName: timeoutInSeconds
-                language: !Languages 
-                  default:
-                    name: timeoutInSeconds
-                    description: The timeout in seconds to execute the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_25
-                flattenedNames:
-                  - properties
-                  - outputBlobUri
-                serializedName: outputBlobUri
-                language: !Languages 
-                  default:
-                    name: outputBlobUri
-                    description: Specifies the Azure storage blob where script output stream will be uploaded.
-                protocol: !Protocols {}
               - !Property 
                 schema: *ref_26
-                flattenedNames:
-                  - properties
-                  - errorBlobUri
-                serializedName: errorBlobUri
+                readOnly: true
+                required: false
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: errorBlobUri
-                    description: Specifies the Azure storage blob where script error stream will be uploaded.
+                    name: id
+                    description: Resource Id
                 protocol: !Protocols {}
               - !Property 
                 schema: *ref_27
-                flattenedNames:
-                  - properties
-                  - provisioningState
                 readOnly: true
-                serializedName: provisioningState
+                required: false
+                serializedName: name
                 language: !Languages 
                   default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
+                    name: name
+                    description: Resource name
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_28
+                readOnly: true
+                required: false
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: Resource type
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_29
+                required: true
+                serializedName: location
+                language: !Languages 
+                  default:
+                    name: location
+                    description: Resource location
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_30
+                required: false
+                serializedName: tags
+                language: !Languages 
+                  default:
+                    name: tags
+                    description: Resource tags
                 protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
               - input
               - output
+            extensions:
+              x-ms-azure-resource: true
             language: !Languages 
               default:
-                name: SubParent
-                description: Describes a Virtual Machine run command.
+                name: Resource
+                description: The Resource model definition.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_28
-          - *ref_29
-          - *ref_30
-          - *ref_31
+          - *ref_3
       properties:
         - !Property 
-          schema: *ref_32
-          readOnly: true
-          required: false
-          serializedName: id
+          schema: *ref_4
+          flattenedNames:
+            - properties
+            - asyncExecution
+          serializedName: asyncExecution
           language: !Languages 
             default:
-              name: id
-              description: Resource Id
+              name: asyncExecution
+              description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_31
+          flattenedNames:
+            - properties
+            - runAsUser
+          serializedName: runAsUser
+          language: !Languages 
+            default:
+              name: runAsUser
+              description: Specifies the user account on the VM when executing the run command.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_32
+          flattenedNames:
+            - properties
+            - runAsPassword
+          serializedName: runAsPassword
+          language: !Languages 
+            default:
+              name: runAsPassword
+              description: Specifies the user account password on the VM when executing the run command.
           protocol: !Protocols {}
         - !Property 
           schema: *ref_33
-          readOnly: true
-          required: false
-          serializedName: name
+          flattenedNames:
+            - properties
+            - timeoutInSeconds
+          serializedName: timeoutInSeconds
           language: !Languages 
             default:
-              name: name
-              description: Resource name
+              name: timeoutInSeconds
+              description: The timeout in seconds to execute the run command.
           protocol: !Protocols {}
         - !Property 
           schema: *ref_34
-          readOnly: true
-          required: false
-          serializedName: type
+          flattenedNames:
+            - properties
+            - outputBlobUri
+          serializedName: outputBlobUri
           language: !Languages 
             default:
-              name: type
-              description: Resource type
+              name: outputBlobUri
+              description: Specifies the Azure storage blob where script output stream will be uploaded.
           protocol: !Protocols {}
         - !Property 
           schema: *ref_35
-          required: true
-          serializedName: location
+          flattenedNames:
+            - properties
+            - errorBlobUri
+          serializedName: errorBlobUri
           language: !Languages 
             default:
-              name: location
-              description: Resource location
+              name: errorBlobUri
+              description: Specifies the Azure storage blob where script error stream will be uploaded.
           protocol: !Protocols {}
         - !Property 
           schema: *ref_36
-          required: false
-          serializedName: tags
+          flattenedNames:
+            - properties
+            - provisioningState
+          readOnly: true
+          serializedName: provisioningState
           language: !Languages 
             default:
-              name: tags
-              description: Resource tags
+              name: provisioningState
+              description: The provisioning state, which only appears in the response.
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - input
         - output
-      extensions:
-        x-ms-azure-resource: true
       language: !Languages 
         default:
-          name: Resource
-          description: The Resource model definition.
+          name: AnotherParent
+          description: Describes a Virtual Machine run command.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_28
+    - *ref_3
     - !ObjectSchema &ref_72
       type: object
       apiVersions:
@@ -1128,96 +1128,326 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2021-03-01'
-      children: !Relations 
+      parents: !Relations 
         all:
           - !ObjectSchema &ref_49
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2021-03-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_48
+                - !ObjectSchema &ref_50
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-03-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_49
+                    immediate:
+                      - *ref_49
+                  properties:
+                    - !Property 
+                      schema: *ref_4
+                      flattenedNames:
+                        - properties
+                        - asyncExecution
+                      serializedName: asyncExecution
+                      language: !Languages 
+                        default:
+                          name: asyncExecution
+                          description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_5
+                      flattenedNames:
+                        - properties
+                        - runAsUser
+                      serializedName: runAsUser
+                      language: !Languages 
+                        default:
+                          name: runAsUser
+                          description: Specifies the user account on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_6
+                      flattenedNames:
+                        - properties
+                        - runAsPassword
+                      serializedName: runAsPassword
+                      language: !Languages 
+                        default:
+                          name: runAsPassword
+                          description: Specifies the user account password on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_7
+                      flattenedNames:
+                        - properties
+                        - timeoutInSeconds
+                      serializedName: timeoutInSeconds
+                      language: !Languages 
+                        default:
+                          name: timeoutInSeconds
+                          description: The timeout in seconds to execute the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_8
+                      flattenedNames:
+                        - properties
+                        - outputBlobUri
+                      serializedName: outputBlobUri
+                      language: !Languages 
+                        default:
+                          name: outputBlobUri
+                          description: Specifies the Azure storage blob where script output stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_9
+                      flattenedNames:
+                        - properties
+                        - errorBlobUri
+                      serializedName: errorBlobUri
+                      language: !Languages 
+                        default:
+                          name: errorBlobUri
+                          description: Specifies the Azure storage blob where script error stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_10
+                      flattenedNames:
+                        - properties
+                        - provisioningState
+                      readOnly: true
+                      serializedName: provisioningState
+                      language: !Languages 
+                        default:
+                          name: provisioningState
+                          description: The provisioning state, which only appears in the response.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                  language: !Languages 
+                    default:
+                      name: ChildBodyUpdate
+                      description: Describes a Virtual Machine run command.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_51
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-03-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_49
+                    immediate:
+                      - *ref_49
+                  properties:
+                    - !Property 
+                      schema: *ref_4
+                      flattenedNames:
+                        - properties
+                        - asyncExecution
+                      serializedName: asyncExecution
+                      language: !Languages 
+                        default:
+                          name: asyncExecution
+                          description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_11
+                      flattenedNames:
+                        - properties
+                        - runAsUser
+                      serializedName: runAsUser
+                      language: !Languages 
+                        default:
+                          name: runAsUser
+                          description: Specifies the user account on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_12
+                      flattenedNames:
+                        - properties
+                        - runAsPassword
+                      serializedName: runAsPassword
+                      language: !Languages 
+                        default:
+                          name: runAsPassword
+                          description: Specifies the user account password on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_13
+                      flattenedNames:
+                        - properties
+                        - timeoutInSeconds
+                      serializedName: timeoutInSeconds
+                      language: !Languages 
+                        default:
+                          name: timeoutInSeconds
+                          description: The timeout in seconds to execute the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_14
+                      flattenedNames:
+                        - properties
+                        - outputBlobUri
+                      serializedName: outputBlobUri
+                      language: !Languages 
+                        default:
+                          name: outputBlobUri
+                          description: Specifies the Azure storage blob where script output stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_15
+                      flattenedNames:
+                        - properties
+                        - errorBlobUri
+                      serializedName: errorBlobUri
+                      language: !Languages 
+                        default:
+                          name: errorBlobUri
+                          description: Specifies the Azure storage blob where script error stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_16
+                      flattenedNames:
+                        - properties
+                        - provisioningState
+                      readOnly: true
+                      serializedName: provisioningState
+                      language: !Languages 
+                        default:
+                          name: provisioningState
+                          description: The provisioning state, which only appears in the response.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                  language: !Languages 
+                    default:
+                      name: ParentUpdate
+                      description: Describes a Virtual Machine run command.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_52
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-03-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_49
+                    immediate:
+                      - *ref_49
+                  properties:
+                    - !Property 
+                      schema: *ref_4
+                      flattenedNames:
+                        - properties
+                        - asyncExecution
+                      serializedName: asyncExecution
+                      language: !Languages 
+                        default:
+                          name: asyncExecution
+                          description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_17
+                      flattenedNames:
+                        - properties
+                        - runAsUser
+                      serializedName: runAsUser
+                      language: !Languages 
+                        default:
+                          name: runAsUser
+                          description: Specifies the user account on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_18
+                      flattenedNames:
+                        - properties
+                        - runAsPassword
+                      serializedName: runAsPassword
+                      language: !Languages 
+                        default:
+                          name: runAsPassword
+                          description: Specifies the user account password on the VM when executing the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_19
+                      flattenedNames:
+                        - properties
+                        - timeoutInSeconds
+                      serializedName: timeoutInSeconds
+                      language: !Languages 
+                        default:
+                          name: timeoutInSeconds
+                          description: The timeout in seconds to execute the run command.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_20
+                      flattenedNames:
+                        - properties
+                        - outputBlobUri
+                      serializedName: outputBlobUri
+                      language: !Languages 
+                        default:
+                          name: outputBlobUri
+                          description: Specifies the Azure storage blob where script output stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_21
+                      flattenedNames:
+                        - properties
+                        - errorBlobUri
+                      serializedName: errorBlobUri
+                      language: !Languages 
+                        default:
+                          name: errorBlobUri
+                          description: Specifies the Azure storage blob where script error stream will be uploaded.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_22
+                      flattenedNames:
+                        - properties
+                        - provisioningState
+                      readOnly: true
+                      serializedName: provisioningState
+                      language: !Languages 
+                        default:
+                          name: provisioningState
+                          description: The provisioning state, which only appears in the response.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                  language: !Languages 
+                    default:
+                      name: SubParentUpdate
+                      description: Describes a Virtual Machine run command.
+                      namespace: ''
+                  protocol: !Protocols {}
               immediate:
                 - *ref_48
+                - *ref_50
+                - *ref_51
+                - *ref_52
             properties:
               - !Property 
-                schema: *ref_3
-                flattenedNames:
-                  - properties
-                  - asyncExecution
-                serializedName: asyncExecution
+                schema: *ref_53
+                serializedName: tags
                 language: !Languages 
                   default:
-                    name: asyncExecution
-                    description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_4
-                flattenedNames:
-                  - properties
-                  - runAsUser
-                serializedName: runAsUser
-                language: !Languages 
-                  default:
-                    name: runAsUser
-                    description: Specifies the user account on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_5
-                flattenedNames:
-                  - properties
-                  - runAsPassword
-                serializedName: runAsPassword
-                language: !Languages 
-                  default:
-                    name: runAsPassword
-                    description: Specifies the user account password on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_6
-                flattenedNames:
-                  - properties
-                  - timeoutInSeconds
-                serializedName: timeoutInSeconds
-                language: !Languages 
-                  default:
-                    name: timeoutInSeconds
-                    description: The timeout in seconds to execute the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_7
-                flattenedNames:
-                  - properties
-                  - outputBlobUri
-                serializedName: outputBlobUri
-                language: !Languages 
-                  default:
-                    name: outputBlobUri
-                    description: Specifies the Azure storage blob where script output stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_8
-                flattenedNames:
-                  - properties
-                  - errorBlobUri
-                serializedName: errorBlobUri
-                language: !Languages 
-                  default:
-                    name: errorBlobUri
-                    description: Specifies the Azure storage blob where script error stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_9
-                flattenedNames:
-                  - properties
-                  - provisioningState
-                readOnly: true
-                serializedName: provisioningState
-                language: !Languages 
-                  default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
+                    name: tags
+                    description: Resource tags
                 protocol: !Protocols {}
             serializationFormats:
               - json
@@ -1225,320 +1455,90 @@ schemas: !Schemas
               - input
             language: !Languages 
               default:
-                name: AnotherParentUpdate
-                description: Describes a Virtual Machine run command.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_50
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2021-03-01'
-            parents: !Relations 
-              all:
-                - *ref_48
-              immediate:
-                - *ref_48
-            properties:
-              - !Property 
-                schema: *ref_3
-                flattenedNames:
-                  - properties
-                  - asyncExecution
-                serializedName: asyncExecution
-                language: !Languages 
-                  default:
-                    name: asyncExecution
-                    description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_10
-                flattenedNames:
-                  - properties
-                  - runAsUser
-                serializedName: runAsUser
-                language: !Languages 
-                  default:
-                    name: runAsUser
-                    description: Specifies the user account on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_11
-                flattenedNames:
-                  - properties
-                  - runAsPassword
-                serializedName: runAsPassword
-                language: !Languages 
-                  default:
-                    name: runAsPassword
-                    description: Specifies the user account password on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_12
-                flattenedNames:
-                  - properties
-                  - timeoutInSeconds
-                serializedName: timeoutInSeconds
-                language: !Languages 
-                  default:
-                    name: timeoutInSeconds
-                    description: The timeout in seconds to execute the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_13
-                flattenedNames:
-                  - properties
-                  - outputBlobUri
-                serializedName: outputBlobUri
-                language: !Languages 
-                  default:
-                    name: outputBlobUri
-                    description: Specifies the Azure storage blob where script output stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_14
-                flattenedNames:
-                  - properties
-                  - errorBlobUri
-                serializedName: errorBlobUri
-                language: !Languages 
-                  default:
-                    name: errorBlobUri
-                    description: Specifies the Azure storage blob where script error stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_15
-                flattenedNames:
-                  - properties
-                  - provisioningState
-                readOnly: true
-                serializedName: provisioningState
-                language: !Languages 
-                  default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-            language: !Languages 
-              default:
-                name: ChildBodyUpdate
-                description: Describes a Virtual Machine run command.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_51
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2021-03-01'
-            parents: !Relations 
-              all:
-                - *ref_48
-              immediate:
-                - *ref_48
-            properties:
-              - !Property 
-                schema: *ref_3
-                flattenedNames:
-                  - properties
-                  - asyncExecution
-                serializedName: asyncExecution
-                language: !Languages 
-                  default:
-                    name: asyncExecution
-                    description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_16
-                flattenedNames:
-                  - properties
-                  - runAsUser
-                serializedName: runAsUser
-                language: !Languages 
-                  default:
-                    name: runAsUser
-                    description: Specifies the user account on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_17
-                flattenedNames:
-                  - properties
-                  - runAsPassword
-                serializedName: runAsPassword
-                language: !Languages 
-                  default:
-                    name: runAsPassword
-                    description: Specifies the user account password on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_18
-                flattenedNames:
-                  - properties
-                  - timeoutInSeconds
-                serializedName: timeoutInSeconds
-                language: !Languages 
-                  default:
-                    name: timeoutInSeconds
-                    description: The timeout in seconds to execute the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_19
-                flattenedNames:
-                  - properties
-                  - outputBlobUri
-                serializedName: outputBlobUri
-                language: !Languages 
-                  default:
-                    name: outputBlobUri
-                    description: Specifies the Azure storage blob where script output stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_20
-                flattenedNames:
-                  - properties
-                  - errorBlobUri
-                serializedName: errorBlobUri
-                language: !Languages 
-                  default:
-                    name: errorBlobUri
-                    description: Specifies the Azure storage blob where script error stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_21
-                flattenedNames:
-                  - properties
-                  - provisioningState
-                readOnly: true
-                serializedName: provisioningState
-                language: !Languages 
-                  default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-            language: !Languages 
-              default:
-                name: ParentUpdate
-                description: Describes a Virtual Machine run command.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_52
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2021-03-01'
-            parents: !Relations 
-              all:
-                - *ref_48
-              immediate:
-                - *ref_48
-            properties:
-              - !Property 
-                schema: *ref_3
-                flattenedNames:
-                  - properties
-                  - asyncExecution
-                serializedName: asyncExecution
-                language: !Languages 
-                  default:
-                    name: asyncExecution
-                    description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_22
-                flattenedNames:
-                  - properties
-                  - runAsUser
-                serializedName: runAsUser
-                language: !Languages 
-                  default:
-                    name: runAsUser
-                    description: Specifies the user account on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_23
-                flattenedNames:
-                  - properties
-                  - runAsPassword
-                serializedName: runAsPassword
-                language: !Languages 
-                  default:
-                    name: runAsPassword
-                    description: Specifies the user account password on the VM when executing the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_24
-                flattenedNames:
-                  - properties
-                  - timeoutInSeconds
-                serializedName: timeoutInSeconds
-                language: !Languages 
-                  default:
-                    name: timeoutInSeconds
-                    description: The timeout in seconds to execute the run command.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_25
-                flattenedNames:
-                  - properties
-                  - outputBlobUri
-                serializedName: outputBlobUri
-                language: !Languages 
-                  default:
-                    name: outputBlobUri
-                    description: Specifies the Azure storage blob where script output stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_26
-                flattenedNames:
-                  - properties
-                  - errorBlobUri
-                serializedName: errorBlobUri
-                language: !Languages 
-                  default:
-                    name: errorBlobUri
-                    description: Specifies the Azure storage blob where script error stream will be uploaded.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_27
-                flattenedNames:
-                  - properties
-                  - provisioningState
-                readOnly: true
-                serializedName: provisioningState
-                language: !Languages 
-                  default:
-                    name: provisioningState
-                    description: The provisioning state, which only appears in the response.
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-            language: !Languages 
-              default:
-                name: SubParentUpdate
-                description: Describes a Virtual Machine run command.
+                name: UpdateResource
+                description: The Update Resource model definition.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
           - *ref_49
-          - *ref_50
-          - *ref_51
-          - *ref_52
       properties:
         - !Property 
-          schema: *ref_53
-          serializedName: tags
+          schema: *ref_4
+          flattenedNames:
+            - properties
+            - asyncExecution
+          serializedName: asyncExecution
           language: !Languages 
             default:
-              name: tags
-              description: Resource tags
+              name: asyncExecution
+              description: Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_31
+          flattenedNames:
+            - properties
+            - runAsUser
+          serializedName: runAsUser
+          language: !Languages 
+            default:
+              name: runAsUser
+              description: Specifies the user account on the VM when executing the run command.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_32
+          flattenedNames:
+            - properties
+            - runAsPassword
+          serializedName: runAsPassword
+          language: !Languages 
+            default:
+              name: runAsPassword
+              description: Specifies the user account password on the VM when executing the run command.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_33
+          flattenedNames:
+            - properties
+            - timeoutInSeconds
+          serializedName: timeoutInSeconds
+          language: !Languages 
+            default:
+              name: timeoutInSeconds
+              description: The timeout in seconds to execute the run command.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_34
+          flattenedNames:
+            - properties
+            - outputBlobUri
+          serializedName: outputBlobUri
+          language: !Languages 
+            default:
+              name: outputBlobUri
+              description: Specifies the Azure storage blob where script output stream will be uploaded.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_35
+          flattenedNames:
+            - properties
+            - errorBlobUri
+          serializedName: errorBlobUri
+          language: !Languages 
+            default:
+              name: errorBlobUri
+              description: Specifies the Azure storage blob where script error stream will be uploaded.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_36
+          flattenedNames:
+            - properties
+            - provisioningState
+          readOnly: true
+          serializedName: provisioningState
+          language: !Languages 
+            default:
+              name: provisioningState
+              description: The provisioning state, which only appears in the response.
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -1546,8 +1546,8 @@ schemas: !Schemas
         - input
       language: !Languages 
         default:
-          name: UpdateResource
-          description: The Update Resource model definition.
+          name: AnotherParentUpdate
+          description: Describes a Virtual Machine run command.
           namespace: ''
       protocol: !Protocols {}
     - *ref_49
@@ -1563,7 +1563,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2021-03-01'
-            elementType: *ref_28
+            elementType: *ref_2
             language: !Languages 
               default:
                 name: AnotherParentsListResultValue
@@ -1595,7 +1595,7 @@ schemas: !Schemas
           description: The List run command operation response
           namespace: ''
       protocol: !Protocols {}
-    - *ref_29
+    - *ref_23
     - *ref_50
     - !ObjectSchema &ref_102
       type: object
@@ -1609,7 +1609,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2021-03-01'
-            elementType: *ref_29
+            elementType: *ref_23
             language: !Languages 
               default:
                 name: ChildBodiesListResultValue
@@ -1641,7 +1641,7 @@ schemas: !Schemas
           description: The List run command operation response
           namespace: ''
       protocol: !Protocols {}
-    - *ref_30
+    - *ref_24
     - *ref_51
     - !ObjectSchema &ref_116
       type: object
@@ -1655,7 +1655,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2021-03-01'
-            elementType: *ref_30
+            elementType: *ref_24
             language: !Languages 
               default:
                 name: ParentsListResultValue
@@ -1687,7 +1687,7 @@ schemas: !Schemas
           description: The List run command operation response
           namespace: ''
       protocol: !Protocols {}
-    - *ref_31
+    - *ref_25
     - *ref_52
     - !ObjectSchema &ref_135
       type: object
@@ -1701,7 +1701,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2021-03-01'
-            elementType: *ref_31
+            elementType: *ref_25
             language: !Languages 
               default:
                 name: SubParentsListResultValue
@@ -1836,7 +1836,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_69
-                schema: *ref_28
+                schema: *ref_2
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1880,7 +1880,7 @@ operationGroups:
           - *ref_71
         responses:
           - !SchemaResponse 
-            schema: *ref_28
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -1894,7 +1894,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_28
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -1978,7 +1978,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_73
-                schema: *ref_49
+                schema: *ref_48
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2022,7 +2022,7 @@ operationGroups:
           - *ref_75
         responses:
           - !SchemaResponse 
-            schema: *ref_28
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -2243,7 +2243,7 @@ operationGroups:
           - *ref_80
         responses:
           - !SchemaResponse 
-            schema: *ref_28
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -2445,7 +2445,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_84
-                schema: *ref_29
+                schema: *ref_23
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2490,7 +2490,7 @@ operationGroups:
           - *ref_87
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -2504,7 +2504,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -2645,7 +2645,7 @@ operationGroups:
           - *ref_91
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -2892,7 +2892,7 @@ operationGroups:
           - *ref_98
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -3095,7 +3095,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_103
-                schema: *ref_30
+                schema: *ref_24
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3139,7 +3139,7 @@ operationGroups:
           - *ref_105
         responses:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -3153,7 +3153,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -3281,7 +3281,7 @@ operationGroups:
           - *ref_108
         responses:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -3502,7 +3502,7 @@ operationGroups:
           - *ref_113
         responses:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -3704,7 +3704,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_117
-                schema: *ref_31
+                schema: *ref_25
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3749,7 +3749,7 @@ operationGroups:
           - *ref_120
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -3763,7 +3763,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -3904,7 +3904,7 @@ operationGroups:
           - *ref_124
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -4151,7 +4151,7 @@ operationGroups:
           - *ref_131
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -4378,7 +4378,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_136
-                schema: *ref_29
+                schema: *ref_23
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4424,7 +4424,7 @@ operationGroups:
           - *ref_140
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -4438,7 +4438,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -4592,7 +4592,7 @@ operationGroups:
           - *ref_145
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -4865,7 +4865,7 @@ operationGroups:
           - *ref_154
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''

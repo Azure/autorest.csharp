@@ -24,6 +24,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\Generated"
     },
+    "ApiVersion": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion\\Generated"
+    },
     "AppConfiguration": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\Generated"
@@ -200,9 +204,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\head\\Generated"
     },
+    "head-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\head\\Generated"
+    },
     "HeadAsBooleanTrue": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeadAsBooleanTrue\\Generated"
+    },
+    "HeadAsBooleanTrue-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeadAsBooleanTrue-LowLevel\\Generated"
     },
     "header": {
       "commandName": "Project",

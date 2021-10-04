@@ -129,7 +129,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, BlobServiceData parameters)
+        internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, Enum2 blobServicesName, BlobServiceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -143,7 +143,7 @@ namespace Azure.Management.Storage
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/blobServices/", false);
-            uri.AppendPath("default", true);
+            uri.AppendPath(blobServicesName.ToString(), true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -158,10 +158,11 @@ namespace Azure.Management.Storage
         /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="blobServicesName"> The name of the blob Service within the specified storage account. Blob Service Name must be &apos;default&apos;. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<BlobServiceData>> SetServicePropertiesAsync(string resourceGroupName, string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobServiceData>> SetServicePropertiesAsync(string resourceGroupName, string accountName, Enum2 blobServicesName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -176,7 +177,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, parameters);
+            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, blobServicesName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -195,10 +196,11 @@ namespace Azure.Management.Storage
         /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="blobServicesName"> The name of the blob Service within the specified storage account. Blob Service Name must be &apos;default&apos;. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<BlobServiceData> SetServiceProperties(string resourceGroupName, string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public Response<BlobServiceData> SetServiceProperties(string resourceGroupName, string accountName, Enum2 blobServicesName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -213,7 +215,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, parameters);
+            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, blobServicesName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -229,7 +231,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateGetServicePropertiesRequest(string resourceGroupName, string accountName)
+        internal HttpMessage CreateGetServicePropertiesRequest(string resourceGroupName, string accountName, Enum2 blobServicesName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -243,7 +245,7 @@ namespace Azure.Management.Storage
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
             uri.AppendPath("/blobServices/", false);
-            uri.AppendPath("default", true);
+            uri.AppendPath(blobServicesName.ToString(), true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -254,9 +256,10 @@ namespace Azure.Management.Storage
         /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="blobServicesName"> The name of the blob Service within the specified storage account. Blob Service Name must be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<BlobServiceData>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobServiceData>> GetServicePropertiesAsync(string resourceGroupName, string accountName, Enum2 blobServicesName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -267,7 +270,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateGetServicePropertiesRequest(resourceGroupName, accountName);
+            using var message = CreateGetServicePropertiesRequest(resourceGroupName, accountName, blobServicesName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -286,9 +289,10 @@ namespace Azure.Management.Storage
         /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="blobServicesName"> The name of the blob Service within the specified storage account. Blob Service Name must be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<BlobServiceData> GetServiceProperties(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public Response<BlobServiceData> GetServiceProperties(string resourceGroupName, string accountName, Enum2 blobServicesName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -299,7 +303,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateGetServicePropertiesRequest(resourceGroupName, accountName);
+            using var message = CreateGetServicePropertiesRequest(resourceGroupName, accountName, blobServicesName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

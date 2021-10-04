@@ -232,7 +232,9 @@ namespace AutoRest.CSharp.Output.Models
                         reference,
                         GetSerializationStyle(requestParameter),
                         !requestParameter.Extensions!.SkipEncoding,
-                        GetSerializationFormat(requestParameter)));
+                        GetSerializationFormat(requestParameter),
+                        GetExplode(requestParameter)
+                    ));
                 }
             }
 
@@ -455,6 +457,8 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
+        private static bool GetExplode(RequestParameter requestParameter) => requestParameter.Protocol.Http is HttpParameter httpParameter && httpParameter.Explode == true;
+
         private static Schema GetValueSchema(RequestParameter requestParameter)
         {
             Schema valueSchema = requestParameter.Schema;
@@ -559,7 +563,12 @@ namespace AutoRest.CSharp.Output.Models
             {
                 defaultValue = Constant.Default(type);
             }
-
+            var allowedValues = requestParameter.Schema switch
+            {
+                ChoiceSchema choiceSchema => choiceSchema.Choices.Select(c => c.Value).ToList(),
+                SealedChoiceSchema sealedChoiceSchema => sealedChoiceSchema.Choices.Select(c => c.Value).ToList(),
+                _ => null
+            };
             return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),
@@ -567,7 +576,8 @@ namespace AutoRest.CSharp.Output.Models
                 defaultValue,
                 isRequired,
                 IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
-                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false);
+                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
+                AllowedValues: allowedValues);
         }
 
         private Constant ParseConstant(ConstantSchema constant) =>

@@ -31,6 +31,22 @@ schemas: !Schemas
           name: Post1ItemsItem
           description: ''
       protocol: !Protocols {}
+  choices:
+    - !ChoiceSchema &ref_16
+      choices:
+        - !ChoiceValue 
+          value: latest
+          language:
+            default:
+              name: Latest
+              description: ''
+      type: choice
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: EnumName2
+          description: ''
+      protocol: !Protocols {}
   sealedChoices:
     - !SealedChoiceSchema &ref_9
       choices:
@@ -52,6 +68,30 @@ schemas: !Schemas
         default:
           name: ContentType
           description: Content type for upload
+      protocol: !Protocols {}
+    - !SealedChoiceSchema &ref_15
+      choices:
+        - !ChoiceValue 
+          value: current
+          language:
+            default:
+              name: Current
+              description: ''
+        - !ChoiceValue 
+          value: default
+          language:
+            default:
+              name: Default
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: 2014-04-01-preview
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: EnumName1
+          description: ''
       protocol: !Protocols {}
   constants:
     - !ConstantSchema &ref_4
@@ -288,6 +328,97 @@ operationGroups:
             name: CreateStream
             description: Resets products.
             summary: Create products
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 2014-04-01-preview
+        parameters:
+          - *ref_2
+          - !Parameter &ref_18
+            schema: *ref_15
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: enumName1
+                description: The first name
+                serializedName: enumName1
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_19
+            schema: *ref_16
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: enumName2
+                description: The second name
+                serializedName: enumName2
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_4
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_17
+                schema: *ref_5
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: bodyParameter
+                    description: body Parameter
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_17
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /{enumName1}/{enumName2}
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_18
+          - *ref_19
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: ok
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateEnum
+            description: Resets products.
+            summary: Create another product
         protocol: !Protocols {}
     language: !Languages 
       default:

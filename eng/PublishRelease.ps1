@@ -1,4 +1,4 @@
-param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $CoverageUser, $CoveragePass)
+param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
 
 $WorkingDirectory = Resolve-Path $WorkingDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
@@ -17,7 +17,7 @@ try {
 
     Write-Host "Publishing $file on GitHub!"
     
-    cmd /c ""npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1""
+    cmd /c ""npx -q publish-release --token $GitHubToken --repo Azure/autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1""
 
     $filePath = Join-Path $WorkingDirectory '.npmrc'
     $env:NPM_TOKEN = $NpmToken
@@ -33,11 +33,13 @@ finally {
 
 Push-Location $RepoRoot
 try {
-    # set the version in the root package.json so coverage-push can pick it up
+    # set the version in the root package.json so coverage can pick it up
 
     npm version --no-git-tag-version $devVersion | Out-Null;
    
-    npm run coverage-push --prefix node_modules/@microsoft.azure/autorest.testserver -- Azure/autorest.csharp refs/heads/feature/v3 skip $CoverageUser $CoveragePass
+    $CoverageDirectory = Resolve-Path $CoverageDirectory
+
+    npm run coverage --prefix node_modules/@microsoft.azure/autorest.testserver -- publish --repo=autorest.csharp --ref=refs/heads/feature/v3 --githubToken=skip --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass --coverageDirectory=$CoverageDirectory
 }
 finally {
     Pop-Location

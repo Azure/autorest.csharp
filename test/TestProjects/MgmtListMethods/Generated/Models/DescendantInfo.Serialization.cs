@@ -8,6 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListMethods.Models
 {
@@ -19,7 +20,7 @@ namespace MgmtListMethods.Models
             string name = default;
             ResourceType type = default;
             Optional<string> displayName = default;
-            Optional<DescendantParentGroupInfo> parent = default;
+            Optional<SubResource> parent = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -60,17 +61,17 @@ namespace MgmtListMethods.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                parent = null;
+                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            parent = DescendantParentGroupInfo.DeserializeDescendantParentGroupInfo(property0.Value);
+                            parent = JsonSerializer.Deserialize<SubResource>(property0.Value.ToString());
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return new DescendantInfo(id, name, type, displayName.Value, parent.Value);
+            return new DescendantInfo(id, name, type, displayName.Value, parent);
         }
     }
 }

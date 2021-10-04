@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
@@ -16,11 +15,16 @@ namespace MgmtScopeResource
     {
         internal static DeploymentOperationData DeserializeDeploymentOperationData(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> operationId = default;
             Optional<DeploymentOperationProperties> properties = default;
-            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("operationId"))
                 {
                     operationId = property.Value.GetString();
@@ -36,13 +40,8 @@ namespace MgmtScopeResource
                     properties = DeploymentOperationProperties.DeserializeDeploymentOperationProperties(property.Value);
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new DeploymentOperationData(id, operationId.Value, properties.Value);
+            return new DeploymentOperationData(id.Value, operationId.Value, properties.Value);
         }
     }
 }
