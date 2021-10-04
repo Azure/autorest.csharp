@@ -23,6 +23,7 @@ namespace head_LowLevel
         private readonly HttpSuccessRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+        private Uri endpoint;
 
         /// <summary> Initializes a new instance of HttpSuccessClient for mocking. </summary>
         protected HttpSuccessClient()
@@ -47,6 +48,7 @@ namespace head_LowLevel
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             _restClient = new HttpSuccessRestClient(_clientDiagnostics, _pipeline, endpoint);
+            this.endpoint = endpoint;
         }
 
         /// <summary> Return 200 status code if successful. </summary>
