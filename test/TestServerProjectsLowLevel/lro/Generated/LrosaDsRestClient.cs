@@ -14,21 +14,2314 @@ using Azure.Core.Pipeline;
 namespace lro_LowLevel
 {
     /// <summary> The LrosaDsRest service client. </summary>
-    internal partial class LrosaDsRestClient
+    public partial class LrosaDsRestClient
     {
-        private Uri endpoint;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private const string AuthorizationHeader = "Fake-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+
+        /// <summary> Initializes a new instance of LrosaDsRestClient for mocking. </summary>
+        protected LrosaDsRestClient()
+        {
+        }
 
         /// <summary> Initializes a new instance of LrosaDsRestClient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public LrosaDsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public LrosaDsRestClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestLongRunningOperationTestServiceClientOptions options = null)
         {
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+            endpoint ??= new Uri("http://localhost:3000");
+
+            options ??= new AutoRestLongRunningOperationTestServiceClientOptions();
+
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
+        }
+
+        /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PutNonRetry400Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutNonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutNonRetry400Request(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutNonRetry400", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PutNonRetry400(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutNonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutNonRetry400Request(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutNonRetry400", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutNonRetry201Creating400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutNonRetry201Creating400Request(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PutNonRetry201Creating400(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutNonRetry201Creating400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutNonRetry201Creating400Request(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400InvalidJsonAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutNonRetry201Creating400InvalidJson");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PutNonRetry201Creating400InvalidJson(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutNonRetry201Creating400InvalidJson");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetry400Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PutAsyncRelativeRetry400(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> DeleteNonRetry400Async(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteNonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteNonRetry400Request();
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteNonRetry400", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> DeleteNonRetry400(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteNonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteNonRetry400Request();
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteNonRetry400", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> Delete202NonRetry400Async(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Delete202NonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDelete202NonRetry400Request();
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Delete202NonRetry400", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> Delete202NonRetry400(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Delete202NonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDelete202NonRetry400Request();
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Delete202NonRetry400", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetry400Async(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteAsyncRelativeRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> DeleteAsyncRelativeRetry400(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteAsyncRelativeRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 400 with no error body. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PostNonRetry400Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostNonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostNonRetry400Request(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostNonRetry400", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 400 with no error body. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PostNonRetry400(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostNonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostNonRetry400Request(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostNonRetry400", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 with a location header. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> Post202NonRetry400Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Post202NonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePost202NonRetry400Request(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Post202NonRetry400", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 with a location header. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> Post202NonRetry400(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Post202NonRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePost202NonRetry400Request(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Post202NonRetry400", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetry400Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostAsyncRelativeRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PostAsyncRelativeRetry400(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostAsyncRelativeRetry400");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PutError201NoProvisioningStatePayloadAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutError201NoProvisioningStatePayload");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PutError201NoProvisioningStatePayload(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutError201NoProvisioningStatePayload");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetryNoStatus");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatus(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetryNoStatus");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusPayloadAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetryNoStatusPayload");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatusPayload(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetryNoStatusPayload");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> Delete204SucceededAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Delete204Succeeded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDelete204SucceededRequest();
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Delete204Succeeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> Delete204Succeeded(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Delete204Succeeded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDelete204SucceededRequest();
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Delete204Succeeded", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryNoStatusAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteAsyncRelativeRetryNoStatus");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> DeleteAsyncRelativeRetryNoStatus(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteAsyncRelativeRetryNoStatus");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> Post202NoLocationAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Post202NoLocation");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePost202NoLocationRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Post202NoLocation", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> Post202NoLocation(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Post202NoLocation");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePost202NoLocationRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Post202NoLocation", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetryNoPayloadAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostAsyncRelativeRetryNoPayload");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PostAsyncRelativeRetryNoPayload(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostAsyncRelativeRetryNoPayload");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> Put200InvalidJsonAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Put200InvalidJson");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePut200InvalidJsonRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Put200InvalidJson", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> Put200InvalidJson(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Put200InvalidJson");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePut200InvalidJsonRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Put200InvalidJson", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidHeader(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidJsonPollingAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetryInvalidJsonPolling");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidJsonPolling(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PutAsyncRelativeRetryInvalidJsonPolling");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> Delete202RetryInvalidHeaderAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Delete202RetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> Delete202RetryInvalidHeader(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Delete202RetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryInvalidHeaderAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteAsyncRelativeRetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> DeleteAsyncRelativeRetryInvalidHeader(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteAsyncRelativeRetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> DeleteAsyncRelativeRetryInvalidJsonPolling(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> Post202RetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Post202RetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> Post202RetryInvalidHeader(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.Post202RetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostAsyncRelativeRetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PostAsyncRelativeRetryInvalidHeader(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostAsyncRelativeRetryInvalidHeader");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetryInvalidJsonPollingAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostAsyncRelativeRetryInvalidJsonPolling");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   properties: {
+        ///     provisioningState: string,
+        ///     provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
+        ///   }
+        /// }
+        /// </code>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   code: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<BinaryData> PostAsyncRelativeRetryInvalidJsonPolling(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("LrosaDsRestClient.PostAsyncRelativeRetryInvalidJsonPolling");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LrosaDsRestClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         internal HttpMessage CreatePutNonRetry400Request(RequestContent content)
@@ -37,65 +2330,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/put/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200201.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutNonRetry400Async(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNonRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutNonRetry400(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNonRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutNonRetry201Creating400Request(RequestContent content)
@@ -104,65 +2346,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/put/201/creating/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200201.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutNonRetry201Creating400Async(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNonRetry201Creating400Request(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutNonRetry201Creating400(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNonRetry201Creating400Request(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutNonRetry201Creating400InvalidJsonRequest(RequestContent content)
@@ -171,65 +2362,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/put/201/creating/400/invalidjson", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200201.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutNonRetry201Creating400InvalidJsonAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutNonRetry201Creating400InvalidJson(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetry400Request(RequestContent content)
@@ -238,63 +2378,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/putasync/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutAsyncRelativeRetry400Async(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutAsyncRelativeRetry400(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateDeleteNonRetry400Request()
@@ -303,59 +2394,12 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/delete/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> DeleteNonRetry400Async(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteNonRetry400Request();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response DeleteNonRetry400(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteNonRetry400Request();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateDelete202NonRetry400Request()
@@ -364,59 +2408,12 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/delete/202/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> Delete202NonRetry400Async(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202NonRetry400Request();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response Delete202NonRetry400(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202NonRetry400Request();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateDeleteAsyncRelativeRetry400Request()
@@ -425,59 +2422,12 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/deleteasync/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> DeleteAsyncRelativeRetry400Async(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response DeleteAsyncRelativeRetry400(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePostNonRetry400Request(RequestContent content)
@@ -486,63 +2436,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/post/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running post request, service returns a 400 with no error body. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PostNonRetry400Async(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostNonRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running post request, service returns a 400 with no error body. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PostNonRetry400(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostNonRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePost202NonRetry400Request(RequestContent content)
@@ -551,63 +2452,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/post/202/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running post request, service returns a 202 with a location header. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> Post202NonRetry400Async(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202NonRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running post request, service returns a 202 with a location header. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response Post202NonRetry400(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202NonRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetry400Request(RequestContent content)
@@ -616,63 +2468,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/nonretryerror/postasync/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PostAsyncRelativeRetry400Async(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PostAsyncRelativeRetry400(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutError201NoProvisioningStatePayloadRequest(RequestContent content)
@@ -681,65 +2484,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/put/201/noprovisioningstatepayload", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200201.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutError201NoProvisioningStatePayloadAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutError201NoProvisioningStatePayload(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetryNoStatusRequest(RequestContent content)
@@ -748,63 +2500,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/putasync/retry/nostatus", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutAsyncRelativeRetryNoStatusAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutAsyncRelativeRetryNoStatus(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetryNoStatusPayloadRequest(RequestContent content)
@@ -813,63 +2516,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/putasync/retry/nostatuspayload", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutAsyncRelativeRetryNoStatusPayloadAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutAsyncRelativeRetryNoStatusPayload(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateDelete204SucceededRequest()
@@ -878,59 +2532,12 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/delete/204/nolocation", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier204.Instance;
             return message;
-        }
-
-        /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> Delete204SucceededAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete204SucceededRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response Delete204Succeeded(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete204SucceededRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateDeleteAsyncRelativeRetryNoStatusRequest()
@@ -939,59 +2546,12 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/deleteasync/retry/nostatus", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> DeleteAsyncRelativeRetryNoStatusAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response DeleteAsyncRelativeRetryNoStatus(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePost202NoLocationRequest(RequestContent content)
@@ -1000,63 +2560,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/post/202/nolocation", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> Post202NoLocationAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202NoLocationRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response Post202NoLocation(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202NoLocationRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetryNoPayloadRequest(RequestContent content)
@@ -1065,63 +2576,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/postasync/retry/nopayload", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PostAsyncRelativeRetryNoPayloadAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PostAsyncRelativeRetryNoPayload(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePut200InvalidJsonRequest(RequestContent content)
@@ -1130,65 +2592,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/put/200/invalidjson", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200204.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> Put200InvalidJsonAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200InvalidJsonRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response Put200InvalidJson(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200InvalidJsonRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetryInvalidHeaderRequest(RequestContent content)
@@ -1197,63 +2608,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/putasync/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutAsyncRelativeRetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutAsyncRelativeRetryInvalidHeader(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content)
@@ -1262,63 +2624,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/putasync/retry/invalidjsonpolling", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutAsyncRelativeRetryInvalidJsonPollingAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutAsyncRelativeRetryInvalidJsonPolling(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateDelete202RetryInvalidHeaderRequest()
@@ -1327,59 +2640,12 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/delete/202/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> Delete202RetryInvalidHeaderAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response Delete202RetryInvalidHeader(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidHeaderRequest()
@@ -1388,59 +2654,12 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/deleteasync/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> DeleteAsyncRelativeRetryInvalidHeaderAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response DeleteAsyncRelativeRetryInvalidHeader(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest()
@@ -1449,59 +2668,12 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/deleteasync/retry/invalidjsonpolling", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response DeleteAsyncRelativeRetryInvalidJsonPolling(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePost202RetryInvalidHeaderRequest(RequestContent content)
@@ -1510,63 +2682,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/post/202/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> Post202RetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response Post202RetryInvalidHeader(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetryInvalidHeaderRequest(RequestContent content)
@@ -1575,63 +2698,14 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/postasync/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PostAsyncRelativeRetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PostAsyncRelativeRetryInvalidHeader(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content)
@@ -1640,62 +2714,81 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/lro/error/postasync/retry/invalidjsonpolling", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PostAsyncRelativeRetryInvalidJsonPollingAsync(RequestContent content, RequestOptions options = null)
+        private sealed class ResponseClassifier200201 : ResponseClassifier
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200201();
+            public override bool IsErrorResponse(HttpMessage message)
             {
-                switch (message.Response.Status)
+                return message.Response.Status switch
                 {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
+                    200 => false,
+                    201 => false,
+                    _ => true
+                };
             }
         }
-
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PostAsyncRelativeRetryInvalidJsonPolling(RequestContent content, RequestOptions options = null)
+        private sealed class ResponseClassifier200 : ResponseClassifier
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
             {
-                switch (message.Response.Status)
+                return message.Response.Status switch
                 {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
+                    200 => false,
+                    _ => true
+                };
             }
-            else
+        }
+        private sealed class ResponseClassifier202 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier202();
+            public override bool IsErrorResponse(HttpMessage message)
             {
-                return message.Response;
+                return message.Response.Status switch
+                {
+                    202 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier204 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier204();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    204 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier200204 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200204();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    204 => false,
+                    _ => true
+                };
             }
         }
     }

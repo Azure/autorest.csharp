@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace AutoRest.CSharp.Output.Models.Responses
+using AutoRest.CSharp.Generation.Types;
+
+namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record StatusCodes(int? Code, int? Family);
+    internal record CSharpAttribute(CSharpType Type);
 }

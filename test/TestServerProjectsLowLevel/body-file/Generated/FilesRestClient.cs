@@ -14,21 +14,216 @@ using Azure.Core.Pipeline;
 namespace body_file_LowLevel
 {
     /// <summary> The FilesRest service client. </summary>
-    internal partial class FilesRestClient
+    public partial class FilesRestClient
     {
-        private Uri endpoint;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private const string AuthorizationHeader = "Fake-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+
+        /// <summary> Initializes a new instance of FilesRestClient for mocking. </summary>
+        protected FilesRestClient()
+        {
+        }
 
         /// <summary> Initializes a new instance of FilesRestClient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public FilesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public FilesRestClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATFileServiceClientOptions options = null)
         {
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+            endpoint ??= new Uri("http://localhost:3000");
+
+            options ??= new AutoRestSwaggerBATFileServiceClientOptions();
+
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
+        }
+
+        /// <summary> Get file. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetFileAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("FilesRestClient.GetFile");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFileRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get file. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetFile(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("FilesRestClient.GetFile");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFileRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get a large file. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetFileLargeAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("FilesRestClient.GetFileLarge");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFileLargeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get a large file. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetFileLarge(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("FilesRestClient.GetFileLarge");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFileLargeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty file. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetEmptyFileAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("FilesRestClient.GetEmptyFile");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetEmptyFileRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty file. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetEmptyFile(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("FilesRestClient.GetEmptyFile");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetEmptyFileRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         internal HttpMessage CreateGetFileRequest()
@@ -37,59 +232,12 @@ namespace body_file_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/files/stream/nonempty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Get file. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetFileAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetFileRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get file. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetFile(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetFileRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetFileLargeRequest()
@@ -98,59 +246,12 @@ namespace body_file_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/files/stream/verylarge", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Get a large file. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetFileLargeAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetFileLargeRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get a large file. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetFileLarge(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetFileLargeRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetEmptyFileRequest()
@@ -159,58 +260,25 @@ namespace body_file_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/files/stream/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get empty file. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetEmptyFileAsync(RequestOptions options = null)
+        private sealed class ResponseClassifier200 : ResponseClassifier
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyFileRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
             {
-                switch (message.Response.Status)
+                return message.Response.Status switch
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get empty file. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetEmptyFile(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyFileRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
+                    200 => false,
+                    _ => true
+                };
             }
         }
     }

@@ -14,21 +14,814 @@ using Azure.Core.Pipeline;
 namespace body_string_LowLevel
 {
     /// <summary> The StringRest service client. </summary>
-    internal partial class StringRestClient
+    public partial class StringRestClient
     {
-        private Uri endpoint;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private const string AuthorizationHeader = "Fake-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+
+        /// <summary> Initializes a new instance of StringRestClient for mocking. </summary>
+        protected StringRestClient()
+        {
+        }
 
         /// <summary> Initializes a new instance of StringRestClient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public StringRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public StringRestClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATServiceClientOptions options = null)
         {
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+            endpoint ??= new Uri("http://localhost:3000");
+
+            options ??= new AutoRestSwaggerBATServiceClientOptions();
+
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
+        }
+
+        /// <summary> Get null string value value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetNullAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNullRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null string value value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetNull(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNullRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Set string value null. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> PutNullAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutNullRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Set string value null. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response PutNull(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutNullRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty string value value &apos;&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetEmptyAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty string value value &apos;&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetEmpty(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Set string value empty &apos;&apos;. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutEmptyRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Set string value empty &apos;&apos;. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response PutEmpty(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutEmptyRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetMbcsAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetMbcs");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetMbcsRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetMbcs(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetMbcs");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetMbcsRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> PutMbcsAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutMbcs");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutMbcsRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response PutMbcs(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutMbcs");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutMbcsRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetWhitespaceAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetWhitespace");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetWhitespaceRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetWhitespace(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetWhitespace");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetWhitespaceRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> PutWhitespaceAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutWhitespace");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutWhitespaceRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response PutWhitespace(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutWhitespace");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutWhitespaceRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get String value when no string value is sent in response payload. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetNotProvided");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNotProvidedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get String value when no string value is sent in response payload. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetNotProvided(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetNotProvided");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNotProvidedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get value that is base64 encoded. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetBase64EncodedAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetBase64Encoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBase64EncodedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get value that is base64 encoded. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetBase64Encoded(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetBase64Encoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBase64EncodedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get value that is base64url encoded. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetBase64UrlEncoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBase64UrlEncodedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get value that is base64url encoded. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetBase64UrlEncoded(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetBase64UrlEncoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBase64UrlEncodedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Put value that is base64url encoded. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> PutBase64UrlEncodedAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutBase64UrlEncoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Put value that is base64url encoded. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response PutBase64UrlEncoded(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.PutBase64UrlEncoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null value that is expected to be base64url encoded. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetNullBase64UrlEncoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null value that is expected to be base64url encoded. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetNullBase64UrlEncoded(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("StringRestClient.GetNullBase64UrlEncoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         internal HttpMessage CreateGetNullRequest()
@@ -37,59 +830,12 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Get null string value value. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetNullAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get null string value value. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetNull(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutNullRequest(RequestContent content)
@@ -98,63 +844,14 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Set string value null. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> PutNullAsync(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNullRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Set string value null. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        public Response PutNull(RequestContent content, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNullRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetEmptyRequest()
@@ -163,59 +860,12 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Get empty string value value &apos;&apos;. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetEmptyAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get empty string value value &apos;&apos;. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetEmpty(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutEmptyRequest(RequestContent content)
@@ -224,75 +874,14 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Set string value empty &apos;&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public async Task<Response> PutEmptyAsync(RequestContent content, RequestOptions options = null)
-        {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutEmptyRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Set string value empty &apos;&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public Response PutEmpty(RequestContent content, RequestOptions options = null)
-        {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutEmptyRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMbcsRequest()
@@ -301,59 +890,12 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetMbcsAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMbcsRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetMbcs(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMbcsRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutMbcsRequest(RequestContent content)
@@ -362,75 +904,14 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public async Task<Response> PutMbcsAsync(RequestContent content, RequestOptions options = null)
-        {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutMbcsRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public Response PutMbcs(RequestContent content, RequestOptions options = null)
-        {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutMbcsRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetWhitespaceRequest()
@@ -439,59 +920,12 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetWhitespaceAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetWhitespaceRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetWhitespace(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetWhitespaceRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutWhitespaceRequest(RequestContent content)
@@ -500,75 +934,14 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public async Task<Response> PutWhitespaceAsync(RequestContent content, RequestOptions options = null)
-        {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutWhitespaceRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public Response PutWhitespace(RequestContent content, RequestOptions options = null)
-        {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutWhitespaceRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetNotProvidedRequest()
@@ -577,59 +950,12 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/notProvided", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Get String value when no string value is sent in response payload. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetNotProvidedAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNotProvidedRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get String value when no string value is sent in response payload. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetNotProvided(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNotProvidedRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetBase64EncodedRequest()
@@ -638,59 +964,12 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/base64Encoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Get value that is base64 encoded. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetBase64EncodedAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBase64EncodedRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get value that is base64 encoded. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetBase64Encoded(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBase64EncodedRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetBase64UrlEncodedRequest()
@@ -699,59 +978,12 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Get value that is base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetBase64UrlEncodedAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBase64UrlEncodedRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get value that is base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetBase64UrlEncoded(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBase64UrlEncodedRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content)
@@ -760,75 +992,14 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Put value that is base64url encoded. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public async Task<Response> PutBase64UrlEncodedAsync(RequestContent content, RequestOptions options = null)
-        {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Put value that is base64url encoded. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public Response PutBase64UrlEncoded(RequestContent content, RequestOptions options = null)
-        {
-            if (content == null)
-            {
-                throw new ArgumentNullException(nameof(content));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetNullBase64UrlEncodedRequest()
@@ -837,58 +1008,25 @@ namespace body_string_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/string/nullBase64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get null value that is expected to be base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetNullBase64UrlEncodedAsync(RequestOptions options = null)
+        private sealed class ResponseClassifier200 : ResponseClassifier
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
             {
-                switch (message.Response.Status)
+                return message.Response.Status switch
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Get null value that is expected to be base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetNullBase64UrlEncoded(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
+                    200 => false,
+                    _ => true
+                };
             }
         }
     }

@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests
     {
         [Test]
         public Task UrlPathItemGetAll() => TestStatus(async (host) =>
-            await new PathItemsClient(globalStringPath: "globalStringPath",
+            await new PathItemsRestClient(globalStringPath: "globalStringPath",
                     globalStringQuery: "globalStringQuery",
                     credential: Key,
                     endpoint: host)
@@ -24,7 +24,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetPathItemAndLocalNull() => TestStatus(async (host) =>
-            await new PathItemsClient(globalStringPath: "globalStringPath",
+            await new PathItemsRestClient(globalStringPath: "globalStringPath",
                     globalStringQuery: "globalStringQuery",
                     credential: Key,
                     endpoint: host)
@@ -36,7 +36,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetGlobalNull() => TestStatus(async (host) =>
-            await new PathItemsClient(globalStringPath: "globalStringPath",
+            await new PathItemsRestClient(globalStringPath: "globalStringPath",
                     endpoint: host,
                     credential: Key,
                     globalStringQuery: null)
@@ -48,7 +48,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetGlobalAndLocalNull() => TestStatus(async (host) =>
-            await new PathItemsClient(
+            await new PathItemsRestClient(
                     globalStringPath: "globalStringPath",
                     endpoint: host,
                     credential: Key,

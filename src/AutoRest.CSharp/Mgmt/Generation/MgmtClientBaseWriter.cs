@@ -182,10 +182,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"{GetAsyncKeyword(isAsync)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
-                WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
+                using (WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName))
                 {
                     WritePageFunction(writer, pagingMethod, restClientName, converter, isAsync, false, pagingMethods);
-                });
+                }
             }
 
             var nextPageFunctionName = "null";
@@ -195,10 +195,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (writer.Scope($"{GetAsyncKeyword(isAsync)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
-                    WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
+                    using (WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName))
                     {
                         WritePageFunction(writer, pagingMethod, restClientName, converter, isAsync, true, pagingMethods);
-                    });
+                    }
                 }
             }
             writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", isAsync)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
@@ -526,7 +526,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope())
             {
                 writer.WriteParameterNullChecks(nonPathParameters);
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+                using (WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField))
                 {
                     writer.Append($"var response = {GetAwait(isAsync)}");
                     writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, isAsync)}(");
@@ -569,7 +569,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
 
                     writer.Line($";");
-                });
+                }
             }
 
             writer.Line();
@@ -765,7 +765,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteParameterNullChecks(passThruParameters.ToArray());
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+                using (WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField))
                 {
                     var response = new CodeWriterDeclaration("response");
                     response.SetActualName(response.RequestedName);
@@ -870,7 +870,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             throw new Exception($"When trying to merge methods, multiple methods can be mapped to the same scope. The methods not handled: {String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}.");
                         }
                     }
-                });
+                }
                 writer.Line();
             }
         }

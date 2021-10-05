@@ -14,21 +14,162 @@ using Azure.Core.Pipeline;
 namespace HeadAsBooleanTrue_LowLevel
 {
     /// <summary> The HttpSuccessRest service client. </summary>
-    internal partial class HttpSuccessRestClient
+    public partial class HttpSuccessRestClient
     {
-        private Uri endpoint;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private const string AuthorizationHeader = "Fake-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+
+        /// <summary> Initializes a new instance of HttpSuccessRestClient for mocking. </summary>
+        protected HttpSuccessRestClient()
+        {
+        }
 
         /// <summary> Initializes a new instance of HttpSuccessRestClient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public HttpSuccessRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public HttpSuccessRestClient(AzureKeyCredential credential, Uri endpoint = null, HeadAsBooleanTrueClientOptions options = null)
         {
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+            endpoint ??= new Uri("http://localhost:3000");
+
+            options ??= new HeadAsBooleanTrueClientOptions();
+
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
+        }
+
+        /// <summary> Return 200 status code if successful. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response<bool>> Head200Async(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessRestClient.Head200");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHead200Request();
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 200 status code if successful. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response<bool> Head200(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessRestClient.Head200");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHead200Request();
+                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 204 status code if successful. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response<bool>> Head204Async(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessRestClient.Head204");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHead204Request();
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 204 status code if successful. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response<bool> Head204(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessRestClient.Head204");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHead204Request();
+                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 404 status code if successful. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response<bool>> Head404Async(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessRestClient.Head404");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHead404Request();
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 404 status code if successful. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response<bool> Head404(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessRestClient.Head404");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHead404Request();
+                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         internal HttpMessage CreateHead200Request()
@@ -37,78 +178,11 @@ namespace HeadAsBooleanTrue_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
+            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
             return message;
-        }
-
-        /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response<bool>> Head200Async(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateHead200Request();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        return new ErrorResponse<bool>(message.Response, await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false));
-                }
-            }
-        }
-
-        /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response<bool> Head200(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateHead200Request();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        return new ErrorResponse<bool>(message.Response, _clientDiagnostics.CreateRequestFailedException(message.Response));
-                }
-            }
         }
 
         internal HttpMessage CreateHead204Request()
@@ -117,78 +191,11 @@ namespace HeadAsBooleanTrue_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
+            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
             return message;
-        }
-
-        /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response<bool>> Head204Async(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateHead204Request();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        return new ErrorResponse<bool>(message.Response, await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false));
-                }
-            }
-        }
-
-        /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response<bool> Head204(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateHead204Request();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        return new ErrorResponse<bool>(message.Response, _clientDiagnostics.CreateRequestFailedException(message.Response));
-                }
-            }
         }
 
         internal HttpMessage CreateHead404Request()
@@ -197,77 +204,25 @@ namespace HeadAsBooleanTrue_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/success/404", false);
             request.Uri = uri;
+            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
             return message;
         }
 
-        /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response<bool>> Head404Async(RequestOptions options = null)
+        private sealed class ResponseClassifier200To300400To500 : ResponseClassifier
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateHead404Request();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200To300400To500();
+            public override bool IsErrorResponse(HttpMessage message)
             {
-                switch (message.Response.Status)
+                return message.Response.Status switch
                 {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        return new ErrorResponse<bool>(message.Response, await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false));
-                }
-            }
-        }
-
-        /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response<bool> Head404(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateHead404Request();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                switch (message.Response.Status)
-                {
-                    case int s when s >= 200 && s < 300:
-                        return Response.FromValue(true, message.Response);
-                    case int s when s >= 400 && s < 500:
-                        return Response.FromValue(false, message.Response);
-                    default:
-                        return new ErrorResponse<bool>(message.Response, _clientDiagnostics.CreateRequestFailedException(message.Response));
-                }
+                    >= 200 and < 300 => false,
+                    >= 400 and < 500 => false,
+                    _ => true
+                };
             }
         }
     }

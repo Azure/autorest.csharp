@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Accessibility;
 using Accessibility_LowLevel;
 using NUnit.Framework;
 

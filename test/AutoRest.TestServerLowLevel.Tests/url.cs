@@ -14,82 +14,82 @@ namespace AutoRest.TestServer.Tests
     public class UrlTests : TestServerLowLevelTestBase
     {
         [Test]
-        public Task UrlPathsStringEmpty() => TestStatus(async (host) => await new PathsClient(Key, host).StringEmptyAsync());
+        public Task UrlPathsStringEmpty() => TestStatus(async (host) => await new PathsRestClient(Key, host).StringEmptyAsync());
 
         [Test]
-        public Task UrlPathsEnumValid() => TestStatus(async (host) => await new PathsClient(Key, host).EnumValidAsync( "green color"));
+        public Task UrlPathsEnumValid() => TestStatus(async (host) => await new PathsRestClient(Key, host).EnumValidAsync( "green color"));
 
         [Test]
-        public Task UrlPathsStringUrlEncoded() => TestStatus(async (host) => await new PathsClient(Key, host).StringUrlEncodedAsync());
+        public Task UrlPathsStringUrlEncoded() => TestStatus(async (host) => await new PathsRestClient(Key, host).StringUrlEncodedAsync());
 
         [Test]
-        public Task UrlPathsStringUrlNonEncoded() => TestStatus(async (host) => await new PathsClient(Key, host).StringUrlNonEncodedAsync());
+        public Task UrlPathsStringUrlNonEncoded() => TestStatus(async (host) => await new PathsRestClient(Key, host).StringUrlNonEncodedAsync());
 
         // LLC - BUG - This test is failing?
         public Task UrlStringNullAsync() => Test(async (host) =>
         {
-            var result = await new PathsClient(Key, host).StringNullAsync(null);
+            var result = await new PathsRestClient(Key, host).StringNullAsync(null);
             Assert.Zero (result.Content.ToMemory().Length);
         }, ignoreScenario: true);
 
         [Test]
-        public Task UrlPathsStringUnicode() => TestStatus(async (host) => await new PathsClient(Key, host).StringUnicodeAsync());
+        public Task UrlPathsStringUnicode() => TestStatus(async (host) => await new PathsRestClient(Key, host).StringUnicodeAsync());
 
         [Test]
-        public Task UrlPathsArrayCSVInPath() => TestStatus(async (host) => await new PathsClient(Key, host).ArrayCsvInPathAsync( new[] { "ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
+        public Task UrlPathsArrayCSVInPath() => TestStatus(async (host) => await new PathsRestClient(Key, host).ArrayCsvInPathAsync( new[] { "ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public Task UrlPathsStringBase64Url() => TestStatus(async (host) => await new PathsClient(Key, host).Base64UrlAsync( Encoding.UTF8.GetBytes("lorem")));
+        public Task UrlPathsStringBase64Url() => TestStatus(async (host) => await new PathsRestClient(Key, host).Base64UrlAsync( Encoding.UTF8.GetBytes("lorem")));
 
         [Test]
-        public Task UrlPathsByteEmpty() => TestStatus(async (host) => await new PathsClient(Key, host).ByteEmptyAsync());
+        public Task UrlPathsByteEmpty() => TestStatus(async (host) => await new PathsRestClient(Key, host).ByteEmptyAsync());
 
         [Test]
-        public Task UrlPathsByteMultiByte() => TestStatus(async (host) => await new PathsClient(Key, host).ByteMultiByteAsync( TestConstants.ByteArray));
+        public Task UrlPathsByteMultiByte() => TestStatus(async (host) => await new PathsRestClient(Key, host).ByteMultiByteAsync( TestConstants.ByteArray));
 
         [Test]
         public void UrlByteNullAsync()
         {
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await new PathsClient(null, null).ByteNullAsync(null));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await new PathsRestClient(null, null).ByteNullAsync(null));
         }
 
         [Test]
-        public Task UrlPathsDateValid() => TestStatus(async (host) => await new PathsClient(Key, host).DateValidAsync());
+        public Task UrlPathsDateValid() => TestStatus(async (host) => await new PathsRestClient(Key, host).DateValidAsync());
 
         [Test]
-        public Task UrlPathsDateTimeValid() => TestStatus(async (host) => await new PathsClient(Key, host).DateTimeValidAsync());
+        public Task UrlPathsDateTimeValid() => TestStatus(async (host) => await new PathsRestClient(Key, host).DateTimeValidAsync());
 
         [Test]
-        public Task UrlPathsLongPositive() => TestStatus(async (host) => await new PathsClient(Key, host).GetTenBillionAsync());
+        public Task UrlPathsLongPositive() => TestStatus(async (host) => await new PathsRestClient(Key, host).GetTenBillionAsync());
 
         [Test]
-        public Task UrlPathsIntUnixTime() => TestStatus(async (host) => await new PathsClient(Key, host).UnixTimeUrlAsync( DateTimeOffset.FromUnixTimeSeconds(1460505600L).UtcDateTime));
+        public Task UrlPathsIntUnixTime() => TestStatus(async (host) => await new PathsRestClient(Key, host).UnixTimeUrlAsync( DateTimeOffset.FromUnixTimeSeconds(1460505600L).UtcDateTime));
 
         [Test]
-        public Task UrlPathsIntNegative() => TestStatus(async (host) => await new PathsClient(Key, host).GetIntNegativeOneMillionAsync());
+        public Task UrlPathsIntNegative() => TestStatus(async (host) => await new PathsRestClient(Key, host).GetIntNegativeOneMillionAsync());
 
         [Test]
-        public Task UrlPathsIntPositive() => TestStatus(async (host) => await new PathsClient(Key, host).GetIntOneMillionAsync());
+        public Task UrlPathsIntPositive() => TestStatus(async (host) => await new PathsRestClient(Key, host).GetIntOneMillionAsync());
 
         [Test]
-        public Task UrlPathsBoolTrue() => TestStatus(async (host) => await new PathsClient(Key, host).GetBooleanTrueAsync());
+        public Task UrlPathsBoolTrue() => TestStatus(async (host) => await new PathsRestClient(Key, host).GetBooleanTrueAsync());
 
         [Test]
-        public Task UrlPathsBoolFalse() => TestStatus(async (host) => await new PathsClient(Key, host).GetBooleanFalseAsync());
+        public Task UrlPathsBoolFalse() => TestStatus(async (host) => await new PathsRestClient(Key, host).GetBooleanFalseAsync());
 
         [Test]
-        public Task UrlPathsLongNegative() => TestStatus(async (host) => await new PathsClient(Key, host).GetNegativeTenBillionAsync());
+        public Task UrlPathsLongNegative() => TestStatus(async (host) => await new PathsRestClient(Key, host).GetNegativeTenBillionAsync());
 
         [Test]
-        public Task UrlPathsFloatPositive() => TestStatus(async (host) => await new PathsClient(Key, host).FloatScientificPositiveAsync());
+        public Task UrlPathsFloatPositive() => TestStatus(async (host) => await new PathsRestClient(Key, host).FloatScientificPositiveAsync());
 
         [Test]
-        public Task UrlPathsFloatNegative() => TestStatus(async (host) => await new PathsClient(Key, host).FloatScientificNegativeAsync());
+        public Task UrlPathsFloatNegative() => TestStatus(async (host) => await new PathsRestClient(Key, host).FloatScientificNegativeAsync());
 
         [Test]
-        public Task UrlPathsDoubleNegative() => TestStatus(async (host) => await new PathsClient(Key, host).DoubleDecimalNegativeAsync());
+        public Task UrlPathsDoubleNegative() => TestStatus(async (host) => await new PathsRestClient(Key, host).DoubleDecimalNegativeAsync());
 
         [Test]
-        public Task UrlPathsDoublePositive() => TestStatus(async (host) => await new PathsClient(Key, host).DoubleDecimalPositiveAsync());
+        public Task UrlPathsDoublePositive() => TestStatus(async (host) => await new PathsRestClient(Key, host).DoubleDecimalPositiveAsync());
     }
 }

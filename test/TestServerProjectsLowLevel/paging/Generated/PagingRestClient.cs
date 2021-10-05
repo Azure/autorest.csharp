@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -14,21 +17,1636 @@ using Azure.Core.Pipeline;
 namespace paging_LowLevel
 {
     /// <summary> The PagingRest service client. </summary>
-    internal partial class PagingRestClient
+    public partial class PagingRestClient
     {
-        private Uri endpoint;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private const string AuthorizationHeader = "Fake-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+
+        /// <summary> Initializes a new instance of PagingRestClient for mocking. </summary>
+        protected PagingRestClient()
+        {
+        }
 
         /// <summary> Initializes a new instance of PagingRestClient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public PagingRestClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestPagingTestServiceClientOptions options = null)
         {
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+            endpoint ??= new Uri("http://localhost:3000");
+
+            options ??= new AutoRestPagingTestServiceClientOptions();
+
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
+        }
+
+        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [Product],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetNoItemNamePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetNoItemNamePagesRequest()
+                        : CreateGetNoItemNamePagesNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [Product],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetNoItemNamePages(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetNoItemNamePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetNoItemNamePagesRequest()
+                        : CreateGetNoItemNamePagesNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetNullNextLinkNamePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                using var message = CreateGetNullNextLinkNamePagesRequest();
+                var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", null, cancellationToken).ConfigureAwait(false);
+                yield return page;
+            }
+        }
+        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetNullNextLinkNamePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                using var message = CreateGetNullNextLinkNamePagesRequest();
+                var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", null);
+                yield return page;
+            }
+        }
+        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetSinglePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetSinglePagesRequest()
+                        : CreateGetSinglePagesNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetSinglePages(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetSinglePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetSinglePagesRequest()
+                        : CreateGetSinglePagesNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [Product],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.FirstResponseEmpty");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateFirstResponseEmptyRequest()
+                        : CreateFirstResponseEmptyNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   value: [Product],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> FirstResponseEmpty(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.FirstResponseEmpty");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateFirstResponseEmptyRequest()
+                        : CreateFirstResponseEmptyNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetMultiplePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout)
+                        : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetMultiplePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout)
+                        : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetWithQueryParams");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetWithQueryParamsRequest(requiredQueryParameter)
+                        : CreateNextOperationWithQueryParamsRequest();
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetWithQueryParams");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetWithQueryParamsRequest(requiredQueryParameter)
+                        : CreateNextOperationWithQueryParamsRequest();
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.NextOperationWithQueryParams");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                using var message = CreateNextOperationWithQueryParamsRequest();
+                var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", null, cancellationToken).ConfigureAwait(false);
+                yield return page;
+            }
+        }
+        /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.NextOperationWithQueryParams");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                using var message = CreateNextOperationWithQueryParamsRequest();
+                var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", null);
+                yield return page;
+            }
+        }
+        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetOdataMultiplePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout)
+                        : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetOdataMultiplePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout)
+                        : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="offset"> Offset of return value. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetMultiplePagesWithOffset");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout)
+                        : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="offset"> Offset of return value. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetMultiplePagesWithOffset");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout)
+                        : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetMultiplePagesRetryFirst");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRetryFirstRequest()
+                        : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetMultiplePagesRetryFirst");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRetryFirstRequest()
+                        : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetMultiplePagesRetrySecond");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRetrySecondRequest()
+                        : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetMultiplePagesRetrySecond");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRetrySecondRequest()
+                        : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that receives a 400 on the first call. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetSinglePagesFailure");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetSinglePagesFailureRequest()
+                        : CreateGetSinglePagesFailureNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that receives a 400 on the first call. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetSinglePagesFailure");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetSinglePagesFailureRequest()
+                        : CreateGetSinglePagesFailureNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that receives a 400 on the second call. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetMultiplePagesFailure");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFailureRequest()
+                        : CreateGetMultiplePagesFailureNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that receives a 400 on the second call. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetMultiplePagesFailure");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFailureRequest()
+                        : CreateGetMultiplePagesFailureNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that receives an invalid nextLink. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetMultiplePagesFailureUri");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFailureUriRequest()
+                        : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that receives an invalid nextLink. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetMultiplePagesFailureUri");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFailureUriRequest()
+                        : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetMultiplePagesFragmentNextLink");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant)
+                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string apiVersion, string tenant, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetMultiplePagesFragmentNextLink");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant)
+                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant)
+                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string apiVersion, string tenant, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant)
+                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> NextFragmentAsync(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.NextFragment");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> NextFragment(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.NextFragment");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.NextFragmentWithGrouping");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="nextLink"> Next link for list operation. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   odata.nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> NextFragmentWithGrouping(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.NextFragmentWithGrouping");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingRestClient.GetPagingModelWithItemNameWithXMSClientName");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
+                        : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingRestClient.GetPagingModelWithItemNameWithXMSClientName");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
+            {
+                do
+                {
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
+                        : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
+            }
+        }
+
+        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("PagingRestClient.GetMultiplePagesLRO");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "PagingRestClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, options, CreateEnumerableAsync).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(Response response, string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                Page<BinaryData> page;
+                if (nextLink == null)
+                {
+                    page = LowLevelPageableHelpers.BuildPageForResponse(response, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+                while (!string.IsNullOrEmpty(nextLink))
+                {
+                    var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+            }
+        }
+
+        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   values: [
+        ///     {
+        ///       properties: {
+        ///         id: number,
+        ///         name: string
+        ///       }
+        ///     }
+        ///   ],
+        ///   nextLink: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("PagingRestClient.GetMultiplePagesLRO");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "PagingRestClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, options, CreateEnumerable);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+
+            IEnumerable<Page<BinaryData>> CreateEnumerable(Response response, string nextLink, int? pageSizeHint)
+            {
+                Page<BinaryData> page;
+                if (nextLink == null)
+                {
+                    page = LowLevelPageableHelpers.BuildPageForResponse(response, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+                while (!string.IsNullOrEmpty(nextLink))
+                {
+                    var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+            }
         }
 
         internal HttpMessage CreateGetNoItemNamePagesRequest()
@@ -37,59 +1655,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/noitemname", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetNoItemNamePagesAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoItemNamePagesRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetNoItemNamePages(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoItemNamePagesRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetNullNextLinkNamePagesRequest()
@@ -98,59 +1669,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/nullnextlink", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetNullNextLinkNamePagesAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullNextLinkNamePagesRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetNullNextLinkNamePages(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullNextLinkNamePagesRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetSinglePagesRequest()
@@ -159,59 +1683,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/single", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetSinglePagesAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSinglePagesRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetSinglePages(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSinglePagesRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateFirstResponseEmptyRequest()
@@ -220,59 +1697,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/firstResponseEmpty/1", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> FirstResponseEmptyAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFirstResponseEmptyRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response FirstResponseEmpty(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFirstResponseEmptyRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
@@ -281,7 +1711,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -297,61 +1727,8 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        public Response GetMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetWithQueryParamsRequest(int requiredQueryParameter)
@@ -360,63 +1737,14 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/getWithQueryParams", false);
             uri.AppendQuery("requiredQueryParameter", requiredQueryParameter, true);
             uri.AppendQuery("queryConstant", true, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetWithQueryParamsAsync(int requiredQueryParameter, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetWithQueryParamsRequest(requiredQueryParameter);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
-        /// <param name="options"> The request options. </param>
-        public Response GetWithQueryParams(int requiredQueryParameter, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetWithQueryParamsRequest(requiredQueryParameter);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateNextOperationWithQueryParamsRequest()
@@ -425,60 +1753,13 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/nextOperationWithQueryParams", false);
             uri.AppendQuery("queryConstant", true, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> NextOperationWithQueryParamsAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateNextOperationWithQueryParamsRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response NextOperationWithQueryParams(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateNextOperationWithQueryParamsRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
@@ -487,7 +1768,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -503,61 +1784,8 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetOdataMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        public Response GetOdataMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(int offset, string clientRequestId, int? maxresults, int? timeout)
@@ -566,7 +1794,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/withpath/", false);
             uri.AppendPath(offset, true);
             request.Uri = uri;
@@ -583,63 +1811,8 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="offset"> Offset of return value. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="offset"> Offset of return value. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        public Response GetMultiplePagesWithOffset(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesRetryFirstRequest()
@@ -648,59 +1821,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/retryfirst", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetMultiplePagesRetryFirstAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRetryFirstRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetMultiplePagesRetryFirst(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRetryFirstRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondRequest()
@@ -709,59 +1835,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/retrysecond", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetMultiplePagesRetrySecondAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRetrySecondRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetMultiplePagesRetrySecond(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRetrySecondRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetSinglePagesFailureRequest()
@@ -770,59 +1849,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/single/failure", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that receives a 400 on the first call. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetSinglePagesFailureAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSinglePagesFailureRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that receives a 400 on the first call. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetSinglePagesFailure(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSinglePagesFailureRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureRequest()
@@ -831,59 +1863,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/failure", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that receives a 400 on the second call. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetMultiplePagesFailureAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFailureRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that receives a 400 on the second call. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetMultiplePagesFailure(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFailureRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureUriRequest()
@@ -892,59 +1877,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/failureuri", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that receives an invalid nextLink. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetMultiplePagesFailureUriAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFailureUriRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that receives an invalid nextLink. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetMultiplePagesFailureUri(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFailureUriRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string apiVersion, string tenant)
@@ -953,85 +1891,14 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
-        public async Task<Response> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, RequestOptions options = null)
-        {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
-        public Response GetMultiplePagesFragmentNextLink(string apiVersion, string tenant, RequestOptions options = null)
-        {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string apiVersion, string tenant)
@@ -1040,85 +1907,14 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(tenant, true);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
-        public async Task<Response> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, RequestOptions options = null)
-        {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
-        public Response GetMultiplePagesFragmentWithGroupingNextLink(string apiVersion, string tenant, RequestOptions options = null)
-        {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
@@ -1127,7 +1923,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1143,61 +1939,8 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
             return message;
-        }
-
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetMultiplePagesLROAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        public Response GetMultiplePagesLRO(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink)
@@ -1206,7 +1949,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
@@ -1214,89 +1957,8 @@ namespace paging_LowLevel
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
-        /// <param name="nextLink"> Next link for list operation. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> NextFragmentAsync(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
-        {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
-        /// <param name="nextLink"> Next link for list operation. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
-        public Response NextFragment(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
-        {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateNextFragmentWithGroupingRequest(string apiVersion, string tenant, string nextLink)
@@ -1305,7 +1967,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
@@ -1313,89 +1975,8 @@ namespace paging_LowLevel
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
-        /// <param name="nextLink"> Next link for list operation. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
-        {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
-        /// <param name="apiVersion"> Sets the api version to use. </param>
-        /// <param name="tenant"> Sets the tenant to use. </param>
-        /// <param name="nextLink"> Next link for list operation. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
-        public Response NextFragmentWithGrouping(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
-        {
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-            if (tenant == null)
-            {
-                throw new ArgumentNullException(nameof(tenant));
-            }
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
@@ -1404,59 +1985,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/paging/itemNameWithXMSClientName", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
-        /// <param name="options"> The request options. </param>
-        public async Task<Response> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetPagingModelWithItemNameWithXMSClientNameRequest();
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
-        /// <param name="options"> The request options. </param>
-        public Response GetPagingModelWithItemNameWithXMSClientName(RequestOptions options = null)
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetPagingModelWithItemNameWithXMSClientNameRequest();
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLink)
@@ -1465,73 +1999,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetNoItemNamePagesNextPageAsync(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoItemNamePagesNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetNoItemNamePagesNextPage(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoItemNamePagesNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink)
@@ -1540,73 +2013,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetSinglePagesNextPageAsync(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSinglePagesNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetSinglePagesNextPage(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSinglePagesNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateFirstResponseEmptyNextPageRequest(string nextLink)
@@ -1615,73 +2027,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> FirstResponseEmptyNextPageAsync(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFirstResponseEmptyNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response FirstResponseEmptyNextPage(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFirstResponseEmptyNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
@@ -1690,7 +2041,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1706,75 +2057,8 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetMultiplePagesNextPageAsync(string nextLink, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetMultiplePagesNextPage(string nextLink, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
@@ -1783,7 +2067,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1799,75 +2083,8 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetOdataMultiplePagesNextPageAsync(string nextLink, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetOdataMultiplePagesNextPage(string nextLink, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, int offset, string clientRequestId, int? maxresults, int? timeout)
@@ -1876,7 +2093,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1892,77 +2109,8 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="offset"> Offset of return value. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetMultiplePagesWithOffsetNextPageAsync(string nextLink, int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="offset"> Offset of return value. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetMultiplePagesWithOffsetNextPage(string nextLink, int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLink)
@@ -1971,73 +2119,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetMultiplePagesRetryFirstNextPageAsync(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetMultiplePagesRetryFirstNextPage(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLink)
@@ -2046,73 +2133,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetMultiplePagesRetrySecondNextPageAsync(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetMultiplePagesRetrySecondNextPage(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLink)
@@ -2121,73 +2147,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that receives a 400 on the first call. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetSinglePagesFailureNextPageAsync(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSinglePagesFailureNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that receives a 400 on the first call. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetSinglePagesFailureNextPage(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetSinglePagesFailureNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLink)
@@ -2196,73 +2161,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that receives a 400 on the second call. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetMultiplePagesFailureNextPageAsync(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFailureNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that receives a 400 on the second call. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetMultiplePagesFailureNextPage(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFailureNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink)
@@ -2271,73 +2175,12 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A paging operation that receives an invalid nextLink. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetMultiplePagesFailureUriNextPageAsync(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A paging operation that receives an invalid nextLink. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetMultiplePagesFailureUriNextPage(string nextLink, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
@@ -2346,7 +2189,7 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -2362,75 +2205,8 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
-        }
-
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetMultiplePagesLRONextPageAsync(string nextLink, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
-        }
-
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
-        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
-        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetMultiplePagesLRONextPage(string nextLink, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
-            }
         }
 
         internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink)
@@ -2439,72 +2215,38 @@ namespace paging_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response> GetPagingModelWithItemNameWithXMSClientNameNextPageAsync(string nextLink, RequestOptions options = null)
+        private sealed class ResponseClassifier200 : ResponseClassifier
         {
-            if (nextLink == null)
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
             {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            await _pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
+                return message.Response.Status switch
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                return message.Response;
+                    200 => false,
+                    _ => true
+                };
             }
         }
-
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="options"> The request options. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response GetPagingModelWithItemNameWithXMSClientNameNextPage(string nextLink, RequestOptions options = null)
+        private sealed class ResponseClassifier202 : ResponseClassifier
         {
-            if (nextLink == null)
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier202();
+            public override bool IsErrorResponse(HttpMessage message)
             {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink);
-            RequestOptions.Apply(options, message);
-            _pipeline.Send(message, options.CancellationToken);
-            if (options.StatusOption == ResponseStatusOption.Default)
-            {
-                switch (message.Response.Status)
+                return message.Response.Status switch
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            else
-            {
-                return message.Response;
+                    202 => false,
+                    _ => true
+                };
             }
         }
     }

@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpSuccess200Head() => Test(async (host) =>
         {
-            var response = await new HttpSuccessClient(Key, host).Head200Async();
+            var response = await new HttpSuccessRestClient(Key, host).Head200Async();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value);
         });
@@ -23,7 +23,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpSuccess204Head() => Test(async (host) =>
         {
-            var response = await new HttpSuccessClient(Key, host).Head204Async();
+            var response = await new HttpSuccessRestClient(Key, host).Head204Async();
             Assert.AreEqual(204, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value);
         });
@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpSuccess404Head() => Test(async (host) =>
         {
-            var response = await new HttpSuccessClient(Key, host).Head404Async();
+            var response = await new HttpSuccessRestClient(Key, host).Head404Async();
             Assert.AreEqual(404, response.GetRawResponse().Status);
             Assert.AreEqual(false, response.Value);
         });
@@ -39,7 +39,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ValidateHead200()
         {
-            var methodInfo = typeof(HttpSuccessClient).GetMethod("Head200", Instance | Public);
+            var methodInfo = typeof(HttpSuccessRestClient).GetMethod("Head200", Instance | Public);
             Assert.NotNull(methodInfo);
             Assert.AreEqual(typeof(Response<bool>), methodInfo.ReturnType);
         }
@@ -47,7 +47,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ValidateHead204()
         {
-            var methodInfo = typeof(HttpSuccessClient).GetMethod("Head204", Instance | Public);
+            var methodInfo = typeof(HttpSuccessRestClient).GetMethod("Head204", Instance | Public);
             Assert.NotNull(methodInfo);
             Assert.AreEqual(typeof(Response<bool>), methodInfo.ReturnType);
         }
@@ -55,7 +55,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ValidateHead404()
         {
-            var methodInfo = typeof(HttpSuccessClient).GetMethod("Head404", Instance | Public);
+            var methodInfo = typeof(HttpSuccessRestClient).GetMethod("Head404", Instance | Public);
             Assert.NotNull(methodInfo);
             Assert.AreEqual(typeof(Response<bool>), methodInfo.ReturnType);
         }

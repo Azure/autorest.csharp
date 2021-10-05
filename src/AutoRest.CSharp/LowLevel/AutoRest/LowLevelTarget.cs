@@ -21,23 +21,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 var lowLevelClientWriter = new LowLevelRestClientWriter();
-                lowLevelClientWriter.WriteClient(codeWriter, client, context.Configuration);
-                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
-            }
-
-            foreach (var client in context.Library.Clients)
-            {
-                var codeWriter = new CodeWriter();
-                var lowLevelClientWriter = new LowLevelDataPlaneClientWriter();
                 lowLevelClientWriter.WriteClient(codeWriter, client, context);
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+
+                var optionsWriter = new CodeWriter();
+                ClientOptionsWriter.WriteClientOptions(optionsWriter, client.ClientOptions);
+                project.AddGeneratedFile($"{client.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
             }
-
-            var optionsWriter = new CodeWriter();
-            ClientOptionsWriter.WriteClientOptions(optionsWriter, context);
-
-            var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
-            project.AddGeneratedFile($"{clientOptionsName}ClientOptions.cs", optionsWriter.ToString());
         }
     }
 }

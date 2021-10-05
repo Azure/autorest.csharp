@@ -20,14 +20,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task RequestThrowsByDefault () => Test(host =>
         {
-            PathsClient paths = new PathsClient(Key, host);
+            PathsRestClient paths = new PathsRestClient(Key, host);
             Assert.ThrowsAsync<Azure.RequestFailedException>(async () => await paths.EnumValidAsync("no color"));
         }, ignoreScenario: true);
 
         [Test]
         public Task RequestThrowsCanBeDisabled () => Test(host =>
         {
-            PathsClient paths = new PathsClient(Key, host);
+            PathsRestClient paths = new PathsRestClient(Key, host);
             Assert.DoesNotThrowAsync(async () => await paths.EnumValidAsync("no color", new Azure.RequestOptions(Azure.ResponseStatusOption.NoThrow)));
         }, ignoreScenario: true);
 
@@ -35,7 +35,7 @@ namespace AutoRest.TestServer.Tests
         public Task RequestCallback () => Test(async host =>
         {
             bool callbackInvoked = false;
-            PathsClient paths = new PathsClient(Key, host);
+            PathsRestClient paths = new PathsRestClient(Key, host);
             await paths.EnumValidAsync("green color", new Azure.RequestOptions(_ => callbackInvoked = true));
             Assert.True(callbackInvoked);
         }, ignoreScenario: true);
