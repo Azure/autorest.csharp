@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void AccessibilityHonoredOnOperations()
         {
-            var client = typeof(AccessibilityRestClient);
+            var client = typeof(AccessibilityClient);
             Assert.AreEqual(true, client.GetMethod ("Operation").IsPublic, "Operation should be public");
             Assert.AreEqual(true, client.GetMethod ("OperationAsync").IsPublic, "OperationAsync should be public");
             Assert.AreEqual(true, client.GetMethod ("OperationInternal", BindingFlags.Instance | BindingFlags.NonPublic).IsAssembly, "OperationInternal should be internal");

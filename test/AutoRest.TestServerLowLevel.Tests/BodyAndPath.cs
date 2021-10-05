@@ -16,7 +16,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void BodyParameterIsLast()
         {
-            ParameterInfo[] parameters = typeof(BodyAndPathRestClient).GetMethod("Create").GetParameters();
+            ParameterInfo[] parameters = typeof(BodyAndPathClient).GetMethod("Create").GetParameters();
             Assert.AreEqual(typeof(string), parameters[0].ParameterType);
             Assert.AreEqual(typeof(RequestContent), parameters[1].ParameterType);
             Assert.AreEqual(typeof(RequestOptions), parameters[2].ParameterType);
@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ContentTypeParameterIsAfterBodyParameter()
         {
-            ParameterInfo[] parameters = typeof(BodyAndPathRestClient).GetMethod("CreateStream").GetParameters();
+            ParameterInfo[] parameters = typeof(BodyAndPathClient).GetMethod("CreateStream").GetParameters();
             Assert.AreEqual(typeof(string), parameters[0].ParameterType);
             Assert.AreEqual(typeof(RequestContent), parameters[1].ParameterType);
             Assert.AreEqual(typeof(ContentType), parameters[2].ParameterType);

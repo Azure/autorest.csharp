@@ -14,28 +14,28 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void CredentialFieldPropertyPrivateInLLC ()
         {
-            var client = typeof(AccessibilityRestClient);
+            var client = typeof(AccessibilityClient);
             Assert.AreEqual(false, client.GetField ("_keyCredential", BindingFlags.NonPublic | BindingFlags.Instance).IsPublic, "_keyCredential should be private");
         }
 
         [Test]
         public void NoAuthHasNoAuthParam ()
         {
-            var client = typeof(Accessibility_LowLevel_NoAuth.AccessibilityRestClient);
+            var client = typeof(Accessibility_LowLevel_NoAuth.AccessibilityClient);
             Assert.NotNull(client.GetConstructor(new Type [] { typeof(Uri), typeof(Accessibility_LowLevel_NoAuth.AccessibilityClientOptions) }));
         }
 
         [Test]
         public void TokenAuthHasTokenCredential ()
         {
-            var client = typeof(Accessibility_LowLevel_TokenAuth.AccessibilityRestClient);
+            var client = typeof(Accessibility_LowLevel_TokenAuth.AccessibilityClient);
             Assert.NotNull(client.GetConstructor(new Type [] { typeof(Azure.Core.TokenCredential), typeof(Uri), typeof(Accessibility_LowLevel_TokenAuth.AccessibilityClientOptions) }));
         }
 
         [Test]
         public void KeyAuthHasAzureKeyCredential ()
         {
-            var client = typeof(Accessibility_LowLevel.AccessibilityRestClient);
+            var client = typeof(Accessibility_LowLevel.AccessibilityClient);
             Assert.NotNull(client.GetConstructor(new Type [] { typeof(Azure.AzureKeyCredential), typeof(Uri), typeof(Accessibility_LowLevel.AccessibilityClientOptions) }));
         }
     }

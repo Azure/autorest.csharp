@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests
             {
                 source = "anything"
             };
-            var response = await new MediaTypesRestClient(Key, host).AnalyzeBodyAsync(RequestContent.Create(value), ContentType.ApplicationJson);
+            var response = await new MediaTypesClient(Key, host).AnalyzeBodyAsync(RequestContent.Create(value), ContentType.ApplicationJson);
             Assert.AreEqual("Nice job with JSON", response.Content.ToObjectFromJson<string>());
         });
 
@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
         public Task MediaTypePdf() => Test(async (host) =>
         {
             await using var value = new MemoryStream(Encoding.UTF8.GetBytes("PDF"));
-            var response = await new MediaTypesRestClient(Key, host).AnalyzeBodyAsync(RequestContent.Create(value), new ContentType("application/pdf"));
+            var response = await new MediaTypesClient(Key, host).AnalyzeBodyAsync(RequestContent.Create(value), new ContentType("application/pdf"));
             Assert.AreEqual("Nice job with PDF", response.Content.ToObjectFromJson<string>());
         });
     }

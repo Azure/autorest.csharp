@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicValid() => Test(async (host) =>
         {
-            var result = await new BasicRestClient(Key, host).GetValidAsync();
+            var result = await new BasicClient(Key, host).GetValidAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("abc", (string)responseBody["name"]);
             Assert.AreEqual(2, (int)responseBody["id"]);
@@ -37,13 +37,13 @@ namespace AutoRest.TestServer.Tests
                 ["id"] = 2,
                 ["color"] = "Magenta"
             });
-            return await new BasicRestClient(Key, host).PutValidAsync(RequestContent.Create(data));
+            return await new BasicClient(Key, host).PutValidAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task GetComplexBasicEmpty() => Test(async (host) =>
         {
-            var result = await new BasicRestClient(Key, host).GetEmptyAsync();
+            var result = await new BasicClient(Key, host).GetEmptyAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.Zero (responseBody.Properties.Count());
         });
@@ -51,14 +51,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicNotProvided() => Test(async (host) =>
         {
-            var result = await new BasicRestClient(Key, host).GetNotProvidedAsync();
+            var result = await new BasicClient(Key, host).GetNotProvidedAsync();
             Assert.Zero (result.Content.ToMemory().Length);
         });
 
         [Test]
         public Task GetComplexBasicNull() => Test(async (host) =>
         {
-            var result = await new BasicRestClient(Key, host).GetNullAsync();
+            var result = await new BasicClient(Key, host).GetNullAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual(null, (string?)responseBody["name"]);
             Assert.AreEqual(null, (int?)responseBody["id"]);
@@ -67,7 +67,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicInvalid() => Test(async (host) =>
         {
-            var result = await new BasicRestClient(Key, host).GetInvalidAsync();
+            var result = await new BasicClient(Key, host).GetInvalidAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("abc", (string?)responseBody["name"]);
             Assert.AreEqual("a", (string?)responseBody["id"]);
@@ -76,7 +76,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveInteger() => Test(async (host) =>
         {
-            var result = await new PrimitiveRestClient(Key, host).GetIntAsync();
+            var result = await new PrimitiveClient(Key, host).GetIntAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual(-1, (int)responseBody["field1"]);
             Assert.AreEqual(2, (int)responseBody["field2"]);
@@ -89,13 +89,13 @@ namespace AutoRest.TestServer.Tests
                 ["field1"] = -1,
                 ["field2"] = 2,
             });
-            return await new PrimitiveRestClient(Key, host).PutIntAsync(RequestContent.Create(data));
+            return await new PrimitiveClient(Key, host).PutIntAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task GetComplexPrimitiveLong() => Test(async (host) =>
         {
-            var result = await new PrimitiveRestClient(Key, host).GetLongAsync();
+            var result = await new PrimitiveClient(Key, host).GetLongAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual(1099511627775L, (long)responseBody["field1"]);
             Assert.AreEqual(-999511627788L, (long)responseBody["field2"]);
@@ -108,13 +108,13 @@ namespace AutoRest.TestServer.Tests
                 ["field1"] = 1099511627775L,
                 ["field2"] = -999511627788L,
             });
-            return await new PrimitiveRestClient(Key, host).PutLongAsync(RequestContent.Create(data));
+            return await new PrimitiveClient(Key, host).PutLongAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task GetComplexArrayValid() => Test(async (host) =>
         {
-            var result = await new ArrayRestClient(Key, host).GetValidAsync();
+            var result = await new ArrayClient(Key, host).GetValidAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             var array = responseBody["array"];
             Assert.AreEqual("1, 2, 3, 4", (string)array[0]);
@@ -130,13 +130,13 @@ namespace AutoRest.TestServer.Tests
             var data = new JsonData(new Dictionary<string, string[]> {
                 ["array"] = new string[] { "1, 2, 3, 4", "", (string)null, "&S#$(*Y","The quick brown fox jumps over the lazy dog"}
             });
-            return await new ArrayRestClient(Key, host).PutValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host).PutValidAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task GetComplexDictionaryValid() => Test(async (host) =>
         {
-            var result = await new DictionaryRestClient(Key, host).GetValidAsync();
+            var result = await new DictionaryClient(Key, host).GetValidAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             var array = responseBody["defaultProgram"];
 
@@ -159,7 +159,7 @@ namespace AutoRest.TestServer.Tests
                     { "exe", string.Empty },
                     { string.Empty, null }
                 }});
-            return await new DictionaryRestClient(Key, host).PutValidAsync(RequestContent.Create(data));
+            return await new DictionaryClient(Key, host).PutValidAsync(RequestContent.Create(data));
         });
     }
 }
