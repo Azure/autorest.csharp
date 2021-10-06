@@ -9,7 +9,6 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -18,27 +17,22 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private CachedDictionary<OperationGroup, LowLevelRestClient> _internalRestClients;
-        private CachedDictionary<OperationGroup, LowLevelDataPlaneClient> _publicClients;
-        private CachedDictionary<LowLevelDataPlaneClient, IReadOnlyList<LowLevelDataPlaneClient>> _subClients;
-        private Lazy<HashSet<string>> _subClientOperationGroups;
-        private Lazy<HashSet<string>> _publicClientOperationGroups;
+        private readonly CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
+        private readonly CachedDictionary<LowLevelRestClient, IReadOnlyList<LowLevelRestClient>> _subClients;
+        private readonly Lazy<HashSet<string>> _subClientOperationGroups;
+        private readonly Lazy<HashSet<string>> _publicClientOperationGroups;
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
             _codeModel = codeModel;
             _context = context;
-            _internalRestClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
-            _publicClients = new CachedDictionary<OperationGroup, LowLevelDataPlaneClient>(EnsureClients);
-            _subClients = new CachedDictionary<LowLevelDataPlaneClient, IReadOnlyList<LowLevelDataPlaneClient>>(EnsureSubClients);
+            _restClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
+            _subClients = new CachedDictionary<LowLevelRestClient, IReadOnlyList<LowLevelRestClient>>(EnsureSubClients);
             _subClientOperationGroups = new Lazy<HashSet<string>>(EnsureSubClientOperationGroups);
             _publicClientOperationGroups = new Lazy<HashSet<string>>(EnsurePublicClientOperationGroups);
         }
 
-        public IEnumerable<LowLevelRestClient> RestClients => _internalRestClients.Values;
-
-        public IEnumerable<LowLevelDataPlaneClient> Clients => _publicClients.Values;
-
+        public IEnumerable<LowLevelRestClient> RestClients => _restClients.Values;
         private Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
         {
             var restClients = new Dictionary<OperationGroup, LowLevelRestClient>();
@@ -50,18 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return restClients;
         }
 
-        private Dictionary<OperationGroup, LowLevelDataPlaneClient> EnsureClients()
-        {
-            var clients = new Dictionary<OperationGroup, LowLevelDataPlaneClient>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                clients.Add(operationGroup, new LowLevelDataPlaneClient(operationGroup, _context));
-            }
-
-            return clients;
-        }
-
-        private Dictionary<LowLevelDataPlaneClient, IReadOnlyList<LowLevelDataPlaneClient>> EnsureSubClients()
+        private Dictionary<LowLevelRestClient, IReadOnlyList<LowLevelRestClient>> EnsureSubClients()
         {
             // Returns a mapping of an operation group name to the names of operation groups which are direct sub-clients
             // of the operation group.
@@ -80,10 +63,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            var clientMappings = _codeModel.OperationGroups.ToDictionary(x => x.Key, x => FindClient(x));
+            var clientMappings = _codeModel.OperationGroups.ToDictionary(x => x.Key, x => FindRestClient(x));
             var childOperationGroupMap = new Dictionary<string, string[]>(_context.Configuration.SubClientConfiguration.ClientConfigurations.SelectMany(CollectOperationGroupMappings));
 
-            return childOperationGroupMap.ToDictionary(v => clientMappings[v.Key], v => (IReadOnlyList<LowLevelDataPlaneClient>) v.Value.Select(x => clientMappings[x]).ToList());
+            return childOperationGroupMap.ToDictionary(v => clientMappings[v.Key], v => (IReadOnlyList<LowLevelRestClient>) v.Value.Select(x => clientMappings[x]).ToList());
         }
 
         private HashSet<string> EnsureSubClientOperationGroups()
@@ -164,24 +147,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _publicClientOperationGroups.Value.Contains(operationGroup.Key);
         }
 
-        public LowLevelDataPlaneClient FindClient(OperationGroup operationGroup)
-        {
-            return _publicClients[operationGroup];
-        }
-
         public LowLevelRestClient FindRestClient(OperationGroup operationGroup)
         {
-            return _internalRestClients[operationGroup];
+            return _restClients[operationGroup];
         }
 
-        public IReadOnlyList<LowLevelDataPlaneClient> FindSubClents(LowLevelDataPlaneClient client)
+        public IReadOnlyList<LowLevelRestClient> FindSubClents(LowLevelRestClient client)
         {
             if (_subClients.TryGetValue(client, out var subClients))
             {
                 return subClients;
             }
 
-            return Array.Empty<LowLevelDataPlaneClient>();
+            return Array.Empty<LowLevelRestClient>();
         }
     }
 }

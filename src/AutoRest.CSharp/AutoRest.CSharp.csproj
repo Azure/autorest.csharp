@@ -12,11 +12,12 @@
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     <PackAsTool>true</PackAsTool>
     <RollForward>Minor</RollForward>
+    <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.19.0" />
-    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.15" />
+    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.16" />
     <PackageReference Include="Azure.ResourceManager" Version="1.0.0-beta.4" />
     <PackageReference Include="Humanizer.Core" Version="2.11.10" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.10.0-1.final" />

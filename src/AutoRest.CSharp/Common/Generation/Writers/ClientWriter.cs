@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
         protected virtual string RestClientField => "RestClient";
 
-        protected string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
+        protected static string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
         protected void WriteClientFields(CodeWriter writer, RestClient client, bool writePipelineField)
         {
@@ -43,10 +43,9 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             writer.Append($"{RestClientAccessibility} {client.Type} {RestClientField}").LineRaw(" { get; }");
         }
 
-        protected void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam, CodeWriterDelegate inner, bool catch404 = false)
+        protected static IDisposable WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam, bool catch404 = false)
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
-
             writer.Line($"using var {scopeVariable:D} = {clientDiagnosticsParam}.CreateScope({diagnostic.ScopeName:L});");
             foreach (DiagnosticAttribute diagnosticScopeAttributes in diagnostic.Attributes)
             {
@@ -56,22 +55,41 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             }
 
             writer.Line($"{scopeVariable}.Start();");
+            return new DiagnosticScope(writer.Scope($"try"), scopeVariable, writer, catch404);
+        }
 
-            using (writer.Scope($"try"))
+        private class DiagnosticScope : IDisposable
+        {
+            private readonly CodeWriter.CodeWriterScope _scope;
+            private readonly CodeWriterDeclaration _scopeVariable;
+            private readonly CodeWriter _writer;
+            private readonly bool _catch404;
+
+            public DiagnosticScope(CodeWriter.CodeWriterScope scope, CodeWriterDeclaration scopeVariable, CodeWriter writer, bool catch404)
             {
-                inner(writer);
+                _scope = scope;
+                _scopeVariable = scopeVariable;
+                _writer = writer;
+                _catch404 = catch404;
             }
-            if (catch404)
+
+            public void Dispose()
             {
-                using (writer.Scope($"catch ({typeof(RequestFailedException)} e) when (e.Status == 404)"))
+                _scope.Dispose();
+
+                if (_catch404)
                 {
-                    writer.Line($"return null;");
+                    using (_writer.Scope($"catch ({typeof(RequestFailedException)} e) when (e.Status == 404)"))
+                    {
+                        _writer.Line($"return null;");
+                    }
                 }
-            }
-            using (writer.Scope($"catch ({typeof(Exception)} e)"))
-            {
-                writer.Line($"{scopeVariable}.Failed(e);");
-                writer.Line($"throw;");
+
+                using (_writer.Scope($"catch ({typeof(Exception)} e)"))
+                {
+                    _writer.Line($"{_scopeVariable}.Failed(e);");
+                    _writer.Line($"throw;");
+                }
             }
         }
     }

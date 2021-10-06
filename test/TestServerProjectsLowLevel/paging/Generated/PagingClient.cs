@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -16,14 +19,15 @@ namespace paging_LowLevel
     /// <summary> The Paging service client. </summary>
     public partial class PagingClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PagingRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
         protected PagingClient()
@@ -34,6 +38,7 @@ namespace paging_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PagingClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestPagingTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -43,12 +48,11 @@ namespace paging_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestPagingTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new PagingRestClient(_clientDiagnostics, _pipeline, endpoint);
-            this.endpoint = endpoint;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
@@ -66,40 +70,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetNoItemNamePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetNoItemNamePagesAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetNoItemNamePagesRequest()
+                        : CreateGetNoItemNamePagesNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetNoItemNamePagesNextPageAsync(nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
@@ -117,40 +100,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetNoItemNamePages(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetNoItemNamePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetNoItemNamePages(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetNoItemNamePagesRequest()
+                        : CreateGetNoItemNamePagesNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetNoItemNamePagesNextPage(nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
@@ -175,26 +137,14 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetNullNextLinkNamePagesAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", null);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                using var message = CreateGetNullNextLinkNamePagesRequest();
+                var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", null, cancellationToken).ConfigureAwait(false);
+                yield return page;
             }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
-
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="options"> The request options. </param>
         /// <remarks>
@@ -217,26 +167,14 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetNullNextLinkNamePages(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", null);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                using var message = CreateGetNullNextLinkNamePagesRequest();
+                var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", null);
+                yield return page;
             }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
-
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="options"> The request options. </param>
         /// <remarks>
@@ -259,40 +197,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetSinglePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetSinglePagesAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetSinglePagesRequest()
+                        : CreateGetSinglePagesNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetSinglePagesNextPageAsync(nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
@@ -317,40 +234,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetSinglePages(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetSinglePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetSinglePages(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetSinglePagesRequest()
+                        : CreateGetSinglePagesNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetSinglePagesNextPage(nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
@@ -368,40 +264,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.FirstResponseEmpty");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.FirstResponseEmpty");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.FirstResponseEmptyAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateFirstResponseEmptyRequest()
+                        : CreateFirstResponseEmptyNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.FirstResponseEmpty");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.FirstResponseEmptyNextPageAsync(nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
@@ -419,40 +294,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> FirstResponseEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.FirstResponseEmpty");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.FirstResponseEmpty");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.FirstResponseEmpty(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateFirstResponseEmptyRequest()
+                        : CreateFirstResponseEmptyNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.FirstResponseEmpty");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.FirstResponseEmptyNextPage(nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
@@ -480,40 +334,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetMultiplePagesAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout)
+                        : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetMultiplePagesNextPageAsync(nextLink, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
@@ -541,40 +374,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetMultiplePages(clientRequestId, maxresults, timeout, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout)
+                        : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetMultiplePagesNextPage(nextLink, clientRequestId, maxresults, timeout, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
@@ -600,40 +412,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetWithQueryParams");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetWithQueryParams");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetWithQueryParamsAsync(requiredQueryParameter, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetWithQueryParamsRequest(requiredQueryParameter)
+                        : CreateNextOperationWithQueryParamsRequest();
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetWithQueryParams");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.NextOperationWithQueryParamsAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
@@ -659,40 +450,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetWithQueryParams");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetWithQueryParams");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetWithQueryParams(requiredQueryParameter, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetWithQueryParamsRequest(requiredQueryParameter)
+                        : CreateNextOperationWithQueryParamsRequest();
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetWithQueryParams");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.NextOperationWithQueryParams(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
@@ -717,26 +487,14 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextOperationWithQueryParams");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextOperationWithQueryParams");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.NextOperationWithQueryParamsAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", null);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                using var message = CreateNextOperationWithQueryParamsRequest();
+                var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", null, cancellationToken).ConfigureAwait(false);
+                yield return page;
             }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
-
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
         /// <param name="options"> The request options. </param>
         /// <remarks>
@@ -759,26 +517,14 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextOperationWithQueryParams");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextOperationWithQueryParams");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.NextOperationWithQueryParams(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", null);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                using var message = CreateNextOperationWithQueryParamsRequest();
+                var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", null);
+                yield return page;
             }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
-
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -804,40 +550,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetOdataMultiplePages");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetOdataMultiplePagesAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout)
+                        : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetOdataMultiplePagesNextPageAsync(nextLink, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
@@ -865,40 +590,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetOdataMultiplePages");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetOdataMultiplePages(clientRequestId, maxresults, timeout, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout)
+                        : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetOdataMultiplePagesNextPage(nextLink, clientRequestId, maxresults, timeout, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
@@ -927,40 +631,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetMultiplePagesWithOffsetAsync(offset, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout)
+                        : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetMultiplePagesWithOffsetNextPageAsync(nextLink, offset, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
@@ -989,40 +672,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetMultiplePagesWithOffset(offset, clientRequestId, maxresults, timeout, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout)
+                        : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetMultiplePagesWithOffsetNextPage(nextLink, offset, clientRequestId, maxresults, timeout, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
@@ -1047,40 +709,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetMultiplePagesRetryFirstAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRetryFirstRequest()
+                        : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetMultiplePagesRetryFirstNextPageAsync(nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
@@ -1105,40 +746,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetMultiplePagesRetryFirst(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRetryFirstRequest()
+                        : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetMultiplePagesRetryFirstNextPage(nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
@@ -1163,40 +783,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetMultiplePagesRetrySecondAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRetrySecondRequest()
+                        : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetMultiplePagesRetrySecondNextPageAsync(nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
@@ -1221,40 +820,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetMultiplePagesRetrySecond(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesRetrySecondRequest()
+                        : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetMultiplePagesRetrySecondNextPage(nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
@@ -1279,40 +857,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetSinglePagesFailure");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetSinglePagesFailureAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetSinglePagesFailureRequest()
+                        : CreateGetSinglePagesFailureNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetSinglePagesFailureNextPageAsync(nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
@@ -1337,40 +894,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetSinglePagesFailure");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetSinglePagesFailure(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetSinglePagesFailureRequest()
+                        : CreateGetSinglePagesFailureNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetSinglePagesFailureNextPage(nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
@@ -1395,40 +931,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFailure");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetMultiplePagesFailureAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFailureRequest()
+                        : CreateGetMultiplePagesFailureNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetMultiplePagesFailureNextPageAsync(nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
@@ -1453,40 +968,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFailure");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetMultiplePagesFailure(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFailureRequest()
+                        : CreateGetMultiplePagesFailureNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetMultiplePagesFailureNextPage(nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
@@ -1511,40 +1005,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetMultiplePagesFailureUriAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFailureUriRequest()
+                        : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetMultiplePagesFailureUriNextPageAsync(nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
@@ -1569,46 +1042,26 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetMultiplePagesFailureUri(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFailureUriRequest()
+                        : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetMultiplePagesFailureUriNextPage(nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1629,46 +1082,35 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            if (apiVersion == null)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
             }
 
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.NextFragmentAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant)
+                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1689,46 +1131,35 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string apiVersion, string tenant, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            if (apiVersion == null)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetMultiplePagesFragmentNextLink(apiVersion, tenant, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
             }
 
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.NextFragment(apiVersion, tenant, nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFragmentNextLinkRequest(apiVersion, tenant)
+                        : CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1749,46 +1180,35 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            if (apiVersion == null)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
             }
 
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant)
+                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1809,40 +1229,28 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string apiVersion, string tenant, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            if (apiVersion == null)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetMultiplePagesFragmentWithGroupingNextLink(apiVersion, tenant, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
             }
 
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(apiVersion, tenant)
+                        : CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -1850,6 +1258,7 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1870,40 +1279,30 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> NextFragmentAsync(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            if (apiVersion == null)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.NextFragmentAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
             }
 
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextFragment");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.NextFragmentAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -1911,6 +1310,7 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1931,40 +1331,30 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> NextFragment(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            if (apiVersion == null)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.NextFragment(apiVersion, tenant, nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
             }
 
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextFragment");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.NextFragment(apiVersion, tenant, nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = CreateNextFragmentRequest(apiVersion, tenant, nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -1972,6 +1362,7 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1992,40 +1383,30 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            if (apiVersion == null)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
             }
 
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextFragmentWithGrouping");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.NextFragmentWithGroupingAsync(apiVersion, tenant, nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
@@ -2033,6 +1414,7 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2053,40 +1435,30 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> NextFragmentWithGrouping(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            if (apiVersion == null)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
+            if (tenant == null)
+            {
+                throw new ArgumentNullException(nameof(tenant));
+            }
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
             }
 
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextFragmentWithGrouping");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.NextFragmentWithGrouping(apiVersion, tenant, nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "odata.nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = CreateNextFragmentWithGroupingRequest(apiVersion, tenant, nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "odata.nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
@@ -2111,40 +1483,19 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagingModelWithItemNameWithXMSClientName");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetPagingModelWithItemNameWithXMSClientNameAsync(options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
+                        : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagingModelWithItemNameWithXMSClientName");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetPagingModelWithItemNameWithXMSClientNameNextPageAsync(nextLink, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
@@ -2169,40 +1520,19 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagingModelWithItemNameWithXMSClientName");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetPagingModelWithItemNameWithXMSClientName(options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
+                        : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagingModelWithItemNameWithXMSClientName");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetPagingModelWithItemNameWithXMSClientNameNextPage(nextLink, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
@@ -2230,40 +1560,35 @@ namespace paging_LowLevel
         public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetMultiplePagesLRONextPageAsync(nextLink, clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            using var scope0 = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
+            scope.Start();
             try
             {
-                using HttpMessage message = _restClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
-                Response response = await _restClient.GetMultiplePagesLROAsync(clientRequestId, maxresults, timeout, options).ConfigureAwait(false);
-                return new LowLevelFuncOperation<AsyncPageable<BinaryData>>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", (response) =>
-                {
-                    return PageableHelpers.CreateAsyncEnumerable((pageSizeHint) =>
-                    {
-                        return Task.FromResult(LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink"));
-                    }, NextPageFunc);
-                });
+                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, options, CreateEnumerableAsync).ConfigureAwait(false);
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
+            }
+
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(Response response, string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                Page<BinaryData> page;
+                if (nextLink == null)
+                {
+                    page = LowLevelPageableHelpers.BuildPageForResponse(response, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+                while (!string.IsNullOrEmpty(nextLink))
+                {
+                    var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
             }
         }
 
@@ -2292,40 +1617,636 @@ namespace paging_LowLevel
         public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetMultiplePagesLRONextPage(nextLink, clientRequestId, maxresults, timeout, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            using var scope0 = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
+            scope.Start();
             try
             {
-                using HttpMessage message = _restClient.CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
-                Response response = _restClient.GetMultiplePagesLRO(clientRequestId, maxresults, timeout, options);
-                return new LowLevelFuncOperation<Pageable<BinaryData>>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", (response) =>
-                {
-                    return PageableHelpers.CreateEnumerable((pageSizeHint) =>
-                    {
-                        return LowLevelPagableHelpers.BuildPageForResponse(response, "values", "nextLink");
-                    }, NextPageFunc);
-                });
+                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, options, CreateEnumerable);
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
+            }
+
+            IEnumerable<Page<BinaryData>> CreateEnumerable(Response response, string nextLink, int? pageSizeHint)
+            {
+                Page<BinaryData> page;
+                if (nextLink == null)
+                {
+                    page = LowLevelPageableHelpers.BuildPageForResponse(response, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+                while (!string.IsNullOrEmpty(nextLink))
+                {
+                    var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout);
+                    page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                }
+            }
+        }
+
+        internal HttpMessage CreateGetNoItemNamePagesRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/noitemname", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetNullNextLinkNamePagesRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/nullnextlink", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSinglePagesRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/single", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateFirstResponseEmptyRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/firstResponseEmpty/1", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple", false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetWithQueryParamsRequest(int requiredQueryParameter)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/getWithQueryParams", false);
+            uri.AppendQuery("requiredQueryParameter", requiredQueryParameter, true);
+            uri.AppendQuery("queryConstant", true, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateNextOperationWithQueryParamsRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/nextOperationWithQueryParams", false);
+            uri.AppendQuery("queryConstant", true, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/odata", false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(int offset, string clientRequestId, int? maxresults, int? timeout)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/withpath/", false);
+            uri.AppendPath(offset, true);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesRetryFirstRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/retryfirst", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesRetrySecondRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/retrysecond", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSinglePagesFailureRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/single/failure", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesFailureRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/failure", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesFailureUriRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/failureuri", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string apiVersion, string tenant)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/fragment/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendQuery("api_version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string apiVersion, string tenant)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendQuery("api_version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/lro", false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier202.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/fragment/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendPath("/", false);
+            uri.AppendRawNextLink(nextLink, false);
+            uri.AppendQuery("api_version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateNextFragmentWithGroupingRequest(string apiVersion, string tenant, string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendPath("/", false);
+            uri.AppendRawNextLink(nextLink, false);
+            uri.AppendQuery("api_version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/itemNameWithXMSClientName", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateFirstResponseEmptyNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, int offset, string clientRequestId, int? maxresults, int? timeout)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier202 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier202();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    202 => false,
+                    _ => true
+                };
             }
         }
     }

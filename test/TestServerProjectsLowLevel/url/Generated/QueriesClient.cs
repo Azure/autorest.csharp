@@ -17,14 +17,15 @@ namespace url_LowLevel
     /// <summary> The Queries service client. </summary>
     public partial class QueriesClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly QueriesRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
         protected QueriesClient()
@@ -35,6 +36,7 @@ namespace url_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public QueriesClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -44,12 +46,11 @@ namespace url_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestUrlTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new QueriesRestClient(_clientDiagnostics, _pipeline, endpoint);
-            this.endpoint = endpoint;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Get true Boolean value on path. </summary>
@@ -71,7 +72,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetBooleanTrueAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetBooleanTrueRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -99,7 +101,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetBooleanTrue(options);
+                using HttpMessage message = CreateGetBooleanTrueRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -127,7 +130,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetBooleanFalseAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetBooleanFalseRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -155,7 +159,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetBooleanFalse(options);
+                using HttpMessage message = CreateGetBooleanFalseRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -184,7 +189,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetBooleanNullAsync(boolQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -213,7 +219,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetBooleanNull(boolQuery, options);
+                using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -241,7 +248,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetIntOneMillionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetIntOneMillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -269,7 +277,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetIntOneMillion(options);
+                using HttpMessage message = CreateGetIntOneMillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -297,7 +306,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetIntNegativeOneMillionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -325,7 +335,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetIntNegativeOneMillion(options);
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -354,7 +365,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetIntNullAsync(intQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetIntNullRequest(intQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -383,7 +395,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetIntNull(intQuery, options);
+                using HttpMessage message = CreateGetIntNullRequest(intQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -411,7 +424,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetTenBillionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetTenBillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -439,7 +453,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetTenBillion(options);
+                using HttpMessage message = CreateGetTenBillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -467,7 +482,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetNegativeTenBillionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -495,7 +511,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetNegativeTenBillion(options);
+                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -524,7 +541,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetLongNullAsync(longQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetLongNullRequest(longQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -553,7 +571,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetLongNull(longQuery, options);
+                using HttpMessage message = CreateGetLongNullRequest(longQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -581,7 +600,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.FloatScientificPositiveAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -609,7 +629,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.FloatScientificPositive(options);
+                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -637,7 +658,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.FloatScientificNegativeAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -665,7 +687,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.FloatScientificNegative(options);
+                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -694,7 +717,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.FloatNullAsync(floatQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateFloatNullRequest(floatQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -723,7 +747,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.FloatNull(floatQuery, options);
+                using HttpMessage message = CreateFloatNullRequest(floatQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -751,7 +776,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DoubleDecimalPositiveAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -779,7 +805,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DoubleDecimalPositive(options);
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -807,7 +834,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DoubleDecimalNegativeAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -835,7 +863,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DoubleDecimalNegative(options);
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -864,7 +893,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DoubleNullAsync(doubleQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -893,7 +923,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DoubleNull(doubleQuery, options);
+                using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -921,7 +952,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.StringUnicodeAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateStringUnicodeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -949,7 +981,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.StringUnicode(options);
+                using HttpMessage message = CreateStringUnicodeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -977,7 +1010,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.StringUrlEncodedAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateStringUrlEncodedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1005,7 +1039,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.StringUrlEncoded(options);
+                using HttpMessage message = CreateStringUrlEncodedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1033,7 +1068,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.StringEmptyAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateStringEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1061,7 +1097,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.StringEmpty(options);
+                using HttpMessage message = CreateStringEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1090,7 +1127,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.StringNullAsync(stringQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateStringNullRequest(stringQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1119,7 +1157,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.StringNull(stringQuery, options);
+                using HttpMessage message = CreateStringNullRequest(stringQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1148,7 +1187,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.EnumValidAsync(enumQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateEnumValidRequest(enumQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1177,7 +1217,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.EnumValid(enumQuery, options);
+                using HttpMessage message = CreateEnumValidRequest(enumQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1206,7 +1247,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.EnumNullAsync(enumQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateEnumNullRequest(enumQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1235,7 +1277,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.EnumNull(enumQuery, options);
+                using HttpMessage message = CreateEnumNullRequest(enumQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1264,7 +1307,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ByteMultiByteAsync(byteQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1293,7 +1337,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ByteMultiByte(byteQuery, options);
+                using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1321,7 +1366,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ByteEmptyAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateByteEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1349,7 +1395,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ByteEmpty(options);
+                using HttpMessage message = CreateByteEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1378,7 +1425,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ByteNullAsync(byteQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateByteNullRequest(byteQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1407,7 +1455,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ByteNull(byteQuery, options);
+                using HttpMessage message = CreateByteNullRequest(byteQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1435,7 +1484,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DateValidAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDateValidRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1463,7 +1513,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DateValid(options);
+                using HttpMessage message = CreateDateValidRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1492,7 +1543,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DateNullAsync(dateQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDateNullRequest(dateQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1521,7 +1573,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DateNull(dateQuery, options);
+                using HttpMessage message = CreateDateNullRequest(dateQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1549,7 +1602,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DateTimeValidAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDateTimeValidRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1577,7 +1631,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DateTimeValid(options);
+                using HttpMessage message = CreateDateTimeValidRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1606,7 +1661,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DateTimeNullAsync(dateTimeQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1635,7 +1691,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DateTimeNull(dateTimeQuery, options);
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1664,7 +1721,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringCsvValidAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1693,7 +1751,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringCsvValid(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1722,7 +1781,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringCsvNullAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1751,7 +1811,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringCsvNull(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1780,7 +1841,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringCsvEmptyAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1809,7 +1871,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringCsvEmpty(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1838,7 +1901,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringNoCollectionFormatEmptyAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1867,7 +1931,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringNoCollectionFormatEmpty(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1896,7 +1961,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringSsvValidAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1925,7 +1991,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringSsvValid(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1954,7 +2021,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringTsvValidAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1983,7 +2051,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringTsvValid(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2012,7 +2081,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringPipesValidAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2041,12 +2111,609 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringPipesValid(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateGetBooleanTrueRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/true", false);
+            uri.AppendQuery("boolQuery", true, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetBooleanFalseRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/false", false);
+            uri.AppendQuery("boolQuery", false, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetBooleanNullRequest(bool? boolQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/null", false);
+            if (boolQuery != null)
+            {
+                uri.AppendQuery("boolQuery", boolQuery.Value, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetIntOneMillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/int/1000000", false);
+            uri.AppendQuery("intQuery", 1000000, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetIntNegativeOneMillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/int/-1000000", false);
+            uri.AppendQuery("intQuery", -1000000, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetIntNullRequest(int? intQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/int/null", false);
+            if (intQuery != null)
+            {
+                uri.AppendQuery("intQuery", intQuery.Value, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetTenBillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/long/10000000000", false);
+            uri.AppendQuery("longQuery", 10000000000L, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetNegativeTenBillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/long/-10000000000", false);
+            uri.AppendQuery("longQuery", -10000000000L, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetLongNullRequest(long? longQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/long/null", false);
+            if (longQuery != null)
+            {
+                uri.AppendQuery("longQuery", longQuery.Value, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateFloatScientificPositiveRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/float/1.034E+20", false);
+            uri.AppendQuery("floatQuery", 1.034E+20F, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateFloatScientificNegativeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/float/-1.034E-20", false);
+            uri.AppendQuery("floatQuery", -1.034E-20F, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateFloatNullRequest(float? floatQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/float/null", false);
+            if (floatQuery != null)
+            {
+                uri.AppendQuery("floatQuery", floatQuery.Value, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDoubleDecimalPositiveRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/double/9999999.999", false);
+            uri.AppendQuery("doubleQuery", 9999999.999, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDoubleDecimalNegativeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/double/-9999999.999", false);
+            uri.AppendQuery("doubleQuery", -9999999.999, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDoubleNullRequest(double? doubleQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/double/null", false);
+            if (doubleQuery != null)
+            {
+                uri.AppendQuery("doubleQuery", doubleQuery.Value, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringUnicodeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/unicode/", false);
+            uri.AppendQuery("stringQuery", "啊齄丂狛狜隣郎隣兀﨩", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringUrlEncodedRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend", false);
+            uri.AppendQuery("stringQuery", "begin!*'();:@ &=+$,/?#[]end", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringEmptyRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/empty", false);
+            uri.AppendQuery("stringQuery", "", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringNullRequest(string stringQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/null", false);
+            if (stringQuery != null)
+            {
+                uri.AppendQuery("stringQuery", stringQuery, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateEnumValidRequest(string enumQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/enum/green%20color", false);
+            if (enumQuery != null)
+            {
+                uri.AppendQuery("enumQuery", enumQuery, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateEnumNullRequest(string enumQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/enum/null", false);
+            if (enumQuery != null)
+            {
+                uri.AppendQuery("enumQuery", enumQuery, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateByteMultiByteRequest(byte[] byteQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/byte/multibyte", false);
+            if (byteQuery != null)
+            {
+                uri.AppendQuery("byteQuery", byteQuery, "D", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateByteEmptyRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/byte/empty", false);
+            uri.AppendQuery("byteQuery", new byte[] { }, "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateByteNullRequest(byte[] byteQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/byte/null", false);
+            if (byteQuery != null)
+            {
+                uri.AppendQuery("byteQuery", byteQuery, "D", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateValidRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/date/2012-01-01", false);
+            uri.AppendQuery("dateQuery", new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/date/null", false);
+            if (dateQuery != null)
+            {
+                uri.AppendQuery("dateQuery", dateQuery.Value, "D", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateTimeValidRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
+            uri.AppendQuery("dateTimeQuery", new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/datetime/null", false);
+            if (dateTimeQuery != null)
+            {
+                uri.AppendQuery("dateTimeQuery", dateTimeQuery.Value, "O", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/csv/string/valid", false);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/csv/string/null", false);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/csv/string/empty", false);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/none/string/empty", false);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/ssv/string/valid", false);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/tsv/string/valid", false);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/pipes/string/valid", false);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
             }
         }
     }

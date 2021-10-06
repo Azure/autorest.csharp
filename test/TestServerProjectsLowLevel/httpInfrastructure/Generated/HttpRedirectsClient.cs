@@ -16,14 +16,15 @@ namespace httpInfrastructure_LowLevel
     /// <summary> The HttpRedirects service client. </summary>
     public partial class HttpRedirectsClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpRedirectsRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of HttpRedirectsClient for mocking. </summary>
         protected HttpRedirectsClient()
@@ -34,6 +35,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpRedirectsClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -43,12 +45,11 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new HttpRedirectsRestClient(_clientDiagnostics, _pipeline, endpoint);
-            this.endpoint = endpoint;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
@@ -70,7 +71,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head300Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead300Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,7 +100,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head300(options);
+                using HttpMessage message = CreateHead300Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -126,7 +129,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get300Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet300Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -154,7 +158,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get300(options);
+                using HttpMessage message = CreateGet300Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -182,7 +187,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head301Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead301Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -210,7 +216,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head301(options);
+                using HttpMessage message = CreateHead301Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -238,7 +245,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get301Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet301Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -266,7 +274,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get301(options);
+                using HttpMessage message = CreateGet301Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -295,7 +304,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put301Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut301Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -324,7 +334,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put301(content, options);
+                using HttpMessage message = CreatePut301Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -352,7 +363,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head302Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead302Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -380,7 +392,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head302(options);
+                using HttpMessage message = CreateHead302Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -408,7 +421,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get302Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet302Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -436,7 +450,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get302(options);
+                using HttpMessage message = CreateGet302Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -465,7 +480,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Patch302Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch302Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -494,7 +510,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Patch302(content, options);
+                using HttpMessage message = CreatePatch302Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -523,7 +540,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post303Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost303Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -552,7 +570,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post303(content, options);
+                using HttpMessage message = CreatePost303Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -580,7 +599,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head307Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead307Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -608,7 +628,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head307(options);
+                using HttpMessage message = CreateHead307Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -636,7 +657,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get307Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet307Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -664,7 +686,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get307(options);
+                using HttpMessage message = CreateGet307Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -692,7 +715,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Options307Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateOptions307Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -720,7 +744,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Options307(options);
+                using HttpMessage message = CreateOptions307Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -749,7 +774,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put307Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut307Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -778,7 +804,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put307(content, options);
+                using HttpMessage message = CreatePut307Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -807,7 +834,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Patch307Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch307Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -836,7 +864,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Patch307(content, options);
+                using HttpMessage message = CreatePatch307Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -865,7 +894,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post307Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost307Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -894,7 +924,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post307(content, options);
+                using HttpMessage message = CreatePost307Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -923,7 +954,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Delete307Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete307Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -952,12 +984,348 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Delete307(content, options);
+                using HttpMessage message = CreateDelete307Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateHead300Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/300", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200300.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet300Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/300", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200300.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead301Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/301", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200301.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet301Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/301", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200301.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut301Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/301", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier301.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead302Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/302", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200302.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet302Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/302", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200302.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePatch302Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/302", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier302.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost303Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/303", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200303.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead307Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200307.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet307Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200307.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateOptions307Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Options;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200307.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut307Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200307.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePatch307Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200307.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost307Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200307.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDelete307Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200307.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200300 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200300();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    300 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier200301 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200301();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    301 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier301 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier301();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    301 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier200302 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200302();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    302 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier302 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier302();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    302 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier200303 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200303();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    303 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier200307 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200307();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    307 => false,
+                    _ => true
+                };
             }
         }
     }

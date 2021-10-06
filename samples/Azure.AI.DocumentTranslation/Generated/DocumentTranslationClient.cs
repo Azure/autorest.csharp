@@ -7,7 +7,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -18,14 +19,15 @@ namespace Azure.AI.DocumentTranslation
     /// <summary> The DocumentTranslation service client. </summary>
     public partial class DocumentTranslationClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DocumentTranslationRestClient _restClient;
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private string endpoint;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly string _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of DocumentTranslationClient for mocking. </summary>
         protected DocumentTranslationClient()
@@ -36,6 +38,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public DocumentTranslationClient(string endpoint, AzureKeyCredential credential, AzureAIDocumentTranslationClientOptions options = null)
         {
             if (endpoint == null)
@@ -48,12 +51,11 @@ namespace Azure.AI.DocumentTranslation
             }
 
             options ??= new AzureAIDocumentTranslationClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new DocumentTranslationRestClient(_clientDiagnostics, _pipeline, endpoint);
-            this.endpoint = endpoint;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
@@ -110,7 +112,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await _restClient.GetDocumentStatusAsync(id, documentId, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -173,7 +176,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return _restClient.GetDocumentStatus(id, documentId, options);
+                using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -242,7 +246,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await _restClient.GetTranslationStatusAsync(id, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetTranslationStatusRequest(id);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -311,7 +316,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return _restClient.GetTranslationStatus(id, options);
+                using HttpMessage message = CreateGetTranslationStatusRequest(id);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -383,7 +389,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await _restClient.CancelTranslationAsync(id, options).ConfigureAwait(false);
+                using HttpMessage message = CreateCancelTranslationRequest(id);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -455,7 +462,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return _restClient.CancelTranslation(id, options);
+                using HttpMessage message = CreateCancelTranslationRequest(id);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -508,7 +516,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await _restClient.GetSupportedDocumentFormatsAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -561,7 +570,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return _restClient.GetSupportedDocumentFormats(options);
+                using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -614,7 +624,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await _restClient.GetSupportedGlossaryFormatsAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -667,7 +678,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return _restClient.GetSupportedGlossaryFormats(options);
+                using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -709,7 +721,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return await _restClient.GetSupportedStorageSourcesAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -751,7 +764,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                return _restClient.GetSupportedStorageSources(options);
+                using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -867,43 +881,19 @@ namespace Azure.AI.DocumentTranslation
         public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            var idsValues = ids.ToArray();
-            var statusesValues = statuses.ToArray();
-            var orderByValues = orderBy.ToArray();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetTranslationsStatusAsync(top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
+                        : CreateGetTranslationsStatusNextPageRequest(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "@nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetTranslationsStatusNextPageAsync(nextLink, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary>
@@ -1013,43 +1003,19 @@ namespace Azure.AI.DocumentTranslation
         public virtual Pageable<BinaryData> GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            var idsValues = ids.ToArray();
-            var statusesValues = statuses.ToArray();
-            var orderByValues = orderBy.ToArray();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetTranslationsStatus(top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
+                        : CreateGetTranslationsStatusNextPageRequest(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "@nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetTranslationsStatusNextPage(nextLink, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary>
@@ -1153,43 +1119,19 @@ namespace Azure.AI.DocumentTranslation
         public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            var idsValues = ids.ToArray();
-            var statusesValues = statuses.ToArray();
-            var orderByValues = orderBy.ToArray();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetDocumentsStatusAsync(id, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
+                        : CreateGetDocumentsStatusNextPageRequest(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "@nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetDocumentsStatusNextPageAsync(nextLink, id, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary>
@@ -1293,43 +1235,19 @@ namespace Azure.AI.DocumentTranslation
         public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            var idsValues = ids.ToArray();
-            var statusesValues = statuses.ToArray();
-            var orderByValues = orderBy.ToArray();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetDocumentsStatus(id, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
+                        : CreateGetDocumentsStatusNextPageRequest(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "@nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetDocumentsStatusNextPage(nextLink, id, top, skip, maxpagesize, idsValues, statusesValues, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderByValues, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "@nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary>
@@ -1345,6 +1263,7 @@ namespace Azure.AI.DocumentTranslation
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1405,9 +1324,8 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = _restClient.CreateStartTranslationRequest(content);
-                Response response = await _restClient.StartTranslationAsync(content, options).ConfigureAwait(false);
-                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation", LowLevelOperationHelpers.ResponseContentSelector);
+                using HttpMessage message = CreateStartTranslationRequest(content);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1429,6 +1347,7 @@ namespace Azure.AI.DocumentTranslation
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1489,14 +1408,278 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = _restClient.CreateStartTranslationRequest(content);
-                Response response = _restClient.StartTranslation(content, options);
-                return new LowLevelFuncOperation<BinaryData>(_clientDiagnostics, _pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation", LowLevelOperationHelpers.ResponseContentSelector);
+                using HttpMessage message = CreateStartTranslationRequest(content);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateStartTranslationRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/batches", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetTranslationsStatusRequest(int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/batches", false);
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            if (skip != null)
+            {
+                uri.AppendQuery("$skip", skip.Value, true);
+            }
+            if (maxpagesize != null)
+            {
+                uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
+            }
+            if (ids != null)
+            {
+                uri.AppendQueryDelimited("ids", ids, ",", true);
+            }
+            if (statuses != null)
+            {
+                uri.AppendQueryDelimited("statuses", statuses, ",", true);
+            }
+            if (createdDateTimeUtcStart != null)
+            {
+                uri.AppendQuery("createdDateTimeUtcStart", createdDateTimeUtcStart.Value, "O", true);
+            }
+            if (createdDateTimeUtcEnd != null)
+            {
+                uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
+            }
+            if (orderBy != null)
+            {
+                uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetDocumentStatusRequest(Guid id, Guid documentId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/batches/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/documents/", false);
+            uri.AppendPath(documentId, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetTranslationStatusRequest(Guid id)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/batches/", false);
+            uri.AppendPath(id, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateCancelTranslationRequest(Guid id)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/batches/", false);
+            uri.AppendPath(id, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetDocumentsStatusRequest(Guid id, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/batches/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/documents", false);
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            if (skip != null)
+            {
+                uri.AppendQuery("$skip", skip.Value, true);
+            }
+            if (maxpagesize != null)
+            {
+                uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
+            }
+            if (ids != null)
+            {
+                uri.AppendQueryDelimited("ids", ids, ",", true);
+            }
+            if (statuses != null)
+            {
+                uri.AppendQueryDelimited("statuses", statuses, ",", true);
+            }
+            if (createdDateTimeUtcStart != null)
+            {
+                uri.AppendQuery("createdDateTimeUtcStart", createdDateTimeUtcStart.Value, "O", true);
+            }
+            if (createdDateTimeUtcEnd != null)
+            {
+                uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
+            }
+            if (orderBy != null)
+            {
+                uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSupportedDocumentFormatsRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/documents/formats", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSupportedGlossaryFormatsRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/glossaries/formats", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetSupportedStorageSourcesRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendPath("/storagesources", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetTranslationsStatusNextPageRequest(string nextLink, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetDocumentsStatusNextPageRequest(string nextLink, Guid id, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/translator/text/batch/v1.0-preview.1", false);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier202 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier202();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    202 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
             }
         }
     }

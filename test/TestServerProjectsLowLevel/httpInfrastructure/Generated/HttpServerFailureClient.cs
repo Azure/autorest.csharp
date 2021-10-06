@@ -16,14 +16,15 @@ namespace httpInfrastructure_LowLevel
     /// <summary> The HttpServerFailure service client. </summary>
     public partial class HttpServerFailureClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpServerFailureRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of HttpServerFailureClient for mocking. </summary>
         protected HttpServerFailureClient()
@@ -34,6 +35,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpServerFailureClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -43,12 +45,11 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new HttpServerFailureRestClient(_clientDiagnostics, _pipeline, endpoint);
-            this.endpoint = endpoint;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
@@ -70,7 +71,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head501Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead501Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,7 +100,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head501(options);
+                using HttpMessage message = CreateHead501Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -126,7 +129,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get501Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet501Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -154,7 +158,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get501(options);
+                using HttpMessage message = CreateGet501Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -183,7 +188,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post505Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost505Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -212,7 +218,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post505(content, options);
+                using HttpMessage message = CreatePost505Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -241,7 +248,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Delete505Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete505Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -270,12 +278,86 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Delete505(content, options);
+                using HttpMessage message = CreateDelete505Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateHead501Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/501", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet501Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/501", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost505Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/505", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDelete505Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/505", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier : Azure.Core.ResponseClassifier
+        {
+            private static Azure.Core.ResponseClassifier _instance;
+            public static Azure.Core.ResponseClassifier Instance => _instance ??= new ResponseClassifier();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    _ => true
+                };
             }
         }
     }
