@@ -43,6 +43,10 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
         private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);
         private static readonly Parameter EnumeratorCancellationTokenParameter = new("cancellationToken", "Enumerator cancellation token", typeof(CancellationToken), Constant.NewInstanceOf(typeof(CancellationToken)), false) { Attributes = new[] { new CSharpAttribute(typeof(EnumeratorCancellationAttribute)) } };
+        private static readonly Parameter ClientDiagnosticsParameter = new("clientDignostics", "The ClientDiagnostics instance to use", new CSharpType(typeof(ClientDiagnostics)), null, true);
+        private static readonly Parameter HttpPipelineParameter = new("pipeline", "The pipeline instance to use", new CSharpType(typeof(HttpPipeline)), null, true);
+        private static readonly Parameter TokenAuthParameter = new("tokenCredential", "The token credential to copy", new CSharpType(typeof(TokenCredential)), null, false);
+        private static readonly Parameter KeyAuthParameter = new("keyCredential", "The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, false);
 
         private static readonly FormattableString ProcessMessageMethodName = $"{PipelineField:I}.{nameof(HttpPipelineExtensions.ProcessMessage)}";
         private static readonly FormattableString ProcessMessageMethodAsyncName = $"{PipelineField:I}.{nameof(HttpPipelineExtensions.ProcessMessageAsync)}";
@@ -55,7 +59,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly FormattableString CreatePageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageable)}";
         private static readonly FormattableString CreateAsyncPageableMethodName = $"{typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}";
 
-        public void WriteClient(CodeWriter writer, LowLevelRestClient restClient, BuildContext context)
+        public void WriteClient(CodeWriter writer, LowLevelRestClient restClient, BuildContext<LowLevelOutputLibrary> context)
         {
             var cs = restClient.Type;
             using (writer.Namespace(cs.Namespace))
@@ -82,6 +86,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         WriteLongRunningOperationMethod(writer, longRunningOperationMethod, true);
                         WriteLongRunningOperationMethod(writer, longRunningOperationMethod, false);
+                    }
+
+                    foreach (var subClient in context.Library.FindSubClents(restClient))
+                    {
+                        WriteSubClientFactoryMethod(writer, restClient, subClient, context);
                     }
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
@@ -146,9 +155,23 @@ namespace AutoRest.CSharp.Generation.Writers
             return fieldNames;
         }
 
-        private static void WriteConstructors(CodeWriter writer, LowLevelRestClient client, BuildContext context)
+        private static void WriteConstructors(CodeWriter writer, LowLevelRestClient client, BuildContext<LowLevelOutputLibrary> context)
         {
             WriteEmptyConstructor(writer, client);
+
+            if (context.Library.EmitPublicConstructor(client.OperationGroup))
+            {
+                WritePublicClientConstructors(writer, client, context);
+            }
+
+            if (context.Library.EmitSubClientConstructor(client.OperationGroup))
+            {
+                WriteSubClientInternalConstructor(writer, client, context);
+            }
+        }
+
+        private static void WritePublicClientConstructors(CodeWriter writer, LowLevelRestClient client, BuildContext<LowLevelOutputLibrary> context)
+        {
             foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {
                 WriteConstructor(writer, client, scheme);
@@ -202,6 +225,55 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.Line($"_{parameter.Name:I} = {parameter.Name:I};");
                     }
+                }
+            }
+            writer.Line();
+        }
+
+        private static void WriteSubClientInternalConstructor(CodeWriter writer, LowLevelRestClient client, BuildContext<LowLevelOutputLibrary> context)
+        {
+            var clientOptionsType = client.ClientOptions.Type;
+            var stateParameters = new List<Parameter>() { ClientDiagnosticsParameter, HttpPipelineParameter };
+
+            foreach (var securityScheme in context.CodeModel.Security.GetSchemesOrAnonymous())
+            {
+                if (securityScheme is AzureKeySecurityScheme)
+                {
+                    stateParameters.Add(KeyAuthParameter);
+                }
+                else if (securityScheme is AADTokenSecurityScheme)
+                {
+                    stateParameters.Add(TokenAuthParameter);
+                }
+            }
+
+            var ctorParams = stateParameters.Concat(RestClientBuilder.GetConstructorParameters(client.Parameters, null, includeAPIVersion: true)).ToArray();
+            var signature = new MethodSignature(client.Type.Name, $"Initializes a new instance of {client.Type.Name}", "internal", ctorParams);
+
+            writer.WriteMethodDocumentation(signature);
+            using (writer.WriteMethodDeclaration(signature))
+            {
+                writer.WriteParameterNullChecks(ctorParams);
+
+                writer.Line();
+                writer.Line($"{ClientDiagnosticsField:I} = {ClientDiagnosticsParameter.Name:I};");
+                writer.Line($"{PipelineField:I} = {HttpPipelineParameter.Name:I};");
+
+                foreach (var securityScheme in context.CodeModel.Security.GetSchemesOrAnonymous())
+                {
+                    if (securityScheme is AzureKeySecurityScheme)
+                    {
+                        writer.Line($"{KeyAuthFieldName}= {KeyAuthParameter.Name:I};");
+                    }
+                    else if (securityScheme is AADTokenSecurityScheme)
+                    {
+                        writer.Line($"{TokenAuthFieldName}= {TokenAuthParameter.Name:I};");
+                    }
+                }
+
+                foreach (var parameter in client.Parameters)
+                {
+                    writer.Line($"_{parameter.Name:I} = {parameter.Name:I};");
                 }
             }
             writer.Line();
@@ -388,6 +460,80 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
+            writer.Line();
+        }
+
+        private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelRestClient parentClient, LowLevelRestClient childClient, BuildContext context)
+        {
+            var factoryMethodParameters = childClient.Parameters.Where(p => !parentClient.Parameters.Any(x => x.Name == p.Name));
+
+            CodeWriterDeclaration cacheVariable = new CodeWriterDeclaration($"_cached{childClient.Type.Name}");
+
+            if (!factoryMethodParameters.Any())
+            {
+                writer.Line($"private {childClient.Type} {cacheVariable:D};");
+                writer.Line();
+            }
+
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {childClient.Type.Name}");
+
+            foreach (Parameter parameter in factoryMethodParameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter);
+            }
+
+            writer.Append($"public virtual {childClient.Type} Get{childClient.Type.Name}(");
+            foreach (var parameter in factoryMethodParameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.RemoveTrailingComma();
+            writer.Line($")");
+
+            using (writer.Scope())
+            {
+                writer.WriteParameterNullChecks(factoryMethodParameters.ToArray());
+
+                CodeWriterDeclaration clientVariable = new CodeWriterDeclaration($"client");
+
+                writer.Append($"var {clientVariable:D} = new {childClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
+
+                foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
+                {
+                    switch (scheme)
+                    {
+                        case AzureKeySecurityScheme _:
+                            writer.Append($"{KeyAuthFieldName}, ");
+                            break;
+                        case AADTokenSecurityScheme _:
+                            writer.Append($"{TokenAuthFieldName}, ");
+                            break;
+                    }
+                }
+
+                foreach (var parameter in childClient.Parameters)
+                {
+                    var thisPrefix = !factoryMethodParameters.Any(x => x.Name == parameter.Name) ? "this." : "";
+                    writer.Append($"{thisPrefix}{parameter.Name}, ");
+                }
+
+                writer.RemoveTrailingComma();
+                writer.Line($");");
+
+                if (!factoryMethodParameters.Any())
+                {
+                    writer.Line($"if ({cacheVariable} == null)");
+                    using (writer.Scope())
+                    {
+                        writer.Line($"{new CSharpType(typeof(Interlocked))}.CompareExchange<{childClient.Type}>(ref {cacheVariable}, {clientVariable}, null);");
+                    }
+                    writer.Line($"return {cacheVariable};");
+                }
+                else
+                {
+                    writer.Line($"return {clientVariable};");
+                }
+            }
             writer.Line();
         }
 

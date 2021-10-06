@@ -33,28 +33,36 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
+        /// <param name="clientDignostics"> The ClientDiagnostics to copy. </param>
+        /// <param name="pipeline"> The pipeline to copy. </param>
+        /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public ResourceSetRulesClient(Uri endpoint, TokenCredential credential, PurviewAccountClientOptions options = null)
+        /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDignostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/>, or <paramref name="apiVersion"/> is null. </exception>
+        internal ResourceSetRulesClient(ClientDiagnostics clientDignostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string apiVersion = "2019-11-01-preview")
         {
+            if (clientDignostics == null)
+            {
+                throw new ArgumentNullException(nameof(clientDignostics));
+            }
+            if (pipeline == null)
+            {
+                throw new ArgumentNullException(nameof(pipeline));
+            }
             if (endpoint == null)
             {
                 throw new ArgumentNullException(nameof(endpoint));
             }
-            if (credential == null)
+            if (apiVersion == null)
             {
-                throw new ArgumentNullException(nameof(credential));
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
-            options ??= new PurviewAccountClientOptions();
-
-            _clientDiagnostics = new ClientDiagnostics(options);
-            _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _clientDiagnostics = clientDignostics;
+            _pipeline = pipeline;
+            _tokenCredential = tokenCredential;
             _endpoint = endpoint;
-            _apiVersion = options.Version;
+            _apiVersion = apiVersion;
         }
 
         /// <summary> Get a resource set config service model. </summary>

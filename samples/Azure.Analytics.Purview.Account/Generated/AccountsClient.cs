@@ -1116,6 +1116,32 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
+        /// <summary> Initializes a new instance of CollectionsClient. </summary>
+        /// <param name="collectionName"> The String to use. </param>
+        public virtual CollectionsClient GetCollectionsClient(string collectionName)
+        {
+            if (collectionName == null)
+            {
+                throw new ArgumentNullException(nameof(collectionName));
+            }
+
+            var client = new CollectionsClient(_clientDiagnostics, _pipeline, _tokenCredential, this.endpoint, collectionName, this.apiVersion);
+            return client;
+        }
+
+        private ResourceSetRulesClient _cachedResourceSetRulesClient;
+
+        /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
+        public virtual ResourceSetRulesClient GetResourceSetRulesClient()
+        {
+            var client = new ResourceSetRulesClient(_clientDiagnostics, _pipeline, _tokenCredential, this.endpoint, this.apiVersion);
+            if (_cachedResourceSetRulesClient == null)
+            {
+                Interlocked.CompareExchange(ref _cachedResourceSetRulesClient, client, null);
+            }
+            return _cachedResourceSetRulesClient;
+        }
+
         internal HttpMessage CreateGetAccountPropertiesRequest()
         {
             var message = _pipeline.CreateMessage();
