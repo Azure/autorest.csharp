@@ -465,13 +465,40 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelRestClient parentClient, LowLevelRestClient childClient, BuildContext context)
         {
+            CodeWriterDeclaration clientVariable = new CodeWriterDeclaration($"client");
             var factoryMethodParameters = childClient.Parameters.Where(p => !parentClient.Parameters.Any(x => x.Name == p.Name));
+
+            void WriteClientObjectCreation() {
+                writer.Append($"var {clientVariable:D} = new {childClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
+
+                foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
+                {
+                    switch (scheme)
+                    {
+                        case AzureKeySecurityScheme _:
+                            writer.Append($"{KeyAuthFieldName}, ");
+                            break;
+                        case AADTokenSecurityScheme _:
+                            writer.Append($"{TokenAuthFieldName}, ");
+                            break;
+                    }
+                }
+
+                foreach (var parameter in childClient.Parameters)
+                {
+                    var prefix = !factoryMethodParameters.Any(x => x.Name == parameter.Name) ? "_" : "";
+                    writer.Append($"{prefix}{parameter.Name}, ");
+                }
+
+                writer.RemoveTrailingComma();
+                writer.Line($");");
+            }
 
             CodeWriterDeclaration cacheVariable = new CodeWriterDeclaration($"_cached{childClient.Type.Name}");
 
             if (!factoryMethodParameters.Any())
             {
-                writer.Line($"private {childClient.Type} {cacheVariable:D};");
+                writer.Line($"private volatile {childClient.Type} {cacheVariable:D};");
                 writer.Line();
             }
 
@@ -494,43 +521,20 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteParameterNullChecks(factoryMethodParameters.ToArray());
 
-                CodeWriterDeclaration clientVariable = new CodeWriterDeclaration($"client");
-
-                writer.Append($"var {clientVariable:D} = new {childClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
-
-                foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
-                {
-                    switch (scheme)
-                    {
-                        case AzureKeySecurityScheme _:
-                            writer.Append($"{KeyAuthFieldName}, ");
-                            break;
-                        case AADTokenSecurityScheme _:
-                            writer.Append($"{TokenAuthFieldName}, ");
-                            break;
-                    }
-                }
-
-                foreach (var parameter in childClient.Parameters)
-                {
-                    var thisPrefix = !factoryMethodParameters.Any(x => x.Name == parameter.Name) ? "this." : "";
-                    writer.Append($"{thisPrefix}{parameter.Name}, ");
-                }
-
-                writer.RemoveTrailingComma();
-                writer.Line($");");
-
                 if (!factoryMethodParameters.Any())
                 {
                     writer.Line($"if ({cacheVariable} == null)");
                     using (writer.Scope())
                     {
-                        writer.Line($"{new CSharpType(typeof(Interlocked))}.CompareExchange<{childClient.Type}>(ref {cacheVariable}, {clientVariable}, null);");
+                        WriteClientObjectCreation();
+                        writer.Line($"{cacheVariable} = {clientVariable};");
                     }
+
                     writer.Line($"return {cacheVariable};");
                 }
                 else
                 {
+                    WriteClientObjectCreation();
                     writer.Line($"return {clientVariable};");
                 }
             }

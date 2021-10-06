@@ -1125,19 +1125,19 @@ namespace Azure.Analytics.Purview.Account
                 throw new ArgumentNullException(nameof(collectionName));
             }
 
-            var client = new CollectionsClient(_clientDiagnostics, _pipeline, _tokenCredential, this.endpoint, collectionName, this.apiVersion);
+            var client = new CollectionsClient(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, collectionName, _apiVersion);
             return client;
         }
 
-        private ResourceSetRulesClient _cachedResourceSetRulesClient;
+        private volatile ResourceSetRulesClient _cachedResourceSetRulesClient;
 
         /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
         public virtual ResourceSetRulesClient GetResourceSetRulesClient()
         {
-            var client = new ResourceSetRulesClient(_clientDiagnostics, _pipeline, _tokenCredential, this.endpoint, this.apiVersion);
             if (_cachedResourceSetRulesClient == null)
             {
-                Interlocked.CompareExchange(ref _cachedResourceSetRulesClient, client, null);
+                var client = new ResourceSetRulesClient(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion);
+                _cachedResourceSetRulesClient = client;
             }
             return _cachedResourceSetRulesClient;
         }

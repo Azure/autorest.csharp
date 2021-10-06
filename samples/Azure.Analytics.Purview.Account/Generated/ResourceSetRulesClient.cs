@@ -33,8 +33,8 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
-        /// <param name="clientDignostics"> The ClientDiagnostics to copy. </param>
-        /// <param name="pipeline"> The pipeline to copy. </param>
+        /// <param name="clientDignostics"> The ClientDiagnostics instance to use. </param>
+        /// <param name="pipeline"> The pipeline instance to use. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="apiVersion"> Api Version. </param>
