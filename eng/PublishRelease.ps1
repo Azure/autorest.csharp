@@ -17,7 +17,7 @@ try {
 
     Write-Host "Publishing $file on GitHub!"
     
-    cmd /c ""npx -q publish-release --token $GitHubToken --repo Azure/autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1""
+    cmd /c ""npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1""
 
     $filePath = Join-Path $WorkingDirectory '.npmrc'
     $env:NPM_TOKEN = $NpmToken
@@ -39,7 +39,7 @@ try {
    
     $CoverageDirectory = Resolve-Path $CoverageDirectory
 
-    npm run coverage --prefix node_modules/@microsoft.azure/autorest.testserver -- publish --repo=autorest.csharp --ref=refs/heads/feature/v3 --githubToken=skip --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass --coverageDirectory=$CoverageDirectory
+    npm run coverage --prefix node_modules/@microsoft.azure/autorest.testserver -- publish --repo=Azure/autorest.csharp --ref=refs/heads/feature/v3 --githubToken=skip --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass --coverageDirectory=$CoverageDirectory
 }
 finally {
     Pop-Location
