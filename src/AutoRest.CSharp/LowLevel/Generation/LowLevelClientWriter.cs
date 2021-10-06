@@ -37,8 +37,10 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string ScopesConstantName = "AuthorizationScopes";
 
         private static readonly CSharpType RequestOptionsParameterType = new(typeof(RequestOptions), true);
+        private static readonly CSharpType RequiredRequestOptionsParameterType = new(typeof(RequestOptions));
 
         private static readonly Parameter RequestOptionsParameter = new("options", "The request options", RequestOptionsParameterType, Constant.Default(RequestOptionsParameterType), false);
+        private static readonly Parameter RequiredRequestOptionsParameter = new("options", "The request options", RequiredRequestOptionsParameterType, null, false);
         private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
         private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
         private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);
@@ -74,14 +76,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var pagingMethod in restClient.PagingMethods)
                     {
-                        WritePagingMethod(writer, pagingMethod, true);
-                        WritePagingMethod(writer, pagingMethod, false);
+                        WritePagingMethod(writer, pagingMethod, context.Configuration, true);
+                        WritePagingMethod(writer, pagingMethod, context.Configuration, false);
                     }
 
                     foreach (var longRunningOperationMethod in restClient.LongRunningOperationMethods)
                     {
-                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, true);
-                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, false);
+                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, context.Configuration, true);
+                        WriteLongRunningOperationMethod(writer, longRunningOperationMethod, context.Configuration, false);
                     }
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
@@ -240,7 +242,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 ? headAsBoolean ? typeof(Task<Response<bool>>) : typeof(Task<Response>)
                 : headAsBoolean ? typeof(Response<bool>) : typeof(Response);
 
-            using (WriteClientMethodDeclaration(writer, restMethod, clientMethod.OperationSchemas, returnType, async))
+            using (WriteClientMethodDeclaration(writer, restMethod, clientMethod.OperationSchemas, returnType, configuration, async))
             {
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField))
                 {
@@ -257,7 +259,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WritePagingMethod(CodeWriter writer, LowLevelPagingMethod clientMethod, bool async)
+        private static void WritePagingMethod(CodeWriter writer, LowLevelPagingMethod clientMethod, Configuration configuration, bool async)
         {
             var method = clientMethod.FirstPageMethod;
             var pagingResponseInfo = clientMethod.PagingResponseInfo;
@@ -266,7 +268,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var createPageableMethodName = async ? CreateAsyncPageableMethodName : CreatePageableMethodName;
 
-            using (WriteClientMethodDeclaration(writer, method, clientMethod.OperationSchemas, returnType, async))
+            using (WriteClientMethodDeclaration(writer, method, clientMethod.OperationSchemas, returnType, configuration, async))
             {
                 writer.WriteParameterNullChecks(method.Parameters);
                 var createEnumerableMethod = new CodeWriterDeclaration(CreateMethodName("CreateEnumerable", async));
@@ -320,7 +322,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelLongRunningOperationMethod clientMethod, bool async)
+        private static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelLongRunningOperationMethod clientMethod, Configuration configuration, bool async)
         {
             var startMethod = clientMethod.StartMethod;
             var pagingResponseInfo = clientMethod.PagingResponseInfo;
@@ -333,7 +335,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 ? async ? typeof(Task<Operation<AsyncPageable<BinaryData>>>) : typeof(Operation<Pageable<BinaryData>>)
                 : async ? typeof(Task<Operation<BinaryData>>) : typeof(Operation<BinaryData>);
 
-            using (WriteClientMethodDeclaration(writer, startMethod, clientMethod.OperationSchemas, returnType, async))
+            using (WriteClientMethodDeclaration(writer, startMethod, clientMethod.OperationSchemas, returnType, configuration, async))
             {
                 var createEnumerableMethod = new CodeWriterDeclaration(CreateMethodName("CreateEnumerable", async));
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, ClientDiagnosticsField))
@@ -420,9 +422,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, RestClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, CSharpType returnType, bool async)
+        private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, RestClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, CSharpType returnType, Configuration configuration, bool async)
         {
-            var parameters = clientMethod.Parameters.Append(RequestOptionsParameter);
+            var parameters = BuildParameters(clientMethod, configuration);
             var asyncText = (async && (clientMethod.Operation.Language.Default.Paging == null || clientMethod.Operation.IsLongRunning)) ? " async" : string.Empty;
             var methodSignature = new MethodSignature(CreateMethodName(clientMethod.Name, async), clientMethod.Description, $"{clientMethod.Accessibility} virtual{asyncText}", returnType, null, parameters.ToArray());
 
@@ -519,6 +521,25 @@ namespace AutoRest.CSharp.Generation.Writers
             // Remove the last "," by first removing ",\n", then add back "\n".
             builder.Length -= 1 + Environment.NewLine.Length;
             builder.AppendLine();
+        }
+
+        private static Parameter[] BuildParameters(RestClientMethod operation, Configuration configuration)
+        {
+            var isRequestOptionsRequired = operation.Request.Body == null && operation.Responses.Any(r => r.ResponseBody != null) && configuration.RequestOptionsAllOptional == false && operation.Request.HttpMethod != RequestMethod.Delete;
+            if (isRequestOptionsRequired)
+            {
+                List<Parameter> methodParameters = new List<Parameter>();
+
+                methodParameters.AddRange(RestClientBuilder.GetRequiredParameters(operation.Parameters));
+                methodParameters.Add(RequiredRequestOptionsParameter);
+                methodParameters.AddRange(RestClientBuilder.GetOptionalParameters(operation.Parameters));
+
+                return methodParameters.ToArray();
+            }
+            else
+            {
+                return operation.Parameters.Concat(new Parameter[] { RequestOptionsParameter }).ToArray();
+            }
         }
 
         private static SchemaDocumentation[]? GetSchemaDocumentationsForSchema(Schema schema, string schemaName)

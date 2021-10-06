@@ -69,6 +69,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, "head-as-boolean", configuration.HeadAsBoolean);
                     WriteIfNotDefault(writer, "skip-csproj-packagereference", configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, "low-level-client", configuration.LowLevelClient);
+                    WriteIfNotDefault(writer, "x-ms-request-options-all-optional", configuration.RequestOptionsAllOptional);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -119,6 +120,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, "head-as-boolean"),
                 ReadOption(root, "skip-csproj-packagereference"),
                 ReadOption(root, "low-level-client"),
+                ReadOption(root, "x-ms-request-options-all-optional"),
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }

@@ -64,7 +64,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNullAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
@@ -93,7 +93,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNull(RequestOptions options = null)
+        public virtual Response GetNull(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
@@ -182,7 +182,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetEmptyAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
@@ -211,7 +211,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmpty(RequestOptions options = null)
+        public virtual Response GetEmpty(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
@@ -302,7 +302,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetMbcsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetMbcsAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
@@ -331,7 +331,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetMbcs(RequestOptions options = null)
+        public virtual Response GetMbcs(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
@@ -422,7 +422,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetWhitespaceAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetWhitespaceAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
@@ -451,7 +451,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetWhitespace(RequestOptions options = null)
+        public virtual Response GetWhitespace(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
@@ -542,7 +542,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
@@ -571,7 +571,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNotProvided(RequestOptions options = null)
+        public virtual Response GetNotProvided(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
@@ -600,7 +600,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBase64EncodedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetBase64EncodedAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
@@ -629,7 +629,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBase64Encoded(RequestOptions options = null)
+        public virtual Response GetBase64Encoded(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
@@ -658,7 +658,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
@@ -687,7 +687,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBase64UrlEncoded(RequestOptions options = null)
+        public virtual Response GetBase64UrlEncoded(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
@@ -778,7 +778,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
@@ -807,7 +807,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNullBase64UrlEncoded(RequestOptions options = null)
+        public virtual Response GetNullBase64UrlEncoded(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");

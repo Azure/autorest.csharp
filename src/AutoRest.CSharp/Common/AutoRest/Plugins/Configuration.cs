@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool requestOptionsAllOptional, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;
+            RequestOptionsAllOptional = requestOptionsAllOptional;
             MgmtConfiguration = mgmtConfiguration;
         }
 
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool SkipCSProjPackageReference { get; }
         public static string ProjectRelativeDirectory = "../";
         public bool LowLevelClient { get; }
+        public bool RequestOptionsAllOptional { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
@@ -56,6 +58,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 GetOptionValue(autoRest, "head-as-boolean"),
                 GetOptionValue(autoRest, "skip-csproj-packagereference"),
                 GetOptionValue(autoRest, "low-level-client"),
+                GetOptionValue(autoRest, "x-ms-request-options-all-optional"),
                 MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
@@ -82,6 +85,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 case "skip-csproj-packagereference":
                     return false;
                 case "low-level-client":
+                    return false;
+                case "x-ms-request-options-all-optional":
                     return false;
                 default:
                     return null;

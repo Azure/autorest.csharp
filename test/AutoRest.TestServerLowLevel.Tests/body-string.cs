@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetStringMultiByteCharacters() => Test(async (host) =>
         {
-            var result = await new StringClient(Key, host).GetMbcsAsync();
+            var result = await new StringClient(Key, host).GetMbcsAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€", (string)responseBody);
@@ -28,14 +28,14 @@ namespace AutoRest.TestServer.Tests
         public Task GetStringNotProvided() => Test(async (host) =>
         {
             // Empty response body
-            var result = await new StringClient(Key, host).GetNotProvidedAsync();
+            var result = await new StringClient(Key, host).GetNotProvidedAsync(new());
             Assert.Zero (result.Content.ToMemory().Length);
         });
 
         [Test]
         public Task GetStringBase64Encoded() => Test(async (host) =>
         {
-            var result = await new StringClient(Key, host).GetBase64EncodedAsync();
+            var result = await new StringClient(Key, host).GetBase64EncodedAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             var data = Convert.FromBase64String(responseBody.ToString());
             Assert.AreEqual(new byte[] { 97, 32, 115, 116, 114, 105, 110, 103, 32, 116, 104, 97, 116, 32, 103, 101, 116, 115, 32, 101, 110, 99, 111, 100, 101, 100, 32, 119, 105, 116, 104, 32, 98, 97, 115, 101, 54, 52}, data);
@@ -53,14 +53,14 @@ namespace AutoRest.TestServer.Tests
         public Task GetStringNull() => Test(async (host) =>
         {
             // Empty response body
-            var result = await new StringClient(Key, host).GetNullAsync();
+            var result = await new StringClient(Key, host).GetNullAsync(new());
             Assert.Zero (result.Content.ToMemory().Length);
         });
 
         [Test]
         public Task GetStringEmpty() => Test(async (host) =>
         {
-            var result = await new StringClient(Key, host).GetEmptyAsync();
+            var result = await new StringClient(Key, host).GetEmptyAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("", (string)responseBody);
@@ -84,7 +84,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetStringWithLeadingAndTrailingWhitespace() => Test(async (host) =>
         {
-            var result = await new StringClient(Key, host).GetWhitespaceAsync();
+            var result = await new StringClient(Key, host).GetWhitespaceAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("    Now is the time for all good men to come to the aid of their country    ", (string)responseBody);
@@ -101,7 +101,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetEnumReferenced() => Test(async (host) =>
         {
-            var result = await new EnumClient(Key, host).GetReferencedAsync();
+            var result = await new EnumClient(Key, host).GetReferencedAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("red color", (string)responseBody);
@@ -110,7 +110,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetEnumReferencedConstant() => Test(async (host) =>
         {
-            var result = await new EnumClient(Key, host).GetReferencedConstantAsync();
+            var result = await new EnumClient(Key, host).GetReferencedConstantAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("Sample String", (string)responseBody["field1"]);
@@ -119,7 +119,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetEnumNotExpandable() => Test(async (host) =>
         {
-            var result = await new EnumClient(Key, host).GetNotExpandableAsync();
+            var result = await new EnumClient(Key, host).GetNotExpandableAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("red color", (string)responseBody);

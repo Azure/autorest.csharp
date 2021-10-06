@@ -67,7 +67,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetNoItemNamePages");
@@ -97,7 +97,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetNoItemNamePages(RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetNoItemNamePages(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetNoItemNamePages");
@@ -134,7 +134,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
@@ -164,7 +164,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
@@ -194,7 +194,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetSinglePages");
@@ -231,7 +231,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetSinglePages(RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetSinglePages(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetSinglePages");
@@ -261,7 +261,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.FirstResponseEmpty");
@@ -291,7 +291,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> FirstResponseEmpty(RequestOptions options = null)
+        public virtual Pageable<BinaryData> FirstResponseEmpty(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.FirstResponseEmpty");
@@ -310,10 +310,10 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="options"> The request options. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -331,7 +331,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(RequestOptions options, string clientRequestId = null, int? maxresults = null, int? timeout = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePages");
@@ -350,10 +350,10 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="options"> The request options. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -371,7 +371,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetMultiplePages(RequestOptions options, string clientRequestId = null, int? maxresults = null, int? timeout = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePages");
@@ -409,7 +409,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetWithQueryParams");
@@ -447,7 +447,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetWithQueryParams");
@@ -484,7 +484,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextOperationWithQueryParams");
@@ -514,7 +514,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestOptions options = null)
+        public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextOperationWithQueryParams");
@@ -526,10 +526,10 @@ namespace paging_LowLevel
             }
         }
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <param name="options"> The request options. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -547,7 +547,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(RequestOptions options, string clientRequestId = null, int? maxresults = null, int? timeout = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetOdataMultiplePages");
@@ -566,10 +566,10 @@ namespace paging_LowLevel
         }
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <param name="options"> The request options. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -587,7 +587,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetOdataMultiplePages(RequestOptions options, string clientRequestId = null, int? maxresults = null, int? timeout = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetOdataMultiplePages");
@@ -607,10 +607,10 @@ namespace paging_LowLevel
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="offset"> Offset of return value. </param>
+        /// <param name="options"> The request options. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -628,7 +628,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, RequestOptions options, string clientRequestId = null, int? maxresults = null, int? timeout = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
@@ -648,10 +648,10 @@ namespace paging_LowLevel
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="offset"> Offset of return value. </param>
+        /// <param name="options"> The request options. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -669,7 +669,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, RequestOptions options, string clientRequestId = null, int? maxresults = null, int? timeout = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
@@ -706,7 +706,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
@@ -743,7 +743,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
@@ -780,7 +780,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
@@ -817,7 +817,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
@@ -854,7 +854,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetSinglePagesFailure");
@@ -891,7 +891,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetSinglePagesFailure");
@@ -928,7 +928,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFailure");
@@ -965,7 +965,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFailure");
@@ -1002,7 +1002,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
@@ -1039,7 +1039,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
@@ -1079,7 +1079,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, RequestOptions options)
 #pragma warning restore AZC0002
         {
             if (apiVersion == null)
@@ -1128,7 +1128,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string apiVersion, string tenant, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string apiVersion, string tenant, RequestOptions options)
 #pragma warning restore AZC0002
         {
             if (apiVersion == null)
@@ -1177,7 +1177,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string apiVersion, string tenant, RequestOptions options)
 #pragma warning restore AZC0002
         {
             if (apiVersion == null)
@@ -1226,7 +1226,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string apiVersion, string tenant, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string apiVersion, string tenant, RequestOptions options)
 #pragma warning restore AZC0002
         {
             if (apiVersion == null)
@@ -1276,7 +1276,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> NextFragmentAsync(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> NextFragmentAsync(string apiVersion, string tenant, string nextLink, RequestOptions options)
 #pragma warning restore AZC0002
         {
             if (apiVersion == null)
@@ -1328,7 +1328,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> NextFragment(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
+        public virtual Pageable<BinaryData> NextFragment(string apiVersion, string tenant, string nextLink, RequestOptions options)
 #pragma warning restore AZC0002
         {
             if (apiVersion == null)
@@ -1380,7 +1380,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string apiVersion, string tenant, string nextLink, RequestOptions options)
 #pragma warning restore AZC0002
         {
             if (apiVersion == null)
@@ -1432,7 +1432,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> NextFragmentWithGrouping(string apiVersion, string tenant, string nextLink, RequestOptions options = null)
+        public virtual Pageable<BinaryData> NextFragmentWithGrouping(string apiVersion, string tenant, string nextLink, RequestOptions options)
 #pragma warning restore AZC0002
         {
             if (apiVersion == null)
@@ -1480,7 +1480,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
@@ -1517,7 +1517,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestOptions options)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
