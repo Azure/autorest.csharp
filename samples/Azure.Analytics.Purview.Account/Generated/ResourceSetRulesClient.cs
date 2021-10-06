@@ -16,29 +16,45 @@ namespace Azure.Analytics.Purview.Account
     /// <summary> The ResourceSetRules service client. </summary>
     public partial class ResourceSetRulesClient
     {
+        private static readonly string[] AuthorizationScopes = { "https://purview.azure.net/.default" };
+        private readonly TokenCredential _tokenCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+        private readonly string _apiVersion;
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResourceSetRulesRestClient _restClient;
-        private readonly string[] AuthorizationScopes = { "https://purview.azure.net/.default" };
-        private readonly TokenCredential _tokenCredential;
-        private Uri endpoint;
-        private string apiVersion;
 
         /// <summary> Initializes a new instance of ResourceSetRulesClient for mocking. </summary>
         protected ResourceSetRulesClient()
         {
         }
 
-        internal ResourceSetRulesClient(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, TokenCredential tokenCredential, Uri endpoint, string apiVersion = "2019-11-01-preview")
+        /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
+        /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public ResourceSetRulesClient(Uri endpoint, TokenCredential credential, PurviewAccountClientOptions options = null)
         {
-            _pipeline = pipeline;
-            _clientDiagnostics = clientDiagnostics;
-            _tokenCredential = tokenCredential;
-            _restClient = new ResourceSetRulesRestClient(_clientDiagnostics, _pipeline, endpoint, apiVersion);
-            this.endpoint = endpoint;
-            this.apiVersion = apiVersion;
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+
+            options ??= new PurviewAccountClientOptions();
+
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _tokenCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> Get a resource set config service model. </summary>
@@ -165,7 +181,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.GetResourceSetRuleAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetResourceSetRuleRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -298,7 +315,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.GetResourceSetRule(options);
+                using HttpMessage message = CreateGetResourceSetRuleRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -310,6 +328,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Creates or updates an resource set config. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -526,7 +545,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.CreateOrUpdateResourceSetRuleAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateCreateOrUpdateResourceSetRuleRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -538,6 +558,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Creates or updates an resource set config. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -754,7 +775,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.CreateOrUpdateResourceSetRule(content, options);
+                using HttpMessage message = CreateCreateOrUpdateResourceSetRuleRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -793,7 +815,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.DeleteResourceSetRuleAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDeleteResourceSetRuleRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -832,12 +855,88 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.DeleteResourceSetRule(options);
+                using HttpMessage message = CreateDeleteResourceSetRuleRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateGetResourceSetRuleRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/resourceSetRuleConfigs/defaultResourceSetRuleConfig", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateCreateOrUpdateResourceSetRuleRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/resourceSetRuleConfigs/defaultResourceSetRuleConfig", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDeleteResourceSetRuleRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/resourceSetRuleConfigs/defaultResourceSetRuleConfig", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200204.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier200204 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200204();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    204 => false,
+                    _ => true
+                };
             }
         }
     }

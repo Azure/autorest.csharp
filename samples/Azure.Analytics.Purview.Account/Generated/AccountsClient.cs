@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -17,15 +19,16 @@ namespace Azure.Analytics.Purview.Account
     /// <summary> The Accounts service client. </summary>
     public partial class AccountsClient
     {
+        private static readonly string[] AuthorizationScopes = { "https://purview.azure.net/.default" };
+        private readonly TokenCredential _tokenCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+        private readonly string _apiVersion;
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AccountsRestClient _restClient;
-        private readonly string[] AuthorizationScopes = { "https://purview.azure.net/.default" };
-        private readonly TokenCredential _tokenCredential;
-        private Uri endpoint;
-        private string apiVersion;
 
         /// <summary> Initializes a new instance of AccountsClient for mocking. </summary>
         protected AccountsClient()
@@ -36,6 +39,7 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public AccountsClient(Uri endpoint, TokenCredential credential, PurviewAccountClientOptions options = null)
         {
             if (endpoint == null)
@@ -48,13 +52,12 @@ namespace Azure.Analytics.Purview.Account
             }
 
             options ??= new PurviewAccountClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
-            var authPolicy = new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new AccountsRestClient(_clientDiagnostics, _pipeline, endpoint, options.Version);
-            this.endpoint = endpoint;
-            apiVersion = options.Version;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> Get an account. </summary>
@@ -153,7 +156,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.GetAccountPropertiesAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetAccountPropertiesRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -258,7 +262,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.GetAccountProperties(options);
+                using HttpMessage message = CreateGetAccountPropertiesRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -270,6 +275,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Updates an account. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -369,7 +375,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.UpdateAccountPropertiesAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateUpdateAccountPropertiesRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -381,6 +388,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Updates an account. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -480,7 +488,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.UpdateAccountProperties(content, options);
+                using HttpMessage message = CreateUpdateAccountPropertiesRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -525,7 +534,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.GetAccessKeysAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetAccessKeysRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -570,7 +580,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.GetAccessKeys(options);
+                using HttpMessage message = CreateGetAccessKeysRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -582,6 +593,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Regenerate the authorization keys associated with this data catalog. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -621,7 +633,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.RegenerateAccessKeyAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateRegenerateAccessKeyRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -633,6 +646,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Regenerate the authorization keys associated with this data catalog. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -672,7 +686,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.RegenerateAccessKey(content, options);
+                using HttpMessage message = CreateRegenerateAccessKeyRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -734,40 +749,19 @@ namespace Azure.Analytics.Purview.Account
         public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "AccountsClient.GetCollections");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetCollections");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetCollectionsAsync(skipToken, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetCollectionsRequest(skipToken)
+                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetCollections");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetCollectionsNextPageAsync(nextLink, skipToken, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> List the collections in the account. </summary>
@@ -823,40 +817,19 @@ namespace Azure.Analytics.Purview.Account
         public virtual Pageable<BinaryData> GetCollections(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "AccountsClient.GetCollections");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetCollections");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetCollections(skipToken, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetCollectionsRequest(skipToken)
+                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetCollections");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetCollectionsNextPage(nextLink, skipToken, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Get a resource set config service model. </summary>
@@ -986,40 +959,19 @@ namespace Azure.Analytics.Purview.Account
         public virtual AsyncPageable<BinaryData> GetResourceSetRulesAsync(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "AccountsClient.GetResourceSetRules");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetResourceSetRules");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.GetResourceSetRulesAsync(skipToken, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetResourceSetRulesRequest(skipToken)
+                        : CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetResourceSetRules");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.GetResourceSetRulesNextPageAsync(nextLink, skipToken, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Get a resource set config service model. </summary>
@@ -1149,66 +1101,163 @@ namespace Azure.Analytics.Purview.Account
         public virtual Pageable<BinaryData> GetResourceSetRules(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "AccountsClient.GetResourceSetRules");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetResourceSetRules");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.GetResourceSetRules(skipToken, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetResourceSetRulesRequest(skipToken)
+                        : CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetResourceSetRules");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.GetResourceSetRulesNextPage(nextLink, skipToken, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Initializes a new instance of CollectionsClient. </summary>
-        /// <param name="collectionName"> The String to use. </param>
-        public virtual CollectionsClient GetCollectionsClient(string collectionName)
+        internal HttpMessage CreateGetAccountPropertiesRequest()
         {
-            if (collectionName == null)
-            {
-                throw new ArgumentNullException(nameof(collectionName));
-            }
-
-            var client = new CollectionsClient(_pipeline, _clientDiagnostics, _tokenCredential, endpoint, collectionName, apiVersion);
-            return client;
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
         }
 
-        private ResourceSetRulesClient _cachedResourceSetRulesClient;
-
-        /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
-        public virtual ResourceSetRulesClient GetResourceSetRulesClient()
+        internal HttpMessage CreateUpdateAccountPropertiesRequest(RequestContent content)
         {
-            var client = new ResourceSetRulesClient(_pipeline, _clientDiagnostics, _tokenCredential, endpoint, apiVersion);
-            if (_cachedResourceSetRulesClient == null)
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetAccessKeysRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/listkeys", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateRegenerateAccessKeyRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/regeneratekeys", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetCollectionsRequest(string skipToken)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (skipToken != null)
             {
-                Interlocked.CompareExchange(ref _cachedResourceSetRulesClient, client, null);
+                uri.AppendQuery("$skipToken", skipToken, true);
             }
-            return _cachedResourceSetRulesClient;
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetResourceSetRulesRequest(string skipToken)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/resourceSetRuleConfigs", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (skipToken != null)
+            {
+                uri.AppendQuery("$skipToken", skipToken, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetCollectionsNextPageRequest(string nextLink, string skipToken)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetResourceSetRulesNextPageRequest(string nextLink, string skipToken)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
         }
     }
 }

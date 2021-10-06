@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -16,31 +19,52 @@ namespace Azure.Analytics.Purview.Account
     /// <summary> The Collections service client. </summary>
     public partial class CollectionsClient
     {
+        private static readonly string[] AuthorizationScopes = { "https://purview.azure.net/.default" };
+        private readonly TokenCredential _tokenCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+        private readonly string _collectionName;
+        private readonly string _apiVersion;
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CollectionsRestClient _restClient;
-        private readonly string[] AuthorizationScopes = { "https://purview.azure.net/.default" };
-        private readonly TokenCredential _tokenCredential;
-        private Uri endpoint;
-        private string collectionName;
-        private string apiVersion;
 
         /// <summary> Initializes a new instance of CollectionsClient for mocking. </summary>
         protected CollectionsClient()
         {
         }
 
-        internal CollectionsClient(HttpPipeline pipeline, ClientDiagnostics clientDiagnostics, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion = "2019-11-01-preview")
+        /// <summary> Initializes a new instance of CollectionsClient. </summary>
+        /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
+        /// <param name="collectionName"> The String to use. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="collectionName"/>, or <paramref name="credential"/> is null. </exception>
+        public CollectionsClient(Uri endpoint, string collectionName, TokenCredential credential, PurviewAccountClientOptions options = null)
         {
-            _pipeline = pipeline;
-            _clientDiagnostics = clientDiagnostics;
-            _tokenCredential = tokenCredential;
-            _restClient = new CollectionsRestClient(_clientDiagnostics, _pipeline, endpoint, collectionName, apiVersion);
-            this.endpoint = endpoint;
-            this.collectionName = collectionName;
-            this.apiVersion = apiVersion;
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (collectionName == null)
+            {
+                throw new ArgumentNullException(nameof(collectionName));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+
+            options ??= new PurviewAccountClientOptions();
+
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _tokenCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _endpoint = endpoint;
+            _collectionName = collectionName;
+            _apiVersion = options.Version;
         }
 
         /// <summary> Get a collection. </summary>
@@ -93,7 +117,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.GetCollectionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetCollectionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -152,7 +177,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.GetCollection(options);
+                using HttpMessage message = CreateGetCollectionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -164,6 +190,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Creates or updates a collection entity. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -232,7 +259,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.CreateOrUpdateCollectionAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateCreateOrUpdateCollectionRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -244,6 +272,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Creates or updates a collection entity. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -312,7 +341,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.CreateOrUpdateCollection(content, options);
+                using HttpMessage message = CreateCreateOrUpdateCollectionRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -351,7 +381,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.DeleteCollectionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDeleteCollectionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -390,7 +421,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.DeleteCollection(options);
+                using HttpMessage message = CreateDeleteCollectionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -435,7 +467,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return await _restClient.GetCollectionPathAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetCollectionPathRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -480,7 +513,8 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                return _restClient.GetCollectionPath(options);
+                using HttpMessage message = CreateGetCollectionPathRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -528,40 +562,19 @@ namespace Azure.Analytics.Purview.Account
         public virtual AsyncPageable<BinaryData> ListChildCollectionNamesAsync(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            async Task<Page<BinaryData>> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "CollectionsClient.ListChildCollectionNames");
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
-                using var scope = _clientDiagnostics.CreateScope("CollectionsClient.ListChildCollectionNames");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = await _restClient.ListChildCollectionNamesAsync(skipToken, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateListChildCollectionNamesRequest(skipToken)
+                        : CreateListChildCollectionNamesNextPageRequest(nextLink, skipToken);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
-
-            async Task<Page<BinaryData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("CollectionsClient.ListChildCollectionNames");
-                scope.Start();
-                try
-                {
-                    Response response = await _restClient.ListChildCollectionNamesNextPageAsync(nextLink, skipToken, options).ConfigureAwait(false);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Lists the child collections names in the collection. </summary>
@@ -603,40 +616,148 @@ namespace Azure.Analytics.Purview.Account
         public virtual Pageable<BinaryData> ListChildCollectionNames(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            Page<BinaryData> FirstPageFunc(int? pageSizeHint)
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "CollectionsClient.ListChildCollectionNames");
+            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("CollectionsClient.ListChildCollectionNames");
-                scope.Start();
-                try
+                do
                 {
-                    Response response = _restClient.ListChildCollectionNames(skipToken, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                    var message = string.IsNullOrEmpty(nextLink)
+                        ? CreateListChildCollectionNamesRequest(skipToken)
+                        : CreateListChildCollectionNamesNextPageRequest(nextLink, skipToken);
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "nextLink");
+                    nextLink = page.ContinuationToken;
+                    yield return page;
+                } while (!string.IsNullOrEmpty(nextLink));
             }
+        }
 
-            Page<BinaryData> NextPageFunc(string nextLink, int? pageSizeHint)
+        internal HttpMessage CreateGetCollectionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateCreateOrUpdateCollectionRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDeleteCollectionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier204.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateListChildCollectionNamesRequest(string skipToken)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
+            uri.AppendPath("/getChildCollectionNames", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (skipToken != null)
             {
-                using var scope = _clientDiagnostics.CreateScope("CollectionsClient.ListChildCollectionNames");
-                scope.Start();
-                try
-                {
-                    Response response = _restClient.ListChildCollectionNamesNextPage(nextLink, skipToken, options);
-                    return LowLevelPagableHelpers.BuildPageForResponse(response, "value", "nextLink");
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                uri.AppendQuery("$skipToken", skipToken, true);
             }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
 
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        internal HttpMessage CreateGetCollectionPathRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections/", false);
+            uri.AppendPath(_collectionName, true);
+            uri.AppendPath("/getCollectionPath", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateListChildCollectionNamesNextPageRequest(string nextLink, string skipToken)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier204 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier204();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    204 => false,
+                    _ => true
+                };
+            }
         }
     }
 }
