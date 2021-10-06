@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,8 +12,24 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal static class LowLevelPagableHelpers
+    internal static class LowLevelPageableHelpers
     {
+#if EXPERIMENTAL
+        public static async ValueTask<Page<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestOptions? requestOptions, string itemPropertyName = "value", string? nextLinkPropertyName = "nextLink", CancellationToken cancellationToken = default)
+        {
+            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions, cancellationToken);
+            var itemsAndNextLink = GetItemsAndNextLinkFromJson(response.Content, itemPropertyName, nextLinkPropertyName);
+            return Page.FromValues(itemsAndNextLink.Items, itemsAndNextLink.NextLink!, response);
+        }
+
+        public static Page<BinaryData> ProcessMessage(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestOptions? requestOptions, string itemPropertyName = "value", string? nextLinkPropertyName = "nextLink", CancellationToken cancellationToken = default)
+        {
+            var response = pipeline.ProcessMessage(message, clientDiagnostics, requestOptions, cancellationToken);
+            var itemsAndNextLink = GetItemsAndNextLinkFromJson(response.Content, itemPropertyName, nextLinkPropertyName);
+            return Page.FromValues(itemsAndNextLink.Items, itemsAndNextLink.NextLink!, response);
+        }
+#endif
+
         /// <summary>
         /// Returns a <see cref="Page{T}"/> for a given response.
         /// </summary>
@@ -80,7 +95,7 @@ namespace Azure.Core
         /// <summary>
         /// Reads the items and next link from a response for a pageable operation. The values returned are BinaryDatas formed over the underlying content.
         /// </summary>
-        private static (IEnumerable<BinaryData> Items, string? NextLink) GetItemsAndNextLinkFromJson(BinaryData content, string itemPropertyName = "value", string nextLinkPropertyName = "nextLink")
+        private static (IEnumerable<BinaryData> Items, string? NextLink) GetItemsAndNextLinkFromJson(BinaryData content, string itemPropertyName = "value", string? nextLinkPropertyName = "nextLink")
         {
             string? nextLink = null;
             IEnumerable<BinaryData> items = Array.Empty<BinaryData>();

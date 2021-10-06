@@ -54,10 +54,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>
 ";
 
-      private string _llcProjectContent = @"
-<ItemGroup>
-    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.15"" />
-</ItemGroup>
+        private string _llcProjectContent = @"
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.16"" />
+  </ItemGroup>
 ";
 
         internal static string GetVersion()

@@ -16,13 +16,15 @@ namespace body_complex_LowLevel
     /// <summary> The Primitive service client. </summary>
     public partial class PrimitiveClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PrimitiveRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of PrimitiveClient for mocking. </summary>
         protected PrimitiveClient()
@@ -33,6 +35,7 @@ namespace body_complex_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PrimitiveClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -42,11 +45,11 @@ namespace body_complex_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestComplexTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new PrimitiveRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Get complex types with integer properties. </summary>
@@ -74,7 +77,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetIntAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetIntRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -108,7 +112,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetInt(options);
+                using HttpMessage message = CreateGetIntRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -120,6 +125,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -143,7 +149,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutIntAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutIntRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -155,6 +162,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -178,7 +186,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutInt(content, options);
+                using HttpMessage message = CreatePutIntRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -212,7 +221,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetLongAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetLongRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -246,7 +256,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetLong(options);
+                using HttpMessage message = CreateGetLongRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -258,6 +269,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -281,7 +293,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutLongAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutLongRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -293,6 +306,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -316,7 +330,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutLong(content, options);
+                using HttpMessage message = CreatePutLongRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -350,7 +365,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetFloatAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetFloatRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -384,7 +400,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetFloat(options);
+                using HttpMessage message = CreateGetFloatRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -396,6 +413,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -419,7 +437,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutFloatAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutFloatRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -431,6 +450,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -454,7 +474,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutFloat(content, options);
+                using HttpMessage message = CreatePutFloatRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -488,7 +509,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetDoubleAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDoubleRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -522,7 +544,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetDouble(options);
+                using HttpMessage message = CreateGetDoubleRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -534,6 +557,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -557,7 +581,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutDoubleAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDoubleRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -569,6 +594,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -592,7 +618,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutDouble(content, options);
+                using HttpMessage message = CreatePutDoubleRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -626,7 +653,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetBoolAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetBoolRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -660,7 +688,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetBool(options);
+                using HttpMessage message = CreateGetBoolRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -672,6 +701,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -695,7 +725,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutBoolAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutBoolRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -707,6 +738,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -730,7 +762,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutBool(content, options);
+                using HttpMessage message = CreatePutBoolRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -765,7 +798,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetStringAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetStringRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -800,7 +834,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetString(options);
+                using HttpMessage message = CreateGetStringRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -812,6 +847,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -836,7 +872,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutStringAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutStringRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -848,6 +885,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -872,7 +910,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutString(content, options);
+                using HttpMessage message = CreatePutStringRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -906,7 +945,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetDateAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDateRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -940,7 +980,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetDate(options);
+                using HttpMessage message = CreateGetDateRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -952,6 +993,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -975,7 +1017,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutDateAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDateRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -987,6 +1030,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1010,7 +1054,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutDate(content, options);
+                using HttpMessage message = CreatePutDateRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1044,7 +1089,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetDateTimeAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDateTimeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1078,7 +1124,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetDateTime(options);
+                using HttpMessage message = CreateGetDateTimeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1090,6 +1137,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1113,7 +1161,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutDateTimeAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDateTimeRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1125,6 +1174,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1148,7 +1198,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutDateTime(content, options);
+                using HttpMessage message = CreatePutDateTimeRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1182,7 +1233,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetDateTimeRfc1123Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDateTimeRfc1123Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1216,7 +1268,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetDateTimeRfc1123(options);
+                using HttpMessage message = CreateGetDateTimeRfc1123Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1228,6 +1281,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1251,7 +1305,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutDateTimeRfc1123Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDateTimeRfc1123Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1263,6 +1318,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1286,7 +1342,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutDateTimeRfc1123(content, options);
+                using HttpMessage message = CreatePutDateTimeRfc1123Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1319,7 +1376,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetDurationAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDurationRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1352,7 +1410,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetDuration(options);
+                using HttpMessage message = CreateGetDurationRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1364,6 +1423,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1386,7 +1446,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutDurationAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDurationRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1398,6 +1459,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1420,7 +1482,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutDuration(content, options);
+                using HttpMessage message = CreatePutDurationRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1453,7 +1516,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetByteAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetByteRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1486,7 +1550,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetByte(options);
+                using HttpMessage message = CreateGetByteRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1498,6 +1563,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1520,7 +1586,8 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.PutByteAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutByteRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1532,6 +1599,7 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1554,12 +1622,357 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                return _restClient.PutByte(content, options);
+                using HttpMessage message = CreatePutByteRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateGetIntRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/integer", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutIntRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/integer", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetLongRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/long", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutLongRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/long", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetFloatRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/float", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutFloatRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/float", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetDoubleRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/double", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutDoubleRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/double", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetBoolRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/bool", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutBoolRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/bool", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetStringRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/string", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutStringRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/string", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetDateRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/date", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutDateRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/date", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetDateTimeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/datetime", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutDateTimeRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/datetime", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetDateTimeRfc1123Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/datetimerfc1123", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutDateTimeRfc1123Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/datetimerfc1123", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetDurationRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/duration", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutDurationRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/duration", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetByteRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/byte", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePutByteRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/primitive/byte", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
             }
         }
     }

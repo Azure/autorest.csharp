@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
@@ -10,8 +10,11 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
+using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -19,13 +22,21 @@ namespace AutoRest.CSharp.Output.Models
     {
         protected override string DefaultAccessibility { get; } = "public";
 
-        private BuildContext<LowLevelOutputLibrary> _context;
+        private readonly BuildContext<LowLevelOutputLibrary> _context;
+        private LowLevelClientMethod[]? _clientMethods;
+        private LowLevelPagingMethod[]? _pagingMethods;
+        private LowLevelLongRunningOperationMethod[]? _longRunningOperationMethods;
 
         public override string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(OperationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
+        public LowLevelClientMethod[] ClientMethods => _clientMethods ??= BuildMethods().ToArray();
+        public LowLevelPagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
+        public LowLevelLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
+        public ClientOptionsTypeProvider ClientOptions { get; }
 
         public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context) : base(operationGroup, context, null)
         {
             _context = context;
+            ClientOptions = new ClientOptionsTypeProvider(_context);
         }
 
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
@@ -118,23 +129,111 @@ namespace AutoRest.CSharp.Output.Models
             return requestMethods;
         }
 
-        private bool FilterServiceParamaters(RequestParameter p)
+
+        private IEnumerable<LowLevelClientMethod> BuildMethods()
         {
-            switch (p.In)
+            foreach (var operation in OperationGroup.Operations)
             {
-                case ParameterLocation.Header:
-                case ParameterLocation.Query:
-                case ParameterLocation.Path:
-                case ParameterLocation.Uri:
-                    return true;
-                default:
-                    return false;
+                if (operation.IsLongRunning || operation.Language.Default.Paging != null)
+                {
+                    continue;
+                }
+
+                foreach (var request in operation.Requests)
+                {
+                    RestClientMethod method = GetOperationMethod(request);
+                    Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
+                    Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
+                    Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
+
+                    yield return new LowLevelClientMethod(
+                        method,
+                        new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema),
+                        new Diagnostic($"{Declaration.Name}.{method.Name}"));
+                }
             }
         }
 
-        private bool IsSynthesizedContentTypeParameter(RequestParameter p)
+        private IEnumerable<LowLevelPagingMethod> BuildPagingMethods()
         {
-            return p.Origin == "modelerfour:synthesized/content-type";
+            foreach (var operation in OperationGroup.Operations)
+            {
+                Paging? paging = operation.Language.Default.Paging;
+                if (paging == null || operation.IsLongRunning)
+                {
+                    continue;
+                }
+
+                foreach (var request in operation.Requests)
+                {
+                    RestClientMethod method = GetOperationMethod(request);
+                    RestClientMethod? nextPageMethod = GetNextOperationMethod(request);
+                    Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
+                    Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
+                    Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
+
+                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
+                    {
+                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
+                    }
+
+                    yield return new LowLevelPagingMethod(
+                        method,
+                        new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema),
+                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
+                        new LowLevelPagingResponseInfo(
+                            nextPageMethod,
+                            paging.NextLinkName,
+                            paging.ItemName ?? "value")
+                        );
+                }
+            }
         }
+
+        private IEnumerable<LowLevelLongRunningOperationMethod> BuildLongRunningOperationMethods()
+        {
+            foreach (var operation in OperationGroup.Operations)
+            {
+                if (operation.IsLongRunning)
+                {
+                    Paging? paging = operation.Language.Default.Paging;
+
+                    foreach (var request in operation.Requests)
+                    {
+                        RestClientMethod startMethod = GetOperationMethod(request);
+                        Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
+                        Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
+                        Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
+
+                        LowLevelPagingResponseInfo? pagingInfo = null;
+
+                        if (paging != null)
+                        {
+                            RestClientMethod? nextPageMethod = GetNextOperationMethod(request);
+                            pagingInfo = new LowLevelPagingResponseInfo(nextPageMethod, paging.NextLinkName, paging.ItemName ?? "value");
+                        }
+
+                        yield return new LowLevelLongRunningOperationMethod(
+                            startMethod,
+                            new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema),
+                            new Diagnostic($"{Declaration.Name}.{startMethod.Name}"),
+                            pagingInfo);
+                    }
+                }
+            }
+        }
+
+        private bool FilterServiceParamaters(RequestParameter p)
+            => p.In switch
+            {
+                ParameterLocation.Header => true,
+                ParameterLocation.Query => true,
+                ParameterLocation.Path => true,
+                ParameterLocation.Uri => true,
+                _ => false
+            };
+
+        private bool IsSynthesizedContentTypeParameter(RequestParameter p)
+            => p.Origin == "modelerfour:synthesized/content-type";
     }
 }
