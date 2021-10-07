@@ -17,7 +17,7 @@ namespace Azure.Core
 #if EXPERIMENTAL
         public static async ValueTask<Operation<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestOptions? requestOptions)
         {
-            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions);
+            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions).ConfigureAwait(false);
             return new LowLevelFuncOperation<BinaryData>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => r.Content);
         }
 
@@ -29,7 +29,7 @@ namespace Azure.Core
 
         public static async ValueTask<Operation<AsyncPageable<BinaryData>>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestOptions? requestOptions, Func<Response, string?, int?, CancellationToken, IAsyncEnumerable<Page<BinaryData>>> createEnumerable)
         {
-            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions);
+            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions).ConfigureAwait(false);
             return new LowLevelFuncOperation<AsyncPageable<BinaryData>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => PageableHelpers.CreateAsyncPageable((nl, ps, ct) => createEnumerable(r, nl, ps, ct), clientDiagnostics, scopeName));
         }
 

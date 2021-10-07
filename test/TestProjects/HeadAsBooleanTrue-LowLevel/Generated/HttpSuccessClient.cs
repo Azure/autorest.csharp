@@ -55,7 +55,7 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response<bool>> Head200Async(RequestOptions options)
+        public virtual async Task<Response<bool>> Head200Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -75,7 +75,7 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response<bool> Head200(RequestOptions options)
+        public virtual Response<bool> Head200(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -95,7 +95,7 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response<bool>> Head204Async(RequestOptions options)
+        public virtual async Task<Response<bool>> Head204Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -115,7 +115,7 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response<bool> Head204(RequestOptions options)
+        public virtual Response<bool> Head204(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -135,7 +135,7 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <summary> Return 404 status code if successful. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response<bool>> Head404Async(RequestOptions options)
+        public virtual async Task<Response<bool>> Head404Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
@@ -155,7 +155,7 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <summary> Return 404 status code if successful. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response<bool> Head404(RequestOptions options)
+        public virtual Response<bool> Head404(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");

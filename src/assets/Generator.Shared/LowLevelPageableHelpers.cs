@@ -17,7 +17,7 @@ namespace Azure.Core
 #if EXPERIMENTAL
         public static async ValueTask<Page<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestOptions? requestOptions, string itemPropertyName = "value", string? nextLinkPropertyName = "nextLink", CancellationToken cancellationToken = default)
         {
-            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions, cancellationToken);
+            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions, cancellationToken).ConfigureAwait(false);
             var itemsAndNextLink = GetItemsAndNextLinkFromJson(response.Content, itemPropertyName, nextLinkPropertyName);
             return Page.FromValues(itemsAndNextLink.Items, itemsAndNextLink.NextLink!, response);
         }

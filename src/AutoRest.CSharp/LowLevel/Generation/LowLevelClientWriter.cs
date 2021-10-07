@@ -525,7 +525,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static Parameter[] BuildParameters(RestClientMethod operation, Configuration configuration)
         {
-            var isRequestOptionsRequired = operation.Request.Body == null && operation.Responses.Any(r => r.ResponseBody != null) && configuration.RequestOptionsAllOptional == false && operation.Request.HttpMethod != RequestMethod.Delete;
+            var headAsBoolean = operation.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean;
+            var isRequestOptionsRequired = operation.Request.Body == null && operation.Responses.Any(r => r.ResponseBody != null) && configuration.RequestOptionsAllOptional == false && operation.Request.HttpMethod != RequestMethod.Delete && headAsBoolean == false;
             if (isRequestOptionsRequired)
             {
                 return RestClientBuilder.GetRequiredParameters(operation.Parameters).Append(RequiredRequestOptionsParameter).Concat(RestClientBuilder.GetOptionalParameters(operation.Parameters)).ToArray();
