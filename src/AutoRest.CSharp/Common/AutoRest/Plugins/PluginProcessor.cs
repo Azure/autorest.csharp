@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             try
             {
                 IPlugin plugin = Plugins[autoRest.PluginName]();
-                var shouldAttach = await autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.attach");
+                var shouldAttach = await autoRest.GetValue<JsonElement?>(string.Format(Configuration.Options.AttachDebuggerFormat, autoRest.PluginName));
                 if (shouldAttach.ToBoolean() ?? false)
                 {
                     Console.Error.WriteLine("Attempting to attach debugger.");
