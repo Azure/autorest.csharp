@@ -2212,17 +2212,17 @@ schemas: !Schemas
     - *ref_47
     - *ref_48
     - *ref_49
-    - *ref_16
     - *ref_12
-    - *ref_23
+    - *ref_16
     - *ref_19
+    - *ref_23
     - *ref_50
     - *ref_51
     - *ref_52
     - *ref_53
     - *ref_54
-    - *ref_37
     - *ref_36
+    - *ref_37
     - !ObjectSchema &ref_165
       type: object
       apiVersions:
@@ -2336,8 +2336,8 @@ schemas: !Schemas
           description: Default error response model
           namespace: ''
       protocol: !Protocols {}
-    - *ref_57
     - *ref_55
+    - *ref_57
     - !ObjectSchema &ref_167
       type: object
       apiVersions:
