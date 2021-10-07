@@ -71,10 +71,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 throw new Exception("Generator did not receive the code model file.");
 
             var configuration = Configuration.GetConfiguration(autoRest);
-            if (configuration.LaunchDotNetDebugger)
-            {
-                Debugger.Launch();
-            }
 
             string codeModelYaml = string.Empty;
 

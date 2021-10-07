@@ -22,10 +22,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public const string HeadAsBoolean = "head-as-boolean";
             public const string SkipCSProjPackageReference = "skip-csproj-packagereference";
             public const string LowLevelClient = "low-level-client";
-            public const string LaunchDotNetDebugger = "launch-dotnet-debugger";
+            public const string AttachDebuggerFormat = "{0}.attach";
         }
 
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool launchDotNetDebugger, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -38,7 +38,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;
-            LaunchDotNetDebugger = launchDotNetDebugger;
             MgmtConfiguration = mgmtConfiguration;
         }
 
@@ -54,7 +53,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool SkipCSProjPackageReference { get; }
         public static string ProjectRelativeDirectory = "../";
         public bool LowLevelClient { get; }
-        public bool LaunchDotNetDebugger { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
@@ -71,7 +69,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 headAsBoolean: GetOptionValue(autoRest, Options.HeadAsBoolean),
                 skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
                 lowLevelClient: GetOptionValue(autoRest, Options.LowLevelClient),
-                launchDotNetDebugger: GetOptionValue(autoRest, Options.LaunchDotNetDebugger),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
@@ -98,8 +95,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 case Options.SkipCSProjPackageReference:
                     return false;
                 case Options.LowLevelClient:
-                    return false;
-                case Options.LaunchDotNetDebugger:
                     return false;
                 default:
                     return null;

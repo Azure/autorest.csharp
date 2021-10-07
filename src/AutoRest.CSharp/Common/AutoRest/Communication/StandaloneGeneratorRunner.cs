@@ -75,7 +75,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.HeadAsBoolean, configuration.HeadAsBoolean);
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.LowLevelClient, configuration.LowLevelClient);
-                    WriteIfNotDefault(writer, Configuration.Options.LaunchDotNetDebugger, configuration.LaunchDotNetDebugger);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -126,7 +125,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.HeadAsBoolean),
                 ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
                 ReadOption(root, Configuration.Options.LowLevelClient),
-                ReadOption(root, Configuration.Options.LaunchDotNetDebugger),
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }
