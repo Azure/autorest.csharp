@@ -3,16 +3,29 @@
 
 using System;
 using System.Linq;
-using System.Reflection.Metadata;
 using AutoRest.CSharp.AutoRest.Communication;
-using System.Text.Json;
-using System.Collections.Generic;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, MgmtConfiguration mgmtConfiguration)
+        public static class Options
+        {
+            public const string OutputFolder = "output-folder";
+            public const string Namespace = "namespace";
+            public const string LibraryName = "library-name";
+            public const string SharedSourceFolders = "shared-source-folders";
+            public const string SaveInputs = "save-inputs";
+            public const string AzureArm = "azure-arm";
+            public const string PublicClients = "public-clients";
+            public const string ModelNamespace = "model-namespace";
+            public const string HeadAsBoolean = "head-as-boolean";
+            public const string SkipCSProjPackageReference = "skip-csproj-packagereference";
+            public const string LowLevelClient = "low-level-client";
+            public const string LaunchDotNetDebugger = "launch-dotnet-debugger";
+        }
+
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool launchDotNetDebugger, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -25,6 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;
+            LaunchDotNetDebugger = launchDotNetDebugger;
             MgmtConfiguration = mgmtConfiguration;
         }
 
@@ -40,23 +54,25 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool SkipCSProjPackageReference { get; }
         public static string ProjectRelativeDirectory = "../";
         public bool LowLevelClient { get; }
+        public bool LaunchDotNetDebugger { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
             return new Configuration(
-                TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
-                autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult(),
-                autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
-                GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
-                GetOptionValue(autoRest, "save-inputs"),
-                GetOptionValue(autoRest, "azure-arm"),
-                GetOptionValue(autoRest, "public-clients"),
-                GetOptionValue(autoRest, "model-namespace"),
-                GetOptionValue(autoRest, "head-as-boolean"),
-                GetOptionValue(autoRest, "skip-csproj-packagereference"),
-                GetOptionValue(autoRest, "low-level-client"),
-                MgmtConfiguration.GetConfiguration(autoRest)
+                outputFolder: TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder)),
+                ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult(),
+                name: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult(),
+                sharedSourceFolders: GetRequiredOption<string[]>(autoRest, Options.SharedSourceFolders).Select(TrimFileSuffix).ToArray(),
+                saveInputs: GetOptionValue(autoRest, Options.SaveInputs),
+                azureArm: GetOptionValue(autoRest, Options.AzureArm),
+                publicClients: GetOptionValue(autoRest, Options.PublicClients),
+                modelNamespace: GetOptionValue(autoRest, Options.ModelNamespace),
+                headAsBoolean: GetOptionValue(autoRest, Options.HeadAsBoolean),
+                skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
+                lowLevelClient: GetOptionValue(autoRest, Options.LowLevelClient),
+                launchDotNetDebugger: GetOptionValue(autoRest, Options.LaunchDotNetDebugger),
+                mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
 
@@ -69,19 +85,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             switch (option)
             {
-                case "save-inputs":
+                case Options.SaveInputs:
                     return false;
-                case "azure-arm":
+                case Options.AzureArm:
                     return false;
-                case "public-clients":
+                case Options.PublicClients:
                     return false;
-                case "model-namespace":
+                case Options.ModelNamespace:
                     return true;
-                case "head-as-boolean":
+                case Options.HeadAsBoolean:
                     return false;
-                case "skip-csproj-packagereference":
+                case Options.SkipCSProjPackageReference:
                     return false;
-                case "low-level-client":
+                case Options.LowLevelClient:
+                    return false;
+                case Options.LaunchDotNetDebugger:
                     return false;
                 default:
                     return null;
