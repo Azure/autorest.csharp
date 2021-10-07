@@ -324,6 +324,71 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_3
+          - !Parameter &ref_14
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceName
+                description: name
+                serializedName: resourceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_6
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /test1
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_14
+        responses:
+          - !SchemaResponse 
+            schema: *ref_5
+            language: !Languages 
+              default:
+                name: ''
+                description: String Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: DeleteNoRequestBodyResponseBody
+            description: Delete
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
         requests:
           - !Request 
             language: !Languages 
@@ -373,7 +438,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_14
+              - !Parameter &ref_15
                 schema: *ref_5
                 implementation: Method
                 nullable: true
@@ -387,7 +452,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_14
+              - *ref_15
             language: !Languages 
               default:
                 name: ''

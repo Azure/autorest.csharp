@@ -528,17 +528,11 @@ namespace AutoRest.CSharp.Generation.Writers
             var isRequestOptionsRequired = operation.Request.Body == null && operation.Responses.Any(r => r.ResponseBody != null) && configuration.RequestOptionsAllOptional == false && operation.Request.HttpMethod != RequestMethod.Delete;
             if (isRequestOptionsRequired)
             {
-                List<Parameter> methodParameters = new List<Parameter>();
-
-                methodParameters.AddRange(RestClientBuilder.GetRequiredParameters(operation.Parameters));
-                methodParameters.Add(RequiredRequestOptionsParameter);
-                methodParameters.AddRange(RestClientBuilder.GetOptionalParameters(operation.Parameters));
-
-                return methodParameters.ToArray();
+                return RestClientBuilder.GetRequiredParameters(operation.Parameters).Append(RequiredRequestOptionsParameter).Concat(RestClientBuilder.GetOptionalParameters(operation.Parameters)).ToArray();
             }
             else
             {
-                return operation.Parameters.Concat(new Parameter[] { RequestOptionsParameter }).ToArray();
+                return operation.Parameters.Append(RequestOptionsParameter).ToArray();
             }
         }
 

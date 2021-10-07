@@ -172,6 +172,50 @@ namespace RequestOptionsRequired_LowLevel
             }
         }
 
+        /// <summary> Delete. </summary>
+        /// <param name="resourceName"> name. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestOptionsRequiredClient.DeleteNoRequestBodyResponseBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete. </summary>
+        /// <param name="resourceName"> name. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
+#pragma warning disable AZC0002
+        public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("RequestOptionsRequiredClient.DeleteNoRequestBodyResponseBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> No RequestBody and No ResponseBody. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -290,6 +334,21 @@ namespace RequestOptionsRequired_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDeleteNoRequestBodyResponseBodyRequest(string resourceName)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test1", false);
+            uri.AppendQuery("resourceName", resourceName, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }

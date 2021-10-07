@@ -31,6 +31,20 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void OptionalRequestOptionsDeleteNoRequestBodyResponseBody()
+        {
+            var client = typeof(RequestOptionsRequiredClient);
+            var method = client.GetMethod("DeleteNoRequestBodyResponseBody");
+            var parameters = method.GetParameters();
+
+            Assert.AreEqual(2, parameters.Length);
+            Assert.AreEqual(parameters[0].ParameterType, typeof(string));
+            Assert.AreEqual(parameters[0].IsOptional, false);
+            Assert.AreEqual(parameters[1].ParameterType, typeof(RequestOptions));
+            Assert.AreEqual(parameters[1].IsOptional, true);
+        }
+
+        [Test]
         public void OptionalRequestOptionsRequestBodyResponseBody()
         {
             var client = typeof(RequestOptionsRequiredClient);

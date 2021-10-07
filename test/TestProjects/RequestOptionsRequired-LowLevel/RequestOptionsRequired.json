@@ -76,6 +76,27 @@
             }
           }
         }
+      },
+      "delete": {
+        "operationId": "DeleteNoRequestBodyResponseBody",
+        "description": "Delete",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "resourceName",
+            "description": "name",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "String Response",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
       }
     },
     "/test2": {
