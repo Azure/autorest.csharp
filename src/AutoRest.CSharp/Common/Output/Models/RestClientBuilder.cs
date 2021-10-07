@@ -623,7 +623,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private static IEnumerable<Parameter> GetRequiredParameters(Parameter[] parameters)
+        public static IEnumerable<Parameter> GetRequiredParameters(Parameter[] parameters)
         {
             List<Parameter> requiredParameters = new List<Parameter>();
             foreach (var parameter in parameters)
@@ -637,7 +637,7 @@ namespace AutoRest.CSharp.Output.Models
             return requiredParameters;
         }
 
-        private static IEnumerable<Parameter> GetOptionalParameters(Parameter[] parameters, bool includeAPIVersion = false)
+        public static IEnumerable<Parameter> GetOptionalParameters(Parameter[] parameters, bool includeAPIVersion = false)
         {
             List<Parameter> optionalParameters = new List<Parameter>();
             foreach (var parameter in parameters)

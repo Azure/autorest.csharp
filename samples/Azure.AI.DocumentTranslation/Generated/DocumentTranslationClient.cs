@@ -105,7 +105,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDocumentStatusAsync(Guid id, Guid documentId, RequestOptions options = null)
+        public virtual async Task<Response> GetDocumentStatusAsync(Guid id, Guid documentId, RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
@@ -169,7 +169,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDocumentStatus(Guid id, Guid documentId, RequestOptions options = null)
+        public virtual Response GetDocumentStatus(Guid id, Guid documentId, RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
@@ -239,7 +239,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetTranslationStatusAsync(Guid id, RequestOptions options = null)
+        public virtual async Task<Response> GetTranslationStatusAsync(Guid id, RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
@@ -309,7 +309,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetTranslationStatus(Guid id, RequestOptions options = null)
+        public virtual Response GetTranslationStatus(Guid id, RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
@@ -509,7 +509,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
@@ -563,7 +563,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetSupportedDocumentFormats(RequestOptions options = null)
+        public virtual Response GetSupportedDocumentFormats(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
@@ -617,7 +617,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
@@ -671,7 +671,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetSupportedGlossaryFormats(RequestOptions options = null)
+        public virtual Response GetSupportedGlossaryFormats(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
@@ -714,7 +714,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
@@ -757,7 +757,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetSupportedStorageSources(RequestOptions options = null)
+        public virtual Response GetSupportedStorageSources(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
@@ -799,6 +799,7 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <param name="options"> The request options. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -825,7 +826,6 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -878,7 +878,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(RequestOptions options, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
@@ -921,6 +921,7 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <param name="options"> The request options. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -947,7 +948,6 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1000,7 +1000,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetTranslationsStatus(RequestOptions options, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
@@ -1041,6 +1041,7 @@ namespace Azure.AI.DocumentTranslation
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
+        /// <param name="options"> The request options. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -1067,7 +1068,6 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1116,7 +1116,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, RequestOptions options, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");
@@ -1157,6 +1157,7 @@ namespace Azure.AI.DocumentTranslation
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
+        /// <param name="options"> The request options. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -1183,7 +1184,6 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1232,7 +1232,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, RequestOptions options, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");

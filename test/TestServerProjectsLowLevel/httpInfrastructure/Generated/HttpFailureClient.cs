@@ -64,7 +64,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyErrorAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetEmptyErrorAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
@@ -93,7 +93,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmptyError(RequestOptions options = null)
+        public virtual Response GetEmptyError(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
@@ -113,7 +113,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty error form server. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNoModelErrorAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNoModelErrorAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -133,7 +133,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty error form server. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetNoModelError(RequestOptions options = null)
+        public virtual Response GetNoModelError(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -153,7 +153,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty response from server. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNoModelEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNoModelEmptyAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
@@ -173,7 +173,7 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty response from server. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetNoModelEmpty(RequestOptions options = null)
+        public virtual Response GetNoModelEmpty(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
