@@ -461,7 +461,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line();
-        }
+            }
 
         private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelRestClient parentClient, LowLevelRestClient childClient, BuildContext context)
         {
