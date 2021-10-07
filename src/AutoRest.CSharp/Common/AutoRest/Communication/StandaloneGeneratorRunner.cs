@@ -21,11 +21,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
             var basePath = args.Single(a => !a.StartsWith("--"));
 
             var configuration = LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
-            if (configuration.LaunchDotNetDebugger)
-            {
-                Debugger.Launch();
-            }
-
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
             var workspace = await new CSharpGen().ExecuteAsync(codeModelTask, configuration);
 
