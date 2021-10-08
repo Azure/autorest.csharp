@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -48,6 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteGetRestOperations(restClient);
                     }
 
+                    var resourcesWithByNameMethod = new HashSet<Resource>();
                     // Write other orphan operations with the parent of ResourceGroup
                     foreach (var clientOperation in _extensions.ClientOperations)
                     {
@@ -58,8 +60,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // If its parent is Subscription, we will have a GetContainer method of that resource, which contains a GetAllAsGenericResource serves the same purpose.
                         if (CheckGetByNameMethod(clientOperation, out var resource))
                         {
+                            // in case that a resource has multiple list methods at the subscription level (for instance one ListBySusbcription and one ListByLocation, location is not an available parent therefore it will show up here)
+                            if (resourcesWithByNameMethod.Contains(resource))
+                                continue;
                             WriteListResourceByNameMethod(resource, true);
                             WriteListResourceByNameMethod(resource, false);
+                            resourcesWithByNameMethod.Add(resource);
                         }
                     }
                 }
@@ -95,19 +101,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
             Debug.Assert(clientOperation.Count == 1);
             var operation = clientOperation.First();
 
-            if (operation.IsListMethod(out var itemType, out _))
+            if (operation.IsListMethod(out var itemType, out var extraScope))
             {
                 if (!Context.Library.TryGetTypeProvider(itemType.Name, out var provider))
                     throw new InvalidOperationException($"Cannot find type {itemType.Name}");
 
-                if (provider is ResourceData data)
-                {
-                    var resourcesOfResourceData = Context.Library.FindResources(data);
-                    return $"Get{resourcesOfResourceData.First().ResourceName.ToPlural()}";
-                }
+                // even if we are list a resource data under the subscription, we could have different scopes. The most common case is that we are listing under "subscriptions/locations"
+                var suffix = GetOperationNameExtraScopeSuffix(extraScope);
+                var by = string.IsNullOrEmpty(suffix) ? string.Empty : "By";
+
+                var itemName = provider is ResourceData data ?
+                    Context.Library.FindResources(data).First().ResourceName :
+                    itemType.Name;
+                return $"Get{itemName.ToPlural()}{by}{suffix}";
             }
 
             return operation.Name;
+        }
+
+        private string GetOperationNameExtraScopeSuffix(IEnumerable<Segment> extraScope)
+        {
+            return string.Join("", extraScope.Select(segment => segment.IsConstant ? segment.ConstantValue.ToSingular() : segment.ReferenceName).Select(segment => segment.FirstCharToUpperCase()));
         }
 
         private void WriteListResourceByNameMethod(Resource resource, bool async)

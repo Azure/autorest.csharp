@@ -51,8 +51,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var operation = operationSet.GetOperation(method);
                 if (operation is not null)
                 {
-                    var clientOperation = new MgmtRestOperation(_context.Library.RestClientMethods[operation],
-                        _context.Library.GetRestClient(operation.GetHttpPath()), GetContextualPath(operationSet));
+                    var clientOperation = new MgmtRestOperation(
+                        _context.Library.RestClientMethods[operation],
+                        _context.Library.GetRestClient(operation.GetHttpPath()),
+                        operation.GetRequestPath(_context),
+                        GetContextualPath(operationSet));
                     result.Add(clientOperation);
                 }
             }
@@ -173,6 +176,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
                         _context.Library.GetRestClient(operation.GetHttpPath()),
+                        operation.GetRequestPath(_context),
                         GetContextualPath(operationSet));
                     if (result.TryGetValue(key, out var list))
                     {

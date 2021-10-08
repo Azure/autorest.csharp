@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             _allOperations = allOperations;
         }
 
+        protected abstract RequestPath ContextualPath { get; }
+
         protected override string DefaultAccessibility => "public";
 
         public override IEnumerable<MgmtClientOperation> ClientOperations => _clientOperations ??= EnsureClientOperations();
@@ -34,7 +36,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 new MgmtRestOperation(
                     _context.Library.RestClientMethods[operation],
                     _context.Library.GetRestClient(operation.GetHttpPath()),
-                    RequestPath.ResourceGroup)));
+                    operation.GetRequestPath(_context),
+                    ContextualPath)));
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;

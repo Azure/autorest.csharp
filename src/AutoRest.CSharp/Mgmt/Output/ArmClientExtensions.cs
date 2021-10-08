@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -17,5 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public override string ResourceName => "ArmClient";
 
         protected override string DefaultName => "ArmClientExtensions";
+
+        protected override RequestPath ContextualPath => RequestPath.Tenant;
     }
 }

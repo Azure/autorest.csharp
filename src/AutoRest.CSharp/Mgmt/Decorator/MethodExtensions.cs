@@ -21,61 +21,58 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class MethodExtensions
     {
-        ///// <summary>
-        ///// Returns the expected return type of the RestClientMethod.
-        ///// If the RestClientMethod represents a List operation, it will return IReadOnlyList<Item> where Item is the element type
-        ///// of the array
-        ///// If the RestClientMethod is anything else, it will return its original return type.
-        ///// </summary>
-        ///// <param name="method">the <see cref="RestClientMethod"/></param>
-        ///// <param name="operationGroup">the <see cref="OperationGroup"/> this RestClientMethod belongs</param>
-        ///// <param name="context">the current building context</param>
-        ///// <returns>a tuple with the first argument is the expected return type of this function and the second argument is a boolean indicating whether this function is returning a collection</returns>
-        //public static (CSharpType? BodyType, bool IsListFunction, bool WasResourceData) GetBodyTypeForList(this RestClientMethod method, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-        //{
-        //    bool wasResourceData = false;
-        //    CSharpType? returnType;
-        //    CSharpType? valueProperty;
-        //    bool isList = method.IsListMethod(out valueProperty, out returnType);
-
-        //    if (returnType == null || returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
-        //        return (returnType, false, wasResourceData);
-
-        //    //convert returnType if this is the same as the resourceData
-        //    if (context.Library.TryGetResourceData(operationGroup, out var resourceData) &&
-        //        returnType.Name == resourceData.Declaration.Name)
-        //    {
-        //        wasResourceData = true;
-        //        returnType = context.Library.GetArmResource(operationGroup).Type;
-        //    }
-
-        //    if (valueProperty == null) // The returnType does not have a value of array in it, therefore it cannot be a list
-        //    {
-        //        return (returnType, false, wasResourceData);
-        //    }
-
-        //    // first we try to get the resource data - this could be a resource
-        //    if (resourceData != null)
-        //    {
-        //        if (valueProperty.EqualsByName(resourceData.Type))
-        //        {
-        //            wasResourceData = true;
-        //            return (new CSharpType(typeof(IReadOnlyList<>), context.Library.GetArmResource(operationGroup).Type), true, wasResourceData);
-        //        }
-        //    }
-
-        //    // otherwise this must be a non-resource, but still a list
-        //    return (new CSharpType(typeof(IReadOnlyList<>), valueProperty), true, wasResourceData);
-        //}
-
-        public static bool IsListMethod(this MgmtRestOperation operation, [MaybeNullWhen(false)] out CSharpType valueProperty, [MaybeNullWhen(false)] out CSharpType returnType)
+        /// <summary>
+        /// Return true if this operation is a list method. Also returns the itemType and a collection of <see cref="Segment"/> as the extra scope
+        /// For instance, /subscriptions/{}/providers/M.F/fakes will give you an empty collection for extra scope
+        /// /subscriptions/{}/providers/M.F/locations/{location}/fakes will give you a collection [locations] as extra scope
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="itemType">The type of the item in the collection</param>
+        /// <param name="extraScope">A collection of segments, which represents the extra scope comparing to its contextual path.</param>
+        /// <returns></returns>
+        public static bool IsListMethod(this MgmtRestOperation operation, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out IEnumerable<Segment> extraScope)
         {
-            return IsListMethod(operation.Method, out valueProperty, out returnType);
+            extraScope = null;
+            if (IsListMethod(operation.Method, out itemType, out _))
+            {
+                // get the scope
+                extraScope = Enumerable.Empty<Segment>();
+                // the contextual request path must be the parent of the request path of this operation, therefore we just assert this is non-null
+                // for instance we have operation path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild
+                // we will get "providers/Microsoft.Fake/locations/{location}/nonResourceChild"
+                var diff = operation.ContextualPath.TrimParentFrom(operation.RequestPath)!;
+                // remove the "providers" segment and its value
+                // we will get "locations/{location}/nonResourceChild"
+                diff = RemoveProviders(diff);
+                // remove the last segment, which is the thing that we are listing
+                // we will get "locations/{location}"
+                diff = diff.SkipLast(1);
+                // we only keep the "keys" which has even index
+                // we will get "locations"
+                extraScope = diff.Where((_, index) => index % 2 == 0);
+
+                return true;
+            }
+
+            return false;
         }
 
-        public static bool IsListMethod(this RestClientMethod method, [MaybeNullWhen(false)] out CSharpType valueProperty, [MaybeNullWhen(false)] out CSharpType returnType)
+        private static IEnumerable<Segment> RemoveProviders(IEnumerable<Segment> diff)
         {
-            valueProperty = null;
+            var index = diff.ToList().IndexOf(Segment.Providers);
+            if (index < 0)
+                return diff;
+
+            // remove the providers segment and its value
+            var result = new List<Segment>();
+            result.AddRange(diff.Take(index));
+            result.AddRange(diff.Skip(index + 2));
+            return result;
+        }
+
+        public static bool IsListMethod(this RestClientMethod method, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out CSharpType returnType)
+        {
+            itemType = null;
             returnType = method.ReturnType;
             if (returnType == null)
                 return false;
@@ -84,15 +81,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (returnType.FrameworkType == typeof(IReadOnlyList<>))
                 {
-                    valueProperty = returnType.Arguments[0];
+                    itemType = returnType.Arguments[0];
                 }
             }
             else
             {
                 var schemaObject = (SchemaObjectType)returnType.Implementation;
-                valueProperty = GetValueProperty(schemaObject)?.ValueType.Arguments.FirstOrDefault();
+                itemType = GetValueProperty(schemaObject)?.ValueType.Arguments.FirstOrDefault();
             }
-            return valueProperty != null;
+            return itemType != null;
         }
 
         public static bool IsListMethod(this RestClientMethod method)

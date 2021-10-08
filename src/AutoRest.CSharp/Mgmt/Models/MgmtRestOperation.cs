@@ -34,6 +34,10 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public RestClientMethod Method { get; }
         /// <summary>
+        /// The request path of this operation
+        /// </summary>
+        public RequestPath RequestPath { get; }
+        /// <summary>
         /// The contextual path of this operation
         /// </summary>
         public RequestPath ContextualPath { get; }
@@ -42,16 +46,17 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public MgmtRestClient RestClient { get; }
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath contextualPath, string methodName)
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName)
         {
             Method = method;
             RestClient = restClient;
+            RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
         }
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath contextualPath)
-            : this(method, restClient, contextualPath, method.Operation.CSharpName())
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath)
+            : this(method, restClient, requestPath, contextualPath, method.Operation.CSharpName())
         {
         }
 
