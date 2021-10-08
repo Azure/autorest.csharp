@@ -1368,42 +1368,6 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/locations/{location}/resGrpParentWithAncestorWithNonResChWithLocs": {
-            "get": {
-                "tags": [
-                    "ResGrpParentWithAncestorWithNonResChWithLocs"
-                ],
-                "operationId": "ResGrpParentWithAncestorWithNonResChWithLocs_ListByLocation",
-                "description": "Gets all under the specified subscription for the specified location.",
-                "parameters": [
-                    {
-                        "name": "location",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The location for which virtual machines under the subscription are queried.",
-                        "pattern": "^[-\\w\\._]+$"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ResGrpParentWithAncestorWithNonResChWithLocListResult"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}": {
             "put": {
                 "tags": [
@@ -2667,120 +2631,6 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/SubParentListResult"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/providers/Microsoft.Management/managementGroups/{groupId}": {
-            "get": {
-                "tags": [
-                    "ManagementGroups"
-                ],
-                "operationId": "ManagementGroups_Get",
-                "description": "Get the details of the management group.\n",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/GroupIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ManagementGroup"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "ManagementGroups"
-                ],
-                "operationId": "ManagementGroups_CreateOrUpdate",
-                "description": "Create or update a management group.\nIf a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.\n",
-                "parameters": [
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ManagementGroup"
-                        },
-                        "description": "Parameters supplied to the Create Availability Set operation."
-                    },
-                    {
-                        "$ref": "#/parameters/GroupIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ManagementGroup"
-                        }
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "x-ms-long-running-operation-options": {
-                    "final-state-via": "azure-async-operation"
-                }
-            }
-        },
-        "/providers/Microsoft.Management/managementGroups": {
-            "get": {
-                "tags": [
-                    "ManagementGroups"
-                ],
-                "operationId": "ManagementGroups_List",
-                "description": "List management groups for the authenticated user.\n",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ManagementGroupListResult"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/providers/Microsoft.Management/managementGroups/{groupId}/descendants": {
-            "get": {
-                "tags": [
-                    "ManagementGroups"
-                ],
-                "operationId": "ManagementGroups_GetDescendants",
-                "description": "List all entities that descend from a management group.\n",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/GroupIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/DescendantListResult"
                         }
                     }
                 },
@@ -4500,39 +4350,6 @@
                     "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
                 }
             }
-        },
-        "ManagementGroup": {
-            "properties": {
-                "bar": {
-                    "type": "string",
-                    "description": "specifies the bar"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
-            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
-        },
-        "ManagementGroupListResult": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ManagementGroup"
-                    },
-                    "description": "The list of fakes"
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes."
-                }
-            },
-            "required": [
-                "value"
-            ],
-            "description": "The List Availability Set operation response."
         },
         "MgmtGrpParentWithNonResChWithLoc": {
             "properties": {
