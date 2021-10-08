@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models
     internal class RestClient : TypeProvider
     {
         private CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
-        private CachedDictionary<ServiceRequest, RestClientMethod> _nextPageMethods;
+        private CachedDictionary<ServiceRequest, RestClientMethod> _nextPageRequestMethods;
         private RestClientMethod[]? _allMethods;
 
         public RestClient(OperationGroup operationGroup, BuildContext context, string? clientName) : base(context)
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models
             Builder = new RestClientBuilder(operationGroup, context);
 
             _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
-            _nextPageMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
+            _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
 
             Parameters = Builder.GetOrderedParameters();
 
@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientMethod? GetNextOperationMethod(ServiceRequest request)
         {
-            _nextPageMethods.TryGetValue(request, out RestClientMethod? value);
+            _nextPageRequestMethods.TryGetValue(request, out RestClientMethod? value);
             return value;
         }
 

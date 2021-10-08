@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -63,12 +64,13 @@ namespace AutoRest.CSharp.AutoRest.Communication
                         writer.WriteStringValue(NormalizePath(configuration, sharedSourceFolder));
                     }
                     writer.WriteEndArray();
-                    WriteIfNotDefault(writer, "azure-arm", configuration.AzureArm);
-                    WriteIfNotDefault(writer, "public-clients", configuration.PublicClients);
-                    WriteIfNotDefault(writer, "model-namespace", configuration.ModelNamespace);
-                    WriteIfNotDefault(writer, "head-as-boolean", configuration.HeadAsBoolean);
-                    WriteIfNotDefault(writer, "skip-csproj-packagereference", configuration.SkipCSProjPackageReference);
-                    WriteIfNotDefault(writer, "low-level-client", configuration.LowLevelClient);
+                    WriteIfNotDefault(writer, Configuration.Options.AzureArm, configuration.AzureArm);
+                    WriteIfNotDefault(writer, Configuration.Options.PublicClients, configuration.PublicClients);
+                    WriteIfNotDefault(writer, Configuration.Options.ModelNamespace, configuration.ModelNamespace);
+                    WriteIfNotDefault(writer, Configuration.Options.HeadAsBoolean, configuration.HeadAsBoolean);
+                    WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, configuration.SkipCSProjPackageReference);
+                    WriteIfNotDefault(writer, Configuration.Options.LowLevelClient, configuration.LowLevelClient);
+                    WriteIfNotDefault(writer, Configuration.Options.RequestOptionsAllOptional, configuration.RequestOptionsAllOptional);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -113,12 +115,13 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
-                ReadOption(root, "azure-arm"),
-                ReadOption(root, "public-clients"),
-                ReadOption(root, "model-namespace"),
-                ReadOption(root, "head-as-boolean"),
-                ReadOption(root, "skip-csproj-packagereference"),
-                ReadOption(root, "low-level-client"),
+                ReadOption(root, Configuration.Options.AzureArm),
+                ReadOption(root, Configuration.Options.PublicClients),
+                ReadOption(root, Configuration.Options.ModelNamespace),
+                ReadOption(root, Configuration.Options.HeadAsBoolean),
+                ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
+                ReadOption(root, Configuration.Options.LowLevelClient),
+                ReadOption(root, Configuration.Options.RequestOptionsAllOptional),
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }

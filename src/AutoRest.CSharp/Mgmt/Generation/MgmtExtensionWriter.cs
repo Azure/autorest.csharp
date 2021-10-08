@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? $", {ExtensionOperationVariableName}.Id.SubscriptionId" : "";
                     writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline{subIdIfNeeded}, baseUri);");
 
-                    WriteDiagnosticScope(writer, new Diagnostic($"{TypeNameOfThis}.{methodName}"), clientDiagnostics.ActualName, writer =>
+                    using (WriteDiagnosticScope(writer, new Diagnostic($"{TypeNameOfThis}.{methodName}"), clientDiagnostics.ActualName))
                     {
                         writer.Append($"var response = {GetAwait(async)} ");
 
@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         }
 
                         writer.Line($";");
-                    });
+                    }
                 }
                 writer.Append($"){(async? ".ConfigureAwait(false)": string.Empty)};");
             }

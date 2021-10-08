@@ -39,7 +39,7 @@ try {
    
     $CoverageDirectory = Resolve-Path $CoverageDirectory
 
-    npm run coverage --prefix node_modules/@microsoft.azure/autorest.testserver -- publish --repo=autorest.csharp --ref=refs/heads/feature/v3 --githubToken=skip --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass --coverageDirectory=$CoverageDirectory
+    npm run coverage --prefix node_modules/@microsoft.azure/autorest.testserver -- publish --repo=Azure/autorest.csharp --ref=refs/heads/feature/v3 --githubToken=skip --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass --coverageDirectory=$CoverageDirectory
 }
 finally {
     Pop-Location

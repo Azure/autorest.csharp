@@ -16,13 +16,15 @@ namespace httpInfrastructure_LowLevel
     /// <summary> The HttpSuccess service client. </summary>
     public partial class HttpSuccessClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpSuccessRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of HttpSuccessClient for mocking. </summary>
         protected HttpSuccessClient()
@@ -33,6 +35,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpSuccessClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -42,11 +45,11 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new HttpSuccessRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Return 200 status code if successful. </summary>
@@ -68,7 +71,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head200Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead200Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -96,7 +100,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head200(options);
+                using HttpMessage message = CreateHead200Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -117,14 +122,15 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Async(RequestOptions options = null)
+        public virtual async Task<Response> Get200Async(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
             try
             {
-                return await _restClient.Get200Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet200Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -145,14 +151,15 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200(RequestOptions options = null)
+        public virtual Response Get200(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
             try
             {
-                return _restClient.Get200(options);
+                using HttpMessage message = CreateGet200Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -173,14 +180,15 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Options200Async(RequestOptions options = null)
+        public virtual async Task<Response> Options200Async(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();
             try
             {
-                return await _restClient.Options200Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateOptions200Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -201,14 +209,15 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Options200(RequestOptions options = null)
+        public virtual Response Options200(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();
             try
             {
-                return _restClient.Options200(options);
+                using HttpMessage message = CreateOptions200Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -237,7 +246,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put200Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut200Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -266,7 +276,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put200(content, options);
+                using HttpMessage message = CreatePut200Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -295,7 +306,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Patch200Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch200Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -324,7 +336,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Patch200(content, options);
+                using HttpMessage message = CreatePatch200Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -353,7 +366,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post200Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost200Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -382,7 +396,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post200(content, options);
+                using HttpMessage message = CreatePost200Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -411,7 +426,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Delete200Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete200Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -440,7 +456,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Delete200(content, options);
+                using HttpMessage message = CreateDelete200Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -469,7 +486,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put201Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut201Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -498,7 +516,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put201(content, options);
+                using HttpMessage message = CreatePut201Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -527,7 +546,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post201Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost201Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -556,7 +576,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post201(content, options);
+                using HttpMessage message = CreatePost201Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -585,7 +606,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put202Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut202Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -614,7 +636,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put202(content, options);
+                using HttpMessage message = CreatePut202Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -643,7 +666,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Patch202Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch202Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -672,7 +696,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Patch202(content, options);
+                using HttpMessage message = CreatePatch202Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -701,7 +726,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post202Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost202Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -730,7 +756,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post202(content, options);
+                using HttpMessage message = CreatePost202Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -759,7 +786,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Delete202Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete202Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -788,7 +816,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Delete202(content, options);
+                using HttpMessage message = CreateDelete202Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -816,7 +845,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head204Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead204Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -844,7 +874,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head204(options);
+                using HttpMessage message = CreateHead204Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -873,7 +904,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put204Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut204Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -902,7 +934,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put204(content, options);
+                using HttpMessage message = CreatePut204Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -931,7 +964,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Patch204Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch204Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -960,7 +994,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Patch204(content, options);
+                using HttpMessage message = CreatePatch204Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -989,7 +1024,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post204Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost204Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1018,7 +1054,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post204(content, options);
+                using HttpMessage message = CreatePost204Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1047,7 +1084,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Delete204Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete204Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1076,7 +1114,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Delete204(content, options);
+                using HttpMessage message = CreateDelete204Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1104,7 +1143,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head404Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead404Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1132,12 +1172,374 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head404(options);
+                using HttpMessage message = CreateHead404Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateHead200Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet200Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateOptions200Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Options;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut200Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePatch200Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost200Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDelete200Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut201Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/201", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier201.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost201Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/201", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier201.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut202Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/202", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePatch202Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/202", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost202Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/202", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDelete202Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/202", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier202.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead204Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier204.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut204Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier204.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePatch204Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier204.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost204Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier204.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDelete204Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier204.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead404Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/404", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier204404.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier201 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier201();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    201 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier202 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier202();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    202 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier204 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier204();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    204 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier204404 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier204404();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    204 => false,
+                    404 => false,
+                    _ => true
+                };
             }
         }
     }

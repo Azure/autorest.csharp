@@ -16,13 +16,15 @@ namespace HeadAsBooleanTrue_LowLevel
     /// <summary> The HttpSuccess service client. </summary>
     public partial class HttpSuccessClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpSuccessRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of HttpSuccessClient for mocking. </summary>
         protected HttpSuccessClient()
@@ -33,6 +35,7 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpSuccessClient(AzureKeyCredential credential, Uri endpoint = null, HeadAsBooleanTrueClientOptions options = null)
         {
             if (credential == null)
@@ -42,11 +45,11 @@ namespace HeadAsBooleanTrue_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new HeadAsBooleanTrueClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new HttpSuccessRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Return 200 status code if successful. </summary>
@@ -59,7 +62,8 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head200Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead200Request();
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -78,7 +82,8 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head200(options);
+                using HttpMessage message = CreateHead200Request();
+                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -97,7 +102,8 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head204Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead204Request();
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -116,7 +122,8 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head204(options);
+                using HttpMessage message = CreateHead204Request();
+                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -135,7 +142,8 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head404Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead404Request();
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -154,12 +162,67 @@ namespace HeadAsBooleanTrue_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head404(options);
+                using HttpMessage message = CreateHead404Request();
+                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateHead200Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            request.Uri = uri;
+            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead204Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            request.Uri = uri;
+            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead404Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/404", false);
+            request.Uri = uri;
+            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200To300400To500 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200To300400To500();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    >= 200 and < 300 => false,
+                    >= 400 and < 500 => false,
+                    _ => true
+                };
             }
         }
     }

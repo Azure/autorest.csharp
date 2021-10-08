@@ -231,11 +231,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.Append($"{typeof(CancellationToken)} {cancellationTokenParameter} = default)");
             using var _ = _writer.Scope();
-            WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField, writer =>
+            using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField, catch404))
             {
                 _writer.WriteParameterNullChecks(parameters.ToList());
                 inner(_writer);
-            }, catch404);
+            }
         }
 
         private void WriteGetFromRestClient(RestClientMethod method, bool isAsync)
@@ -473,7 +473,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType returnType = typeof(GenericResource).WrapPageable(isAsync);
             using (_writer.Scope($"public {GetVirtual(true)} {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField, writer =>
+                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField))
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
@@ -485,7 +485,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", isAsync)}({ContextProperty} as {typeof(Subscription)}, filters, expand, top, cancellationToken);");
                     }
-                });
+                }
             }
         }
 

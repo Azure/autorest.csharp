@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicValid() => Test(async (host) =>
         {
-            var result = await new BasicClient(Key, host).GetValidAsync();
+            var result = await new BasicClient(Key, host).GetValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("abc", (string)responseBody["name"]);
             Assert.AreEqual(2, (int)responseBody["id"]);
@@ -43,7 +43,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicEmpty() => Test(async (host) =>
         {
-            var result = await new BasicClient(Key, host).GetEmptyAsync();
+            var result = await new BasicClient(Key, host).GetEmptyAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.Zero (responseBody.Properties.Count());
         });
@@ -51,14 +51,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicNotProvided() => Test(async (host) =>
         {
-            var result = await new BasicClient(Key, host).GetNotProvidedAsync();
+            var result = await new BasicClient(Key, host).GetNotProvidedAsync(new());
             Assert.Zero (result.Content.ToMemory().Length);
         });
 
         [Test]
         public Task GetComplexBasicNull() => Test(async (host) =>
         {
-            var result = await new BasicClient(Key, host).GetNullAsync();
+            var result = await new BasicClient(Key, host).GetNullAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual(null, (string?)responseBody["name"]);
             Assert.AreEqual(null, (int?)responseBody["id"]);
@@ -67,7 +67,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicInvalid() => Test(async (host) =>
         {
-            var result = await new BasicClient(Key, host).GetInvalidAsync();
+            var result = await new BasicClient(Key, host).GetInvalidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("abc", (string?)responseBody["name"]);
             Assert.AreEqual("a", (string?)responseBody["id"]);
@@ -76,7 +76,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveInteger() => Test(async (host) =>
         {
-            var result = await new PrimitiveClient(Key, host).GetIntAsync();
+            var result = await new PrimitiveClient(Key, host).GetIntAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual(-1, (int)responseBody["field1"]);
             Assert.AreEqual(2, (int)responseBody["field2"]);
@@ -95,7 +95,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveLong() => Test(async (host) =>
         {
-            var result = await new PrimitiveClient(Key, host).GetLongAsync();
+            var result = await new PrimitiveClient(Key, host).GetLongAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual(1099511627775L, (long)responseBody["field1"]);
             Assert.AreEqual(-999511627788L, (long)responseBody["field2"]);
@@ -114,7 +114,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexArrayValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetValidAsync();
+            var result = await new ArrayClient(Key, host).GetValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             var array = responseBody["array"];
             Assert.AreEqual("1, 2, 3, 4", (string)array[0]);
@@ -136,7 +136,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexDictionaryValid() => Test(async (host) =>
         {
-            var result = await new DictionaryClient(Key, host).GetValidAsync();
+            var result = await new DictionaryClient(Key, host).GetValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             var array = responseBody["defaultProgram"];
 
