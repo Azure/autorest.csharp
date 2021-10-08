@@ -36,17 +36,6 @@ schemas: !Schemas
           name: AzureResourceFlattenModel3Foo
           description: New property
       protocol: !Protocols {}
-    - !NumberSchema &ref_22
-      type: integer
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      precision: 32
-      language: !Languages 
-        default:
-          name: WritableSubResourceModelId
-          description: ''
-      protocol: !Protocols {}
     - !NumberSchema &ref_21
       type: integer
       apiVersions:
@@ -195,6 +184,16 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: TrackedResourceModelLocation
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_22
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WritableSubResourceModelId
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_23

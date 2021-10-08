@@ -16,6 +16,11 @@ namespace OmitOperationGroups
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(B))
             {
                 writer.WritePropertyName("b");
@@ -31,12 +36,18 @@ namespace OmitOperationGroups
 
         internal static Model2Data DeserializeModel2Data(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> b = default;
             Optional<ModelX> modelx = default;
             Optional<string> f = default;
             Optional<string> g = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("b"))
                 {
                     b = property.Value.GetString();
@@ -63,7 +74,7 @@ namespace OmitOperationGroups
                     continue;
                 }
             }
-            return new Model2Data(f.Value, g.Value, b.Value, modelx.Value);
+            return new Model2Data(f.Value, g.Value, id.Value, b.Value, modelx.Value);
         }
     }
 }

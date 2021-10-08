@@ -15,6 +15,11 @@ namespace SupersetFlattenInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Bar))
             {
                 writer.WritePropertyName("bar");
@@ -22,6 +27,11 @@ namespace SupersetFlattenInheritance
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
+            if (Optional.IsDefined(IdPropertiesId))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(IdPropertiesId);
+            }
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo");
@@ -33,10 +43,17 @@ namespace SupersetFlattenInheritance
 
         internal static CustomModel2Data DeserializeCustomModel2Data(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> bar = default;
+            Optional<string> id0 = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("bar"))
                 {
                     bar = property.Value.GetString();
@@ -51,6 +68,11 @@ namespace SupersetFlattenInheritance
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
+                        if (property0.NameEquals("id"))
+                        {
+                            id0 = property0.Value.GetString();
+                            continue;
+                        }
                         if (property0.NameEquals("foo"))
                         {
                             foo = property0.Value.GetString();
@@ -60,7 +82,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new CustomModel2Data(bar.Value, foo.Value);
+            return new CustomModel2Data(id.Value, bar.Value, id0.Value, foo.Value);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="type"></param>
-        internal AzureResourceFlattenModel4Data(int? foo, int? id, string name, string type)
+        internal AzureResourceFlattenModel4Data(int? foo, string id, string name, string type)
         {
             Foo = foo;
             Id = id;
@@ -31,7 +31,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> New property. </summary>
         public int? Foo { get; set; }
         /// <summary> Gets or sets the id. </summary>
-        public int? Id { get; set; }
+        public string Id { get; set; }
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
         /// <summary> Gets or sets the type. </summary>
