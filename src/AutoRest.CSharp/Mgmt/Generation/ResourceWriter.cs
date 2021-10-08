@@ -132,8 +132,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
             // inherits the default constructor when it is not a resource
-            var baseConstructorCall = _resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource){baseConstructorCall}"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, resource.Id)"))
             {
                 _writer.Line($"HasData = true;");
                 _writer.Line($"_data = resource;");
