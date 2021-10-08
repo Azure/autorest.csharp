@@ -23,7 +23,7 @@ namespace MgmtMultipleParentResource
     public partial class AnotherParent : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AnotherParentsRestOperations _restClient;
+        private readonly AnotherParentsRestOperations _anotherParentsRestClient;
         private readonly AnotherParentData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AnotherParent"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace MgmtMultipleParentResource
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _anotherParentsRestClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="AnotherParent"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtMultipleParentResource
         internal AnotherParent(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _anotherParentsRestClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="AnotherParent"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtMultipleParentResource
         internal AnotherParent(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _anotherParentsRestClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -93,7 +93,7 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _anotherParentsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
@@ -114,7 +114,7 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _anotherParentsRestClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
@@ -151,8 +151,8 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new AnotherParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = await _anotherParentsRestClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new AnotherParentDeleteOperation(_clientDiagnostics, Pipeline, _anotherParentsRestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -173,8 +173,8 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new AnotherParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = _anotherParentsRestClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new AnotherParentDeleteOperation(_clientDiagnostics, Pipeline, _anotherParentsRestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -205,7 +205,7 @@ namespace MgmtMultipleParentResource
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _anotherParentsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -234,7 +234,7 @@ namespace MgmtMultipleParentResource
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _anotherParentsRestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -263,7 +263,7 @@ namespace MgmtMultipleParentResource
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _anotherParentsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -292,7 +292,7 @@ namespace MgmtMultipleParentResource
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _anotherParentsRestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -320,7 +320,7 @@ namespace MgmtMultipleParentResource
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _anotherParentsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -348,7 +348,7 @@ namespace MgmtMultipleParentResource
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _anotherParentsRestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -374,8 +374,8 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken).ConfigureAwait(false);
-                var operation = new AnotherParentUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
+                var response = await _anotherParentsRestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken).ConfigureAwait(false);
+                var operation = new AnotherParentUpdateOperation(this, _clientDiagnostics, Pipeline, _anotherParentsRestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -403,8 +403,8 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken);
-                var operation = new AnotherParentUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
+                var response = _anotherParentsRestClient.Update(Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken);
+                var operation = new AnotherParentUpdateOperation(this, _clientDiagnostics, Pipeline, _anotherParentsRestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -416,11 +416,14 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> Gets a list of ChildBodyAnotherParents in the AnotherParent. </summary>
-        /// <returns> An object representing collection of ChildBodyAnotherParents and their operations over a AnotherParent. </returns>
-        public ChildBodyAnotherParentContainer GetChildBodyAnotherParents()
+        #region ChildBody
+
+        /// <summary> Gets a list of ChildBodies in the AnotherParent. </summary>
+        /// <returns> An object representing collection of ChildBodies and their operations over a AnotherParent. </returns>
+        public ChildBodyInAnotherParentContainer GetChildBodies()
         {
-            return new ChildBodyAnotherParentContainer(this);
+            return new ChildBodyInAnotherParentContainer(this);
         }
+        #endregion
     }
 }

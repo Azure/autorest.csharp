@@ -19,52 +19,52 @@ using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A Class representing a ChildBodySubParent along with the instance operations that can be performed on it. </summary>
-    public partial class ChildBodySubParent : ArmResource
+    /// <summary> A Class representing a ChildBodyInAnotherParent along with the instance operations that can be performed on it. </summary>
+    public partial class ChildBodyInAnotherParent : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ChildrenRestOperations _restClient;
+        private readonly AnotherChildrenRestOperations _anotherChildrenRestClient;
         private readonly ChildBodyData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="ChildBodySubParent"/> class for mocking. </summary>
-        protected ChildBodySubParent()
+        /// <summary> Initializes a new instance of the <see cref="ChildBodyInAnotherParent"/> class for mocking. </summary>
+        protected ChildBodyInAnotherParent()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ChildBodySubParent"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "ChildBodyInAnotherParent"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ChildBodySubParent(ArmResource options, ChildBodyData resource) : base(options, resource.Id)
+        internal ChildBodyInAnotherParent(ArmResource options, ChildBodyData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="ChildBodySubParent"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ChildBodyInAnotherParent"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ChildBodySubParent(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal ChildBodyInAnotherParent(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="ChildBodySubParent"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ChildBodyInAnotherParent"/> class. </summary>
         /// <param name="clientOptions"> The client options to build client context. </param>
         /// <param name="credential"> The credential to build client context. </param>
         /// <param name="uri"> The uri to build client context. </param>
         /// <param name="pipeline"> The pipeline to build client context. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ChildBodySubParent(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
+        internal ChildBodyInAnotherParent(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/parents/subParents/children";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/anotherParents/children";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -84,19 +84,19 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to get the VMSS VM run command. </summary>
+        /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ChildBodySubParent>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ChildBodyInAnotherParent>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.Get");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ChildBodySubParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ChildBodyInAnotherParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -105,19 +105,19 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to get the VMSS VM run command. </summary>
+        /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ChildBodySubParent> Get(string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<ChildBodyInAnotherParent> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.Get");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.Get");
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, expand, cancellationToken);
+                var response = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ChildBodySubParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ChildBodyInAnotherParent(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -142,17 +142,17 @@ namespace MgmtMultipleParentResource
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the run command. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ChildDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<AnotherChildDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.Delete");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.Delete");
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new ChildDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
+                var response = await _anotherChildrenRestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new AnotherChildDeleteOperation(_clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -164,17 +164,17 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the run command. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ChildDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual AnotherChildDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.Delete");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.Delete");
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new ChildDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
+                var response = _anotherChildrenRestClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var operation = new AnotherChildDeleteOperation(_clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -191,22 +191,22 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async virtual Task<Response<ChildBodySubParent>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ChildBodyInAnotherParent>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ChildBodySubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new ChildBodyInAnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -220,22 +220,22 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public virtual Response<ChildBodySubParent> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public virtual Response<ChildBodyInAnotherParent> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new ChildBodySubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
+                return Response.FromValue(new ChildBodyInAnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -248,14 +248,14 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async virtual Task<Response<ChildBodySubParent>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ChildBodyInAnotherParent>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.SetTags");
             scope.Start();
             try
             {
@@ -263,8 +263,8 @@ namespace MgmtMultipleParentResource
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ChildBodySubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new ChildBodyInAnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -277,14 +277,14 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public virtual Response<ChildBodySubParent> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual Response<ChildBodyInAnotherParent> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.SetTags");
             scope.Start();
             try
             {
@@ -292,8 +292,8 @@ namespace MgmtMultipleParentResource
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new ChildBodySubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
+                return Response.FromValue(new ChildBodyInAnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -306,22 +306,22 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async virtual Task<Response<ChildBodySubParent>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ChildBodyInAnotherParent>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ChildBodySubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new ChildBodyInAnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -334,22 +334,22 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public virtual Response<ChildBodySubParent> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public virtual Response<ChildBodyInAnotherParent> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new ChildBodySubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
+                return Response.FromValue(new ChildBodyInAnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -358,24 +358,24 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to update the VMSS VM run command. </summary>
+        /// <summary> The operation to update the run command. </summary>
         /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
-        public async virtual Task<ChildUpdateOperation> UpdateAsync(ChildBodyUpdate childBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<AnotherChildUpdateOperation> UpdateAsync(ChildBodyUpdate childBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (childBody == null)
             {
                 throw new ArgumentNullException(nameof(childBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.Update");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.Update");
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, childBody, cancellationToken).ConfigureAwait(false);
-                var operation = new ChildUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, childBody).Request, response);
+                var response = await _anotherChildrenRestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody, cancellationToken).ConfigureAwait(false);
+                var operation = new AnotherChildUpdateOperation(this, _clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -387,24 +387,24 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to update the VMSS VM run command. </summary>
+        /// <summary> The operation to update the run command. </summary>
         /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
-        public virtual ChildUpdateOperation Update(ChildBodyUpdate childBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual AnotherChildUpdateOperation Update(ChildBodyUpdate childBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (childBody == null)
             {
                 throw new ArgumentNullException(nameof(childBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParent.Update");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyInAnotherParent.Update");
             scope.Start();
             try
             {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, childBody, cancellationToken);
-                var operation = new ChildUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, childBody).Request, response);
+                var response = _anotherChildrenRestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody, cancellationToken);
+                var operation = new AnotherChildUpdateOperation(this, _clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
