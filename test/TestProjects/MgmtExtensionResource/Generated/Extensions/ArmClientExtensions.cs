@@ -23,14 +23,14 @@ namespace MgmtExtensionResource
         }
         #endregion
 
-        #region PolicyDefinitionInTenant
-        /// <summary> Gets an object representing a PolicyDefinitionInTenant along with the instance operations that can be performed on it but with no data. </summary>
+        #region BuiltInPolicyDefinition
+        /// <summary> Gets an object representing a BuiltInPolicyDefinition along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PolicyDefinitionInTenant" /> object. </returns>
-        public static PolicyDefinitionInTenant GetPolicyDefinitionInTenant(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="BuiltInPolicyDefinition" /> object. </returns>
+        public static BuiltInPolicyDefinition GetBuiltInPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new PolicyDefinitionInTenant(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BuiltInPolicyDefinition(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 

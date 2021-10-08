@@ -65,7 +65,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private string EnsureResourceDefaultName()
         {
-            // TODO -- make this configurable
+            // read configuration to see if we could get a configuration for this resource
+            var defaultNameFromConfig = GetDefaultNameFromConfiguration();
+            if (defaultNameFromConfig != null)
+                return defaultNameFromConfig;
 
             // check if the resource name is unique in the library
             if (HasUniqueResourceName())
@@ -77,6 +80,17 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (parents.Count() > 1)
                 throw new NotImplementedException($"The resource {ResourceName} has multiple parents, this is not supported yet, please directly assign a name to this resource using configuration (placeholder - not implemented either)");
             return $"{ResourceName}In{parents.First().ResourceName}";
+        }
+
+        private string? GetDefaultNameFromConfiguration()
+        {
+            foreach (var operationSet in OperationSets)
+            {
+                if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
+                    return name;
+            }
+
+            return null;
         }
 
         private bool HasUniqueResourceName()

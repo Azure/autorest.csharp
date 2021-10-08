@@ -18,22 +18,22 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtExtensionResource
 {
-    /// <summary> A Class representing a PolicyDefinitionInTenant along with the instance operations that can be performed on it. </summary>
-    public partial class PolicyDefinitionInTenant : ArmResource
+    /// <summary> A Class representing a BuiltInPolicyDefinition along with the instance operations that can be performed on it. </summary>
+    public partial class BuiltInPolicyDefinition : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyDefinitionsRestOperations _policyDefinitionsRestClient;
         private readonly PolicyDefinitionData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionInTenant"/> class for mocking. </summary>
-        protected PolicyDefinitionInTenant()
+        /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinition"/> class for mocking. </summary>
+        protected BuiltInPolicyDefinition()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "PolicyDefinitionInTenant"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "BuiltInPolicyDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PolicyDefinitionInTenant(ArmResource options, PolicyDefinitionData resource) : base(options, resource.Id)
+        internal BuiltInPolicyDefinition(ArmResource options, PolicyDefinitionData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -41,22 +41,22 @@ namespace MgmtExtensionResource
             _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionInTenant"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PolicyDefinitionInTenant(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal BuiltInPolicyDefinition(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionInTenant"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinition"/> class. </summary>
         /// <param name="clientOptions"> The client options to build client context. </param>
         /// <param name="credential"> The credential to build client context. </param>
         /// <param name="uri"> The uri to build client context. </param>
         /// <param name="pipeline"> The pipeline to build client context. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PolicyDefinitionInTenant(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
+        internal BuiltInPolicyDefinition(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
@@ -85,16 +85,16 @@ namespace MgmtExtensionResource
 
         /// <summary> This operation retrieves the built-in policy definition with the given name. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<PolicyDefinitionInTenant>> GetAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BuiltInPolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInTenant.Get");
+            using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinition.Get");
             scope.Start();
             try
             {
                 var response = await _policyDefinitionsRestClient.GetBuiltInAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PolicyDefinitionInTenant(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -105,16 +105,16 @@ namespace MgmtExtensionResource
 
         /// <summary> This operation retrieves the built-in policy definition with the given name. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<PolicyDefinitionInTenant> Get(CancellationToken cancellationToken = default)
+        public virtual Response<BuiltInPolicyDefinition> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInTenant.Get");
+            using var scope = _clientDiagnostics.CreateScope("BuiltInPolicyDefinition.Get");
             scope.Start();
             try
             {
                 var response = _policyDefinitionsRestClient.GetBuiltIn(Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PolicyDefinitionInTenant(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

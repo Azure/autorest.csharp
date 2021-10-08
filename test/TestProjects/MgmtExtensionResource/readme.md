@@ -7,6 +7,8 @@ azure-arm: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/MgmtExtensionResource.json
 namespace: MgmtExtensionResource
-operation-group-to-parent:
-  PolicyDefinitions: tenant
+request-path-to-resource-name:
+  /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}: BuiltInPolicyDefinition
+# operation-group-to-parent:
+#   PolicyDefinitions: tenant
 ```
