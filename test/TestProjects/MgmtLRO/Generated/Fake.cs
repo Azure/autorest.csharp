@@ -23,7 +23,7 @@ namespace MgmtLRO
     public partial class Fake : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FakesRestOperations _restClient;
+        private readonly FakesRestOperations _fakesRestClient;
         private readonly FakeData _data;
 
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace MgmtLRO
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtLRO
         internal Fake(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtLRO
         internal Fake(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -93,7 +93,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _fakesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
@@ -114,7 +114,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _fakesRestClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
@@ -151,7 +151,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _fakesRestClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new FakeDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -173,7 +173,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _fakesRestClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new FakeDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -205,7 +205,7 @@ namespace MgmtLRO
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -234,7 +234,7 @@ namespace MgmtLRO
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _fakesRestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -263,7 +263,7 @@ namespace MgmtLRO
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -292,7 +292,7 @@ namespace MgmtLRO
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _fakesRestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -320,7 +320,7 @@ namespace MgmtLRO
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -348,7 +348,7 @@ namespace MgmtLRO
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _fakesRestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -374,8 +374,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var response = await _fakesRestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new FakeUpdateOperation(this, _clientDiagnostics, Pipeline, _fakesRestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -403,8 +403,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new FakeUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var response = _fakesRestClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var operation = new FakeUpdateOperation(this, _clientDiagnostics, Pipeline, _fakesRestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -425,8 +425,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = await _restClient.DoSomethingSlroAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeDoSomethingSlroOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingSlroRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = await _fakesRestClient.DoSomethingSlroAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new FakeDoSomethingSlroOperation(_clientDiagnostics, Pipeline, _fakesRestClient.CreateDoSomethingSlroRequest(Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -447,8 +447,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = _restClient.DoSomethingSlro(Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new FakeDoSomethingSlroOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingSlroRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = _fakesRestClient.DoSomethingSlro(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new FakeDoSomethingSlroOperation(_clientDiagnostics, Pipeline, _fakesRestClient.CreateDoSomethingSlroRequest(Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -469,8 +469,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = await _restClient.DoSomethingLROAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeDoSomethingLROOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingLRORequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = await _fakesRestClient.DoSomethingLROAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new FakeDoSomethingLROOperation(_clientDiagnostics, Pipeline, _fakesRestClient.CreateDoSomethingLRORequest(Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -491,8 +491,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = _restClient.DoSomethingLRO(Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new FakeDoSomethingLROOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingLRORequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = _fakesRestClient.DoSomethingLRO(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new FakeDoSomethingLROOperation(_clientDiagnostics, Pipeline, _fakesRestClient.CreateDoSomethingLRORequest(Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
