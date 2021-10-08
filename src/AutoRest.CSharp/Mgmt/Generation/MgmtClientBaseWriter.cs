@@ -49,6 +49,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual string Accessibility => "public";
 
+        protected virtual string IdVariableName => "Id";
+
         protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;
@@ -175,7 +177,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // build contextual parameters
             var contextualParameterMappings = operationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context));
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -327,7 +329,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // build contextual parameters
             var contextualParameterMappings = operationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context));
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -410,7 +412,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // build contextual parameters
             var contextualParameterMappings = operationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context));
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -448,7 +450,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteLROMethodBody(CodeWriter writer, CSharpType lroObjectType, IDictionary<RequestPath, MgmtRestOperation> operationMapping,
+        protected virtual void WriteLROMethodBody(CodeWriter writer, CSharpType lroObjectType, IDictionary<RequestPath, MgmtRestOperation> operationMapping,
             IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
             // TODO -- we need to write multiple branches for a LRO operation
@@ -465,7 +467,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteLROMethodBranch(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        protected virtual void WriteLROMethodBranch(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             writer.Append($"var response = {GetAwait(async)} ");
             writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
@@ -485,7 +487,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return false;
         }
 
-        private CSharpType GetLROObjectType(Operation operation, bool async)
+        protected CSharpType GetLROObjectType(Operation operation, bool async)
         {
             var lroObjectType = operation.IsLongRunning
                 ? Context.Library.GetLongRunningOperation(operation).Type
@@ -552,7 +554,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation;
         }
 
-        protected void WriteLROResponse(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        protected virtual void WriteLROResponse(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             writer.Append($"var operation = new {lroObjectType}(");
 

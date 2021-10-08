@@ -229,7 +229,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // build contextual parameters
             var contextualParameterMappings = operationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context));
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -266,7 +266,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // build contextual parameters
             var contextualParameterMappings = operationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context));
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,

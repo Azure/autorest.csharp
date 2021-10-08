@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="context">The <see cref="BuildContext"/></param>
         /// <param name="idVariableName">The variable name of the Id variable</param>
         /// <returns></returns>
-        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context, string idVariableName = "Id")
+        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context, string idVariableName)
         {
             var stack = new Stack<ContextualParameterMapping>();
             BuildContextualParameterMappingHierarchy(requestPath, context, stack, idVariableName);

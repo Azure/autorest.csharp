@@ -38,6 +38,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected abstract string ExtensionOperationVariableName { get; }
         protected abstract Type ExtensionOperationVariableType { get; }
 
+        protected override string IdVariableName => $"{ExtensionOperationVariableName}.Id";
+
+        protected override string ContextProperty => ExtensionOperationVariableName;
+
         protected void WriteGetRestOperations(MgmtRestClient restClient)
         {
             _writer.Line();
@@ -101,8 +105,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             methodName ??= GetMethodName(clientOperation);
             if (clientOperation.IsLongRunningOperation())
             {
-                //WriteLROMethod(operation, methodName, async);
-                throw new NotImplementedException("LRO method in extension class not implemented yet");
+                WriteLROMethod(clientOperation, methodName, async);
             }
             else if (clientOperation.IsPagingOperation(Context))
             {
@@ -134,6 +137,104 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return "restOperations";
         }
 
+        protected override void WriteLROMethod(MgmtClientOperation clientOperation, string methodName, bool async)
+        {
+            _writer.Line();
+            // get the corresponding MgmtClientOperation mapping
+            var operationMappings = clientOperation.ToDictionary(
+                operation => operation.ContextualPath,
+                operation => operation);
+            // build contextual parameters
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
+            // build parameter mapping
+            var parameterMappings = operationMappings.ToDictionary(
+                pair => pair.Key,
+                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+            // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
+            var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
+
+            // we can only make this an SLRO when all of the methods are not really long
+            bool isSLRO = !clientOperation.IsLongRunningReallyLong();
+            methodName = isSLRO ? methodName : $"Start{methodName}";
+
+            // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
+            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
+            _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
+            }
+            _writer.WriteXmlDocumentationParameter("waitForCompletion", $"Waits for the completion of the long running operations.");
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            // TODO -- find a way to properly get the LRO response type here. Temporarily we are using the first one
+            var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
+            var responseType = lroObjectType.WrapAsync(async);
+
+            WriteLROMethodSignature(_writer, responseType, methodName, methodParameters, async, isSLRO, clientOperation.Accessibility, true);
+
+            using (_writer.Scope())
+            {
+                _writer.WriteParameterNullChecks(methodParameters);
+
+                WriteExtensionContextScope(writer =>
+                {
+                    var diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
+                    WriteClientDiagnosticsAssignment(_writer, "options");
+
+                    WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable,
+                        writer => WriteLROMethodBody(writer, lroObjectType, operationMappings, parameterMappings, async));
+                    _writer.Line();
+                }, async);
+            }
+        }
+
+        protected override void WriteLROMethodBranch(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        {
+            WriteRestOperationAssignment(writer, operation.RestClient);
+
+            base.WriteLROMethodBranch(writer, lroObjectType, operation, parameterMapping, async);
+        }
+
+        protected override void WriteLROResponse(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        {
+            writer.Append($"var operation = new {lroObjectType}(");
+
+            if (operation.Operation.IsLongRunning)
+            {
+                var longRunningOperation = AsMgmtOperation(Context.Library.GetLongRunningOperation(operation.Operation));
+                if (longRunningOperation.WrapperType != null)
+                {
+                    writer.Append($"{ContextProperty}, ");
+                }
+                writer.Append($"{ClientDiagnosticsVariable}, pipeline, {GetRestClientVariableName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Name)}(");
+                WriteArguments(writer, parameterMapping);
+                writer.RemoveTrailingComma();
+                writer.Append($").Request, ");
+            }
+            else
+            {
+                var nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(operation.Operation);
+                // need to check implementation type as some delete operation uses ResourceData.
+                if (nonLongRunningOperation.ResultType != null && nonLongRunningOperation.ResultType.Implementation.GetType() == typeof(Resource))
+                {
+                    writer.Append($"{ContextProperty}, ");
+                }
+            }
+            writer.Line($"response);");
+            CSharpType? lroResultType = GetLROResultType(operation.Operation);
+            // note that the sync version of method "WaitForCompletion" is an extension method provided by "Azure.ResourceManager.Core", we need to add the corresponding namespace here
+            writer.UseNamespace("Azure.ResourceManager.Core");
+            var waitForCompletionMethod = lroResultType == null && async ?
+                    "WaitForCompletionResponse" :
+                    "WaitForCompletion";
+            writer.Line($"if (waitForCompletion)");
+            writer.Line($"{GetAwait(async)} operation.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken){GetConfigureAwait(async)};");
+            writer.Line($"return operation;");
+        }
+
         protected override void WritePagingMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
@@ -144,7 +245,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // build contextual parameters
             var contextualParameterMappings = operationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context));
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -244,6 +345,31 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
+        protected override void WriteLROMethodSignature(CodeWriter writer, CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,
+            bool async, bool isSLRO, string accessibility = "public", bool isVirtual = true)
+        {
+            writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            foreach (var parameter in methodParameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+
+            var defaultWaitForCompletion = isSLRO ? "true" : "false";
+            writer.Line($"bool waitForCompletion = {defaultWaitForCompletion}, {typeof(CancellationToken)} cancellationToken = default)");
+        }
+
+        protected override void WriteNormalMethodSignature(CodeWriter writer, CSharpType responseType, string methodName,
+            IEnumerable<Parameter> methodParameters, bool async, string accessibility = "public", bool isVirtual = true)
+        {
+            writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+
+            foreach (var parameter in methodParameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+        }
+
         protected override void WriteNormalMethod(MgmtClientOperation clientOperation, string methodName, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             _writer.Line();
@@ -254,7 +380,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // build contextual parameters
             var contextualParameterMappings = operationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context));
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
@@ -271,14 +397,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
             var returnType = WrapResourceDataType(clientOperation.ReturnType);
-            var responseType = GetResponseType(returnType, async);
-            _writer.Append($"public static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
 
-            foreach (var parameter in methodParameters)
-            {
-                _writer.WriteParameter(parameter);
-            }
-            _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+            WriteNormalMethodSignature(_writer, GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
+
             using (_writer.Scope())
             {
                 _writer.WriteParameterNullChecks(methodParameters);
@@ -299,24 +420,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             WriteRestOperationAssignment(writer, operation.RestClient);
 
-            writer.Append($"var response = {GetAwait(async)} ");
-            writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(writer, parameterMappings);
-            writer.Line($"cancellationToken){GetConfigureAwait(async)};");
-
-            WriteNormalMethodResponse(writer, operation, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull);
-        }
-
-        protected override void WriteNormalMethodSignature(CodeWriter writer, CSharpType responseType, string methodName,
-            IEnumerable<Parameter> methodParameters, bool async, string accessibility = "public", bool isVirtual = true)
-        {
-            writer.Append($"{accessibility} static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
-
-            foreach (var parameter in methodParameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+            base.WriteNormalMethodBranch(writer, operation, parameterMappings, async, shouldThrowExceptionWhenNull);
         }
 
         //protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, string methodName, bool async, MgmtRestClient restClient)

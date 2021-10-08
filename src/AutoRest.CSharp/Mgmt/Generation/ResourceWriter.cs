@@ -404,7 +404,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // build contextual parameters
             var contextualParameterMappings = operationMappings.Keys.ToDictionary(
                 contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context));
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
             // build parameter mapping
             var parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
