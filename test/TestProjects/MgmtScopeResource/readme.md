@@ -25,7 +25,7 @@ operation-group-to-parent:
   Deployments: tenant
   PolicyAssignments: tenant
   ResourceLinks: tenant
-request-path-to-resource:
+request-path-to-resource-data:
   # model of this only has ID
   /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}: DeploymentOperation
   # model of this has id, type and name, but its type has the type of `object` instead of `string`

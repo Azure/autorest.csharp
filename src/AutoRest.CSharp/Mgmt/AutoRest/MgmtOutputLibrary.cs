@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// considering of the extension resources, one resource name might correspond to multiple operation sets
         /// This must be initialized before other maps
         /// </summary>
-        private Dictionary<string, HashSet<OperationSet>> _resourceNameToOperationSets;
+        private Dictionary<string, HashSet<OperationSet>> _resourceDataSchemaNameToOperationSets;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, TypeProvider> _nameToTypeProvider;
@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _codeModel = codeModel;
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
-            _resourceNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
+            _resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _mergedOperations = _mgmtConfiguration.MergeOperations.SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key))).ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
 
-        public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= _resourceNameToOperationSets.SelectMany(pair => pair.Value);
+        public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= _resourceDataSchemaNameToOperationSets.SelectMany(pair => pair.Value);
         /// <summary>
         /// Returns the full list of the operation sets in this swagger
         /// </summary>
@@ -474,7 +474,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return _rawRequestPathToArmResource;
 
             _rawRequestPathToArmResource = new Dictionary<string, Resource>();
-            foreach ((var resourceName, var operationSets) in _resourceNameToOperationSets)
+            foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach (var resourceOperations in resourceOperationsList)
@@ -498,7 +498,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return _rawRequestPathToResourceContainer;
 
             _rawRequestPathToResourceContainer = new Dictionary<string, ResourceContainer>();
-            foreach ((var resourceName, var operationSets) in _resourceNameToOperationSets)
+            foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach (var resourceOperations in resourceOperationsList)
@@ -583,7 +583,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                if (_resourceNameToOperationSets.TryGetValue(schema.Name, out var operationSets))
+                if (_resourceDataSchemaNameToOperationSets.TryGetValue(schema.Name, out var operationSets))
                 {
                     // we are iterating over the ResourceSchemaMap, the value can only be [ResourceData]s
                     var resourceData = (ResourceData)entry.Value;
@@ -706,7 +706,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_resourceNameToOperationSets.ContainsKey(schema.Name))
+                if (_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
                 {
                     continue;
                 }
@@ -723,7 +723,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_resourceNameToOperationSets.ContainsKey(schema.Name))
+                if (_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
                 {
                     TypeProvider typeOfModel = BuildResourceModel(schema);
                     resourceModels.Add(schema, typeOfModel);
@@ -778,14 +778,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var operation in operationSet)
                 {
-                    if (operationSet.TryGetResourceName(_mgmtConfiguration, out var resourceName))
+                    if (operationSet.TryGetResourceDataSchemaName(_mgmtConfiguration, out var resourceName))
                     {
                         // if this operation set corresponds to a SDK resource, we add it to the map
                         HashSet<OperationSet>? result;
-                        if (!_resourceNameToOperationSets.TryGetValue(resourceName, out result))
+                        if (!_resourceDataSchemaNameToOperationSets.TryGetValue(resourceName, out result))
                         {
                             result = new HashSet<OperationSet>();
-                            _resourceNameToOperationSets.Add(resourceName, result);
+                            _resourceDataSchemaNameToOperationSets.Add(resourceName, result);
                         }
                         result.Add(operationSet);
                     }

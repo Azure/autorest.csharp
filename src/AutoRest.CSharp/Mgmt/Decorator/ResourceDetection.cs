@@ -13,41 +13,41 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceDetection
     {
-        private static ConcurrentDictionary<string, string?> _rawCache = new ConcurrentDictionary<string, string?>();
+        private static ConcurrentDictionary<string, string?> _resourceDataSchemaNameCache = new ConcurrentDictionary<string, string?>();
 
         public static bool IsResource(this OperationSet set, MgmtConfiguration config)
         {
-            return set.TryGetResourceName(config, out _);
+            return set.TryGetResourceDataSchemaName(config, out _);
         }
 
-        public static string Resource(this OperationSet set, MgmtConfiguration config)
+        public static string ResourceDataSchemaName(this OperationSet set, MgmtConfiguration config)
         {
-            if (set.TryGetResourceName(config, out var resourceName))
+            if (set.TryGetResourceDataSchemaName(config, out var resourceName))
                 return resourceName;
 
             throw new InvalidOperationException($"Operation set {set.RequestPath} does not correspond to a resource");
         }
 
-        public static bool TryGetResourceName(this OperationSet set, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
+        public static bool TryGetResourceDataSchemaName(this OperationSet set, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
         {
             resourceName = null;
             // get the result from cache
-            if (_rawCache.TryGetValue(set.RequestPath, out resourceName))
+            if (_resourceDataSchemaNameCache.TryGetValue(set.RequestPath, out resourceName))
             {
                 return resourceName != null;
             }
 
             // try to get result from configuration
-            if (config.RequestPathToResource.TryGetValue(set.RequestPath, out resourceName))
+            if (config.RequestPathToResourceData.TryGetValue(set.RequestPath, out resourceName))
             {
-                _rawCache.TryAdd(set.RequestPath, resourceName);
+                _resourceDataSchemaNameCache.TryAdd(set.RequestPath, resourceName);
                 return true;
             }
 
             // try to get another configuration to see if this is marked as not a resource
             if (config.RequestPathIsNonResource.Contains(set.RequestPath))
             {
-                _rawCache.TryAdd(set.RequestPath, null);
+                _resourceDataSchemaNameCache.TryAdd(set.RequestPath, null);
                 return false;
             }
 
@@ -57,19 +57,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // try put operation to get the resource name
             if (set.TryOperationWithMethod(HttpMethod.Put, config, out resourceName))
             {
-                _rawCache.TryAdd(set.RequestPath, resourceName);
+                _resourceDataSchemaNameCache.TryAdd(set.RequestPath, resourceName);
                 return true;
             }
 
             // try get operation to get the resource name
             if (set.TryOperationWithMethod(HttpMethod.Get, config, out resourceName))
             {
-                _rawCache.TryAdd(set.RequestPath, resourceName);
+                _resourceDataSchemaNameCache.TryAdd(set.RequestPath, resourceName);
                 return true;
             }
 
             // We tried everything, this is not a resource
-            _rawCache.TryAdd(set.RequestPath, null);
+            _resourceDataSchemaNameCache.TryAdd(set.RequestPath, null);
             return false;
         }
 
