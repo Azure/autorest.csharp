@@ -14,6 +14,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
         }
 
+        public override string ResourceName => "ResourceGroup";
+
         protected override string DefaultName => "ResourceGroupExtensions";
     }
 }

@@ -14,6 +14,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
         }
 
+        public override string ResourceName => "Subscription";
+
         protected override string DefaultName => "SubscriptionExtensions";
     }
 }

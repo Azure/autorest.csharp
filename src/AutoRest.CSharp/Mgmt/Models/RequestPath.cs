@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public static readonly RequestPath ManagementGroup = new(new[] {
             new Segment("providers"),
-            new Segment("Microsoft.ManagementGroups"),
+            new Segment("Microsoft.Management"),
             new Segment("managementGroups"),
             new Segment(new Reference("managementGroupId", typeof(string)))
         });

@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
@@ -132,26 +133,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
             //    resourceType = $"\"{resourceType}\"";
             //}
 
-            string validResourceType;
+            FormattableString validResourceType;
             if (_resourceContainer.ResourceTypes.Count == 1)
                 validResourceType = GetResourceTypeExpression(_resourceContainer.ResourceTypes.Values.First());
             else
-                validResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
+                validResourceType = $"{typeof(ResourceIdentifier)}.RootResourceIdentifier.ResourceType";
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
             _writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {validResourceType};");
         }
 
-        private string GetResourceTypeExpression(ResourceType resourceType)
+        private FormattableString GetResourceTypeExpression(ResourceType resourceType)
         {
             if (resourceType == ResourceType.ResourceGroup)
-                return "ResourceGroup.ResourceType";
+                return $"{typeof(ResourceGroup)}.ResourceType";
             if (resourceType == ResourceType.Subscription)
-                return "Subscription.ResourceType";
+                return $"{typeof(Subscription)}.ResourceType";
             if (resourceType == ResourceType.Tenant)
-                return "Tenant.ResourceType";
+                return $"{typeof(Tenant)}.ResourceType";
             if (resourceType == ResourceType.ManagementGroup)
-                return "ManagementGroup.ResourceType";
+                return $"{typeof(ManagementGroup)}.ResourceType";
 
             if (!resourceType.IsConstant)
                 throw new NotImplementedException($"ResourceType that contains variables are not supported yet");

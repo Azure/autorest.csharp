@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type}\" /> object.");
-            using (_writer.Scope($"public static {container.Type.Name} Get{container.Resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            using (_writer.Scope($"public static {container.Type.Name} Get{resource.ResourceName.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
                 _writer.Line($"return new {container.Type.Name}({ExtensionOperationVariableName});");
             }
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
-            using (_writer.Scope($"public static {resource.Type.Name} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            using (_writer.Scope($"public static {resource.Type.Name} Get{resource.ResourceName}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
                 _writer.Line($"return new {resource.Type.Name}({ExtensionOperationVariableName}, {ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\");");
             }

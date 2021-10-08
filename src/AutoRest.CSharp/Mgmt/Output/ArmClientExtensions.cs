@@ -14,6 +14,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
         }
 
+        public override string ResourceName => "ArmClient";
+
         protected override string DefaultName => "ArmClientExtensions";
     }
 }

@@ -65,9 +65,31 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private string EnsureResourceDefaultName()
         {
-            // TODO -- sometimes we might have multiple resources with the same name, we need to resolve this here
-            // But temporarily, we just return the ResourceName and assume we will not hit on any issues
-            return ResourceName;
+            // TODO -- make this configurable
+
+            // check if the resource name is unique in the library
+            if (HasUniqueResourceName())
+                return ResourceName;
+
+            // otherwise we append the parent name to it
+            var parents = this.Parent(_context);
+            // TODO -- what happens if I have multiple parents????
+            if (parents.Count() > 1)
+                throw new NotImplementedException($"The resource {ResourceName} has multiple parents, this is not supported yet, please directly assign a name to this resource using configuration (placeholder - not implemented either)");
+            return $"{ResourceName}In{parents.First().ResourceName}";
+        }
+
+        private bool HasUniqueResourceName()
+        {
+            foreach (var resource in _context.Library.ArmResources)
+            {
+                if (resource == this)
+                    continue;
+                if (resource.ResourceName == this.ResourceName)
+                    return false;
+            }
+
+            return true;
         }
 
         protected override string DefaultAccessibility => "public";
@@ -89,7 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public ResourceData ResourceData => _context.Library.GetResourceData(RequestPaths.First());
 
-        public virtual string ResourceName { get; }
+        public override string ResourceName { get; }
 
         public virtual MgmtClientOperation? GetOperation { get; }
         public virtual MgmtClientOperation? DeleteOperation { get; }

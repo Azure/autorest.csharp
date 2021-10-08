@@ -14,6 +14,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
         }
 
+        public override string ResourceName => "Tenant";
+
         protected override string DefaultName => "TenantExtensions";
     }
 }

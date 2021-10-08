@@ -21,6 +21,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
+        public abstract string ResourceName { get; }
+
         public abstract IEnumerable<MgmtClientOperation> ClientOperations { get; }
 
         private IEnumerable<Resource>? _chileResources;
