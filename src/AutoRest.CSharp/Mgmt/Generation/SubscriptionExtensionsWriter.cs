@@ -51,9 +51,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // Write other orphan operations with the parent of ResourceGroup
                     foreach (var clientOperation in _extensions.ClientOperations)
                     {
-                        var methodName = GetMethodName(clientOperation);
-                        WriteMethod(clientOperation, methodName, true);
-                        WriteMethod(clientOperation, methodName, false);
+                        WriteMethod(clientOperation, true);
+                        WriteMethod(clientOperation, false);
 
                         // we only check if a resource needs a GetByName method when it has a List operation in the subscription extension.
                         // If its parent is Subscription, we will have a GetContainer method of that resource, which contains a GetAllAsGenericResource serves the same purpose.
@@ -90,7 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return false;
         }
 
-        protected string GetMethodName(MgmtClientOperation clientOperation)
+        protected override string GetMethodName(MgmtClientOperation clientOperation)
         {
             // we should always have only one operation in extension classes
             Debug.Assert(clientOperation.Count == 1);

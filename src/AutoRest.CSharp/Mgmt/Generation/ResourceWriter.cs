@@ -218,8 +218,8 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             // write all the methods that should belong to this resouce
             foreach (var clientOperation in _resource.ClientOperations)
             {
-                WriteMethod(clientOperation, clientOperation.Name, true);
-                WriteMethod(clientOperation, clientOperation.Name, false);
+                WriteMethod(clientOperation, true);
+                WriteMethod(clientOperation, false);
             }
 
             // TODO -- what does this used for?
@@ -245,14 +245,14 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         {
             if (operation == null)
                 return;
-            WriteMethod(operation, "Update", async);
+            WriteMethod(operation, async, "Update");
         }
 
         private void WritePostMethod(MgmtClientOperation? operation, bool async)
         {
             if (operation == null)
                 return;
-            WriteMethod(operation, operation.Name, async);
+            WriteMethod(operation, async, operation.Name);
         }
 
         protected override CSharpType? WrapResourceDataType(CSharpType? returnType)

@@ -46,6 +46,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             : base(writer, resourceContainer.Resource, context)
         {
             _resourceContainer = resourceContainer;
+            _listMethods = _resourceContainer.ClientOperations.Where(operation => IsListMethod(operation));
+        }
+
+        private IEnumerable<MgmtClientOperation> _listMethods;
+
+        private bool IsListMethod(MgmtClientOperation clientOperation)
+        {
+            if (clientOperation.Count > 1)
+                throw new NotImplementedException("multiple operations are not supported yet");
+
+            if (clientOperation.First().IsListMethod(out var itemType, out _))
+            {
+                return itemType.Equals(_resourceData.Type);
+            }
+
+            return false;
         }
 
         public override void Write()
@@ -178,8 +194,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // write all the methods that should belong to this resouce container
             foreach (var clientOperation in _resourceContainer.ClientOperations)
             {
-                WriteMethod(clientOperation, clientOperation.Name, false);
-                WriteMethod(clientOperation, clientOperation.Name, true);
+                WriteMethod(clientOperation, false);
+                WriteMethod(clientOperation, true);
             }
 
             var parents = _resource.Parent(Context);
@@ -188,6 +204,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteListAsGenericResource(false);
                 WriteListAsGenericResource(true);
             }
+        }
+
+        protected override string GetMethodName(MgmtClientOperation clientOperation)
+        {
+            // TODO -- we might need to find a way to put this method to the corresponding ResourceContainer class
+            // in the resouce container, we should make the method that lists its corresponding ResourceData to "GetAll", and leave all other methods unchanged
+            if (_listMethods.Count() == 1 && _listMethods.Contains(clientOperation))
+                return "GetAll";
+
+            return base.GetMethodName(clientOperation);
         }
 
         private void WriteCheckIfExists(MgmtClientOperation clientOperation, bool async)

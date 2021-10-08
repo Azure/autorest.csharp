@@ -96,20 +96,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override void WriteMethod(MgmtClientOperation operation, string methodName, bool async)
+        protected override void WriteMethod(MgmtClientOperation clientOperation, bool async, string? methodName = null)
         {
-            if (operation.IsLongRunningOperation())
+            methodName ??= GetMethodName(clientOperation);
+            if (clientOperation.IsLongRunningOperation())
             {
                 //WriteLROMethod(operation, methodName, async);
                 throw new NotImplementedException("LRO method in extension class not implemented yet");
             }
-            else if (operation.IsPagingOperation(Context))
+            else if (clientOperation.IsPagingOperation(Context))
             {
-                WritePagingMethod(operation, methodName, async);
+                WritePagingMethod(clientOperation, methodName, async);
             }
             else
             {
-                WriteNormalMethod(operation, methodName, async);
+                WriteNormalMethod(clientOperation, methodName, async);
             }
         }
 

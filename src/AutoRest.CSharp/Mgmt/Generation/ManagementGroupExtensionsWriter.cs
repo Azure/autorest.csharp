@@ -49,8 +49,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // Write other orphan operations with the parent of ResourceGroup
                     foreach (var clientOperation in _extensions.ClientOperations)
                     {
-                        WriteMethod(clientOperation, clientOperation.Name, true);
-                        WriteMethod(clientOperation, clientOperation.Name, false);
+                        WriteMethod(clientOperation, true);
+                        WriteMethod(clientOperation, false);
                     }
                 }
             }

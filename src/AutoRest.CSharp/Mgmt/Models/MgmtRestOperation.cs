@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The name of this operation
         /// </summary>
-        public string Name => Operation.CSharpName(); // TODO -- introduce some mechanism to determine this name
+        public string Name { get; }
         public string? Description => Method.Description;
         public CSharpType? ReturnType => Method.ReturnType;
         public string Accessibility => Method.Accessibility;
@@ -42,11 +42,17 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public MgmtRestClient RestClient { get; }
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath contextualPath)
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath contextualPath, string methodName)
         {
             Method = method;
-            ContextualPath = contextualPath;
             RestClient = restClient;
+            ContextualPath = contextualPath;
+            Name = methodName;
+        }
+
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath contextualPath)
+            : this(method, restClient, contextualPath, method.Operation.CSharpName())
+        {
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

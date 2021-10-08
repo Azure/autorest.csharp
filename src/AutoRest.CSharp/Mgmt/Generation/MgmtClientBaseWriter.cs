@@ -139,8 +139,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return isInheritedMethod ? "override" : GetVirtual(isVirtual);
         }
 
-        protected virtual void WriteMethod(MgmtClientOperation clientOperation, string methodName, bool async)
+        protected virtual void WriteMethod(MgmtClientOperation clientOperation, bool async, string? methodName = null)
         {
+            methodName ??= GetMethodName(clientOperation);
             // we need to identify this operation belongs to which category: NormalMethod, LROMethod or PagingMethod
             if (clientOperation.IsLongRunningOperation())
             {
@@ -157,6 +158,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // this is a normal operation
                 WriteNormalMethod(clientOperation, methodName, async);
             }
+        }
+
+        protected virtual string GetMethodName(MgmtClientOperation clientOperation)
+        {
+            return clientOperation.Name;
         }
 
         protected virtual void WritePagingMethod(MgmtClientOperation clientOperation, string methodName, bool async)
