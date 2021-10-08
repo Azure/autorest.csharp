@@ -10,12 +10,6 @@ namespace: MgmtParent
 model-namespace: false
 public-clients: false
 head-as-boolean: false
-operation-group-to-resource-type:
-   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/vmextension
-operation-group-to-resource:
-   VirtualMachineExtensionImages: VirtualMachineExtensionImage
-operation-group-to-parent:
-   VirtualMachineExtensionImages: subscriptions
 modelerfour:
   lenient-model-deduplication: true
 ```
