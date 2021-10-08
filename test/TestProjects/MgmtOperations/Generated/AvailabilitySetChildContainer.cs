@@ -16,11 +16,11 @@ using MgmtOperations.Models;
 
 namespace MgmtOperations
 {
-    /// <summary> A class representing collection of AvailabilitySetChild and their operations over a AvailabilitySet. </summary>
+    /// <summary> A class representing collection of AvailabilitySetChild and their operations over its parent. </summary>
     public partial class AvailabilitySetChildContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AvailabilitySetChildRestOperations _restClient;
+        private readonly AvailabilitySetChildRestOperations _availabilitySetChildRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildContainer"/> class for mocking. </summary>
         protected AvailabilitySetChildContainer()
@@ -32,11 +32,11 @@ namespace MgmtOperations
         internal AvailabilitySetChildContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _availabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => AvailabilitySet.ResourceType;
+        protected override ResourceType ValidResourceType => "Microsoft.Compute/availabilitySets";
 
         // Container level operations.
 
@@ -61,7 +61,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken);
+                var response = _availabilitySetChildRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken);
                 var operation = new AvailabilitySetChildCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -95,7 +95,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetChildRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new AvailabilitySetChildCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -108,21 +108,22 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public virtual Response<AvailabilitySetChild> Get(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.Get");
             scope.Start();
             try
             {
-                if (availabilitySetChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetChildName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
+                var response = _availabilitySetChildRestClient.Get(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetChild(Parent, response.Value), response.GetRawResponse());
@@ -134,21 +135,22 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySetChild>> GetAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.Get");
             scope.Start();
             try
             {
-                if (availabilitySetChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetChildName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetChildRestClient.GetAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetChild(Parent, response.Value), response.GetRawResponse());
@@ -162,7 +164,8 @@ namespace MgmtOperations
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public virtual Response<AvailabilitySetChild> GetIfExists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.GetIfExists");
@@ -174,7 +177,7 @@ namespace MgmtOperations
                     throw new ArgumentNullException(nameof(availabilitySetChildName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
+                var response = _availabilitySetChildRestClient.Get(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse())
                     : Response.FromValue(new AvailabilitySetChild(this, response.Value), response.GetRawResponse());
@@ -188,10 +191,11 @@ namespace MgmtOperations
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySetChild>> GetIfExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
@@ -200,7 +204,7 @@ namespace MgmtOperations
                     throw new ArgumentNullException(nameof(availabilitySetChildName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetChildRestClient.GetAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse())
                     : Response.FromValue(new AvailabilitySetChild(this, response.Value), response.GetRawResponse());
@@ -214,7 +218,8 @@ namespace MgmtOperations
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.CheckIfExists");
@@ -238,10 +243,11 @@ namespace MgmtOperations
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -261,6 +267,6 @@ namespace MgmtOperations
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, AvailabilitySetChild, AvailabilitySetChildData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AvailabilitySetChild, AvailabilitySetChildData> Construct() { }
     }
 }
