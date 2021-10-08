@@ -18,20 +18,31 @@ namespace AutoRest.CSharp.Mgmt.Models
         private ReferenceOrConstant _value;
         private string _stringValue;
 
-        public Segment(ReferenceOrConstant value)
+        public Segment(ReferenceOrConstant value, bool strict = true)
         {
             _value = value;
             _stringValue = value.IsConstant ? value.Constant.Value?.ToString() ?? "null"
                 : $"({value.Reference.Type.Name}){value.Reference.Name}";
+            IsStrict = strict;
         }
 
-        public Segment(string value)
+        public Segment(string value, bool strict = true)
         {
             _stringValue = value;
             _value = new Constant(value, typeof(string));
+            IsStrict = strict;
         }
 
+        /// <summary>
+        /// Mark if this segment is strict when comparing with each other.
+        /// IsStrict only works on Reference and does not work on Constant
+        /// If IsStrict is false, and this is a Reference, we will only compare the type is the same when comparing
+        /// But when IsStrict is true, or this is a Constant, we will always ensure we have the same value (for constant) or same reference name (for reference) and the same type
+        /// </summary>
+        public bool IsStrict { get; private set; }
+
         public bool IsConstant => _value.IsConstant;
+
         public bool IsReference => !IsConstant;
 
         public Constant Constant => _value.Constant;
@@ -42,20 +53,25 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public string ReferenceName => _value.Reference.Name;
 
-        public bool Equals(Segment other, bool strict)
+        private bool Equals(Segment other, bool strict)
         {
             if (strict)
-                return this.Equals(other);
+                return ExactEquals(this, other);
             if (this.IsConstant)
-                return this.Equals(other);
+                return ExactEquals(this, other);
             // this is a reference, we will only test if the Type is the same
             if (other.IsConstant)
-                return this.Equals(other);
+                return ExactEquals(this, other);
             // now other is also a reference
             return this._value.Reference.Type.Equals(other._value.Reference.Type);
         }
 
-        public bool Equals(Segment other) => _stringValue.Equals(other._stringValue, StringComparison.InvariantCultureIgnoreCase);
+        private static bool ExactEquals(Segment left, Segment right)
+        {
+            return left._stringValue.Equals(right._stringValue, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public bool Equals(Segment other) => this.Equals(other, IsStrict && other.IsStrict);
 
         public override bool Equals(object? obj)
         {

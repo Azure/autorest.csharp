@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return parent;
             }
             // if we cannot find a resource as its parent, its parent must be one of the Extensions
-            if (parentRequestPath.Equals(RequestPath.ManagementGroup, false))
+            if (parentRequestPath.Equals(RequestPath.ManagementGroup))
                 return context.Library.ManagementGroupExtensions;
             if (parentRequestPath.Equals(RequestPath.ResourceGroup))
                 return context.Library.ResourceGroupExtensions;
@@ -144,8 +144,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return candidates.Last();
             // if we cannot find one, we try the 4 extensions
             // first try management group
-            // We use strict = false because we usually see the name of management group is different in different RPs. Some of them are groupId, some of them are groupName, etc
-            if (RequestPath.ManagementGroup.IsParentOf(requestPath, false))
+            if (RequestPath.ManagementGroup.IsParentOf(requestPath))
                 return RequestPath.ManagementGroup;
             // then try resourceGroup
             if (RequestPath.ResourceGroup.IsParentOf(requestPath))

@@ -34,7 +34,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment("providers"),
             new Segment("Microsoft.Management"),
             new Segment("managementGroups"),
-            new Segment(new Reference("managementGroupId", typeof(string)))
+            // We use strict = false because we usually see the name of management group is different in different RPs. Some of them are groupId, some of them are groupName, etc
+            new Segment(new Reference("managementGroupId", typeof(string)), false)
         });
 
         private IReadOnlyList<Segment> _segments;
@@ -63,9 +64,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// Check if this <see cref="RequestPath"/> is the parent (aka prefix) of <code other/>
         /// </summary>
         /// <param name="other"></param>
-        /// <param name="strict">if true, we will require the parameter name to be the same during the detection</param>
         /// <returns></returns>
-        public bool IsParentOf(RequestPath other, bool strict = true)
+        public bool IsParentOf(RequestPath other)
         {
             // To be the parent of other, you must at least be shorter than other.
             if (other.Count <= Count)
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 // when strict is false, we also need the segment to be identical if it is constant.
                 // but if it is a reference, we only require they have the same type, do not require they have the same variable name.
                 // This case happens a lot during the management group parent detection - different RP calls this different things
-                if (!this[i].Equals(other[i], strict))
+                if (!this[i].Equals(other[i]))
                     return false;
             }
             return true;
@@ -120,19 +120,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new Segment(pathSegment.Value).SingleItemAsIEnumerate();
         }
 
-        public bool Equals(RequestPath other, bool strict)
+        public bool Equals(RequestPath other)
         {
             if (Count != other.Count)
                 return false;
             for (int i = 0; i < Count; i++)
             {
-                if (!this[i].Equals(other[i], strict))
+                if (!this[i].Equals(other[i]))
                     return false;
             }
             return true;
         }
-
-        public bool Equals(RequestPath other) => this.Equals(other, true);
 
         public override bool Equals(object? obj)
         {
