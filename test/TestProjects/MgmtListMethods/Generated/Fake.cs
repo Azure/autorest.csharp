@@ -22,7 +22,7 @@ namespace MgmtListMethods
     public partial class Fake : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FakesRestOperations _restClient;
+        private readonly FakesRestOperations _fakesRestClient;
         private readonly FakeData _data;
 
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace MgmtListMethods
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class. </summary>
@@ -47,7 +47,7 @@ namespace MgmtListMethods
         internal Fake(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class. </summary>
@@ -59,7 +59,7 @@ namespace MgmtListMethods
         internal Fake(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -92,7 +92,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _fakesRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
@@ -113,7 +113,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Name, expand, cancellationToken);
+                var response = _fakesRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
@@ -160,7 +160,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakesRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -189,7 +189,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, null, cancellationToken);
+                var originalResponse = _fakesRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -218,7 +218,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakesRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -247,7 +247,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, null, cancellationToken);
+                var originalResponse = _fakesRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -275,7 +275,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakesRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -303,7 +303,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, null, cancellationToken);
+                var originalResponse = _fakesRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -313,12 +313,17 @@ namespace MgmtListMethods
             }
         }
 
+        #region FakeParentWithAncestorWithNonResChWithLoc
+
         /// <summary> Gets a list of FakeParentWithAncestorWithNonResChWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocs and their operations over a Fake. </returns>
         public FakeParentWithAncestorWithNonResChWithLocContainer GetFakeParentWithAncestorWithNonResChWithLocs()
         {
             return new FakeParentWithAncestorWithNonResChWithLocContainer(this);
         }
+        #endregion
+
+        #region FakeParentWithAncestorWithNonResCh
 
         /// <summary> Gets a list of FakeParentWithAncestorWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a Fake. </returns>
@@ -326,6 +331,9 @@ namespace MgmtListMethods
         {
             return new FakeParentWithAncestorWithNonResChContainer(this);
         }
+        #endregion
+
+        #region FakeParentWithAncestorWithLoc
 
         /// <summary> Gets a list of FakeParentWithAncestorWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocs and their operations over a Fake. </returns>
@@ -333,6 +341,9 @@ namespace MgmtListMethods
         {
             return new FakeParentWithAncestorWithLocContainer(this);
         }
+        #endregion
+
+        #region FakeParentWithAncestor
 
         /// <summary> Gets a list of FakeParentWithAncestors in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a Fake. </returns>
@@ -340,6 +351,9 @@ namespace MgmtListMethods
         {
             return new FakeParentWithAncestorContainer(this);
         }
+        #endregion
+
+        #region FakeParentWithNonResCh
 
         /// <summary> Gets a list of FakeParentWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithNonResChes and their operations over a Fake. </returns>
@@ -347,6 +361,9 @@ namespace MgmtListMethods
         {
             return new FakeParentWithNonResChContainer(this);
         }
+        #endregion
+
+        #region FakeParent
 
         /// <summary> Gets a list of FakeParents in the Fake. </summary>
         /// <returns> An object representing collection of FakeParents and their operations over a Fake. </returns>
@@ -354,5 +371,6 @@ namespace MgmtListMethods
         {
             return new FakeParentContainer(this);
         }
+        #endregion
     }
 }

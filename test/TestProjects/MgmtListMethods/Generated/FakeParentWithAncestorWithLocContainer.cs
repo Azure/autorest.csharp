@@ -18,11 +18,11 @@ using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of FakeParentWithAncestorWithLoc and their operations over a Fake. </summary>
+    /// <summary> A class representing collection of FakeParentWithAncestorWithLoc and their operations over its parent. </summary>
     public partial class FakeParentWithAncestorWithLocContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FakeParentWithAncestorWithLocsRestOperations _restClient;
+        private readonly FakeParentWithAncestorWithLocsRestOperations _fakeParentWithAncestorWithLocsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithLocContainer"/> class for mocking. </summary>
         protected FakeParentWithAncestorWithLocContainer()
@@ -34,11 +34,11 @@ namespace MgmtListMethods
         internal FakeParentWithAncestorWithLocContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakeParentWithAncestorWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakeParentWithAncestorWithLocsRestClient = new FakeParentWithAncestorWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => Fake.ResourceType;
+        protected override ResourceType ValidResourceType => "Microsoft.Fake/fakes";
 
         // Container level operations.
 
@@ -63,7 +63,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.Name, fakeParentWithAncestorWithLocName, parameters, cancellationToken);
+                var response = _fakeParentWithAncestorWithLocsRestClient.CreateOrUpdate(Id.Name, fakeParentWithAncestorWithLocName, parameters, cancellationToken);
                 var operation = new FakeParentWithAncestorWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -97,7 +97,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.Name, fakeParentWithAncestorWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithLocsRestClient.CreateOrUpdateAsync(Id.Name, fakeParentWithAncestorWithLocName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new FakeParentWithAncestorWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -110,21 +110,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public virtual Response<FakeParentWithAncestorWithLoc> Get(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithAncestorWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.Get");
             scope.Start();
             try
             {
-                if (fakeParentWithAncestorWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-                }
-
-                var response = _restClient.Get(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken);
+                var response = _fakeParentWithAncestorWithLocsRestClient.Get(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithAncestorWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -136,21 +137,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public async virtual Task<Response<FakeParentWithAncestorWithLoc>> GetAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithAncestorWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.Get");
             scope.Start();
             try
             {
-                if (fakeParentWithAncestorWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithLocsRestClient.GetAsync(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithAncestorWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -164,7 +166,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public virtual Response<FakeParentWithAncestorWithLoc> GetIfExists(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.GetIfExists");
@@ -176,7 +179,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
                 }
 
-                var response = _restClient.Get(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken);
+                var response = _fakeParentWithAncestorWithLocsRestClient.Get(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
@@ -190,10 +193,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public async virtual Task<Response<FakeParentWithAncestorWithLoc>> GetIfExistsAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
@@ -202,7 +206,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
                 }
 
-                var response = await _restClient.GetAsync(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithLocsRestClient.GetAsync(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
@@ -216,7 +220,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.CheckIfExists");
@@ -240,10 +245,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -273,7 +279,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetTest(Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorWithLocsRestClient.GetTest(Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -288,7 +294,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetTestNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorWithLocsRestClient.GetTestNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -311,7 +317,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetTestAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorWithLocsRestClient.GetTestAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -326,7 +332,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetTestNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorWithLocsRestClient.GetTestNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -339,6 +345,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, FakeParentWithAncestorWithLoc, FakeParentWithAncestorWithLocData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, FakeParentWithAncestorWithLoc, FakeParentWithAncestorWithLocData> Construct() { }
     }
 }

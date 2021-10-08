@@ -18,11 +18,11 @@ using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of TenantParent and their operations over a TenantTest. </summary>
+    /// <summary> A class representing collection of TenantParent and their operations over its parent. </summary>
     public partial class TenantParentContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly TenantParentsRestOperations _restClient;
+        private readonly TenantParentsRestOperations _tenantParentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentContainer"/> class for mocking. </summary>
         protected TenantParentContainer()
@@ -34,11 +34,11 @@ namespace MgmtListMethods
         internal TenantParentContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _tenantParentsRestClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => TenantTest.ResourceType;
+        protected override ResourceType ValidResourceType => "Microsoft.Tenant/tenantTests";
 
         // Container level operations.
 
@@ -63,7 +63,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.Name, tenantParentName, parameters, cancellationToken);
+                var response = _tenantParentsRestClient.CreateOrUpdate(Id.Name, tenantParentName, parameters, cancellationToken);
                 var operation = new TenantParentCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -97,7 +97,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.Name, tenantParentName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _tenantParentsRestClient.CreateOrUpdateAsync(Id.Name, tenantParentName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new TenantParentCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -110,21 +110,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<TenantParent> Get(string tenantParentName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.Get");
             scope.Start();
             try
             {
-                if (tenantParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentName));
-                }
-
-                var response = _restClient.Get(Id.Name, tenantParentName, cancellationToken: cancellationToken);
+                var response = _tenantParentsRestClient.Get(Id.Name, tenantParentName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TenantParent(Parent, response.Value), response.GetRawResponse());
@@ -136,21 +137,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<TenantParent>> GetAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.Get");
             scope.Start();
             try
             {
-                if (tenantParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, tenantParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _tenantParentsRestClient.GetAsync(Id.Name, tenantParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new TenantParent(Parent, response.Value), response.GetRawResponse());
@@ -164,7 +166,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<TenantParent> GetIfExists(string tenantParentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.GetIfExists");
@@ -176,7 +179,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(tenantParentName));
                 }
 
-                var response = _restClient.Get(Id.Name, tenantParentName, cancellationToken: cancellationToken);
+                var response = _tenantParentsRestClient.Get(Id.Name, tenantParentName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<TenantParent>(null, response.GetRawResponse())
                     : Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
@@ -190,10 +193,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<TenantParent>> GetIfExistsAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
@@ -202,7 +206,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(tenantParentName));
                 }
 
-                var response = await _restClient.GetAsync(Id.Name, tenantParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _tenantParentsRestClient.GetAsync(Id.Name, tenantParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<TenantParent>(null, response.GetRawResponse())
                     : Response.FromValue(new TenantParent(this, response.Value), response.GetRawResponse());
@@ -216,7 +220,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string tenantParentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.CheckIfExists");
@@ -240,10 +245,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="tenantParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -273,7 +279,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(Id.Name, cancellationToken: cancellationToken);
+                    var response = _tenantParentsRestClient.GetAll(Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -288,7 +294,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _tenantParentsRestClient.GetAllNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -311,7 +317,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _tenantParentsRestClient.GetAllAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -326,7 +332,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _tenantParentsRestClient.GetAllNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -339,6 +345,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, TenantParent, TenantParentData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, TenantParent, TenantParentData> Construct() { }
     }
 }

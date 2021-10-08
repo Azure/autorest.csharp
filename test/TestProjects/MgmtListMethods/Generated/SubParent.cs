@@ -22,7 +22,7 @@ namespace MgmtListMethods
     public partial class SubParent : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SubParentsRestOperations _restClient;
+        private readonly SubParentsRestOperations _subParentsRestClient;
         private readonly SubParentData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubParent"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace MgmtListMethods
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subParentsRestClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubParent"/> class. </summary>
@@ -47,7 +47,7 @@ namespace MgmtListMethods
         internal SubParent(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subParentsRestClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubParent"/> class. </summary>
@@ -59,7 +59,7 @@ namespace MgmtListMethods
         internal SubParent(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subParentsRestClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -91,7 +91,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentsRestClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
@@ -111,7 +111,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Name, cancellationToken);
+                var response = _subParentsRestClient.Get(Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
@@ -158,7 +158,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _subParentsRestClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -187,7 +187,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, cancellationToken);
+                var originalResponse = _subParentsRestClient.Get(Id.Name, cancellationToken);
                 return Response.FromValue(new SubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -216,7 +216,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _subParentsRestClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -245,7 +245,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, cancellationToken);
+                var originalResponse = _subParentsRestClient.Get(Id.Name, cancellationToken);
                 return Response.FromValue(new SubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -273,7 +273,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _subParentsRestClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -301,7 +301,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, cancellationToken);
+                var originalResponse = _subParentsRestClient.Get(Id.Name, cancellationToken);
                 return Response.FromValue(new SubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

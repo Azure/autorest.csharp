@@ -19,11 +19,11 @@ using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of SubParentWithNonResCh and their operations over a Subscription. </summary>
+    /// <summary> A class representing collection of SubParentWithNonResCh and their operations over its parent. </summary>
     public partial class SubParentWithNonResChContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SubParentWithNonResChesRestOperations _restClient;
+        private readonly SubParentWithNonResChesRestOperations _subParentWithNonResChesRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResChContainer"/> class for mocking. </summary>
         protected SubParentWithNonResChContainer()
@@ -35,7 +35,7 @@ namespace MgmtListMethods
         internal SubParentWithNonResChContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subParentWithNonResChesRestClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -64,7 +64,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(subParentWithNonResChName, parameters, cancellationToken);
+                var response = _subParentWithNonResChesRestClient.CreateOrUpdate(subParentWithNonResChName, parameters, cancellationToken);
                 var operation = new SubParentWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -98,7 +98,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(subParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChesRestClient.CreateOrUpdateAsync(subParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new SubParentWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -111,21 +111,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public virtual Response<SubParentWithNonResCh> Get(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.Get");
             scope.Start();
             try
             {
-                if (subParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithNonResChName));
-                }
-
-                var response = _restClient.Get(subParentWithNonResChName, cancellationToken: cancellationToken);
+                var response = _subParentWithNonResChesRestClient.Get(subParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -137,21 +138,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithNonResCh>> GetAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.Get");
             scope.Start();
             try
             {
-                if (subParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithNonResChName));
-                }
-
-                var response = await _restClient.GetAsync(subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChesRestClient.GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -165,7 +167,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public virtual Response<SubParentWithNonResCh> GetIfExists(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.GetIfExists");
@@ -177,7 +180,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(subParentWithNonResChName));
                 }
 
-                var response = _restClient.Get(subParentWithNonResChName, cancellationToken: cancellationToken);
+                var response = _subParentWithNonResChesRestClient.Get(subParentWithNonResChName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new SubParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -191,10 +194,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithNonResCh>> GetIfExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
@@ -203,7 +207,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(subParentWithNonResChName));
                 }
 
-                var response = await _restClient.GetAsync(subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChesRestClient.GetAsync(subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new SubParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -217,7 +221,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.CheckIfExists");
@@ -241,10 +246,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -274,7 +280,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(cancellationToken: cancellationToken);
+                    var response = _subParentWithNonResChesRestClient.GetAll(cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -289,7 +295,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, cancellationToken: cancellationToken);
+                    var response = _subParentWithNonResChesRestClient.GetAllNextPage(nextLink, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -312,7 +318,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subParentWithNonResChesRestClient.GetAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -327,7 +333,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subParentWithNonResChesRestClient.GetAllNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -386,6 +392,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, SubParentWithNonResCh, SubParentWithNonResChData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParentWithNonResCh, SubParentWithNonResChData> Construct() { }
     }
 }

@@ -19,11 +19,11 @@ using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of SubParentWithNonResChWithLoc and their operations over a Subscription. </summary>
+    /// <summary> A class representing collection of SubParentWithNonResChWithLoc and their operations over its parent. </summary>
     public partial class SubParentWithNonResChWithLocContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SubParentWithNonResChWithLocsRestOperations _restClient;
+        private readonly SubParentWithNonResChWithLocsRestOperations _subParentWithNonResChWithLocsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResChWithLocContainer"/> class for mocking. </summary>
         protected SubParentWithNonResChWithLocContainer()
@@ -35,7 +35,7 @@ namespace MgmtListMethods
         internal SubParentWithNonResChWithLocContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subParentWithNonResChWithLocsRestClient = new SubParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -64,7 +64,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(subParentWithNonResChWithLocName, parameters, cancellationToken);
+                var response = _subParentWithNonResChWithLocsRestClient.CreateOrUpdate(subParentWithNonResChWithLocName, parameters, cancellationToken);
                 var operation = new SubParentWithNonResChWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -98,7 +98,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(subParentWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChWithLocsRestClient.CreateOrUpdateAsync(subParentWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new SubParentWithNonResChWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -111,21 +111,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<SubParentWithNonResChWithLoc> Get(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocContainer.Get");
             scope.Start();
             try
             {
-                if (subParentWithNonResChWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
-                }
-
-                var response = _restClient.Get(subParentWithNonResChWithLocName, cancellationToken: cancellationToken);
+                var response = _subParentWithNonResChWithLocsRestClient.Get(subParentWithNonResChWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParentWithNonResChWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -137,21 +138,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithNonResChWithLoc>> GetAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocContainer.Get");
             scope.Start();
             try
             {
-                if (subParentWithNonResChWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
-                }
-
-                var response = await _restClient.GetAsync(subParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChWithLocsRestClient.GetAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubParentWithNonResChWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -165,7 +167,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<SubParentWithNonResChWithLoc> GetIfExists(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocContainer.GetIfExists");
@@ -177,7 +180,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
                 }
 
-                var response = _restClient.Get(subParentWithNonResChWithLocName, cancellationToken: cancellationToken);
+                var response = _subParentWithNonResChWithLocsRestClient.Get(subParentWithNonResChWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithNonResChWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new SubParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
@@ -191,10 +194,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithNonResChWithLoc>> GetIfExistsAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocContainer.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
@@ -203,7 +207,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(subParentWithNonResChWithLocName));
                 }
 
-                var response = await _restClient.GetAsync(subParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChWithLocsRestClient.GetAsync(subParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithNonResChWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new SubParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
@@ -217,7 +221,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocContainer.CheckIfExists");
@@ -241,10 +246,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocContainer.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChWithLocContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -274,7 +280,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(cancellationToken: cancellationToken);
+                    var response = _subParentWithNonResChWithLocsRestClient.GetAll(cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResChWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -289,7 +295,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, cancellationToken: cancellationToken);
+                    var response = _subParentWithNonResChWithLocsRestClient.GetAllNextPage(nextLink, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResChWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -312,7 +318,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subParentWithNonResChWithLocsRestClient.GetAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResChWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -327,7 +333,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subParentWithNonResChWithLocsRestClient.GetAllNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResChWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -386,6 +392,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, SubParentWithNonResChWithLoc, SubParentWithNonResChWithLocData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParentWithNonResChWithLoc, SubParentWithNonResChWithLocData> Construct() { }
     }
 }

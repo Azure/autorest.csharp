@@ -19,11 +19,11 @@ using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of ResGrpParentWithAncestorWithNonResCh and their operations over a ResourceGroup. </summary>
+    /// <summary> A class representing collection of ResGrpParentWithAncestorWithNonResCh and their operations over its parent. </summary>
     public partial class ResGrpParentWithAncestorWithNonResChContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResGrpParentWithAncestorWithNonResChesRestOperations _restClient;
+        private readonly ResGrpParentWithAncestorWithNonResChesRestOperations _resGrpParentWithAncestorWithNonResChesRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithAncestorWithNonResChContainer"/> class for mocking. </summary>
         protected ResGrpParentWithAncestorWithNonResChContainer()
@@ -35,7 +35,7 @@ namespace MgmtListMethods
         internal ResGrpParentWithAncestorWithNonResChContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ResGrpParentWithAncestorWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _resGrpParentWithAncestorWithNonResChesRestClient = new ResGrpParentWithAncestorWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -64,7 +64,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, parameters, cancellationToken);
+                var response = _resGrpParentWithAncestorWithNonResChesRestClient.CreateOrUpdate(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, parameters, cancellationToken);
                 var operation = new ResGrpParentWithAncestorWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -98,7 +98,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithNonResChesRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ResGrpParentWithAncestorWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -111,21 +111,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public virtual Response<ResGrpParentWithAncestorWithNonResCh> Get(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentWithAncestorWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.Get");
             scope.Start();
             try
             {
-                if (resGrpParentWithAncestorWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken);
+                var response = _resGrpParentWithAncestorWithNonResChesRestClient.Get(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -137,21 +138,22 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Retrieves information. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<ResGrpParentWithAncestorWithNonResCh>> GetAsync(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentWithAncestorWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.Get");
             scope.Start();
             try
             {
-                if (resGrpParentWithAncestorWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithNonResChesRestClient.GetAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -165,7 +167,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public virtual Response<ResGrpParentWithAncestorWithNonResCh> GetIfExists(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.GetIfExists");
@@ -177,7 +180,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken);
+                var response = _resGrpParentWithAncestorWithNonResChesRestClient.Get(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParentWithAncestorWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new ResGrpParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -191,10 +194,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<ResGrpParentWithAncestorWithNonResCh>> GetIfExistsAsync(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
@@ -203,7 +207,7 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithNonResChesRestClient.GetAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParentWithAncestorWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new ResGrpParentWithAncestorWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -217,7 +221,8 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.CheckIfExists");
@@ -241,10 +246,11 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -274,7 +280,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetTest(Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _resGrpParentWithAncestorWithNonResChesRestClient.GetTest(Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -289,7 +295,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetTestNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _resGrpParentWithAncestorWithNonResChesRestClient.GetTestNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -312,7 +318,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetTestAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentWithAncestorWithNonResChesRestClient.GetTestAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -327,7 +333,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetTestNextPageAsync(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentWithAncestorWithNonResChesRestClient.GetTestNextPageAsync(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -386,6 +392,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, ResGrpParentWithAncestorWithNonResCh, ResGrpParentWithAncestorWithNonResChData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResGrpParentWithAncestorWithNonResCh, ResGrpParentWithAncestorWithNonResChData> Construct() { }
     }
 }
