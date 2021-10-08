@@ -95,15 +95,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private bool HasUniqueResourceName()
         {
-            foreach (var resource in _context.Library.ArmResources)
-            {
-                if (resource == this)
-                    continue;
-                if (resource.ResourceName == this.ResourceName)
-                    return false;
-            }
+            var count = _context.Library.ArmResources.Count(resource => resource.ResourceName == this.ResourceName);
 
-            return true;
+            return count == 1;
         }
 
         protected override string DefaultAccessibility => "public";
