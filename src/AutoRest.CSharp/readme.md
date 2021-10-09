@@ -36,6 +36,7 @@ pipeline:
 
 ## Help
 ```yaml
+
 help-content:
   csharp: # type: Help as defined in autorest-core/help.ts
     activationScope: csharp
