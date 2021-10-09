@@ -349,11 +349,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"{typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
-                {
-                    _writer.WriteParameterNullChecks(methodParameters);
-                    inner(_writer);
-                }, catch404);
+                _writer.WriteParameterNullChecks(methodParameters);
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, inner, catch404);
             }
         }
 
