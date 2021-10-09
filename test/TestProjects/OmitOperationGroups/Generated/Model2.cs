@@ -23,9 +23,9 @@ namespace OmitOperationGroups
     public partial class Model2 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly Model2SRestOperations _restClient;
+        private readonly Model2SRestOperations _model2sRestClient;
+        private readonly Model4SRestOperations _model4sRestClient;
         private readonly Model2Data _data;
-        private Model4SRestOperations _model4sRestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="Model2"/> class for mocking. </summary>
         protected Model2()
@@ -40,7 +40,7 @@ namespace OmitOperationGroups
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
             _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
@@ -50,7 +50,7 @@ namespace OmitOperationGroups
         internal Model2(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
             _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
@@ -63,7 +63,7 @@ namespace OmitOperationGroups
         internal Model2(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
             _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
@@ -95,7 +95,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _model2sRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
@@ -114,7 +114,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _model2sRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
@@ -141,10 +141,11 @@ namespace OmitOperationGroups
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
+
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Model4>> GetModel4DefaultAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Model4>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model2.GetModel4Default");
+            using var scope = _clientDiagnostics.CreateScope("Model2.GetDefault");
             scope.Start();
             try
             {
@@ -159,9 +160,9 @@ namespace OmitOperationGroups
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Model4> GetModel4Default(CancellationToken cancellationToken = default)
+        public virtual Response<Model4> GetDefault(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model2.GetModel4Default");
+            using var scope = _clientDiagnostics.CreateScope("Model2.GetDefault");
             scope.Start();
             try
             {

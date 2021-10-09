@@ -78,7 +78,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
 
         protected virtual void WriteFields()
         {
-            WriteFields(_writer, _resource.RestClients);
+            WriteFields(_writer, This.RestClients);
             _writer.Line($"private readonly {_resourceData.Type} _data;");
         }
 
@@ -136,7 +136,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         protected void WriteRestClientAssignments()
         {
             // write assignment statements of the rest clients of this resource
-            foreach (var client in _resource.RestClients)
+            foreach (var client in This.RestClients)
             {
                 var subscriptionParamString = client.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
                 _writer.Line($"{GetRestClientVariableName(client)} = new {client.Type.Name}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, {BaseUriField});");

@@ -9,11 +9,6 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/OmitOperationGroups.json
 namespace: OmitOperationGroups
-operation-group-to-resource-type:
-  Model4s: Microsoft.Compute/model2s/model4s
-operation-group-to-resource:
-  Model4s: NonResource
-  Model5s: NonResource
 operation-groups-to-omit:
-   Model1s
+- Model1s
 ```

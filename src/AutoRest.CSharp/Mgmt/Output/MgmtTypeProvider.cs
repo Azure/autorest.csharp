@@ -12,6 +12,11 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
+    /// <summary>
+    /// MgmtTypeProvider represents the information that corresponds to the generated class in the SDK that contains operations in it.
+    /// This includes <see cref="Resource"/>, <see cref="ResourceContainer"/>, <see cref="ArmClientExtensions"/>, <see cref="TenantExtensions"/>,
+    /// <see cref="SubscriptionExtensions"/>, <see cref="ResourceGroupExtensions"/> and <see cref="ManagementGroupExtensions"/>
+    /// </summary>
     internal abstract class MgmtTypeProvider : TypeProvider
     {
         protected BuildContext<MgmtOutputLibrary> _context;
@@ -21,11 +26,26 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
+        /// <summary>
+        /// This is the display name for this TypeProvider.
+        /// If this TypeProvider generates an extension class, this will be the resource name of whatever it extends from.
+        /// </summary>
         public abstract string ResourceName { get; }
 
+        /// <summary>
+        /// The collection of <see cref="MgmtRestClient"/> of all the operations that will be included in this generated class
+        /// </summary>
+        public abstract IEnumerable<MgmtRestClient> RestClients { get; }
+
+        /// <summary>
+        /// The collection of operations that will be included in this generated class.
+        /// </summary>
         public abstract IEnumerable<MgmtClientOperation> ClientOperations { get; }
 
         private IEnumerable<Resource>? _chileResources;
+        /// <summary>
+        /// The collection of <see cref="Resource"/> that is a child of this generated class.
+        /// </summary>
         public virtual IEnumerable<Resource> ChildResources => _chileResources ??= _context.Library.ArmResources.Where(resource => resource.Parent(_context).Contains(this));
     }
 }

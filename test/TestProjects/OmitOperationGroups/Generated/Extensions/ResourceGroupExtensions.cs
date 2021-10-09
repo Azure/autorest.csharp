@@ -30,7 +30,6 @@ namespace OmitOperationGroups
         }
         #endregion
 
-        #region Model5
         private static Model5SRestOperations GetModel5SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new Model5SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
@@ -41,7 +40,7 @@ namespace OmitOperationGroups
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<Model5>> CreateModel5OrUpdateAsync(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<Model5>> CreateOrUpdateAsync(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -55,12 +54,12 @@ namespace OmitOperationGroups
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateModel5OrUpdate");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateOrUpdate");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.CreateOrUpdateAsync(resourceGroup.Id.Name, model5SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.CreateOrUpdateAsync(resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -77,7 +76,7 @@ namespace OmitOperationGroups
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<Model5> CreateModel5OrUpdate(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        public static Response<Model5> CreateOrUpdate(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -91,12 +90,12 @@ namespace OmitOperationGroups
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateModel5OrUpdate");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateOrUpdate");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.CreateOrUpdate(resourceGroup.Id.Name, model5SName, parameters, cancellationToken);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.CreateOrUpdate(resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -112,7 +111,7 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
-        public static async Task<Response<Model5>> GetModel5Async(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Model5>> GetAsync(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -122,12 +121,12 @@ namespace OmitOperationGroups
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetModel5");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.Get");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, model5SName, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -143,7 +142,7 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
-        public static Response<Model5> GetModel5(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
+        public static Response<Model5> Get(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -153,12 +152,12 @@ namespace OmitOperationGroups
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetModel5");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.Get");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Get(resourceGroup.Id.Name, model5SName, cancellationToken);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -169,7 +168,5 @@ namespace OmitOperationGroups
             }
             );
         }
-
-        #endregion
     }
 }

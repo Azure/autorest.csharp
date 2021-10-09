@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;
-        public virtual IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
+        public override IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
 
         private IEnumerable<MgmtRestClient> EnsureRestClients()
         {
