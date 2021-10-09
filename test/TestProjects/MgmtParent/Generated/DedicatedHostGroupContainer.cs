@@ -169,15 +169,15 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual Response<DedicatedHostGroup> GetIfExists(string hostGroupName, CancellationToken cancellationToken = default)
         {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (hostGroupName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostGroupName));
-                }
-
                 var response = _dedicatedHostGroupsRestClient.Get(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
@@ -196,15 +196,15 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public async virtual Task<Response<DedicatedHostGroup>> GetIfExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (hostGroupName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostGroupName));
-                }
-
                 var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
@@ -223,15 +223,15 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string hostGroupName, CancellationToken cancellationToken = default)
         {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (hostGroupName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostGroupName));
-                }
-
                 var response = GetIfExists(hostGroupName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -248,15 +248,15 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (hostGroupName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostGroupName));
-                }
-
                 var response = await GetIfExistsAsync(hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

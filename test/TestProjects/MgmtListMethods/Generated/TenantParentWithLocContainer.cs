@@ -170,15 +170,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public virtual Response<TenantParentWithLoc> GetIfExists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (tenantParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentWithLocName));
-                }
-
                 var response = _tenantParentWithLocsRestClient.Get(Id.Name, tenantParentWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<TenantParentWithLoc>(null, response.GetRawResponse())
@@ -197,15 +197,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<TenantParentWithLoc>> GetIfExistsAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (tenantParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentWithLocName));
-                }
-
                 var response = await _tenantParentWithLocsRestClient.GetAsync(Id.Name, tenantParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<TenantParentWithLoc>(null, response.GetRawResponse())
@@ -224,15 +224,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (tenantParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentWithLocName));
-                }
-
                 var response = GetIfExists(tenantParentWithLocName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -249,15 +249,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (tenantParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentWithLocName));
-                }
-
                 var response = await GetIfExistsAsync(tenantParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

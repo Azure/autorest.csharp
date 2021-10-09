@@ -170,15 +170,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public virtual Response<FakeParentWithAncestorWithLoc> GetIfExists(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithAncestorWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (fakeParentWithAncestorWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-                }
-
                 var response = _fakeParentWithAncestorWithLocsRestClient.Get(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse())
@@ -197,15 +197,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public async virtual Task<Response<FakeParentWithAncestorWithLoc>> GetIfExistsAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithAncestorWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (fakeParentWithAncestorWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-                }
-
                 var response = await _fakeParentWithAncestorWithLocsRestClient.GetAsync(Id.Name, fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestorWithLoc>(null, response.GetRawResponse())
@@ -224,15 +224,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithAncestorWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (fakeParentWithAncestorWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-                }
-
                 var response = GetIfExists(fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -249,15 +249,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithAncestorWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithLocContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (fakeParentWithAncestorWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithAncestorWithLocName));
-                }
-
                 var response = await GetIfExistsAsync(fakeParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

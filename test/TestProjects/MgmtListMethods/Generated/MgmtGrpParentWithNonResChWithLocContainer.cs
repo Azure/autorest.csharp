@@ -171,15 +171,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<MgmtGrpParentWithNonResChWithLoc> GetIfExists(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithNonResChWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-                }
-
                 var response = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Name, mgmtGrpParentWithNonResChWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<MgmtGrpParentWithNonResChWithLoc>(null, response.GetRawResponse())
@@ -198,15 +198,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetIfExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithNonResChWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-                }
-
                 var response = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Name, mgmtGrpParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<MgmtGrpParentWithNonResChWithLoc>(null, response.GetRawResponse())
@@ -225,15 +225,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithNonResChWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-                }
-
                 var response = GetIfExists(mgmtGrpParentWithNonResChWithLocName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,15 +250,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithNonResChWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLocContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithNonResChWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-                }
-
                 var response = await GetIfExistsAsync(mgmtGrpParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

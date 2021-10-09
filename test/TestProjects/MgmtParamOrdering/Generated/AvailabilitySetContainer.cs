@@ -171,15 +171,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual Response<AvailabilitySet> GetIfExists(string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
                 var response = _availabilitySetsRestClient.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySet>(null, response.GetRawResponse())
@@ -198,15 +198,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySet>> GetIfExistsAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
                 var response = await _availabilitySetsRestClient.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySet>(null, response.GetRawResponse())
@@ -225,15 +225,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
                 var response = GetIfExists(availabilitySetName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,15 +250,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
                 var response = await GetIfExistsAsync(availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

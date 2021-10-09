@@ -174,15 +174,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public virtual Response<Parent> GetIfExists(string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (parentName == null)
-                {
-                    throw new ArgumentNullException(nameof(parentName));
-                }
-
                 var response = _parentsRestClient.Get(Id.ResourceGroupName, parentName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Parent>(null, response.GetRawResponse())
@@ -202,15 +202,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public async virtual Task<Response<Parent>> GetIfExistsAsync(string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (parentName == null)
-                {
-                    throw new ArgumentNullException(nameof(parentName));
-                }
-
                 var response = await _parentsRestClient.GetAsync(Id.ResourceGroupName, parentName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Parent>(null, response.GetRawResponse())
@@ -230,15 +230,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (parentName == null)
-                {
-                    throw new ArgumentNullException(nameof(parentName));
-                }
-
                 var response = GetIfExists(parentName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -256,15 +256,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (parentName == null)
-                {
-                    throw new ArgumentNullException(nameof(parentName));
-                }
-
                 var response = await GetIfExistsAsync(parentName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

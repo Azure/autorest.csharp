@@ -169,15 +169,15 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<Bar> GetIfExists(string barName, CancellationToken cancellationToken = default)
         {
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BarContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (barName == null)
-                {
-                    throw new ArgumentNullException(nameof(barName));
-                }
-
                 var response = _barsRestClient.Get(Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Bar>(null, response.GetRawResponse())
@@ -196,15 +196,15 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public async virtual Task<Response<Bar>> GetIfExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BarContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (barName == null)
-                {
-                    throw new ArgumentNullException(nameof(barName));
-                }
-
                 var response = await _barsRestClient.GetAsync(Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Bar>(null, response.GetRawResponse())
@@ -223,15 +223,15 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string barName, CancellationToken cancellationToken = default)
         {
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BarContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (barName == null)
-                {
-                    throw new ArgumentNullException(nameof(barName));
-                }
-
                 var response = GetIfExists(barName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -248,15 +248,15 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BarContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (barName == null)
-                {
-                    throw new ArgumentNullException(nameof(barName));
-                }
-
                 var response = await GetIfExistsAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

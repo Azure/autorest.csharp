@@ -170,15 +170,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public virtual Response<DedicatedHost> GetIfExists(string hostName, CancellationToken cancellationToken = default)
         {
+            if (hostName == null)
+            {
+                throw new ArgumentNullException(nameof(hostName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (hostName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostName));
-                }
-
                 var response = _dedicatedHostsRestClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
@@ -197,15 +197,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public async virtual Task<Response<DedicatedHost>> GetIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
+            if (hostName == null)
+            {
+                throw new ArgumentNullException(nameof(hostName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (hostName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostName));
-                }
-
                 var response = await _dedicatedHostsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
@@ -224,15 +224,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string hostName, CancellationToken cancellationToken = default)
         {
+            if (hostName == null)
+            {
+                throw new ArgumentNullException(nameof(hostName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (hostName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostName));
-                }
-
                 var response = GetIfExists(hostName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -249,15 +249,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
+            if (hostName == null)
+            {
+                throw new ArgumentNullException(nameof(hostName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (hostName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostName));
-                }
-
                 var response = await GetIfExistsAsync(hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

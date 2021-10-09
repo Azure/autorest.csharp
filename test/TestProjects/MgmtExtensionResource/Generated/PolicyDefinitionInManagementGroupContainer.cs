@@ -171,15 +171,15 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public virtual Response<PolicyDefinitionInManagementGroup> GetIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInManagementGroupContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (policyDefinitionName == null)
-                {
-                    throw new ArgumentNullException(nameof(policyDefinitionName));
-                }
-
                 var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Name, policyDefinitionName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<PolicyDefinitionInManagementGroup>(null, response.GetRawResponse())
@@ -198,15 +198,15 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public async virtual Task<Response<PolicyDefinitionInManagementGroup>> GetIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInManagementGroupContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (policyDefinitionName == null)
-                {
-                    throw new ArgumentNullException(nameof(policyDefinitionName));
-                }
-
                 var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<PolicyDefinitionInManagementGroup>(null, response.GetRawResponse())
@@ -225,15 +225,15 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInManagementGroupContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (policyDefinitionName == null)
-                {
-                    throw new ArgumentNullException(nameof(policyDefinitionName));
-                }
-
                 var response = GetIfExists(policyDefinitionName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,15 +250,15 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInManagementGroupContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (policyDefinitionName == null)
-                {
-                    throw new ArgumentNullException(nameof(policyDefinitionName));
-                }
-
                 var response = await GetIfExistsAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

@@ -171,15 +171,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public virtual Response<SubParentWithLoc> GetIfExists(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithLocContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (subParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithLocName));
-                }
-
                 var response = _subParentWithLocsRestClient.Get(subParentWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithLoc>(null, response.GetRawResponse())
@@ -198,15 +198,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithLoc>> GetIfExistsAsync(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithLocContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (subParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithLocName));
-                }
-
                 var response = await _subParentWithLocsRestClient.GetAsync(subParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithLoc>(null, response.GetRawResponse())
@@ -225,15 +225,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithLocContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (subParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithLocName));
-                }
-
                 var response = GetIfExists(subParentWithLocName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,15 +250,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithLocContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (subParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithLocName));
-                }
-
                 var response = await GetIfExistsAsync(subParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

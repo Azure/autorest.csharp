@@ -169,15 +169,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
         public virtual Response<Workspace> GetIfExists(string workspaceName, CancellationToken cancellationToken = default)
         {
+            if (workspaceName == null)
+            {
+                throw new ArgumentNullException(nameof(workspaceName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("WorkspaceContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (workspaceName == null)
-                {
-                    throw new ArgumentNullException(nameof(workspaceName));
-                }
-
                 var response = _workspacesRestClient.Get(Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Workspace>(null, response.GetRawResponse())
@@ -196,15 +196,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
         public async virtual Task<Response<Workspace>> GetIfExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
+            if (workspaceName == null)
+            {
+                throw new ArgumentNullException(nameof(workspaceName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("WorkspaceContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (workspaceName == null)
-                {
-                    throw new ArgumentNullException(nameof(workspaceName));
-                }
-
                 var response = await _workspacesRestClient.GetAsync(Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Workspace>(null, response.GetRawResponse())
@@ -223,15 +223,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string workspaceName, CancellationToken cancellationToken = default)
         {
+            if (workspaceName == null)
+            {
+                throw new ArgumentNullException(nameof(workspaceName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("WorkspaceContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (workspaceName == null)
-                {
-                    throw new ArgumentNullException(nameof(workspaceName));
-                }
-
                 var response = GetIfExists(workspaceName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -248,15 +248,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
+            if (workspaceName == null)
+            {
+                throw new ArgumentNullException(nameof(workspaceName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("WorkspaceContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (workspaceName == null)
-                {
-                    throw new ArgumentNullException(nameof(workspaceName));
-                }
-
                 var response = await GetIfExistsAsync(workspaceName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

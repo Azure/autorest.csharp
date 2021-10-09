@@ -171,15 +171,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public virtual Response<ResGrpParentWithAncestorWithNonResCh> GetIfExists(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentWithAncestorWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (resGrpParentWithAncestorWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
-                }
-
                 var response = _resGrpParentWithAncestorWithNonResChesRestClient.Get(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParentWithAncestorWithNonResCh>(null, response.GetRawResponse())
@@ -198,15 +198,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<ResGrpParentWithAncestorWithNonResCh>> GetIfExistsAsync(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentWithAncestorWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (resGrpParentWithAncestorWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
-                }
-
                 var response = await _resGrpParentWithAncestorWithNonResChesRestClient.GetAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParentWithAncestorWithNonResCh>(null, response.GetRawResponse())
@@ -225,15 +225,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentWithAncestorWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (resGrpParentWithAncestorWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
-                }
-
                 var response = GetIfExists(resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,15 +250,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentWithAncestorWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (resGrpParentWithAncestorWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithNonResChName));
-                }
-
                 var response = await GetIfExistsAsync(resGrpParentWithAncestorWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

@@ -172,15 +172,15 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<Fake> GetIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (fakeName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeName));
-                }
-
                 var response = _fakesRestClient.Get(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Fake>(null, response.GetRawResponse())
@@ -200,15 +200,15 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<Fake>> GetIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (fakeName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeName));
-                }
-
                 var response = await _fakesRestClient.GetAsync(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Fake>(null, response.GetRawResponse())
@@ -228,15 +228,15 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (fakeName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeName));
-                }
-
                 var response = GetIfExists(fakeName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -254,15 +254,15 @@ namespace MgmtLRO
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (fakeName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeName));
-                }
-
                 var response = await GetIfExistsAsync(fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

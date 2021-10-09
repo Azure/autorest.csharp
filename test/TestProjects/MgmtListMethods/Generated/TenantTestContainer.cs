@@ -174,15 +174,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
         public virtual Response<TenantTest> GetIfExists(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (tenantTestName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantTestName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (tenantTestName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantTestName));
-                }
-
                 var response = _tenantTestsRestClient.Get(tenantTestName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<TenantTest>(null, response.GetRawResponse())
@@ -202,15 +202,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
         public async virtual Task<Response<TenantTest>> GetIfExistsAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (tenantTestName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantTestName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (tenantTestName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantTestName));
-                }
-
                 var response = await _tenantTestsRestClient.GetAsync(tenantTestName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<TenantTest>(null, response.GetRawResponse())
@@ -230,15 +230,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (tenantTestName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantTestName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (tenantTestName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantTestName));
-                }
-
                 var response = GetIfExists(tenantTestName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -256,15 +256,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (tenantTestName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantTestName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (tenantTestName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantTestName));
-                }
-
                 var response = await GetIfExistsAsync(tenantTestName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

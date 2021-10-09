@@ -171,15 +171,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public virtual Response<SubParentWithNonResCh> GetIfExists(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (subParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithNonResChName));
-                }
-
                 var response = _subParentWithNonResChesRestClient.Get(subParentWithNonResChName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithNonResCh>(null, response.GetRawResponse())
@@ -198,15 +198,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithNonResCh>> GetIfExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (subParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithNonResChName));
-                }
-
                 var response = await _subParentWithNonResChesRestClient.GetAsync(subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithNonResCh>(null, response.GetRawResponse())
@@ -225,15 +225,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (subParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithNonResChName));
-                }
-
                 var response = GetIfExists(subParentWithNonResChName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,15 +250,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (subParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResChContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (subParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentWithNonResChName));
-                }
-
                 var response = await GetIfExistsAsync(subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

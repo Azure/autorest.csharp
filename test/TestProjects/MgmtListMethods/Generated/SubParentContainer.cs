@@ -171,15 +171,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<SubParent> GetIfExists(string subParentName, CancellationToken cancellationToken = default)
         {
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
                 var response = _subParentsRestClient.Get(subParentName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SubParent>(null, response.GetRawResponse())
@@ -198,15 +198,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public async virtual Task<Response<SubParent>> GetIfExistsAsync(string subParentName, CancellationToken cancellationToken = default)
         {
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
                 var response = await _subParentsRestClient.GetAsync(subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SubParent>(null, response.GetRawResponse())
@@ -225,15 +225,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string subParentName, CancellationToken cancellationToken = default)
         {
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
                 var response = GetIfExists(subParentName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,15 +250,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentName, CancellationToken cancellationToken = default)
         {
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
                 var response = await GetIfExistsAsync(subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

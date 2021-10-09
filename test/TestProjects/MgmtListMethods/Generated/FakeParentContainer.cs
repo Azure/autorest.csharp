@@ -170,15 +170,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public virtual Response<FakeParent> GetIfExists(string fakeParentName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (fakeParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentName));
-                }
-
                 var response = _fakeParentsRestClient.Get(Id.Name, fakeParentName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<FakeParent>(null, response.GetRawResponse())
@@ -197,15 +197,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public async virtual Task<Response<FakeParent>> GetIfExistsAsync(string fakeParentName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (fakeParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentName));
-                }
-
                 var response = await _fakeParentsRestClient.GetAsync(Id.Name, fakeParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<FakeParent>(null, response.GetRawResponse())
@@ -224,15 +224,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string fakeParentName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (fakeParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentName));
-                }
-
                 var response = GetIfExists(fakeParentName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -249,15 +249,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeParentName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (fakeParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentName));
-                }
-
                 var response = await GetIfExistsAsync(fakeParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

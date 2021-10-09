@@ -168,15 +168,15 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual Response<AvailabilitySetGrandChild> GetIfExists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
                 var response = _availabilitySetGrandChildRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse())
@@ -195,15 +195,15 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySetGrandChild>> GetIfExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
                 var response = await _availabilitySetGrandChildRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse())
@@ -222,15 +222,15 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
                 var response = GetIfExists(availabilitySetGrandChildName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -247,15 +247,15 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
                 var response = await GetIfExistsAsync(availabilitySetGrandChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

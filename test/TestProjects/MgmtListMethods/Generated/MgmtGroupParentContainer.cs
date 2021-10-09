@@ -171,15 +171,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
         public virtual Response<MgmtGroupParent> GetIfExists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGroupParentName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGroupParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (mgmtGroupParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGroupParentName));
-                }
-
                 var response = _mgmtGroupParentsRestClient.Get(Id.Parent.Name, mgmtGroupParentName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<MgmtGroupParent>(null, response.GetRawResponse())
@@ -198,15 +198,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
         public async virtual Task<Response<MgmtGroupParent>> GetIfExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGroupParentName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGroupParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (mgmtGroupParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGroupParentName));
-                }
-
                 var response = await _mgmtGroupParentsRestClient.GetAsync(Id.Parent.Name, mgmtGroupParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<MgmtGroupParent>(null, response.GetRawResponse())
@@ -225,15 +225,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGroupParentName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGroupParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (mgmtGroupParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGroupParentName));
-                }
-
                 var response = GetIfExists(mgmtGroupParentName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,15 +250,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGroupParentName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGroupParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (mgmtGroupParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGroupParentName));
-                }
-
                 var response = await GetIfExistsAsync(mgmtGroupParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

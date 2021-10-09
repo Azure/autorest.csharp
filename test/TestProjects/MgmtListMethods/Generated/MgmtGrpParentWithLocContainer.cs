@@ -171,15 +171,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public virtual Response<MgmtGrpParentWithLoc> GetIfExists(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
                 var response = _mgmtGrpParentWithLocsRestClient.Get(Id.Parent.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<MgmtGrpParentWithLoc>(null, response.GetRawResponse())
@@ -198,15 +198,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<MgmtGrpParentWithLoc>> GetIfExistsAsync(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
                 var response = await _mgmtGrpParentWithLocsRestClient.GetAsync(Id.Parent.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<MgmtGrpParentWithLoc>(null, response.GetRawResponse())
@@ -225,15 +225,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
                 var response = GetIfExists(mgmtGrpParentWithLocName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,15 +250,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
                 var response = await GetIfExistsAsync(mgmtGrpParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

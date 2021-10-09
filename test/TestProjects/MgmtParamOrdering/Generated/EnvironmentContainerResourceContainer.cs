@@ -168,15 +168,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<EnvironmentContainerResource> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
                 var response = _environmentContainersRestClient.Get(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<EnvironmentContainerResource>(null, response.GetRawResponse())
@@ -195,15 +195,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<EnvironmentContainerResource>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
                 var response = await _environmentContainersRestClient.GetAsync(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<EnvironmentContainerResource>(null, response.GetRawResponse())
@@ -222,15 +222,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
                 var response = GetIfExists(name, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -247,15 +247,15 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
                 var response = await GetIfExistsAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

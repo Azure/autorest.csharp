@@ -169,15 +169,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public virtual Response<ResGrpParent> GetIfExists(string resGrpParentName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (resGrpParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentName));
-                }
-
                 var response = _resGrpParentsRestClient.Get(Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParent>(null, response.GetRawResponse())
@@ -196,15 +196,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public async virtual Task<Response<ResGrpParent>> GetIfExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (resGrpParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentName));
-                }
-
                 var response = await _resGrpParentsRestClient.GetAsync(Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParent>(null, response.GetRawResponse())
@@ -223,15 +223,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string resGrpParentName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (resGrpParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentName));
-                }
-
                 var response = GetIfExists(resGrpParentName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -248,15 +248,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
+            if (resGrpParentName == null)
+            {
+                throw new ArgumentNullException(nameof(resGrpParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (resGrpParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(resGrpParentName));
-                }
-
                 var response = await GetIfExistsAsync(resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

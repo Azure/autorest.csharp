@@ -134,27 +134,27 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
         public virtual Response<VirtualMachineExtensionImage> GetIfExists(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (location == null)
-                {
-                    throw new ArgumentNullException(nameof(location));
-                }
-                if (publisherName == null)
-                {
-                    throw new ArgumentNullException(nameof(publisherName));
-                }
-                if (type == null)
-                {
-                    throw new ArgumentNullException(nameof(type));
-                }
-                if (version == null)
-                {
-                    throw new ArgumentNullException(nameof(version));
-                }
-
                 var response = _virtualMachineExtensionImagesRestClient.Get(location, publisherName, type, version, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachineExtensionImage>(null, response.GetRawResponse())
@@ -176,27 +176,27 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineExtensionImage>> GetIfExistsAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (location == null)
-                {
-                    throw new ArgumentNullException(nameof(location));
-                }
-                if (publisherName == null)
-                {
-                    throw new ArgumentNullException(nameof(publisherName));
-                }
-                if (type == null)
-                {
-                    throw new ArgumentNullException(nameof(type));
-                }
-                if (version == null)
-                {
-                    throw new ArgumentNullException(nameof(version));
-                }
-
                 var response = await _virtualMachineExtensionImagesRestClient.GetAsync(location, publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachineExtensionImage>(null, response.GetRawResponse())
@@ -218,27 +218,27 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (location == null)
-                {
-                    throw new ArgumentNullException(nameof(location));
-                }
-                if (publisherName == null)
-                {
-                    throw new ArgumentNullException(nameof(publisherName));
-                }
-                if (type == null)
-                {
-                    throw new ArgumentNullException(nameof(type));
-                }
-                if (version == null)
-                {
-                    throw new ArgumentNullException(nameof(version));
-                }
-
                 var response = GetIfExists(location, publisherName, type, version, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -258,27 +258,27 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (location == null)
-                {
-                    throw new ArgumentNullException(nameof(location));
-                }
-                if (publisherName == null)
-                {
-                    throw new ArgumentNullException(nameof(publisherName));
-                }
-                if (type == null)
-                {
-                    throw new ArgumentNullException(nameof(type));
-                }
-                if (version == null)
-                {
-                    throw new ArgumentNullException(nameof(version));
-                }
-
                 var response = await GetIfExistsAsync(location, publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

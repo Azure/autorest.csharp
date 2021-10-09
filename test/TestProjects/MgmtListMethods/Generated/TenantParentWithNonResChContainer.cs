@@ -170,15 +170,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public virtual Response<TenantParentWithNonResCh> GetIfExists(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (tenantParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
-                }
-
                 var response = _tenantParentWithNonResChesRestClient.Get(Id.Name, tenantParentWithNonResChName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<TenantParentWithNonResCh>(null, response.GetRawResponse())
@@ -197,15 +197,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<TenantParentWithNonResCh>> GetIfExistsAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (tenantParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
-                }
-
                 var response = await _tenantParentWithNonResChesRestClient.GetAsync(Id.Name, tenantParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<TenantParentWithNonResCh>(null, response.GetRawResponse())
@@ -224,15 +224,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (tenantParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
-                }
-
                 var response = GetIfExists(tenantParentWithNonResChName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -249,15 +249,15 @@ namespace MgmtListMethods
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (tenantParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (tenantParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
-                }
-
                 var response = await GetIfExistsAsync(tenantParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

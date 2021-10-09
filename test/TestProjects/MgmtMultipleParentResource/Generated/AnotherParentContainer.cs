@@ -174,15 +174,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public virtual Response<AnotherParent> GetIfExists(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
                 var response = _anotherParentsRestClient.Get(Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<AnotherParent>(null, response.GetRawResponse())
@@ -202,15 +202,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public async virtual Task<Response<AnotherParent>> GetIfExistsAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
                 var response = await _anotherParentsRestClient.GetAsync(Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<AnotherParent>(null, response.GetRawResponse())
@@ -230,15 +230,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
                 var response = GetIfExists(anotherName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -256,15 +256,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
                 var response = await GetIfExistsAsync(anotherName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }

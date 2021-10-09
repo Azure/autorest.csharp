@@ -168,15 +168,15 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public virtual Response<AvailabilitySetChild> GetIfExists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetChildName));
-                }
-
                 var response = _availabilitySetChildRestClient.Get(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse())
@@ -195,15 +195,15 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySetChild>> GetIfExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetChildName));
-                }
-
                 var response = await _availabilitySetChildRestClient.GetAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse())
@@ -222,15 +222,15 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetChildName));
-                }
-
                 var response = GetIfExists(availabilitySetChildName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -247,15 +247,15 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetChildName));
-                }
-
                 var response = await GetIfExistsAsync(availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
