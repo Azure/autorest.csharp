@@ -45,18 +45,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (current == RequestPath.Subscription)
             {
                 // using the reference name of the last segment as the parameter name, aka, subscriptionId
-                parameterMappingStack.Push(new ContextualParameterMapping(current.Last().Reference, $"{idVariableName}.SubscriptionId"));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.Last(), $"{idVariableName}.SubscriptionId"));
             }
             else if (current == RequestPath.ManagementGroup)
             {
                 // using the reference name of the last segment as the parameter name, aka, groupId
-                parameterMappingStack.Push(new ContextualParameterMapping(current.Last().Reference, $"{idVariableName}{invocationSuffix}.Parent.Name", false));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.Last(), $"{idVariableName}{invocationSuffix}.Parent.Name"));
             }
             // ResourceGroup is not terminal state - Subscription is its parent
             else if (current == RequestPath.ResourceGroup)
             {
                 // using the reference name of the last segment as the parameter name, aka, resourceGroupName
-                parameterMappingStack.Push(new ContextualParameterMapping(current.Last().Reference, $"{idVariableName}.ResourceGroupName"));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.Last(), $"{idVariableName}.ResourceGroupName"));
             }
             // this branch is for every other cases - all the request path that corresponds to a resource in this swagger
             else
@@ -84,18 +84,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     // skip if this pair only has one segment. Since we are grouping these in pairs, this can only happen on the last group
                     if (pair.Count == 1)
                         continue;
-                    if (pair[1].IsReference)
+                    var valueSegment = pair[1];
+                    if (valueSegment.IsReference)
                     {
-                        var reference = pair[1].Reference;
                         if (pair[0] == Segment.Providers) // if the key is providers and the value is a parameter
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(reference, $"{idVariableName}.Namespace"));
+                            parameterMappingStack.Push(new ContextualParameterMapping(valueSegment, $"{idVariableName}.Namespace"));
                             // do not append a new .Parent to the id
                             continue;
                         }
                         else // for all other normal keys
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(reference, $"{idVariableName}{invocationSuffix}.Name"));
+                            parameterMappingStack.Push(new ContextualParameterMapping(valueSegment, $"{idVariableName}{invocationSuffix}.Name"));
                             invocationSuffix += ".Parent";
                             continue;
                         }
@@ -138,16 +138,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// </summary>
             public bool Strict;
 
-            public ContextualParameterMapping(Reference reference, string valueExpression, bool strict = true) : this(reference.Name, reference.Type, valueExpression, strict)
+            public ContextualParameterMapping(Segment segment, string valueExpression) : this(segment.Reference.Name, segment.Reference.Type, valueExpression, segment.IsStrict)
             {
             }
 
-            public ContextualParameterMapping(string parameterName, CSharpType parameterType, string valueExpression, bool strict = true)
+            public ContextualParameterMapping(string parameterName, CSharpType parameterType, string valueExpression, bool strict)
             {
                 ParameterName = parameterName;
                 ParameterType = parameterType;
-                ValueExpression = valueExpression;
+                ValueExpression = GetValueExpression(parameterType, valueExpression);
                 Strict = strict;
+            }
+
+            private static string GetValueExpression(CSharpType type, string rawExpression)
+            {
+                if (type.IsStringLike())
+                    return rawExpression;
+
+                if (!type.IsFrameworkType)
+                    throw new System.InvalidOperationException($"Type {type} is not supported to construct contextual parameter mapping");
+
+                return $"{type.FrameworkType}.Parse({rawExpression})";
             }
 
             /// <summary>
