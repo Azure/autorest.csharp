@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -275,14 +277,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<VirtualMachineExtensionsListResult> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<VirtualMachineScaleSetVMExtension>> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.GetAll");
             scope.Start();
             try
             {
                 var response = _virtualMachineScaleSetVMExtensionsRestClient.GetAll(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineScaleSetVMExtension(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineScaleSetVMExtension>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -294,14 +296,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<VirtualMachineExtensionsListResult>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<VirtualMachineScaleSetVMExtension>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.GetAll");
             scope.Start();
             try
             {
                 var response = await _virtualMachineScaleSetVMExtensionsRestClient.GetAllAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineScaleSetVMExtension(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineScaleSetVMExtension>, response.GetRawResponse());
             }
             catch (Exception e)
             {

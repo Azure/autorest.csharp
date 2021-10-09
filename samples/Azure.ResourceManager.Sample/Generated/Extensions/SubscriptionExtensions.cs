@@ -704,7 +704,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = await restOperations.GetAllAsync(location, publisherName, offer, skus, expand, top, orderby, cancellationToken).ConfigureAwait(false);
-                    return response;
+                    return Response.FromValue(response.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -754,7 +754,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = restOperations.GetAll(location, publisherName, offer, skus, expand, top, orderby, cancellationToken);
-                    return response;
+                    return Response.FromValue(response.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -791,7 +791,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = await restOperations.GetOffersAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
-                    return response;
+                    return Response.FromValue(response.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -828,7 +828,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = restOperations.GetOffers(location, publisherName, cancellationToken);
-                    return response;
+                    return Response.FromValue(response.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -860,7 +860,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = await restOperations.GetPublishersAsync(location, cancellationToken).ConfigureAwait(false);
-                    return response;
+                    return Response.FromValue(response.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -892,7 +892,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = restOperations.GetPublishers(location, cancellationToken);
-                    return response;
+                    return Response.FromValue(response.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -934,7 +934,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = await restOperations.GetSkusAsync(location, publisherName, offer, cancellationToken).ConfigureAwait(false);
-                    return response;
+                    return Response.FromValue(response.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -976,7 +976,7 @@ namespace Azure.ResourceManager.Sample
                 {
                     var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = restOperations.GetSkus(location, publisherName, offer, cancellationToken);
-                    return response;
+                    return Response.FromValue(response.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
