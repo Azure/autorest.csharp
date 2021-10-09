@@ -9,15 +9,5 @@
   "azure-arm": true,
   "public-clients": true,
   "head-as-boolean": true,
-  "skip-csproj-packagereference": true,
-  "OperationGroupToResourceType": {
-    "Agreements": "Microsoft.Billing/billingAccounts/agreements"
-  },
-  "OperationGroupToResource": {
-    "BillingAccounts": "BillingAccount",
-    "Agreements": "Agreement"
-  },
-  "RequestPathToResource": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": "Agreement"
-  }
+  "skip-csproj-packagereference": true
 }

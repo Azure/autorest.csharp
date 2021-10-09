@@ -15,11 +15,11 @@ using Azure.ResourceManager.Core;
 
 namespace TenantOnly
 {
-    /// <summary> A class representing collection of Agreement and their operations over a BillingAccount. </summary>
+    /// <summary> A class representing collection of Agreement and their operations over its parent. </summary>
     public partial class AgreementContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AgreementsRestOperations _restClient;
+        private readonly AgreementsRestOperations _agreementsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="AgreementContainer"/> class for mocking. </summary>
         protected AgreementContainer()
@@ -31,30 +31,31 @@ namespace TenantOnly
         internal AgreementContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => BillingAccount.ResourceType;
+        protected override ResourceType ValidResourceType => "Microsoft.Billing/billingAccounts";
 
         // Container level operations.
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Gets an agreement by ID. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public virtual Response<Agreement> Get(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (agreementName == null)
+            {
+                throw new ArgumentNullException(nameof(agreementName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AgreementContainer.Get");
             scope.Start();
             try
             {
-                if (agreementName == null)
-                {
-                    throw new ArgumentNullException(nameof(agreementName));
-                }
-
-                var response = _restClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
+                var response = _agreementsRestClient.Get(Id.Name, agreementName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
@@ -66,22 +67,23 @@ namespace TenantOnly
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Gets an agreement by ID. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public async virtual Task<Response<Agreement>> GetAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (agreementName == null)
+            {
+                throw new ArgumentNullException(nameof(agreementName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AgreementContainer.Get");
             scope.Start();
             try
             {
-                if (agreementName == null)
-                {
-                    throw new ArgumentNullException(nameof(agreementName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _agreementsRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
@@ -96,19 +98,20 @@ namespace TenantOnly
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public virtual Response<Agreement> GetIfExists(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (agreementName == null)
+            {
+                throw new ArgumentNullException(nameof(agreementName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AgreementContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (agreementName == null)
-                {
-                    throw new ArgumentNullException(nameof(agreementName));
-                }
-
-                var response = _restClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
+                var response = _agreementsRestClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Agreement>(null, response.GetRawResponse())
                     : Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
@@ -123,19 +126,20 @@ namespace TenantOnly
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public async virtual Task<Response<Agreement>> GetIfExistsAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.GetIfExists");
+            if (agreementName == null)
+            {
+                throw new ArgumentNullException(nameof(agreementName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (agreementName == null)
-                {
-                    throw new ArgumentNullException(nameof(agreementName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _agreementsRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Agreement>(null, response.GetRawResponse())
                     : Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
@@ -150,18 +154,19 @@ namespace TenantOnly
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (agreementName == null)
+            {
+                throw new ArgumentNullException(nameof(agreementName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AgreementContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (agreementName == null)
-                {
-                    throw new ArgumentNullException(nameof(agreementName));
-                }
-
                 var response = GetIfExists(agreementName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -175,18 +180,19 @@ namespace TenantOnly
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.CheckIfExists");
+            if (agreementName == null)
+            {
+                throw new ArgumentNullException(nameof(agreementName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (agreementName == null)
-                {
-                    throw new ArgumentNullException(nameof(agreementName));
-                }
-
                 var response = await GetIfExistsAsync(agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -198,6 +204,6 @@ namespace TenantOnly
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, Agreement, AgreementData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Agreement, AgreementData> Construct() { }
     }
 }
