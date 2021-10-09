@@ -221,6 +221,8 @@ namespace Azure.Management.Storage
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((ImmutabilityPolicyData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -260,6 +262,8 @@ namespace Azure.Management.Storage
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((ImmutabilityPolicyData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

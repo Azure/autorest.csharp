@@ -23,7 +23,8 @@ namespace Azure.Management.Storage
     public partial class BlobContainer : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BlobContainersRestOperations _restClient;
+        private readonly BlobContainersRestOperations _blobContainersRestClient;
+        private readonly ImmutabilityPoliciesRestOperations _immutabilityPoliciesRestClient;
         private readonly BlobContainerData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class for mocking. </summary>
@@ -39,7 +40,8 @@ namespace Azure.Management.Storage
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _immutabilityPoliciesRestClient = new ImmutabilityPoliciesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class. </summary>
@@ -48,7 +50,8 @@ namespace Azure.Management.Storage
         internal BlobContainer(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _immutabilityPoliciesRestClient = new ImmutabilityPoliciesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class. </summary>
@@ -60,7 +63,8 @@ namespace Azure.Management.Storage
         internal BlobContainer(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _immutabilityPoliciesRestClient = new ImmutabilityPoliciesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -92,7 +96,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainersRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
@@ -112,7 +116,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _blobContainersRestClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
@@ -149,7 +153,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainersRestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new BlobContainerDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -171,7 +175,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _blobContainersRestClient.Delete(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken);
                 var operation = new BlobContainerDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -183,11 +187,12 @@ namespace Azure.Management.Storage
                 throw;
             }
         }
+
         /// <summary> Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn&apos;t already exist. </summary>
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
-        public virtual async Task<Response<BlobContainer>> UpdateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BlobContainer>> UpdateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (blobContainer == null)
             {
@@ -198,7 +203,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainersRestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, blobContainer, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -223,7 +228,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken);
+                var response = _blobContainersRestClient.Update(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, blobContainer, cancellationToken);
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -237,7 +242,7 @@ namespace Azure.Management.Storage
         /// <param name="legalHold"> The LegalHold property that will be set to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="legalHold"/> is null. </exception>
-        public virtual async Task<Response<LegalHold>> SetLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<LegalHold>> SetLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             if (legalHold == null)
             {
@@ -248,7 +253,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.SetLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainersRestClient.SetLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -273,7 +278,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.SetLegalHold(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken);
+                var response = _blobContainersRestClient.SetLegalHold(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -287,7 +292,7 @@ namespace Azure.Management.Storage
         /// <param name="legalHold"> The LegalHold property that will be clear from a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="legalHold"/> is null. </exception>
-        public virtual async Task<Response<LegalHold>> ClearLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<LegalHold>> ClearLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             if (legalHold == null)
             {
@@ -298,7 +303,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.ClearLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainersRestClient.ClearLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -323,7 +328,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.ClearLegalHold(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken);
+                var response = _blobContainersRestClient.ClearLegalHold(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -336,13 +341,13 @@ namespace Azure.Management.Storage
         /// <summary> The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. </summary>
         /// <param name="parameters"> Lease Container request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<LeaseContainerResponse>> LeaseAsync(LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<LeaseContainerResponse>> LeaseAsync(LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobContainer.Lease");
             scope.Start();
             try
             {
-                var response = await _restClient.LeaseAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainersRestClient.LeaseAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -361,7 +366,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Lease(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
+                var response = _blobContainersRestClient.Lease(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -371,11 +376,116 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Gets an object representing a ImmutabilityPolicy along with the instance operations that can be performed on it. </summary>
-        /// <returns> Returns a <see cref="ImmutabilityPolicy" /> object. </returns>
-        public ImmutabilityPolicy GetImmutabilityPolicy()
+        /// <summary> Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation. </summary>
+        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
+        public async virtual Task<Response<ImmutabilityPolicyData>> LockAsync(string ifMatch, CancellationToken cancellationToken = default)
         {
-            return new ImmutabilityPolicy(this, Id + "/immutabilityPolicies/default");
+            if (ifMatch == null)
+            {
+                throw new ArgumentNullException(nameof(ifMatch));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BlobContainer.Lock");
+            scope.Start();
+            try
+            {
+                var response = await _immutabilityPoliciesRestClient.LockAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
+
+        /// <summary> Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation. </summary>
+        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
+        public virtual Response<ImmutabilityPolicyData> Lock(string ifMatch, CancellationToken cancellationToken = default)
+        {
+            if (ifMatch == null)
+            {
+                throw new ArgumentNullException(nameof(ifMatch));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BlobContainer.Lock");
+            scope.Start();
+            try
+            {
+                var response = _immutabilityPoliciesRestClient.Lock(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, ifMatch, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation. </summary>
+        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
+        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
+        public async virtual Task<Response<ImmutabilityPolicyData>> ExtendAsync(string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        {
+            if (ifMatch == null)
+            {
+                throw new ArgumentNullException(nameof(ifMatch));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BlobContainer.Extend");
+            scope.Start();
+            try
+            {
+                var response = await _immutabilityPoliciesRestClient.ExtendAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, ifMatch, parameters, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation. </summary>
+        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
+        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
+        public virtual Response<ImmutabilityPolicyData> Extend(string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        {
+            if (ifMatch == null)
+            {
+                throw new ArgumentNullException(nameof(ifMatch));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BlobContainer.Extend");
+            scope.Start();
+            try
+            {
+                var response = _immutabilityPoliciesRestClient.Extend(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, ifMatch, parameters, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        #region ImmutabilityPolicy
+
+        /// <summary> Gets a list of ImmutabilityPolicies in the BlobContainer. </summary>
+        /// <returns> An object representing collection of ImmutabilityPolicies and their operations over a BlobContainer. </returns>
+        public ImmutabilityPolicyContainer GetImmutabilityPolicies()
+        {
+            return new ImmutabilityPolicyContainer(this);
+        }
+        #endregion
     }
 }
