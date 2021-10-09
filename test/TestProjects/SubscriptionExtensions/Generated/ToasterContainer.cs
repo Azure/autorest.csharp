@@ -17,11 +17,11 @@ using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {
-    /// <summary> A class representing collection of Toaster and their operations over a Subscription. </summary>
+    /// <summary> A class representing collection of Toaster and their operations over its parent. </summary>
     public partial class ToasterContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ToastersRestOperations _restClient;
+        private readonly ToastersRestOperations _toastersRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ToasterContainer"/> class for mocking. </summary>
         protected ToasterContainer()
@@ -33,7 +33,7 @@ namespace SubscriptionExtensions
         internal ToasterContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _toastersRestClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -62,7 +62,7 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.Name, availabilitySetName, parameters, cancellationToken);
+                var response = _toastersRestClient.CreateOrUpdate(Id.SubscriptionId, availabilitySetName, parameters, cancellationToken);
                 var operation = new ToasterCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -96,7 +96,7 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.Name, availabilitySetName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _toastersRestClient.CreateOrUpdateAsync(Id.SubscriptionId, availabilitySetName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ToasterCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -109,21 +109,21 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual Response<Toaster> Get(string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.Get");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
-                var response = _restClient.Get(Id.Name, availabilitySetName, cancellationToken: cancellationToken);
+                var response = _toastersRestClient.Get(Id.SubscriptionId, availabilitySetName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Toaster(Parent, response.Value), response.GetRawResponse());
@@ -135,21 +135,21 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public async virtual Task<Response<Toaster>> GetAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.Get");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _toastersRestClient.GetAsync(Id.SubscriptionId, availabilitySetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Toaster(Parent, response.Value), response.GetRawResponse());
@@ -163,19 +163,20 @@ namespace SubscriptionExtensions
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual Response<Toaster> GetIfExists(string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
-                var response = _restClient.Get(Id.Name, availabilitySetName, cancellationToken: cancellationToken);
+                var response = _toastersRestClient.Get(Id.SubscriptionId, availabilitySetName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Toaster>(null, response.GetRawResponse())
                     : Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
@@ -189,19 +190,20 @@ namespace SubscriptionExtensions
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public async virtual Task<Response<Toaster>> GetIfExistsAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.GetIfExists");
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _toastersRestClient.GetAsync(Id.SubscriptionId, availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Toaster>(null, response.GetRawResponse())
                     : Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
@@ -215,18 +217,19 @@ namespace SubscriptionExtensions
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
                 var response = GetIfExists(availabilitySetName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -239,18 +242,19 @@ namespace SubscriptionExtensions
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.CheckIfExists");
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetName));
-                }
-
                 var response = await GetIfExistsAsync(availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -308,6 +312,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, Toaster, ToasterData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Toaster, ToasterData> Construct() { }
     }
 }
