@@ -37,6 +37,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
 
+            // this is for singleton method.
+            // TODO -- another solution of this is "assigning null here and adding this method to ClientOperations"
+            CreateOperation = GetOperationWithVerb(HttpMethod.Put);
             GetOperation = GetOperationWithVerb(HttpMethod.Get);
             DeleteOperation = GetOperationWithVerb(HttpMethod.Delete);
             UpdateOperation = GetOperationWithVerb(HttpMethod.Patch);
@@ -124,6 +127,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override string ResourceName { get; }
 
+        public MgmtClientOperation? CreateOperation { get; }
         public virtual MgmtClientOperation? GetOperation { get; }
         public virtual MgmtClientOperation? DeleteOperation { get; }
         public virtual MgmtClientOperation? UpdateOperation { get; }

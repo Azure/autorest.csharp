@@ -23,7 +23,7 @@ namespace MgmtSingleton
     public partial class SubscriptionParentSingleton : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SubscriptionParentSingletonRestOperations _restClient;
+        private readonly SubscriptionParentSingletonRestOperations _subscriptionParentSingletonRestClient;
         private readonly SubscriptionParentSingletonData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class for mocking. </summary>
@@ -40,7 +40,7 @@ namespace MgmtSingleton
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
@@ -50,7 +50,7 @@ namespace MgmtSingleton
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
@@ -62,11 +62,11 @@ namespace MgmtSingleton
         internal SubscriptionParentSingleton(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Billing/SubscriptionParentSingleton/default";
+        public static readonly ResourceType ResourceType = "Microsoft.Billing/SubscriptionParentSingleton";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -96,7 +96,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _restClient.GetDefaultAsync(cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionParentSingletonRestClient.GetDefaultAsync(cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
@@ -115,7 +115,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _restClient.GetDefault(cancellationToken);
+                var response = _subscriptionParentSingletonRestClient.GetDefault(cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
@@ -152,7 +152,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionParentSingletonRestClient.DeleteAsync(cancellationToken).ConfigureAwait(false);
                 var operation = new SubscriptionParentSingletonDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -174,7 +174,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _restClient.Delete(cancellationToken);
+                var response = _subscriptionParentSingletonRestClient.Delete(cancellationToken);
                 var operation = new SubscriptionParentSingletonDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -186,10 +186,12 @@ namespace MgmtSingleton
                 throw;
             }
         }
+
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<SubscriptionParentSingleton>> CreateOrUpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SubscriptionParentSingletonCreateOrUpdateOperation> CreateOrUpdateAsync(SubscriptionParentSingletonData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -200,8 +202,11 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+                var response = await _subscriptionParentSingletonRestClient.CreateOrUpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SubscriptionParentSingletonCreateOrUpdateOperation(this, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -211,9 +216,10 @@ namespace MgmtSingleton
         }
 
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<SubscriptionParentSingleton> CreateOrUpdate(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
+        public virtual SubscriptionParentSingletonCreateOrUpdateOperation CreateOrUpdate(SubscriptionParentSingletonData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -224,8 +230,11 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(parameters, cancellationToken);
-                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+                var response = _subscriptionParentSingletonRestClient.CreateOrUpdate(parameters, cancellationToken);
+                var operation = new SubscriptionParentSingletonCreateOrUpdateOperation(this, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -238,7 +247,7 @@ namespace MgmtSingleton
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<SubscriptionParentSingleton>> UpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubscriptionParentSingleton>> UpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -249,7 +258,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionParentSingletonRestClient.UpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -274,7 +283,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _restClient.Update(parameters, cancellationToken);
+                var response = _subscriptionParentSingletonRestClient.Update(parameters, cancellationToken);
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -294,8 +303,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _restClient.PostTestAsync(postParameter, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
+                var response = await _subscriptionParentSingletonRestClient.PostTestAsync(postParameter, cancellationToken).ConfigureAwait(false);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _subscriptionParentSingletonRestClient.CreatePostTestRequest(postParameter).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -317,8 +326,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _restClient.PostTest(postParameter, cancellationToken);
-                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
+                var response = _subscriptionParentSingletonRestClient.PostTest(postParameter, cancellationToken);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _subscriptionParentSingletonRestClient.CreatePostTestRequest(postParameter).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

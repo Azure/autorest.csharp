@@ -14,9 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class SingletonDetection
     {
-        private static string[] SingletonKeywords = { "/default", "/latest" };
-
-        private static ConcurrentDictionary<OperationGroup, string?> _valueCache = new ConcurrentDictionary<OperationGroup, string?>();
+        private static string[] SingletonKeywords = { "default", "latest" };
 
         private static ConcurrentDictionary<OperationSet, string?> _singletonResourceCache = new ConcurrentDictionary<OperationSet, string?>();
 
@@ -61,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
             // now we can ensure the last segment of the path is a constant
             var lastSegment = currentRequestPath.Last();
-            if (SingletonKeywords.Any(w => lastSegment.Constant.Type.Equals(typeof(string)) && lastSegment.ConstantValue == w))
+            if (lastSegment.Constant.Type.Equals(typeof(string)) && SingletonKeywords.Any(w => lastSegment.ConstantValue == w))
             {
                 singletonIdSuffix = string.Join('/', diff.Select(s => s.ConstantValue));
                 return true;

@@ -64,8 +64,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // get the diff between current and parent
                 var diffSegments = parent.TrimParentFrom(current).ToList();
                 // we need the segments here to be an even number
+                // TODO -- Or do we? If we do we need to change this into an exception
                 if (diffSegments.Count() % 2 != 0)
-                    throw new InvalidOperationException($"Cannot calculate contextual parameters between {current} and {parent}, we get odd number segments in the difference");
+                    Console.Error.WriteLine($"[WARNING] we get odd number segments in the difference when calculating contextual parameters between {current} and {parent}");
                 // group the diffSegments in pairs, which is a IEnumerable of List<Segment> with two elements in reversed order
                 var segmentPairs = diffSegments.Select((segment, index) => new { Index = index, Value = segment })
                     .GroupBy(pair => pair.Index / 2)
@@ -80,6 +81,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     // TODO -- also consider the key is variable scenario
                     if (pair[0].IsReference)
                         throw new NotImplementedException($"Key is variable scenario is not supported yet. RequestPath: {current} and key {pair[0]}");
+                    // skip if this pair only has one segment. Since we are grouping these in pairs, this can only happen on the last group
+                    if (pair.Count == 1)
+                        continue;
                     if (pair[1].IsReference)
                     {
                         var reference = pair[1].Reference;

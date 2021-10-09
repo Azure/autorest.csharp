@@ -12,7 +12,6 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
@@ -23,7 +22,6 @@ using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using Operation = AutoRest.CSharp.Input.Operation;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 using ResourceType = Azure.ResourceManager.ResourceType;
 
@@ -193,6 +191,13 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             WriteDeleteMethod(_resource.DeleteOperation, true);
             WriteDeleteMethod(_resource.DeleteOperation, false);
 
+            if (_resource.IsSingleton)
+            {
+                // only write create method when this is a singleton
+                WriteCreateOrUpdateMethod(_resource.CreateOperation, true);
+                WriteCreateOrUpdateMethod(_resource.CreateOperation, false);
+            }
+
             if (_isITaggableResource)
             {
                 WriteAddTagMethod(true);
@@ -232,6 +237,13 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
         protected void WriteGetMethod(MgmtClientOperation operation, bool async)
         {
             WriteNormalMethod(operation, "Get", async, shouldThrowExceptionWhenNull: true);
+        }
+
+        protected void WriteCreateOrUpdateMethod(MgmtClientOperation? operation, bool async)
+        {
+            if (operation == null)
+                return;
+            WriteLROMethod(operation, "CreateOrUpdate", async);
         }
 
         protected void WriteDeleteMethod(MgmtClientOperation? operation, bool async)

@@ -24,14 +24,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceContainer(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
             : base(operationSets, resourceName, context)
         {
-            CreateOperation = GetOperationWithVerb(HttpMethod.Put);
         }
 
         public Resource Resource => _context.Library.GetArmResource(RequestPaths.First());
 
         public override string ResourceName => Resource.ResourceName;
-
-        public MgmtClientOperation? CreateOperation { get; }
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {

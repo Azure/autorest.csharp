@@ -308,15 +308,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"\t: Response.FromValue(new {_resource.Type.Name}(this, response.Value), response.GetRawResponse());");
         }
 
-        private void WriteGetIfExistsResponse(CodeWriter writer, CSharpType resourceType)
-        {
-        }
-
-        private void WriteCreateOrUpdateMethod(MgmtClientOperation operation, bool async)
-        {
-            WriteLROMethod(operation, "CreateOrUpdate", async);
-        }
-
         /// <summary>
         /// Write some scaffolding for container operation methods.
         /// </summary>
