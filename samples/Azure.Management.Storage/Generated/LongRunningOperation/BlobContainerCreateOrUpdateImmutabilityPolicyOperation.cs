@@ -16,16 +16,16 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation. </summary>
-    public partial class ImmutabilityPolicyCreateOrUpdateOperation : Operation<ImmutabilityPolicy>
+    public partial class BlobContainerCreateOrUpdateImmutabilityPolicyOperation : Operation<ImmutabilityPolicy>
     {
         private readonly OperationOrResponseInternals<ImmutabilityPolicy> _operation;
 
-        /// <summary> Initializes a new instance of ImmutabilityPolicyCreateOrUpdateOperation for mocking. </summary>
-        protected ImmutabilityPolicyCreateOrUpdateOperation()
+        /// <summary> Initializes a new instance of BlobContainerCreateOrUpdateImmutabilityPolicyOperation for mocking. </summary>
+        protected BlobContainerCreateOrUpdateImmutabilityPolicyOperation()
         {
         }
 
-        internal ImmutabilityPolicyCreateOrUpdateOperation(ArmResource operationsBase, Response<ImmutabilityPolicyData> response)
+        internal BlobContainerCreateOrUpdateImmutabilityPolicyOperation(ArmResource operationsBase, Response<ImmutabilityPolicyData> response)
         {
             _operation = new OperationOrResponseInternals<ImmutabilityPolicy>(Response.FromValue(new ImmutabilityPolicy(operationsBase, response.Value), response.GetRawResponse()));
         }

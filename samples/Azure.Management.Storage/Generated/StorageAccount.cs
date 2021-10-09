@@ -774,41 +774,21 @@ namespace Azure.Management.Storage
 
         #region BlobService
 
-        /// <summary> Gets a list of BlobServices in the StorageAccount. </summary>
-        /// <returns> An object representing collection of BlobServices and their operations over a StorageAccount. </returns>
-        public BlobServiceContainer GetBlobServices()
+        /// <summary> Gets an object representing a BlobService along with the instance operations that can be performed on it in the StorageAccount. </summary>
+        /// <returns> Returns a <see cref="BlobService" /> object. </returns>
+        public BlobService GetBlobService()
         {
-            return new BlobServiceContainer(this);
-        }
-        #endregion
-
-        #region BlobContainer
-
-        /// <summary> Gets a list of BlobContainers in the StorageAccount. </summary>
-        /// <returns> An object representing collection of BlobContainers and their operations over a StorageAccount. </returns>
-        public BlobContainerContainer GetBlobContainers()
-        {
-            return new BlobContainerContainer(this);
+            return new BlobService(this, Id + "/blobServices/default");
         }
         #endregion
 
         #region FileService
 
-        /// <summary> Gets a list of FileServices in the StorageAccount. </summary>
-        /// <returns> An object representing collection of FileServices and their operations over a StorageAccount. </returns>
-        public FileServiceContainer GetFileServices()
+        /// <summary> Gets an object representing a FileService along with the instance operations that can be performed on it in the StorageAccount. </summary>
+        /// <returns> Returns a <see cref="FileService" /> object. </returns>
+        public FileService GetFileService()
         {
-            return new FileServiceContainer(this);
-        }
-        #endregion
-
-        #region FileShare
-
-        /// <summary> Gets a list of FileShares in the StorageAccount. </summary>
-        /// <returns> An object representing collection of FileShares and their operations over a StorageAccount. </returns>
-        public FileShareContainer GetFileShares()
-        {
-            return new FileShareContainer(this);
+            return new FileService(this, Id + "/fileServices/default");
         }
         #endregion
 

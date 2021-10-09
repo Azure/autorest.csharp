@@ -15,16 +15,16 @@ using Azure.Management.Storage;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
-    public partial class ImmutabilityPolicyDeleteOperation : Operation<ImmutabilityPolicyData>
+    public partial class BlobContainerDeleteImmutabilityPolicyOperation : Operation<ImmutabilityPolicyData>
     {
         private readonly OperationOrResponseInternals<ImmutabilityPolicyData> _operation;
 
-        /// <summary> Initializes a new instance of ImmutabilityPolicyDeleteOperation for mocking. </summary>
-        protected ImmutabilityPolicyDeleteOperation()
+        /// <summary> Initializes a new instance of BlobContainerDeleteImmutabilityPolicyOperation for mocking. </summary>
+        protected BlobContainerDeleteImmutabilityPolicyOperation()
         {
         }
 
-        internal ImmutabilityPolicyDeleteOperation(Response<ImmutabilityPolicyData> response)
+        internal BlobContainerDeleteImmutabilityPolicyOperation(Response<ImmutabilityPolicyData> response)
         {
             _operation = new OperationOrResponseInternals<ImmutabilityPolicyData>(response);
         }
