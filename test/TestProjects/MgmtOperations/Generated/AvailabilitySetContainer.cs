@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -278,7 +280,7 @@ namespace MgmtOperations
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<AvailabilitySetListResult> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<AvailabilitySet>> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -290,7 +292,7 @@ namespace MgmtOperations
             try
             {
                 var response = _availabilitySetsRestClient.TestMethod(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySet(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -304,7 +306,7 @@ namespace MgmtOperations
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public async virtual Task<Response<AvailabilitySetListResult>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<AvailabilitySet>>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -316,7 +318,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _availabilitySetsRestClient.TestMethodAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySet(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
             }
             catch (Exception e)
             {

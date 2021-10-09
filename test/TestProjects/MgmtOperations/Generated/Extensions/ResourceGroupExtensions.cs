@@ -41,7 +41,7 @@ namespace MgmtOperations
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static async Task<AvailabilitySetTestLROMethodOperation> TestLROMethodAsync(this ResourceGroup resourceGroup, AvailabilitySetUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public static async Task<AvailabilitySetTestLROMethodOperation> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, AvailabilitySetUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -51,7 +51,7 @@ namespace MgmtOperations
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.TestLROMethod");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.TestLROMethodAvailabilitySet");
                 scope.Start();
                 try
                 {
@@ -77,7 +77,7 @@ namespace MgmtOperations
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static AvailabilitySetTestLROMethodOperation TestLROMethod(this ResourceGroup resourceGroup, AvailabilitySetUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public static AvailabilitySetTestLROMethodOperation TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, AvailabilitySetUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -87,7 +87,7 @@ namespace MgmtOperations
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.TestLROMethod");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.TestLROMethodAvailabilitySet");
                 scope.Start();
                 try
                 {

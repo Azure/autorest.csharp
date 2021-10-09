@@ -139,54 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return pageType.WrapPageable(async);
         }
 
-        ///// <summary>
-        ///// Checks if parent exists in path parameters
-        ///// </summary>
-        ///// <param name="clientMethod">Rest client method</param>
-        ///// <param name="parentResourceType">Parent resource type</param>
-        //public static bool IsParentExistsInPathParamaters(this RestClientMethod clientMethod, string parentResourceType)
-        //{
-        //    var isParentExistsInPathParams = false;
-        //    if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest)
-        //    {
-        //        if (clientMethod.Operation.AncestorResourceType() == ResourceTypeBuilder.Tenant)
-        //        {
-        //            return true;
-        //        }
-        //        // Example - "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children"
-        //        var fullPath = httpRequest.Path.ToLower();
-        //        parentResourceType = parentResourceType.ToLower();
-
-        //        // This will replace -
-        //        // "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children" with
-        //        // "/subscriptions/resourceGroups/providers/Microsoft.Compute/parents/subParents/children" in order to find the parent
-        //        var path = Regex.Replace(fullPath, @"\{[a-zA-Z]+\}\/", "");
-        //        var isParentFound = path.IndexOf(parentResourceType);
-        //        if (isParentFound != -1)
-        //        {
-        //            // Parent is found, now check if the parent exists in path parameters
-        //            var parentArr = parentResourceType.Split('/');
-        //            var fullPathArr = fullPath.Split('/');
-        //            foreach (var parentSegment in parentArr)
-        //            {
-        //                var index = Array.IndexOf(fullPathArr, parentSegment);
-        //                if (index + 1 < fullPathArr.Length && fullPathArr[index + 1].StartsWith('{'))
-        //                {
-        //                    char[] charsToTrim = { '{', '}' };
-        //                    var parentParamName = fullPathArr[index + 1].Trim(charsToTrim);
-        //                    isParentExistsInPathParams = clientMethod.Request.PathParameterSegments.Any(p => p.Value.Reference.Name.Equals(parentParamName, StringComparison.InvariantCultureIgnoreCase));
-        //                    if (isParentExistsInPathParams)
-        //                    {
-        //                        break;
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return isParentExistsInPathParams;
-        //}
-
+        // TODO -- this needs refinement
         public static bool IsByIdMethod(this RestClientMethod clientMethod)
         {
             return clientMethod.Operation?.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && clientMethod.Parameters.Count() > 0 && $"/{{{clientMethod.Parameters[0].Name}}}".Equals(httpRequest.Path);
@@ -194,17 +147,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static bool IsPagingOperation(this MgmtClientOperation clientOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            return clientOperation.Any(restOperation => restOperation.IsPagingOperation(context));
+            return clientOperation.First().IsPagingOperation(context);
+        }
+
+        public static bool IsListOperation(this MgmtClientOperation clientOperation, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out CSharpType itemType)
+        {
+            return clientOperation.First().IsListMethod(out itemType, out _);
         }
 
         public static bool IsLongRunningOperation(this MgmtClientOperation clientOperation)
         {
-            return clientOperation.Any(restOperation => restOperation.IsLongRunningOperation());
+            return clientOperation.First().IsLongRunningOperation();
         }
 
         public static bool IsLongRunningReallyLong(this MgmtClientOperation clientOperation)
         {
-            return clientOperation.Any(restOperation => restOperation.IsLongRunningReallyLong());
+            return clientOperation.First().IsLongRunningReallyLong();
         }
 
         public static bool IsPagingOperation(this MgmtRestOperation restOperation, BuildContext<MgmtOutputLibrary> context)

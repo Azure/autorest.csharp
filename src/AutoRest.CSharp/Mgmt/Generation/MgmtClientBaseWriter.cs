@@ -155,6 +155,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // this is a paging operation
                 WritePagingMethod(clientOperation, methodName, async);
             }
+            else if (clientOperation.IsListOperation(Context, out var itemType))
+            {
+                // this is a normal list operation
+                WriteNormalListMethod(clientOperation, methodName, itemType, async);
+            }
             else
             {
                 // this is a normal operation
@@ -196,10 +201,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // TODO -- find a better way to get this type
             var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
-            itemType = WrapResourceDataType(itemType)!;
-            _writer.WriteXmlDocumentationReturns($"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.");
+            var actualItemType = WrapResourceDataType(itemType)!;
+            _writer.WriteXmlDocumentationReturns($"{(async ? "An async" : "A")} collection of <see cref=\"{actualItemType.Name}\" /> that may take multiple service requests to iterate over.");
 
-            WritePagingMethodSignature(_writer, itemType.WrapPageable(async), methodName, methodParameters, async, clientOperation.Accessibility, true);
+            WritePagingMethodSignature(_writer, actualItemType.WrapPageable(async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
             using (_writer.Scope())
             {
@@ -232,7 +237,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             IEnumerable<ParameterMapping> parameterMappings, bool async)
         {
             var pagingMethod = operation.GetPagingMethod(Context)!;
-            var returnType = new CSharpType(typeof(Page<>), itemType).WrapAsync(async);
+            var returnType = new CSharpType(typeof(Page<>), WrapResourceDataType(itemType)!).WrapAsync(async);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
@@ -276,10 +281,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
             var converter = string.Empty;
-            if (itemType != pagingMethod.PagingResponse.ItemType)
+            if (IsResourceDataType(itemType))
             {
                 writer.UseNamespace("System.Linq");
-                converter = $".Select(value => new {itemType.Name}({ContextProperty}, value))";
+                converter = $".Select(value => new {WrapResourceDataType(itemType)!.Name}({ContextProperty}, value))";
             }
             writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
         }
@@ -348,6 +353,88 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer => WriteNormalMethodBody(writer, operationMappings, parameterMappings, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull));
                 _writer.Line();
             }
+        }
+
+        protected virtual void WriteNormalListMethod(MgmtClientOperation clientOperation, string methodName, CSharpType itemType, bool async)
+        {
+            _writer.Line();
+            // get the corresponding MgmtClientOperation mapping
+            var operationMappings = clientOperation.ToDictionary(
+                operation => operation.ContextualPath,
+                operation => operation);
+            // build contextual parameters
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
+            // build parameter mapping
+            var parameterMappings = operationMappings.ToDictionary(
+                pair => pair.Key,
+                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+            // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
+            var methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
+            // TODO -- since we are combining multiple operations under different parents, which description should we leave here?
+            _writer.WriteXmlDocumentationSummary($"{clientOperation.Description}");
+            foreach (var parameter in methodParameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
+            }
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
+            var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType)!);
+
+            WriteNormalMethodSignature(_writer, GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
+
+            using (_writer.Scope())
+            {
+                _writer.WriteParameterNullChecks(methodParameters);
+                var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
+                WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField,
+                    writer => WriteNormalListMethodBody(writer, itemType, operationMappings, parameterMappings, async));
+                _writer.Line();
+            }
+        }
+
+        protected virtual void WriteNormalListMethodBody(CodeWriter writer, CSharpType itemType, IDictionary<RequestPath, MgmtRestOperation> operationMappings,
+            IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
+        {
+            // we need to write multiple branches for a normal method
+            if (operationMappings.Count == 1)
+            {
+                // if we only have one branch, we would not need those if-else statements
+                var branch = operationMappings.Keys.First();
+                WriteNormalListMethodBranch(writer, itemType, operationMappings[branch], parameterMappings[branch], async);
+            }
+            else
+            {
+                // branches go here
+                throw new NotImplementedException("multi-branch normal method not supported yet");
+            }
+        }
+
+        protected virtual void WriteNormalListMethodBranch(CodeWriter writer, CSharpType itemType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
+        {
+            writer.Append($"var response = {GetAwait(async)} ");
+            writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}(");
+            WriteArguments(writer, parameterMappings);
+            writer.Line($"cancellationToken){GetConfigureAwait(async)};");
+
+            WriteNormalListMethodResponse(writer, itemType, operation, async);
+        }
+
+        protected virtual void WriteNormalListMethodResponse(CodeWriter writer, CSharpType itemType, MgmtRestOperation operation, bool async)
+        {
+            // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
+            var converter = string.Empty;
+            if (IsResourceDataType(itemType))
+            {
+                writer.UseNamespace("System.Linq");
+                var actualItemType = WrapResourceDataType(itemType)!;
+                converter = $".Select(value => new {actualItemType.Name}({ContextProperty}, value)).ToArray() as IReadOnlyList<{actualItemType.Name}>";
+            }
+            var valueProperty = ".Value";
+            if (operation.ReturnType!.IsFrameworkType && operation.ReturnType.FrameworkType == typeof(IReadOnlyList<>))
+                valueProperty = string.Empty;
+            writer.Line($"return {typeof(Response)}.FromValue(response.Value{valueProperty}{converter}, response.GetRawResponse());");
         }
 
         protected virtual void WriteNormalMethodBody(CodeWriter writer, IDictionary<RequestPath, MgmtRestOperation> operationMappings,

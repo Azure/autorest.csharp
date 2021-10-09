@@ -101,22 +101,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override void WriteMethod(MgmtClientOperation clientOperation, bool async, string? methodName = null)
-        {
-            methodName ??= GetMethodName(clientOperation);
-            if (clientOperation.IsLongRunningOperation())
-            {
-                WriteLROMethod(clientOperation, methodName, async);
-            }
-            else if (clientOperation.IsPagingOperation(Context))
-            {
-                WritePagingMethod(clientOperation, methodName, async);
-            }
-            else
-            {
-                WriteNormalMethod(clientOperation, methodName, async);
-            }
-        }
+        //protected override void WriteMethod(MgmtClientOperation clientOperation, bool async, string? methodName = null)
+        //{
+        //    methodName ??= GetMethodName(clientOperation);
+        //    if (clientOperation.IsLongRunningOperation())
+        //    {
+        //        WriteLROMethod(clientOperation, methodName, async);
+        //    }
+        //    else if (clientOperation.IsPagingOperation(Context))
+        //    {
+        //        WritePagingMethod(clientOperation, methodName, async);
+        //    }
+        //    else
+        //    {
+        //        WriteNormalMethod(clientOperation, methodName, async);
+        //    }
+        //}
 
         protected override string GetMethodName(MgmtClientOperation clientOperation)
         {
