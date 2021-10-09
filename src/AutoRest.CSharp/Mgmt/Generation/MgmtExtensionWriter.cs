@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.AutoRest.Plugins;
@@ -115,6 +116,39 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 WriteNormalMethod(clientOperation, methodName, async);
             }
+        }
+
+        protected override string GetMethodName(MgmtClientOperation clientOperation)
+        {
+            // we should always have only one operation in extension classes
+            Debug.Assert(clientOperation.Count == 1);
+            var operation = clientOperation.First();
+
+            if (operation.IsListMethod(out var itemType, out var extraScope))
+            {
+                if (!Context.Library.TryGetTypeProvider(itemType.Name, out var provider))
+                    throw new InvalidOperationException($"Cannot find type {itemType.Name}");
+
+                // even if we are list a resource data under the subscription, we could have different scopes. The most common case is that we are listing under "subscriptions/locations"
+                var suffix = GetOperationNameExtraScopeSuffix(extraScope);
+                var by = string.IsNullOrEmpty(suffix) ? string.Empty : "By";
+
+                var itemName = provider is ResourceData data ?
+                    Context.Library.FindResources(data).First().ResourceName :
+                    itemType.Name;
+                return $"Get{itemName.ToPlural()}{by}{suffix}";
+            }
+
+            // if this is not a list method, we also need to rename this operation to avoid method name collision
+            var operationSet = Context.Library.GetOperationSet(operation.RequestPath);
+            var operationGroup = operationSet[operation.Operation];
+
+            return $"{operation.Name}{operationGroup.Key.ToSingular()}";
+        }
+
+        private string GetOperationNameExtraScopeSuffix(IEnumerable<Segment> extraScope)
+        {
+            return string.Join("", extraScope.Select(segment => segment.IsConstant ? segment.ConstantValue.ToSingular() : segment.ReferenceName).Select(segment => segment.FirstCharToUpperCase()));
         }
 
         protected void WriteExtensionContextScope(CodeWriterDelegate inner, bool async)
