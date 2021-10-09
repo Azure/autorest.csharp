@@ -19,11 +19,11 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of VirtualMachineScaleSet and their operations over a ResourceGroup. </summary>
+    /// <summary> A class representing collection of VirtualMachineScaleSet and their operations over its parent. </summary>
     public partial class VirtualMachineScaleSetContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly VirtualMachineScaleSetsRestOperations _restClient;
+        private readonly VirtualMachineScaleSetsRestOperations _virtualMachineScaleSetsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetContainer"/> class for mocking. </summary>
         protected VirtualMachineScaleSetContainer()
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample
         internal VirtualMachineScaleSetContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new VirtualMachineScaleSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _virtualMachineScaleSetsRestClient = new VirtualMachineScaleSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -64,8 +64,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken);
-                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
+                var response = _virtualMachineScaleSetsRestClient.CreateOrUpdate(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken);
+                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -98,8 +98,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
+                var response = await _virtualMachineScaleSetsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _virtualMachineScaleSetsRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -111,21 +111,22 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Display information about a virtual machine scale set. </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSet> Get(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.Get");
             scope.Start();
             try
             {
-                if (vmScaleSetName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmScaleSetName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken);
+                var response = _virtualMachineScaleSetsRestClient.Get(Id.ResourceGroupName, vmScaleSetName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSet(Parent, response.Value), response.GetRawResponse());
@@ -137,21 +138,22 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Display information about a virtual machine scale set. </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineScaleSet>> GetAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.Get");
             scope.Start();
             try
             {
-                if (vmScaleSetName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmScaleSetName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetsRestClient.GetAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSet(Parent, response.Value), response.GetRawResponse());
@@ -165,19 +167,20 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSet> GetIfExists(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (vmScaleSetName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmScaleSetName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken);
+                var response = _virtualMachineScaleSetsRestClient.Get(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachineScaleSet>(null, response.GetRawResponse())
                     : Response.FromValue(new VirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
@@ -191,19 +194,20 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineScaleSet>> GetIfExistsAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.GetIfExists");
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (vmScaleSetName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmScaleSetName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetsRestClient.GetAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachineScaleSet>(null, response.GetRawResponse())
                     : Response.FromValue(new VirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
@@ -217,18 +221,19 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (vmScaleSetName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmScaleSetName));
-                }
-
                 var response = GetIfExists(vmScaleSetName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -241,18 +246,19 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.CheckIfExists");
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (vmScaleSetName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmScaleSetName));
-                }
-
                 var response = await GetIfExistsAsync(vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -274,7 +280,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _virtualMachineScaleSetsRestClient.GetAll(Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -289,7 +295,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _virtualMachineScaleSetsRestClient.GetAllNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -312,7 +318,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineScaleSetsRestClient.GetAllAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -327,7 +333,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineScaleSetsRestClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -386,6 +392,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData> Construct() { }
     }
 }

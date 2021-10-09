@@ -10,29 +10,9 @@ namespace: Azure.ResourceManager.Sample
 model-namespace: false
 public-clients: false
 head-as-boolean: false
-operation-group-to-resource-type:
-   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/artifacttypes/types/versions
-   VirtualMachineImages: Microsoft.Compute/locations/publishers/artifacttypes/offers/skus/versions
-   Usage: Microsoft.Compute/locations/usages
-   VirtualMachineSizes: Microsoft.Compute/locations/vmSizes
-   VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades
-   LogAnalytics: Microsoft.Compute/locations/logAnalytics
-operation-group-to-resource:
-   VirtualMachineExtensionImages: VirtualMachineExtensionImage
-   VirtualMachineImages: NonResource
-   VirtualMachineSizes: NonResource
-   VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
-   LogAnalytics: NonResource
-operation-group-to-parent:
-   Usage: subscriptions
-   LogAnalytics: subscriptions
-   VirtualMachineExtensionImages: subscriptions
-   VirtualMachineImages: subscriptions
-   VirtualMachineSizes: subscriptions
-   VirtualMachineExtensions: Microsoft.Compute/virtualMachines
-   VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets/virtualMachines
-   VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets
-operation-group-is-extension: VirtualMachineScaleSetVMExtensions;VirtualMachineExtensions
+request-path-to-resource-name:
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}: VirtualMachineExtension
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}: VirtualMachineScaleSetVMExtension
 modelerfour:
   lenient-model-deduplication: true
 directive:

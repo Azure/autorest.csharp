@@ -9,33 +9,8 @@
   "azure-arm": true,
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "OperationGroupToResourceType": {
-    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/artifacttypes/types/versions",
-    "VirtualMachineImages": "Microsoft.Compute/locations/publishers/artifacttypes/offers/skus/versions",
-    "Usage": "Microsoft.Compute/locations/usages",
-    "VirtualMachineSizes": "Microsoft.Compute/locations/vmSizes",
-    "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades",
-    "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
-  },
-  "OperationGroupToResource": {
-    "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
-    "VirtualMachineImages": "NonResource",
-    "VirtualMachineSizes": "NonResource",
-    "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
-    "LogAnalytics": "NonResource"
-  },
-  "OperationGroupToParent": {
-    "Usage": "subscriptions",
-    "LogAnalytics": "subscriptions",
-    "VirtualMachineExtensionImages": "subscriptions",
-    "VirtualMachineImages": "subscriptions",
-    "VirtualMachineSizes": "subscriptions",
-    "VirtualMachineExtensions": "Microsoft.Compute/virtualMachines",
-    "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
-    "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets"
-  },
-  "OperationGroupIsExtension": [
-    "VirtualMachineScaleSetVMExtensions",
-    "VirtualMachineExtensions"
-  ]
+  "RequestPathToResourceName": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}": "VirtualMachineExtension",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}": "VirtualMachineScaleSetVMExtension"
+  }
 }

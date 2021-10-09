@@ -440,7 +440,7 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             _writer.Append($"var originalResponse = {GetAwait(async)} ");
             // TODO -- we need to implement the branches here as well
             //var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, Context).ToList();
-            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName("Get", async)}( ");
+            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}( ");
             WriteArguments(_writer, parameterMapping, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
             _writer.Line($"return {typeof(Response)}.FromValue(new {TypeOfThis}(this, originalResponse.Value), originalResponse.GetRawResponse());");
