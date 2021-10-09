@@ -138,7 +138,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// </summary>
             public bool Strict;
 
-            public ContextualParameterMapping(Segment segment, string valueExpression) : this(segment.Reference.Name, segment.Reference.Type, valueExpression, segment.IsStrict)
+            public ContextualParameterMapping(Segment segment, string valueExpression)
+                : this(segment.Reference.Name, segment.Reference.Type, valueExpression, segment.IsStrict)
             {
             }
 

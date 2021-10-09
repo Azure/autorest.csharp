@@ -167,6 +167,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return clientOperation.Name;
         }
 
+        #region PagingMethod
+
         protected virtual void WritePagingMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
@@ -282,18 +284,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
         }
 
-        protected virtual void WriteNormalMethodSignature(CodeWriter writer, CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,
-            bool async, string accessibility = "public", bool isVirtual = true)
-        {
-            writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
-
-            foreach (var parameter in methodParameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-        }
-
         protected virtual void WritePagingMethodSignature(CodeWriter writer, CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,
             bool async, string accessibility = "public", bool isVirtual = true)
         {
@@ -306,17 +296,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
-        protected virtual void WriteLROMethodSignature(CodeWriter writer, CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,
-            bool async, bool isSLRO, string accessibility = "public", bool isVirtual = true)
+        #endregion
+
+        #region NormalMethod
+        protected virtual void WriteNormalMethodSignature(CodeWriter writer, CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,
+            bool async, string accessibility = "public", bool isVirtual = true)
         {
             writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
+
             foreach (var parameter in methodParameters)
             {
                 writer.WriteParameter(parameter);
             }
-
-            var defaultWaitForCompletion = isSLRO ? "true" : "false";
-            writer.Line($"bool waitForCompletion = {defaultWaitForCompletion}, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
         protected virtual void WriteNormalMethod(MgmtClientOperation clientOperation, string methodName, bool async, bool shouldThrowExceptionWhenNull = false)
@@ -402,6 +394,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        #endregion
+
+        #region LROMethod
+
         protected virtual void WriteLROMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
@@ -476,6 +472,56 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WriteLROResponse(writer, lroObjectType, operation, parameterMapping, async);
         }
+
+        protected virtual void WriteLROMethodSignature(CodeWriter writer, CSharpType responseType, string methodName, IEnumerable<Parameter> methodParameters,
+            bool async, bool isSLRO, string accessibility = "public", bool isVirtual = true)
+        {
+            writer.Append($"{accessibility} {GetAsyncKeyword(async)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
+            foreach (var parameter in methodParameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+
+            var defaultWaitForCompletion = isSLRO ? "true" : "false";
+            writer.Line($"bool waitForCompletion = {defaultWaitForCompletion}, {typeof(CancellationToken)} cancellationToken = default)");
+        }
+
+        protected virtual void WriteLROResponse(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        {
+            writer.Append($"var operation = new {lroObjectType}(");
+
+            if (operation.Operation.IsLongRunning)
+            {
+                var longRunningOperation = AsMgmtOperation(Context.Library.GetLongRunningOperation(operation.Operation));
+                if (longRunningOperation.WrapperType != null)
+                {
+                    writer.Append($"{ContextProperty}, ");
+                }
+                writer.Append($"{ClientDiagnosticsField}, {PipelineProperty}, {GetRestClientVariableName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Name)}(");
+                WriteArguments(writer, parameterMapping);
+                writer.RemoveTrailingComma();
+                writer.Append($").Request, ");
+            }
+            else
+            {
+                var nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(operation.Operation);
+                // need to check implementation type as some delete operation uses ResourceData.
+                if (nonLongRunningOperation.ResultType != null && nonLongRunningOperation.ResultType.Implementation.GetType() == typeof(Resource))
+                {
+                    writer.Append($"{ContextProperty}, ");
+                }
+            }
+            writer.Line($"response);");
+            CSharpType? lroResultType = GetLROResultType(operation.Operation);
+            var waitForCompletionMethod = lroResultType == null && async ?
+                    "WaitForCompletionResponse" :
+                    "WaitForCompletion";
+            writer.Line($"if (waitForCompletion)");
+            writer.Line($"{GetAwait(async)} operation.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken){GetConfigureAwait(async)};");
+            writer.Line($"return operation;");
+        }
+
+        #endregion
 
         protected virtual CSharpType? WrapResourceDataType(CSharpType? returnType)
         {
@@ -552,41 +598,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var mgmtOperation = operation as MgmtLongRunningOperation;
             Debug.Assert(mgmtOperation != null);
             return mgmtOperation;
-        }
-
-        protected virtual void WriteLROResponse(CodeWriter writer, CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
-        {
-            writer.Append($"var operation = new {lroObjectType}(");
-
-            if (operation.Operation.IsLongRunning)
-            {
-                var longRunningOperation = AsMgmtOperation(Context.Library.GetLongRunningOperation(operation.Operation));
-                if (longRunningOperation.WrapperType != null)
-                {
-                    writer.Append($"{ContextProperty}, ");
-                }
-                writer.Append($"{ClientDiagnosticsField}, {PipelineProperty}, {GetRestClientVariableName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Name)}(");
-                WriteArguments(writer, parameterMapping);
-                writer.RemoveTrailingComma();
-                writer.Append($").Request, ");
-            }
-            else
-            {
-                var nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(operation.Operation);
-                // need to check implementation type as some delete operation uses ResourceData.
-                if (nonLongRunningOperation.ResultType != null && nonLongRunningOperation.ResultType.Implementation.GetType() == typeof(Resource))
-                {
-                    writer.Append($"{ContextProperty}, ");
-                }
-            }
-            writer.Line($"response);");
-            CSharpType? lroResultType = GetLROResultType(operation.Operation);
-            var waitForCompletionMethod = lroResultType == null && async ?
-                    "WaitForCompletionResponse" :
-                    "WaitForCompletion";
-            writer.Line($"if (waitForCompletion)");
-            writer.Line($"{GetAwait(async)} operation.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken){GetConfigureAwait(async)};");
-            writer.Line($"return operation;");
         }
     }
 }
