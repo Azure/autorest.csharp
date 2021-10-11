@@ -76,5 +76,20 @@ namespace AutoRest.CSharp.Utilities
             var result = name.ToCleanName(camelCase);
             Assert.AreEqual(expected, result);
         }
+
+        [TestCase("List", "MetadataRoles", "GetMetadataRoles")]
+        [TestCase("ListAll", "MetadataPolicy", "GetMetadataPolicies")]
+        [TestCase("ListCollection", "Collections", "GetCollections")]
+        [TestCase("ListChildCollectionNames", "Collections", "GetChildCollectionNames")]
+        [TestCase("ListByGuids", "Entity", "GetEntitiesByGuids")]
+        [TestCase("ListEntitiesAssignedWithTerm", "Glossary", "GetEntitiesAssignedWithTerm")]
+        [TestCase("ListTermsByGlossaryName", "Glossary", "GetTermsByGlossaryName")]
+        [TestCase("ListMyListings", "Glossary", "GetMyListings")]
+        [TestCase("ListBlobContainerBlob", "StorageBlob", "GetBlobContainerBlobs")]
+        public void ValidateRenameListToGet(string methodName, string resourceName, string expected)
+        {
+            var result = methodName.RenameListToGet(resourceName);
+            Assert.AreEqual(expected, result);
+        }
     }
 }

@@ -41,22 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    var curName = operation.Language.Default.Name;
-                    if (curName.Equals("List") || curName.Equals("ListAll"))
-                    {
-                        operation.Language.Default.Name = "GetAll";
-                    }
-                    else if (curName.StartsWith("ListBy"))
-                    {
-                        operation.Language.Default.Name = curName.Replace("List", "GetAll");
-                    }
-                    else if (curName.StartsWith("List"))
-                    {
-                        var lastNoun = curName.SplitByCamelCase().LastOrDefault();
-                        if (lastNoun != null)
-                            curName = curName.Replace(lastNoun, lastNoun.ToPlural(inputIsKnownToBeSingular: false));
-                        operation.Language.Default.Name = curName.Replace("List", "Get");
-                    }
+                    operation.Language.Default.Name = operation.Language.Default.Name.RenameListToGet(operationGroup.Key);
                 }
             }
         }
