@@ -403,16 +403,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"var {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, credential, options, pipeline{subIdIfNeeded}, baseUri);");
         }
 
-        //protected void WriteExtensionContextScope(CodeWriterDelegate inner, bool async)
-        //{
-        //    _writer.Append($"return {GetAwait(async)} {ExtensionOperationVariableName}.UseClientContext({GetAsyncKeyword(async)} (baseUri, credential, options, pipeline) =>");
-        //    using (_writer.Scope())
-        //    {
-        //        inner(_writer);
-        //    }
-        //    _writer.Append($"){GetConfigureAwait(async)};");
-        //}
-
         protected static IDisposable WriteExtensionContextScope(CodeWriter writer, string extensionVariableName, bool async)
         {
             writer.Append($"return {GetAwait(async)} {extensionVariableName}.UseClientContext({GetAsyncKeyword(async)} (baseUri, credential, options, pipeline) =>");
