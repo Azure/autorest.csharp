@@ -54,21 +54,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return new ResourceType(requestPath);
         }
 
-        public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)
-        {
-            string? result = null;
-            if (_valueCache.TryGetValue(operationsGroup, out result))
-                return result;
-
-            if (!config.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out result))
-            {
-                result = ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
-            }
-
-            _valueCache.TryAdd(operationsGroup, result);
-            return result;
-        }
-
         public static string ResourceType(this Operation operation)
         {
             string? result = null;
@@ -115,7 +100,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             return resourceType.ToString().TrimEnd('/');
         }
-
 
         private static string ConstructResourceType(string httpRequestUri)
         {

@@ -12,14 +12,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     public class MgmtConfiguration
     {
         public MgmtConfiguration(
-            string[] operationGroupIsTuple,
-            string[] operationGroupIsExtension,
             string[] operationGroupsToOmit,
             string[] requestPathIsNonResource,
-            JsonElement? operationGroupToResourceType = default,
-            JsonElement? operationGroupToResource = default,
-            JsonElement? operationGroupToParent = default,
-            JsonElement? operationGroupToSingletonResource = default,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
             JsonElement? requestPathToResourceData = default,
@@ -30,10 +24,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? resourceModelRequiresType = default,
             JsonElement? resourceModelRequiresName = default)
         {
-            OperationGroupToResourceType = !IsValidJsonElement(operationGroupToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
-            OperationGroupToResource = !IsValidJsonElement(operationGroupToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
-            OperationGroupToParent = !IsValidJsonElement(operationGroupToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
-            OperationGroupToSingletonResource = !IsValidJsonElement(operationGroupToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToSingletonResource.ToString());
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
             RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
             RequestPathToResourceData = !IsValidJsonElement(requestPathToResourceData) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceData.ToString());
@@ -49,8 +39,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var mergeOperationsStrDict = !IsValidJsonElement(mergeOperations) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(mergeOperations.ToString());
                 MergeOperations = mergeOperationsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
             }
-            OperationGroupIsTuple = operationGroupIsTuple;
-            OperationGroupIsExtension = operationGroupIsExtension;
             OperationGroupsToOmit = operationGroupsToOmit;
             RequestPathIsNonResource = requestPathIsNonResource;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
@@ -66,18 +54,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// Will the resource model detection require name property? Defaults to true
         /// </summary>
         public bool DoesResourceModelRequireName { get; }
-        public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
-        public IReadOnlyDictionary<string, string> OperationGroupToResource { get; }
-        public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
-        public IReadOnlyDictionary<string, string> OperationGroupToSingletonResource { get; }
         public IReadOnlyDictionary<string, string> RequestPathToParent { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceName { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceData { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
-        public string[] OperationGroupIsTuple { get; }
-        public string[] OperationGroupIsExtension { get; }
         public string[] OperationGroupsToOmit { get; }
         public string[] RequestPathIsNonResource { get; }
 
@@ -86,34 +68,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
         {
             return new MgmtConfiguration(
-                autoRest.GetValue<string[]?>("operation-group-is-tuple").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<string[]?>("operation-group-is-extension").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<string[]?>("request-path-is-non-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-singleton-resource").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("request-path-to-resource-data").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("request-path-to-resource-type").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult());
+                operationGroupsToOmit: autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                requestPathIsNonResource: autoRest.GetValue<string[]?>("request-path-is-non-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
+                requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
+                requestPathToResourceData: autoRest.GetValue<JsonElement?>("request-path-to-resource-data").GetAwaiter().GetResult(),
+                requestPathToResourceType: autoRest.GetValue<JsonElement?>("request-path-to-resource-type").GetAwaiter().GetResult(),
+                requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
+                mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
+                armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
+                resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
+                resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
         {
-            WriteNonEmptySettings(writer, nameof(OperationGroupToResourceType), OperationGroupToResourceType);
-            WriteNonEmptySettings(writer, nameof(OperationGroupToResource), OperationGroupToResource);
-            WriteNonEmptySettings(writer, nameof(OperationGroupToParent), OperationGroupToParent);
             WriteNonEmptySettings(writer, nameof(MergeOperations), MergeOperations);
-            WriteNonEmptySettings(writer, nameof(OperationGroupToSingletonResource), OperationGroupToSingletonResource);
-            WriteNonEmptySettings(writer, nameof(OperationGroupIsTuple), OperationGroupIsTuple);
-            WriteNonEmptySettings(writer, nameof(OperationGroupIsExtension), OperationGroupIsExtension);
             WriteNonEmptySettings(writer, nameof(RequestPathIsNonResource), RequestPathIsNonResource);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
@@ -131,28 +101,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
         {
-            root.TryGetProperty(nameof(OperationGroupIsTuple), out var operationGroupIsTuple);
-            root.TryGetProperty(nameof(OperationGroupIsExtension), out var operationGroupIsExtension);
             root.TryGetProperty(nameof(OperationGroupsToOmit), out var operationGroupsToOmit);
             root.TryGetProperty(nameof(RequestPathIsNonResource), out var requestPathIsNonResource);
-            root.TryGetProperty(nameof(OperationGroupToResourceType), out var operationGroupToResourceType);
-            root.TryGetProperty(nameof(OperationGroupToResource), out var operationGroupToResource);
-            root.TryGetProperty(nameof(OperationGroupToParent), out var operationGroupToParent);
-            root.TryGetProperty(nameof(OperationGroupToSingletonResource), out var singletonResource);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
             root.TryGetProperty(nameof(RequestPathToResourceType), out var requestPathToResourceType);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
-
-            var operationGroupIsTupleList = operationGroupIsTuple.ValueKind == JsonValueKind.Array
-                ? operationGroupIsTuple.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
-
-            var operationGroupIsExtensionList = operationGroupIsExtension.ValueKind == JsonValueKind.Array
-                ? operationGroupIsExtension.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
 
             var operationGroupList = operationGroupsToOmit.ValueKind == JsonValueKind.Array
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
@@ -167,23 +123,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
 
             return new MgmtConfiguration(
-                operationGroupIsTupleList,
-                operationGroupIsExtensionList,
-                operationGroupList,
-                requestPathIsNonResourceList,
-                operationGroupToResourceType,
-                operationGroupToResource,
-                operationGroupToParent,
-                singletonResource,
-                requestPathToParent,
-                requestPathToResourceName,
-                requestPathToResourceData,
-                requestPathToResourceType,
-                requestPathToSingletonResource,
-                mergeOperations,
-                isArmCore,
-                resourceModelRequiresType,
-                resourceModelRequiresName);
+                operationGroupsToOmit: operationGroupList,
+                requestPathIsNonResource: requestPathIsNonResourceList,
+                requestPathToParent: requestPathToParent,
+                requestPathToResourceName: requestPathToResourceName,
+                requestPathToResourceData: requestPathToResourceData,
+                requestPathToResourceType: requestPathToResourceType,
+                requestPathToSingletonResource: requestPathToSingletonResource,
+                mergeOperations: mergeOperations,
+                armCore: isArmCore,
+                resourceModelRequiresType: resourceModelRequiresType,
+                resourceModelRequiresName: resourceModelRequiresName);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)
