@@ -15,11 +15,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceTypeBuilder
     {
-        public const string Subscriptions = "subscriptions";
-        public const string ResourceGroups = "resourceGroups";
-        public const string Tenant = "tenant";
-        public const string Locations = "locations";
-        public const string ManagementGroups = "providers/Microsoft.Management/managementGroups"; // TODO: Fix ResourceType() and make it "Microsoft.Management/managementGroups".
         public const string ResourceGroupResources = "resourceGroupsResources"; // Represent any resource under a resource group. The resource type for /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
 
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();

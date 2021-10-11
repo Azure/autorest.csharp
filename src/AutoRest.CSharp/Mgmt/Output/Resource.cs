@@ -17,8 +17,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class Resource : MgmtTypeProvider
     {
-        //public bool IsScopeOrExtension { get; } // will be back soon
-
         public IEnumerable<OperationSet> OperationSets { get; }
 
         private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperations;
@@ -32,7 +30,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             _allOperations = allOperations;
             OperationSets = allOperations.Keys;
             ResourceName = resourceName;
-            //DefaultName = resourceName + SuffixValue;
 
             if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
@@ -44,7 +41,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             DeleteOperation = GetOperationWithVerb(HttpMethod.Delete);
             UpdateOperation = GetOperationWithVerb(HttpMethod.Patch);
             PostOperation = GetOperationWithVerb(HttpMethod.Post);
+
+            ImplicitScopeResourceTypes = OperationSets.First().GetRequestPath(_context).GetImplicitScopeResourceTypes(_context);
         }
+
+        public bool IsScopeResource => ImplicitScopeResourceTypes != null;
+
+        public ResourceType[]? ImplicitScopeResourceTypes { get; }
 
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method)
         {

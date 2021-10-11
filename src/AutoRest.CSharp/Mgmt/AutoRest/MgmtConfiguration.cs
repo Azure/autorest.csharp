@@ -18,6 +18,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? requestPathToResourceName = default,
             JsonElement? requestPathToResourceData = default,
             JsonElement? requestPathToResourceType = default,
+            JsonElement? requestPathToScopeResourceTypes = default,
             JsonElement? requestPathToSingletonResource = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
@@ -28,6 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
             RequestPathToResourceData = !IsValidJsonElement(requestPathToResourceData) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceData.ToString());
             RequestPathToResourceType = !IsValidJsonElement(requestPathToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceType.ToString());
+            RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
             RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
             // TODO: A unified way to load from both readme and configuration.json
             try
@@ -59,6 +61,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> RequestPathToResourceData { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
+        public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
         public string[] OperationGroupsToOmit { get; }
         public string[] RequestPathIsNonResource { get; }
@@ -74,6 +77,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
                 requestPathToResourceData: autoRest.GetValue<JsonElement?>("request-path-to-resource-data").GetAwaiter().GetResult(),
                 requestPathToResourceType: autoRest.GetValue<JsonElement?>("request-path-to-resource-type").GetAwaiter().GetResult(),
+                requestPathToScopeResourceTypes: autoRest.GetValue<JsonElement?>("request-path-to-scope-resource-types").GetAwaiter().GetResult(),
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
@@ -90,6 +94,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceName), RequestPathToResourceName);
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceData), RequestPathToResourceData);
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
+            WriteNonEmptySettings(writer, nameof(RequestPathToScopeResourceTypes), RequestPathToScopeResourceTypes);
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
@@ -107,6 +112,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
             root.TryGetProperty(nameof(RequestPathToResourceType), out var requestPathToResourceType);
+            root.TryGetProperty(nameof(RequestPathToScopeResourceTypes), out var requestPathToScopeResourceTypes);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
 
@@ -129,6 +135,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToResourceName: requestPathToResourceName,
                 requestPathToResourceData: requestPathToResourceData,
                 requestPathToResourceType: requestPathToResourceType,
+                requestPathToScopeResourceTypes: requestPathToScopeResourceTypes,
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,

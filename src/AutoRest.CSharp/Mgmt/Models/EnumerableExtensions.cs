@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     public static class EnumerableExtensions
     {
-        public static IEnumerable<T> SingleItemAsIEnumerate<T>(this T item)
+        public static IEnumerable<T> SingleItemAsIEnumerable<T>(this T item)
         {
             yield return item;
         }

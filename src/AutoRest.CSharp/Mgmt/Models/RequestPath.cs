@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
             }
             // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
-            return new Segment(pathSegment.Value).SingleItemAsIEnumerate();
+            return new Segment(pathSegment.Value).SingleItemAsIEnumerable();
         }
 
         public bool Equals(RequestPath other)

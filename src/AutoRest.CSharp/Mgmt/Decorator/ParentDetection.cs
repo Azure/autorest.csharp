@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parentList;
         }
 
+        // TODO -- support implicit resource here
         private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
             var result = new List<MgmtTypeProvider>();
@@ -100,6 +101,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
+        // TODO -- support implicit scope here
         private static RequestPath GetParentRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
             // escape the calculation if this is configured in the configuration

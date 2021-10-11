@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return stack;
         }
 
+        // TODO -- support implicit scope in this function
         private static void BuildContextualParameterMappingHierarchy(RequestPath current, BuildContext<MgmtOutputLibrary> context, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
         {
             // TODO -- we are still missing the "scope" parameters
