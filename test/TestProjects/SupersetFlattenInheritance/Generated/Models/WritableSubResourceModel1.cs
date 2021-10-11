@@ -5,12 +5,10 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Resources.Models;
-
 namespace SupersetFlattenInheritance.Models
 {
     /// <summary> WritableSubResource WITHOUT flatten properties. </summary>
-    public partial class WritableSubResourceModel1 : WritableSubResource
+    public partial class WritableSubResourceModel1
     {
         /// <summary> Initializes a new instance of WritableSubResourceModel1. </summary>
         public WritableSubResourceModel1()
@@ -18,13 +16,16 @@ namespace SupersetFlattenInheritance.Models
         }
 
         /// <summary> Initializes a new instance of WritableSubResourceModel1. </summary>
-        /// <param name="id"> The id. </param>
+        /// <param name="id"></param>
         /// <param name="foo"></param>
-        internal WritableSubResourceModel1(string id, string foo) : base(id)
+        internal WritableSubResourceModel1(string id, string foo)
         {
+            Id = id;
             Foo = foo;
         }
 
+        /// <summary> Gets or sets the id. </summary>
+        public string Id { get; set; }
         /// <summary> Gets or sets the foo. </summary>
         public string Foo { get; set; }
     }

@@ -16,14 +16,18 @@ namespace OmitOperationGroups.Models
         }
 
         /// <summary> Initializes a new instance of Model4. </summary>
+        /// <param name="id"></param>
         /// <param name="j"></param>
         /// <param name="modelz"></param>
-        internal Model4(string j, ModelZ modelz)
+        internal Model4(string id, string j, ModelZ modelz)
         {
+            Id = id;
             J = j;
             Modelz = modelz;
         }
 
+        /// <summary> Gets the id. </summary>
+        public string Id { get; }
         /// <summary> Gets the j. </summary>
         public string J { get; }
         /// <summary> Gets the modelz. </summary>

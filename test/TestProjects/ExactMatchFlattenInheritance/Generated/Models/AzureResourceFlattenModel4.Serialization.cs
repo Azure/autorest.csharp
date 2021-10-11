@@ -25,7 +25,7 @@ namespace ExactMatchFlattenInheritance.Models
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
-                writer.WriteNumberValue(Id.Value);
+                writer.WriteStringValue(Id);
             }
             if (Optional.IsDefined(Name))
             {
@@ -44,7 +44,7 @@ namespace ExactMatchFlattenInheritance.Models
         internal static AzureResourceFlattenModel4 DeserializeAzureResourceFlattenModel4(JsonElement element)
         {
             Optional<int> foo = default;
-            Optional<int> id = default;
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
@@ -70,12 +70,7 @@ namespace ExactMatchFlattenInheritance.Models
                     {
                         if (property0.NameEquals("id"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            id = property0.Value.GetInt32();
+                            id = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("name"))
@@ -92,7 +87,7 @@ namespace ExactMatchFlattenInheritance.Models
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel4(Optional.ToNullable(foo), Optional.ToNullable(id), name.Value, type.Value);
+            return new AzureResourceFlattenModel4(Optional.ToNullable(foo), id.Value, name.Value, type.Value);
         }
     }
 }

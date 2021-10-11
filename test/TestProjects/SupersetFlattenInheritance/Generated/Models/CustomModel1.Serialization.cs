@@ -15,6 +15,11 @@ namespace SupersetFlattenInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo");
@@ -25,16 +30,22 @@ namespace SupersetFlattenInheritance.Models
 
         internal static CustomModel1 DeserializeCustomModel1(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("foo"))
                 {
                     foo = property.Value.GetString();
                     continue;
                 }
             }
-            return new CustomModel1(foo.Value);
+            return new CustomModel1(id.Value, foo.Value);
         }
     }
 }

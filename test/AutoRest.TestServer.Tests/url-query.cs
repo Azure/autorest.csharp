@@ -121,7 +121,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiNullAsync( null));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/1161")]
         public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiEmptyAsync( new string[] { }));
 
         [Test]

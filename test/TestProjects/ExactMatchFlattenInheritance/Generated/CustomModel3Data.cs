@@ -18,7 +18,7 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of CustomModel3Data. </summary>
-        /// <param name="id"> The id. </param>
+        /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="type"></param>
         /// <param name="foo"></param>

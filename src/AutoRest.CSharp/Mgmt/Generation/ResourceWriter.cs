@@ -132,8 +132,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
             // inherits the default constructor when it is not a resource
-            var baseConstructorCall = _resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource){baseConstructorCall}"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource) : base(options, resource.Id)"))
             {
                 _writer.Line($"HasData = true;");
                 _writer.Line($"_data = resource;");
@@ -386,7 +385,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 _writer.WriteParameterNullChecks(nonPathParameters);
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField, _writer =>
+                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
                 {
                     var response = new CodeWriterDeclaration("response");
                     response.SetActualName(response.RequestedName);
@@ -491,7 +490,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                             throw new Exception($"When trying to merge methods, multiple methods can be mapped to the same scope. The methods not handled: {String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}.");
                         }
                     }
-                });
+                }
                 _writer.Line();
             }
         }
@@ -570,7 +569,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.AddTag", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField, _writer =>
+                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
                 {
                     _writer.Append($"var originalTags = ");
                     if (async)
@@ -580,7 +579,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                     _writer.Line($"originalTags.Value.Data.Properties.TagsValue[key] = value;");
                     WriteTaggableCommonMethod(async);
-                });
+                }
                 _writer.Line();
             }
         }
@@ -611,7 +610,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.Line();
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.SetTags", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField, _writer =>
+                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
                 {
                     if (async)
                     {
@@ -626,7 +625,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                     _writer.Line($"originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);");
                     WriteTaggableCommonMethod(async);
-                });
+                }
                 _writer.Line();
             }
         }
@@ -656,8 +655,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 }
                 _writer.Line();
 
-                Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.RemoveTag", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField, _writer =>
+                Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.RemoveTag");
+                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
                 {
                     _writer.Append($"var originalTags = ");
                     if (async)
@@ -667,7 +666,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                     _writer.Line($"originalTags.Value.Data.Properties.TagsValue.Remove(key);");
                     WriteTaggableCommonMethod(async);
-                });
+                }
                 _writer.Line();
             }
         }

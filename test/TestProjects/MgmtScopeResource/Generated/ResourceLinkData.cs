@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Resources.Models;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
     /// <summary> A class representing the ResourceLink data model. </summary>
-    public partial class ResourceLinkData : SubResource
+    public partial class ResourceLinkData
     {
         /// <summary> Initializes a new instance of ResourceLinkData. </summary>
         public ResourceLinkData()
@@ -19,17 +18,20 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Initializes a new instance of ResourceLinkData. </summary>
-        /// <param name="id"> The id. </param>
+        /// <param name="id"> The fully qualified ID of the resource link. </param>
         /// <param name="name"> The name of the resource link. </param>
         /// <param name="type"> The resource link object. </param>
         /// <param name="properties"> Properties for resource link. </param>
-        internal ResourceLinkData(string id, string name, object type, ResourceLinkProperties properties) : base(id)
+        internal ResourceLinkData(string id, string name, object type, ResourceLinkProperties properties)
         {
+            Id = id;
             Name = name;
             Type = type;
             Properties = properties;
         }
 
+        /// <summary> The fully qualified ID of the resource link. </summary>
+        public string Id { get; }
         /// <summary> The name of the resource link. </summary>
         public string Name { get; }
         /// <summary> The resource link object. </summary>

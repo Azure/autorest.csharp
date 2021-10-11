@@ -17,13 +17,15 @@ namespace url_multi_collectionFormat_LowLevel
     /// <summary> The Queries service client. </summary>
     public partial class QueriesClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly QueriesRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
         protected QueriesClient()
@@ -34,6 +36,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public QueriesClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlMutliCollectionFormatTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -43,11 +46,11 @@ namespace url_multi_collectionFormat_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestUrlMutliCollectionFormatTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new QueriesRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
@@ -70,7 +73,8 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringMultiNullAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -99,7 +103,8 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringMultiNull(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -128,7 +133,8 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringMultiEmptyAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -157,7 +163,8 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringMultiEmpty(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -186,7 +193,8 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayStringMultiValidAsync(arrayQuery, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -215,12 +223,90 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayStringMultiValid(arrayQuery, options);
+                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/multi/string/null", false);
+            if (arrayQuery != null)
+            {
+                foreach (var param in arrayQuery)
+                {
+                    uri.AppendQuery("arrayQuery", param, true);
+                }
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/multi/string/empty", false);
+            if (arrayQuery != null)
+            {
+                foreach (var param in arrayQuery)
+                {
+                    uri.AppendQuery("arrayQuery", param, true);
+                }
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/multi/string/valid", false);
+            if (arrayQuery != null)
+            {
+                foreach (var param in arrayQuery)
+                {
+                    uri.AppendQuery("arrayQuery", param, true);
+                }
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
             }
         }
     }

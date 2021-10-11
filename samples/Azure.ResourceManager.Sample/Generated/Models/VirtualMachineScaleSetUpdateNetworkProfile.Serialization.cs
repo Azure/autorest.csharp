@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(HealthProbe))
             {
                 writer.WritePropertyName("healthProbe");
-                writer.WriteObjectValue(HealthProbe);
+                JsonSerializer.Serialize(writer, HealthProbe);
             }
             if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
             {

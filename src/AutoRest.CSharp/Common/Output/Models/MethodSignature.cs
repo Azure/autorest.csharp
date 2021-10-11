@@ -7,7 +7,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class MethodSignature
+    internal record MethodSignature
     {
         public MethodSignature(string name, string? description, string modifiers, Parameter[] parameters, MethodSignature? baseMethod = default)
             : this(name, description, modifiers, null, null, parameters, baseMethod)

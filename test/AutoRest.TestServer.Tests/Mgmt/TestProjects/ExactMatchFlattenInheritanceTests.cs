@@ -19,11 +19,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel1Data))]
+<<<<<<< HEAD
         [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel2))]
         [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel3))]
         [TestCase(typeof(object), typeof(AzureResourceFlattenModel4))]
         [TestCase(typeof(Resource), typeof(AzureResourceFlattenModel5))]
         [TestCase(typeof(WritableSubResource), typeof(AzureResourceFlattenModel7))]
+=======
+        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel2Data))]
+        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel3Data))]
+        [TestCase(typeof(object), typeof(AzureResourceFlattenModel4Data))]
+        [TestCase(typeof(Resource), typeof(AzureResourceFlattenModel5Data))]
+>>>>>>> origin/feature/request-path
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);

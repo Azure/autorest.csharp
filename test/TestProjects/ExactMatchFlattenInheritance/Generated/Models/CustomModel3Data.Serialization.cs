@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -21,6 +20,11 @@ namespace ExactMatchFlattenInheritance
                 writer.WritePropertyName("foo");
                 writer.WriteStringValue(Foo);
             }
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
@@ -31,22 +35,25 @@ namespace ExactMatchFlattenInheritance
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 
         internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element)
         {
             Optional<string> foo = default;
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))
                 {
                     foo = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -59,13 +66,8 @@ namespace ExactMatchFlattenInheritance
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new CustomModel3Data(id, name.Value, type.Value, foo.Value);
+            return new CustomModel3Data(id.Value, name.Value, type.Value, foo.Value);
         }
     }
 }

@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a virtual machine scale set network profile&apos;s network configurations. </summary>
-    public partial class VirtualMachineScaleSetUpdateNetworkConfiguration : WritableSubResource
+    public partial class VirtualMachineScaleSetUpdateNetworkConfiguration : SubResource
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkConfiguration. </summary>
         public VirtualMachineScaleSetUpdateNetworkConfiguration()
@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkConfiguration. </summary>
-        /// <param name="id"> The id. </param>
+        /// <param name="id"> Resource Id. </param>
         /// <param name="name"> The network configuration name. </param>
         /// <param name="primary"> Whether this is a primary NIC on a virtual machine. </param>
         /// <param name="enableAcceleratedNetworking"> Specifies whether the network interface is accelerated networking-enabled. </param>
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="dnsSettings"> The dns settings to be applied on the network interfaces. </param>
         /// <param name="ipConfigurations"> The virtual machine scale set IP Configuration. </param>
         /// <param name="enableIPForwarding"> Whether IP forwarding enabled on this NIC. </param>
-        internal VirtualMachineScaleSetUpdateNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, SubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations, bool? enableIPForwarding) : base(id)
+        internal VirtualMachineScaleSetUpdateNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations, bool? enableIPForwarding) : base(id)
         {
             Name = name;
             Primary = primary;
@@ -47,7 +47,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies whether the network interface is accelerated networking-enabled. </summary>
         public bool? EnableAcceleratedNetworking { get; set; }
         /// <summary> The network security group. </summary>
-        public SubResource NetworkSecurityGroup { get; set; }
+        public WritableSubResource NetworkSecurityGroup { get; set; }
         /// <summary> The dns settings to be applied on the network interfaces. </summary>
         public VirtualMachineScaleSetNetworkConfigurationDnsSettings DnsSettings { get; set; }
         /// <summary> The virtual machine scale set IP Configuration. </summary>

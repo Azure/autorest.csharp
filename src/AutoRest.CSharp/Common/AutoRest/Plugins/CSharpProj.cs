@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-beta.3"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-beta.4"" />
   </ItemGroup>
 ";
 
@@ -54,10 +54,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>
 ";
 
-      private string _llcProjectContent = @"
-<ItemGroup>
-    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.15"" />
-</ItemGroup>
+        private string _llcProjectContent = @"
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.16"" />
+  </ItemGroup>
 ";
 
         internal static string GetVersion()
