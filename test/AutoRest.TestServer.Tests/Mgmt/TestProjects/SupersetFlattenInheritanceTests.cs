@@ -17,17 +17,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-<<<<<<< HEAD:test/AutoRest.TestServer.Tests/Mgmt/TestProjects/SupersetFlattenInheritanceTests.cs
         [TestCase(typeof(object), typeof(CustomModel1))]
         [TestCase(typeof(object), typeof(CustomModel2))]
-        [TestCase(typeof(SubResource), typeof(SubResourceModel1))]
-        [TestCase(typeof(SubResource), typeof(SubResourceModel2))]
-        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel1))]
-        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel2))]
-=======
-        [TestCase(typeof(object), typeof(CustomModel1Data))]
-        [TestCase(typeof(object), typeof(CustomModel2Data))]
->>>>>>> origin/feature/request-path:test/AutoRest.TestServer.Tests/Mgmt/TestProjects/SupersetFlattenInheritance.cs
         [TestCase(typeof(Resource), typeof(ResourceModel1Data))]
         [TestCase(typeof(Resource), typeof(ResourceModel2))]
         [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel1Data))]
