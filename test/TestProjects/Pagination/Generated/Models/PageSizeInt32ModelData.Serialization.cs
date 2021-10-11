@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 
 namespace Pagination
 {
@@ -21,11 +20,16 @@ namespace Pagination
 
         internal static PageSizeInt32ModelData DeserializePageSizeInt32ModelData(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
@@ -36,13 +40,8 @@ namespace Pagination
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new PageSizeInt32ModelData(id, name.Value, type.Value);
+            return new PageSizeInt32ModelData(id.Value, name.Value, type.Value);
         }
     }
 }

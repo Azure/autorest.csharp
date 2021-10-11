@@ -5,18 +5,18 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Resources.Models;
-
 namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> SubResource type has the following read-only properties. </summary>
-    internal partial class SubResourceModel : SubResource
+    internal partial class SubResourceModel
     {
         /// <summary> Initializes a new instance of SubResourceModel. </summary>
         internal SubResourceModel()
         {
         }
 
+        /// <summary> Gets the id. </summary>
+        public string Id { get; }
         /// <summary> Gets the name. </summary>
         public string Name { get; }
         /// <summary> Gets the type. </summary>

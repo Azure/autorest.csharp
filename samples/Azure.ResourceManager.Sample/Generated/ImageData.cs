@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="storageProfile"> Specifies the storage settings for the virtual machine disks. </param>
         /// <param name="provisioningState"> The provisioning state. </param>
         /// <param name="hyperVGeneration"> Gets the HyperVGenerationType of the VirtualMachine created from the image. </param>
-        internal ImageData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, Models.SubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration) : base(id, name, type, tags, location)
+        internal ImageData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration) : base(id, name, type, tags, location)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> The source virtual machine from which Image is created. </summary>
-        public Models.SubResource SourceVirtualMachine { get; set; }
+        public WritableSubResource SourceVirtualMachine { get; set; }
         /// <summary> Specifies the storage settings for the virtual machine disks. </summary>
         public ImageStorageProfile StorageProfile { get; set; }
         /// <summary> The provisioning state. </summary>

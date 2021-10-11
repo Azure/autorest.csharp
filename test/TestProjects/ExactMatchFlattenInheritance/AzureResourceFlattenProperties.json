@@ -625,7 +625,7 @@
             "description": "WritableSubResource type has the following read-write properties.",
             "properties": {
                 "id": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"

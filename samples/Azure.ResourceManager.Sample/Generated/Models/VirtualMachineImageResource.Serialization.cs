@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -32,8 +31,11 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             writer.WriteEndObject();
         }
 
@@ -42,7 +44,7 @@ namespace Azure.ResourceManager.Sample.Models
             string name = default;
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
-            ResourceIdentifier id = default;
+            Optional<string> id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -76,7 +78,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineImageResource(id, name, location, Optional.ToDictionary(tags));
+            return new VirtualMachineImageResource(id.Value, name, location, Optional.ToDictionary(tags));
         }
     }
 }

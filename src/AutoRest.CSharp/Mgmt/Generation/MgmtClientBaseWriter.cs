@@ -173,7 +173,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         #region PagingMethod
-
         protected virtual void WritePagingMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
@@ -246,10 +245,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"{GetAsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+                using (WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField))
                 {
                     WritePageFunctionBody(writer, itemType, pagingMethod, operation, parameterMappings, async, false);
-                });
+                }
             }
 
             var nextPageFunctionName = "null";
@@ -259,10 +258,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (writer.Scope($"{GetAsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
-                    WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+                    using (WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField))
                     {
                         WritePageFunctionBody(writer, itemType, pagingMethod, operation, parameterMappings, async, true);
-                    });
+                    }
                 }
             }
             writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
@@ -300,7 +299,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
-
         #endregion
 
         #region NormalMethod
@@ -349,8 +347,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteParameterNullChecks(methodParameters);
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField,
-                    writer => WriteNormalMethodBody(writer, operationMappings, parameterMappings, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull));
+                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                {
+                    WriteNormalMethodBody(_writer, operationMappings, parameterMappings, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull);
+                }
                 _writer.Line();
             }
         }
@@ -388,8 +388,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteParameterNullChecks(methodParameters);
                 var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField,
-                    writer => WriteNormalListMethodBody(writer, itemType, operationMappings, parameterMappings, async));
+                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                {
+                    WriteNormalListMethodBody(_writer, itemType, operationMappings, parameterMappings, async);
+                }
                 _writer.Line();
             }
         }
@@ -480,11 +482,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"return response;");
             }
         }
-
         #endregion
 
         #region LROMethod
-
         protected virtual void WriteLROMethod(MgmtClientOperation clientOperation, string methodName, bool async)
         {
             _writer.Line();
@@ -527,8 +527,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteParameterNullChecks(methodParameters);
 
                 Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField,
-                    writer => WriteLROMethodBody(writer, lroObjectType, operationMappings, parameterMappings, async));
+                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
+                {
+                    WriteLROMethodBody(_writer, lroObjectType, operationMappings, parameterMappings, async);
+                }
                 _writer.Line();
             }
         }

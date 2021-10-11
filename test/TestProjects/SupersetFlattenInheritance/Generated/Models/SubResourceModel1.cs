@@ -5,12 +5,10 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Resources.Models;
-
 namespace SupersetFlattenInheritance.Models
 {
     /// <summary> SubResource WITHOUT flatten properties. </summary>
-    public partial class SubResourceModel1 : SubResource
+    public partial class SubResourceModel1
     {
         /// <summary> Initializes a new instance of SubResourceModel1. </summary>
         public SubResourceModel1()
@@ -18,13 +16,16 @@ namespace SupersetFlattenInheritance.Models
         }
 
         /// <summary> Initializes a new instance of SubResourceModel1. </summary>
-        /// <param name="id"> The id. </param>
+        /// <param name="id"></param>
         /// <param name="foo"></param>
-        internal SubResourceModel1(string id, string foo) : base(id)
+        internal SubResourceModel1(string id, string foo)
         {
+            Id = id;
             Foo = foo;
         }
 
+        /// <summary> Gets the id. </summary>
+        public string Id { get; }
         /// <summary> Gets or sets the foo. </summary>
         public string Foo { get; set; }
     }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListMethods.Models
 {
@@ -20,6 +21,6 @@ namespace MgmtListMethods.Models
         /// <summary> The friendly name of the management group. </summary>
         public string DisplayName { get; }
         /// <summary> The ID of the parent management group. </summary>
-        public DescendantParentGroupInfo Parent { get; }
+        public SubResource Parent { get; }
     }
 }

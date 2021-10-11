@@ -16,13 +16,15 @@ namespace httpInfrastructure_LowLevel
     /// <summary> The HttpClientFailure service client. </summary>
     public partial class HttpClientFailureClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpClientFailureRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of HttpClientFailureClient for mocking. </summary>
         protected HttpClientFailureClient()
@@ -33,6 +35,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpClientFailureClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -42,11 +45,11 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new HttpClientFailureRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
@@ -68,7 +71,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head400Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead400Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -96,7 +100,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head400(options);
+                using HttpMessage message = CreateHead400Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -124,7 +129,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get400Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet400Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -152,7 +158,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get400(options);
+                using HttpMessage message = CreateGet400Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -180,7 +187,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Options400Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateOptions400Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -208,7 +216,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Options400(options);
+                using HttpMessage message = CreateOptions400Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -237,7 +246,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put400Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut400Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -266,7 +276,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put400(content, options);
+                using HttpMessage message = CreatePut400Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -295,7 +306,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Patch400Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch400Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -324,7 +336,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Patch400(content, options);
+                using HttpMessage message = CreatePatch400Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -353,7 +366,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post400Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost400Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -382,7 +396,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post400(content, options);
+                using HttpMessage message = CreatePost400Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -411,7 +426,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Delete400Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete400Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -440,7 +456,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Delete400(content, options);
+                using HttpMessage message = CreateDelete400Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -468,7 +485,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head401Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead401Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -496,7 +514,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head401(options);
+                using HttpMessage message = CreateHead401Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -524,7 +543,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get402Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet402Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -552,7 +572,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get402(options);
+                using HttpMessage message = CreateGet402Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -580,7 +601,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Options403Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateOptions403Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -608,7 +630,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Options403(options);
+                using HttpMessage message = CreateOptions403Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -636,7 +659,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get403Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet403Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -664,7 +688,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get403(options);
+                using HttpMessage message = CreateGet403Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -693,7 +718,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put404Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut404Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -722,7 +748,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put404(content, options);
+                using HttpMessage message = CreatePut404Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -751,7 +778,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Patch405Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch405Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -780,7 +808,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Patch405(content, options);
+                using HttpMessage message = CreatePatch405Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -809,7 +838,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post406Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost406Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -838,7 +868,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post406(content, options);
+                using HttpMessage message = CreatePost406Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -867,7 +898,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Delete407Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete407Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -896,7 +928,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Delete407(content, options);
+                using HttpMessage message = CreateDelete407Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -925,7 +958,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put409Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut409Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -954,7 +988,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put409(content, options);
+                using HttpMessage message = CreatePut409Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -982,7 +1017,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head410Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead410Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1010,7 +1046,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head410(options);
+                using HttpMessage message = CreateHead410Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1038,7 +1075,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get411Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet411Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1066,7 +1104,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get411(options);
+                using HttpMessage message = CreateGet411Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1094,7 +1133,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Options412Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateOptions412Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1122,7 +1162,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Options412(options);
+                using HttpMessage message = CreateOptions412Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1150,7 +1191,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get412Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet412Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1178,7 +1220,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get412(options);
+                using HttpMessage message = CreateGet412Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1207,7 +1250,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Put413Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut413Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1236,7 +1280,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Put413(content, options);
+                using HttpMessage message = CreatePut413Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1265,7 +1310,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Patch414Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch414Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1294,7 +1340,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Patch414(content, options);
+                using HttpMessage message = CreatePatch414Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1323,7 +1370,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Post415Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost415Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1352,7 +1400,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Post415(content, options);
+                using HttpMessage message = CreatePost415Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1380,7 +1429,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Get416Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet416Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1408,7 +1458,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Get416(options);
+                using HttpMessage message = CreateGet416Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1437,7 +1488,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Delete417Async(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete417Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1466,7 +1518,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Delete417(content, options);
+                using HttpMessage message = CreateDelete417Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1494,7 +1547,8 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Head429Async(options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead429Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1522,12 +1576,416 @@ namespace httpInfrastructure_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Head429(options);
+                using HttpMessage message = CreateHead429Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateHead400Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/400", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet400Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/400", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateOptions400Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Options;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/400", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut400Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/400", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePatch400Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/400", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost400Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/400", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDelete400Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/400", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead401Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/401", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet402Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/402", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateOptions403Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Options;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/403", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet403Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/403", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut404Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/404", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePatch405Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/405", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost406Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/406", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDelete407Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/407", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut409Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/409", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead410Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/410", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet411Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/411", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateOptions412Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Options;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/412", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet412Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/412", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePut413Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/413", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePatch414Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/414", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreatePost415Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/415", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGet416Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/416", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDelete417Request(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/417", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateHead429Request()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/client/429", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier : Azure.Core.ResponseClassifier
+        {
+            private static Azure.Core.ResponseClassifier _instance;
+            public static Azure.Core.ResponseClassifier Instance => _instance ??= new ResponseClassifier();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    _ => true
+                };
             }
         }
     }

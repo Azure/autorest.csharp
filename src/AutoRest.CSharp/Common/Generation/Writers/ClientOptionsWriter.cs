@@ -2,11 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 
@@ -14,34 +10,22 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ClientOptionsWriter
     {
-        public static void WriteClientOptions(CodeWriter writer, BuildContext context)
+        public static void WriteClientOptions(CodeWriter writer, ClientOptionsTypeProvider clientOptions)
         {
-            var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
-            var @namespace = context.DefaultNamespace;
-            var apiVersions = context.CodeModel.OperationGroups
-                .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))
-                .Select(v => v.Version)
-                .Distinct()
-                .OrderBy(v => v)
-                .Select(v => (Version: v, Name: ToVersionProperty(v)))
-                .ToArray();
-
-            using (writer.Namespace(@namespace))
+            using (writer.Namespace(clientOptions.Type.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"Client options for {clientOptionsName}Client.");
-                using (writer.Scope($"public partial class {clientOptionsName}ClientOptions: {typeof(ClientOptions)}"))
+                writer.WriteXmlDocumentationSummary($"Client options for {clientOptions.DefaultClientName}Client.");
+                using (writer.Scope($"{clientOptions.Declaration.Accessibility} partial class {clientOptions.Type.Name}: {typeof(ClientOptions)}"))
                 {
-                    writer.Line($"private const ServiceVersion LatestVersion = ServiceVersion.{apiVersions.Last().Name};");
+                    writer.Line($"private const ServiceVersion LatestVersion = ServiceVersion.{clientOptions.ApiVersions.Last().Name};");
                     writer.Line();
                     writer.WriteXmlDocumentationSummary($"The version of the service to use.");
                     using (writer.Scope($"public enum ServiceVersion"))
                     {
-                        int i = 1;
-                        foreach (var apiVersion in apiVersions)
+                        foreach (var apiVersion in clientOptions.ApiVersions)
                         {
-                            writer.WriteXmlDocumentationSummary($"Service version \"{apiVersion.Version}\"");
-                            writer.Line($"{apiVersion.Name} = {i:L},");
-                            i++;
+                            writer.WriteXmlDocumentationSummary($"{apiVersion.Description}");
+                            writer.Line($"{apiVersion.Name} = {apiVersion.Value:L},");
                         }
                     }
 
@@ -49,15 +33,15 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"internal string Version {{ get; }}");
                     writer.Line();
 
-                    writer.WriteXmlDocumentationSummary($"Initializes new instance of {clientOptionsName}ClientOptions.");
-                    using (writer.Scope($"public {clientOptionsName}ClientOptions(ServiceVersion version = LatestVersion)"))
+                    writer.WriteXmlDocumentationSummary($"Initializes new instance of {clientOptions.Type.Name}.");
+                    using (writer.Scope($"public {clientOptions.Type.Name}(ServiceVersion version = LatestVersion)"))
                     {
                         writer.Append($"Version = version ");
                         using (writer.Scope($"switch", end: "};"))
                         {
-                            foreach (var apiVersion in apiVersions)
+                            foreach (var apiVersion in clientOptions.ApiVersions)
                             {
-                                writer.Line($"ServiceVersion.{apiVersion.Name} => {apiVersion.Version:L},");
+                                writer.Line($"ServiceVersion.{apiVersion.Name} => {apiVersion.StringValue:L},");
                             }
 
                             writer.Line($"_ => throw new {typeof(NotSupportedException)}()");
@@ -65,11 +49,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
             }
-        }
-
-        private static string ToVersionProperty(string s)
-        {
-            return "V" + s.Replace(".", "_").Replace('-', '_');
         }
     }
 }

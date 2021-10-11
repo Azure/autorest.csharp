@@ -16,13 +16,15 @@ namespace Accessibility_LowLevel_TokenAuth
     /// <summary> The Accessibility service client. </summary>
     public partial class AccessibilityClient
     {
+        private static readonly string[] AuthorizationScopes = { "https://test.azure.com/.default" };
+        private readonly TokenCredential _tokenCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AccessibilityRestClient _restClient;
-        private readonly string[] AuthorizationScopes = { "https://test.azure.com/.default" };
-        private readonly TokenCredential _tokenCredential;
 
         /// <summary> Initializes a new instance of AccessibilityClient for mocking. </summary>
         protected AccessibilityClient()
@@ -33,6 +35,7 @@ namespace Accessibility_LowLevel_TokenAuth
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public AccessibilityClient(TokenCredential credential, Uri endpoint = null, AccessibilityClientOptions options = null)
         {
             if (credential == null)
@@ -42,11 +45,11 @@ namespace Accessibility_LowLevel_TokenAuth
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AccessibilityClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
-            var authPolicy = new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new AccessibilityRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -59,7 +62,8 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                return await _restClient.OperationAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateOperationRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -78,7 +82,8 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                return _restClient.Operation(content, options);
+                using HttpMessage message = CreateOperationRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -97,7 +102,8 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                return await _restClient.OperationInternalAsync(content, options).ConfigureAwait(false);
+                using HttpMessage message = CreateOperationInternalRequest(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -116,12 +122,57 @@ namespace Accessibility_LowLevel_TokenAuth
             scope.Start();
             try
             {
-                return _restClient.OperationInternal(content, options);
+                using HttpMessage message = CreateOperationInternalRequest(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateOperationRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/Operation/", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateOperationInternalRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationInternal/", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
             }
         }
     }

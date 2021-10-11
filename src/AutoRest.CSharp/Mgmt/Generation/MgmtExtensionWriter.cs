@@ -201,8 +201,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
                     WriteClientDiagnosticsAssignment(_writer, "options");
 
-                    WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable,
-                        writer => WriteLROMethodBody(writer, lroObjectType, operationMappings, parameterMappings, async));
+                    using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable))
+                    {
+                        WriteLROMethodBody(writer, lroObjectType, operationMappings, parameterMappings, async);
+                    }
                     _writer.Line();
                 }, async);
             }
@@ -318,10 +320,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"{GetAsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsVariable, writer =>
+                using (WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsVariable))
                 {
                     WritePageFunctionBody(writer, itemType, pagingMethod, operation, parameterMappings, async, false);
-                });
+                }
             }
 
             var nextPageFunctionName = "null";
@@ -331,10 +333,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (writer.Scope($"{GetAsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
-                    WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsVariable, writer =>
+                    using (WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsVariable))
                     {
                         WritePageFunctionBody(writer, itemType, pagingMethod, operation, parameterMappings, async, true);
-                    });
+                    }
                 }
             }
             writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
@@ -415,8 +417,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                     WriteClientDiagnosticsAssignment(_writer, "options");
 
-                    WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable,
-                        writer => WriteNormalListMethodBody(writer, itemType, operationMappings, parameterMappings, async));
+                    using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable))
+                    {
+                        WriteNormalListMethodBody(writer, itemType, operationMappings, parameterMappings, async);
+                    }
                     _writer.Line();
                 }, async);
             }
@@ -468,8 +472,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                     WriteClientDiagnosticsAssignment(_writer, "options");
 
-                    WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable,
-                        writer => WriteNormalMethodBody(writer, operationMappings, parameterMappings, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull));
+                    using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsVariable))
+                    {
+                        WriteNormalMethodBody(writer, operationMappings, parameterMappings, async, shouldThrowExceptionWhenNull: shouldThrowExceptionWhenNull);
+                    }
                     _writer.Line();
                 }, async);
             }

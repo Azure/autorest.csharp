@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -269,14 +271,14 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ResGrpParentListResult> GetAll(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<ResGrpParent>> GetAll(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentContainer.GetAll");
             scope.Start();
             try
             {
                 var response = _resGrpParentsRestClient.GetAll(Id.ResourceGroupName, cancellationToken);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new ResGrpParent(Parent, value)).ToArray() as IReadOnlyList<ResGrpParent>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -287,14 +289,14 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ResGrpParentListResult>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<ResGrpParent>>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResGrpParentContainer.GetAll");
             scope.Start();
             try
             {
                 var response = await _resGrpParentsRestClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new ResGrpParent(Parent, value)).ToArray() as IReadOnlyList<ResGrpParent>, response.GetRawResponse());
             }
             catch (Exception e)
             {

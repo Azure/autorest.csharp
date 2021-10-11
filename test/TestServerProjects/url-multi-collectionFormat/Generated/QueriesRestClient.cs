@@ -42,7 +42,10 @@ namespace url_multi_collectionFormat
             uri.AppendPath("/queries/array/multi/string/null", false);
             if (arrayQuery != null)
             {
-                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                foreach (var param in arrayQuery)
+                {
+                    uri.AppendQuery("arrayQuery", param, true);
+                }
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -91,7 +94,10 @@ namespace url_multi_collectionFormat
             uri.AppendPath("/queries/array/multi/string/empty", false);
             if (arrayQuery != null)
             {
-                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                foreach (var param in arrayQuery)
+                {
+                    uri.AppendQuery("arrayQuery", param, true);
+                }
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -140,7 +146,10 @@ namespace url_multi_collectionFormat
             uri.AppendPath("/queries/array/multi/string/valid", false);
             if (arrayQuery != null)
             {
-                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+                foreach (var param in arrayQuery)
+                {
+                    uri.AppendQuery("arrayQuery", param, true);
+                }
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

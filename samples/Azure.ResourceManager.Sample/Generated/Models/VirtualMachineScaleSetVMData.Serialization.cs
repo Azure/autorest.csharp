@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(AvailabilitySet))
             {
                 writer.WritePropertyName("availabilitySet");
-                writer.WriteObjectValue(AvailabilitySet);
+                JsonSerializer.Serialize(writer, AvailabilitySet);
             }
             if (Optional.IsDefined(LicenseType))
             {
@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Sample
             Optional<NetworkProfile> networkProfile = default;
             Optional<VirtualMachineScaleSetVMNetworkProfileConfiguration> networkProfileConfiguration = default;
             Optional<DiagnosticsProfile> diagnosticsProfile = default;
-            Optional<Models.SubResource> availabilitySet = default;
+            Optional<WritableSubResource> availabilitySet = default;
             Optional<string> provisioningState = default;
             Optional<string> licenseType = default;
             Optional<string> modelDefinitionApplied = default;
@@ -331,7 +331,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            availabilitySet = Models.SubResource.DeserializeSubResource(property0.Value);
+                            availabilitySet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.ToString());
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -363,7 +363,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMData(id, name, type, tags, location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet.Value, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
+            return new VirtualMachineScaleSetVMData(id, name, type, tags, location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
         }
     }
 }

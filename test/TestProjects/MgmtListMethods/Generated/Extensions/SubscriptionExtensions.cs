@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -1231,7 +1232,7 @@ namespace MgmtListMethods
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<ResGrpParentWithAncestorListResult>> GetResGrpParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<ResGrpParentWithAncestorData>>> GetResGrpParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
@@ -1242,7 +1243,7 @@ namespace MgmtListMethods
                 {
                     var restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = await restOperations.NonPageableListBySubscriptionAsync(cancellationToken).ConfigureAwait(false);
-                    return response;
+                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -1256,7 +1257,7 @@ namespace MgmtListMethods
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<ResGrpParentWithAncestorListResult> GetResGrpParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<ResGrpParentWithAncestorData>> GetResGrpParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -1267,7 +1268,7 @@ namespace MgmtListMethods
                 {
                     var restOperations = GetResGrpParentWithAncestorsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = restOperations.NonPageableListBySubscription(cancellationToken);
-                    return response;
+                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -1312,7 +1313,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<UpdateWorkspaceQuotasResult>> GetUpdateWorkspaceQuotasByLocationAsync(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<UpdateWorkspaceQuotas>>> GetUpdateWorkspaceQuotasByLocationAsync(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1332,7 +1333,7 @@ namespace MgmtListMethods
                 {
                     var restOperations = GetQuotasRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = await restOperations.UpdateAsync(location, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
+                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -1349,7 +1350,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<UpdateWorkspaceQuotasResult> GetUpdateWorkspaceQuotasByLocation(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<UpdateWorkspaceQuotas>> GetUpdateWorkspaceQuotasByLocation(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1369,7 +1370,7 @@ namespace MgmtListMethods
                 {
                     var restOperations = GetQuotasRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                     var response = restOperations.Update(location, parameters, cancellationToken);
-                    return response;
+                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -17,13 +17,15 @@ namespace url_LowLevel
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PathsRestClient _restClient;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
+
+        private readonly HttpPipeline _pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
@@ -34,6 +36,7 @@ namespace url_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PathsClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -43,11 +46,11 @@ namespace url_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestUrlTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            _restClient = new PathsRestClient(_clientDiagnostics, _pipeline, endpoint);
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Get true Boolean value on path. </summary>
@@ -69,7 +72,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetBooleanTrueAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetBooleanTrueRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -97,7 +101,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetBooleanTrue(options);
+                using HttpMessage message = CreateGetBooleanTrueRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -125,7 +130,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetBooleanFalseAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetBooleanFalseRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -153,7 +159,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetBooleanFalse(options);
+                using HttpMessage message = CreateGetBooleanFalseRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -181,7 +188,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetIntOneMillionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetIntOneMillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -209,7 +217,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetIntOneMillion(options);
+                using HttpMessage message = CreateGetIntOneMillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -237,7 +246,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetIntNegativeOneMillionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -265,7 +275,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetIntNegativeOneMillion(options);
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -293,7 +304,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetTenBillionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetTenBillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -321,7 +333,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetTenBillion(options);
+                using HttpMessage message = CreateGetTenBillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -349,7 +362,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.GetNegativeTenBillionAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -377,7 +391,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.GetNegativeTenBillion(options);
+                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -405,7 +420,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.FloatScientificPositiveAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -433,7 +449,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.FloatScientificPositive(options);
+                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -461,7 +478,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.FloatScientificNegativeAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -489,7 +507,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.FloatScientificNegative(options);
+                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -517,7 +536,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DoubleDecimalPositiveAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -545,7 +565,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DoubleDecimalPositive(options);
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -573,7 +594,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DoubleDecimalNegativeAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -601,7 +623,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DoubleDecimalNegative(options);
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -629,7 +652,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.StringUnicodeAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateStringUnicodeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -657,7 +681,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.StringUnicode(options);
+                using HttpMessage message = CreateStringUnicodeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -685,7 +710,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.StringUrlEncodedAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateStringUrlEncodedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -713,7 +739,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.StringUrlEncoded(options);
+                using HttpMessage message = CreateStringUrlEncodedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -741,7 +768,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.StringUrlNonEncodedAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateStringUrlNonEncodedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -769,7 +797,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.StringUrlNonEncoded(options);
+                using HttpMessage message = CreateStringUrlNonEncodedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -797,7 +826,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.StringEmptyAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateStringEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -825,7 +855,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.StringEmpty(options);
+                using HttpMessage message = CreateStringEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -837,6 +868,7 @@ namespace url_LowLevel
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -854,7 +886,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.StringNullAsync(stringPath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateStringNullRequest(stringPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -866,6 +899,7 @@ namespace url_LowLevel
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -883,7 +917,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.StringNull(stringPath, options);
+                using HttpMessage message = CreateStringNullRequest(stringPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -893,8 +928,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
-        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -912,7 +948,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.EnumValidAsync(enumPath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateEnumValidRequest(enumPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -922,8 +959,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
-        /// <param name="enumPath"> send the value green. </param>
+        /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -941,7 +979,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.EnumValid(enumPath, options);
+                using HttpMessage message = CreateEnumValidRequest(enumPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -951,8 +990,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
-        /// <param name="enumPath"> send null should throw. </param>
+        /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -970,7 +1010,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.EnumNullAsync(enumPath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateEnumNullRequest(enumPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -980,8 +1021,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
-        /// <param name="enumPath"> send null should throw. </param>
+        /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -999,7 +1041,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.EnumNull(enumPath, options);
+                using HttpMessage message = CreateEnumNullRequest(enumPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1011,6 +1054,7 @@ namespace url_LowLevel
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1028,7 +1072,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ByteMultiByteAsync(bytePath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateByteMultiByteRequest(bytePath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1040,6 +1085,7 @@ namespace url_LowLevel
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1057,7 +1103,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ByteMultiByte(bytePath, options);
+                using HttpMessage message = CreateByteMultiByteRequest(bytePath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1085,7 +1132,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ByteEmptyAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateByteEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1113,7 +1161,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ByteEmpty(options);
+                using HttpMessage message = CreateByteEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1125,6 +1174,7 @@ namespace url_LowLevel
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1142,7 +1192,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ByteNullAsync(bytePath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateByteNullRequest(bytePath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1154,6 +1205,7 @@ namespace url_LowLevel
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1171,7 +1223,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ByteNull(bytePath, options);
+                using HttpMessage message = CreateByteNullRequest(bytePath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1199,7 +1252,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DateValidAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDateValidRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1227,7 +1281,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DateValid(options);
+                using HttpMessage message = CreateDateValidRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1256,7 +1311,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DateNullAsync(datePath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDateNullRequest(datePath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1285,7 +1341,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DateNull(datePath, options);
+                using HttpMessage message = CreateDateNullRequest(datePath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1313,7 +1370,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DateTimeValidAsync(options).ConfigureAwait(false);
+                using HttpMessage message = CreateDateTimeValidRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1341,7 +1399,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DateTimeValid(options);
+                using HttpMessage message = CreateDateTimeValidRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1370,7 +1429,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.DateTimeNullAsync(dateTimePath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1399,7 +1459,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.DateTimeNull(dateTimePath, options);
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1411,6 +1472,7 @@ namespace url_LowLevel
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1428,7 +1490,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.Base64UrlAsync(base64UrlPath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1440,6 +1503,7 @@ namespace url_LowLevel
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1457,7 +1521,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.Base64Url(base64UrlPath, options);
+                using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1469,6 +1534,7 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1486,7 +1552,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.ArrayCsvInPathAsync(arrayPath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1498,6 +1565,7 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1515,7 +1583,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.ArrayCsvInPath(arrayPath, options);
+                using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1544,7 +1613,8 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return await _restClient.UnixTimeUrlAsync(unixTimeUrlPath, options).ConfigureAwait(false);
+                using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1573,12 +1643,445 @@ namespace url_LowLevel
             scope.Start();
             try
             {
-                return _restClient.UnixTimeUrl(unixTimeUrlPath, options);
+                using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        internal HttpMessage CreateGetBooleanTrueRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/bool/true/", false);
+            uri.AppendPath(true, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetBooleanFalseRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/bool/false/", false);
+            uri.AppendPath(false, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetIntOneMillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/int/1000000/", false);
+            uri.AppendPath(1000000, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetIntNegativeOneMillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/int/-1000000/", false);
+            uri.AppendPath(-1000000, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetTenBillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/long/10000000000/", false);
+            uri.AppendPath(10000000000L, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetNegativeTenBillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/long/-10000000000/", false);
+            uri.AppendPath(-10000000000L, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateFloatScientificPositiveRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/float/1.034E+20/", false);
+            uri.AppendPath(1.034E+20F, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateFloatScientificNegativeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/float/-1.034E-20/", false);
+            uri.AppendPath(-1.034E-20F, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDoubleDecimalPositiveRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/double/9999999.999/", false);
+            uri.AppendPath(9999999.999, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDoubleDecimalNegativeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/double/-9999999.999/", false);
+            uri.AppendPath(-9999999.999, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringUnicodeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/unicode/", false);
+            uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringUrlEncodedRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/", false);
+            uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringUrlNonEncodedRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/begin!*'();:@&=+$,end/", false);
+            uri.AppendPath("begin!*'();:@&=+$,end", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringEmptyRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/empty/", false);
+            uri.AppendPath("", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringNullRequest(string stringPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/null/", false);
+            uri.AppendPath(stringPath, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateEnumValidRequest(string enumPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/enum/green%20color/", false);
+            uri.AppendPath(enumPath, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateEnumNullRequest(string enumPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/null/", false);
+            uri.AppendPath(enumPath, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateByteMultiByteRequest(byte[] bytePath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/byte/multibyte/", false);
+            uri.AppendPath(bytePath, "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateByteEmptyRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/byte/empty/", false);
+            uri.AppendPath(new byte[] { }, "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateByteNullRequest(byte[] bytePath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/byte/null/", false);
+            uri.AppendPath(bytePath, "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateValidRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/date/2012-01-01/", false);
+            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateNullRequest(DateTimeOffset datePath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/date/null/", false);
+            uri.AppendPath(datePath, "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateTimeValidRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
+            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/datetime/null/", false);
+            uri.AppendPath(dateTimePath, "O", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/bG9yZW0/", false);
+            uri.AppendPath(base64UrlPath, "U", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/", false);
+            uri.AppendPath(arrayPath, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/int/1460505600/", false);
+            uri.AppendPath(unixTimeUrlPath, "U", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier400 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier400();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    400 => false,
+                    _ => true
+                };
             }
         }
     }

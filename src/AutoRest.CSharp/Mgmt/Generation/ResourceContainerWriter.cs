@@ -341,7 +341,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Scope())
             {
                 _writer.WriteParameterNullChecks(methodParameters);
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, inner, catch404);
+                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, catch404))
+                {
+                    inner(_writer);
+                }
             }
         }
 
@@ -360,7 +363,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType returnType = typeof(GenericResource).WrapPageable(async);
             using (_writer.Scope($"public {GetVirtual(true)} {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField, writer =>
+                using (WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField))
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
@@ -372,7 +375,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(Subscription)}, filters, expand, top, cancellationToken);");
                     }
-                });
+                }
             }
         }
 

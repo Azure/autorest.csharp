@@ -314,14 +314,14 @@ namespace MgmtListMethods
 
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<NonResourceChildListResult>> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<NonResourceChild>>> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResCh.GetNonResourceChild");
             scope.Start();
             try
             {
                 var response = await _fakeParentWithNonResChesRestClient.GetNonResourceChildAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -332,14 +332,14 @@ namespace MgmtListMethods
 
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<NonResourceChildListResult> GetNonResourceChild(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<NonResourceChild>> GetNonResourceChild(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResCh.GetNonResourceChild");
             scope.Start();
             try
             {
                 var response = _fakeParentWithNonResChesRestClient.GetNonResourceChild(Id.Parent.Name, Id.Name, cancellationToken);
-                return response;
+                return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
             {
