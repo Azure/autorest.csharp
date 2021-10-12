@@ -23,6 +23,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ConcurrentDictionary<RequestPath, RequestPath> _scopePathCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<RequestPath, ResourceType[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceType[]?>();
 
+        public static bool Contains(this ResourceType[] parameterizedScopeTypes, ResourceType resourceType)
+        {
+            if (parameterizedScopeTypes.Length == 0)
+                return true;
+            return parameterizedScopeTypes.Contains(resourceType);
+        }
+
         public static RequestPath GetScopePath(this RequestPath requestPath)
         {
             if (_scopePathCache.TryGetValue(requestPath, out var result))
@@ -38,25 +45,34 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return operationSet.GetRequestPath(context).GetScopePath();
         }
 
-        public static bool IsImplicitScope(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        /// <summary>
+        /// Returns true if this request path is a parameterized scope, like the "/{scope}" in "/{scope}/providers/M.C/virtualMachines/{vmName}"
+        /// </summary>
+        /// <param name="scopePath"></param>
+        /// <returns></returns>
+        public static bool IsParameterizedScope(this RequestPath scopePath)
         {
             // if a request is an implicit scope, it must only have one segment
-            var scopePath = requestPath.GetScopePath();
-            if (scopePath.Count > 1)
+            if (scopePath.Count != 1)
                 return false;
+            // now the path only has one segment
+            var first = scopePath.First();
             // then we need to ensure the corresponding parameter enables `x-ms-skip-url-encoding`
-            var operation = context.Library.GetOperationSet(requestPath).First();
-            var method = context.Library.RestClientMethods[operation];
-            return method.Parameters.First().SkipUrlEncoding;
+            if (first.IsConstant)
+                return false; // actually this cannot happen
+            // now the first segment is a reference
+            // we ensure this parameter enables x-ms-skip-url-encoding, aka Escape is false
+            return !first.Escape;
         }
 
         private static RequestPath CalculateScopePath(RequestPath requestPath)
         {
             var indexOfProvider = requestPath.ToList().LastIndexOf(Segment.Providers);
+            // if there is no providers segment, myself should be a scope request path. Just return myself
             if (indexOfProvider < 0)
-                throw new System.InvalidOperationException($"Request path {requestPath} does not have providers segment in it");
+                return requestPath;
 
-            return new RequestPath(requestPath.Take(indexOfProvider).ToArray());
+            return new RequestPath(requestPath.Take(indexOfProvider));
         }
 
         //public static bool IsScopeResource(this Operation operation, BuildContext<MgmtOutputLibrary> context)
@@ -74,21 +90,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         //    return resourceTypes != null;
         //}
 
-        public static ResourceType[]? GetImplicitScopeResourceTypes(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        public static ResourceType[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
         {
             if (_scopeTypesCache.TryGetValue(requestPath, out var result))
                 return result;
 
-            result = requestPath.CalculateScopeResourceTypes(context);
+            result = requestPath.CalculateScopeResourceTypes(config);
             _scopeTypesCache.TryAdd(requestPath, result);
             return result;
         }
 
-        private static ResourceType[]? CalculateScopeResourceTypes(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        private static ResourceType[]? CalculateScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
         {
-            if (!requestPath.IsImplicitScope(context))
+            if (!requestPath.GetScopePath().IsParameterizedScope())
                 return null;
-            if (context.Configuration.MgmtConfiguration.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
+            if (config.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
                 return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
             // otherwise we just assume this is scope and this scope could be anything
             return System.Array.Empty<ResourceType>();

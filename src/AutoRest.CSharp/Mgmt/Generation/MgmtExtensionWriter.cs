@@ -6,10 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -131,7 +129,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private string GetOperationNameExtraScopeSuffix(IEnumerable<Segment> extraScope)
         {
-            return string.Join("", extraScope.Select(segment => segment.IsConstant ? segment.ConstantValue.ToSingular() : segment.ReferenceName).Select(segment => segment.FirstCharToUpperCase()));
+            return string.Join("", extraScope.Select(segment => segment.IsConstant ? segment.ConstantValue.ToSingular() : segment.ReferenceName)
+                .Select(segment => segment.RemoveInvalidCharacters().ToCleanName()));
         }
 
         /// <summary>

@@ -58,18 +58,40 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // we need to iterate all resources to find if this is the parent of that
             foreach (var operationSet in context.Library.ResourceOperationSets)
             {
-                var segments = requestPath.TrimParentFrom(operationSet.GetRequestPath(context));
-                if (segments is null)
-                    continue;
-                // some tuple resources (a resource that accepts a tuple to uniquely determine its ID from its parent resource) might have multiple list operation in different levels
-                // therefore here we are adding this to the candidate list, and finds a resource with the shortest path as the operation set of this operation
-                candidates.Add(operationSet);
+                var resourceRequestPath = operationSet.GetRequestPath(context);
+                if (resourceRequestPath.GetScopePath().IsParameterizedScope())
+                {
+                    // if this is a resource that has a parameterized scope
+                    // first we get the types that this parameterized scope could be, since we already ensure this is a parameterized scope, we could assert this is non-null
+                    var types = resourceRequestPath.GetParameterizedScopeResourceTypes(context.Configuration.MgmtConfiguration)!;
+                    // get the scope of this request
+                    var scope = requestPath.GetScopePath();
+                    // see if the scope type could include this resource type
+                    var scopeResourceType = scope.GetResourceType(context.Configuration.MgmtConfiguration);
+                    if (types.Contains(scopeResourceType))
+                    {
+                        candidates.Add(operationSet);
+                        continue;
+                    }
+                }
+                else
+                {
+                    // if the resource does not have parameterized scope, we should expect this request path is the child of the resource's request path, in order to add it to this resource
+                    var segments = requestPath.TrimParentFrom(resourceRequestPath);
+                    if (segments is null)
+                        continue;
+                    // some tuple resources (a resource that accepts a tuple to uniquely determine its ID from its parent resource) might have multiple list operation in different levels
+                    // therefore here we are adding this to the candidate list, and finds a resource with the shortest path as the operation set of this operation
+                    candidates.Add(operationSet);
+                }
             }
 
             if (candidates.Count == 0)
                 return null;
 
             // choose the shortest as the resource to hold this operation
+            // TODO -- maybe we need to change the sorting criteria to make sure that scope request is always the first one?
+            // in this way we could ensure that scope request could override others
             return candidates.OrderBy(operationSet => operationSet.GetRequestPath(context).Count).First();
         }
 

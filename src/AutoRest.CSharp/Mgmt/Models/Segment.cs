@@ -18,21 +18,28 @@ namespace AutoRest.CSharp.Mgmt.Models
         private ReferenceOrConstant _value;
         private string _stringValue;
 
-        public Segment(ReferenceOrConstant value, bool strict = true)
+        public Segment(ReferenceOrConstant value, bool escape, bool strict = true)
         {
             _value = value;
             _stringValue = value.IsConstant ? value.Constant.Value?.ToString() ?? "null"
                 : $"({value.Reference.Type.Name}){value.Reference.Name}";
             IsStrict = strict;
+            Escape = escape;
         }
 
-        public Segment(string value, bool strict = true)
+        public Segment(string value, bool escape = true, bool strict = true)
         {
             _stringValue = value;
             _value = new Constant(value, typeof(string));
             IsStrict = strict;
+            Escape = escape;
         }
 
+        /// <summary>
+        /// If this is a constant, escape is guranteed to be true, since our segment has been split by slashes.
+        /// If this is a reference, escape is false when the corresponding parameter has x-ms-skip-url-encoding = true indicating this might be a scope variable
+        /// </summary>
+        public bool Escape { get; private set; }
         /// <summary>
         /// Mark if this segment is strict when comparing with each other.
         /// IsStrict only works on Reference and does not work on Constant

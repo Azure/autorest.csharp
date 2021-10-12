@@ -34,10 +34,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return stack;
         }
 
-        // TODO -- support implicit scope in this function
         private static void BuildContextualParameterMappingHierarchy(RequestPath current, BuildContext<MgmtOutputLibrary> context, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
         {
-            // TODO -- we are still missing the "scope" parameters
+            // Check if the current path is a scope parameter
+            if (current.IsParameterizedScope())
+            {
+                // in this case, we should only have one segment in this current path
+                parameterMappingStack.Push(new ContextualParameterMapping(current.Last(), $"{idVariableName}{invocationSuffix}"));
+                return;
+            }
             // RequestPath of tenant does not have any parameter in it (actually it does not have anything), we take this as an exit
             if (current == RequestPath.Tenant)
                 return;

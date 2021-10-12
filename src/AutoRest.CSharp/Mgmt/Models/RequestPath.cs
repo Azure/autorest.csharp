@@ -18,14 +18,14 @@ namespace AutoRest.CSharp.Mgmt.Models
     {
         public static readonly RequestPath ResourceGroup = new(new[] {
             new Segment("subscriptions"),
-            new Segment(new Reference("subscriptionId", typeof(string))),
+            new Segment(new Reference("subscriptionId", typeof(string)), true),
             new Segment("resourceGroups"),
-            new Segment(new Reference("resourceGroupName", typeof(string)))
+            new Segment(new Reference("resourceGroupName", typeof(string)), true)
         });
 
         public static readonly RequestPath Subscription = new(new[] {
             new Segment("subscriptions"),
-            new Segment(new Reference("subscriptionId", typeof(string)))
+            new Segment(new Reference("subscriptionId", typeof(string)), true)
         });
 
         public static readonly RequestPath Tenant = new(new Segment[] { });
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment("Microsoft.Management"),
             new Segment("managementGroups"),
             // We use strict = false because we usually see the name of management group is different in different RPs. Some of them are groupId, some of them are groupName, etc
-            new Segment(new Reference("managementGroupId", typeof(string)), false)
+            new Segment(new Reference("managementGroupId", typeof(string)), true, false)
         });
 
         private IReadOnlyList<Segment> _segments;
@@ -48,9 +48,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             SerializedPath = method.Operation.GetHttpPath();
         }
 
-        public RequestPath(IReadOnlyList<Segment> segments)
+        public RequestPath(IEnumerable<Segment> segments)
         {
-            _segments = segments;
+            _segments = segments.ToArray();
             SerializedPath = Segment.BuildSerializedSegments(segments);
         }
 
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
             }
             // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
-            return new Segment(pathSegment.Value).SingleItemAsIEnumerable();
+            return new Segment(pathSegment.Value, pathSegment.Escape).AsIEnumerable();
         }
 
         public bool Equals(RequestPath other)

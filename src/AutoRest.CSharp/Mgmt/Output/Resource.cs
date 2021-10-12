@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             UpdateOperation = GetOperationWithVerb(HttpMethod.Patch);
             PostOperation = GetOperationWithVerb(HttpMethod.Post);
 
-            ImplicitScopeResourceTypes = OperationSets.First().GetRequestPath(_context).GetImplicitScopeResourceTypes(_context);
+            ImplicitScopeResourceTypes = OperationSets.First().GetRequestPath(_context).GetParameterizedScopeResourceTypes(_context.Configuration.MgmtConfiguration);
         }
 
         public bool IsScopeResource => ImplicitScopeResourceTypes != null;
@@ -163,6 +163,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var result = new Dictionary<string, List<MgmtRestOperation>>();
             foreach ((var operationSet, var operations) in _allOperations)
             {
+                var resourceRequestPath = operationSet.GetRequestPath(_context);
                 // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
                 foreach (var operation in operations)
                 {
@@ -172,14 +173,21 @@ namespace AutoRest.CSharp.Mgmt.Output
                     string key;
                     if (IsListOperation(operation, operationSet))
                     {
+                        // if we have a parameterized scope, there will be no direct parenting relationship
+                        // since we actually only need the diff between two request paths, we could also do this by first trimming the scope off,
+                        // and then do the diff
+                        // trim the scope off from the current request path
+                        var currentRequestPath = operation.GetRequestPath(_context);
+                        var currentTrimmed = new RequestPath(currentRequestPath.GetScopePath().TrimParentFrom(currentRequestPath)!);
+                        var resourceTrimmedPath = new RequestPath(resourceRequestPath.GetScopePath().TrimParentFrom(resourceRequestPath)!);
                         // if this operation is a collection operation, it should be the parent of its corresponding resource request path
-                        var diff = new RequestPath(operation.GetRequestPath(_context).TrimParentFrom(operationSet.GetRequestPath(_context)).ToList());
+                        var diff = new RequestPath(currentTrimmed.TrimParentFrom(resourceTrimmedPath)!);
                         // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
                         key = $"-{diff}";
                     }
                     else
                         // for other child operations, they should be child of the corresponding resource request path
-                        key = new RequestPath(operationSet.GetRequestPath(_context).TrimParentFrom(operation.GetRequestPath(_context)).ToList());
+                        key = new RequestPath(resourceRequestPath.TrimParentFrom(operation.GetRequestPath(_context))!);
                     var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
                         _context.Library.GetRestClient(operation.GetHttpPath()),
