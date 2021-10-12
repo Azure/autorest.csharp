@@ -44,7 +44,6 @@ namespace url_multi_collectionFormat_LowLevel
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AutoRestUrlMutliCollectionFormatTestServiceClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

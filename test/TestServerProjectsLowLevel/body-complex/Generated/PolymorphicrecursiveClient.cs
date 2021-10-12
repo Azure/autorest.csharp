@@ -43,7 +43,6 @@ namespace body_complex_LowLevel
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AutoRestComplexTestServiceClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

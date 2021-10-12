@@ -49,7 +49,6 @@ namespace Azure.AI.DocumentTranslation
             {
                 throw new ArgumentNullException(nameof(credential));
             }
-
             options ??= new AzureAIDocumentTranslationClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

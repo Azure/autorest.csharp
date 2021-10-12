@@ -46,7 +46,6 @@ namespace paging_LowLevel
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AutoRestPagingTestServiceClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

@@ -46,7 +46,6 @@ namespace custom_baseUrl_LowLevel
             {
                 throw new ArgumentNullException(nameof(host));
             }
-
             options ??= new AutoRestParameterizedHostTestClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

@@ -43,7 +43,6 @@ namespace RequestOptionsRequired_LowLevel
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new RequestOptionsRequiredClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

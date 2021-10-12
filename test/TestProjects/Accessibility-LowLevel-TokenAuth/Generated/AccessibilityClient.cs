@@ -43,7 +43,6 @@ namespace Accessibility_LowLevel_TokenAuth
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AccessibilityClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

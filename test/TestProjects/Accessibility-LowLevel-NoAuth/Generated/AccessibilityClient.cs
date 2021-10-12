@@ -34,7 +34,6 @@ namespace Accessibility_LowLevel_NoAuth
         public AccessibilityClient(Uri endpoint = null, AccessibilityClientOptions options = null)
         {
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AccessibilityClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

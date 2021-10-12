@@ -28,16 +28,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
 
-        public MgmtNonResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string defaultName) : base(context)
+        public MgmtNonResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string defaultName) : base(context, defaultName)
         {
             _context = context;
             OperationGroup = operationGroup;
-            DefaultName = defaultName;
 
             SchemaName = operationGroup.Key.ToSingular(false);
         }
-
-        protected override string DefaultName { get; }
 
         public string SchemaName { get; }
 

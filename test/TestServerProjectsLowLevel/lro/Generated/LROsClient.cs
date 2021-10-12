@@ -43,7 +43,6 @@ namespace lro_LowLevel
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AutoRestLongRunningOperationTestServiceClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

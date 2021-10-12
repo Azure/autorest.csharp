@@ -43,7 +43,6 @@ namespace media_types_LowLevel
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new MediaTypesClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

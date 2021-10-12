@@ -43,7 +43,6 @@ namespace httpInfrastructure_LowLevel
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

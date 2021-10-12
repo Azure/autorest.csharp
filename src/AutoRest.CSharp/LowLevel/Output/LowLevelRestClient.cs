@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.Core;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 
@@ -23,20 +24,31 @@ namespace AutoRest.CSharp.Output.Models
         protected override string DefaultAccessibility { get; } = "public";
 
         private readonly BuildContext<LowLevelOutputLibrary> _context;
+        private readonly bool _hasPublicConstructors = true;
+
         private LowLevelClientMethod[]? _clientMethods;
         private LowLevelPagingMethod[]? _pagingMethods;
         private LowLevelLongRunningOperationMethod[]? _longRunningOperationMethods;
+        private MethodSignature[]? _publicConstructors;
 
         public override string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(OperationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
+        public MethodSignature[] PublicConstructors => _publicConstructors ??= BuildPublicConstructors().ToArray();
         public LowLevelClientMethod[] ClientMethods => _clientMethods ??= BuildMethods().ToArray();
         public LowLevelPagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
         public LowLevelLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
         public ClientOptionsTypeProvider ClientOptions { get; }
+        public string? ParentClientTypeName { get; }
+        public bool IsSubClient => ParentClientTypeName != null;
 
         public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context) : base(operationGroup, context, null)
         {
             _context = context;
             ClientOptions = new ClientOptionsTypeProvider(_context);
+            if (ExistingType != null && context.SourceInputModel != null && context.SourceInputModel.TryGetClientSourceInput(ExistingType, out var codeGenClientAttribute))
+            {
+                ParentClientTypeName = codeGenClientAttribute.ParentClientType?.Name;
+                _hasPublicConstructors = !IsSubClient || codeGenClientAttribute.ForcePublicConstructors;
+            }
         }
 
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
@@ -58,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models
                     // parameter to be the last required parameter in the method signature (so any required path or query parameters
                     // will show up first.
 
-                    IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where(FilterServiceParamaters);
+                    IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where(FilterServiceParameters);
                     var accessibility = operation.Accessibility ?? "public";
                     RestClientMethod method = Builder.BuildMethod(operation, httpRequest, requestParameters, null, accessibility);
                     RequestHeader[] requestHeaders = method.Request.Headers;
@@ -223,7 +235,23 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private bool FilterServiceParamaters(RequestParameter p)
+        private IEnumerable<MethodSignature> BuildPublicConstructors()
+        {
+            if (!_hasPublicConstructors)
+            {
+                yield break;
+            }
+
+            var clientOptionsType = ClientOptions.Type.WithNullable(true);
+            var clientOptionsParameter = new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false);
+            foreach (var securityScheme in _context.CodeModel.Security.GetSchemesOrAnonymous())
+            {
+                var ctorParams = RestClientBuilder.GetConstructorParameters(Parameters, GetCredentialType(securityScheme)).Append(clientOptionsParameter).ToArray();
+                yield return new MethodSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", "public", ctorParams);
+            }
+        }
+
+        private static bool FilterServiceParameters(RequestParameter p)
             => p.In switch
             {
                 ParameterLocation.Header => true,
@@ -233,7 +261,22 @@ namespace AutoRest.CSharp.Output.Models
                 _ => false
             };
 
-        private bool IsSynthesizedContentTypeParameter(RequestParameter p)
+        private static bool IsSynthesizedContentTypeParameter(RequestParameter p)
             => p.Origin == "modelerfour:synthesized/content-type";
+
+        private static CSharpType? GetCredentialType(SecurityScheme scheme)
+        {
+            switch (scheme)
+            {
+                case AzureKeySecurityScheme:
+                    return typeof(AzureKeyCredential);
+                case AADTokenSecurityScheme:
+                    return typeof(TokenCredential);
+                case NoAuthSecurity:
+                    return null;
+                default:
+                    throw new NotImplementedException($"Unknown security scheme: {scheme.GetType()}");
+            }
+        }
     }
 }

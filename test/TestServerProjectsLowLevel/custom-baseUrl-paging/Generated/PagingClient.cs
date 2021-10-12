@@ -48,7 +48,6 @@ namespace custom_baseUrl_paging_LowLevel
             {
                 throw new ArgumentNullException(nameof(host));
             }
-
             options ??= new AutoRestParameterizedHostTestPagingClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

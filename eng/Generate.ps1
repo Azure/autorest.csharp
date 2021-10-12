@@ -143,7 +143,8 @@ $projectNames =
     'Azure.ResourceManager.Sample',
     'Azure.Management.Storage',
     'Azure.Network.Management.Interface',
-    'Azure.AI.DocumentTranslation'
+    'Azure.AI.DocumentTranslation',
+    'Azure.Analytics.Purview.Account'
 
 if (!($Exclude -contains "Samples"))
 {
