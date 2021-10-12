@@ -221,8 +221,42 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                // branches go here
-                throw new NotImplementedException("multi-branch PagingMethod not supported yet");
+                var keyword = "if";
+                var escapeBranches = new List<RequestPath>();
+                foreach ((var branch, var operation) in operationMappings)
+                {
+                    // we need to identify the correct branch using the resource type, therefore we need first to determine the resource type is a constant
+                    var resourceType = branch.GetResourceType(Config);
+                    if (!resourceType.IsConstant)
+                    {
+                        escapeBranches.Add(branch);
+                        continue;
+                    }
+                    using (_writer.Scope($"{keyword} ({IdVariableName}.ResourceType == \"{branch.GetResourceType(Config)}\")"))
+                    {
+                        WritePagingMethodBranch(itemType, diagnostic, operation, parameterMappings[branch], async);
+                    }
+                    keyword = "else if";
+                }
+                if (escapeBranches.Count == 0)
+                {
+                    using (_writer.Scope($"else"))
+                    {
+                        _writer.Line($"throw new InvalidOperationException(${{Id.ResourceType}} is not supported here);");
+                    }
+                }
+                else if (escapeBranches.Count == 1)
+                {
+                    var branch = escapeBranches.First();
+                    using (_writer.Scope($"else"))
+                    {
+                        WritePagingMethodBranch(itemType, diagnostic, operationMappings[branch], parameterMappings[branch], async);
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException($"It is impossible to identify which branch to go here using Id for request paths: [{string.Join(", ", escapeBranches)}]");
+                }
             }
         }
 
@@ -655,6 +689,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
+                    foreach (var @namespace in parameter.Usings)
+                    {
+                        writer.UseNamespace(@namespace);
+                    }
                     writer.Append($"{parameter.ValueExpression}, ");
                 }
             }

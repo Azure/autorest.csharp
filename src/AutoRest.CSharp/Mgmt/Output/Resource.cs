@@ -171,6 +171,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         continue; // meaning this operation will be included in the container
                     // first we need to see if this operation is a collection operation. Collection operation is not literally a child of the corresponding resource
                     string key;
+                    RequestPath contextualPath;
                     if (IsListOperation(operation, operationSet))
                     {
                         // if we have a parameterized scope, there will be no direct parenting relationship
@@ -178,21 +179,28 @@ namespace AutoRest.CSharp.Mgmt.Output
                         // and then do the diff
                         // trim the scope off from the current request path
                         var currentRequestPath = operation.GetRequestPath(_context);
-                        var currentTrimmed = new RequestPath(currentRequestPath.GetScopePath().TrimParentFrom(currentRequestPath)!);
-                        var resourceTrimmedPath = new RequestPath(resourceRequestPath.GetScopePath().TrimParentFrom(resourceRequestPath)!);
+                        var currentTrimmedPath = currentRequestPath.TrimScope();
+                        var resourceTrimmedPath = resourceRequestPath.TrimScope();
                         // if this operation is a collection operation, it should be the parent of its corresponding resource request path
-                        var diff = new RequestPath(currentTrimmed.TrimParentFrom(resourceTrimmedPath)!);
+                        var diff = new RequestPath(currentTrimmedPath.TrimParentFrom(resourceTrimmedPath));
                         // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
                         key = $"-{diff}";
+                        contextualPath = GetContextualPath(operationSet);
+                        // we need to replace the contextual path with the actual contextual path if it is a parameterized scope
+                        if (contextualPath.IsParameterizedScope())
+                            contextualPath = currentRequestPath.GetScopePath();
                     }
                     else
+                    {
                         // for other child operations, they should be child of the corresponding resource request path
-                        key = new RequestPath(resourceRequestPath.TrimParentFrom(operation.GetRequestPath(_context))!);
+                        key = new RequestPath(resourceRequestPath.TrimParentFrom(operation.GetRequestPath(_context)));
+                        contextualPath = GetContextualPath(operationSet);
+                    }
                     var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
                         _context.Library.GetRestClient(operation.GetHttpPath()),
                         operation.GetRequestPath(_context),
-                        GetContextualPath(operationSet));
+                        contextualPath);
                     if (result.TryGetValue(key, out var list))
                     {
                         list.Add(restOperation);

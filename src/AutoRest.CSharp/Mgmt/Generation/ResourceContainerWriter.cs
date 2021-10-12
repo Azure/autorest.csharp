@@ -54,9 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private bool IsListMethod(MgmtClientOperation clientOperation)
         {
-            if (clientOperation.Count > 1)
-                throw new NotImplementedException("multiple operations are not supported yet");
-
+            // we should have ensured that the response type in this operation is the same
             if (clientOperation.First().IsListMethod(out var itemType, out _))
             {
                 return itemType.Equals(_resourceData.Type);

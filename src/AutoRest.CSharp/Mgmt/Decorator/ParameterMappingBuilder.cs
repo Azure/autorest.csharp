@@ -12,7 +12,6 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -68,56 +67,103 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             else
             {
                 // get the diff between current and parent
-                var diffSegments = parent.TrimParentFrom(current).ToList();
-                // we need the segments here to be an even number
-                // TODO -- Or do we? If we do we need to change this into an exception
-                if (diffSegments.Count() % 2 != 0)
-                    Console.Error.WriteLine($"[WARNING] we get odd number segments in the difference when calculating contextual parameters between {current} and {parent}");
-                // group the diffSegments in pairs, which is a IEnumerable of List<Segment> with two elements in reversed order
-                var segmentPairs = diffSegments.Select((segment, index) => new { Index = index, Value = segment })
-                    .GroupBy(pair => pair.Index / 2)
-                    .Select(group => group.Select(v => v.Value).ToList())
-                    .Reverse();
-                // from the tail, check these segments in pairs.
-                foreach (var pair in segmentPairs)
+                var diffPath = parent.TrimParentFrom(current);
+                // get the segment in pairs
+                var segmentPairs = SplitDiffIntoPairs(diffPath).ToList();
+                var indexOfProvidersPair = segmentPairs.FindIndex(pair => pair[0] == Segment.Providers);
+                // from the tail, check these segments in pairs
+                for (int i = 0; i < segmentPairs.Count; i++)
                 {
-                    // NOTE: we grouped the segments in pairs, therefore here pair[0] will always be the key, `resourceGroups` for instance.
-                    // The key can also be variable in some scenarios
-                    // pair[1] will always be the value, which is Id.Name or Id.Namespace (if its key is providers)
-                    // TODO -- also consider the key is variable scenario
-                    if (pair[0].IsReference)
-                        throw new NotImplementedException($"Key is variable scenario is not supported yet. RequestPath: {current} and key {pair[0]}");
-                    // skip if this pair only has one segment. Since we are grouping these in pairs, this can only happen on the last group
-                    if (pair.Count == 1)
-                        continue;
-                    var valueSegment = pair[1];
-                    if (valueSegment.IsReference)
+                    var pair = segmentPairs[i];
+                    if (pair.Count == 2)
                     {
-                        if (pair[0] == Segment.Providers) // if the key is providers and the value is a parameter
+                        // we have a pair of segment, therefore here pair[0] will always be the key, `resourceGroups` for instance.
+                        // The key can also be variable in some scenarios
+                        // pair[1] will always be the value, which is Id.Name or Id.Namespace (if its key is providers)
+                        var keySegment = pair[0];
+                        var valueSegment = pair[1];
+                        var appendParent = false;
+                        if (valueSegment.IsReference)
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(valueSegment, $"{idVariableName}.Namespace"));
-                            // do not append a new .Parent to the id
-                            continue;
+                            if (keySegment == Segment.Providers) // if the key is providers and the value is a parameter
+                            {
+                                parameterMappingStack.Push(new ContextualParameterMapping(valueSegment, $"{idVariableName}.ResourceType.Namespace"));
+                                // do not append a new .Parent to the id
+                            }
+                            else // for all other normal keys
+                            {
+                                parameterMappingStack.Push(new ContextualParameterMapping(valueSegment, $"{idVariableName}{invocationSuffix}.Name"));
+                                appendParent = true;
+                            }
                         }
-                        else // for all other normal keys
+                        else // in this branch pair[1] is a constant
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(valueSegment, $"{idVariableName}{invocationSuffix}.Name"));
+                            if (keySegment != Segment.Providers)
+                            {
+                                // if the key is not providers, we need to skip this level and increment the parent hierarchy
+                                appendParent = true;
+                            }
+                        }
+                        if (keySegment.IsReference)
+                        {
+                            parameterMappingStack.Push(new ContextualParameterMapping(keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.Types.Last()", new[] { "System.Linq" }));
+                            appendParent = true;
+                        }
+                        // add .Parent suffix
+                        if (appendParent)
                             invocationSuffix += ".Parent";
-                            continue;
-                        }
                     }
-                    else // in this branch pair[1] is a constant
+                    else
                     {
-                        if (pair[0] != Segment.Providers)
-                        {
-                            // if the key is not providers, we need to skip this level and increment the parent hierarchy
-                            invocationSuffix += ".Parent";
-                        }
+                        // if we only have one segment in this group, it should always be a reference
+                        parameterMappingStack.Push(new ContextualParameterMapping(pair[0], $"{idVariableName}{invocationSuffix}.GetParts({segmentPairs.Count - indexOfProvidersPair})"));
                     }
                 }
             }
             // recursively get the parameters of its parent
             BuildContextualParameterMappingHierarchy(parent, context, parameterMappingStack, idVariableName, invocationSuffix);
+        }
+
+        /// <summary>
+        /// This bases on the fact that the contextual path should always be a resource identifier in its value,
+        /// therefore we should always have the ability to split the contextual path into pairs.
+        /// But the request path has variables in it, therefore we need to split the diff into pairs considering that some segment might have the x-ms-skip-url-encoding = true,
+        /// which means it can be not only a single variable, but also at least a subset of a resource ID (virtualMachines/myVM for instance)
+        /// If we have two segments with all x-ms-skip-url-encoding = false, they should be able to go into pairs
+        /// A segment with x-ms-skip-url-encoding = true has the ability to go alone, since it could have multiple segments in its value.
+        /// How many segment could go solo? Say we have a total number of X segments with x-ms-skip-url-encoding = true
+        /// and N is the total number of the segments.
+        /// If N is an odd number, we must have an odd number of segments that go solo.
+        /// If N is an even number, we must have an even number of segments that go solo. (zero is an even number)
+        /// </summary>
+        /// <param name="diff"></param>
+        /// <returns></returns>
+        private static IEnumerable<List<Segment>> SplitDiffIntoPairs(RequestPath diff)
+        {
+            // if N is odd, we allow 1 segment to go alone. if N is even, we allow 0 segments to go alone
+            int maximumNumberOfAloneSegments = diff.Count % 2 == 0 ? 0 : 1;
+            var result = new Stack<List<Segment>>();
+            var indices = new List<int>();
+            for (int i = 0; i < diff.Count; i++)
+            {
+                var current = diff[i];
+                if (current.IsConstant || !current.SkipUrlEncoding || maximumNumberOfAloneSegments == 0)
+                {
+                    // key is constant, or key is a reference but it is not enabling `x-ms-skip-url-encoding`, we could include a pair
+                    if (i + 1 >= diff.Count)
+                        throw new InvalidOperationException($"The greedy algorithm does not work on this request. Diff {diff}");
+                    result.Push(new List<Segment> { diff[i], diff[i + 1] });
+                    i++;
+                    continue;
+                }
+                if (current.SkipUrlEncoding && maximumNumberOfAloneSegments > 0)
+                {
+                    result.Push(new List<Segment> { diff[i] });
+                    maximumNumberOfAloneSegments--;
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -143,18 +189,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// If false, we will only match the type
             /// </summary>
             public bool Strict;
+            /// <summary>
+            /// The using statements in the ValueExpression
+            /// </summary>
+            public IEnumerable<string> Usings;
 
-            public ContextualParameterMapping(Segment segment, string valueExpression)
-                : this(segment.Reference.Name, segment.Reference.Type, valueExpression, segment.IsStrict)
+            public ContextualParameterMapping(Segment segment, string valueExpression, IEnumerable<string>? usings = default)
+                : this(segment.Reference.Name, segment.Reference.Type, valueExpression, segment.IsStrict, usings ?? Enumerable.Empty<string>())
             {
             }
 
-            public ContextualParameterMapping(string parameterName, CSharpType parameterType, string valueExpression, bool strict)
+            internal ContextualParameterMapping(string parameterName, CSharpType parameterType, string valueExpression, bool strict, IEnumerable<string> usings)
             {
                 ParameterName = parameterName;
                 ParameterType = parameterType;
                 ValueExpression = GetValueExpression(parameterType, valueExpression);
                 Strict = strict;
+                Usings = usings;
             }
 
             private static string GetValueExpression(CSharpType type, string rawExpression)
@@ -203,11 +254,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var mapping = FindContextualParameterForMethod(p, contextualParameterMappingCache, method);
                 if (mapping == null)
                 {
-                    yield return new ParameterMapping(p, true, "");
+                    yield return new ParameterMapping(p, true, "", Enumerable.Empty<string>());
                 }
                 else
                 {
-                    yield return new ParameterMapping(p, false, mapping.ValueExpression);
+                    yield return new ParameterMapping(p, false, mapping.ValueExpression, mapping.Usings);
                 }
             }
         }
@@ -217,7 +268,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (method.IsByIdMethod() && parameter.Name.Equals(method.Parameters[0].Name, StringComparison.InvariantCultureIgnoreCase))
             {
-                return parameter with { Type = typeof(ResourceIdentifier) };
+                return parameter with { Type = typeof(Azure.ResourceManager.ResourceIdentifier) };
             }
 
             return parameter;
@@ -240,12 +291,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// if not pass-through, this is the value to pass in <see cref="RestClientMethod"/>.
             /// </summary>
             public string ValueExpression;
+            /// <summary>
+            /// the using statements used in the ValueExpression
+            /// </summary>
+            public IEnumerable<string> Usings;
 
-            public ParameterMapping(Parameter parameter, bool isPassThru, string valueExpression)
+            public ParameterMapping(Parameter parameter, bool isPassThru, string valueExpression, IEnumerable<string> usings)
             {
                 Parameter = parameter;
                 IsPassThru = isPassThru;
                 ValueExpression = valueExpression;
+                Usings = usings;
             }
         }
 

@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false; // actually this cannot happen
             // now the first segment is a reference
             // we ensure this parameter enables x-ms-skip-url-encoding, aka Escape is false
-            return !first.Escape;
+            return first.SkipUrlEncoding;
         }
 
         private static RequestPath CalculateScopePath(RequestPath requestPath)

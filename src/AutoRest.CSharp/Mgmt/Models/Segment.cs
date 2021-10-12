@@ -35,6 +35,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             Escape = escape;
         }
 
+        public bool SkipUrlEncoding => !Escape;
+
         /// <summary>
         /// If this is a constant, escape is guranteed to be true, since our segment has been split by slashes.
         /// If this is a reference, escape is false when the corresponding parameter has x-ms-skip-url-encoding = true indicating this might be a scope variable

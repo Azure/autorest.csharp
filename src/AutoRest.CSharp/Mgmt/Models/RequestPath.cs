@@ -83,17 +83,30 @@ namespace AutoRest.CSharp.Mgmt.Models
         }
 
         /// <summary>
-        /// Trim this from the other and return the <see cref="Segment"/> that remain.
+        /// Trim this from the other and return the <see cref="RequestPath"/> that remain.
         /// Return null if this is not a parent of the other
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public IEnumerable<Segment>? TrimParentFrom(RequestPath other)
+        public RequestPath TrimParentFrom(RequestPath other)
         {
             if (!this.IsParentOf(other))
-                return null;
+                throw new InvalidOperationException($"Request path {this} is not parent of {other}");
             // this is a parent, we can safely just return from the length of this
-            return other._segments.Skip(this.Count);
+            return new RequestPath(other._segments.Skip(this.Count));
+        }
+
+        /// <summary>
+        /// Trim the scope out of this request path.
+        /// If this is already a scope path, return the empty request path, aka the RequestPath.Tenant
+        /// </summary>
+        /// <returns></returns>
+        public RequestPath TrimScope()
+        {
+            var scope = this.GetScopePath();
+            if (scope == this)
+                return Tenant; // if myself is a scope path, we return the empty path after the trim.
+            return scope.TrimParentFrom(this);
         }
 
         private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)

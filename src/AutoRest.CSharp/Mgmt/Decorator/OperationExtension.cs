@@ -77,8 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 else
                 {
                     // if the resource does not have parameterized scope, we should expect this request path is the child of the resource's request path, in order to add it to this resource
-                    var segments = requestPath.TrimParentFrom(resourceRequestPath);
-                    if (segments is null)
+                    if (!requestPath.IsParentOf(resourceRequestPath))
                         continue;
                     // some tuple resources (a resource that accepts a tuple to uniquely determine its ID from its parent resource) might have multiple list operation in different levels
                     // therefore here we are adding this to the candidate list, and finds a resource with the shortest path as the operation set of this operation

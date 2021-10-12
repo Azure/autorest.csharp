@@ -35,21 +35,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             extraScope = null;
             if (IsListMethod(operation.Method, out itemType, out _))
             {
-                // get the scope
-                extraScope = Enumerable.Empty<Segment>();
-                // the contextual request path must be the parent of the request path of this operation, therefore we just assert this is non-null
+                // the contextual request path must be the parent of the request path of this operation
                 // for instance we have operation path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild
                 // we will get "providers/Microsoft.Fake/locations/{location}/nonResourceChild"
-                var diff = operation.ContextualPath.TrimParentFrom(operation.RequestPath)!;
+                // An exception happens in the scope resources. The parameterized scope might be the contextual path of an operation,
+                // but it literally is not the parent of the corresponding operation.
+                // Here to unify these two cases, we just trim the scope out before we compare the diff
+                var diff = operation.ContextualPath.TrimScope().TrimParentFrom(operation.RequestPath.TrimScope());
                 // remove the "providers" segment and its value
                 // we will get "locations/{location}/nonResourceChild"
-                diff = RemoveProviders(diff);
-                // remove the last segment, which is the thing that we are listing
-                // we will get "locations/{location}"
-                diff = diff.SkipLast(1);
-                // we only keep the "keys" which has even index
-                // we will get "locations"
-                extraScope = diff.Where((_, index) => index % 2 == 0);
+                extraScope = RemoveProviders(diff)
+                            // remove the last segment, which is the thing that we are listing
+                            // we will get "locations/{location}"
+                            .SkipLast(1)
+                            // we only keep the "keys" which has even index
+                            // we will get "locations"
+                            .Where((_, index) => index % 2 == 0);
 
                 return true;
             }
