@@ -10,6 +10,21 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "OperationGroupToResourceType": {
+    "Deployments": "Microsoft.Resources/deployments",
+    "DeploymentOperations": "Microsoft.Resources/deployments/operations",
+    "ResourceLinks": "Microsoft.Resources/links"
+  },
+  "OperationGroupToResource": {
+    "DeploymentOperations": "DeploymentOperation",
+    "Deployments": "DeploymentExtended",
+    "ResourceLinks": "ResourceLink"
+  },
+  "OperationGroupToParent": {
+    "Deployments": "tenant",
+    "PolicyAssignments": "tenant",
+    "ResourceLinks": "tenant"
+  },
   "MergeOperations": {
     "WhatIf": [
       "Deployments_WhatIf_POST",
@@ -18,7 +33,8 @@
       "Deployments_WhatIfAtSubscriptionScope_POST"
     ]
   },
-  "RequestPathToResourceData": {
+  "RequestPathToResource": {
+    "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": "DeploymentOperation",
     "/{linkId}": "ResourceLink"
   }
 }

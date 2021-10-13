@@ -19,52 +19,52 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A Class representing a PolicyAssignment along with the instance operations that can be performed on it. </summary>
-    public partial class PolicyAssignment : ArmResource
+    /// <summary> A Class representing a ResourceLink along with the instance operations that can be performed on it. </summary>
+    public partial class ResourceLink : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PolicyAssignmentsRestOperations _restClient;
-        private readonly PolicyAssignmentData _data;
+        private readonly ResourceLinksRestOperations _restClient;
+        private readonly ResourceLinkData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyAssignment"/> class for mocking. </summary>
-        protected PolicyAssignment()
+        /// <summary> Initializes a new instance of the <see cref="ResourceLink"/> class for mocking. </summary>
+        protected ResourceLink()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "PolicyAssignment"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "ResourceLink"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PolicyAssignment(ArmResource options, PolicyAssignmentData resource) : base(options, resource.Id)
+        internal ResourceLink(ArmResource options, ResourceLinkData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyAssignment"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceLink"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PolicyAssignment(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal ResourceLink(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyAssignment"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceLink"/> class. </summary>
         /// <param name="clientOptions"> The client options to build client context. </param>
         /// <param name="credential"> The credential to build client context. </param>
         /// <param name="uri"> The uri to build client context. </param>
         /// <param name="pipeline"> The pipeline to build client context. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PolicyAssignment(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
+        internal ResourceLink(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Authorization/policyAssignments";
+        public static readonly ResourceType ResourceType = "Microsoft.Resources/links";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -74,7 +74,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PolicyAssignmentData Data
+        public virtual ResourceLinkData Data
         {
             get
             {
@@ -84,18 +84,18 @@ namespace MgmtScopeResource
             }
         }
 
-        /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
+        /// <summary> Gets a resource link with the specified ID. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<PolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceLink>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Get");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLink.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -104,18 +104,18 @@ namespace MgmtScopeResource
             }
         }
 
-        /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
+        /// <summary> Gets a resource link with the specified ID. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<PolicyAssignment> Get(CancellationToken cancellationToken = default)
+        public virtual Response<ResourceLink> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Get");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLink.Get");
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Parent, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -140,19 +140,19 @@ namespace MgmtScopeResource
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
+        /// <summary> Deletes a resource link with the specified ID. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<PolicyAssignmentDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceLinkDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Delete");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLink.Delete");
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new PolicyAssignmentDeleteOperation(response);
+                var response = await _restClient.DeleteAsync(Id, cancellationToken).ConfigureAwait(false);
+                var operation = new ResourceLinkDeleteOperation(response);
                 if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
             catch (Exception e)
@@ -162,17 +162,17 @@ namespace MgmtScopeResource
             }
         }
 
-        /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
+        /// <summary> Deletes a resource link with the specified ID. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual PolicyAssignmentDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ResourceLinkDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Delete");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLink.Delete");
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.Parent, Id.Name, cancellationToken);
-                var operation = new PolicyAssignmentDeleteOperation(response);
+                var response = _restClient.Delete(Id, cancellationToken);
+                var operation = new ResourceLinkDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
