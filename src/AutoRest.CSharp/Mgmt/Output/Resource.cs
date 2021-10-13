@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         var currentTrimmedPath = currentRequestPath.TrimScope();
                         var resourceTrimmedPath = resourceRequestPath.TrimScope();
                         // if this operation is a collection operation, it should be the parent of its corresponding resource request path
-                        var diff = new RequestPath(currentTrimmedPath.TrimParentFrom(resourceTrimmedPath));
+                        var diff = new RequestPath(currentTrimmedPath.TrimAncestorFrom(resourceTrimmedPath));
                         // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
                         key = $"-{diff}";
                         contextualPath = GetContextualPath(operationSet);
@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     else
                     {
                         // for other child operations, they should be child of the corresponding resource request path
-                        key = new RequestPath(resourceRequestPath.TrimParentFrom(operation.GetRequestPath(_context)));
+                        key = new RequestPath(resourceRequestPath.TrimAncestorFrom(operation.GetRequestPath(_context)));
                         contextualPath = GetContextualPath(operationSet);
                     }
                     var restOperation = new MgmtRestOperation(

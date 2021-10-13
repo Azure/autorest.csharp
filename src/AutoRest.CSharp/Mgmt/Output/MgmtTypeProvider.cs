@@ -42,10 +42,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         public abstract IEnumerable<MgmtClientOperation> ClientOperations { get; }
 
-        private IEnumerable<Resource>? _chileResources;
+        private IEnumerable<Resource>? _childResources;
         /// <summary>
         /// The collection of <see cref="Resource"/> that is a child of this generated class.
         /// </summary>
-        public virtual IEnumerable<Resource> ChildResources => _chileResources ??= _context.Library.ArmResources.Where(resource => resource.Parent(_context).Contains(this));
+        public virtual IEnumerable<Resource> ChildResources => _childResources ??= _context.Library.ArmResources.Where(resource => resource.Parent(_context).Contains(this));
     }
 }

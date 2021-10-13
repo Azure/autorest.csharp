@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool IsParentOf(RequestPath other)
+        public bool IsAncestorOf(RequestPath other)
         {
             // To be the parent of other, you must at least be shorter than other.
             if (other.Count <= Count)
@@ -84,13 +84,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         /// <summary>
         /// Trim this from the other and return the <see cref="RequestPath"/> that remain.
-        /// Return null if this is not a parent of the other
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public RequestPath TrimParentFrom(RequestPath other)
+        public RequestPath TrimAncestorFrom(RequestPath other)
         {
-            if (!this.IsParentOf(other))
+            if (!this.IsAncestorOf(other))
                 throw new InvalidOperationException($"Request path {this} is not parent of {other}");
             // this is a parent, we can safely just return from the length of this
             return new RequestPath(other._segments.Skip(this.Count));
@@ -106,7 +105,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             var scope = this.GetScopePath();
             if (scope == this)
                 return Tenant; // if myself is a scope path, we return the empty path after the trim.
-            return scope.TrimParentFrom(this);
+            return scope.TrimAncestorFrom(this);
         }
 
         private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)

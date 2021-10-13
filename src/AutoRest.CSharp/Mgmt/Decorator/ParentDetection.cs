@@ -162,18 +162,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
             // or null if none matched
             var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
-                .Where(r => r.IsParentOf(requestPath)).OrderBy(r => r.Count);
+                .Where(r => r.IsAncestorOf(requestPath)).OrderBy(r => r.Count);
             if (candidates.Any())
                 return candidates.Last();
             // if we cannot find one, we try the 4 extensions
             // first try management group
-            if (RequestPath.ManagementGroup.IsParentOf(requestPath))
+            if (RequestPath.ManagementGroup.IsAncestorOf(requestPath))
                 return RequestPath.ManagementGroup;
             // then try resourceGroup
-            if (RequestPath.ResourceGroup.IsParentOf(requestPath))
+            if (RequestPath.ResourceGroup.IsAncestorOf(requestPath))
                 return RequestPath.ResourceGroup;
             // then try subscriptions
-            if (RequestPath.Subscription.IsParentOf(requestPath))
+            if (RequestPath.Subscription.IsAncestorOf(requestPath))
                 return RequestPath.Subscription;
             // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             var scope = requestPath.GetScopePath();
