@@ -29,5 +29,24 @@ namespace AutoRest.TestServer.Tests
 
             CollectionAssert.AreEqual(File.ReadAllBytes(SamplePngPath), memoryStream.ToArray());
         });
+
+        [Test]
+        public Task FileStreamVeryLarge() => Test(async (host) =>
+        {
+            var result = await new FilesClient(Key, host).GetFileLargeAsync(new());
+            var buffer = new byte[2 * 1024 * 1024L];
+            var stream = result.ContentStream;
+            long total = 0;
+            var count = await stream.ReadAsync(buffer, 0, buffer.Length);
+            while (count > 0)
+            {
+                total += count;
+                count = await stream.ReadAsync(buffer, 0, buffer.Length);
+            }
+
+            Assert.AreEqual(3000 * 1024 * 1024L, total);
+            Assert.False(stream.CanSeek);
+            await result.ContentStream.DisposeAsync().ConfigureAwait(false);
+        }, ignoreScenario: false);
     }
 }
