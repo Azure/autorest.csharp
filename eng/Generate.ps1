@@ -92,6 +92,7 @@ $testNamesLowLevel =
     'body-file',
     'body-string',
     'custom-baseUrl',
+    'custom-baseUrl-more-options'
     'custom-baseUrl-paging',
     'header',
     'httpInfrastructure',
