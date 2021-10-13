@@ -11,6 +11,9 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
+    /// <summary>
+    /// A <see cref="Segment"/> represents a segment of a request path which could be either a <see cref="Constant"/> or a <see cref="Reference"/>
+    /// </summary>
     internal struct Segment : IEquatable<Segment>
     {
         public static readonly Segment Providers = "providers";
@@ -35,6 +38,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             Escape = escape;
         }
 
+        /// <summary>
+        /// Represents the value of `x-ms-skip-url-encoding` if the corresponding path parameter has this extension
+        /// </summary>
         public bool SkipUrlEncoding => !Escape;
 
         /// <summary>
@@ -42,6 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// If this is a reference, escape is false when the corresponding parameter has x-ms-skip-url-encoding = true indicating this might be a scope variable
         /// </summary>
         public bool Escape { get; private set; }
+
         /// <summary>
         /// Mark if this segment is strict when comparing with each other.
         /// IsStrict only works on Reference and does not work on Constant
@@ -54,12 +61,28 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsReference => !IsConstant;
 
+        /// <summary>
+        /// Returns the <see cref="Constant"/> of this segment
+        /// </summary>
+        /// <exception cref="InvalidOperationException">if this.IsConstant is false</exception>
         public Constant Constant => _value.Constant;
 
+        /// <summary>
+        /// Returns the value of the <see cref="Constant"/> of this segment in string
+        /// </summary>
+        /// <exception cref="InvalidOperationException">if this.IsConstant is false</exception>
         public string ConstantValue => _value.Constant.Value?.ToString() ?? "null";
 
+        /// <summary>
+        /// Returns the <see cref="Reference"/> of this segment
+        /// </summary>
+        /// <exception cref="InvalidOperationException">if this.IsReference is false</exception>
         public Reference Reference => _value.Reference;
 
+        /// <summary>
+        /// Returns the name of the <see cref="Reference"/> of this segment
+        /// </summary>
+        /// <exception cref="InvalidOperationException">if this.IsReference is false</exception>
         public string ReferenceName => _value.Reference.Name;
 
         private bool Equals(Segment other, bool strict)

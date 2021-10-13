@@ -14,8 +14,14 @@ using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
+    /// <summary>
+    /// A <see cref="RequestPath"/> represents a parsed request path in the swagger which corresponds to an operation. For instance, `/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines`
+    /// </summary>
     internal struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
     {
+        /// <summary>
+        /// The <see cref="RequestPath"/> of a resource group resource
+        /// </summary>
         public static readonly RequestPath ResourceGroup = new(new[] {
             new Segment("subscriptions"),
             new Segment(new Reference("subscriptionId", typeof(string)), true),
@@ -23,13 +29,22 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment(new Reference("resourceGroupName", typeof(string)), true)
         });
 
+        /// <summary>
+        /// The <see cref="RequestPath"/> of a subscription resource
+        /// </summary>
         public static readonly RequestPath Subscription = new(new[] {
             new Segment("subscriptions"),
             new Segment(new Reference("subscriptionId", typeof(string)), true)
         });
 
+        /// <summary>
+        /// The <see cref="RequestPath"/> of tenants
+        /// </summary>
         public static readonly RequestPath Tenant = new(new Segment[] { });
 
+        /// <summary>
+        /// The <see cref="RequestPath"/> of a management group resource
+        /// </summary>
         public static readonly RequestPath ManagementGroup = new(new[] {
             new Segment("providers"),
             new Segment("Microsoft.Management"),
@@ -40,6 +55,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private IReadOnlyList<Segment> _segments;
 
+        /// <summary>
+        /// Constructs the <see cref="RequestPath"/> instance using the information in a <see cref="RestClientMethod"/>
+        /// Only the information about request path is used, other information, like HttpMethod is not used.
+        /// This is based on the facts that the paths of different operations under the same path are the same - they could have different non-path parameters, but path parameters must be the same
+        /// </summary>
+        /// <param name="method"></param>
         public RequestPath(RestClientMethod method)
         {
             _segments = method.Request.PathSegments
@@ -48,20 +69,25 @@ namespace AutoRest.CSharp.Mgmt.Models
             SerializedPath = method.Operation.GetHttpPath();
         }
 
+        /// <summary>
+        /// Constructs the <see cref="RequestPath"/> instance using a collection of <see cref="Segment"/>
+        /// This is used for the request path that does not come from the swagger document, or an incomplete request path
+        /// </summary>
+        /// <param name="segments"></param>
         public RequestPath(IEnumerable<Segment> segments)
         {
             _segments = segments.ToArray();
             SerializedPath = Segment.BuildSerializedSegments(segments);
         }
 
+        /// <summary>
+        /// The raw request path of this <see cref="RequestPath"/> instance
+        /// </summary>
         public string SerializedPath { get; }
 
-        public int Count => _segments.Count;
-
-        public Segment this[int index] => _segments[index];
-
         /// <summary>
-        /// Check if this <see cref="RequestPath"/> is the parent (aka prefix) of <code other/>
+        /// Check if this <see cref="RequestPath"/> is the ancestor (aka prefix) of <code other/>
+        /// Note that this.IsAncestorOf(this) will return false which indicates that this method is testing the "proper ancestor" like a proper subset.
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -84,9 +110,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         /// <summary>
         /// Trim this from the other and return the <see cref="RequestPath"/> that remain.
+        /// The result is "other - this" by removing this as a prefix of other.
+        /// Note that in current implementation, this.TrimAncestorFrom(this) will throw exception instead of returning an empty request path
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
+        /// <exception cref="InvalidOperationException">if this.IsAncestorOf(other) is false</exception>
         public RequestPath TrimAncestorFrom(RequestPath other)
         {
             if (!this.IsAncestorOf(other))
@@ -131,6 +160,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
             return new Segment(pathSegment.Value, pathSegment.Escape).AsIEnumerable();
         }
+
+        public int Count => _segments.Count;
+
+        public Segment this[int index] => _segments[index];
 
         public bool Equals(RequestPath other)
         {

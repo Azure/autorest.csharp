@@ -10,24 +10,39 @@ using System.Text;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
+    /// <summary>
+    /// A <see cref="ResourceType"/> represents the resource type that derives from a <see cref="RequestPath"/>. It can contain variables in it.
+    /// </summary>
     internal struct ResourceType : IEquatable<ResourceType>, IReadOnlyList<Segment>
     {
         public static readonly ResourceType Null = new(new Segment[0]);
+        /// <summary>
+        /// The <see cref="ResourceType"/> of the resource group resource
+        /// </summary>
         public static readonly ResourceType ResourceGroup = new(new[] {
             new Segment("Microsoft.Resources"),
             new Segment("resourceGroups")
         });
 
+        /// <summary>
+        /// The <see cref="ResourceType"/> of the subscription resource
+        /// </summary>
         public static readonly ResourceType Subscription = new(new[] {
             new Segment("Microsoft.Resources"),
             new Segment("subscriptions")
         });
 
+        /// <summary>
+        /// The <see cref="ResourceType"/> of the tenant resource
+        /// </summary>
         public static readonly ResourceType Tenant = new(new Segment[] {
             new Segment("Microsoft.Resources"),
             new Segment("tenants")
         });
 
+        /// <summary>
+        /// The <see cref="ResourceType"/> of the management group resource
+        /// </summary>
         public static readonly ResourceType ManagementGroup = new(new[] {
             new Segment("Microsoft.ManagementGroups"),
             new Segment("managementGroups")
@@ -64,6 +79,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             return segment;
         }
 
+        /// <summary>
+        /// Returns true if every <see cref="Segment"/> in this <see cref="ResourceType"/> is constant
+        /// </summary>
         public bool IsConstant { get; }
 
         public string SerializedType { get; }
