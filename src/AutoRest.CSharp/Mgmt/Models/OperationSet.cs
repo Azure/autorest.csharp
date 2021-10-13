@@ -91,5 +91,10 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             return null;
         }
+
+        public override string? ToString()
+        {
+            return RequestPath;
+        }
     }
 }

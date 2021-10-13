@@ -88,10 +88,25 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (candidates.Count == 0)
                 return null;
 
-            // choose the shortest as the resource to hold this operation
-            // TODO -- maybe we need to change the sorting criteria to make sure that scope request is always the first one?
-            // in this way we could ensure that scope request could override others
-            return candidates.OrderBy(operationSet => operationSet.GetRequestPath(context).Count).First();
+            // choose the toppest of the rank
+            return candidates.OrderBy(operationSet => RankRequestPath(operationSet.GetRequestPath(context))).First();
+        }
+
+        /// <summary>
+        /// Rank the request path to serve that which request path to choose.
+        /// For normal request paths, we just return its count, and we choose the shortest one.
+        /// For request paths with parameterized scope, we rank it as 0 so that it will always be the first.
+        /// For request paths that only accepts an Id, we rank it as int.MaxValue so that it will always be our last choice
+        /// </summary>
+        /// <param name="requestPath"></param>
+        /// <returns></returns>
+        private static int RankRequestPath(RequestPath requestPath)
+        {
+            if (requestPath.IsById())
+                return int.MaxValue;
+            if (requestPath.GetScopePath().IsParameterizedScope())
+                return 0;
+            return requestPath.Count;
         }
 
         public static string GetHttpPath(this Operation operation)

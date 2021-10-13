@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var parentRequestPath = operationSet.ParentRequestPath(context);
             var diff = parentRequestPath.TrimAncestorFrom(currentRequestPath);
             // if not all of the segment in difference are constant, we cannot be a singleton resource
-            if (!diff.All(s => s.IsConstant))
+            if (!diff.Any() || !diff.All(s => s.IsConstant))
                 return false;
             // now we can ensure the last segment of the path is a constant
             var lastSegment = currentRequestPath.Last();

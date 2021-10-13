@@ -85,10 +85,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // otherwise we append the parent name to it
             var parents = this.Parent(_context);
-            // TODO -- what happens if I have multiple parents????
-            if (parents.Count() > 1)
-                throw new NotImplementedException($"The resource {ResourceName} has multiple parents, this is not supported yet, please directly assign a name to this resource using configuration (placeholder - not implemented either)");
-            return $"{ResourceName}In{parents.First().ResourceName}";
+            var parentSuffix = string.Join("", parents.Select(p => p.ResourceName));
+            return $"{ResourceName}In{parentSuffix}";
         }
 
         private string? GetDefaultNameFromConfiguration()

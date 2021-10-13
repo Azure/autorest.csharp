@@ -111,13 +111,15 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// Trim this from the other and return the <see cref="RequestPath"/> that remain.
         /// The result is "other - this" by removing this as a prefix of other.
-        /// Note that in current implementation, this.TrimAncestorFrom(this) will throw exception instead of returning an empty request path
+        /// If this == other, return empty request path
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">if this.IsAncestorOf(other) is false</exception>
         public RequestPath TrimAncestorFrom(RequestPath other)
         {
+            if (this == other)
+                return RequestPath.Tenant;
             if (!this.IsAncestorOf(other))
                 throw new InvalidOperationException($"Request path {this} is not parent of {other}");
             // this is a parent, we can safely just return from the length of this

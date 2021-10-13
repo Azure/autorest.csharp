@@ -415,22 +415,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRequestPathToArmResources().TryGetValue(requestPath, out resource);
         }
 
-        ///// <summary>
-        ///// Looks up a <see cref="RestClient" /> object by <see cref="OperationGroup" />.
-        ///// </summary>
-        ///// <param name="operationGroup">OperationGroup object.</param>
-        ///// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
-        //public MgmtRestClient GetRestClient(OperationGroup operationGroup)
-        //{
-        //    foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
-        //    {
-        //        if (TryGetRestClient(requestPath, out var restClient))
-        //            return restClient;
-        //    }
-
-        //    throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {operationGroup}");
-        //}
-
         public MgmtRestClient GetRestClient(string requestPath)
         {
             if (TryGetRestClient(requestPath, out var restClient))
@@ -477,10 +461,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
+                var count = resourceOperationsList.Count();
                 foreach (var resourceOperations in resourceOperationsList)
                 {
-                    // TODO -- we need to give them different names
-                    var resource = new Resource(resourceOperations, resourceName, _context);
+                    var nameSuffix = string.Empty;
+                    // if this is from a "ById" operation set, and we have other operation to choose, we add a suffix to the resource name of it
+                    if (resourceOperations.Keys.First().IsById(_context) && count > 1)
+                        nameSuffix = "ById";
+                    var resource = new Resource(resourceOperations, $"{resourceName}{nameSuffix}", _context);
                     // one resource might appear multiple times since one resource might corresponds to multiple request paths
                     foreach (var resourceOperationSet in resourceOperations.Keys)
                     {
@@ -523,21 +511,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private IEnumerable<Dictionary<OperationSet, IEnumerable<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
         {
-            var result = new List<Dictionary<OperationSet, IEnumerable<Operation>>>();
+            var operations = new List<Tuple<OperationSet, IEnumerable<Operation>>>();
 
             foreach (var resourceOperationSet in resourceOperationSets)
             {
                 // all the child operations with the parent of current request path
-                result.Add(new Dictionary<OperationSet, IEnumerable<Operation>>
-                {
-                    { resourceOperationSet, GetChildOperations(resourceOperationSet.RequestPath) }
-                });
+                operations.Add(new Tuple<OperationSet, IEnumerable<Operation>>(resourceOperationSet, GetChildOperations(resourceOperationSet.RequestPath)));
             }
 
             // TODO -- we need to categrize the above list to see if some of the resources have the operation list and we can combine them.
-            //yield return result.Aggregate((l, r) => l.Union(r).ToDictionary(pair => pair.Key, pair => pair.Value));
             // now by default we will never combine any of them
-            return result;
+            return operations.Select(tuple => new Dictionary<OperationSet, IEnumerable<Operation>> { { tuple.Item1, tuple.Item2 } });
         }
 
         public IEnumerable<Operation> GetChildOperations(string requestPath)

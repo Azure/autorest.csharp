@@ -19,6 +19,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static readonly ConcurrentDictionary<OperationSet, RequestPath> _cache = new ConcurrentDictionary<OperationSet, RequestPath>();
 
+        private static readonly ConcurrentDictionary<OperationSet, bool> _byIdCache = new ConcurrentDictionary<OperationSet, bool>();
+
         public static RequestPath GetRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
         {
             if (_cache.TryGetValue(operationSet, out var requestPath))
@@ -27,6 +29,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             requestPath = GetOperation(operationSet).GetRequestPath(context);
             _cache.TryAdd(operationSet, requestPath);
             return requestPath;
+        }
+
+        public static bool IsById(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (_byIdCache.TryGetValue(operationSet, out var result))
+                return result;
+
+            result = operationSet.GetRequestPath(context).IsById();
+            _byIdCache.TryAdd(operationSet, result);
+            return result;
+        }
+
+        public static bool IsById(this RequestPath requestPath)
+        {
+            if (requestPath.Count != 1)
+                return false;
+
+            return requestPath.First().SkipUrlEncoding;
         }
 
         private static Operation GetOperation(OperationSet operationSet)
