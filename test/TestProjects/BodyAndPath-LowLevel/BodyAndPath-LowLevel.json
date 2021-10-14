@@ -134,7 +134,45 @@
             }
           }
         }
-      }      
+      },
+      "/list": {
+        "get": {
+          "operationId": "list",
+          "summary": "List",
+          "description": "List all.",
+          "responses": {
+            "200": {
+              "description": "An array of objects.",
+              "schema": {
+                "type": "array",
+                "description": "An array of objects.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/listItems": {
+        "get": {
+          "operationId": "listItems",
+          "summary": "List products",
+          "description": "List all products.",
+          "responses": {
+            "200": {
+              "description": "An array of products.",
+              "schema": {
+                "type": "array",
+                "description": "An array of objects.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "definitions": {},
     "parameters": {

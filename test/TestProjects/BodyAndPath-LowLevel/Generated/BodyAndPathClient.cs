@@ -197,6 +197,86 @@ namespace BodyAndPath_LowLevel
             }
         }
 
+        /// <summary> List all. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetBodyAndPathsAsync(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBodyAndPathsRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List all. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetBodyAndPaths(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBodyAndPathsRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List all products. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetItemsAsync(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetItemsRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List all products. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetItems(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetItemsRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateCreateRequest(string itemName, RequestContent content)
         {
             var message = _pipeline.CreateMessage();
@@ -250,6 +330,34 @@ namespace BodyAndPath_LowLevel
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetBodyAndPathsRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/list", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetItemsRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/listItems", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
