@@ -91,5 +91,23 @@ namespace AutoRest.CSharp.Utilities
             var result = methodName.RenameListToGet(resourceName);
             Assert.AreEqual(expected, result);
         }
+
+        [TestCase("ListMyListings", "List", "Get", "GetMyListings")]
+        [TestCase("ListEntity", "Entity", "Entities", "ListEntities")]
+        [TestCase("CreateEntity", "List", "Get", "CreateEntity")]
+        public void ValidateReplaceFirst(string text, string oldValue, string newValue, string expected)
+        {
+            var result = text.ReplaceFirst(oldValue, newValue);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase("ListBlobContainerBlob", "Blob", "Blobs", "ListBlobContainerBlobs")]
+        [TestCase("ListEntity", "Entity", "Entities", "ListEntities")]
+        [TestCase("CreateEntity", "List", "Get", "CreateEntity")]
+        public void ValidateReplaceLast(string text, string oldValue, string newValue, string expected)
+        {
+            var result = text.ReplaceLast(oldValue, newValue);
+            Assert.AreEqual(expected, result);
+        }
     }
 }
