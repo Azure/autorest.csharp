@@ -19,16 +19,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string ResourceGroups = "resourceGroups";
         public const string Tenant = "tenant";
         public const string ManagementGroups = "managementGroups";
+        public const string Any = "*";
 
         private static ConcurrentDictionary<RequestPath, RequestPath> _scopePathCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<RequestPath, ResourceType[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceType[]?>();
 
-        public static bool Contains(this ResourceType[] parameterizedScopeTypes, ResourceType resourceType)
-        {
-            if (parameterizedScopeTypes.Length == 0)
-                return true;
-            return parameterizedScopeTypes.Contains(resourceType);
-        }
+        //public static bool ContainsResourceType(this ResourceType[] parameterizedScopeTypes, ResourceType resourceType)
+        //{
+        //    if (parameterizedScopeTypes.Length == 0)
+        //        return true;
+        //    return parameterizedScopeTypes.Contains(resourceType);
+        //}
 
         public static RequestPath GetScopePath(this RequestPath requestPath)
         {
@@ -107,7 +108,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (config.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
                 return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
             // otherwise we just assume this is scope and this scope could be anything
-            return System.Array.Empty<ResourceType>();
+            return new[] { ResourceType.Subscription, ResourceType.ResourceGroup, ResourceType.ManagementGroup, ResourceType.Tenant, ResourceType.Any };
+        }
+
+        public static RequestPath? GetRequestPath(this ResourceType resourceType)
+        {
+            if (resourceType == ResourceType.Subscription)
+                return RequestPath.Subscription;
+            if (resourceType == ResourceType.ResourceGroup)
+                return RequestPath.ResourceGroup;
+            if (resourceType == ResourceType.ManagementGroup)
+                return RequestPath.ManagementGroup;
+            if (resourceType == ResourceType.Tenant)
+                return RequestPath.Tenant;
+            if (resourceType == ResourceType.Any)
+                return RequestPath.Any;
+            return null;
         }
 
         private static ResourceType BuildResourceType(string resourceType) => resourceType switch
@@ -116,6 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             ResourceGroups => ResourceType.ResourceGroup,
             ManagementGroups => ResourceType.ManagementGroup,
             Tenant => ResourceType.Tenant,
+            Any => ResourceType.Any,
             _ => new ResourceType(resourceType)
         };
     }

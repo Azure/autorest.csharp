@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
@@ -52,6 +53,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return valueType.EqualsByName(resourceData.Type);
         }
 
+        private static ISet<ResourceType> GetScopeResourceTypes(RequestPath requestPath, MgmtConfiguration config)
+        {
+            var scope = requestPath.GetScopePath();
+            if (scope.IsParameterizedScope())
+            {
+                return new HashSet<ResourceType>(requestPath.GetParameterizedScopeResourceTypes(config)!);
+            }
+
+            return new HashSet<ResourceType> { scope.GetResourceType(config) };
+        }
+
+        private static bool IsScopeCompatible(RequestPath requestPath, RequestPath resourcePath, MgmtConfiguration config)
+        {
+            // get scope types
+            var requestScopeTypes = GetScopeResourceTypes(requestPath, config);
+            var resourceScopeTypes = GetScopeResourceTypes(resourcePath, config);
+            if (resourceScopeTypes.Contains(ResourceType.Any))
+                return true;
+            return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
+        }
+
         private static OperationSet? FindOperationSetOfResource(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
             var candidates = new List<OperationSet>();
@@ -59,30 +81,40 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             foreach (var operationSet in context.Library.ResourceOperationSets)
             {
                 var resourceRequestPath = operationSet.GetRequestPath(context);
-                if (resourceRequestPath.GetScopePath().IsParameterizedScope())
-                {
-                    // if this is a resource that has a parameterized scope
-                    // first we get the types that this parameterized scope could be, since we already ensure this is a parameterized scope, we could assert this is non-null
-                    var types = resourceRequestPath.GetParameterizedScopeResourceTypes(context.Configuration.MgmtConfiguration)!;
-                    // get the scope of this request
-                    var scope = requestPath.GetScopePath();
-                    // see if the scope type could include this resource type
-                    var scopeResourceType = scope.GetResourceType(context.Configuration.MgmtConfiguration);
-                    if (types.Contains(scopeResourceType))
-                    {
-                        candidates.Add(operationSet);
-                        continue;
-                    }
-                }
-                else
-                {
-                    // if the resource does not have parameterized scope, we should expect this request path is the child of the resource's request path, in order to add it to this resource
-                    if (!requestPath.IsAncestorOf(resourceRequestPath))
-                        continue;
-                    // some tuple resources (a resource that accepts a tuple to uniquely determine its ID from its parent resource) might have multiple list operation in different levels
-                    // therefore here we are adding this to the candidate list, and finds a resource with the shortest path as the operation set of this operation
-                    candidates.Add(operationSet);
-                }
+                // we compare the request with the resource request in two parts:
+                // 1. Compare if they have the same scope
+                // 2. Compare if they have the "compatible" remaining path
+                // check if they have compatible scopes
+                if (!IsScopeCompatible(requestPath, resourceRequestPath, context.Configuration.MgmtConfiguration))
+                    continue;
+                // check the remaining path
+                if (!requestPath.TrimScope().IsAncestorOf(resourceRequestPath.TrimScope()))
+                    continue;
+                candidates.Add(operationSet);
+                //if (resourceRequestPath.GetScopePath().IsParameterizedScope())
+                //{
+                //    // if this is a resource that has a parameterized scope
+                //    // first we get the types that this parameterized scope could be, since we already ensure this is a parameterized scope, we could assert this is non-null
+                //    var types = resourceRequestPath.GetParameterizedScopeResourceTypes(context.Configuration.MgmtConfiguration)!;
+                //    // get the scope of this request
+                //    var scope = requestPath.GetScopePath();
+                //    // see if the scope type could include this resource type
+                //    var scopeResourceType = scope.GetResourceType(context.Configuration.MgmtConfiguration);
+                //    if (types.Contains(scopeResourceType))
+                //    {
+                //        candidates.Add(operationSet);
+                //        continue;
+                //    }
+                //}
+                //else
+                //{
+                //    // if the resource does not have parameterized scope, we should expect this request path is the child of the resource's request path, in order to add it to this resource
+                //    if (!requestPath.IsAncestorOf(resourceRequestPath))
+                //        continue;
+                //    // some tuple resources (a resource that accepts a tuple to uniquely determine its ID from its parent resource) might have multiple list operation in different levels
+                //    // therefore here we are adding this to the candidate list, and finds a resource with the shortest path as the operation set of this operation
+                //    candidates.Add(operationSet);
+                //}
             }
 
             if (candidates.Count == 0)

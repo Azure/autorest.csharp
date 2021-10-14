@@ -1,21 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text.RegularExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure;
-using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -103,47 +96,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
                 p.Declaration.Type.IsFrameworkType && p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>));
-        }
-
-        /// <summary>
-        /// Get the body type of a ClientMethod
-        /// </summary>
-        /// <param name="clientMethod">the ClientMethod</param>
-        /// <returns>the body type of the ClientMethod</returns>
-        public static CSharpType? GetBodyType(this ClientMethod clientMethod)
-        {
-            return clientMethod.RestClientMethod.ReturnType;
-        }
-
-        /// <summary>
-        /// Get the proper return type of the ClientMethod considering the async status
-        /// </summary>
-        /// <param name="clientMethod">the ClientMethod</param>
-        /// <param name="async">Is this method async?</param>
-        /// <returns>the response type of the ClientMethod</returns>
-        public static CSharpType GetResponseType(this ClientMethod clientMethod, bool async)
-        {
-            var bodyType = clientMethod.GetBodyType();
-            var responseType = bodyType != null ? new CSharpType(typeof(Response<>), bodyType) : typeof(Response);
-            return responseType.WrapAsync(async);
-        }
-
-        /// <summary>
-        /// Get the proper return type of the PagingMethod considering the async status
-        /// </summary>
-        /// <param name="pagingMethod">the PagingMethod</param>
-        /// <param name="async">Is this method async?</param>
-        /// <returns>the response type of the PagingMethod</returns>
-        public static CSharpType GetResponseType(this PagingMethod pagingMethod, bool async)
-        {
-            var pageType = pagingMethod.PagingResponse.ItemType;
-            return pageType.WrapPageable(async);
-        }
-
-        // TODO -- this needs refinement
-        public static bool IsByIdMethod(this RestClientMethod clientMethod)
-        {
-            return clientMethod.Operation?.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && clientMethod.Parameters.Count() > 0 && $"/{{{clientMethod.Parameters[0].Name}}}".Equals(httpRequest.Path);
         }
 
         public static bool IsPagingOperation(this MgmtClientOperation clientOperation, BuildContext<MgmtOutputLibrary> context)

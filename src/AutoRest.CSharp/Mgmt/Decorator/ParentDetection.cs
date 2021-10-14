@@ -84,6 +84,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 yield return context.Library.ResourceGroupExtensions;
             if (parameterizedScopeTypes.Contains(ResourceType.Subscription))
                 yield return context.Library.SubscriptionExtensions;
+            if (parameterizedScopeTypes.Contains(ResourceType.Tenant))
+                yield return context.Library.TenantExtensions;
             // tenant is not quite a concrete resource, therefore we do not include it here
             // TODO -- if this scope could be anything, we need to add an extension for ArmResource
         }
@@ -122,7 +124,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        // TODO -- support implicit scope here
         private static RequestPath GetParentRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
             // escape the calculation if this is configured in the configuration
@@ -178,7 +179,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             var scope = requestPath.GetScopePath();
             // if the scope of this request path is parameterized, we return the scope as its parent
-            if (scope.IsParameterizedScope())
+            if (scope != requestPath && scope.IsParameterizedScope())
                 return scope;
             // we do not have much choice to make, return tenant as the parent
             return RequestPath.Tenant;

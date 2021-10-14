@@ -27,27 +27,37 @@ namespace AutoRest.CSharp.Mgmt.Output
         public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _context = context;
-            _allOperations = allOperations;
             OperationSets = allOperations.Keys;
             ResourceName = resourceName;
 
             if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
 
-            // this is for singleton method.
-            // TODO -- another solution of this is "assigning null here and adding this method to ClientOperations"
             CreateOperation = GetOperationWithVerb(HttpMethod.Put);
             GetOperation = GetOperationWithVerb(HttpMethod.Get);
             DeleteOperation = GetOperationWithVerb(HttpMethod.Delete);
             UpdateOperation = GetOperationWithVerb(HttpMethod.Patch);
-            PostOperation = GetOperationWithVerb(HttpMethod.Post);
 
-            ImplicitScopeResourceTypes = OperationSets.First().GetRequestPath(_context).GetParameterizedScopeResourceTypes(_context.Configuration.MgmtConfiguration);
+            _allOperations = GetAllOperations(allOperations);
+
+            IsById = OperationSets.Any(operationSet => operationSet.IsById(_context));
         }
 
-        public bool IsScopeResource => ImplicitScopeResourceTypes != null;
+        private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
 
-        public ResourceType[]? ImplicitScopeResourceTypes { get; }
+        private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> GetAllOperations(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations)
+        {
+            var result = new Dictionary<OperationSet, IEnumerable<Operation>>();
+
+            foreach ((var operationSet, var operations) in allOperations)
+            {
+                result.Add(operationSet, operations.Concat(operationSet.Where(operation => !MethodToExclude.Contains(operation.GetHttpRequest()!.Method))));
+            }
+
+            return result;
+        }
+
+        private bool IsById { get; }
 
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method)
         {
@@ -79,14 +89,28 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            // check if the resource name is unique in the library
-            if (HasUniqueResourceName())
+            int count = ResourceWithSameResourceNameCount();
+            if (!IsById)
+            {
+                // this is a regular resource and the name is unique
+                if (count == 1)
+                    return ResourceName;
+                // otherwise we need prefix to distinguish the resources
+                // TODO -- introduce a flag that suppress the exception here to be thrown which notice the user to assign a proper name in config
+
+                // otherwise we append the parent name to it
+                var parents = this.Parent(_context);
+                var parentSuffix = string.Join("", parents.Select(p => p.ResourceName));
+                return $"{parentSuffix}{ResourceName}";
+            }
+            // if this resource is based on a "ById" operation
+            // if we only have one resource class with this name - we have no choice but use this "ById" resource
+            if (count == 1)
                 return ResourceName;
 
-            // otherwise we append the parent name to it
-            var parents = this.Parent(_context);
-            var parentSuffix = string.Join("", parents.Select(p => p.ResourceName));
-            return $"{ResourceName}In{parentSuffix}";
+            // otherwise we need to add a "ById" suffix to make this resource to have a different name
+            // TODO -- introduce a flag that suppress the exception here to be thrown which notice the user to assign a proper name in config
+            return $"{ResourceName}ById";
         }
 
         private string? GetDefaultNameFromConfiguration()
@@ -100,11 +124,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
-        private bool HasUniqueResourceName()
+        private int ResourceWithSameResourceNameCount()
         {
-            var count = _context.Library.ArmResources.Count(resource => resource.ResourceName == this.ResourceName);
-
-            return count == 1;
+            return _context.Library.ArmResources.Count(resource => resource.ResourceName == this.ResourceName);
         }
 
         protected override string DefaultAccessibility => "public";
@@ -132,7 +154,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         public virtual MgmtClientOperation? GetOperation { get; }
         public virtual MgmtClientOperation? DeleteOperation { get; }
         public virtual MgmtClientOperation? UpdateOperation { get; }
-        public virtual MgmtClientOperation? PostOperation { get; }
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
@@ -167,32 +188,31 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     if (!ShouldIncludeOperation(operation))
                         continue; // meaning this operation will be included in the container
-                    // first we need to see if this operation is a collection operation. Collection operation is not literally a child of the corresponding resource
+                    // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
+                    // therefore we trim the scope off and then calculate the diff
+                    var requestPath = operation.GetRequestPath(_context);
+                    var requestTrimmedPath = requestPath.TrimScope();
+                    var resourceTrimmedPath = resourceRequestPath.TrimScope();
                     string key;
                     RequestPath contextualPath;
+                    // first we need to see if this operation is a collection operation. Collection operation is not literally a child of the corresponding resource
                     if (IsListOperation(operation, operationSet))
                     {
-                        // if we have a parameterized scope, there will be no direct parenting relationship
-                        // since we actually only need the diff between two request paths, we could also do this by first trimming the scope off,
-                        // and then do the diff
-                        // trim the scope off from the current request path
-                        var currentRequestPath = operation.GetRequestPath(_context);
-                        var currentTrimmedPath = currentRequestPath.TrimScope();
-                        var resourceTrimmedPath = resourceRequestPath.TrimScope();
                         // if this operation is a collection operation, it should be the parent of its corresponding resource request path
-                        var diff = new RequestPath(currentTrimmedPath.TrimAncestorFrom(resourceTrimmedPath));
+                        var diff = requestTrimmedPath.TrimAncestorFrom(resourceTrimmedPath);
                         // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
                         key = $"-{diff}";
-                        contextualPath = GetContextualPath(operationSet);
-                        // we need to replace the contextual path with the actual contextual path if it is a parameterized scope
-                        if (contextualPath.IsParameterizedScope())
-                            contextualPath = currentRequestPath.GetScopePath();
+                        //contextualPath = GetContextualPath(operationSet);
+                        contextualPath = ReplaceParameterizedScope(GetContextualPath(operationSet), requestPath.GetScopePath());
+                        //// we need to replace the contextual path with the actual contextual path if it is a parameterized scope
+                        //if (contextualPath.IsParameterizedScope())
+                        //    contextualPath = requestPath.GetScopePath();
                     }
                     else
                     {
                         // for other child operations, they should be child of the corresponding resource request path
-                        key = new RequestPath(resourceRequestPath.TrimAncestorFrom(operation.GetRequestPath(_context)));
-                        contextualPath = GetContextualPath(operationSet);
+                        key = resourceTrimmedPath.TrimAncestorFrom(requestTrimmedPath);
+                        contextualPath = ReplaceParameterizedScope(GetContextualPath(operationSet), requestPath.GetScopePath());
                     }
                     var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
@@ -216,6 +236,14 @@ namespace AutoRest.CSharp.Mgmt.Output
                 pair => pair.Key,
                 pair => MgmtClientOperation.FromOperations(pair.Value)!); // We first filtered the ones with at least one operation, therefore this will never be null
             return _clientOperationMap;
+        }
+
+        private RequestPath ReplaceParameterizedScope(RequestPath path, RequestPath scopeToReplace)
+        {
+            var scope = path.GetScopePath();
+            if (!scope.IsParameterizedScope())
+                return path;
+            return scopeToReplace.Append(path.TrimScope());
         }
 
         private bool IsListOperation(Operation operation, OperationSet operationSet)

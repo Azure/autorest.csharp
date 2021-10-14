@@ -55,9 +55,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 if (_resource.GetOperation == null)
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
-Check the swagger definition, and use 'request-path-to-resource' or 'request-path-is-non-resource' directive to specify the correct resource if necessary.");
+Check the swagger definition, and use 'request-path-to-resource-name' or 'request-path-is-non-resource' directive to specify the correct resource if necessary.");
 
-                CSharpType inheritType = new CSharpType(typeof(TrackedResource));
+                var inheritType = new CSharpType(typeof(TrackedResource));
                 if (_resourceData.Inherits != null && _resourceData.Inherits.Name == inheritType.Name)
                 {
                     _isITaggableResource = true;
@@ -211,10 +211,6 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             WriteUpdateMethod(_resource.UpdateOperation, true);
             WriteUpdateMethod(_resource.UpdateOperation, false);
 
-            // write post method
-            WritePostMethod(_resource.PostOperation, true);
-            WritePostMethod(_resource.PostOperation, false);
-
             // 1. Listing myself at parent scope -> on the container named list
             // 2. Listing myself at ancestor scope -> extension method if the ancestor is not in this RP, or follow #3 by listing myself as the children of the ancestor in the operations of the ancestor
             // 3. Listing children (might be resource or not) -> on the operations
@@ -257,13 +253,6 @@ Check the swagger definition, and use 'request-path-to-resource' or 'request-pat
             if (operation == null)
                 return;
             WriteMethod(operation, async, "Update");
-        }
-
-        private void WritePostMethod(MgmtClientOperation? operation, bool async)
-        {
-            if (operation == null)
-                return;
-            WriteMethod(operation, async, operation.Name);
         }
 
         protected override CSharpType? WrapResourceDataType(CSharpType? returnType)

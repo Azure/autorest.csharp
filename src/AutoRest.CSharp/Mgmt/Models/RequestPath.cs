@@ -20,6 +20,10 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
     {
         /// <summary>
+        /// This is a placeholder of request path for "any" resources in other RPs
+        /// </summary>
+        public static readonly RequestPath Any = new(new[] { new Segment("*") });
+        /// <summary>
         /// The <see cref="RequestPath"/> of a resource group resource
         /// </summary>
         public static readonly RequestPath ResourceGroup = new(new[] {
@@ -137,6 +141,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (scope == this)
                 return Tenant; // if myself is a scope path, we return the empty path after the trim.
             return scope.TrimAncestorFrom(this);
+        }
+
+        public RequestPath Append(RequestPath other)
+        {
+            return new RequestPath(this._segments.Concat(other._segments));
         }
 
         private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)

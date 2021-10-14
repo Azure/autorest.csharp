@@ -234,24 +234,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        public static IEnumerable<ParameterMapping> BuildParameterMapping(this Operation operation, IEnumerable<ContextualParameterMapping> contextualParameterMappings, BuildContext<MgmtOutputLibrary> context)
-            => context.Library.RestClientMethods[operation].BuildParameterMapping(contextualParameterMappings);
-
-        public static IEnumerable<ParameterMapping> BuildParameterMapping(this MgmtRestOperation method, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
-            => method.Method.BuildParameterMapping(contextualParameterMappings);
-
-        public static IEnumerable<ParameterMapping> BuildParameterMapping(this RestClientMethod method, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
+        public static IEnumerable<ParameterMapping> BuildParameterMapping(this MgmtRestOperation operation, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
         {
+            var method = operation.Method;
             var contextualParameterMappingCache = new List<ContextualParameterMapping>(contextualParameterMappings);
             foreach (var parameter in method.Parameters)
             {
-                // Update parameter type if the method is a `ById` method
-                // TODO -- we might no longer needs this since we are not generating "ById" methods
-                var p = UpdateParameterTypeOfByIdMethod(method, parameter);
                 // find this parameter name in the contextual parameter mappings
                 // if there is one, this parameter should use the same value expression
                 // if there is none of this, this parameter should be a pass through parameter
-                var mapping = FindContextualParameterForMethod(p, contextualParameterMappingCache, method);
+                var mapping = FindContextualParameterForMethod(parameter, contextualParameterMappingCache, method);
+                // Update parameter type if the method is a `ById` method
+                var p = UpdateParameterTypeOfByIdMethod(operation.RequestPath, parameter);
                 if (mapping == null)
                 {
                     yield return new ParameterMapping(p, true, "", Enumerable.Empty<string>());
@@ -263,12 +257,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        // TODO -- this needs refinement
-        private static Parameter UpdateParameterTypeOfByIdMethod(RestClientMethod method, Parameter parameter)
+        private static Parameter UpdateParameterTypeOfByIdMethod(RequestPath requestPath, Parameter parameter)
         {
-            if (method.IsByIdMethod() && parameter.Name.Equals(method.Parameters[0].Name, StringComparison.InvariantCultureIgnoreCase))
+            if (requestPath.IsById())
             {
-                return parameter with { Type = typeof(Azure.ResourceManager.ResourceIdentifier) };
+                var reference = requestPath.First().Reference;
+                if (parameter.Name.Equals(reference.Name, StringComparison.InvariantCultureIgnoreCase) && parameter.Type.EqualsByName(reference.Type))
+                {
+                    return parameter with { Type = typeof(Azure.ResourceManager.ResourceIdentifier) };
+                }
             }
 
             return parameter;

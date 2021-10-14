@@ -77,7 +77,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
-            CodeModelValidator.Validate(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
@@ -315,11 +314,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private ArmClientExtensions? _armClientExtensions;
         private ArmClientExtensions EnsureArmClientExtensions()
         {
-           if (_armClientExtensions != null)
-               return _armClientExtensions;
+            if (_armClientExtensions != null)
+                return _armClientExtensions;
 
-           _armClientExtensions = new ArmClientExtensions(GetChildOperations(RequestPath.Tenant), _context);
-           return _armClientExtensions;
+            _armClientExtensions = new ArmClientExtensions(GetChildOperations(RequestPath.Tenant), _context);
+            return _armClientExtensions;
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
@@ -461,14 +460,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
-                var count = resourceOperationsList.Count();
                 foreach (var resourceOperations in resourceOperationsList)
                 {
-                    var nameSuffix = string.Empty;
-                    // if this is from a "ById" operation set, and we have other operation to choose, we add a suffix to the resource name of it
-                    if (resourceOperations.Keys.First().IsById(_context) && count > 1)
-                        nameSuffix = "ById";
-                    var resource = new Resource(resourceOperations, $"{resourceName}{nameSuffix}", _context);
+                    var resource = new Resource(resourceOperations, resourceName, _context);
                     // one resource might appear multiple times since one resource might corresponds to multiple request paths
                     foreach (var resourceOperationSet in resourceOperations.Keys)
                     {
@@ -546,15 +540,36 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var operation in operationSet)
                 {
                     var parentRequestPath = operation.ParentRequestPath(_context);
+                    //// here we get the parent request path, and expand the parameterized scope if this parent is a parameterized scope
+                    //var possibleParentPaths = ExpandParameterizedScope(operation.ParentRequestPath(_context), operation.GetRequestPath(_context));
+                    //foreach (var parentRequestPath in possibleParentPaths)
+                    //{
                     if (_childOperations.TryGetValue(parentRequestPath, out var list))
                         list.Add(operation);
                     else
                         _childOperations.Add(parentRequestPath, new HashSet<Operation> { operation });
+                    //}
                 }
             }
 
             return _childOperations;
         }
+
+        //private IEnumerable<RequestPath> ExpandParameterizedScope(RequestPath parent, RequestPath original)
+        //{
+        //    if (parent.IsParameterizedScope())
+        //    {
+        //        var possibleTypes = original.GetParameterizedScopeResourceTypes(_mgmtConfiguration)!; // this will never be null, since we have checked this is a parameterized scope
+        //        foreach (var type in possibleTypes)
+        //        {
+        //            var path = type.GetRequestPath();
+        //            if (path != null)
+        //                yield return (RequestPath)path;
+        //        }
+        //    }
+
+        //    yield return parent;
+        //}
 
         private IDictionary<string, ResourceData> EnsureRequestPathToResourceData()
         {

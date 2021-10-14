@@ -16,6 +16,9 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal struct ResourceType : IEquatable<ResourceType>, IReadOnlyList<Segment>
     {
         public static readonly ResourceType Null = new(new Segment[0]);
+
+        public static readonly ResourceType Any = new(new[] { new Segment("*") });
+
         /// <summary>
         /// The <see cref="ResourceType"/> of the resource group resource
         /// </summary>

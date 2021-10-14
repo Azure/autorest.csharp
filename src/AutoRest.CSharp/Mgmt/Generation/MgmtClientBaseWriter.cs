@@ -95,7 +95,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual string GetRestClientVariableName(RestClient client)
         {
-            return $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
+            return client.OperationGroup.Key.IsNullOrEmpty()
+                ? "_restClient"
+                : $"_{client.OperationGroup.Key.ToVariableName()}RestClient";
         }
 
         protected internal static CSharpType GetResponseType(CSharpType? returnType, bool async)
@@ -242,7 +244,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"else"))
                     {
-                        _writer.Line($"throw new InvalidOperationException(${{Id.ResourceType}} is not supported here);");
+                        _writer.Line($"throw new InvalidOperationException($\"{{Id.ResourceType}} is not supported here\");");
                     }
                 }
                 else if (escapeBranches.Count == 1)
@@ -546,19 +548,54 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteLROMethodBody(CSharpType lroObjectType, IDictionary<RequestPath, MgmtRestOperation> operationMapping, IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
+        protected virtual void WriteLROMethodBody(CSharpType lroObjectType, IDictionary<RequestPath, MgmtRestOperation> operationMappings, IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
             // TODO -- we need to write multiple branches for a LRO operation
-            if (operationMapping.Count == 1)
+            if (operationMappings.Count == 1)
             {
                 // if we only have one branch, we would not need those if-else statements
-                var branch = operationMapping.Keys.First();
-                WriteLROMethodBranch(lroObjectType, operationMapping[branch], parameterMappings[branch], async);
+                var branch = operationMappings.Keys.First();
+                WriteLROMethodBranch(lroObjectType, operationMappings[branch], parameterMappings[branch], async);
             }
             else
             {
-                // branches go here
-                throw new NotImplementedException("multi-branch LRO not supported yet");
+
+                var keyword = "if";
+                var escapeBranches = new List<RequestPath>();
+                foreach ((var branch, var operation) in operationMappings)
+                {
+                    // we need to identify the correct branch using the resource type, therefore we need first to determine the resource type is a constant
+                    var resourceType = branch.GetResourceType(Config);
+                    if (!resourceType.IsConstant)
+                    {
+                        escapeBranches.Add(branch);
+                        continue;
+                    }
+                    using (_writer.Scope($"{keyword} ({IdVariableName}.ResourceType == \"{branch.GetResourceType(Config)}\")"))
+                    {
+                        WriteLROMethodBranch(lroObjectType, operation, parameterMappings[branch], async);
+                    }
+                    keyword = "else if";
+                }
+                if (escapeBranches.Count == 0)
+                {
+                    using (_writer.Scope($"else"))
+                    {
+                        _writer.Line($"throw new InvalidOperationException($\"{{Id.ResourceType}} is not supported here\");");
+                    }
+                }
+                else if (escapeBranches.Count == 1)
+                {
+                    var branch = escapeBranches.First();
+                    using (_writer.Scope($"else"))
+                    {
+                        WriteLROMethodBranch(lroObjectType, operationMappings[branch], parameterMappings[branch], async);
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException($"It is impossible to identify which branch to go here using Id for request paths: [{string.Join(", ", escapeBranches)}]");
+                }
             }
         }
 
