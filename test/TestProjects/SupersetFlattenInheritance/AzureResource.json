@@ -899,6 +899,9 @@
             "description": "Normal custom object, although marked as azure resource, but it's not recognized by autorest.",
             "x-ms-azure-resource": true,
             "properties": {
+                "id": {
+                    "type": "string"
+                },
                 "foo": {
                     "type": "string"
                 }
@@ -909,6 +912,9 @@
             "description": "Normal custom object with flatten properties from CustomModel2. Also marked as azure resource, but it's not recognized either.",
             "x-ms-azure-resource": true,
             "properties": {
+                "id": {
+                    "type": "string"
+                },
                 "bar": {
                     "type": "string"
                 },

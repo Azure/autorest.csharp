@@ -15,10 +15,16 @@ namespace OmitOperationGroups
     {
         internal static Model4Data DeserializeModel4Data(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> j = default;
             Optional<ModelZ> modelz = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("j"))
                 {
                     j = property.Value.GetString();
@@ -35,7 +41,7 @@ namespace OmitOperationGroups
                     continue;
                 }
             }
-            return new Model4Data(j.Value, modelz.Value);
+            return new Model4Data(id.Value, j.Value, modelz.Value);
         }
     }
 }

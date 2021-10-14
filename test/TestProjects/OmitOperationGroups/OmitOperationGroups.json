@@ -458,6 +458,9 @@
         "Model2": {
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "string"
+                },
                 "b": {
                     "type": "string"
                 },
@@ -523,11 +526,14 @@
         "Model4": {
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "string"
+                },
                 "j": {
                     "readOnly": true,
                     "type": "string"
                 },
-                "modelz":{
+                "modelz": {
                     "$ref": "#/definitions/ModelZ"
                 }
             }
@@ -535,11 +541,14 @@
         "Model5": {
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "string"
+                },
                 "k": {
                     "readOnly": true,
                     "type": "string"
                 },
-                "modelqs":{
+                "modelqs": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ModelQ"

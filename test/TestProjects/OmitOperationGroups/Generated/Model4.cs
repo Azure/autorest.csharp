@@ -33,7 +33,7 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref = "Model4"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Model4(ArmResource options, Model4Data resource)
+        internal Model4(ArmResource options, Model4Data resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;

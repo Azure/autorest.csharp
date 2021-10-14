@@ -27,18 +27,5 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return $"A class representing the {clientPrefix} data model. ";
         }
-
-        /// <summary>
-        /// Tells if a [Resource]Data is a resource by checking if it inherits any of:
-        /// Resource, TrackedResource, SubResource, or SubResourceWritable from the Azure.ResourceManager library.
-        /// </summary>
-        /// <returns></returns>
-        internal bool IsResource()
-        {
-            return EnumerateHierarchy().
-                Where(t => t.Inherits != null)
-                .Select(t => t.Inherits!.Implementation)
-                .Any(s => s is SystemObjectType o && o.SystemType.Assembly.FullName!.StartsWith("Azure.ResourceManager,"));
-        }
     }
 }

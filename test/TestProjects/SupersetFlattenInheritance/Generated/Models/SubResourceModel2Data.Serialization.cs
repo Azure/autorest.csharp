@@ -17,6 +17,11 @@ namespace SupersetFlattenInheritance
             writer.WriteStartObject();
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
+            if (Optional.IsDefined(IdPropertiesId))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(IdPropertiesId);
+            }
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo");
@@ -29,6 +34,7 @@ namespace SupersetFlattenInheritance
         internal static SubResourceModel2Data DeserializeSubResourceModel2Data(JsonElement element)
         {
             Optional<string> id = default;
+            Optional<string> id0 = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -46,6 +52,11 @@ namespace SupersetFlattenInheritance
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
+                        if (property0.NameEquals("id"))
+                        {
+                            id0 = property0.Value.GetString();
+                            continue;
+                        }
                         if (property0.NameEquals("foo"))
                         {
                             foo = property0.Value.GetString();
@@ -55,7 +66,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new SubResourceModel2Data(id.Value, foo.Value);
+            return new SubResourceModel2Data(id.Value, id0.Value, foo.Value);
         }
     }
 }

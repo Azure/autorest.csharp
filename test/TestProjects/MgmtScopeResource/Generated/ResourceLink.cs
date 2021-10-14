@@ -34,7 +34,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref = "ResourceLink"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ResourceLink(ArmResource options, ResourceLinkData resource)
+        internal ResourceLink(ArmResource options, ResourceLinkData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
