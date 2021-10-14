@@ -20,10 +20,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(typeof(object), typeof(CustomModel1Data))]
         [TestCase(typeof(object), typeof(CustomModel2Data))]
-        [TestCase(typeof(SubResource), typeof(SubResourceModel1Data))]
-        [TestCase(typeof(SubResource), typeof(SubResourceModel2Data))]
-        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel1Data))]
-        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel2Data))]
         [TestCase(typeof(Resource), typeof(ResourceModel1Data))]
         [TestCase(typeof(Resource), typeof(ResourceModel2Data))]
         [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel1Data))]

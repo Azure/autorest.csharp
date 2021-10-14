@@ -9,6 +9,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.Management.Storage
 {
@@ -22,7 +23,7 @@ namespace Azure.Management.Storage
             if (Optional.IsDefined(PrivateEndpoint))
             {
                 writer.WritePropertyName("privateEndpoint");
-                writer.WriteObjectValue(PrivateEndpoint);
+                JsonSerializer.Serialize(writer, PrivateEndpoint);
             }
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
@@ -38,7 +39,7 @@ namespace Azure.Management.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<PrivateEndpoint> privateEndpoint = default;
+            Optional<SubResource> privateEndpoint = default;
             Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<PrivateEndpointConnectionProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
@@ -74,7 +75,7 @@ namespace Azure.Management.Storage
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            privateEndpoint = PrivateEndpoint.DeserializePrivateEndpoint(property0.Value);
+                            privateEndpoint = JsonSerializer.Deserialize<SubResource>(property0.Value.ToString());
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"))
@@ -101,7 +102,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new PrivateEndpointConnectionData(id, name, type, privateEndpoint.Value, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new PrivateEndpointConnectionData(id, name, type, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

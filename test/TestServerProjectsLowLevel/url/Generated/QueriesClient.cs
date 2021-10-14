@@ -17,14 +17,15 @@ namespace url_LowLevel
     /// <summary> The Queries service client. </summary>
     public partial class QueriesClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly string apiVersion;
+
+        private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
         protected QueriesClient()
@@ -35,6 +36,7 @@ namespace url_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public QueriesClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -44,15 +46,15 @@ namespace url_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestUrlTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            apiVersion = options.Version;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Get true Boolean value on path. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -62,33 +64,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanTrueAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanTrueRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanTrueRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,6 +83,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get true Boolean value on path. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -107,33 +93,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetBooleanTrue(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanTrueRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanTrueRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -142,21 +111,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetBooleanTrueRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/queries/bool/true", false);
-            uri.AppendQuery("boolQuery", true, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get false Boolean value on path. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -166,33 +122,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanFalseAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanFalseRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanFalseRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -202,6 +141,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get false Boolean value on path. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -211,33 +151,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetBooleanFalse(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanFalseRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanFalseRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -246,21 +169,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetBooleanFalseRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/queries/bool/false", false);
-            uri.AppendQuery("boolQuery", false, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
+        /// <param name="boolQuery"> null boolean value. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -270,34 +181,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="boolQuery"> null boolean value. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanNullAsync(bool? boolQuery = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -307,6 +200,8 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
+        /// <param name="boolQuery"> null boolean value. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -316,34 +211,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="boolQuery"> null boolean value. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetBooleanNull(bool? boolQuery = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -352,13 +229,1935 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetBooleanNullRequest(bool? boolQuery)
+        /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetIntOneMillionAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntOneMillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetIntOneMillion(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntOneMillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetIntNegativeOneMillion(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null integer value (no query parameter). </summary>
+        /// <param name="intQuery"> null integer value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetIntNullAsync(int? intQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntNullRequest(intQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null integer value (no query parameter). </summary>
+        /// <param name="intQuery"> null integer value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetIntNull(int? intQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntNullRequest(intQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetTenBillionAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetTenBillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetTenBillion(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetTenBillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetNegativeTenBillionAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetNegativeTenBillion(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
+        /// <param name="longQuery"> null 64 bit integer value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetLongNullAsync(long? longQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLongNullRequest(longQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
+        /// <param name="longQuery"> null 64 bit integer value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response GetLongNull(long? longQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLongNullRequest(longQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> FloatScientificPositiveAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response FloatScientificPositive(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> FloatScientificNegativeAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response FloatScientificNegative(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null numeric value (no query parameter). </summary>
+        /// <param name="floatQuery"> null numeric value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> FloatNullAsync(float? floatQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatNullRequest(floatQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null numeric value (no query parameter). </summary>
+        /// <param name="floatQuery"> null numeric value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response FloatNull(float? floatQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatNullRequest(floatQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response DoubleDecimalPositive(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response DoubleDecimalNegative(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null numeric value (no query parameter). </summary>
+        /// <param name="doubleQuery"> null numeric value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> DoubleNullAsync(double? doubleQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null numeric value (no query parameter). </summary>
+        /// <param name="doubleQuery"> null numeric value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response DoubleNull(double? doubleQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> StringUnicodeAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringUnicodeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response StringUnicode(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringUnicodeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> StringUrlEncodedAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringUrlEncodedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response StringUrlEncoded(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringUrlEncodedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> StringEmptyAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;&apos;. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response StringEmpty(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null (no query parameter in url). </summary>
+        /// <param name="stringQuery"> null string value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> StringNullAsync(string stringQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringNullRequest(stringQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null (no query parameter in url). </summary>
+        /// <param name="stringQuery"> null string value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response StringNull(string stringQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringNullRequest(stringQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
+        /// <param name="enumQuery"> &apos;green color&apos; enum value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> EnumValidAsync(string enumQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateEnumValidRequest(enumQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
+        /// <param name="enumQuery"> &apos;green color&apos; enum value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response EnumValid(string enumQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateEnumValidRequest(enumQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null (no query parameter in url). </summary>
+        /// <param name="enumQuery"> null string value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> EnumNullAsync(string enumQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateEnumNullRequest(enumQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null (no query parameter in url). </summary>
+        /// <param name="enumQuery"> null string value. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response EnumNull(string enumQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateEnumNullRequest(enumQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
+        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
+        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ByteMultiByte(byte[] byteQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ByteEmptyAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateByteEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ByteEmpty(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateByteEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null as byte array (no query parameters in uri). </summary>
+        /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ByteNullAsync(byte[] byteQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateByteNullRequest(byteQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null as byte array (no query parameters in uri). </summary>
+        /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ByteNull(byte[] byteQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateByteNullRequest(byteQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> DateValidAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDateValidRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response DateValid(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDateValidRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
+        /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> DateNullAsync(DateTimeOffset? dateQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDateNullRequest(dateQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
+        /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response DateNull(DateTimeOffset? dateQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDateNullRequest(dateQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> DateTimeValidAsync(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDateTimeValidRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response DateTimeValid(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDateTimeValidRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
+        /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
+        /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get a null array of string using the csv-array format. </summary>
+        /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get a null array of string using the csv-array format. </summary>
+        /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an empty array [] of string using the csv-array format. </summary>
+        /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an empty array [] of string using the csv-array format. </summary>
+        /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
+        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ArrayStringNoCollectionFormatEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
+        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ArrayStringNoCollectionFormatEmpty(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
+        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateGetBooleanTrueRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/true", false);
+            uri.AppendQuery("boolQuery", true, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetBooleanFalseRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/false", false);
+            uri.AppendQuery("boolQuery", false, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetBooleanNullRequest(bool? boolQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/bool/null", false);
             if (boolQuery != null)
             {
@@ -366,316 +2165,47 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;1000000&apos; integer value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntOneMillionAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntOneMillionRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;1000000&apos; integer value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response GetIntOneMillion(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntOneMillionRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateGetIntOneMillionRequest()
+        internal HttpMessage CreateGetIntOneMillionRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/int/1000000", false);
             uri.AppendQuery("intQuery", 1000000, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;-1000000&apos; integer value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;-1000000&apos; integer value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response GetIntNegativeOneMillion(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateGetIntNegativeOneMillionRequest()
+        internal HttpMessage CreateGetIntNegativeOneMillionRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/int/-1000000", false);
             uri.AppendQuery("intQuery", -1000000, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get null integer value (no query parameter). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="intQuery"> null integer value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntNullAsync(int? intQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNullRequest(intQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get null integer value (no query parameter). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="intQuery"> null integer value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response GetIntNull(int? intQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNullRequest(intQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateGetIntNullRequest(int? intQuery)
+        internal HttpMessage CreateGetIntNullRequest(int? intQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/int/null", false);
             if (intQuery != null)
             {
@@ -683,316 +2213,47 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetTenBillionAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTenBillionRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response GetTenBillion(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTenBillionRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateGetTenBillionRequest()
+        internal HttpMessage CreateGetTenBillionRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/long/10000000000", false);
             uri.AppendQuery("longQuery", 10000000000L, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetNegativeTenBillionAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNegativeTenBillionRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response GetNegativeTenBillion(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNegativeTenBillionRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateGetNegativeTenBillionRequest()
+        internal HttpMessage CreateGetNegativeTenBillionRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/long/-10000000000", false);
             uri.AppendQuery("longQuery", -10000000000L, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="longQuery"> null 64 bit integer value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetLongNullAsync(long? longQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetLongNullRequest(longQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="longQuery"> null 64 bit integer value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response GetLongNull(long? longQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetLongNullRequest(longQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateGetLongNullRequest(long? longQuery)
+        internal HttpMessage CreateGetLongNullRequest(long? longQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/long/null", false);
             if (longQuery != null)
             {
@@ -1000,316 +2261,47 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> FloatScientificPositiveAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificPositiveRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response FloatScientificPositive(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificPositiveRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateFloatScientificPositiveRequest()
+        internal HttpMessage CreateFloatScientificPositiveRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/float/1.034E+20", false);
             uri.AppendQuery("floatQuery", 1.034E+20F, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> FloatScientificNegativeAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificNegativeRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response FloatScientificNegative(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificNegativeRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateFloatScientificNegativeRequest()
+        internal HttpMessage CreateFloatScientificNegativeRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/float/-1.034E-20", false);
             uri.AppendQuery("floatQuery", -1.034E-20F, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get null numeric value (no query parameter). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="floatQuery"> null numeric value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> FloatNullAsync(float? floatQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatNullRequest(floatQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get null numeric value (no query parameter). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="floatQuery"> null numeric value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response FloatNull(float? floatQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatNullRequest(floatQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateFloatNullRequest(float? floatQuery)
+        internal HttpMessage CreateFloatNullRequest(float? floatQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/float/null", false);
             if (floatQuery != null)
             {
@@ -1317,316 +2309,47 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalPositiveRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response DoubleDecimalPositive(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalPositiveRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateDoubleDecimalPositiveRequest()
+        internal HttpMessage CreateDoubleDecimalPositiveRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/double/9999999.999", false);
             uri.AppendQuery("doubleQuery", 9999999.999, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalNegativeRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response DoubleDecimalNegative(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalNegativeRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateDoubleDecimalNegativeRequest()
+        internal HttpMessage CreateDoubleDecimalNegativeRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/double/-9999999.999", false);
             uri.AppendQuery("doubleQuery", -9999999.999, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get null numeric value (no query parameter). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="doubleQuery"> null numeric value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> DoubleNullAsync(double? doubleQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get null numeric value (no query parameter). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="doubleQuery"> null numeric value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response DoubleNull(double? doubleQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateDoubleNullRequest(double? doubleQuery)
+        internal HttpMessage CreateDoubleNullRequest(double? doubleQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/double/null", false);
             if (doubleQuery != null)
             {
@@ -1634,420 +2357,62 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> StringUnicodeAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUnicodeRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response StringUnicode(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUnicodeRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateStringUnicodeRequest()
+        internal HttpMessage CreateStringUnicodeRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/string/unicode/", false);
             uri.AppendQuery("stringQuery", "啊齄丂狛狜隣郎隣兀﨩", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> StringUrlEncodedAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlEncodedRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response StringUrlEncoded(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlEncodedRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateStringUrlEncodedRequest()
+        internal HttpMessage CreateStringUrlEncodedRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend", false);
             uri.AppendQuery("stringQuery", "begin!*'();:@ &=+$,/?#[]end", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;&apos;. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> StringEmptyAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringEmptyRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;&apos;. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response StringEmpty(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringEmptyRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateStringEmptyRequest()
+        internal HttpMessage CreateStringEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/string/empty", false);
             uri.AppendQuery("stringQuery", "", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get null (no query parameter in url). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="stringQuery"> null string value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> StringNullAsync(string stringQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringNullRequest(stringQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get null (no query parameter in url). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="stringQuery"> null string value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response StringNull(string stringQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringNullRequest(stringQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateStringNullRequest(string stringQuery)
+        internal HttpMessage CreateStringNullRequest(string stringQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/string/null", false);
             if (stringQuery != null)
             {
@@ -2055,108 +2420,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> EnumValidAsync(string enumQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumValidRequest(enumQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response EnumValid(string enumQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumValidRequest(enumQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateEnumValidRequest(string enumQuery)
+        internal HttpMessage CreateEnumValidRequest(string enumQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/enum/green%20color", false);
             if (enumQuery != null)
             {
@@ -2164,108 +2438,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get null (no query parameter in url). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="enumQuery"> null string value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> EnumNullAsync(string enumQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumNullRequest(enumQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get null (no query parameter in url). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="enumQuery"> null string value. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response EnumNull(string enumQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumNullRequest(enumQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateEnumNullRequest(string enumQuery)
+        internal HttpMessage CreateEnumNullRequest(string enumQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/enum/null", false);
             if (enumQuery != null)
             {
@@ -2273,108 +2456,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ByteMultiByte(byte[] byteQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateByteMultiByteRequest(byte[] byteQuery)
+        internal HttpMessage CreateByteMultiByteRequest(byte[] byteQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/byte/multibyte", false);
             if (byteQuery != null)
             {
@@ -2382,212 +2474,32 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;&apos; as byte array. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ByteEmptyAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteEmptyRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;&apos; as byte array. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ByteEmpty(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteEmptyRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateByteEmptyRequest()
+        internal HttpMessage CreateByteEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/byte/empty", false);
             uri.AppendQuery("byteQuery", new byte[] { }, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get null as byte array (no query parameters in uri). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ByteNullAsync(byte[] byteQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteNullRequest(byteQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get null as byte array (no query parameters in uri). </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ByteNull(byte[] byteQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteNullRequest(byteQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateByteNullRequest(byte[] byteQuery)
+        internal HttpMessage CreateByteNullRequest(byte[] byteQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/byte/null", false);
             if (byteQuery != null)
             {
@@ -2595,212 +2507,32 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> DateValidAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateValidRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response DateValid(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateValidRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateDateValidRequest()
+        internal HttpMessage CreateDateValidRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/date/2012-01-01", false);
             uri.AppendQuery("dateQuery", new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> DateNullAsync(DateTimeOffset? dateQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateNullRequest(dateQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response DateNull(DateTimeOffset? dateQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateNullRequest(dateQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery)
+        internal HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/date/null", false);
             if (dateQuery != null)
             {
@@ -2808,212 +2540,32 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> DateTimeValidAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeValidRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response DateTimeValid(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeValidRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateDateTimeValidRequest()
+        internal HttpMessage CreateDateTimeValidRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
             uri.AppendQuery("dateTimeQuery", new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery)
+        internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/datetime/null", false);
             if (dateTimeQuery != null)
             {
@@ -3021,108 +2573,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/csv/string/valid", false);
             if (arrayQuery != null)
             {
@@ -3130,108 +2591,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get a null array of string using the csv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get a null array of string using the csv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/csv/string/null", false);
             if (arrayQuery != null)
             {
@@ -3239,108 +2609,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get an empty array [] of string using the csv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get an empty array [] of string using the csv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/csv/string/empty", false);
             if (arrayQuery != null)
             {
@@ -3348,108 +2627,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringNoCollectionFormatEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ArrayStringNoCollectionFormatEmpty(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/none/string/empty", false);
             if (arrayQuery != null)
             {
@@ -3457,108 +2645,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/ssv/string/valid", false);
             if (arrayQuery != null)
             {
@@ -3566,108 +2663,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/tsv/string/valid", false);
             if (arrayQuery != null)
             {
@@ -3675,108 +2681,17 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/pipes/string/valid", false);
             if (arrayQuery != null)
             {
@@ -3784,7 +2699,22 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
         }
     }
 }

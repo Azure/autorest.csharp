@@ -78,7 +78,14 @@ namespace Azure.Core
                     writer.WriteNumberValue(d);
                     break;
                 case double d:
-                    writer.WriteNumberValue(d);
+                    if (double.IsNaN(d))
+                    {
+                        writer.WriteStringValue("NaN");
+                    }
+                    else
+                    {
+                        writer.WriteNumberValue(d);
+                    }
                     break;
                 case float f:
                     writer.WriteNumberValue(f);

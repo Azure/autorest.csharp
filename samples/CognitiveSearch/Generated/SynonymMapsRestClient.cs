@@ -37,7 +37,7 @@ namespace CognitiveSearch
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string synonymMapName, SynonymMap synonymMap, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateCreateOrUpdateRequest(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, Models.RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -57,7 +57,7 @@ namespace CognitiveSearch
             {
                 request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
-            request.Headers.Add("Prefer", "return=representation");
+            request.Headers.Add("Prefer", prefer.ToString());
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
@@ -68,12 +68,13 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new synonym map or updates a synonym map if it already exists. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="synonymMapName"/> or <paramref name="synonymMap"/> is null. </exception>
-        public async Task<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -84,7 +85,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(synonymMapName, prefer, synonymMap, requestOptions, accessCondition);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -103,12 +104,13 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new synonym map or updates a synonym map if it already exists. </summary>
         /// <param name="synonymMapName"> The name of the synonym map to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="synonymMapName"/> or <paramref name="synonymMap"/> is null. </exception>
-        public Response<SynonymMap> CreateOrUpdate(string synonymMapName, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response<SynonymMap> CreateOrUpdate(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (synonymMapName == null)
             {
@@ -119,7 +121,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(synonymMapName, prefer, synonymMap, requestOptions, accessCondition);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

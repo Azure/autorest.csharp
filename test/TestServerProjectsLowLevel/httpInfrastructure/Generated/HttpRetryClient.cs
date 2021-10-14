@@ -16,14 +16,15 @@ namespace httpInfrastructure_LowLevel
     /// <summary> The HttpRetry service client. </summary>
     public partial class HttpRetryClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly string apiVersion;
+
+        private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of HttpRetryClient for mocking. </summary>
         protected HttpRetryClient()
@@ -34,6 +35,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpRetryClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -43,15 +45,15 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            apiVersion = options.Version;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -61,33 +63,16 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head408Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateHead408Request();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateHead408Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -97,6 +82,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -106,33 +92,16 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head408(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateHead408Request();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateHead408Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -141,865 +110,632 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        private HttpMessage CreateHead408Request()
+        /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> Put500Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePut500Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response Put500(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePut500Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> Patch500Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePatch500Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response Patch500(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePatch500Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 502 status code, then 200 after retry. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> Get502Async(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGet502Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 502 status code, then 200 after retry. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response Get502(RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGet502Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 502 status code, then 200 after retry. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> Options502Async(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptions502Request();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 502 status code, then 200 after retry. </summary>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response Options502(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOptions502Request();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> Post503Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePost503Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response Post503(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePost503Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> Delete503Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDelete503Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response Delete503(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDelete503Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> Put504Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePut504Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response Put504(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePut504Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> Patch504Async(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePatch504Request(content);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
+#pragma warning disable AZC0002
+        public virtual Response Patch504(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePatch504Request(content);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateHead408Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/retry/408", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Return 500 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Put500Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePut500Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return 500 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response Put500(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePut500Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreatePut500Request(RequestContent content)
+        internal HttpMessage CreatePut500Request(RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/retry/500", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Return 500 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Patch500Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch500Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return 500 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response Patch500(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch500Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreatePatch500Request(RequestContent content)
+        internal HttpMessage CreatePatch500Request(RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/retry/500", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Return 502 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Get502Async(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGet502Request();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return 502 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response Get502(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGet502Request();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateGet502Request()
+        internal HttpMessage CreateGet502Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/retry/502", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Return 502 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Options502Async(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions502Request();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return 502 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response Options502(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions502Request();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateOptions502Request()
+        internal HttpMessage CreateOptions502Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/retry/502", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Return 503 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Post503Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost503Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return 503 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response Post503(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePost503Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreatePost503Request(RequestContent content)
+        internal HttpMessage CreatePost503Request(RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/retry/503", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Return 503 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Delete503Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete503Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return 503 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response Delete503(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete503Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateDelete503Request(RequestContent content)
+        internal HttpMessage CreateDelete503Request(RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/retry/503", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Return 504 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Put504Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePut504Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return 504 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response Put504(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePut504Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreatePut504Request(RequestContent content)
+        internal HttpMessage CreatePut504Request(RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/retry/504", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Return 504 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Patch504Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch504Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Return 504 status code, then 200 after retry. </summary>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response Patch504(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch504Request(content);
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreatePatch504Request(RequestContent content)
+        internal HttpMessage CreatePatch504Request(RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/retry/504", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
         }
     }
 }

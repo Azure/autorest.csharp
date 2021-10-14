@@ -17,14 +17,15 @@ namespace url_LowLevel
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly string apiVersion;
+
+        private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
@@ -35,6 +36,7 @@ namespace url_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PathsClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -44,15 +46,15 @@ namespace url_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestUrlTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            apiVersion = options.Version;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Get true Boolean value on path. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -62,33 +64,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanTrueAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanTrueRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanTrueRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -98,6 +83,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get true Boolean value on path. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -107,33 +93,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetBooleanTrue(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanTrueRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanTrueRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -142,21 +111,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetBooleanTrueRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/bool/true/", false);
-            uri.AppendPath(true, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get false Boolean value on path. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -166,33 +122,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanFalseAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanFalseRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanFalseRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -202,6 +141,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get false Boolean value on path. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -211,33 +151,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetBooleanFalse(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanFalseRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetBooleanFalseRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -246,21 +169,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetBooleanFalseRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/bool/false/", false);
-            uri.AppendPath(false, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -270,33 +180,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetIntOneMillionAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntOneMillionRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetIntOneMillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -306,6 +199,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -315,33 +209,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetIntOneMillion(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntOneMillionRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetIntOneMillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -350,21 +227,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetIntOneMillionRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/int/1000000/", false);
-            uri.AppendPath(1000000, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -374,33 +238,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -410,6 +257,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -419,33 +267,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetIntNegativeOneMillion(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -454,21 +285,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetIntNegativeOneMillionRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/int/-1000000/", false);
-            uri.AppendPath(-1000000, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -478,33 +296,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetTenBillionAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTenBillionRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetTenBillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -514,6 +315,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -523,33 +325,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetTenBillion(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTenBillionRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetTenBillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -558,21 +343,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetTenBillionRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/long/10000000000/", false);
-            uri.AppendPath(10000000000L, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -582,33 +354,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNegativeTenBillionRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -618,6 +373,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -627,33 +383,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetNegativeTenBillion(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNegativeTenBillionRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetNegativeTenBillionRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -662,21 +401,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetNegativeTenBillionRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/long/-10000000000/", false);
-            uri.AppendPath(-10000000000L, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -686,33 +412,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificPositiveRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -722,6 +431,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -731,33 +441,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response FloatScientificPositive(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificPositiveRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateFloatScientificPositiveRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -766,21 +459,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateFloatScientificPositiveRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/float/1.034E+20/", false);
-            uri.AppendPath(1.034E+20F, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -790,33 +470,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificNegativeRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -826,6 +489,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -835,33 +499,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response FloatScientificNegative(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificNegativeRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateFloatScientificNegativeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -870,21 +517,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateFloatScientificNegativeRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/float/-1.034E-20/", false);
-            uri.AppendPath(-1.034E-20F, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -894,33 +528,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalPositiveRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -930,6 +547,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -939,33 +557,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DoubleDecimalPositive(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalPositiveRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDoubleDecimalPositiveRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -974,21 +575,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateDoubleDecimalPositiveRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/double/9999999.999/", false);
-            uri.AppendPath(9999999.999, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -998,33 +586,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalNegativeRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1034,6 +605,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1043,33 +615,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DoubleDecimalNegative(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalNegativeRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDoubleDecimalNegativeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1078,21 +633,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateDoubleDecimalNegativeRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/double/-9999999.999/", false);
-            uri.AppendPath(-9999999.999, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1102,33 +644,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> StringUnicodeAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUnicodeRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringUnicodeRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1138,6 +663,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1147,33 +673,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response StringUnicode(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUnicodeRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringUnicodeRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1182,21 +691,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateStringUnicodeRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/string/unicode/", false);
-            uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1206,33 +702,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlEncodedAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlEncodedRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringUrlEncodedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1242,6 +721,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1251,33 +731,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response StringUrlEncoded(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlEncodedRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringUrlEncodedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1286,21 +749,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateStringUrlEncodedRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/", false);
-            uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1310,33 +760,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlNonEncodedRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringUrlNonEncodedRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1346,6 +779,7 @@ namespace url_LowLevel
         }
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1355,33 +789,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response StringUrlNonEncoded(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlNonEncodedRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringUrlNonEncodedRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1390,21 +807,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateStringUrlNonEncodedRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/string/begin!*'();:@&=+$,end/", false);
-            uri.AppendPath("begin!*'();:@&=+$,end", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;&apos;. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1414,33 +818,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> StringEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringEmptyRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1450,6 +837,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos;. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1459,33 +847,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response StringEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringEmptyRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1494,21 +865,10 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateStringEmptyRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/string/empty/", false);
-            uri.AppendPath("", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get null (should throw). </summary>
+        /// <param name="stringPath"> null string value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1518,34 +878,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="stringPath"> null string value. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringNullRequest(stringPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringNullRequest(stringPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1555,6 +897,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw). </summary>
+        /// <param name="stringPath"> null string value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1564,34 +909,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="stringPath"> null string value. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response StringNull(string stringPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateStringNullRequest(stringPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateStringNullRequest(stringPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1600,21 +927,10 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateStringNullRequest(string stringPath)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/string/null/", false);
-            uri.AppendPath(stringPath, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
+        /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1624,34 +940,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="enumPath"> send the value green. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumValidRequest(enumPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateEnumValidRequest(enumPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1661,6 +959,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
+        /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1670,34 +971,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="enumPath"> send the value green. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response EnumValid(string enumPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumValidRequest(enumPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateEnumValidRequest(enumPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1706,21 +989,10 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateEnumValidRequest(string enumPath)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/enum/green%20color/", false);
-            uri.AppendPath(enumPath, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
+        /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1730,34 +1002,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="enumPath"> send null should throw. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumNullRequest(enumPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateEnumNullRequest(enumPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1767,6 +1021,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
+        /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1776,34 +1033,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="enumPath"> send null should throw. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response EnumNull(string enumPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumNullRequest(enumPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateEnumNullRequest(enumPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1812,21 +1051,10 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateEnumNullRequest(string enumPath)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/string/null/", false);
-            uri.AppendPath(enumPath, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
+        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1836,34 +1064,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteMultiByteRequest(bytePath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateByteMultiByteRequest(bytePath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1873,6 +1083,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
+        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1882,34 +1095,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ByteMultiByte(byte[] bytePath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteMultiByteRequest(bytePath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateByteMultiByteRequest(bytePath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -1918,21 +1113,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateByteMultiByteRequest(byte[] bytePath)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/byte/multibyte/", false);
-            uri.AppendPath(bytePath, "D", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1942,33 +1124,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ByteEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteEmptyRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateByteEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1978,6 +1143,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1987,33 +1153,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ByteEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteEmptyRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateByteEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2022,21 +1171,10 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateByteEmptyRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/byte/empty/", false);
-            uri.AppendPath(new byte[] { }, "D", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get null as byte array (should throw). </summary>
+        /// <param name="bytePath"> null as byte array (should throw). </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2046,34 +1184,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="bytePath"> null as byte array (should throw). </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteNullRequest(bytePath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateByteNullRequest(bytePath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2083,6 +1203,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null as byte array (should throw). </summary>
+        /// <param name="bytePath"> null as byte array (should throw). </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2092,34 +1215,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="bytePath"> null as byte array (should throw). </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ByteNull(byte[] bytePath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateByteNullRequest(bytePath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateByteNullRequest(bytePath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2128,21 +1233,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateByteNullRequest(byte[] bytePath)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/byte/null/", false);
-            uri.AppendPath(bytePath, "D", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2152,33 +1244,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DateValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateValidRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDateValidRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2188,6 +1263,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2197,33 +1273,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DateValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateValidRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDateValidRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2232,21 +1291,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateDateValidRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/date/2012-01-01/", false);
-            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
+        /// <param name="datePath"> null as date (should throw). </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2256,34 +1303,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="datePath"> null as date (should throw). </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateNullRequest(datePath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDateNullRequest(datePath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2293,6 +1322,8 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
+        /// <param name="datePath"> null as date (should throw). </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2302,34 +1333,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="datePath"> null as date (should throw). </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DateNull(DateTimeOffset datePath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateNullRequest(datePath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDateNullRequest(datePath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2338,21 +1351,8 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateDateNullRequest(DateTimeOffset datePath)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/date/null/", false);
-            uri.AppendPath(datePath, "D", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2362,33 +1362,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeValidRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDateTimeValidRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2398,6 +1381,7 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2407,33 +1391,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DateTimeValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeValidRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDateTimeValidRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2442,21 +1409,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateDateTimeValidRequest()
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
-            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
+        /// <param name="dateTimePath"> null as date-time. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2466,34 +1421,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="dateTimePath"> null as date-time. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2503,6 +1440,8 @@ namespace url_LowLevel
         }
 
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
+        /// <param name="dateTimePath"> null as date-time. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2512,34 +1451,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="dateTimePath"> null as date-time. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 400:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2548,21 +1469,10 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/datetime/null/", false);
-            uri.AppendPath(dateTimePath, "O", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
+        /// <param name="base64UrlPath"> base64url encoded value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2572,34 +1482,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="base64UrlPath"> base64url encoded value. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2609,6 +1501,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
+        /// <param name="base64UrlPath"> base64url encoded value. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2618,34 +1513,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="base64UrlPath"> base64url encoded value. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Base64Url(byte[] base64UrlPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2654,21 +1531,10 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/string/bG9yZW0/", false);
-            uri.AppendPath(base64UrlPath, "U", true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
+        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2678,34 +1544,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2715,6 +1563,9 @@ namespace url_LowLevel
         }
 
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
+        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2724,34 +1575,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2760,21 +1593,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/", false);
-            uri.AppendPath(arrayPath, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
+        /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2784,34 +1605,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2821,6 +1624,8 @@ namespace url_LowLevel
         }
 
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
+        /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2830,34 +1635,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -2866,18 +1653,436 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)
+        internal HttpMessage CreateGetBooleanTrueRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/bool/true/", false);
+            uri.AppendPath(true, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetBooleanFalseRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/bool/false/", false);
+            uri.AppendPath(false, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetIntOneMillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/int/1000000/", false);
+            uri.AppendPath(1000000, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetIntNegativeOneMillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/int/-1000000/", false);
+            uri.AppendPath(-1000000, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetTenBillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/long/10000000000/", false);
+            uri.AppendPath(10000000000L, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateGetNegativeTenBillionRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/long/-10000000000/", false);
+            uri.AppendPath(-10000000000L, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateFloatScientificPositiveRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/float/1.034E+20/", false);
+            uri.AppendPath(1.034E+20F, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateFloatScientificNegativeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/float/-1.034E-20/", false);
+            uri.AppendPath(-1.034E-20F, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDoubleDecimalPositiveRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/double/9999999.999/", false);
+            uri.AppendPath(9999999.999, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDoubleDecimalNegativeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/double/-9999999.999/", false);
+            uri.AppendPath(-9999999.999, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringUnicodeRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/unicode/", false);
+            uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringUrlEncodedRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/", false);
+            uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringUrlNonEncodedRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/begin!*'();:@&=+$,end/", false);
+            uri.AppendPath("begin!*'();:@&=+$,end", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringEmptyRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/empty/", false);
+            uri.AppendPath("", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateStringNullRequest(string stringPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/null/", false);
+            uri.AppendPath(stringPath, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateEnumValidRequest(string enumPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/enum/green%20color/", false);
+            uri.AppendPath(enumPath, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateEnumNullRequest(string enumPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/null/", false);
+            uri.AppendPath(enumPath, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateByteMultiByteRequest(byte[] bytePath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/byte/multibyte/", false);
+            uri.AppendPath(bytePath, "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateByteEmptyRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/byte/empty/", false);
+            uri.AppendPath(new byte[] { }, "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateByteNullRequest(byte[] bytePath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/byte/null/", false);
+            uri.AppendPath(bytePath, "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateValidRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/date/2012-01-01/", false);
+            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateNullRequest(DateTimeOffset datePath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/date/null/", false);
+            uri.AppendPath(datePath, "D", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateTimeValidRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
+            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/datetime/null/", false);
+            uri.AppendPath(dateTimePath, "O", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier400.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/bG9yZW0/", false);
+            uri.AppendPath(base64UrlPath, "U", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/", false);
+            uri.AppendPath(arrayPath, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
+            return message;
+        }
+
+        internal HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/paths/int/1460505600/", false);
             uri.AppendPath(unixTimeUrlPath, "U", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
+        }
+        private sealed class ResponseClassifier400 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier400();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    400 => false,
+                    _ => true
+                };
+            }
         }
     }
 }

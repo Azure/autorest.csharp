@@ -1,14 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -17,7 +12,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
+        private readonly CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
@@ -27,7 +22,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public IEnumerable<LowLevelRestClient> RestClients => _restClients.Values;
-
         private Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
         {
             var restClients = new Dictionary<OperationGroup, LowLevelRestClient>();

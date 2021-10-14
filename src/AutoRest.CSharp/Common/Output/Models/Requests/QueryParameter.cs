@@ -7,13 +7,14 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class QueryParameter
     {
-        public QueryParameter(string name, ReferenceOrConstant value, RequestParameterSerializationStyle serializationStyle, bool escape, SerializationFormat serializationFormat)
+        public QueryParameter(string name, ReferenceOrConstant value, RequestParameterSerializationStyle serializationStyle, bool escape, SerializationFormat serializationFormat, bool explode)
         {
             Name = name;
             Value = value;
             SerializationStyle = serializationStyle;
             Escape = escape;
             SerializationFormat = serializationFormat;
+            Explode = explode;
         }
 
         public string Name { get; }
@@ -21,5 +22,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public RequestParameterSerializationStyle SerializationStyle { get; }
         public SerializationFormat SerializationFormat { get; }
         public bool Escape { get; }
+        public bool Explode { get; }
     }
 }

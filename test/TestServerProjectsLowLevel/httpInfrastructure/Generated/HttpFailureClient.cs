@@ -16,14 +16,15 @@ namespace httpInfrastructure_LowLevel
     /// <summary> The HttpFailure service client. </summary>
     public partial class HttpFailureClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private Uri endpoint;
-        private readonly string apiVersion;
+
+        private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Uri _endpoint;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of HttpFailureClient for mocking. </summary>
         protected HttpFailureClient()
@@ -34,6 +35,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpFailureClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
         {
             if (credential == null)
@@ -43,15 +45,15 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.endpoint = endpoint;
-            apiVersion = options.Version;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _endpoint = endpoint;
         }
 
         /// <summary> Get empty error form server. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -61,33 +63,16 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyErrorAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetEmptyErrorAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyErrorRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetEmptyErrorRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -97,6 +82,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -106,33 +92,16 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetEmptyError(RequestOptions options = null)
+        public virtual Response GetEmptyError(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyErrorRequest();
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetEmptyErrorRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -141,187 +110,140 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        private HttpMessage CreateGetEmptyErrorRequest()
+        /// <summary> Get empty error form server. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetNoModelErrorAsync(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNoModelErrorRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty error form server. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetNoModelError(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNoModelErrorRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty response from server. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetNoModelEmptyAsync(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNoModelEmptyRequest();
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty response from server. </summary>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetNoModelEmpty(RequestOptions options)
+#pragma warning restore AZC0002
+        {
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNoModelEmptyRequest();
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateGetEmptyErrorRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/emptybody/error", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get empty error form server. </summary>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetNoModelErrorAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoModelErrorRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get empty error form server. </summary>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response GetNoModelError(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoModelErrorRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateGetNoModelErrorRequest()
+        internal HttpMessage CreateGetNoModelErrorRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/nomodel/error", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        /// <summary> Get empty response from server. </summary>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetNoModelEmptyAsync(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoModelEmptyRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
-            scope.Start();
-            try
-            {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Get empty response from server. </summary>
-        /// <param name="options"> The request options. </param>
-#pragma warning disable AZC0002
-        public virtual Response GetNoModelEmpty(RequestOptions options = null)
-#pragma warning restore AZC0002
-        {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNoModelEmptyRequest();
-            RequestOptions.Apply(options, message);
-            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
-            scope.Start();
-            try
-            {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        private HttpMessage CreateGetNoModelEmptyRequest()
+        internal HttpMessage CreateGetNoModelEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/nomodel/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
         }
     }
 }

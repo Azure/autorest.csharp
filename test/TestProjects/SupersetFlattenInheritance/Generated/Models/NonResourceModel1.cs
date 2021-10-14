@@ -17,15 +17,19 @@ namespace SupersetFlattenInheritance.Models
 
         /// <summary> Initializes a new instance of NonResourceModel1. </summary>
         /// <param name="bar"></param>
+        /// <param name="id"></param>
         /// <param name="foo"></param>
-        internal NonResourceModel1(string bar, string foo)
+        internal NonResourceModel1(string bar, string id, string foo)
         {
             Bar = bar;
+            Id = id;
             Foo = foo;
         }
 
         /// <summary> Gets or sets the bar. </summary>
         public string Bar { get; set; }
+        /// <summary> Gets or sets the id. </summary>
+        public string Id { get; set; }
         /// <summary> Gets or sets the foo. </summary>
         public string Foo { get; set; }
     }

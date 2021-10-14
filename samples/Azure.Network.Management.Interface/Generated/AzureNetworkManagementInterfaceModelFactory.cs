@@ -13,20 +13,6 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AzureNetworkManagementInterfaceModelFactory
     {
-        /// <summary> Initializes a new instance of Resource. </summary>
-        /// <param name="id"> Resource ID. </param>
-        /// <param name="name"> Resource name. </param>
-        /// <param name="type"> Resource type. </param>
-        /// <param name="location"> Resource location. </param>
-        /// <param name="tags"> Resource tags. </param>
-        /// <returns> A new <see cref="Models.Resource"/> instance for mocking. </returns>
-        public static Resource Resource(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null)
-        {
-            tags ??= new Dictionary<string, string>();
-
-            return new Resource(id, name, type, location, tags);
-        }
-
         /// <summary> Initializes a new instance of NetworkInterface. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
@@ -131,6 +117,20 @@ namespace Azure.Network.Management.Interface.Models
             tags ??= new Dictionary<string, string>();
 
             return new ApplicationSecurityGroup(id, name, type, location, tags, etag, resourceGuid, provisioningState);
+        }
+
+        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <param name="id"> Resource ID. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <returns> A new <see cref="Models.Resource"/> instance for mocking. </returns>
+        public static Resource Resource(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new Resource(id, name, type, location, tags);
         }
 
         /// <summary> Initializes a new instance of Subnet. </summary>

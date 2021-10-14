@@ -17,6 +17,9 @@ namespace constants
 {
     internal partial class ContantsRestClient
     {
+        private Enum8 headerConstant;
+        private Enum9 queryConstant;
+        private Enum10 pathConstant;
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
@@ -24,9 +27,15 @@ namespace constants
         /// <summary> Initializes a new instance of ContantsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="headerConstant"> Constant header property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
+        /// <param name="queryConstant"> Constant query property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
+        /// <param name="pathConstant"> Constant path property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public ContantsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        public ContantsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Enum8 headerConstant, Enum9 queryConstant, Enum10 pathConstant, Uri endpoint = null)
         {
+            this.headerConstant = headerConstant;
+            this.queryConstant = queryConstant;
+            this.pathConstant = pathConstant;
             this.endpoint = endpoint ?? new Uri("http://localhost:3000");
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -778,6 +787,51 @@ namespace constants
             switch (message.Response.Status)
             {
                 case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePutClientConstantsRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/constants/clientConstants/", false);
+            uri.AppendPath(pathConstant.ToString(), true);
+            uri.AppendQuery("query-constant", queryConstant.ToString(), true);
+            request.Uri = uri;
+            request.Headers.Add("header-constant", headerConstant.ToString());
+            return message;
+        }
+
+        /// <summary> Pass constants from the client to this function. Will pass in constant path, query, and header parameters. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> PutClientConstantsAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePutClientConstantsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Pass constants from the client to this function. Will pass in constant path, query, and header parameters. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response PutClientConstants(CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePutClientConstantsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
                     return message.Response;
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

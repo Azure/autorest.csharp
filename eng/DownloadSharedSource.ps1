@@ -13,7 +13,7 @@ function DownloadAll([string[]]$files, [string]$baseUrl, [string]$downloadPath)
 
 $downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Azure.Core.Shared')
 Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
-$files = 'ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory.cs', 'ContentTypeUtilities.cs', 'HttpMessageSanitizer.cs', 'OperationHelpers.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs', 'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'Argument.cs', 'AzureKeyCredentialPolicy.cs'
+$files = 'ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory.cs', 'ContentTypeUtilities.cs', 'HttpMessageSanitizer.cs', 'OperationHelpers.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs', 'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'Argument.cs', 'AppContextSwitchHelper.cs'
 $baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/master/sdk/core/Azure.Core/src/Shared/'
 DownloadAll $files $baseUrl $downloadPath
 

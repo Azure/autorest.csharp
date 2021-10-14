@@ -22,6 +22,11 @@ namespace SupersetFlattenInheritance.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo");
@@ -34,6 +39,7 @@ namespace SupersetFlattenInheritance.Models
         internal static NonResourceModel1 DeserializeNonResourceModel1(JsonElement element)
         {
             Optional<string> bar = default;
+            Optional<string> id = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -51,6 +57,11 @@ namespace SupersetFlattenInheritance.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
+                        if (property0.NameEquals("id"))
+                        {
+                            id = property0.Value.GetString();
+                            continue;
+                        }
                         if (property0.NameEquals("foo"))
                         {
                             foo = property0.Value.GetString();
@@ -60,7 +71,7 @@ namespace SupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new NonResourceModel1(bar.Value, foo.Value);
+            return new NonResourceModel1(bar.Value, id.Value, foo.Value);
         }
     }
 }

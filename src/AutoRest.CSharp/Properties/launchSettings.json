@@ -24,6 +24,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\Generated"
     },
+    "ApiVersion": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ApiVersion\\Generated"
+    },
     "AppConfiguration": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\Generated"
@@ -168,6 +172,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging\\Generated"
     },
+    "custom-baseUrl-paging-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-paging\\Generated"
+    },
     "ExactMatchFlattenInheritance": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExactMatchFlattenInheritance\\Generated"
@@ -192,9 +200,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\head\\Generated"
     },
+    "head-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\head\\Generated"
+    },
     "HeadAsBooleanTrue": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeadAsBooleanTrue\\Generated"
+    },
+    "HeadAsBooleanTrue-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeadAsBooleanTrue-LowLevel\\Generated"
     },
     "header": {
       "commandName": "Project",
@@ -336,6 +352,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\paging\\Generated"
     },
+    "paging-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\paging\\Generated"
+    },
     "PublicClientCtor": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PublicClientCtor\\Generated"
@@ -343,6 +363,14 @@
     "ReferenceTypes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ReferenceTypes\\Generated"
+    },
+    "RequestOptionsAllOptional-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RequestOptionsAllOptional-LowLevel\\Generated"
+    },
+    "RequestOptionsRequired-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RequestOptionsRequired-LowLevel\\Generated"
     },
     "required-optional": {
       "commandName": "Project",

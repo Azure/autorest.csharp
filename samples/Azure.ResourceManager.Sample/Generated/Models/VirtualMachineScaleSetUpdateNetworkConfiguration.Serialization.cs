@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -22,8 +22,11 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(Primary))
@@ -39,7 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup");
-                writer.WriteObjectValue(NetworkSecurityGroup);
+                JsonSerializer.Serialize(writer, NetworkSecurityGroup);
             }
             if (Optional.IsDefined(DnsSettings))
             {
@@ -68,10 +71,10 @@ namespace Azure.ResourceManager.Sample.Models
         internal static VirtualMachineScaleSetUpdateNetworkConfiguration DeserializeVirtualMachineScaleSetUpdateNetworkConfiguration(JsonElement element)
         {
             Optional<string> name = default;
-            ResourceIdentifier id = default;
+            Optional<string> id = default;
             Optional<bool> primary = default;
             Optional<bool> enableAcceleratedNetworking = default;
-            Optional<SubResource> networkSecurityGroup = default;
+            Optional<WritableSubResource> networkSecurityGroup = default;
             Optional<VirtualMachineScaleSetNetworkConfigurationDnsSettings> dnsSettings = default;
             Optional<IList<VirtualMachineScaleSetUpdateIPConfiguration>> ipConfigurations = default;
             Optional<bool> enableIPForwarding = default;
@@ -123,7 +126,7 @@ namespace Azure.ResourceManager.Sample.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            networkSecurityGroup = SubResource.DeserializeSubResource(property0.Value);
+                            networkSecurityGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.ToString());
                             continue;
                         }
                         if (property0.NameEquals("dnsSettings"))
@@ -165,7 +168,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetUpdateNetworkConfiguration(id, name.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup.Value, dnsSettings.Value, Optional.ToList(ipConfigurations), Optional.ToNullable(enableIPForwarding));
+            return new VirtualMachineScaleSetUpdateNetworkConfiguration(id.Value, name.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup, dnsSettings.Value, Optional.ToList(ipConfigurations), Optional.ToNullable(enableIPForwarding));
         }
     }
 }

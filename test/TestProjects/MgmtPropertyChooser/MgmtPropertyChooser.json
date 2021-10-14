@@ -410,6 +410,22 @@
                         "type": "string"
                     },
                     "description": "The virtual machine zones."
+                },
+                "fakeResources": {
+                    "readOnly": true,
+                    "type":"array",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    },
+                    "description": "The fake resources for the virtual machine."
+                },
+                "fakeSubResource": {
+                    "$ref": "#/definitions/FakeSubResource",
+                    "description": "The fake subresource."
+                },
+                "fakeWritableSubResource": {
+                    "$ref": "#/definitions/FakeWritableSubResource",
+                    "description": "The fake writable subresource."
                 }
             },
             "allOf": [
@@ -824,6 +840,25 @@
                 "location"
             ],
             "x-ms-azure-resource": true
+        },
+        "FakeSubResource": {
+            "properties": {
+              "id": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The ARM identifier for fake SubResource"
+              }
+            },
+            "description": "The fake SubResource."
+        },
+        "FakeWritableSubResource": {
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ARM identifier for fake writable SubResource"
+              }
+            },
+            "description": "The fake writable SubResource."
         }
     },
     "parameters": {

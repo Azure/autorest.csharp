@@ -232,7 +232,9 @@ namespace AutoRest.CSharp.Output.Models
                         reference,
                         GetSerializationStyle(requestParameter),
                         !requestParameter.Extensions!.SkipEncoding,
-                        GetSerializationFormat(requestParameter)));
+                        GetSerializationFormat(requestParameter),
+                        GetExplode(requestParameter)
+                    ));
                 }
             }
 
@@ -455,6 +457,8 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
+        private static bool GetExplode(RequestParameter requestParameter) => requestParameter.Protocol.Http is HttpParameter httpParameter && httpParameter.Explode == true;
+
         private static Schema GetValueSchema(RequestParameter requestParameter)
         {
             Schema valueSchema = requestParameter.Schema;
@@ -562,7 +566,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new Parameter(
                 requestParameter.CSharpName(),
-                CreateDescription(requestParameter),
+                CreateDescription(requestParameter, type),
                 TypeFactory.GetInputType(type),
                 defaultValue,
                 isRequired,
@@ -596,14 +600,30 @@ namespace AutoRest.CSharp.Output.Models
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
-        private static string CreateDescription(RequestParameter requestParameter)
+        private static string CreateDescription(RequestParameter requestParameter, CSharpType type)
         {
-            return string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
+            var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
                 BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+
+            return requestParameter.Schema switch
+            {
+                ChoiceSchema choiceSchema when type.IsFrameworkType => AddAllowedValues(description, choiceSchema.Choices),
+                SealedChoiceSchema sealedChoiceSchema when type.IsFrameworkType => AddAllowedValues(description, sealedChoiceSchema.Choices),
+                _ => description
+            };
+
+            static string AddAllowedValues(string description, ICollection<ChoiceValue> choices)
+            {
+                var allowedValues = string.Join(" | ", choices.Select(c => c.Value).Select(v => $"\"{v}\""));
+
+                return string.IsNullOrEmpty(allowedValues)
+                    ? description
+                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
+            }
         }
 
-        private static IEnumerable<Parameter> GetRequiredParameters(Parameter[] parameters)
+        public static IEnumerable<Parameter> GetRequiredParameters(Parameter[] parameters)
         {
             List<Parameter> requiredParameters = new List<Parameter>();
             foreach (var parameter in parameters)
@@ -617,7 +637,7 @@ namespace AutoRest.CSharp.Output.Models
             return requiredParameters;
         }
 
-        private static IEnumerable<Parameter> GetOptionalParameters(Parameter[] parameters, bool includeAPIVersion = false)
+        public static IEnumerable<Parameter> GetOptionalParameters(Parameter[] parameters, bool includeAPIVersion = false)
         {
             List<Parameter> optionalParameters = new List<Parameter>();
             foreach (var parameter in parameters)

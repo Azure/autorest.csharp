@@ -10,14 +10,6 @@ namespace xms_error_responses.Models
     /// <summary> Model factory for read-only models. </summary>
     public static partial class XMSErrorResponseExtensionsModelFactory
     {
-        /// <summary> Initializes a new instance of Animal. </summary>
-        /// <param name="aniType"></param>
-        /// <returns> A new <see cref="Models.Animal"/> instance for mocking. </returns>
-        public static Animal Animal(string aniType = null)
-        {
-            return new Animal(aniType);
-        }
-
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="aniType"></param>
         /// <param name="name"> Gets the Pet by id. </param>
@@ -25,6 +17,14 @@ namespace xms_error_responses.Models
         public static Pet Pet(string aniType = null, string name = null)
         {
             return new Pet(aniType, name);
+        }
+
+        /// <summary> Initializes a new instance of Animal. </summary>
+        /// <param name="aniType"></param>
+        /// <returns> A new <see cref="Models.Animal"/> instance for mocking. </returns>
+        public static Animal Animal(string aniType = null)
+        {
+            return new Animal(aniType);
         }
 
         /// <summary> Initializes a new instance of PetAction. </summary>

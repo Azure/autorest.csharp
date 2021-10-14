@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                using (WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField))
                 {
                     writer.Append($"return (");
                     if (async)
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     writer.Line($";");
-                });
+                }
             }
 
             writer.Line();
@@ -310,7 +310,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
                 using (writer.Scope($"{asyncText} {funcType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
                 {
-                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                    using (WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField))
                     {
                         writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.Method.Name, async)}(");
                         foreach (Parameter parameter in parameters)
@@ -320,7 +320,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         writer.Line($"cancellationToken){configureAwaitText};");
                         writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}, {continuationTokenText}, response.GetRawResponse());");
-                    });
+                    }
                 }
 
                 var nextPageFunctionName = "null";
@@ -330,7 +330,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                     using (writer.Scope($"{asyncText} {funcType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                     {
-                        WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                        using (WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField))
                         {
                             writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
                             foreach (Parameter parameter in nextPageParameters)
@@ -339,7 +339,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             }
                             writer.Line($"cancellationToken){configureAwaitText};");
                             writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}, {continuationTokenText}, response.GetRawResponse());");
-                        });
+                        }
                     }
                 }
                 writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
@@ -374,7 +374,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteParameterNullChecks(parameters);
 
-                WriteDiagnosticScope(writer, lroMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                using (WriteDiagnosticScope(writer, lroMethod.Diagnostics, ClientDiagnosticsField))
                 {
                     string awaitText = async ? "await" : string.Empty;
                     string configureText = async ? ".ConfigureAwait(false)" : string.Empty;
@@ -408,7 +408,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     writer.Line($");");
-                });
+                }
 
             }
             writer.Line();

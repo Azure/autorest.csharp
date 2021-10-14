@@ -42,8 +42,13 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignature method)
+        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignature method, params string[] disabledWarnings)
         {
+            foreach (var disabledWarning in disabledWarnings)
+            {
+                writer.Line($"#pragma warning disable {disabledWarning}");
+            }
+
             writer
                 .Append($"{method.Modifiers} ")
                 .AppendIf($"{method.ReturnType} ", method.ReturnType != null)
@@ -68,10 +73,15 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line();
+            foreach (var disabledWarning in disabledWarnings)
+            {
+                writer.Line($"#pragma warning restore {disabledWarning}");
+            }
+
             return writer.Scope();
         }
 
-        public static void WriteMethodDocumentation(this CodeWriter writer, MethodSignature method)
+        public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignature method)
         {
             writer.WriteXmlDocumentationSummary($"{method.Description}");
             writer.WriteXmlDocumentationParameters(method.Parameters);
@@ -80,10 +90,23 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteXmlDocumentationReturns(method.ReturnDescription);
             }
+
+            return writer;
         }
 
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false)
         {
+            if (clientParameter.Attributes.Any())
+            {
+                writer.AppendRaw("[");
+                foreach (var attribute in clientParameter.Attributes)
+                {
+                    writer.Append($"{attribute.Type}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.AppendRaw("]");
+            }
+
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)
             {
@@ -115,7 +138,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw(",");
         }
 
-        public static void WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        public static CodeWriter WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
         {
             foreach (Parameter parameter in parameters)
             {
@@ -123,7 +146,23 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line();
+            return writer;
         }
+
+        public static CodeWriter.CodeWriterScope WriteUsingStatement(this CodeWriter writer, string variableName, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters, out CodeWriterDeclaration variable)
+        {
+            variable = new CodeWriterDeclaration(variableName);
+            return writer.Scope($"using (var {variable:D} = {GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)})");
+        }
+
+        public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString methodName, FormattableString parameters)
+            => writer.WriteMethodCall(asyncCall, methodName, methodName, parameters);
+
+        public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
+            => writer.Append(GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)).LineRaw(";");
+
+        private static FormattableString GetMethodCallFormattableString(bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
+            => asyncCall ? (FormattableString) $"await {asyncMethodName}({parameters}).ConfigureAwait(false)" : (FormattableString) $"{syncMethodName}({parameters})";
 
         public static void WriteVariableAssignmentWithNullCheck(this CodeWriter writer, string variableName, Parameter parameter)
         {

@@ -36,17 +36,6 @@ schemas: !Schemas
           name: AzureResourceFlattenModel3Foo
           description: New property
       protocol: !Protocols {}
-    - !NumberSchema &ref_22
-      type: integer
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      precision: 32
-      language: !Languages 
-        default:
-          name: WritableSubResourceModelId
-          description: ''
-      protocol: !Protocols {}
     - !NumberSchema &ref_21
       type: integer
       apiVersions:
@@ -197,6 +186,16 @@ schemas: !Schemas
           name: TrackedResourceModelLocation
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_22
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WritableSubResourceModelId
+          description: ''
+      protocol: !Protocols {}
     - !StringSchema &ref_23
       type: string
       apiVersions:
@@ -217,37 +216,7 @@ schemas: !Schemas
           name: WritableSubResourceModelType
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_29
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel6Id
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_30
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel6Name
-          description: ''
-      protocol: !Protocols {}
     - !StringSchema &ref_31
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel6Type
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_27
       type: string
       apiVersions:
         - !ApiVersion 
@@ -257,24 +226,34 @@ schemas: !Schemas
           name: CustomModel2Foo
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_35
+    - !StringSchema &ref_27
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: AzureResourceFlattenModel7Id
+          name: AzureResourceFlattenModel6Id
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_36
+    - !StringSchema &ref_28
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: AzureResourceFlattenModel7Name
+          name: AzureResourceFlattenModel6Name
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_29
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AzureResourceFlattenModel6Type
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_37
@@ -284,7 +263,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: AzureResourceFlattenModel7Type
+          name: CustomModel3Foo
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_33
@@ -294,7 +273,27 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: CustomModel3Foo
+          name: AzureResourceFlattenModel7Id
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_34
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AzureResourceFlattenModel7Name
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_35
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AzureResourceFlattenModel7Type
           description: ''
       protocol: !Protocols {}
   constants:
@@ -829,25 +828,44 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_28
+          - !ObjectSchema &ref_30
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_26
               immediate:
                 - *ref_26
             properties:
-              - !Property &ref_77
+              - !Property 
                 schema: *ref_27
-                serializedName: foo
+                readOnly: true
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: foo
+                    name: id
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_28
+                readOnly: true
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_29
+                readOnly: true
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
                     description: ''
                 protocol: !Protocols {}
             serializationFormats:
@@ -855,40 +873,23 @@ schemas: !Schemas
             usage:
               - input
               - output
+            extensions:
+              x-ms-azure-resource: true
             language: !Languages 
               default:
-                name: CustomModel2
-                description: Pure custom model, the purpose is to pull in a SubResource model so that it can be generated.
+                name: AzureResourceFlattenModel6
+                description: This model is x-ms-azure-resource, and is exactly a SubResource type.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_28
+          - *ref_30
       properties:
-        - !Property 
-          schema: *ref_29
-          readOnly: true
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_30
-          readOnly: true
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
+        - !Property &ref_77
           schema: *ref_31
-          readOnly: true
-          serializedName: type
+          serializedName: foo
           language: !Languages 
             default:
-              name: type
+              name: foo
               description: ''
           protocol: !Protocols {}
       serializationFormats:
@@ -896,28 +897,26 @@ schemas: !Schemas
       usage:
         - input
         - output
-      extensions:
-        x-ms-azure-resource: true
       language: !Languages 
         default:
-          name: AzureResourceFlattenModel6
-          description: This model is x-ms-azure-resource, and is exactly a SubResource type.
+          name: CustomModel2
+          description: Pure custom model, the purpose is to pull in a SubResource model so that it can be generated.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_28
+    - *ref_30
     - !ObjectSchema &ref_32
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_34
+          - !ObjectSchema &ref_36
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_32
               immediate:
@@ -925,10 +924,26 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_33
-                serializedName: foo
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: foo
+                    name: id
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_34
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_35
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
                     description: ''
                 protocol: !Protocols {}
             serializationFormats:
@@ -936,37 +951,23 @@ schemas: !Schemas
             usage:
               - input
               - output
+            extensions:
+              x-ms-azure-resource: true
             language: !Languages 
               default:
-                name: CustomModel3
-                description: Pure custom model, the purpose is to pull in a WritableSubResource model so that it can be generated.
+                name: AzureResourceFlattenModel7
+                description: This model is x-ms-azure-resource, and is exactly a WritableSubResource type.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_34
+          - *ref_36
       properties:
         - !Property 
-          schema: *ref_35
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_36
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
           schema: *ref_37
-          serializedName: type
+          serializedName: foo
           language: !Languages 
             default:
-              name: type
+              name: foo
               description: ''
           protocol: !Protocols {}
       serializationFormats:
@@ -974,15 +975,13 @@ schemas: !Schemas
       usage:
         - input
         - output
-      extensions:
-        x-ms-azure-resource: true
       language: !Languages 
         default:
-          name: AzureResourceFlattenModel7
-          description: This model is x-ms-azure-resource, and is exactly a WritableSubResource type.
+          name: CustomModel3
+          description: Pure custom model, the purpose is to pull in a WritableSubResource model so that it can be generated.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_34
+    - *ref_36
 globalParameters:
   - !Parameter &ref_41
     schema: *ref_1
@@ -2077,7 +2076,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_76
-                schema: *ref_28
+                schema: *ref_26
                 flattened: true
                 implementation: Method
                 required: true
@@ -2103,7 +2102,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !VirtualParameter &ref_78
-                schema: *ref_27
+                schema: *ref_31
                 implementation: Method
                 originalParameter: *ref_76
                 pathToProperty: []
@@ -2132,7 +2131,7 @@ operationGroups:
           - *ref_80
         responses:
           - !SchemaResponse 
-            schema: *ref_28
+            schema: *ref_26
             language: !Languages 
               default:
                 name: ''
@@ -2212,7 +2211,7 @@ operationGroups:
           - *ref_82
         responses:
           - !SchemaResponse 
-            schema: *ref_28
+            schema: *ref_26
             language: !Languages 
               default:
                 name: ''
@@ -2286,7 +2285,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_83
-                schema: *ref_34
+                schema: *ref_32
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2329,7 +2328,7 @@ operationGroups:
           - *ref_85
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -2409,7 +2408,7 @@ operationGroups:
           - *ref_87
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''

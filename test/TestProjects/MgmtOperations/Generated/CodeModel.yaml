@@ -4,7 +4,7 @@ info: !Info
   title: ManagementOperations
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_17
+    - !NumberSchema &ref_19
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -15,7 +15,7 @@ schemas: !Schemas
           name: AvailabilitySetPropertiesPlatformUpdateDomainCount
           description: Update Domain count.
       protocol: !Protocols {}
-    - !NumberSchema &ref_18
+    - !NumberSchema &ref_20
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -44,7 +44,17 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_15
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AvailabilitySetBar
+          description: specifies the bar
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
       type: string
       apiVersions:
         - !ApiVersion 
@@ -54,7 +64,7 @@ schemas: !Schemas
           name: ResourceId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
@@ -64,7 +74,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -74,7 +84,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_13
       type: string
       apiVersions:
         - !ApiVersion 
@@ -83,16 +93,6 @@ schemas: !Schemas
         default:
           name: ResourceLocation
           description: Resource location
-      protocol: !Protocols {}
-    - !StringSchema &ref_3
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AvailabilitySetBar
-          description: specifies the bar
       protocol: !Protocols {}
     - !StringSchema &ref_4
       type: string
@@ -176,7 +176,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_15
+    - !DictionarySchema &ref_14
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -184,7 +184,7 @@ schemas: !Schemas
           name: ResourceTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_20
+    - !DictionarySchema &ref_17
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -198,225 +198,227 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_7
+          - !ObjectSchema &ref_3
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_2
+                - !ObjectSchema &ref_7
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_4
+                      required: true
+                      serializedName: value
+                      language: !Languages 
+                        default:
+                          name: value
+                          description: The virtual network connection shared key value.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ConnectionSharedKey
+                      description: Response for GetConnectionSharedKey API service call.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_8
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_5
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - output
+                    - input
+                  language: !Languages 
+                    default:
+                      name: AvailabilitySetChild
+                      description: >-
+                        Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For
+                        more information about availability sets, see [Manage the availability of virtual
+                        machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned
+                        maintenance, see [Planned maintenance for virtual machines in
+                        Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability
+                        set at creation time. An existing VM cannot be added to an availability set.
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_9
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_3
+                    immediate:
+                      - *ref_3
+                  properties:
+                    - !Property 
+                      schema: *ref_6
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: specifies the bar
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - output
+                    - input
+                  language: !Languages 
+                    default:
+                      name: AvailabilitySetGrandChild
+                      description: >-
+                        Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For
+                        more information about availability sets, see [Manage the availability of virtual
+                        machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned
+                        maintenance, see [Planned maintenance for virtual machines in
+                        Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability
+                        set at creation time. An existing VM cannot be added to an availability set.
+                      namespace: ''
+                  protocol: !Protocols {}
               immediate:
                 - *ref_2
+                - *ref_7
+                - *ref_8
+                - *ref_9
             properties:
               - !Property 
-                schema: *ref_3
-                serializedName: bar
+                schema: *ref_10
+                readOnly: true
+                required: false
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: bar
-                    description: specifies the bar
+                    name: id
+                    description: Resource Id
                 protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: AvailabilitySet
-                description: >-
-                  Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-                  information about availability sets, see [Manage the availability of virtual
-                  machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance,
-                  see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br>
-                  Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_8
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
               - !Property 
-                schema: *ref_4
+                schema: *ref_11
+                readOnly: true
+                required: false
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: Resource name
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_12
+                readOnly: true
+                required: false
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: Resource type
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_13
                 required: true
-                serializedName: value
+                serializedName: location
                 language: !Languages 
                   default:
-                    name: value
-                    description: The virtual network connection shared key value.
+                    name: location
+                    description: Resource location
                 protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: ConnectionSharedKey
-                description: Response for GetConnectionSharedKey API service call.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_9
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
               - !Property 
-                schema: *ref_5
-                serializedName: bar
+                schema: *ref_14
+                required: false
+                serializedName: tags
                 language: !Languages 
                   default:
-                    name: bar
-                    description: specifies the bar
+                    name: tags
+                    description: Resource tags
                 protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
-              - output
               - input
+              - output
+            extensions:
+              x-ms-azure-resource: true
             language: !Languages 
               default:
-                name: AvailabilitySetChild
-                description: >-
-                  Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-                  information about availability sets, see [Manage the availability of virtual
-                  machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance,
-                  see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br>
-                  Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_10
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_6
-                serializedName: bar
-                language: !Languages 
-                  default:
-                    name: bar
-                    description: specifies the bar
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - output
-              - input
-            language: !Languages 
-              default:
-                name: AvailabilitySetGrandChild
-                description: >-
-                  Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-                  information about availability sets, see [Manage the availability of virtual
-                  machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance,
-                  see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br>
-                  Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+                name: Resource
+                description: The Resource model definition.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_7
-          - *ref_8
-          - *ref_9
-          - *ref_10
+          - *ref_3
       properties:
         - !Property 
-          schema: *ref_11
-          readOnly: true
-          required: false
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: Resource Id
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_12
-          readOnly: true
-          required: false
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: Resource name
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_13
-          readOnly: true
-          required: false
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: Resource type
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_14
-          required: true
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: Resource location
-          protocol: !Protocols {}
-        - !Property 
           schema: *ref_15
-          required: false
-          serializedName: tags
+          serializedName: bar
           language: !Languages 
             default:
-              name: tags
-              description: Resource tags
+              name: bar
+              description: specifies the bar
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - input
         - output
-      extensions:
-        x-ms-azure-resource: true
       language: !Languages 
         default:
-          name: Resource
-          description: The Resource model definition.
+          name: AvailabilitySet
+          description: >-
+            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
+            information about availability sets, see [Manage the availability of virtual
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
+            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
+            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_7
+    - *ref_3
     - !ObjectSchema &ref_16
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      children: !Relations 
+      parents: !Relations 
         all:
-          - !ObjectSchema &ref_19
+          - !ObjectSchema &ref_18
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            parents: !Relations 
+            children: !Relations 
               all:
                 - *ref_16
               immediate:
@@ -424,25 +426,11 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_17
-                flattenedNames:
-                  - properties
-                  - platformUpdateDomainCount
-                serializedName: platformUpdateDomainCount
+                serializedName: tags
                 language: !Languages 
                   default:
-                    name: platformUpdateDomainCount
-                    description: Update Domain count.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_18
-                flattenedNames:
-                  - properties
-                  - platformFaultDomainCount
-                serializedName: platformFaultDomainCount
-                language: !Languages 
-                  default:
-                    name: platformFaultDomainCount
-                    description: Fault Domain count.
+                    name: tags
+                    description: Resource tags
                 protocol: !Protocols {}
             serializationFormats:
               - json
@@ -450,20 +438,34 @@ schemas: !Schemas
               - input
             language: !Languages 
               default:
-                name: AvailabilitySetUpdate
-                description: Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated.
+                name: UpdateResource
+                description: The Update Resource model definition.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_19
+          - *ref_18
       properties:
         - !Property 
-          schema: *ref_20
-          serializedName: tags
+          schema: *ref_19
+          flattenedNames:
+            - properties
+            - platformUpdateDomainCount
+          serializedName: platformUpdateDomainCount
           language: !Languages 
             default:
-              name: tags
-              description: Resource tags
+              name: platformUpdateDomainCount
+              description: Update Domain count.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_20
+          flattenedNames:
+            - properties
+            - platformFaultDomainCount
+          serializedName: platformFaultDomainCount
+          language: !Languages 
+            default:
+              name: platformFaultDomainCount
+              description: Fault Domain count.
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -471,14 +473,14 @@ schemas: !Schemas
         - input
       language: !Languages 
         default:
-          name: UpdateResource
-          description: The Update Resource model definition.
+          name: AvailabilitySetUpdate
+          description: Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_19
+    - *ref_18
+    - *ref_7
     - *ref_8
     - *ref_9
-    - *ref_10
     - !ObjectSchema &ref_47
       type: object
       apiVersions:
@@ -491,7 +493,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_7
+            elementType: *ref_2
             language: !Languages 
               default:
                 name: AvailabilitySetListResultValue
@@ -646,7 +648,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_30
-                schema: *ref_7
+                schema: *ref_2
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -689,7 +691,7 @@ operationGroups:
           - *ref_32
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -755,7 +757,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_33
-                schema: *ref_19
+                schema: *ref_16
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -798,7 +800,7 @@ operationGroups:
           - *ref_35
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -960,7 +962,7 @@ operationGroups:
           - *ref_40
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -1026,7 +1028,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_41
-                schema: *ref_8
+                schema: *ref_7
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1069,7 +1071,7 @@ operationGroups:
           - *ref_43
         responses:
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''
@@ -1217,7 +1219,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_48
-                schema: *ref_19
+                schema: *ref_16
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1362,7 +1364,7 @@ operationGroups:
           - *ref_53
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_8
             language: !Languages 
               default:
                 name: ''
@@ -1440,7 +1442,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_54
-                schema: *ref_9
+                schema: *ref_8
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1484,7 +1486,7 @@ operationGroups:
           - *ref_57
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_8
             language: !Languages 
               default:
                 name: ''
@@ -1599,7 +1601,7 @@ operationGroups:
           - *ref_61
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -1689,7 +1691,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_62
-                schema: *ref_10
+                schema: *ref_9
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1735,7 +1737,7 @@ operationGroups:
           - *ref_66
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''

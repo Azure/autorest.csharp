@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -32,8 +31,11 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(Plan))
@@ -80,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
             string name = default;
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
-            ResourceIdentifier id = default;
+            Optional<string> id = default;
             Optional<PurchasePlan> plan = default;
             Optional<OSDiskImage> osDiskImage = default;
             Optional<IList<DataDiskImage>> dataDiskImages = default;
@@ -197,7 +199,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineImage(id, name, location, Optional.ToDictionary(tags), plan.Value, osDiskImage.Value, Optional.ToList(dataDiskImages), automaticOSUpgradeProperties.Value, Optional.ToNullable(hyperVGeneration), disallowed.Value);
+            return new VirtualMachineImage(id.Value, name, location, Optional.ToDictionary(tags), plan.Value, osDiskImage.Value, Optional.ToList(dataDiskImages), automaticOSUpgradeProperties.Value, Optional.ToNullable(hyperVGeneration), disallowed.Value);
         }
     }
 }

@@ -20,7 +20,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(typeof(Resource), typeof(ExactMatchModel1Data))]
         [TestCase(typeof(TrackedResource), typeof(ExactMatchModel5Data))]
-        [TestCase(typeof(WritableSubResource), typeof(ExactMatchModel8))]
         [TestCase(typeof(ExactMatchModel7), typeof(ExactMatchModel2))]
         [TestCase(typeof(ExactMatchModel8), typeof(ExactMatchModel3Data))]
         [TestCase(typeof(ExactMatchModel9), typeof(ExactMatchModel4))]

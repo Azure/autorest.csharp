@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -121,7 +122,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", UseUserAgentOverride());
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", null, null, UseUserAgentOverride());
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)

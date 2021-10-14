@@ -16,14 +16,15 @@ namespace custom_baseUrl_LowLevel
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient
     {
-        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
-        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-        private string host;
-        private readonly string apiVersion;
+
+        private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly string _host;
+
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
 
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
@@ -34,6 +35,7 @@ namespace custom_baseUrl_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
         /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
         public PathsClient(AzureKeyCredential credential, string host = "host", AutoRestParameterizedHostTestClientOptions options = null)
         {
             if (credential == null)
@@ -46,15 +48,17 @@ namespace custom_baseUrl_LowLevel
             }
 
             options ??= new AutoRestParameterizedHostTestClientOptions();
+
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
-            this.host = host;
-            apiVersion = options.Version;
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _host = host;
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
+        /// <param name="accountName"> Account Name. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -64,34 +68,16 @@ namespace custom_baseUrl_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest(accountName);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetEmptyRequest(accountName);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -101,6 +87,9 @@ namespace custom_baseUrl_LowLevel
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
+        /// <param name="accountName"> Account Name. </param>
+        /// <param name="options"> The request options. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -110,34 +99,16 @@ namespace custom_baseUrl_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetEmpty(string accountName, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest(accountName);
-            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
-                {
-                    switch (message.Response.Status)
-                    {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                    }
-                }
-                else
-                {
-                    return message.Response;
-                }
+                using HttpMessage message = CreateGetEmptyRequest(accountName);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
             {
@@ -146,7 +117,7 @@ namespace custom_baseUrl_LowLevel
             }
         }
 
-        private HttpMessage CreateGetEmptyRequest(string accountName)
+        internal HttpMessage CreateGetEmptyRequest(string accountName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -154,11 +125,26 @@ namespace custom_baseUrl_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(_host, false);
             uri.AppendPath("/customuri", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
+        }
+
+        private sealed class ResponseClassifier200 : ResponseClassifier
+        {
+            private static ResponseClassifier _instance;
+            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
+            public override bool IsErrorResponse(HttpMessage message)
+            {
+                return message.Response.Status switch
+                {
+                    200 => false,
+                    _ => true
+                };
+            }
         }
     }
 }

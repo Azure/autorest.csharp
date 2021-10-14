@@ -17,6 +17,11 @@ namespace OmitOperationGroups
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsCollectionDefined(Modelqs))
             {
                 writer.WritePropertyName("modelqs");
@@ -32,10 +37,16 @@ namespace OmitOperationGroups
 
         internal static Model5Data DeserializeModel5Data(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> k = default;
             Optional<IList<ModelQ>> modelqs = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("k"))
                 {
                     k = property.Value.GetString();
@@ -57,7 +68,7 @@ namespace OmitOperationGroups
                     continue;
                 }
             }
-            return new Model5Data(k.Value, Optional.ToList(modelqs));
+            return new Model5Data(id.Value, k.Value, Optional.ToList(modelqs));
         }
     }
 }

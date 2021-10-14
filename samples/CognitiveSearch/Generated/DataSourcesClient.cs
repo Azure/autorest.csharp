@@ -40,17 +40,18 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return await RestClient.CreateOrUpdateAsync(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateOrUpdateAsync(dataSourceName, prefer, dataSource, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -61,17 +62,18 @@ namespace CognitiveSearch
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
         /// <param name="dataSourceName"> The name of the datasource to create or update. </param>
+        /// <param name="prefer"> For HTTP PUT requests, instructs the service to return the created/updated resource on success. </param>
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return RestClient.CreateOrUpdate(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken);
+                return RestClient.CreateOrUpdate(dataSourceName, prefer, dataSource, requestOptions, accessCondition, cancellationToken);
             }
             catch (Exception e)
             {

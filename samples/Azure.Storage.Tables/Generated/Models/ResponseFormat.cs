@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.Storage.Tables
 {
-    /// <summary> The Enum0. </summary>
+    /// <summary> The Enum2. </summary>
     public readonly partial struct ResponseFormat : IEquatable<ResponseFormat>
     {
         private readonly string _value;

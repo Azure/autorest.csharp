@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(SourceVirtualMachine))
             {
                 writer.WritePropertyName("sourceVirtualMachine");
-                writer.WriteObjectValue(SourceVirtualMachine);
+                JsonSerializer.Serialize(writer, SourceVirtualMachine);
             }
             if (Optional.IsDefined(StorageProfile))
             {
@@ -57,7 +57,7 @@ namespace Azure.ResourceManager.Sample
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<Models.SubResource> sourceVirtualMachine = default;
+            Optional<WritableSubResource> sourceVirtualMachine = default;
             Optional<ImageStorageProfile> storageProfile = default;
             Optional<string> provisioningState = default;
             Optional<HyperVGenerationTypes> hyperVGeneration = default;
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            sourceVirtualMachine = Models.SubResource.DeserializeSubResource(property0.Value);
+                            sourceVirtualMachine = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.ToString());
                             continue;
                         }
                         if (property0.NameEquals("storageProfile"))
@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new ImageData(id, name, type, tags, location, sourceVirtualMachine.Value, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
+            return new ImageData(id, name, type, tags, location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
         }
     }
 }

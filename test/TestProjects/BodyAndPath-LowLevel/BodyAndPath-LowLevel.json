@@ -84,6 +84,56 @@
             }
           }
         }
+      },
+      "/{enumName1}/{enumName2}": {
+        "post": {
+          "operationId": "createEnum",
+          "summary": "Create another product",
+          "description": "Resets products.",
+          "parameters": [
+            {
+              "name": "enumName1",
+              "in": "path",
+              "description": "The first name",
+              "required": true,
+              "type": "string",
+              "enum": [
+                "current",
+                "default"
+              ],
+              "x-ms-enum": {
+                "name": "EnumName1",
+                "modelAsString": false
+              }
+            },
+            {
+              "name": "enumName2",
+              "in": "path",
+              "description": "The second name",
+              "required": true,
+              "type": "string",
+              "enum": [
+                "latest"
+              ],
+              "x-ms-enum": {
+                "name": "EnumName2",
+                "modelAsString": true
+              }
+            },
+            {
+              "name": "bodyParameter",
+              "in": "body",
+              "description": "body Parameter",
+              "required": true,
+              "schema": {}
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ok"
+            }
+          }
+        }
       }      
     },
     "definitions": {},
