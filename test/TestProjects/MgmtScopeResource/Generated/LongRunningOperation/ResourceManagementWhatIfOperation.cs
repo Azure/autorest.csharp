@@ -16,18 +16,18 @@ using Azure.Core.Pipeline;
 namespace MgmtScopeResource.Models
 {
     /// <summary> Returns changes that will be made by the deployment if executed at the scope of the tenant group. </summary>
-    public partial class DeploymentWhatIfAtTenantScopeOperation : Operation<WhatIfOperationResult>, IOperationSource<WhatIfOperationResult>
+    public partial class ResourceManagementWhatIfOperation : Operation<WhatIfOperationResult>, IOperationSource<WhatIfOperationResult>
     {
         private readonly OperationInternals<WhatIfOperationResult> _operation;
 
-        /// <summary> Initializes a new instance of DeploymentWhatIfAtTenantScopeOperation for mocking. </summary>
-        protected DeploymentWhatIfAtTenantScopeOperation()
+        /// <summary> Initializes a new instance of ResourceManagementWhatIfOperation for mocking. </summary>
+        protected ResourceManagementWhatIfOperation()
         {
         }
 
-        internal DeploymentWhatIfAtTenantScopeOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal ResourceManagementWhatIfOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<WhatIfOperationResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DeploymentWhatIfAtTenantScopeOperation");
+            _operation = new OperationInternals<WhatIfOperationResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ResourceManagementWhatIfOperation");
         }
 
         /// <inheritdoc />

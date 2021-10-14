@@ -5,8 +5,15 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
@@ -14,47 +21,102 @@ namespace MgmtScopeResource
     public static partial class TenantExtensions
     {
         #region PolicyAssignment
-        /// <summary> Gets an object representing a PolicyAssignment along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary> Gets an object representing a PolicyAssignmentContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PolicyAssignment" /> object. </returns>
-        public static PolicyAssignment GetPolicyAssignment(this Tenant tenant, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PolicyAssignmentContainer" /> object. </returns>
+        public static PolicyAssignmentContainer GetPolicyAssignments(this Tenant tenant)
         {
-            return new PolicyAssignment(tenant, id);
+            return new PolicyAssignmentContainer(tenant);
         }
         #endregion
 
         #region DeploymentExtended
-        /// <summary> Gets an object representing a DeploymentExtended along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary> Gets an object representing a DeploymentExtendedContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeploymentExtended" /> object. </returns>
-        public static DeploymentExtended GetDeploymentExtended(this Tenant tenant, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="DeploymentExtendedContainer" /> object. </returns>
+        public static DeploymentExtendedContainer GetDeploymentExtendeds(this Tenant tenant)
         {
-            return new DeploymentExtended(tenant, id);
-        }
-        #endregion
-
-        #region DeploymentOperation
-        /// <summary> Gets an object representing a DeploymentOperation along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeploymentOperation" /> object. </returns>
-        public static DeploymentOperation GetDeploymentOperation(this Tenant tenant, ResourceIdentifier id)
-        {
-            return new DeploymentOperation(tenant, id);
+            return new DeploymentExtendedContainer(tenant);
         }
         #endregion
 
         #region ResourceLink
-        /// <summary> Gets an object representing a ResourceLink along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary> Gets an object representing a ResourceLinkContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResourceLink" /> object. </returns>
-        public static ResourceLink GetResourceLink(this Tenant tenant, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResourceLinkContainer" /> object. </returns>
+        public static ResourceLinkContainer GetResourceLinks(this Tenant tenant)
         {
-            return new ResourceLink(tenant, id);
+            return new ResourceLinkContainer(tenant);
         }
         #endregion
+
+        private static DeploymentsRestOperations GetDeploymentsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new DeploymentsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        /// <summary> Calculate the hash of the given template. </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this Tenant tenant, object template, CancellationToken cancellationToken = default)
+        {
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template));
+            }
+
+            return await tenant.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("TenantExtensions.CalculateTemplateHashDeployment");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetDeploymentsRestOperations(clientDiagnostics, credential, options, pipeline, tenant.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <summary> Calculate the hash of the given template. </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this Tenant tenant, object template, CancellationToken cancellationToken = default)
+        {
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template));
+            }
+
+            return tenant.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("TenantExtensions.CalculateTemplateHashDeployment");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetDeploymentsRestOperations(clientDiagnostics, credential, options, pipeline, tenant.Id.SubscriptionId, baseUri);
+                    var response = restOperations.CalculateTemplateHash(template, cancellationToken);
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
     }
 }

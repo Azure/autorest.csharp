@@ -7,13 +7,12 @@
 
 using System.Text.Json;
 using Azure.Core;
-using MgmtScopeResource.Models;
 
-namespace MgmtScopeResource
+namespace MgmtScopeResource.Models
 {
-    public partial class DeploymentOperationData
+    public partial class DeploymentOperation
     {
-        internal static DeploymentOperationData DeserializeDeploymentOperationData(JsonElement element)
+        internal static DeploymentOperation DeserializeDeploymentOperation(JsonElement element)
         {
             Optional<string> id = default;
             Optional<string> operationId = default;
@@ -41,7 +40,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new DeploymentOperationData(id.Value, operationId.Value, properties.Value);
+            return new DeploymentOperation(id.Value, operationId.Value, properties.Value);
         }
     }
 }

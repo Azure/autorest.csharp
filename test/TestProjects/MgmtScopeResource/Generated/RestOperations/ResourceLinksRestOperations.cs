@@ -19,6 +19,7 @@ namespace MgmtScopeResource
 {
     internal partial class ResourceLinksRestOperations
     {
+        private string subscriptionId;
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
@@ -28,9 +29,12 @@ namespace MgmtScopeResource
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public ResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public ResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null)
         {
+            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -98,7 +102,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateCreateOrUpdateRequest(string linkId, ResourceLinkProperties properties)
+        internal Azure.Core.HttpMessage CreateCreateOrUpdateRequest(string linkId, ResourceLinkData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -111,12 +115,8 @@ namespace MgmtScopeResource
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new ResourceLinkData()
-            {
-                Properties = properties
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
             message.SetProperty("UserAgentOverride", _userAgent);
             return message;
@@ -124,17 +124,21 @@ namespace MgmtScopeResource
 
         /// <summary> Creates or updates a resource link between the specified resources. </summary>
         /// <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="properties"> Properties for resource link. </param>
+        /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
-        public async Task<Response<ResourceLinkData>> CreateOrUpdateAsync(string linkId, ResourceLinkProperties properties = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ResourceLinkData>> CreateOrUpdateAsync(string linkId, ResourceLinkData parameters, CancellationToken cancellationToken = default)
         {
             if (linkId == null)
             {
                 throw new ArgumentNullException(nameof(linkId));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateCreateOrUpdateRequest(linkId, properties);
+            using var message = CreateCreateOrUpdateRequest(linkId, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -153,17 +157,21 @@ namespace MgmtScopeResource
 
         /// <summary> Creates or updates a resource link between the specified resources. </summary>
         /// <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="properties"> Properties for resource link. </param>
+        /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
-        public Response<ResourceLinkData> CreateOrUpdate(string linkId, ResourceLinkProperties properties = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<ResourceLinkData> CreateOrUpdate(string linkId, ResourceLinkData parameters, CancellationToken cancellationToken = default)
         {
             if (linkId == null)
             {
                 throw new ArgumentNullException(nameof(linkId));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateCreateOrUpdateRequest(linkId, properties);
+            using var message = CreateCreateOrUpdateRequest(linkId, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -254,6 +262,69 @@ namespace MgmtScopeResource
             }
         }
 
+        internal Azure.Core.HttpMessage CreateGetAtSubscriptionRequest(string filter)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Resources/links", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            uri.AppendQuery("api-version", "2016-09-01", true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Gets all the linked resources for the subscription. </summary>
+        /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<ResourceLinkResult>> GetAtSubscriptionAsync(string filter = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetAtSubscriptionRequest(filter);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ResourceLinkResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ResourceLinkResult.DeserializeResourceLinkResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Gets all the linked resources for the subscription. </summary>
+        /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ResourceLinkResult> GetAtSubscription(string filter = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetAtSubscriptionRequest(filter);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ResourceLinkResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ResourceLinkResult.DeserializeResourceLinkResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal Azure.Core.HttpMessage CreateGetAtSourceScopeRequest(string scope)
         {
             var message = _pipeline.CreateMessage();
@@ -311,6 +382,76 @@ namespace MgmtScopeResource
             }
 
             using var message = CreateGetAtSourceScopeRequest(scope);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ResourceLinkResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ResourceLinkResult.DeserializeResourceLinkResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal Azure.Core.HttpMessage CreateGetAtSubscriptionNextPageRequest(string nextLink, string filter)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Gets all the linked resources for the subscription. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        public async Task<Response<ResourceLinkResult>> GetAtSubscriptionNextPageAsync(string nextLink, string filter = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var message = CreateGetAtSubscriptionNextPageRequest(nextLink, filter);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ResourceLinkResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ResourceLinkResult.DeserializeResourceLinkResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Gets all the linked resources for the subscription. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        public Response<ResourceLinkResult> GetAtSubscriptionNextPage(string nextLink, string filter = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var message = CreateGetAtSubscriptionNextPageRequest(nextLink, filter);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

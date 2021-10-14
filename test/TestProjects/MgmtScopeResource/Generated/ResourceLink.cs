@@ -23,7 +23,7 @@ namespace MgmtScopeResource
     public partial class ResourceLink : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResourceLinksRestOperations _restClient;
+        private readonly ResourceLinksRestOperations _resourceLinksRestClient;
         private readonly ResourceLinkData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLink"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace MgmtScopeResource
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLink"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtScopeResource
         internal ResourceLink(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLink"/> class. </summary>
@@ -60,11 +60,11 @@ namespace MgmtScopeResource
         internal ResourceLink(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Resources/links";
+        public static readonly ResourceType ResourceType = "";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -92,7 +92,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id, cancellationToken).ConfigureAwait(false);
+                var response = await _resourceLinksRestClient.GetAsync(Id, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
@@ -112,7 +112,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id, cancellationToken);
+                var response = _resourceLinksRestClient.Get(Id, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
@@ -149,7 +149,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id, cancellationToken).ConfigureAwait(false);
+                var response = await _resourceLinksRestClient.DeleteAsync(Id, cancellationToken).ConfigureAwait(false);
                 var operation = new ResourceLinkDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -171,7 +171,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id, cancellationToken);
+                var response = _resourceLinksRestClient.Delete(Id, cancellationToken);
                 var operation = new ResourceLinkDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);

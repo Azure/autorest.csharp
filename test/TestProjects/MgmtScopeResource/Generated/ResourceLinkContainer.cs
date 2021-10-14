@@ -14,15 +14,16 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A class representing collection of ResourceLink and their operations over a Tenant. </summary>
+    /// <summary> A class representing collection of ResourceLink and their operations over its parent. </summary>
     public partial class ResourceLinkContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResourceLinksRestOperations _restClient;
+        private readonly ResourceLinksRestOperations _resourceLinksRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLinkContainer"/> class for mocking. </summary>
         protected ResourceLinkContainer()
@@ -34,38 +35,36 @@ namespace MgmtScopeResource
         internal ResourceLinkContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-        }
-
-        /// <summary> Verify that the input resource Id is a valid container for this type. </summary>
-        /// <param name="identifier"> The input resource Id to check. </param>
-        protected override void ValidateResourceType(ResourceIdentifier identifier)
-        {
+            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
+        protected override ResourceType ValidResourceType => Tenant.ResourceType;
 
         // Container level operations.
 
         /// <summary> Creates or updates a resource link between the specified resources. </summary>
         /// <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="properties"> Properties for resource link. </param>
+        /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
-        public virtual ResourceLinkCreateOrUpdateOperation CreateOrUpdate(ResourceIdentifier linkId, ResourceLinkProperties properties = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ResourceLinkCreateOrUpdateOperation CreateOrUpdate(ResourceIdentifier linkId, ResourceLinkData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (linkId == null)
             {
                 throw new ArgumentNullException(nameof(linkId));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(linkId, properties, cancellationToken);
+                var response = _resourceLinksRestClient.CreateOrUpdate(linkId, parameters, cancellationToken);
                 var operation = new ResourceLinkCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -80,22 +79,26 @@ namespace MgmtScopeResource
 
         /// <summary> Creates or updates a resource link between the specified resources. </summary>
         /// <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="properties"> Properties for resource link. </param>
+        /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
-        public async virtual Task<ResourceLinkCreateOrUpdateOperation> CreateOrUpdateAsync(ResourceIdentifier linkId, ResourceLinkProperties properties = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<ResourceLinkCreateOrUpdateOperation> CreateOrUpdateAsync(ResourceIdentifier linkId, ResourceLinkData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (linkId == null)
             {
                 throw new ArgumentNullException(nameof(linkId));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(linkId, properties, cancellationToken).ConfigureAwait(false);
+                var response = await _resourceLinksRestClient.CreateOrUpdateAsync(linkId, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ResourceLinkCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -108,21 +111,22 @@ namespace MgmtScopeResource
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Gets a resource link with the specified ID. </summary>
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public virtual Response<ResourceLink> Get(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
+            if (linkId == null)
+            {
+                throw new ArgumentNullException(nameof(linkId));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.Get");
             scope.Start();
             try
             {
-                if (linkId == null)
-                {
-                    throw new ArgumentNullException(nameof(linkId));
-                }
-
-                var response = _restClient.Get(linkId, cancellationToken: cancellationToken);
+                var response = _resourceLinksRestClient.Get(linkId, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceLink(Parent, response.Value), response.GetRawResponse());
@@ -134,21 +138,22 @@ namespace MgmtScopeResource
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// <summary> Gets a resource link with the specified ID. </summary>
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public async virtual Task<Response<ResourceLink>> GetAsync(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
+            if (linkId == null)
+            {
+                throw new ArgumentNullException(nameof(linkId));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.Get");
             scope.Start();
             try
             {
-                if (linkId == null)
-                {
-                    throw new ArgumentNullException(nameof(linkId));
-                }
-
-                var response = await _restClient.GetAsync(linkId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resourceLinksRestClient.GetAsync(linkId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResourceLink(Parent, response.Value), response.GetRawResponse());
@@ -162,19 +167,20 @@ namespace MgmtScopeResource
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public virtual Response<ResourceLink> GetIfExists(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
+            if (linkId == null)
+            {
+                throw new ArgumentNullException(nameof(linkId));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetIfExists");
             scope.Start();
             try
             {
-                if (linkId == null)
-                {
-                    throw new ArgumentNullException(nameof(linkId));
-                }
-
-                var response = _restClient.Get(linkId, cancellationToken: cancellationToken);
+                var response = _resourceLinksRestClient.Get(linkId, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ResourceLink>(null, response.GetRawResponse())
                     : Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
@@ -188,19 +194,20 @@ namespace MgmtScopeResource
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public async virtual Task<Response<ResourceLink>> GetIfExistsAsync(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetIfExists");
+            if (linkId == null)
+            {
+                throw new ArgumentNullException(nameof(linkId));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (linkId == null)
-                {
-                    throw new ArgumentNullException(nameof(linkId));
-                }
-
-                var response = await _restClient.GetAsync(linkId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resourceLinksRestClient.GetAsync(linkId, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ResourceLink>(null, response.GetRawResponse())
                     : Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
@@ -214,18 +221,19 @@ namespace MgmtScopeResource
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
+            if (linkId == null)
+            {
+                throw new ArgumentNullException(nameof(linkId));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.CheckIfExists");
             scope.Start();
             try
             {
-                if (linkId == null)
-                {
-                    throw new ArgumentNullException(nameof(linkId));
-                }
-
                 var response = GetIfExists(linkId, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -238,18 +246,19 @@ namespace MgmtScopeResource
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.CheckIfExists");
+            if (linkId == null)
+            {
+                throw new ArgumentNullException(nameof(linkId));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (linkId == null)
-                {
-                    throw new ArgumentNullException(nameof(linkId));
-                }
-
                 var response = await GetIfExistsAsync(linkId, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -261,37 +270,43 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
+        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ResourceLink> GetAll(CancellationToken cancellationToken = default)
+        public virtual Pageable<ResourceLink> GetAll(string scope, CancellationToken cancellationToken = default)
         {
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+
             Page<ResourceLink> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetAll");
-                scope.Start();
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetAll");
+                scope0.Start();
                 try
                 {
-                    var response = _restClient.GetAtSourceScope(Id, cancellationToken: cancellationToken);
+                    var response = _resourceLinksRestClient.GetAtSourceScope(scope, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
-                    scope.Failed(e);
+                    scope0.Failed(e);
                     throw;
                 }
             }
             Page<ResourceLink> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetAll");
-                scope.Start();
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetAll");
+                scope0.Start();
                 try
                 {
-                    var response = _restClient.GetAtSourceScopeNextPage(nextLink, Id, cancellationToken: cancellationToken);
+                    var response = _resourceLinksRestClient.GetAtSourceScopeNextPage(nextLink, scope, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
-                    scope.Failed(e);
+                    scope0.Failed(e);
                     throw;
                 }
             }
@@ -299,37 +314,43 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
+        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ResourceLink> GetAllAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<ResourceLink> GetAllAsync(string scope, CancellationToken cancellationToken = default)
         {
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+
             async Task<Page<ResourceLink>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetAll");
-                scope.Start();
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetAll");
+                scope0.Start();
                 try
                 {
-                    var response = await _restClient.GetAtSourceScopeAsync(Id, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resourceLinksRestClient.GetAtSourceScopeAsync(scope, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
-                    scope.Failed(e);
+                    scope0.Failed(e);
                     throw;
                 }
             }
             async Task<Page<ResourceLink>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetAll");
-                scope.Start();
+                using var scope0 = _clientDiagnostics.CreateScope("ResourceLinkContainer.GetAll");
+                scope0.Start();
                 try
                 {
-                    var response = await _restClient.GetAtSourceScopeNextPageAsync(nextLink, Id, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resourceLinksRestClient.GetAtSourceScopeNextPageAsync(nextLink, scope, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
-                    scope.Failed(e);
+                    scope0.Failed(e);
                     throw;
                 }
             }
@@ -337,6 +358,6 @@ namespace MgmtScopeResource
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, ResourceLink, ResourceLinkData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ResourceLink, ResourceLinkData> Construct() { }
     }
 }
