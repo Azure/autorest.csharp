@@ -91,30 +91,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (!requestPath.TrimScope().IsAncestorOf(resourceRequestPath.TrimScope()))
                     continue;
                 candidates.Add(operationSet);
-                //if (resourceRequestPath.GetScopePath().IsParameterizedScope())
-                //{
-                //    // if this is a resource that has a parameterized scope
-                //    // first we get the types that this parameterized scope could be, since we already ensure this is a parameterized scope, we could assert this is non-null
-                //    var types = resourceRequestPath.GetParameterizedScopeResourceTypes(context.Configuration.MgmtConfiguration)!;
-                //    // get the scope of this request
-                //    var scope = requestPath.GetScopePath();
-                //    // see if the scope type could include this resource type
-                //    var scopeResourceType = scope.GetResourceType(context.Configuration.MgmtConfiguration);
-                //    if (types.Contains(scopeResourceType))
-                //    {
-                //        candidates.Add(operationSet);
-                //        continue;
-                //    }
-                //}
-                //else
-                //{
-                //    // if the resource does not have parameterized scope, we should expect this request path is the child of the resource's request path, in order to add it to this resource
-                //    if (!requestPath.IsAncestorOf(resourceRequestPath))
-                //        continue;
-                //    // some tuple resources (a resource that accepts a tuple to uniquely determine its ID from its parent resource) might have multiple list operation in different levels
-                //    // therefore here we are adding this to the candidate list, and finds a resource with the shortest path as the operation set of this operation
-                //    candidates.Add(operationSet);
-                //}
             }
 
             if (candidates.Count == 0)
@@ -157,6 +133,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return null;
+        }
+
+        public static HttpMethod GetHttpMethod(this Operation operation)
+        {
+            return operation.GetHttpRequest()!.Method;
         }
 
         public static ServiceResponse? GetServiceResponse(this Operation operation, StatusCodes code = StatusCodes._200)

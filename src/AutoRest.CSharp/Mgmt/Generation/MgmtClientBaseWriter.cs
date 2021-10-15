@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             foreach (var resource in This.ChildResources)
             {
                 _writer.Line();
-                _writer.Line($"#region {resource.ResourceName}");
+                _writer.Line($"#region {resource.Type.Name}");
                 if (resource.IsSingleton)
                     WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!);
                 else

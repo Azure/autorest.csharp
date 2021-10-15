@@ -78,11 +78,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var container = resource.ResourceContainer;
             if (container == null)
-                throw new InvalidOperationException($"We are about to write a {resource.ResourceName} resource entry, but it does not have a container, this cannot happen");
+                throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry, but it does not have a container, this cannot happen");
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type}\" /> object.");
-            using (_writer.Scope($"public static {container.Type.Name} Get{resource.ResourceName.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            using (_writer.Scope($"public static {container.Type.Name} Get{resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
                 _writer.Line($"return new {container.Type.Name}({ExtensionOperationVariableName});");
             }
@@ -92,8 +92,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
-            using (_writer.Scope($"public static {resource.Type.Name} Get{resource.ResourceName}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
+            using (_writer.Scope($"public static {resource.Type.Name} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
                 _writer.Line($"return new {resource.Type.Name}({ExtensionOperationVariableName}, {ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\");");
             }

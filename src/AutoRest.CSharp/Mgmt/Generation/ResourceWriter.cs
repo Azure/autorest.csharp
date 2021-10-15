@@ -438,11 +438,11 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         {
             var container = resource.ResourceContainer;
             if (container == null)
-                throw new InvalidOperationException($"We are about to write a {resource.ResourceName} resource entry in {_resource.ResourceName} resource, but it does not have a container, this cannot happen");
+                throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry in {_resource.Type.Name} resource, but it does not have a container, this cannot happen");
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
-            _writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
-            using (_writer.Scope($"public {container.Type.Name} Get{container.ResourceName.ToPlural()}()"))
+            _writer.WriteXmlDocumentationSummary($"Gets a container of {resource.Type.Name.ToPlural()} in the {_resource.Type.Name}.");
+            _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.ToPlural()} and their operations over a {_resource.Type.Name}.");
+            using (_writer.Scope($"public {container.Type.Name} Get{resource.Type.Name.ToPlural()}()"))
             {
                 _writer.Line($"return new {container.Type.Name}(this);");
             }
@@ -451,7 +451,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix)
         {
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {_resource.ResourceName}.");
+            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
             using (_writer.Scope($"public {resource.Type.Name} Get{resource.Type.Name}()"))
             {

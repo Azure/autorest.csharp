@@ -188,6 +188,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     if (!ShouldIncludeOperation(operation))
                         continue; // meaning this operation will be included in the container
+                    var method = operation.GetHttpMethod();
                     // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
                     // therefore we trim the scope off and then calculate the diff
                     var requestPath = operation.GetRequestPath(_context);
@@ -201,7 +202,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         // if this operation is a collection operation, it should be the parent of its corresponding resource request path
                         var diff = requestTrimmedPath.TrimAncestorFrom(resourceTrimmedPath);
                         // since in this case, the diff is a "minus" diff comparing with the other branch of the condition, we add a minus sign at the beginning of this key ti make sure this key would not collide with others
-                        key = $"-{diff}";
+                        key = $"{method}-{diff}";
                         //contextualPath = GetContextualPath(operationSet);
                         contextualPath = ReplaceParameterizedScope(GetContextualPath(operationSet), requestPath.GetScopePath());
                         //// we need to replace the contextual path with the actual contextual path if it is a parameterized scope
@@ -211,7 +212,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     else
                     {
                         // for other child operations, they should be child of the corresponding resource request path
-                        key = resourceTrimmedPath.TrimAncestorFrom(requestTrimmedPath);
+                        var diff = resourceTrimmedPath.TrimAncestorFrom(requestTrimmedPath);
+                        key = $"{method}{diff}";
                         contextualPath = ReplaceParameterizedScope(GetContextualPath(operationSet), requestPath.GetScopePath());
                     }
                     var restOperation = new MgmtRestOperation(
