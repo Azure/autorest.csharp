@@ -15,8 +15,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceTypeBuilder
     {
-        public const string ResourceGroupResources = "resourceGroupsResources"; // Represent any resource under a resource group. The resource type for /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
-
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         private static ConcurrentDictionary<string, string> _operationPathValueCache = new ConcurrentDictionary<string, string>();
@@ -50,105 +48,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (requestPath.IsParameterizedScope())
                 return ResourceType.Null;
             return new ResourceType(requestPath);
-        }
-
-        public static string GetResourceType(this Operation operation)
-        {
-            string? result = null;
-            if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
-            {
-                throw new ArgumentException($"The operation does not have an HttpRequest.");
-            }
-            var path = httpRequest.Path;
-            if (_operationPathValueCache.TryGetValue(path, out result))
-                return result;
-
-            var indexOfProvider = path.IndexOf(ProviderSegment.Providers);
-            if (indexOfProvider < 0)
-            {
-                throw new ArgumentException($"Could not set ResourceType for operations group {path}. No {ProviderSegment.Providers} string found in the URI");
-            }
-            var resourceType = ResourceTypeBuilder.ConstructResourceType(path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
-            if (resourceType == string.Empty)
-            {
-                throw new ArgumentException($"Could not set ResourceType for operations group {path}. An unexpected pattern of reference-reference was found in the URI");
-            }
-            result = resourceType.ToString().TrimEnd('/');
-            _operationPathValueCache.TryAdd(path, result);
-            return result;
-        }
-
-        private static string ConstructOperationResourceType(OperationGroup operationsGroup)
-        {
-            var method = GetBestMethod(operationsGroup);
-            if (method == null)
-            {
-                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key}
-                                            Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
-            }
-            var indexOfProvider = method.Path.IndexOf(ProviderSegment.Providers);
-            if (indexOfProvider < 0)
-            {
-                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {ProviderSegment.Providers} string found in the URI");
-            }
-            var resourceType = ResourceTypeBuilder.ConstructResourceType(method.Path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
-            if (resourceType == string.Empty)
-            {
-                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. An unexpected pattern of reference-reference was found in the URI");
-            }
-            return resourceType.ToString().TrimEnd('/');
-        }
-
-        private static string ConstructResourceType(string httpRequestUri)
-        {
-            var returnString = new StringBuilder();
-            var insideBrace = false;
-
-            for (int i = 0; i < httpRequestUri.Length; i++)
-            {
-                char ch = httpRequestUri[i];
-                char lastChar = ch;
-
-                if (ch == '{')
-                {
-                    // non-constant-refernce pattern, need to custom defined in readme.md
-                    if (lastChar == '}')
-                    {
-                        return string.Empty;
-                    }
-                    insideBrace = true;
-                }
-                else if (ch == '}')
-                {
-                    insideBrace = false;
-                    i++;
-                }
-                else if (!insideBrace)
-                {
-                    // non-constant-refernce pattern, need to custom defined in readme.md
-                    returnString.Append(ch);
-                }
-                lastChar = ch;
-            }
-            return returnString.ToString();
-        }
-
-        private static HttpRequest? GetBestMethod(OperationGroup operationsGroup)
-        {
-            List<ServiceRequest>? requests;
-            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Put, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Delete, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Patch, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            return null;
         }
     }
 }
