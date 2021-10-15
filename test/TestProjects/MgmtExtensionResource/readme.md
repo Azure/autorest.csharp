@@ -9,6 +9,4 @@ input-file: $(this-folder)/MgmtExtensionResource.json
 namespace: MgmtExtensionResource
 request-path-to-resource-name:
   /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}: BuiltInPolicyDefinition
-# operation-group-to-parent:
-#   PolicyDefinitions: tenant
 ```

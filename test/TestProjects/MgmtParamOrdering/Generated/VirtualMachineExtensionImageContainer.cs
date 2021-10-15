@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -294,7 +295,7 @@ namespace MgmtParamOrdering
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public virtual Response<IReadOnlyList<VirtualMachineExtensionImageData>> GetTypes(string location, string publisherName, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<VirtualMachineExtensionImage>> GetTypes(string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -310,7 +311,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _virtualMachineExtensionImagesRestClient.GetTypes(location, publisherName, cancellationToken);
-                return response;
+                return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -324,7 +325,7 @@ namespace MgmtParamOrdering
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public async virtual Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> GetTypesAsync(string location, string publisherName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetTypesAsync(string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -340,7 +341,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _virtualMachineExtensionImagesRestClient.GetTypesAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -358,7 +359,7 @@ namespace MgmtParamOrdering
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public virtual Response<IReadOnlyList<VirtualMachineExtensionImageData>> GetVersions(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<VirtualMachineExtensionImage>> GetVersions(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -378,7 +379,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _virtualMachineExtensionImagesRestClient.GetVersions(location, publisherName, type, filter, top, orderby, cancellationToken);
-                return response;
+                return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -396,7 +397,7 @@ namespace MgmtParamOrdering
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public async virtual Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> GetVersionsAsync(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetVersionsAsync(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -416,7 +417,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _virtualMachineExtensionImagesRestClient.GetVersionsAsync(location, publisherName, type, filter, top, orderby, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
             {

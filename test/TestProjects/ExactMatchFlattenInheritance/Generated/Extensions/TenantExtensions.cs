@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace OperationGroupMappings
+namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class to add extension methods to Tenant. </summary>
     public static partial class TenantExtensions

@@ -43,22 +43,26 @@ namespace ResourceRename
 
         /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="properties"> The SshPublicKeyProperties to use. </param>
+        /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public virtual SshPublicKeyCreateOperation CreateOrUpdate(string sshPublicKeyName, SshPublicKeyProperties properties = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual SshPublicKeyCreateOperation CreateOrUpdate(string sshPublicKeyName, SshPublicKeyInfoData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _sshPublicKeysRestClient.Create(Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
+                var response = _sshPublicKeysRestClient.Create(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken);
                 var operation = new SshPublicKeyCreateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -73,22 +77,26 @@ namespace ResourceRename
 
         /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="properties"> The SshPublicKeyProperties to use. </param>
+        /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async virtual Task<SshPublicKeyCreateOperation> CreateOrUpdateAsync(string sshPublicKeyName, SshPublicKeyProperties properties = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<SshPublicKeyCreateOperation> CreateOrUpdateAsync(string sshPublicKeyName, SshPublicKeyInfoData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeysRestClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeysRestClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new SshPublicKeyCreateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);

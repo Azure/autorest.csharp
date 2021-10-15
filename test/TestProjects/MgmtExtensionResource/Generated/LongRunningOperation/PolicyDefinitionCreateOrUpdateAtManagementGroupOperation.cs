@@ -16,9 +16,9 @@ using MgmtExtensionResource;
 namespace MgmtExtensionResource.Models
 {
     /// <summary> This operation creates or updates a policy definition in the given management group with the given name. </summary>
-    public partial class PolicyDefinitionCreateOrUpdateAtManagementGroupOperation : Operation<PolicyDefinitionInManagementGroup>
+    public partial class PolicyDefinitionCreateOrUpdateAtManagementGroupOperation : Operation<ManagementGroupPolicyDefinition>
     {
-        private readonly OperationOrResponseInternals<PolicyDefinitionInManagementGroup> _operation;
+        private readonly OperationOrResponseInternals<ManagementGroupPolicyDefinition> _operation;
 
         /// <summary> Initializes a new instance of PolicyDefinitionCreateOrUpdateAtManagementGroupOperation for mocking. </summary>
         protected PolicyDefinitionCreateOrUpdateAtManagementGroupOperation()
@@ -27,14 +27,14 @@ namespace MgmtExtensionResource.Models
 
         internal PolicyDefinitionCreateOrUpdateAtManagementGroupOperation(ArmResource operationsBase, Response<PolicyDefinitionData> response)
         {
-            _operation = new OperationOrResponseInternals<PolicyDefinitionInManagementGroup>(Response.FromValue(new PolicyDefinitionInManagementGroup(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ManagementGroupPolicyDefinition>(Response.FromValue(new ManagementGroupPolicyDefinition(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override PolicyDefinitionInManagementGroup Value => _operation.Value;
+        public override ManagementGroupPolicyDefinition Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,9 +52,9 @@ namespace MgmtExtensionResource.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<PolicyDefinitionInManagementGroup>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<ManagementGroupPolicyDefinition>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<PolicyDefinitionInManagementGroup>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<ManagementGroupPolicyDefinition>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

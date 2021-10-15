@@ -17,11 +17,11 @@ using ExactMatchInheritance.Models;
 
 namespace ExactMatchInheritance
 {
-    /// <summary> A class representing collection of ExactMatchModel1 and their operations over a ResourceGroup. </summary>
+    /// <summary> A class representing collection of ExactMatchModel1 and their operations over its parent. </summary>
     public partial class ExactMatchModel1Container : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ExactMatchModel1SRestOperations _restClient;
+        private readonly ExactMatchModel1SRestOperations _exactMatchModel1sRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1Container"/> class for mocking. </summary>
         protected ExactMatchModel1Container()
@@ -33,7 +33,7 @@ namespace ExactMatchInheritance
         internal ExactMatchModel1Container(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _exactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -61,7 +61,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = _restClient.Put(Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken);
+                var response = _exactMatchModel1sRestClient.Put(Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken);
                 var operation = new ExactMatchModel1PutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -94,7 +94,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = await _restClient.PutAsync(Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1sRestClient.PutAsync(Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ExactMatchModel1PutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -107,21 +107,21 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public virtual Response<ExactMatchModel1> Get(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
+            if (exactMatchModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel1SName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.Get");
             scope.Start();
             try
             {
-                if (exactMatchModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel1SName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
+                var response = _exactMatchModel1sRestClient.Get(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1(Parent, response.Value), response.GetRawResponse());
@@ -133,21 +133,21 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public async virtual Task<Response<ExactMatchModel1>> GetAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
+            if (exactMatchModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel1SName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.Get");
             scope.Start();
             try
             {
-                if (exactMatchModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel1SName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1sRestClient.GetAsync(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ExactMatchModel1(Parent, response.Value), response.GetRawResponse());
@@ -161,19 +161,20 @@ namespace ExactMatchInheritance
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public virtual Response<ExactMatchModel1> GetIfExists(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
+            if (exactMatchModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel1SName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.GetIfExists");
             scope.Start();
             try
             {
-                if (exactMatchModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel1SName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
+                var response = _exactMatchModel1sRestClient.Get(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse())
                     : Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
@@ -187,19 +188,20 @@ namespace ExactMatchInheritance
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public async virtual Task<Response<ExactMatchModel1>> GetIfExistsAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.GetIfExists");
+            if (exactMatchModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel1SName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (exactMatchModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel1SName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1sRestClient.GetAsync(Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse())
                     : Response.FromValue(new ExactMatchModel1(this, response.Value), response.GetRawResponse());
@@ -213,18 +215,19 @@ namespace ExactMatchInheritance
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
+            if (exactMatchModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel1SName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.CheckIfExists");
             scope.Start();
             try
             {
-                if (exactMatchModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel1SName));
-                }
-
                 var response = GetIfExists(exactMatchModel1SName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -237,18 +240,19 @@ namespace ExactMatchInheritance
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.CheckIfExists");
+            if (exactMatchModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel1SName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (exactMatchModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel1SName));
-                }
-
                 var response = await GetIfExistsAsync(exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -306,6 +310,6 @@ namespace ExactMatchInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, ExactMatchModel1, ExactMatchModel1Data> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ExactMatchModel1, ExactMatchModel1Data> Construct() { }
     }
 }

@@ -138,7 +138,7 @@ schemas: !Schemas
               name: name
               description: ''
           protocol: !Protocols {}
-        - !Property &ref_16
+        - !Property 
           schema: !ObjectSchema &ref_6
             type: object
             apiVersions:
@@ -246,7 +246,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_9
-          - !Parameter &ref_18
+          - !Parameter &ref_16
             schema: *ref_7
             implementation: Method
             required: true
@@ -258,7 +258,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_19
+          - !Parameter &ref_17
             schema: *ref_7
             implementation: Method
             required: true
@@ -290,7 +290,6 @@ operationGroups:
                     in: header
               - !Parameter &ref_15
                 schema: *ref_13
-                flattened: true
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -314,19 +313,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_17
-                schema: *ref_6
-                implementation: Method
-                originalParameter: *ref_15
-                pathToProperty: []
-                targetProperty: *ref_16
-                language: !Languages 
-                  default:
-                    name: properties
-                    description: ''
-                protocol: !Protocols {}
             signatureParameters:
-              - *ref_17
+              - *ref_15
             language: !Languages 
               default:
                 name: ''
@@ -340,8 +328,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_18
-          - *ref_19
+          - *ref_16
+          - *ref_17
         responses:
           - !SchemaResponse 
             schema: *ref_13
@@ -380,7 +368,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_9
-          - !Parameter &ref_20
+          - !Parameter &ref_18
             schema: *ref_7
             implementation: Method
             required: true
@@ -392,7 +380,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_21
+          - !Parameter &ref_19
             schema: *ref_7
             implementation: Method
             required: true
@@ -418,8 +406,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_20
-          - *ref_21
+          - *ref_18
+          - *ref_19
         responses:
           - !Response 
             language: !Languages 
@@ -450,7 +438,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_9
-          - !Parameter &ref_22
+          - !Parameter &ref_20
             schema: *ref_7
             implementation: Method
             required: true
@@ -462,7 +450,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_23
+          - !Parameter &ref_21
             schema: *ref_7
             implementation: Method
             required: true
@@ -503,8 +491,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_22
-          - *ref_23
+          - *ref_20
+          - *ref_21
         responses:
           - !SchemaResponse 
             schema: *ref_13

@@ -19,22 +19,22 @@ using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
-    /// <summary> A Class representing a PolicyDefinitionInManagementGroup along with the instance operations that can be performed on it. </summary>
-    public partial class PolicyDefinitionInManagementGroup : ArmResource
+    /// <summary> A Class representing a ManagementGroupPolicyDefinition along with the instance operations that can be performed on it. </summary>
+    public partial class ManagementGroupPolicyDefinition : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyDefinitionsRestOperations _policyDefinitionsRestClient;
         private readonly PolicyDefinitionData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionInManagementGroup"/> class for mocking. </summary>
-        protected PolicyDefinitionInManagementGroup()
+        /// <summary> Initializes a new instance of the <see cref="ManagementGroupPolicyDefinition"/> class for mocking. </summary>
+        protected ManagementGroupPolicyDefinition()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "PolicyDefinitionInManagementGroup"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "ManagementGroupPolicyDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PolicyDefinitionInManagementGroup(ArmResource options, PolicyDefinitionData resource) : base(options, resource.Id)
+        internal ManagementGroupPolicyDefinition(ArmResource options, PolicyDefinitionData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -42,22 +42,22 @@ namespace MgmtExtensionResource
             _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionInManagementGroup"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ManagementGroupPolicyDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PolicyDefinitionInManagementGroup(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal ManagementGroupPolicyDefinition(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionInManagementGroup"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ManagementGroupPolicyDefinition"/> class. </summary>
         /// <param name="clientOptions"> The client options to build client context. </param>
         /// <param name="credential"> The credential to build client context. </param>
         /// <param name="uri"> The uri to build client context. </param>
         /// <param name="pipeline"> The pipeline to build client context. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PolicyDefinitionInManagementGroup(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
+        internal ManagementGroupPolicyDefinition(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
@@ -86,16 +86,16 @@ namespace MgmtExtensionResource
 
         /// <summary> This operation retrieves the policy definition in the given management group with the given name. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<PolicyDefinitionInManagementGroup>> GetAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ManagementGroupPolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInManagementGroup.Get");
+            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Get");
             scope.Start();
             try
             {
                 var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PolicyDefinitionInManagementGroup(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -106,16 +106,16 @@ namespace MgmtExtensionResource
 
         /// <summary> This operation retrieves the policy definition in the given management group with the given name. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<PolicyDefinitionInManagementGroup> Get(CancellationToken cancellationToken = default)
+        public virtual Response<ManagementGroupPolicyDefinition> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInManagementGroup.Get");
+            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Get");
             scope.Start();
             try
             {
                 var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PolicyDefinitionInManagementGroup(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -145,7 +145,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<PolicyDefinitionDeleteAtManagementGroupOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInManagementGroup.Delete");
+            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
             scope.Start();
             try
             {
@@ -167,7 +167,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual PolicyDefinitionDeleteAtManagementGroupOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInManagementGroup.Delete");
+            using var scope = _clientDiagnostics.CreateScope("ManagementGroupPolicyDefinition.Delete");
             scope.Start();
             try
             {

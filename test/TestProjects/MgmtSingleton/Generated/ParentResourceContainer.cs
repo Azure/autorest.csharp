@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -267,14 +269,14 @@ namespace MgmtSingleton
 
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ParentResourceListResult> GetAll(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<ParentResource>> GetAll(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.GetAll");
             scope.Start();
             try
             {
                 var response = _parentResourcesRestClient.GetAll(Id.ResourceGroupName, cancellationToken);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new ParentResource(Parent, value)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -285,14 +287,14 @@ namespace MgmtSingleton
 
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ParentResourceListResult>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<ParentResource>>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.GetAll");
             scope.Start();
             try
             {
                 var response = await _parentResourcesRestClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new ParentResource(Parent, value)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)
             {

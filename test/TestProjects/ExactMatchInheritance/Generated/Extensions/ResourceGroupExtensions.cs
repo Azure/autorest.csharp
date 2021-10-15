@@ -40,10 +40,19 @@ namespace ExactMatchInheritance
         }
         #endregion
 
-        #region ExactMatchModel2
         private static ExactMatchModel2SRestOperations GetExactMatchModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ExactMatchModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        private static ExactMatchModel3SRestOperations GetExactMatchModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new ExactMatchModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        private static ExactMatchModel4SRestOperations GetExactMatchModel4SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new ExactMatchModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -65,12 +74,12 @@ namespace ExactMatchInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel2");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, exactMatchModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.ResourceGroupName, exactMatchModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -101,12 +110,12 @@ namespace ExactMatchInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel2");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Put(resourceGroup.Id.Name, exactMatchModel2SName, parameters, cancellationToken);
+                    var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Put(resourceGroup.Id.ResourceGroupName, exactMatchModel2SName, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -116,14 +125,6 @@ namespace ExactMatchInheritance
                 }
             }
             );
-        }
-
-        #endregion
-
-        #region ExactMatchModel3
-        private static ExactMatchModel3SRestOperations GetExactMatchModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
-        {
-            return new ExactMatchModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -145,12 +146,12 @@ namespace ExactMatchInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel3");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, exactMatchModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -181,12 +182,12 @@ namespace ExactMatchInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel3");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Put(resourceGroup.Id.Name, exactMatchModel3SName, parameters, cancellationToken);
+                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Put(resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -212,12 +213,12 @@ namespace ExactMatchInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -243,12 +244,12 @@ namespace ExactMatchInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Get(resourceGroup.Id.Name, exactMatchModel3SName, cancellationToken);
+                    var restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -258,14 +259,6 @@ namespace ExactMatchInheritance
                 }
             }
             );
-        }
-
-        #endregion
-
-        #region ExactMatchModel4
-        private static ExactMatchModel4SRestOperations GetExactMatchModel4SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
-        {
-            return new ExactMatchModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -287,12 +280,12 @@ namespace ExactMatchInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel4");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, exactMatchModel4SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.ResourceGroupName, exactMatchModel4SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -323,12 +316,12 @@ namespace ExactMatchInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel4");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Put(resourceGroup.Id.Name, exactMatchModel4SName, parameters, cancellationToken);
+                    var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Put(resourceGroup.Id.ResourceGroupName, exactMatchModel4SName, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -339,7 +332,5 @@ namespace ExactMatchInheritance
             }
             );
         }
-
-        #endregion
     }
 }

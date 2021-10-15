@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets/virtualMachines";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets/virtualmachines";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -348,42 +348,6 @@ namespace Azure.ResourceManager.Sample
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetVMsRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetVM(this, originalResponse.Value), originalResponse.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> SimulateEvictionAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVM.SimulateEviction");
-            scope.Start();
-            try
-            {
-                var response = await _virtualMachineScaleSetVMsRestClient.SimulateEvictionAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response SimulateEviction(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVM.SimulateEviction");
-            scope.Start();
-            try
-            {
-                var response = _virtualMachineScaleSetVMsRestClient.SimulateEviction(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return response;
             }
             catch (Exception e)
             {
@@ -814,6 +778,42 @@ namespace Azure.ResourceManager.Sample
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response> SimulateEvictionAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVM.SimulateEviction");
+            scope.Start();
+            try
+            {
+                var response = await _virtualMachineScaleSetVMsRestClient.SimulateEvictionAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response SimulateEviction(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVM.SimulateEviction");
+            scope.Start();
+            try
+            {
+                var response = _virtualMachineScaleSetVMsRestClient.SimulateEviction(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {

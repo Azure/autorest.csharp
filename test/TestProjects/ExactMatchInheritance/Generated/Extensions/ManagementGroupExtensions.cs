@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace OperationGroupMappings
+namespace ExactMatchInheritance
 {
     /// <summary> A class to add extension methods to ManagementGroup. </summary>
     public static partial class ManagementGroupExtensions

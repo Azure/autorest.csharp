@@ -9,15 +9,5 @@
   "azure-arm": true,
   "public-clients": true,
   "head-as-boolean": true,
-  "skip-csproj-packagereference": true,
-  "OperationGroupToResource": {
-    "ExactMatchModel2s": "NonResource",
-    "ExactMatchModel3s": "NonResource",
-    "ExactMatchModel4s": "NonResource"
-  },
-  "OperationGroupToParent": {
-    "ExactMatchModel2s": "resourceGroups",
-    "ExactMatchModel3s": "resourceGroups",
-    "ExactMatchModel4s": "resourceGroups"
-  }
+  "skip-csproj-packagereference": true
 }

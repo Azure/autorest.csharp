@@ -50,10 +50,24 @@ namespace ExactMatchFlattenInheritance
         }
         #endregion
 
-        #region AzureResourceFlattenModel2
         private static AzureResourceFlattenModel2SRestOperations GetAzureResourceFlattenModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new AzureResourceFlattenModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        private static AzureResourceFlattenModel3SRestOperations GetAzureResourceFlattenModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new AzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        private static AzureResourceFlattenModel4SRestOperations GetAzureResourceFlattenModel4SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new AzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        private static AzureResourceFlattenModel5SRestOperations GetAzureResourceFlattenModel5SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new AzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Create or update an AzureResourceFlattenModel2. </summary>
@@ -76,12 +90,12 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel2");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, name, parameters, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -113,12 +127,12 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel2");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Put(resourceGroup.Id.Name, name, parameters, cancellationToken);
+                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Put(resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -145,12 +159,12 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel2");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, name, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -177,12 +191,12 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel2");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Get(resourceGroup.Id.Name, name, cancellationToken);
+                    var restOperations = GetAzureResourceFlattenModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, name, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -192,14 +206,6 @@ namespace ExactMatchFlattenInheritance
                 }
             }
             );
-        }
-
-        #endregion
-
-        #region AzureResourceFlattenModel3
-        private static AzureResourceFlattenModel3SRestOperations GetAzureResourceFlattenModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
-        {
-            return new AzureResourceFlattenModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Create or update an AzureResourceFlattenModel3. </summary>
@@ -222,12 +228,12 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel3");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, name, parameters, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -259,12 +265,12 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel3");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Put(resourceGroup.Id.Name, name, parameters, cancellationToken);
+                    var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Put(resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -291,12 +297,12 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, name, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -323,12 +329,12 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel3");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Get(resourceGroup.Id.Name, name, cancellationToken);
+                    var restOperations = GetAzureResourceFlattenModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, name, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -338,14 +344,6 @@ namespace ExactMatchFlattenInheritance
                 }
             }
             );
-        }
-
-        #endregion
-
-        #region AzureResourceFlattenModel4
-        private static AzureResourceFlattenModel4SRestOperations GetAzureResourceFlattenModel4SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
-        {
-            return new AzureResourceFlattenModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Create or update an AzureResourceFlattenModel4. </summary>
@@ -368,12 +366,12 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel4");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, name, parameters, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -405,12 +403,12 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel4");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Put(resourceGroup.Id.Name, name, parameters, cancellationToken);
+                    var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Put(resourceGroup.Id.ResourceGroupName, name, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -437,12 +435,12 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, name, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -469,12 +467,12 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel4");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Get(resourceGroup.Id.Name, name, cancellationToken);
+                    var restOperations = GetAzureResourceFlattenModel4SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, name, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -484,14 +482,6 @@ namespace ExactMatchFlattenInheritance
                 }
             }
             );
-        }
-
-        #endregion
-
-        #region AzureResourceFlattenModel5
-        private static AzureResourceFlattenModel5SRestOperations GetAzureResourceFlattenModel5SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
-        {
-            return new AzureResourceFlattenModel5SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Create or update an AzureResourceFlattenModel5. </summary>
@@ -510,12 +500,12 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel5");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, name, foo, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -543,12 +533,12 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutAzureResourceFlattenModel5");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Put(resourceGroup.Id.Name, name, foo, cancellationToken);
+                    var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Put(resourceGroup.Id.ResourceGroupName, name, foo, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -575,12 +565,12 @@ namespace ExactMatchFlattenInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, name, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -607,12 +597,12 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetAzureResourceFlattenModel5");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.Get(resourceGroup.Id.Name, name, cancellationToken);
+                    var restOperations = GetAzureResourceFlattenModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, name, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -623,7 +613,5 @@ namespace ExactMatchFlattenInheritance
             }
             );
         }
-
-        #endregion
     }
 }

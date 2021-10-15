@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // An exception happens in the scope resources. The parameterized scope might be the contextual path of an operation,
                 // but it literally is not the parent of the corresponding operation.
                 // Here to unify these two cases, we just trim the scope out before we compare the diff
-                var diff = operation.ContextualPath.TrimScope().TrimAncestorFrom(operation.RequestPath.TrimScope());
+                var diff = operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
                 // remove the "providers" segment and its value
                 // we will get "locations/{location}/nonResourceChild"
                 extraScope = RemoveProviders(diff)

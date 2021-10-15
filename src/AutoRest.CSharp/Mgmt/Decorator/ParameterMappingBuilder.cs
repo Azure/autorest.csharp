@@ -115,8 +115,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                     else
                     {
-                        // if we only have one segment in this group, it should always be a reference
-                        parameterMappingStack.Push(new ContextualParameterMapping(pair[0], $"{idVariableName}{invocationSuffix}.GetParts({segmentPairs.Count - indexOfProvidersPair})"));
+                        if (pair[0].IsReference && pair[0].SkipUrlEncoding)
+                        {
+                            // if we only have one segment in this group, it should always be a reference
+                            parameterMappingStack.Push(new ContextualParameterMapping(pair[0], $"{idVariableName}{invocationSuffix}.GetParts({segmentPairs.Count - indexOfProvidersPair})"));
+                        }
                     }
                 }
             }
@@ -150,10 +153,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (current.IsConstant || !current.SkipUrlEncoding || maximumNumberOfAloneSegments == 0)
                 {
                     // key is constant, or key is a reference but it is not enabling `x-ms-skip-url-encoding`, we could include a pair
-                    if (i + 1 >= diff.Count)
-                        throw new InvalidOperationException($"The greedy algorithm does not work on this request. Diff {diff}");
-                    result.Push(new List<Segment> { diff[i], diff[i + 1] });
-                    i++;
+                    if (i + 1 < diff.Count)
+                    {
+                        result.Push(new List<Segment> { diff[i], diff[i + 1] });
+                        i++;
+                    }
+                    else
+                    {
+                        result.Push(new List<Segment> { diff[i] });
+                    }
                     continue;
                 }
                 if (current.SkipUrlEncoding && maximumNumberOfAloneSegments > 0)

@@ -10,7 +10,6 @@ namespace: ResourceRename
 model-namespace: false
 public-clients: false
 head-as-boolean: false
-payload-flattening-threshold: 2
 modelerfour:
   lenient-model-deduplication: true
 

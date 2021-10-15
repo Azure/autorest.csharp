@@ -20,19 +20,19 @@ using MgmtExtensionResource.Models;
 namespace MgmtExtensionResource
 {
     /// <summary> A class representing collection of PolicyDefinition and their operations over its parent. </summary>
-    public partial class PolicyDefinitionInSubscriptionContainer : ArmContainer
+    public partial class SubscriptionPolicyDefinitionContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyDefinitionsRestOperations _policyDefinitionsRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionInSubscriptionContainer"/> class for mocking. </summary>
-        protected PolicyDefinitionInSubscriptionContainer()
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionPolicyDefinitionContainer"/> class for mocking. </summary>
+        protected SubscriptionPolicyDefinitionContainer()
         {
         }
 
-        /// <summary> Initializes a new instance of PolicyDefinitionInSubscriptionContainer class. </summary>
+        /// <summary> Initializes a new instance of SubscriptionPolicyDefinitionContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PolicyDefinitionInSubscriptionContainer(ArmResource parent) : base(parent)
+        internal SubscriptionPolicyDefinitionContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
@@ -60,7 +60,7 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -94,7 +94,7 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -115,21 +115,21 @@ namespace MgmtExtensionResource
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public virtual Response<PolicyDefinitionInSubscription> Get(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public virtual Response<SubscriptionPolicyDefinition> Get(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.Get");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.Get");
             scope.Start();
             try
             {
                 var response = _policyDefinitionsRestClient.Get(policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PolicyDefinitionInSubscription(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -142,21 +142,21 @@ namespace MgmtExtensionResource
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public async virtual Task<Response<PolicyDefinitionInSubscription>> GetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubscriptionPolicyDefinition>> GetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.Get");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.Get");
             scope.Start();
             try
             {
                 var response = await _policyDefinitionsRestClient.GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new PolicyDefinitionInSubscription(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubscriptionPolicyDefinition(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,21 +169,21 @@ namespace MgmtExtensionResource
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public virtual Response<PolicyDefinitionInSubscription> GetIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public virtual Response<SubscriptionPolicyDefinition> GetIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.GetIfExists");
             scope.Start();
             try
             {
                 var response = _policyDefinitionsRestClient.Get(policyDefinitionName, cancellationToken: cancellationToken);
                 return response.Value == null
-                    ? Response.FromValue<PolicyDefinitionInSubscription>(null, response.GetRawResponse())
-                    : Response.FromValue(new PolicyDefinitionInSubscription(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse())
+                    : Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,21 +196,21 @@ namespace MgmtExtensionResource
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public async virtual Task<Response<PolicyDefinitionInSubscription>> GetIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubscriptionPolicyDefinition>> GetIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
                 var response = await _policyDefinitionsRestClient.GetAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
-                    ? Response.FromValue<PolicyDefinitionInSubscription>(null, response.GetRawResponse())
-                    : Response.FromValue(new PolicyDefinitionInSubscription(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse())
+                    : Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -255,7 +255,7 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -273,17 +273,17 @@ namespace MgmtExtensionResource
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PolicyDefinitionInSubscription" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<PolicyDefinitionInSubscription> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="SubscriptionPolicyDefinition" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<SubscriptionPolicyDefinition> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            Page<PolicyDefinitionInSubscription> FirstPageFunc(int? pageSizeHint)
+            Page<SubscriptionPolicyDefinition> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _policyDefinitionsRestClient.GetAll(filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinitionInSubscription(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -291,14 +291,14 @@ namespace MgmtExtensionResource
                     throw;
                 }
             }
-            Page<PolicyDefinitionInSubscription> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<SubscriptionPolicyDefinition> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _policyDefinitionsRestClient.GetAllNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinitionInSubscription(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -313,17 +313,17 @@ namespace MgmtExtensionResource
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PolicyDefinitionInSubscription" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<PolicyDefinitionInSubscription> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="SubscriptionPolicyDefinition" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<SubscriptionPolicyDefinition> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<PolicyDefinitionInSubscription>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<SubscriptionPolicyDefinition>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _policyDefinitionsRestClient.GetAllAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinitionInSubscription(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -331,14 +331,14 @@ namespace MgmtExtensionResource
                     throw;
                 }
             }
-            async Task<Page<PolicyDefinitionInSubscription>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<SubscriptionPolicyDefinition>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _policyDefinitionsRestClient.GetAllNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinitionInSubscription(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -349,7 +349,7 @@ namespace MgmtExtensionResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of <see cref="PolicyDefinitionInSubscription" /> for this subscription represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="SubscriptionPolicyDefinition" /> for this subscription represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -357,11 +357,11 @@ namespace MgmtExtensionResource
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.GetAllAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PolicyDefinitionInSubscription.ResourceType);
+                var filters = new ResourceFilterCollection(SubscriptionPolicyDefinition.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as Subscription, filters, expand, top, cancellationToken);
             }
@@ -372,7 +372,7 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// <summary> Filters the list of <see cref="PolicyDefinitionInSubscription" /> for this subscription represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="SubscriptionPolicyDefinition" /> for this subscription represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -380,11 +380,11 @@ namespace MgmtExtensionResource
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionInSubscriptionContainer.GetAllAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionPolicyDefinitionContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PolicyDefinitionInSubscription.ResourceType);
+                var filters = new ResourceFilterCollection(SubscriptionPolicyDefinition.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as Subscription, filters, expand, top, cancellationToken);
             }
@@ -396,6 +396,6 @@ namespace MgmtExtensionResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, PolicyDefinitionInSubscription, PolicyDefinitionData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubscriptionPolicyDefinition, PolicyDefinitionData> Construct() { }
     }
 }

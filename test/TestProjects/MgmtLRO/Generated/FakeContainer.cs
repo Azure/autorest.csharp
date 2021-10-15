@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -278,7 +280,7 @@ namespace MgmtLRO
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<FakeListResult> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<Fake>> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -290,7 +292,7 @@ namespace MgmtLRO
             try
             {
                 var response = _fakesRestClient.GetAll(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new Fake(Parent, value)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -304,7 +306,7 @@ namespace MgmtLRO
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public async virtual Task<Response<FakeListResult>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<Fake>>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -316,7 +318,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _fakesRestClient.GetAllAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(response.Value.Value.Select(value => new Fake(Parent, value)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
             {

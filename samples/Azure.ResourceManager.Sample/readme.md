@@ -28,15 +28,4 @@ directive:
   - rename-model:
       from: RollingUpgradeStatusInfo
       to: VirtualMachineScaleSetRollingUpgrade
-  ## we need to unify all the paths by changing `virtualmachines` to `virtualMachines` so that every path could have consistent casing
-  - from: swagger-document
-    where: $.paths
-    transform: >
-      for (var key in $) {
-          const newKey = key.replace('virtualmachines', 'virtualMachines');
-          if (newKey !== key) {
-              $[newKey] = $[key]
-              delete $[key]
-          }
-      }
 ```

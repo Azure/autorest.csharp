@@ -25,7 +25,7 @@ directive:
   - rename-operation:
       from: Deployments_WhatIfAtTenantScope
       to: WhatIf
-  # These methods can be replaced by using other methods in the same operation group, remove for Preview.
+  # PolicyDefinition resource has the corresponding method written using `scope`, therefore the "ById" methods are no longer required. Remove those
   - remove-operation: PolicyAssignments_DeleteById
   - remove-operation: PolicyAssignments_CreateById
   - remove-operation: PolicyAssignments_GetById
