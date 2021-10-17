@@ -19,16 +19,15 @@ namespace Azure.Analytics.Purview.Account
     /// <summary> The Accounts service client. </summary>
     public partial class AccountsClient
     {
-        private static readonly string[] AuthorizationScopes = { "https://purview.azure.net/.default" };
+        private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
         private readonly TokenCredential _tokenCredential;
-
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of AccountsClient for mocking. </summary>
         protected AccountsClient()
@@ -1115,8 +1114,11 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
+        private volatile ResourceSetRulesClient _cachedResourceSetRulesClient;
+
         /// <summary> Initializes a new instance of CollectionsClient. </summary>
         /// <param name="collectionName"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="collectionName"/> is null. </exception>
         public virtual CollectionsClient GetCollectionsClient(string collectionName)
         {
             if (collectionName == null)
@@ -1124,21 +1126,13 @@ namespace Azure.Analytics.Purview.Account
                 throw new ArgumentNullException(nameof(collectionName));
             }
 
-            var client = new CollectionsClient(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, collectionName, _apiVersion);
-            return client;
+            return new CollectionsClient(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, collectionName, _apiVersion);
         }
-
-        private volatile ResourceSetRulesClient _cachedResourceSetRulesClient;
 
         /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
         public virtual ResourceSetRulesClient GetResourceSetRulesClient()
         {
-            if (_cachedResourceSetRulesClient == null)
-            {
-                var client = new ResourceSetRulesClient(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion);
-                _cachedResourceSetRulesClient = client;
-            }
-            return _cachedResourceSetRulesClient;
+            return _cachedResourceSetRulesClient ??= new ResourceSetRulesClient(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion);
         }
 
         internal HttpMessage CreateGetAccountPropertiesRequest()

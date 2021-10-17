@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,10 +15,8 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -31,13 +28,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter : ClientWriter
     {
-        private const string KeyAuthParameterName = "keyCredential";
-        private const string KeyAuthFieldName = "_" + KeyAuthParameterName;
-        private const string TokenAuthParameterName = "tokenCredential";
-        private const string TokenAuthFieldName = "_" + TokenAuthParameterName;
-        private const string AuthorizationHeaderConstantName = "AuthorizationHeader";
-        private const string ScopesConstantName = "AuthorizationScopes";
-
         private static readonly CSharpType RequestOptionsParameterType = new(typeof(RequestOptions), true);
         private static readonly CSharpType RequiredRequestOptionsParameterType = new(typeof(RequestOptions));
 
@@ -47,15 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
         private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);
         private static readonly Parameter EnumeratorCancellationTokenParameter = new("cancellationToken", "Enumerator cancellation token", typeof(CancellationToken), Constant.NewInstanceOf(typeof(CancellationToken)), false) { Attributes = new[] { new CSharpAttribute(typeof(EnumeratorCancellationAttribute)) } };
-        private static readonly Parameter ClientDiagnosticsParameter = new(ClientDiagnosticsVariable, "The ClientDiagnostics instance to use", new CSharpType(typeof(ClientDiagnostics)), null, true);
-        private static readonly Parameter HttpPipelineParameter = new(PipelineVariable, "The pipeline instance to use", new CSharpType(typeof(HttpPipeline)), null, true);
-        private static readonly Parameter TokenAuthParameter = new(TokenAuthParameterName, "The token credential to copy", new CSharpType(typeof(TokenCredential)), null, false);
-        private static readonly Parameter KeyAuthParameter = new(KeyAuthParameterName, "The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, false);
 
-        private static readonly FormattableString ProcessMessageMethodName = $"{PipelineField:I}.{nameof(HttpPipelineExtensions.ProcessMessage)}";
-        private static readonly FormattableString ProcessMessageMethodAsyncName = $"{PipelineField:I}.{nameof(HttpPipelineExtensions.ProcessMessageAsync)}";
-        private static readonly FormattableString ProcessHeadAsBoolMessageMethodName = $"{PipelineField:I}.{nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage)}";
-        private static readonly FormattableString ProcessHeadAsBoolMessageMethodAsyncName = $"{PipelineField:I}.{nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync)}";
         private static readonly FormattableString PageableProcessMessageMethodName = $"{typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.ProcessMessage)}";
         private static readonly FormattableString PageableProcessMessageMethodAsyncName = $"{typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.ProcessMessageAsync)}";
         private static readonly FormattableString LroProcessMessageMethodName = $"{typeof(LowLevelOperationHelpers)}.{nameof(LowLevelOperationHelpers.ProcessMessage)}";
@@ -71,13 +53,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationSummary($"{restClient.Description}");
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {cs.Name}"))
                 {
-                    var fieldNames = WriteClientFields(writer, restClient, context);
-                    WriteConstructors(writer, restClient, context);
+                    WriteClientFields(writer, restClient);
+                    WriteConstructors(writer, restClient);
 
                     foreach (var clientMethod in restClient.ClientMethods)
                     {
-                        WriteClientMethod(writer, clientMethod, context.Configuration, true);
-                        WriteClientMethod(writer, clientMethod, context.Configuration, false);
+                        WriteClientMethod(writer, restClient, clientMethod, context.Configuration, true);
+                        WriteClientMethod(writer, restClient, clientMethod, context.Configuration, false);
                     }
 
                     foreach (var pagingMethod in restClient.PagingMethods)
@@ -92,12 +74,11 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteLongRunningOperationMethod(writer, longRunningOperationMethod, context.Configuration, false);
                     }
 
-                    foreach (var subClient in subClients)
-                    {
-                        WriteSubClientFactoryMethod(writer, restClient, subClient, context);
-                    }
+                    WriteSubClientFactoryMethod(writer, restClient, subClients);
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
+                    var fieldNames = new Dictionary<string, string>(restClient.Parameters
+                        .Select(p => new KeyValuePair<string, string>(p.Name, restClient.GetFieldReferenceByParameter(p)!.Name)));
                     foreach (var method in restClient.Methods)
                     {
                         var responseClassifierType = CreateResponseClassifierType(method);
@@ -113,144 +94,33 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static IReadOnlyDictionary<string, string> WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
+        private static void WriteClientFields(CodeWriter writer, LowLevelRestClient client)
         {
-            var fieldNames = new Dictionary<string, string>();
-
-            foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
+            foreach (var field in client.Fields)
             {
-                switch (scheme)
-                {
-                    case AzureKeySecurityScheme azureKeySecurityScheme:
-                        writer.Line($"private const string {AuthorizationHeaderConstantName} = {azureKeySecurityScheme.HeaderName:L};");
-                        writer.Line($"private readonly {typeof(AzureKeyCredential)}? {KeyAuthFieldName};");
-                        break;
-                    case AADTokenSecurityScheme aadTokenSecurityScheme:
-                        writer.Append($"private static readonly string[] {ScopesConstantName} = ");
-                        writer.Append($"{{ ");
-                        foreach (var credentialScope in aadTokenSecurityScheme.Scopes)
-                        {
-                            writer.Append($"{credentialScope:L}, ");
-                        }
-                        writer.RemoveTrailingComma();
-                        writer.Line($"}};");
-                        writer.Line($"private readonly {typeof(TokenCredential)}? {TokenAuthFieldName};");
-                        break;
-                }
+                writer.WriteFieldDeclaration(field);
             }
 
-            writer.Line();
-
-            writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-            writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            foreach (Parameter clientParameter in client.Parameters)
-            {
-                fieldNames.Add(clientParameter.Name, "_" + clientParameter.Name);
-                writer.Line($"private readonly {clientParameter.Type} _{clientParameter.Name};");
-            }
+            writer
+                .Line()
+                .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
+                .Line($"public virtual {typeof(HttpPipeline)} Pipeline => {client.PipelineField.Name};");
 
             writer.Line();
-
-            writer.WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.");
-            writer.Line($"public virtual {typeof(HttpPipeline)} {PipelineProperty} {{ get => {PipelineField}; }}");
-
-            writer.Line();
-
-            return fieldNames;
         }
 
-        private static void WriteConstructors(CodeWriter writer, LowLevelRestClient client, BuildContext<LowLevelOutputLibrary> context)
+        private static void WriteConstructors(CodeWriter writer, LowLevelRestClient client)
         {
             WriteEmptyConstructor(writer, client);
-
-            foreach (var constructorSignature in client.PublicConstructors)
+            foreach (var constructor in client.PublicConstructors)
             {
-                WritePublicConstructor(writer, client, constructorSignature);
+                WritePublicConstructor(writer, client, constructor);
             }
 
             if (client.IsSubClient)
             {
-                WriteSubClientInternalConstructor(writer, client, context);
+                WriteSubClientInternalConstructor(writer, client, client.SubClientInternalConstructor);
             }
-        }
-
-        private static void WritePublicConstructor(CodeWriter writer, LowLevelRestClient client, MethodSignature constructorSignature)
-        {
-            var credentialParameter = constructorSignature.Parameters.FirstOrDefault(p => p.Name == "credential");
-            var clientOptionsParameter = constructorSignature.Parameters.Last(p => p.Name == "options");
-
-            writer.WriteMethodDocumentation(constructorSignature);
-            using (writer.WriteMethodDeclaration(constructorSignature))
-            {
-                writer.WriteParameterNullChecks(constructorSignature.Parameters);
-                writer.Line();
-                writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({clientOptionsParameter.Name});");
-
-                FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
-                FormattableString perCallPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{ new {typeof(LowLevelCallbackPolicy)}()}}";
-
-                if (credentialParameter != default)
-                {
-                    if (credentialParameter.Type.Equals(KeyAuthParameter.Type))
-                    {
-                        writer.Line($"{KeyAuthFieldName} = {credentialParameter.Name};");
-                        perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({KeyAuthFieldName}, {AuthorizationHeaderConstantName})}}";
-                    }
-                    else if (credentialParameter.Type.Equals(TokenAuthParameter.Type))
-                    {
-                        writer.Line($"{TokenAuthFieldName} = {credentialParameter.Name};");
-                        perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({TokenAuthFieldName}, {ScopesConstantName})}}"; //(, }}";
-                    }
-                }
-
-                writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
-
-                foreach (var parameter in client.Parameters)
-                {
-                    if (parameter.IsApiVersionParameter)
-                    {
-                        writer.Line($"_{parameter.Name:I} = {clientOptionsParameter.Name:I}.Version;");
-                    }
-                    else
-                    {
-                        writer.Line($"_{parameter.Name:I} = {parameter.Name:I};");
-                    }
-                }
-            }
-            writer.Line();
-        }
-
-        private static void WriteSubClientInternalConstructor(CodeWriter writer, LowLevelRestClient client, BuildContext<LowLevelOutputLibrary> context)
-        {
-            var stateParameters = new List<Parameter>() { ClientDiagnosticsParameter, HttpPipelineParameter };
-
-            foreach (var securityScheme in context.CodeModel.Security.GetSchemesOrAnonymous())
-            {
-                if (securityScheme is AzureKeySecurityScheme)
-                {
-                    stateParameters.Add(KeyAuthParameter);
-                }
-                else if (securityScheme is AADTokenSecurityScheme)
-                {
-                    stateParameters.Add(TokenAuthParameter);
-                }
-            }
-
-            var ctorParams = stateParameters.Concat(RestClientBuilder.GetConstructorParameters(client.Parameters, null, includeAPIVersion: true)).ToArray();
-            var signature = new MethodSignature(client.Type.Name, $"Initializes a new instance of {client.Type.Name}", "internal", ctorParams);
-
-            writer.WriteMethodDocumentation(signature);
-            using (writer.WriteMethodDeclaration(signature))
-            {
-                writer.WriteParameterNullChecks(ctorParams);
-
-                writer.Line();
-                foreach (var parameter in ctorParams)
-                {
-                    writer.Line($"_{parameter.Name:I} = {parameter.Name:I};");
-                }
-            }
-            writer.Line();
         }
 
         private static void WriteEmptyConstructor(CodeWriter writer, TypeProvider client)
@@ -262,7 +132,81 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, Configuration configuration, bool async)
+        private static void WritePublicConstructor(CodeWriter writer, LowLevelRestClient client, MethodSignature signature)
+        {
+            writer.WriteMethodDocumentation(signature);
+            using (writer.WriteMethodDeclaration(signature))
+            {
+                writer.WriteParameterNullChecks(signature.Parameters);
+                writer.Line();
+
+                var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
+                writer.Line($"{client.ClientDiagnosticsField.Name:I} = new {client.ClientDiagnosticsField.Type}({clientOptionsParameter.Name:I});");
+
+                FormattableString perCallPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{ new {typeof(LowLevelCallbackPolicy)}()}}";
+                FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
+
+                var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
+                if (credentialParameter != null)
+                {
+                    var credentialField = client.GetFieldReferenceByParameter(credentialParameter);
+                    if (credentialField != null)
+                    {
+                        var fieldName = credentialField.Name;
+                        writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
+                        if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
+                        {
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {client.AuthorizationHeaderConstant!.Name})}}";
+                        }
+                        else if (credentialField.Type.Equals(typeof(TokenCredential)))
+                        {
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({fieldName:I}, {client.ScopesConstant!.Name})}}";
+                        }
+                    }
+                }
+
+                writer.Line($"{client.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
+
+                foreach (var parameter in client.Parameters)
+                {
+                    var field = client.GetFieldReferenceByParameter(parameter);
+                    if (field != null)
+                    {
+                        if (parameter.IsApiVersionParameter)
+                        {
+                            writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
+                        }
+                        else
+                        {
+                            writer.Line($"{field.Name:I} = {parameter.Name:I};");
+                        }
+                    }
+                }
+            }
+            writer.Line();
+        }
+
+        private static void WriteSubClientInternalConstructor(CodeWriter writer, LowLevelRestClient client, MethodSignature signature)
+        {
+            writer.WriteMethodDocumentation(signature);
+            using (writer.WriteMethodDeclaration(signature))
+            {
+                writer.WriteParameterNullChecks(signature.Parameters);
+                writer.Line();
+
+                foreach (var parameter in signature.Parameters)
+                {
+                    var field = client.GetFieldReferenceByParameter(parameter);
+                    if (field != null)
+                    {
+                        writer.Line($"{field.Name:I} = {parameter.Name:I};");
+                    }
+                }
+            }
+            writer.Line();
+        }
+
+        private static void WriteClientMethod(CodeWriter writer, LowLevelRestClient client, LowLevelClientMethod clientMethod, Configuration configuration, bool async)
         {
             var restMethod = clientMethod.RestMethod;
             var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean;
@@ -276,13 +220,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
-                    writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetNamesForMethodCall()});");
+                    writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});");
 
                     var methodName = async
-                        ? headAsBoolean ? ProcessHeadAsBoolMessageMethodAsyncName : ProcessMessageMethodAsyncName
-                        : headAsBoolean ? ProcessHeadAsBoolMessageMethodName : ProcessMessageMethodName;
+                        ? headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessageAsync)
+                        : headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage) : nameof(HttpPipelineExtensions.ProcessMessage);
 
-                    writer.AppendRaw("return ").WriteMethodCall(async, methodName, $"{messageVariable}, {ClientDiagnosticsField}, {RequestOptionsParameter.Name:I}");
+                    writer.AppendRaw("return ").WriteMethodCall(async, $"{client.PipelineField.Name}.{methodName}", $"{messageVariable}, {ClientDiagnosticsField}, {RequestOptionsParameter.Name:I}");
                 }
             }
             writer.Line();
@@ -318,7 +262,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (nextPageMethod == null)
                     {
                         writer
-                            .Line($"using var {messageVariable:D} = Create{method.Name}Request({method.Parameters.GetNamesForMethodCall()});")
+                            .Line($"using var {messageVariable:D} = Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()});")
                             .Append($"var {pageVariable:D} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, processMessageMethodParameters)
                             .Line($"yield return {pageVariable};");
                         return;
@@ -330,12 +274,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             writer
                                 .Line($"var {messageVariable:D} = string.IsNullOrEmpty(nextLink)")
-                                .Line($"    ? Create{method.Name}Request({method.Parameters.GetNamesForMethodCall()})")
-                                .Line($"    : Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetNamesForMethodCall()});");
+                                .Line($"    ? Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()})")
+                                .Line($"    : Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
                         }
                         else
                         {
-                            writer.Line($"var {messageVariable:D} = Create{method.Name}Request({method.Parameters.GetNamesForMethodCall()});");
+                            writer.Line($"var {messageVariable:D} = Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()});");
                         }
 
                         writer
@@ -375,7 +319,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         : (FormattableString)$"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {RequestOptionsParameter.Name:I}";
 
                     writer
-                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetNamesForMethodCall()});")
+                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
                         .AppendRaw("return ")
                         .WriteMethodCall(async, LroProcessMessageMethodAsyncName, LroProcessMessageMethodName, processMessageParameters);
                 }
@@ -406,7 +350,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (writer.Scope($"while (!string.IsNullOrEmpty({NextLinkParameter.Name}))"))
                         {
                             var messageVariable = new CodeWriterDeclaration("message");
-                            writer.Line($"var {messageVariable:D} = Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetNamesForMethodCall()});");
+                            writer.Line($"var {messageVariable:D} = Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
 
                             FormattableString pageableProcessMessageParameters = $"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {RequestOptionsParameter.Name:I}, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
 
@@ -422,82 +366,69 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
             }
 
-        private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelRestClient parentClient, LowLevelRestClient childClient, BuildContext context)
+        private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelRestClient parentClient, LowLevelRestClient[] childClients)
         {
-            CodeWriterDeclaration clientVariable = new CodeWriterDeclaration($"client");
-            var factoryMethodParameters = childClient.Parameters.Where(p => !parentClient.Parameters.Any(x => x.Name == p.Name));
+            var factoryMethods = new List<(FieldDeclaration?, MethodSignature, List<Reference>)>();
+            foreach (var childClient in childClients)
+            {
+                var methodParameters = new List<Parameter>();
+                var constructorCallParameters = new List<Reference>();
 
-            void WriteClientObjectCreation() {
-                writer.Append($"var {clientVariable:D} = new {childClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
-
-                foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
+                foreach (var parameter in childClient.SubClientInternalConstructor.Parameters)
                 {
-                    switch (scheme)
+                    var field = parentClient.GetFieldReferenceByParameter(parameter);
+                    if (field == null)
                     {
-                        case AzureKeySecurityScheme _:
-                            writer.Append($"{KeyAuthFieldName}, ");
-                            break;
-                        case AADTokenSecurityScheme _:
-                            writer.Append($"{TokenAuthFieldName}, ");
-                            break;
+                        methodParameters.Add(parameter);
+                        constructorCallParameters.Add(parameter);
+                    }
+                    else
+                    {
+                        constructorCallParameters.Add(new Reference(field.Name, field.Type));
                     }
                 }
 
-                foreach (var parameter in childClient.Parameters)
+                var methodSignature = new MethodSignature($"Get{childClient.Type.Name}", $"Initializes a new instance of {childClient.Type.Name}", "public virtual", childClient.Type, null, methodParameters.ToArray());
+                if (methodParameters.Any())
                 {
-                    var prefix = !factoryMethodParameters.Any(x => x.Name == parameter.Name) ? "_" : "";
-                    writer.Append($"{prefix}{parameter.Name}, ");
-                }
-
-                writer.RemoveTrailingComma();
-                writer.Line($");");
-            }
-
-            CodeWriterDeclaration cacheVariable = new CodeWriterDeclaration($"_cached{childClient.Type.Name}");
-
-            if (!factoryMethodParameters.Any())
-            {
-                writer.Line($"private volatile {childClient.Type} {cacheVariable:D};");
-                writer.Line();
-            }
-
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {childClient.Type.Name}");
-
-            foreach (Parameter parameter in factoryMethodParameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter);
-            }
-
-            writer.Append($"public virtual {childClient.Type} Get{childClient.Type.Name}(");
-            foreach (var parameter in factoryMethodParameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.RemoveTrailingComma();
-            writer.Line($")");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(factoryMethodParameters.ToArray());
-
-                if (!factoryMethodParameters.Any())
-                {
-                    writer.Line($"if ({cacheVariable} == null)");
-                    using (writer.Scope())
-                    {
-                        WriteClientObjectCreation();
-                        writer.Line($"{cacheVariable} = {clientVariable};");
-                    }
-
-                    writer.Line($"return {cacheVariable};");
+                    factoryMethods.Add((null, methodSignature, constructorCallParameters));
                 }
                 else
                 {
-                    WriteClientObjectCreation();
-                    writer.Line($"return {clientVariable};");
+                    var field = new FieldDeclaration("private volatile", childClient.Type, $"_cached{childClient.Type.Name}");
+                    factoryMethods.Add((field, methodSignature, constructorCallParameters));
                 }
             }
+
+            foreach (var (field, _, _) in factoryMethods)
+            {
+                if (field != null)
+                {
+                    writer.WriteFieldDeclaration(field);
+                }
+            }
+
             writer.Line();
+
+            foreach (var (field, methodSignature, constructorCallParameters) in factoryMethods)
+            {
+                writer.WriteMethodDocumentation(methodSignature);
+                using (writer.WriteMethodDeclaration(methodSignature))
+                {
+                    writer.WriteParameterNullChecks(methodSignature.Parameters);
+                    writer.Line();
+
+                    if (field != null)
+                    {
+                        writer.Line($"return {field.Name} ??= new {methodSignature.ReturnType}({constructorCallParameters.GetIdentifiersFormattable()});");
+                    }
+                    else
+                    {
+                        writer.Line($"return new {methodSignature.ReturnType}({constructorCallParameters.GetIdentifiersFormattable()});");
+                    }
+                }
+                writer.Line();
+            }
         }
 
         private static void WriteResponseClassifier(CodeWriter writer, string responseClassifierTypeName, StatusCodes[] statusCodes)
@@ -583,7 +514,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var docDict = docs.ToDictionary(d => d.SchemaName, d => d);
             var builder = new StringBuilder();
             builder.AppendLine("{");
-            BuildSchemaFromDoc(builder, docs.FirstOrDefault(), docDict, showRequired, 2);
+            BuildSchemaFromDoc(builder, docs.First(), docDict, showRequired, 2);
             builder.AppendLine("}");
             return builder.ToString();
         }
@@ -647,9 +578,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private static SchemaDocumentation[]? GetSchemaDocumentationsForSchema(Schema schema, string schemaName)
         {
             // Visit each schema in the graph and for object schemas, collect information about all the properties.
-            HashSet<string> visitedSchema = new HashSet<string>();
-            Queue<Schema> schemasToExplore = new Queue<Schema>(new Schema[] { schema });
-            List<(string SchemaName, List<SchemaDocumentation.DocumentationRow> Rows)> documentationObjects = new();
+            var visitedSchema = new HashSet<string>();
+            var schemasToExplore = new Queue<Schema>(new[] { schema });
+            var documentationObjects = new List<(string SchemaName, List<SchemaDocumentation.DocumentationRow> Rows)>();
 
             while (schemasToExplore.Any())
             {
@@ -707,44 +638,30 @@ namespace AutoRest.CSharp.Generation.Writers
             return documentationObjects.Select(o => new SchemaDocumentation(o.SchemaName, o.Rows.ToArray())).ToArray();
         }
 
-        private static string StringifyTypeForTable(Schema s)
+        private static string StringifyTypeForTable(Schema schema)
         {
             string RemovePrefix(string s, string prefix)
             {
-                if (s.StartsWith(prefix))
-                {
-                    return s.Substring(prefix.Length);
-                }
-
-                return s;
+                return s.StartsWith(prefix) ? s[prefix.Length..] : s;
             }
 
-            switch (s)
+            return schema switch
             {
-                case BooleanSchema:
-                    return "boolean";
-                case StringSchema:
-                    return "string";
-                case NumberSchema:
-                    return "number";
-                case AnySchema:
-                    return "object";
-                case DateTimeSchema:
-                    return "string (ISO 8601 Format)";
-                case ChoiceSchema c:
-                    return string.Join(" | ", c.Choices.Select(c => $"\"{c.Value}\""));
-                case DictionarySchema d:
-                    return $"Dictionary<string, {StringifyTypeForTable(d.ElementType)}>";
-                case ArraySchema a:
-                    return $"{StringifyTypeForTable(a.ElementType)}[]";
-                default:
-                    return $"{RemovePrefix(s.Name, "Json")}";
-            }
+                BooleanSchema => "boolean",
+                StringSchema => "string",
+                NumberSchema => "number",
+                AnySchema => "object",
+                DateTimeSchema => "string (ISO 8601 Format)",
+                ChoiceSchema choiceSchema => string.Join(" | ", choiceSchema.Choices.Select(c => $"\"{c.Value}\"")),
+                DictionarySchema d => $"Dictionary<string, {StringifyTypeForTable(d.ElementType)}>",
+                ArraySchema a => $"{StringifyTypeForTable(a.ElementType)}[]",
+                _ => $"{RemovePrefix(schema.Name, "Json")}"
+            };
         }
 
         private class SchemaDocumentation
         {
-            internal record DocumentationRow(string Name, string Type, bool Required, string Description) { }
+            internal record DocumentationRow(string Name, string Type, bool Required, string Description);
 
             public string SchemaName { get; }
             public DocumentationRow[] DocumentationRows { get; }

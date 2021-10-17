@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models
         protected RestClientBuilder Builder;
         internal OperationGroup OperationGroup { get; }
         protected string RestClientSuffix { get; }
-        public virtual Parameter[] Parameters { get; }
+        public Parameter[] Parameters { get; }
         public virtual string Description { get; } = "";
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }

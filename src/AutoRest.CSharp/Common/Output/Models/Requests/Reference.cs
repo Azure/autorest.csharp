@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
@@ -15,5 +16,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
         public string Name { get; }
         public CSharpType Type { get; }
+
+        public static implicit operator Reference(Parameter parameter) => new Reference(parameter.Name, parameter.Type);
     }
 }
