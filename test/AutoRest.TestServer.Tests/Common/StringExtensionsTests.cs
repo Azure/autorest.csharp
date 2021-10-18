@@ -53,6 +53,8 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("IPAddress", new[] { "IP", "Address" })]
         [TestCase("HTTPIsURL", new[] { "HTTP", "Is", "URL" })]
         [TestCase("GetAllByLocation", new[] { "Get", "All", "By", "Location" })]
+        [TestCase("snake_case", new[] { "Snake", "Case" })]
+        [TestCase("single", new[] { "Single" })]
         public void ValidateSplitByCamelCase(string camelCase, string[] expected)
         {
             var result = camelCase.SplitByCamelCase().ToArray();
@@ -72,6 +74,39 @@ namespace AutoRest.CSharp.Utilities
         public void ValidateToCleanName(string name, bool camelCase, string expected)
         {
             var result = name.ToCleanName(camelCase);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase("List", "MetadataRoles", "GetMetadataRoles")]
+        [TestCase("ListAll", "MetadataPolicy", "GetMetadataPolicies")]
+        [TestCase("ListCollection", "Collections", "GetCollections")]
+        [TestCase("ListChildCollectionNames", "Collections", "GetChildCollectionNames")]
+        [TestCase("ListByGuids", "Entity", "GetEntitiesByGuids")]
+        [TestCase("ListEntitiesAssignedWithTerm", "Glossary", "GetEntitiesAssignedWithTerm")]
+        [TestCase("ListTermsByGlossaryName", "Glossary", "GetTermsByGlossaryName")]
+        [TestCase("ListMyListings", "Glossary", "GetMyListings")]
+        [TestCase("ListBlobContainerBlob", "StorageBlob", "GetBlobContainerBlobs")]
+        public void ValidateRenameListToGet(string methodName, string resourceName, string expected)
+        {
+            var result = methodName.RenameListToGet(resourceName);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase("ListMyListings", "List", "Get", "GetMyListings")]
+        [TestCase("ListEntity", "Entity", "Entities", "ListEntities")]
+        [TestCase("CreateEntity", "List", "Get", "CreateEntity")]
+        public void ValidateReplaceFirst(string text, string oldValue, string newValue, string expected)
+        {
+            var result = text.ReplaceFirst(oldValue, newValue);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase("ListBlobContainerBlob", "Blob", "Blobs", "ListBlobContainerBlobs")]
+        [TestCase("ListEntity", "Entity", "Entities", "ListEntities")]
+        [TestCase("CreateEntity", "List", "Get", "CreateEntity")]
+        public void ValidateReplaceLast(string text, string oldValue, string newValue, string expected)
+        {
+            var result = text.ReplaceLast(oldValue, newValue);
             Assert.AreEqual(expected, result);
         }
     }
