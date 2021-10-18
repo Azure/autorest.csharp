@@ -7,9 +7,12 @@ using Azure.Core;
 
 namespace Azure.Analytics.Purview.Account
 {
-    [CodeGenClient(ParentClient = typeof(AccountsClient))]
+    [CodeGenClient("AccountsClient")]
+    public partial class PurviewAccountsClient { }
+
+    [CodeGenClient("CollectionsClient", ParentClient = typeof(PurviewAccountsClient))]
     public partial class PurviewAccountCollections { }
 
-    [CodeGenClient(ParentClient = typeof(AccountsClient), ForcePublicConstructors = true)]
+    [CodeGenClient("ResourceSetRulesClient", ParentClient = typeof(PurviewAccountsClient), ForcePublicConstructors = true)]
     public partial class PurviewAccountResourceSetRules { }
 }

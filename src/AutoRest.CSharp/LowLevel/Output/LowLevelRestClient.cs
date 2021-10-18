@@ -61,8 +61,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public bool IsSubClient => ParentClientTypeName != null;
 
-        public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context)
-            : base(operationGroup, context, GetClientName(context, operationGroup.Language.Default.Name), string.Empty)
+        public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context) : base(operationGroup, context, null)
         {
             _context = context;
             ClientOptions = new ClientOptionsTypeProvider(_context);
@@ -350,21 +349,6 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
 
             return new MethodSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", "internal", constructorParameters);
-        }
-
-        private static string GetClientName(BuildContext context, string clientName)
-        {
-            var defaultName = ClientBuilder.GetClientPrefix(clientName, context);
-            var sourceInputModel = context.SourceInputModel;
-            if (sourceInputModel == null)
-            {
-                return defaultName + ClientBuilder.GetRestClientSuffix(context);
-            }
-
-            var defaultNamespace = context.DefaultNamespace;
-            var defaultLibraryName = context.DefaultLibraryName;
-            var subClientType = sourceInputModel.FindForType(defaultNamespace, $"{defaultLibraryName}{defaultName}");
-            return subClientType != null ? subClientType.Name : defaultName + ClientBuilder.GetRestClientSuffix(context);
         }
 
         private static bool FilterServiceParameters(RequestParameter p)

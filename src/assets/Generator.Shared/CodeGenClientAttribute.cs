@@ -11,7 +11,7 @@ namespace Azure.Core
         public Type? ParentClient { get; set; }
         public bool ForcePublicConstructors { get; set; } = false;
 
-        public CodeGenClientAttribute(string? originalName = default) : base(originalName)
+        public CodeGenClientAttribute(string originalName) : base(originalName)
         {
         }
     }

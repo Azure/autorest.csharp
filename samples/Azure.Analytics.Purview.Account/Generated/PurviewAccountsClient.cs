@@ -16,8 +16,8 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Analytics.Purview.Account
 {
-    /// <summary> The Accounts service client. </summary>
-    public partial class AccountsClient
+    /// <summary> The PurviewAccounts service client. </summary>
+    public partial class PurviewAccountsClient
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
         private readonly TokenCredential _tokenCredential;
@@ -29,17 +29,17 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of AccountsClient for mocking. </summary>
-        protected AccountsClient()
+        /// <summary> Initializes a new instance of PurviewAccountsClient for mocking. </summary>
+        protected PurviewAccountsClient()
         {
         }
 
-        /// <summary> Initializes a new instance of AccountsClient. </summary>
+        /// <summary> Initializes a new instance of PurviewAccountsClient. </summary>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public AccountsClient(Uri endpoint, TokenCredential credential, PurviewAccountClientOptions options = null)
+        public PurviewAccountsClient(Uri endpoint, TokenCredential credential, PurviewAccountClientOptions options = null)
         {
             if (endpoint == null)
             {
@@ -150,7 +150,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> GetAccountPropertiesAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetAccountProperties");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.GetAccountProperties");
             scope.Start();
             try
             {
@@ -256,7 +256,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response GetAccountProperties(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetAccountProperties");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.GetAccountProperties");
             scope.Start();
             try
             {
@@ -369,7 +369,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> UpdateAccountPropertiesAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccountsClient.UpdateAccountProperties");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.UpdateAccountProperties");
             scope.Start();
             try
             {
@@ -482,7 +482,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response UpdateAccountProperties(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccountsClient.UpdateAccountProperties");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.UpdateAccountProperties");
             scope.Start();
             try
             {
@@ -528,7 +528,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> GetAccessKeysAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetAccessKeys");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.GetAccessKeys");
             scope.Start();
             try
             {
@@ -574,7 +574,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response GetAccessKeys(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccountsClient.GetAccessKeys");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.GetAccessKeys");
             scope.Start();
             try
             {
@@ -627,7 +627,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> RegenerateAccessKeyAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccountsClient.RegenerateAccessKey");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.RegenerateAccessKey");
             scope.Start();
             try
             {
@@ -680,7 +680,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response RegenerateAccessKey(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccountsClient.RegenerateAccessKey");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.RegenerateAccessKey");
             scope.Start();
             try
             {
@@ -747,7 +747,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual AsyncPageable<BinaryData> GetCollectionsAsync(RequestOptions options, string skipToken = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "AccountsClient.GetCollections");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PurviewAccountsClient.GetCollections");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -815,7 +815,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Pageable<BinaryData> GetCollections(RequestOptions options, string skipToken = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "AccountsClient.GetCollections");
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PurviewAccountsClient.GetCollections");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -957,7 +957,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual AsyncPageable<BinaryData> GetResourceSetRulesAsync(RequestOptions options, string skipToken = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "AccountsClient.GetResourceSetRules");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PurviewAccountsClient.GetResourceSetRules");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1099,7 +1099,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Pageable<BinaryData> GetResourceSetRules(RequestOptions options, string skipToken = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "AccountsClient.GetResourceSetRules");
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PurviewAccountsClient.GetResourceSetRules");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
