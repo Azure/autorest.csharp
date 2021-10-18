@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -74,7 +75,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteLongRunningOperationMethod(writer, longRunningOperationMethod, context.Configuration, false);
                     }
 
-                    WriteSubClientFactoryMethod(writer, restClient, subClients);
+                    WriteSubClientFactoryMethod(writer, context, restClient, subClients);
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
                     var fieldNames = new Dictionary<string, string>(restClient.Parameters
@@ -366,7 +367,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
             }
 
-        private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelRestClient parentClient, LowLevelRestClient[] childClients)
+        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelRestClient parentClient, LowLevelRestClient[] childClients)
         {
             var factoryMethods = new List<(FieldDeclaration?, MethodSignature, List<Reference>)>();
             foreach (var childClient in childClients)
@@ -388,7 +389,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                var methodSignature = new MethodSignature($"Get{childClient.Type.Name}", $"Initializes a new instance of {childClient.Type.Name}", "public virtual", childClient.Type, null, methodParameters.ToArray());
+                var methodName = $"Get{childClient.Type.Name[context.DefaultLibraryName.Length..]}{ClientBuilder.GetClientSuffix(context)}";
+                var methodSignature = new MethodSignature(methodName, $"Initializes a new instance of {childClient.Type.Name}", "public virtual", childClient.Type, null, methodParameters.ToArray());
                 if (methodParameters.Any())
                 {
                     factoryMethods.Add((null, methodSignature, constructorCallParameters));

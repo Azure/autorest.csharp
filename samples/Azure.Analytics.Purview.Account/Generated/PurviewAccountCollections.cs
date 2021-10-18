@@ -16,8 +16,8 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Analytics.Purview.Account
 {
-    /// <summary> The Collections service client. </summary>
-    public partial class CollectionsClient
+    /// <summary> The PurviewAccountCollections service client. </summary>
+    public partial class PurviewAccountCollections
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
         private readonly TokenCredential _tokenCredential;
@@ -30,12 +30,12 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of CollectionsClient for mocking. </summary>
-        protected CollectionsClient()
+        /// <summary> Initializes a new instance of PurviewAccountCollections for mocking. </summary>
+        protected PurviewAccountCollections()
         {
         }
 
-        /// <summary> Initializes a new instance of CollectionsClient. </summary>
+        /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
         /// <param name="clientDiagnostics"> The ClientDiagnostics instance to use. </param>
         /// <param name="pipeline"> The pipeline instance to use. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
@@ -43,7 +43,7 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="collectionName"> The String to use. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/>, <paramref name="collectionName"/>, or <paramref name="apiVersion"/> is null. </exception>
-        internal CollectionsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion = "2019-11-01-preview")
+        internal PurviewAccountCollections(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion = "2019-11-01-preview")
         {
             if (clientDiagnostics == null)
             {
@@ -120,7 +120,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> GetCollectionAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("CollectionsClient.GetCollection");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
             try
             {
@@ -180,7 +180,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response GetCollection(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("CollectionsClient.GetCollection");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
             try
             {
@@ -262,7 +262,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> CreateOrUpdateCollectionAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("CollectionsClient.CreateOrUpdateCollection");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
             {
@@ -344,7 +344,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response CreateOrUpdateCollection(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("CollectionsClient.CreateOrUpdateCollection");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.CreateOrUpdateCollection");
             scope.Start();
             try
             {
@@ -384,7 +384,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> DeleteCollectionAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("CollectionsClient.DeleteCollection");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
             scope.Start();
             try
             {
@@ -424,7 +424,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response DeleteCollection(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("CollectionsClient.DeleteCollection");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
             scope.Start();
             try
             {
@@ -470,7 +470,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> GetCollectionPathAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("CollectionsClient.GetCollectionPath");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
             try
             {
@@ -516,7 +516,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response GetCollectionPath(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("CollectionsClient.GetCollectionPath");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
             try
             {
@@ -569,7 +569,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual AsyncPageable<BinaryData> ListChildCollectionNamesAsync(RequestOptions options, string skipToken = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "CollectionsClient.ListChildCollectionNames");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PurviewAccountCollections.ListChildCollectionNames");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -623,7 +623,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Pageable<BinaryData> ListChildCollectionNames(RequestOptions options, string skipToken = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "CollectionsClient.ListChildCollectionNames");
+            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PurviewAccountCollections.ListChildCollectionNames");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do

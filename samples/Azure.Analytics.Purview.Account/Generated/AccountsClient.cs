@@ -1114,25 +1114,25 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        private volatile ResourceSetRulesClient _cachedResourceSetRulesClient;
+        private volatile PurviewAccountResourceSetRules _cachedPurviewAccountResourceSetRules;
 
-        /// <summary> Initializes a new instance of CollectionsClient. </summary>
+        /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
         /// <param name="collectionName"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="collectionName"/> is null. </exception>
-        public virtual CollectionsClient GetCollectionsClient(string collectionName)
+        public virtual PurviewAccountCollections GetCollectionsClient(string collectionName)
         {
             if (collectionName == null)
             {
                 throw new ArgumentNullException(nameof(collectionName));
             }
 
-            return new CollectionsClient(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, collectionName, _apiVersion);
+            return new PurviewAccountCollections(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, collectionName, _apiVersion);
         }
 
-        /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
-        public virtual ResourceSetRulesClient GetResourceSetRulesClient()
+        /// <summary> Initializes a new instance of PurviewAccountResourceSetRules. </summary>
+        public virtual PurviewAccountResourceSetRules GetResourceSetRulesClient()
         {
-            return _cachedResourceSetRulesClient ??= new ResourceSetRulesClient(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion);
+            return _cachedPurviewAccountResourceSetRules ??= new PurviewAccountResourceSetRules(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion);
         }
 
         internal HttpMessage CreateGetAccountPropertiesRequest()

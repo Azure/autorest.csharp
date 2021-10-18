@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Analytics.Purview.Account
 {
-    /// <summary> The ResourceSetRules service client. </summary>
-    public partial class ResourceSetRulesClient
+    /// <summary> The PurviewAccountResourceSetRules service client. </summary>
+    public partial class PurviewAccountResourceSetRules
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
         private readonly TokenCredential _tokenCredential;
@@ -26,17 +26,17 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ResourceSetRulesClient for mocking. </summary>
-        protected ResourceSetRulesClient()
+        /// <summary> Initializes a new instance of PurviewAccountResourceSetRules for mocking. </summary>
+        protected PurviewAccountResourceSetRules()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
+        /// <summary> Initializes a new instance of PurviewAccountResourceSetRules. </summary>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public ResourceSetRulesClient(Uri endpoint, TokenCredential credential, PurviewAccountClientOptions options = null)
+        public PurviewAccountResourceSetRules(Uri endpoint, TokenCredential credential, PurviewAccountClientOptions options = null)
         {
             if (endpoint == null)
             {
@@ -55,14 +55,14 @@ namespace Azure.Analytics.Purview.Account
             _apiVersion = options.Version;
         }
 
-        /// <summary> Initializes a new instance of ResourceSetRulesClient. </summary>
+        /// <summary> Initializes a new instance of PurviewAccountResourceSetRules. </summary>
         /// <param name="clientDiagnostics"> The ClientDiagnostics instance to use. </param>
         /// <param name="pipeline"> The pipeline instance to use. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/>, or <paramref name="apiVersion"/> is null. </exception>
-        internal ResourceSetRulesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string apiVersion = "2019-11-01-preview")
+        internal PurviewAccountResourceSetRules(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string apiVersion = "2019-11-01-preview")
         {
             if (clientDiagnostics == null)
             {
@@ -208,7 +208,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> GetResourceSetRuleAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceSetRulesClient.GetResourceSetRule");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.GetResourceSetRule");
             scope.Start();
             try
             {
@@ -342,7 +342,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response GetResourceSetRule(RequestOptions options)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceSetRulesClient.GetResourceSetRule");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.GetResourceSetRule");
             scope.Start();
             try
             {
@@ -572,7 +572,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> CreateOrUpdateResourceSetRuleAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceSetRulesClient.CreateOrUpdateResourceSetRule");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.CreateOrUpdateResourceSetRule");
             scope.Start();
             try
             {
@@ -802,7 +802,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response CreateOrUpdateResourceSetRule(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceSetRulesClient.CreateOrUpdateResourceSetRule");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.CreateOrUpdateResourceSetRule");
             scope.Start();
             try
             {
@@ -842,7 +842,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual async Task<Response> DeleteResourceSetRuleAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceSetRulesClient.DeleteResourceSetRule");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.DeleteResourceSetRule");
             scope.Start();
             try
             {
@@ -882,7 +882,7 @@ namespace Azure.Analytics.Purview.Account
         public virtual Response DeleteResourceSetRule(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceSetRulesClient.DeleteResourceSetRule");
+            using var scope = _clientDiagnostics.CreateScope("PurviewAccountResourceSetRules.DeleteResourceSetRule");
             scope.Start();
             try
             {
