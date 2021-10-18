@@ -229,6 +229,14 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             //}
         }
 
+        protected override string GetMethodName(MgmtClientOperation clientOperation)
+        {
+            // we need to override the GetMethodName method to guarantee that we do not have a collision of method names
+            var operation = clientOperation.First();
+            var operationSet = Context.Library.GetOperationSet(operation.RequestPath);
+            return $"{operation.Name}{operationSet[operation.Operation].Key}";
+        }
+
         protected void WriteGetMethod(MgmtClientOperation operation, bool async)
         {
             WriteNormalMethod(operation, "Get", async, shouldThrowExceptionWhenNull: true);
