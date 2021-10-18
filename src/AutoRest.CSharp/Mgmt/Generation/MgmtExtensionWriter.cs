@@ -105,11 +105,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             Debug.Assert(clientOperation.Count == 1);
             var operation = clientOperation.First();
 
-            if (operation.IsListMethod(out var itemType, out var extraScope))
+            if (operation.IsListMethod(out var itemType, out var extraScope)
+                && !itemType.IsFrameworkType // we need to ensure this is not a framework type
+                && Context.Library.TryGetTypeProvider(itemType.Name, out var provider)) // and get the model name we are listing
             {
-                if (!Context.Library.TryGetTypeProvider(itemType.Name, out var provider))
-                    throw new InvalidOperationException($"Cannot find type {itemType.Name}");
-
                 // even if we are list a resource data under the subscription, we could have different scopes. The most common case is that we are listing under "subscriptions/locations"
                 var suffix = GetOperationNameExtraScopeSuffix(extraScope);
                 var by = string.IsNullOrEmpty(suffix) ? string.Empty : "By";
