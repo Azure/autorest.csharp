@@ -12,9 +12,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     public class MgmtConfiguration
     {
         public MgmtConfiguration(
-            string[] operationGroupIsTuple,
-            string[] operationGroupIsExtension,
-            string[] operationGroupsToOmit,
+            IReadOnlyList<string> operationGroupIsTuple,
+            IReadOnlyList<string> operationGroupIsExtension,
+            IReadOnlyList<string> operationGroupsToOmit,
+            IReadOnlyList<string> noPropertyTypeReplacement,
             JsonElement? operationGroupToResourceType = default,
             JsonElement? operationGroupToResource = default,
             JsonElement? operationGroupToParent = default,
@@ -39,6 +40,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupIsTuple = operationGroupIsTuple;
             OperationGroupIsExtension = operationGroupIsExtension;
             OperationGroupsToOmit = operationGroupsToOmit;
+            NoPropertyTypeReplacement = noPropertyTypeReplacement;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
         }
 
@@ -47,9 +49,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToSingletonResource { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
-        public string[] OperationGroupIsTuple { get; }
-        public string[] OperationGroupIsExtension { get; }
-        public string[] OperationGroupsToOmit { get; }
+        public IReadOnlyList<string> OperationGroupIsTuple { get; }
+        public IReadOnlyList<string> OperationGroupIsExtension { get; }
+        public IReadOnlyList<string> OperationGroupsToOmit { get; }
+        public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
         public bool IsArmCore { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
@@ -58,6 +61,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<string[]?>("operation-group-is-tuple").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("operation-group-is-extension").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                autoRest.GetValue<string[]?>("no-property-type-replacement").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult(),
@@ -90,6 +94,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(OperationGroupToParent), out var operationGroupToParent);
             root.TryGetProperty(nameof(OperationGroupToSingletonResource), out var singletonResource);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
+            root.TryGetProperty(nameof(NoPropertyTypeReplacement), out var noPropertyTypeReplacment);
 
             var operationGroupIsTupleList = operationGroupIsTuple.ValueKind == JsonValueKind.Array
                 ? operationGroupIsTuple.EnumerateArray().Select(t => t.ToString()).ToArray()
@@ -103,12 +108,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : new string[0];
 
+            var noPropertyTypeReplacementList = noPropertyTypeReplacment.ValueKind == JsonValueKind.Array
+                ? noPropertyTypeReplacment.EnumerateArray().Select(t => t.ToString()).ToList()
+                : new List<string>();
+
             root.TryGetProperty("ArmCore", out var isArmCore);
 
             return new MgmtConfiguration(
                 operationGroupIsTupleList,
                 operationGroupIsExtensionList,
                 operationGroupList,
+                noPropertyTypeReplacementList,
                 operationGroupToResourceType,
                 operationGroupToResource,
                 operationGroupToParent,
@@ -165,9 +175,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static void WriteNonEmptySettings(
             Utf8JsonWriter writer,
             string settingName,
-            string[] settings)
+            IReadOnlyList<string> settings)
         {
-            if (settings.Length > 0)
+            if (settings.Count() > 0)
             {
                 writer.WriteStartArray(settingName);
                 foreach (var s in settings)
