@@ -1,4 +1,4 @@
-### Don't buffer downloads
+### In order to get the large files, tests fail with "Stream was too long" exception. To fix this, don't download response from buffer.
 
 ``` yaml
 directive:
