@@ -21,13 +21,12 @@ namespace Azure.AI.DocumentTranslation
     {
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _endpoint;
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of DocumentTranslationClient for mocking. </summary>
         protected DocumentTranslationClient()
@@ -49,7 +48,6 @@ namespace Azure.AI.DocumentTranslation
             {
                 throw new ArgumentNullException(nameof(credential));
             }
-
             options ??= new AzureAIDocumentTranslationClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

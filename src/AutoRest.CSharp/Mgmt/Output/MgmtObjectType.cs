@@ -15,28 +15,34 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtObjectType : SchemaObjectType
     {
-        private string? _defaultNamespace;
         private ObjectTypeProperty[]? _myProperties;
-        private BuildContext<MgmtOutputLibrary> _context;
+        private readonly BuildContext<MgmtOutputLibrary> _context;
 
         public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context)
-            : base(objectSchema, context)
+            : this(objectSchema, context, false)
         {
-            _context = context;
         }
 
-        protected virtual bool IsResourceType => false;
+        protected MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, bool isResourceType)
+            : base(objectSchema, context, GetDefaultName(objectSchema, isResourceType), GetDefaultNamespace(context, objectSchema, isResourceType))
+        {
+            _context = context;
+            IsResourceType = isResourceType;
+        }
+
+        protected bool IsResourceType { get; }
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        protected override string DefaultNamespace => _defaultNamespace ??= IsResourceType ? base.DefaultNamespace.Substring(0, base.DefaultNamespace.Length - 7) : base.DefaultNamespace;
-
-        protected override string DefaultName => GetDefaultName(ObjectSchema);
-
-        protected string GetDefaultName(ObjectSchema objectSchema)
+        private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
             var name = objectSchema.CSharpName();
-            return IsResourceType ? name + "Data" : name;
+            return isResourceType ? name + "Data" : name;
+        }
+
+        private static string GetDefaultNamespace(BuildContext context, Schema objectSchema, bool isResourceType)
+        {
+            return isResourceType ? context.DefaultNamespace : GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
         }
 
         private HashSet<string> GetParentPropertyNames()

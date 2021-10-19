@@ -3,7 +3,6 @@
 
 using System;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;
 
@@ -11,13 +10,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal abstract class TypeProvider
     {
-        private readonly Lazy<INamedTypeSymbol?> _existingType;
         private TypeDeclarationOptions? _type;
 
-        protected TypeProvider(BuildContext context)
+        protected TypeProvider(BuildContext context, string defaultName, string? defaultNamespace = default)
         {
             Context = context;
-            _existingType = new Lazy<INamedTypeSymbol?>(() => Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName));
+            DefaultName = defaultName;
+            DefaultNamespace = defaultNamespace ?? Context.DefaultNamespace;
+            ExistingType = Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName);
         }
 
         public CSharpType Type => new CSharpType(
@@ -28,11 +28,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         internal BuildContext Context { get; private set; }
-        protected abstract string DefaultName { get; }
-        protected virtual string DefaultNamespace => Context.DefaultNamespace;
+        protected string DefaultName { get; }
+        protected string DefaultNamespace { get; }
         protected abstract string DefaultAccessibility { get; }
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
-        protected INamedTypeSymbol? ExistingType => _existingType.Value;
+        protected INamedTypeSymbol? ExistingType { get; }
 
         internal virtual Type? SerializeAs => null;
 
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 existingTypeOverrides: TypeKind == TypeKind.Enum);
         }
 
-        public string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
+        public static string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
         {
             var result = context.DefaultNamespace;
             if (namespaceExtension != default)
