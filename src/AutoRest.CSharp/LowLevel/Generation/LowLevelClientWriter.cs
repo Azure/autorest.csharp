@@ -367,15 +367,15 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelRestClient parentClient, LowLevelRestClient[] childClients)
+        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelRestClient parentClient, LowLevelRestClient[] subClients)
         {
             var factoryMethods = new List<(FieldDeclaration?, MethodSignature, List<Reference>)>();
-            foreach (var childClient in childClients)
+            foreach (var subClient in subClients)
             {
                 var methodParameters = new List<Parameter>();
                 var constructorCallParameters = new List<Reference>();
 
-                foreach (var parameter in childClient.SubClientInternalConstructor.Parameters)
+                foreach (var parameter in subClient.SubClientInternalConstructor.Parameters)
                 {
                     var field = parentClient.GetFieldReferenceByParameter(parameter);
                     if (field == null)
@@ -389,15 +389,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                var methodName = $"Get{childClient.Type.Name[context.DefaultLibraryName.Length..]}{ClientBuilder.GetClientSuffix(context)}";
-                var methodSignature = new MethodSignature(methodName, $"Initializes a new instance of {childClient.Type.Name}", "public virtual", childClient.Type, null, methodParameters.ToArray());
+                var subClientName = subClient.Type.Name;
+                var libraryName = context.DefaultLibraryName;
+                var methodName = subClientName.StartsWith(libraryName)
+                    ? subClientName[libraryName.Length..]
+                    : subClientName;
+
+                var methodSignature = new MethodSignature($"Get{methodName}{ClientBuilder.GetClientSuffix(context)}", $"Initializes a new instance of {subClient.Type.Name}", "public virtual", subClient.Type, null, methodParameters.ToArray());
                 if (methodParameters.Any())
                 {
                     factoryMethods.Add((null, methodSignature, constructorCallParameters));
                 }
                 else
                 {
-                    var field = new FieldDeclaration("private volatile", childClient.Type, $"_cached{childClient.Type.Name}");
+                    var field = new FieldDeclaration("private volatile", subClient.Type, $"_cached{subClient.Type.Name}");
                     factoryMethods.Add((field, methodSignature, constructorCallParameters));
                 }
             }
