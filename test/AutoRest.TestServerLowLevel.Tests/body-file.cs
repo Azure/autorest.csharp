@@ -14,6 +14,7 @@ namespace AutoRest.TestServer.Tests
         private string SamplePngPath = Path.Combine(TestServerV1.GetBaseDirectory(), "routes", "sample.png");
 
         [Test]
+        [Ignore("Enable this test case after https://github.com/Azure/autorest.csharp/issues/1161 resolved")]
         public Task FileStreamEmpty() => Test(async (host) =>
         {
             var result = await new FilesClient(Key, host).GetEmptyFileAsync(new());
@@ -21,6 +22,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [Ignore("Enable this test case after https://github.com/Azure/autorest.csharp/issues/1161 resolved")]
         public Task FileStreamNonempty() => Test(async (host) =>
         {
             var result = await new FilesClient(Key, host).GetFileAsync(new());
@@ -31,6 +33,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [Ignore("Enable this test case after https://github.com/Azure/autorest.csharp/issues/1161 resolved")]
         public Task FileStreamVeryLarge() => Test(async (host) =>
         {
             var result = await new FilesClient(Key, host).GetFileLargeAsync(new());

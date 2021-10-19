@@ -101,7 +101,8 @@ $testNamesLowLevel =
     'paging',
     'url-multi-collectionFormat',
     'url',
-    'head';
+    'head',
+    'body-array';
 
 if (!($Exclude -contains "TestServerLowLevel"))
 {
