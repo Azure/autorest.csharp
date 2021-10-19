@@ -22,7 +22,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
         {
             if (operations.Count > 0)
-                return new MgmtClientOperation(operations);
+            {
+                return new MgmtClientOperation(operations.OrderBy(operations => operations.Name).ToArray());
+            }
 
             return null;
         }

@@ -36,6 +36,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual Type BaseClass => typeof(ArmResource);
 
         protected override string ContextProperty => "this";
+
+        protected override string BranchIdVariableName => "Id.Parent";
+
         private bool IsSingleton => _resource.IsSingleton;
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)

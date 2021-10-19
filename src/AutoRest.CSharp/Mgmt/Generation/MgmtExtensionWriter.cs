@@ -39,6 +39,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string IdVariableName => $"{ExtensionOperationVariableName}.Id";
 
+        protected override string BranchIdVariableName => $"{ExtensionOperationVariableName}.Id";
+
         protected override string ContextProperty => ExtensionOperationVariableName;
 
         protected void WriteGetRestOperations(MgmtRestClient restClient)

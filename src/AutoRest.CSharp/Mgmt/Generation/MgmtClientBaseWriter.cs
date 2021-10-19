@@ -51,6 +51,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual string IdVariableName => "Id";
 
+        protected virtual string BranchIdVariableName => "Id";
+
         protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;
@@ -228,13 +230,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 foreach ((var branch, var operation) in operationMappings)
                 {
                     // we need to identify the correct branch using the resource type, therefore we need first to determine the resource type is a constant
-                    var resourceType = branch.GetResourceType(Config);
+                    var resourceType = GetBranchResourceType(branch);
                     if (!resourceType.IsConstant)
                     {
                         escapeBranches.Add(branch);
                         continue;
                     }
-                    using (_writer.Scope($"{keyword} ({IdVariableName}.ResourceType == \"{branch.GetResourceType(Config)}\")"))
+                    using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == \"{resourceType}\")"))
                     {
                         WritePagingMethodBranch(itemType, diagnostic, operation, parameterMappings[branch], async);
                     }
@@ -244,7 +246,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"else"))
                     {
-                        _writer.Line($"throw new InvalidOperationException($\"{{Id.ResourceType}} is not supported here\");");
+                        _writer.Line($"throw new InvalidOperationException($\"{{{BranchIdVariableName}.ResourceType}} is not supported here\");");
                     }
                 }
                 else if (escapeBranches.Count == 1)
@@ -548,6 +550,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected virtual ResourceType GetBranchResourceType(RequestPath branch)
+        {
+            return branch.ParentRequestPath(Context).GetResourceType(Config);
+        }
+
         protected virtual void WriteLROMethodBody(CSharpType lroObjectType, IDictionary<RequestPath, MgmtRestOperation> operationMappings, IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
             // TODO -- we need to write multiple branches for a LRO operation
@@ -559,19 +566,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-
                 var keyword = "if";
                 var escapeBranches = new List<RequestPath>();
                 foreach ((var branch, var operation) in operationMappings)
                 {
                     // we need to identify the correct branch using the resource type, therefore we need first to determine the resource type is a constant
-                    var resourceType = branch.GetResourceType(Config);
+                    var resourceType = GetBranchResourceType(branch);
                     if (!resourceType.IsConstant)
                     {
                         escapeBranches.Add(branch);
                         continue;
                     }
-                    using (_writer.Scope($"{keyword} ({IdVariableName}.ResourceType == \"{branch.GetResourceType(Config)}\")"))
+                    using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == \"{resourceType}\")"))
                     {
                         WriteLROMethodBranch(lroObjectType, operation, parameterMappings[branch], async);
                     }
@@ -581,7 +587,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"else"))
                     {
-                        _writer.Line($"throw new InvalidOperationException($\"{{Id.ResourceType}} is not supported here\");");
+                        _writer.Line($"throw new InvalidOperationException($\"{{{BranchIdVariableName}.ResourceType}} is not supported here\");");
                     }
                 }
                 else if (escapeBranches.Count == 1)

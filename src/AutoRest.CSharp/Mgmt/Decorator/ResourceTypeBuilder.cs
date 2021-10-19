@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // we cannot directly return the new ResourceType here, the requestPath here can be a parameterized scope, which does not have a resource type.
             if (requestPath.IsParameterizedScope())
                 return ResourceType.Null;
-            return new ResourceType(requestPath);
+            return ResourceType.ParseRequestPath(requestPath);
         }
     }
 }

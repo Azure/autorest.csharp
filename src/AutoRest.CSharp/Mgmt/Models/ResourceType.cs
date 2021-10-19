@@ -47,18 +47,31 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// The <see cref="ResourceType"/> of the management group resource
         /// </summary>
         public static readonly ResourceType ManagementGroup = new(new[] {
-            new Segment("Microsoft.ManagementGroups"),
+            new Segment("Microsoft.Management"),
             new Segment("managementGroups")
         });
 
         private IReadOnlyList<Segment> _segments;
 
-        public ResourceType(string path)
-            : this(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => new Segment(segment)).ToList())
+        public static ResourceType ParseRequestPath(RequestPath path)
         {
+            // first try our built-in resources
+            if (path == RequestPath.Subscription)
+                return ResourceType.Subscription;
+            if (path == RequestPath.ResourceGroup)
+                return ResourceType.ResourceGroup;
+            if (path == RequestPath.ManagementGroup)
+                return ResourceType.ManagementGroup;
+            if (path == RequestPath.Tenant)
+                return ResourceType.Tenant;
+            if (path == RequestPath.Any)
+                return ResourceType.Any;
+
+            return Parse(path);
         }
 
-        public ResourceType(RequestPath path) : this(ParseRequestPath(path))
+        public ResourceType(string path)
+            : this(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => new Segment(segment)).ToList())
         {
         }
 
@@ -69,17 +82,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             IsConstant = _segments.All(segment => segment.IsConstant);
         }
 
-        private static IReadOnlyList<Segment> ParseRequestPath(RequestPath path)
+        private static ResourceType Parse(RequestPath path)
         {
             var segment = new List<Segment>();
             // find providers
-            int index = path.ToList().IndexOf(Segment.Providers);
+            int index = path.ToList().LastIndexOf(Segment.Providers);
             if (index < 0)
                 throw new ArgumentException($"Could not set ResourceType for operations group {path}. No {Segment.Providers} string found in the URI");
             segment.Add(path[index + 1]);
             segment.AddRange(path.Skip(index + 1).Where((_, index) => index % 2 != 0));
 
-            return segment;
+            return new ResourceType(segment);
         }
 
         /// <summary>
