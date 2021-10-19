@@ -92,6 +92,7 @@ $testNamesLowLevel =
     'body-file',
     'body-string',
     'custom-baseUrl',
+    'custom-baseUrl-more-options',
     'custom-baseUrl-paging',
     'header',
     'httpInfrastructure',
@@ -100,7 +101,8 @@ $testNamesLowLevel =
     'paging',
     'url-multi-collectionFormat',
     'url',
-    'head';
+    'head',
+    'body-array';
 
 if (!($Exclude -contains "TestServerLowLevel"))
 {
