@@ -18,14 +18,13 @@ namespace custom_baseUrl_more_options_LowLevel
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _subscriptionId;
         private readonly string _dnsSuffix;
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
@@ -52,7 +51,6 @@ namespace custom_baseUrl_more_options_LowLevel
             {
                 throw new ArgumentNullException(nameof(dnsSuffix));
             }
-
             options ??= new AutoRestParameterizedCustomHostTestClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
