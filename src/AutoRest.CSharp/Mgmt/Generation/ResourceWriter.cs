@@ -258,17 +258,17 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             WriteMethod(operation, async);
         }
 
-        protected override CSharpType? WrapResourceDataType(CSharpType? returnType)
+        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
         {
-            if (IsResourceDataType(returnType))
-                return _resource.Type;
+            if (!IsResourceDataType(type, operation))
+                return type;
 
-            return returnType;
+            return _resource.Type;
         }
 
-        protected override bool IsResourceDataType(CSharpType? returnType)
+        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation clientOperation)
         {
-            return _resourceData.Type.Equals(returnType);
+            return _resourceData.Type.Equals(type);
         }
 
         private void WriteListAvailableLocationsMethod(bool async)

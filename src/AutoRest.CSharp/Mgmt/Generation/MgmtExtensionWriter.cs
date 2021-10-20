@@ -170,8 +170,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var pagingMethod = clientOperation.First().GetPagingMethod(Context)!;
             var itemType = pagingMethod.PagingResponse.ItemType;
+            var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
 
-            _writer.WriteXmlDocumentationSummary($"Lists the {itemType.Name.ToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
+            _writer.WriteXmlDocumentationSummary($"Lists the {actualItemType.Name.ToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             foreach (var parameter in methodParameters)
             {
@@ -181,9 +182,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
 
-            var responseType = itemType.WrapPageable(async);
-
-            WritePagingMethodSignature(responseType, methodName, methodParameters, async, clientOperation.Accessibility, false);
+            WritePagingMethodSignature(actualItemType.WrapPageable(async), methodName, methodParameters, async, clientOperation.Accessibility, false);
 
             using (_writer.Scope())
             {
@@ -203,7 +202,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             bool async)
         {
             var pagingMethod = operation.GetPagingMethod(Context)!;
-            var returnType = new CSharpType(typeof(Page<>), itemType).WrapAsync(async);
+            var returnType = new CSharpType(typeof(Page<>), WrapResourceDataType(itemType, operation)!).WrapAsync(async);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
@@ -288,7 +287,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType)!);
+            var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType, clientOperation.First())!);
 
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
@@ -330,7 +329,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             _writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
-            var returnType = WrapResourceDataType(clientOperation.ReturnType);
+            var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
 
             WriteNormalMethodSignature(GetResponseType(returnType, async), methodName, methodParameters, async, clientOperation.Accessibility, true);
 
@@ -357,6 +356,54 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteRestOperationAssignment(operation.RestClient);
 
             base.WriteNormalMethodBranch(operation, parameterMappings, async, shouldThrowExceptionWhenNull);
+        }
+
+        /// <summary>
+        /// In the extension class, we need to find the correct resource class that links to this resource data, if this is a resource data
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="operation"></param>
+        /// <returns></returns>
+        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        {
+            if (!IsResourceDataType(type, operation))
+                return type;
+
+            // we need to find the correct resource type that links with this resource data
+            var candidates = new List<RequestPath>();
+            foreach (var resource in Context.Library.ArmResources)
+            {
+                foreach (var operationSet in resource.OperationSets)
+                {
+                    var resourceRequestPath = operationSet.GetRequestPath(Context);
+                    // TODO -- verify if this has the same prefix after the scope is trimeed
+                    if (operation.RequestPath.TrimScope().IsAncestorOf(resourceRequestPath.TrimScope()))
+                        candidates.Add(resourceRequestPath);
+                }
+            }
+
+            // we should have a list of candidates, return the original type if there is no candidates
+            if (candidates.Count == 0)
+                return type;
+
+            var selectedResourcePath = candidates.OrderBy(path => path.Count).First();
+
+            return Context.Library.GetArmResource(selectedResourcePath).Type;
+        }
+
+        /// <summary>
+        /// In the extension class, we need to check the type is a resource data or not
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="operation"></param>
+        /// <returns></returns>
+        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        {
+            if (type == null || type.IsFrameworkType)
+                return false;
+
+            return Context.Library.TryGetTypeProvider(type.Name, out var provider)
+                && provider is ResourceData;
         }
 
         private void WriteClientDiagnosticsAssignment(string optionsVariable)
