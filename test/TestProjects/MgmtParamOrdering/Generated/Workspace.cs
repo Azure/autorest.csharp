@@ -408,7 +408,7 @@ namespace MgmtParamOrdering
 
         #region EnvironmentContainerResource
 
-        /// <summary> Gets a list of EnvironmentContainerResources in the Workspace. </summary>
+        /// <summary> Gets a container of EnvironmentContainerResources in the Workspace. </summary>
         /// <returns> An object representing collection of EnvironmentContainerResources and their operations over a Workspace. </returns>
         public EnvironmentContainerResourceContainer GetEnvironmentContainerResources()
         {

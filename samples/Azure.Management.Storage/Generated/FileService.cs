@@ -205,7 +205,7 @@ namespace Azure.Management.Storage
 
         #region FileShare
 
-        /// <summary> Gets a list of FileShares in the FileService. </summary>
+        /// <summary> Gets a container of FileShares in the FileService. </summary>
         /// <returns> An object representing collection of FileShares and their operations over a FileService. </returns>
         public FileShareContainer GetFileShares()
         {

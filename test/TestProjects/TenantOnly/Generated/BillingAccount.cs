@@ -315,7 +315,7 @@ namespace TenantOnly
 
         #region Agreement
 
-        /// <summary> Gets a list of Agreements in the BillingAccount. </summary>
+        /// <summary> Gets a container of Agreements in the BillingAccount. </summary>
         /// <returns> An object representing collection of Agreements and their operations over a BillingAccount. </returns>
         public AgreementContainer GetAgreements()
         {

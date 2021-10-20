@@ -416,11 +416,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        #region ChildBody
+        #region SubParentChildBody
 
-        /// <summary> Gets a list of ChildBodies in the SubParent. </summary>
-        /// <returns> An object representing collection of ChildBodies and their operations over a SubParent. </returns>
-        public SubParentChildBodyContainer GetChildBodies()
+        /// <summary> Gets a container of SubParentChildBodies in the SubParent. </summary>
+        /// <returns> An object representing collection of SubParentChildBodies and their operations over a SubParent. </returns>
+        public SubParentChildBodyContainer GetSubParentChildBodies()
         {
             return new SubParentChildBodyContainer(this);
         }

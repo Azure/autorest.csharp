@@ -143,9 +143,9 @@ namespace OmitOperationGroups
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Model4>> GetDefaultAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Model4>> GetDefaultModel4Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model2.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("Model2.GetDefaultModel4");
             scope.Start();
             try
             {
@@ -160,9 +160,9 @@ namespace OmitOperationGroups
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Model4> GetDefault(CancellationToken cancellationToken = default)
+        public virtual Response<Model4> GetDefaultModel4(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model2.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("Model2.GetDefaultModel4");
             scope.Start();
             try
             {

@@ -468,7 +468,7 @@ namespace MgmtOperations
 
         #region AvailabilitySetChild
 
-        /// <summary> Gets a list of AvailabilitySetChildren in the AvailabilitySet. </summary>
+        /// <summary> Gets a container of AvailabilitySetChildren in the AvailabilitySet. </summary>
         /// <returns> An object representing collection of AvailabilitySetChildren and their operations over a AvailabilitySet. </returns>
         public AvailabilitySetChildContainer GetAvailabilitySetChildren()
         {

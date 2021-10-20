@@ -315,7 +315,7 @@ namespace MgmtListMethods
 
         #region TenantParentWithNonResChWithLoc
 
-        /// <summary> Gets a list of TenantParentWithNonResChWithLocs in the TenantTest. </summary>
+        /// <summary> Gets a container of TenantParentWithNonResChWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocs and their operations over a TenantTest. </returns>
         public TenantParentWithNonResChWithLocContainer GetTenantParentWithNonResChWithLocs()
         {
@@ -325,7 +325,7 @@ namespace MgmtListMethods
 
         #region TenantParentWithNonResCh
 
-        /// <summary> Gets a list of TenantParentWithNonResChes in the TenantTest. </summary>
+        /// <summary> Gets a container of TenantParentWithNonResChes in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChes and their operations over a TenantTest. </returns>
         public TenantParentWithNonResChContainer GetTenantParentWithNonResChes()
         {
@@ -335,7 +335,7 @@ namespace MgmtListMethods
 
         #region TenantParentWithLoc
 
-        /// <summary> Gets a list of TenantParentWithLocs in the TenantTest. </summary>
+        /// <summary> Gets a container of TenantParentWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithLocs and their operations over a TenantTest. </returns>
         public TenantParentWithLocContainer GetTenantParentWithLocs()
         {
@@ -345,7 +345,7 @@ namespace MgmtListMethods
 
         #region TenantParent
 
-        /// <summary> Gets a list of TenantParents in the TenantTest. </summary>
+        /// <summary> Gets a container of TenantParents in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParents and their operations over a TenantTest. </returns>
         public TenantParentContainer GetTenantParents()
         {

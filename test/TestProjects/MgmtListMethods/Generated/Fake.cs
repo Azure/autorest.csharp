@@ -315,7 +315,7 @@ namespace MgmtListMethods
 
         #region FakeParentWithAncestorWithNonResChWithLoc
 
-        /// <summary> Gets a list of FakeParentWithAncestorWithNonResChWithLocs in the Fake. </summary>
+        /// <summary> Gets a container of FakeParentWithAncestorWithNonResChWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocs and their operations over a Fake. </returns>
         public FakeParentWithAncestorWithNonResChWithLocContainer GetFakeParentWithAncestorWithNonResChWithLocs()
         {
@@ -325,7 +325,7 @@ namespace MgmtListMethods
 
         #region FakeParentWithAncestorWithNonResCh
 
-        /// <summary> Gets a list of FakeParentWithAncestorWithNonResChes in the Fake. </summary>
+        /// <summary> Gets a container of FakeParentWithAncestorWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a Fake. </returns>
         public FakeParentWithAncestorWithNonResChContainer GetFakeParentWithAncestorWithNonResChes()
         {
@@ -335,7 +335,7 @@ namespace MgmtListMethods
 
         #region FakeParentWithAncestorWithLoc
 
-        /// <summary> Gets a list of FakeParentWithAncestorWithLocs in the Fake. </summary>
+        /// <summary> Gets a container of FakeParentWithAncestorWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocs and their operations over a Fake. </returns>
         public FakeParentWithAncestorWithLocContainer GetFakeParentWithAncestorWithLocs()
         {
@@ -345,7 +345,7 @@ namespace MgmtListMethods
 
         #region FakeParentWithAncestor
 
-        /// <summary> Gets a list of FakeParentWithAncestors in the Fake. </summary>
+        /// <summary> Gets a container of FakeParentWithAncestors in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a Fake. </returns>
         public FakeParentWithAncestorContainer GetFakeParentWithAncestors()
         {
@@ -355,7 +355,7 @@ namespace MgmtListMethods
 
         #region FakeParentWithNonResCh
 
-        /// <summary> Gets a list of FakeParentWithNonResChes in the Fake. </summary>
+        /// <summary> Gets a container of FakeParentWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithNonResChes and their operations over a Fake. </returns>
         public FakeParentWithNonResChContainer GetFakeParentWithNonResChes()
         {
@@ -365,7 +365,7 @@ namespace MgmtListMethods
 
         #region FakeParent
 
-        /// <summary> Gets a list of FakeParents in the Fake. </summary>
+        /// <summary> Gets a container of FakeParents in the Fake. </summary>
         /// <returns> An object representing collection of FakeParents and their operations over a Fake. </returns>
         public FakeParentContainer GetFakeParents()
         {

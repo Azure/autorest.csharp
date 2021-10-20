@@ -738,9 +738,9 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<PrivateLinkResource>>> GetAllByStorageAccountAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<PrivateLinkResource>>> GetAllByStorageAccountPrivateLinkResourceAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetAllByStorageAccount");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetAllByStorageAccountPrivateLinkResource");
             scope.Start();
             try
             {
@@ -756,9 +756,9 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<PrivateLinkResource>> GetAllByStorageAccount(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<PrivateLinkResource>> GetAllByStorageAccountPrivateLinkResource(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetAllByStorageAccount");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetAllByStorageAccountPrivateLinkResource");
             scope.Start();
             try
             {
@@ -794,7 +794,7 @@ namespace Azure.Management.Storage
 
         #region ManagementPolicy
 
-        /// <summary> Gets a list of ManagementPolicies in the StorageAccount. </summary>
+        /// <summary> Gets a container of ManagementPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of ManagementPolicies and their operations over a StorageAccount. </returns>
         public ManagementPolicyContainer GetManagementPolicies()
         {
@@ -804,7 +804,7 @@ namespace Azure.Management.Storage
 
         #region PrivateEndpointConnection
 
-        /// <summary> Gets a list of PrivateEndpointConnections in the StorageAccount. </summary>
+        /// <summary> Gets a container of PrivateEndpointConnections in the StorageAccount. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a StorageAccount. </returns>
         public PrivateEndpointConnectionContainer GetPrivateEndpointConnections()
         {
@@ -814,7 +814,7 @@ namespace Azure.Management.Storage
 
         #region ObjectReplicationPolicy
 
-        /// <summary> Gets a list of ObjectReplicationPolicies in the StorageAccount. </summary>
+        /// <summary> Gets a container of ObjectReplicationPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of ObjectReplicationPolicies and their operations over a StorageAccount. </returns>
         public ObjectReplicationPolicyContainer GetObjectReplicationPolicies()
         {
@@ -824,7 +824,7 @@ namespace Azure.Management.Storage
 
         #region EncryptionScope
 
-        /// <summary> Gets a list of EncryptionScopes in the StorageAccount. </summary>
+        /// <summary> Gets a container of EncryptionScopes in the StorageAccount. </summary>
         /// <returns> An object representing collection of EncryptionScopes and their operations over a StorageAccount. </returns>
         public EncryptionScopeContainer GetEncryptionScopes()
         {

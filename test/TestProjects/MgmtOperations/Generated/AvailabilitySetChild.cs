@@ -313,7 +313,7 @@ namespace MgmtOperations
 
         #region AvailabilitySetGrandChild
 
-        /// <summary> Gets a list of AvailabilitySetGrandChildren in the AvailabilitySetChild. </summary>
+        /// <summary> Gets a container of AvailabilitySetGrandChildren in the AvailabilitySetChild. </summary>
         /// <returns> An object representing collection of AvailabilitySetGrandChildren and their operations over a AvailabilitySetChild. </returns>
         public AvailabilitySetGrandChildContainer GetAvailabilitySetGrandChildren()
         {

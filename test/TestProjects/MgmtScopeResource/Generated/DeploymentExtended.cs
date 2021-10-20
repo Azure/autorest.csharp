@@ -194,9 +194,9 @@ namespace MgmtScopeResource
 
         /// <summary> You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> CancelAtScopeDeploymentsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> CancelAtScopeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CancelAtScopeDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
             scope.Start();
             try
             {
@@ -212,9 +212,9 @@ namespace MgmtScopeResource
 
         /// <summary> You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CancelAtScopeDeployments(CancellationToken cancellationToken = default)
+        public virtual Response CancelAtScope(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CancelAtScopeDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
             scope.Start();
             try
             {
@@ -233,14 +233,14 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DeploymentValidateAtScopeOperation> ValidateAtScopeDeploymentsAsync(Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentValidateAtScopeOperation> ValidateAtScopeAsync(Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScopeDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
             scope.Start();
             try
             {
@@ -262,14 +262,14 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual DeploymentValidateAtScopeOperation ValidateAtScopeDeployments(Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DeploymentValidateAtScopeOperation ValidateAtScope(Deployment parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScopeDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
             scope.Start();
             try
             {
@@ -288,9 +288,9 @@ namespace MgmtScopeResource
 
         /// <summary> Exports the template used for specified deployment. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DeploymentExportResult>> ExportTemplateAtScopeDeploymentsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DeploymentExportResult>> ExportTemplateAtScopeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScopeDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
             scope.Start();
             try
             {
@@ -306,9 +306,9 @@ namespace MgmtScopeResource
 
         /// <summary> Exports the template used for specified deployment. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DeploymentExportResult> ExportTemplateAtScopeDeployments(CancellationToken cancellationToken = default)
+        public virtual Response<DeploymentExportResult> ExportTemplateAtScope(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScopeDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
             scope.Start();
             try
             {
@@ -327,14 +327,14 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DeploymentWhatIfOperation> WhatIfDeploymentsAsync(DeploymentWhatIf parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentWhatIfOperation> WhatIfAsync(DeploymentWhatIf parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.WhatIfDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
             scope.Start();
             try
             {
@@ -387,14 +387,14 @@ namespace MgmtScopeResource
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual DeploymentWhatIfOperation WhatIfDeployments(DeploymentWhatIf parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual DeploymentWhatIfOperation WhatIf(DeploymentWhatIf parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.WhatIfDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
             scope.Start();
             try
             {
@@ -446,14 +446,14 @@ namespace MgmtScopeResource
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="operationId"/> is null. </exception>
-        public async virtual Task<Response<DeploymentOperation>> GetAtScopeDeploymentOperationsAsync(string operationId, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DeploymentOperation>> GetAtScopeDeploymentOperationAsync(string operationId, CancellationToken cancellationToken = default)
         {
             if (operationId == null)
             {
                 throw new ArgumentNullException(nameof(operationId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
             scope.Start();
             try
             {
@@ -471,14 +471,14 @@ namespace MgmtScopeResource
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="operationId"/> is null. </exception>
-        public virtual Response<DeploymentOperation> GetAtScopeDeploymentOperations(string operationId, CancellationToken cancellationToken = default)
+        public virtual Response<DeploymentOperation> GetAtScopeDeploymentOperation(string operationId, CancellationToken cancellationToken = default)
         {
             if (operationId == null)
             {
                 throw new ArgumentNullException(nameof(operationId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
             scope.Start();
             try
             {
@@ -496,11 +496,11 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="DeploymentOperation" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DeploymentOperation> GetAtScopeDeploymentOperationsAsync(int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DeploymentOperation> GetAtScopeDeploymentOperationAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<DeploymentOperation>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
                 scope.Start();
                 try
                 {
@@ -515,7 +515,7 @@ namespace MgmtScopeResource
             }
             async Task<Page<DeploymentOperation>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
                 scope.Start();
                 try
                 {
@@ -535,11 +535,11 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="DeploymentOperation" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DeploymentOperation> GetAtScopeDeploymentOperations(int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<DeploymentOperation> GetAtScopeDeploymentOperation(int? top = null, CancellationToken cancellationToken = default)
         {
             Page<DeploymentOperation> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
                 scope.Start();
                 try
                 {
@@ -554,7 +554,7 @@ namespace MgmtScopeResource
             }
             Page<DeploymentOperation> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
                 scope.Start();
                 try
                 {
@@ -572,9 +572,9 @@ namespace MgmtScopeResource
 
         /// <summary> Checks whether the deployment exists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<bool>> CheckExistenceAtScopeDeploymentsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckExistenceAtScopeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScopeDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
             scope.Start();
             try
             {
@@ -590,9 +590,9 @@ namespace MgmtScopeResource
 
         /// <summary> Checks whether the deployment exists. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<bool> CheckExistenceAtScopeDeployments(CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckExistenceAtScope(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScopeDeployments");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
             scope.Start();
             try
             {

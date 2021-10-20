@@ -418,7 +418,7 @@ namespace MgmtMultipleParentResource
 
         #region SubParent
 
-        /// <summary> Gets a list of SubParents in the Parent. </summary>
+        /// <summary> Gets a container of SubParents in the Parent. </summary>
         /// <returns> An object representing collection of SubParents and their operations over a Parent. </returns>
         public SubParentContainer GetSubParents()
         {

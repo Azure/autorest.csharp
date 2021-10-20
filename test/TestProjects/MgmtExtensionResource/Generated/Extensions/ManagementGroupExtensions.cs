@@ -12,11 +12,11 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to ManagementGroup. </summary>
     public static partial class ManagementGroupExtensions
     {
-        #region PolicyDefinition
+        #region ManagementGroupPolicyDefinition
         /// <summary> Gets an object representing a ManagementGroupPolicyDefinitionContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionContainer" /> object. </returns>
-        public static ManagementGroupPolicyDefinitionContainer GetPolicyDefinitions(this ManagementGroup managementGroup)
+        public static ManagementGroupPolicyDefinitionContainer GetManagementGroupPolicyDefinitions(this ManagementGroup managementGroup)
         {
             return new ManagementGroupPolicyDefinitionContainer(managementGroup);
         }
