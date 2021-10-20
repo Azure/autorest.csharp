@@ -72,6 +72,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-array\\Generated"
     },
+    "body-array-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-array\\Generated"
+    },
     "body-boolean": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-boolean\\Generated"
@@ -171,6 +175,10 @@
     "custom-baseUrl-more-options": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options\\Generated"
+    },
+    "custom-baseUrl-more-options-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-more-options\\Generated"
     },
     "custom-baseUrl-paging": {
       "commandName": "Project",

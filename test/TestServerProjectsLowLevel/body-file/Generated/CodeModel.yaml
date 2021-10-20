@@ -160,6 +160,8 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-csharp-buffer-response: false
         language: !Languages 
           default:
             name: GetFile
@@ -227,6 +229,8 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-csharp-buffer-response: false
         language: !Languages 
           default:
             name: GetFileLarge
@@ -294,6 +298,8 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-csharp-buffer-response: false
         language: !Languages 
           default:
             name: GetEmptyFile
