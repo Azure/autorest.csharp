@@ -57,7 +57,7 @@ namespace Azure.Core
 
         public static async ValueTask<Response<bool>> ProcessHeadAsBoolMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestOptions? requestOptions)
         {
-            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions);
+            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions).ConfigureAwait(false);
             switch (response.Status)
             {
                 case >= 200 and < 300:
