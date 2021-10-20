@@ -101,39 +101,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override string GetMethodName(MgmtClientOperation clientOperation)
-        {
-            // we should always have only one operation in extension classes
-            Debug.Assert(clientOperation.Count == 1);
-            var operation = clientOperation.First();
-
-            if (operation.IsListMethod(out var itemType, out var extraScope)
-                && !itemType.IsFrameworkType // we need to ensure this is not a framework type
-                && Context.Library.TryGetTypeProvider(itemType.Name, out var provider)) // and get the model name we are listing
-            {
-                // even if we are list a resource data under the subscription, we could have different scopes. The most common case is that we are listing under "subscriptions/locations"
-                var suffix = GetOperationNameExtraScopeSuffix(extraScope);
-                var by = string.IsNullOrEmpty(suffix) ? string.Empty : "By";
-
-                var itemName = provider is ResourceData data ?
-                    Context.Library.FindResources(data).First().ResourceName :
-                    itemType.Name;
-                return $"Get{itemName.ToPlural()}{by}{suffix}";
-            }
-
-            // if this is not a list method, we also need to rename this operation to avoid method name collision
-            var operationSet = Context.Library.GetOperationSet(operation.RequestPath);
-            var operationGroup = operationSet[operation.Operation];
-
-            return $"{operation.Name}{operationGroup.Key.ToSingular()}";
-        }
-
-        private string GetOperationNameExtraScopeSuffix(IEnumerable<Segment> extraScope)
-        {
-            return string.Join("", extraScope.Select(segment => segment.IsConstant ? segment.ConstantValue.ToSingular() : segment.ReferenceName)
-                .Select(segment => segment.RemoveInvalidCharacters().ToCleanName()));
-        }
-
         /// <summary>
         /// The RestClients in the extension classes are all local variables
         /// </summary>

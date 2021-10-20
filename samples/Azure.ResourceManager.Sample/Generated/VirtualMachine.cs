@@ -1112,7 +1112,7 @@ namespace Azure.ResourceManager.Sample
 
         #region VirtualMachineExtension
 
-        /// <summary> Gets a list of VirtualMachineExtensions in the VirtualMachine. </summary>
+        /// <summary> Gets a container of VirtualMachineExtensions in the VirtualMachine. </summary>
         /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachine. </returns>
         public VirtualMachineExtensionContainer GetVirtualMachineExtensions()
         {

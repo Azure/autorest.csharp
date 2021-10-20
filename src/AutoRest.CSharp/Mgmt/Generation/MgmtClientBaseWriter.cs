@@ -145,44 +145,38 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return isInheritedMethod ? "override" : GetVirtual(isVirtual);
         }
 
-        protected virtual void WriteMethod(MgmtClientOperation clientOperation, bool async, string? methodName = null)
+        protected virtual void WriteMethod(MgmtClientOperation clientOperation, bool async)
         {
-            methodName ??= GetMethodName(clientOperation);
             // we need to identify this operation belongs to which category: NormalMethod, LROMethod or PagingMethod
             if (clientOperation.IsLongRunningOperation())
             {
                 // this is a long-running operation
-                WriteLROMethod(clientOperation, methodName, async);
+                WriteLROMethod(clientOperation, async);
             }
             else if (clientOperation.IsPagingOperation(Context))
             {
                 // this is a paging operation
-                WritePagingMethod(clientOperation, methodName, async);
+                WritePagingMethod(clientOperation, async);
             }
             else if (clientOperation.IsListOperation(Context, out var itemType))
             {
                 // this is a normal list operation
-                WriteNormalListMethod(clientOperation, itemType, methodName, async);
+                WriteNormalListMethod(clientOperation, itemType, async);
             }
             else
             {
                 // this is a normal operation
-                WriteNormalMethod(clientOperation, methodName, async);
+                WriteNormalMethod(clientOperation, async);
             }
         }
 
-        protected virtual string GetMethodName(MgmtClientOperation clientOperation)
-        {
-            return clientOperation.Name;
-        }
-
         #region PagingMethod
-        protected void WritePagingMethod(MgmtClientOperation clientOperation, string methodName, bool async)
+        protected void WritePagingMethod(MgmtClientOperation clientOperation, bool async)
         {
             _writer.Line();
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
-            WritePagingMethod(clientOperation, operationMappings, parameterMappings, methodParameters, methodName, async);
+            WritePagingMethod(clientOperation, operationMappings, parameterMappings, methodParameters, clientOperation.Name, async);
         }
 
         protected virtual void WritePagingMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
@@ -345,12 +339,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
         }
 
-        protected void WriteNormalMethod(MgmtClientOperation clientOperation, string methodName, bool async, bool shouldThrowExceptionWhenNull = false)
+        protected void WriteNormalMethod(MgmtClientOperation clientOperation, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             _writer.Line();
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
-            WriteNormalMethod(clientOperation, operationMappings, parameterMappings, methodParameters, methodName, async, shouldThrowExceptionWhenNull);
+            WriteNormalMethod(clientOperation, operationMappings, parameterMappings, methodParameters, clientOperation.Name, async, shouldThrowExceptionWhenNull);
         }
 
         protected virtual void WriteNormalMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
@@ -381,12 +375,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteNormalListMethod(MgmtClientOperation clientOperation, CSharpType itemType, string methodName, bool async)
+        protected void WriteNormalListMethod(MgmtClientOperation clientOperation, CSharpType itemType, bool async)
         {
             _writer.Line();
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
-            WriteNormalListMethod(clientOperation, operationMappings, parameterMappings, methodParameters, itemType, methodName, async);
+            WriteNormalListMethod(clientOperation, operationMappings, parameterMappings, methodParameters, itemType, clientOperation.Name, async);
         }
 
         protected virtual void WriteNormalListMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
@@ -506,12 +500,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         #endregion
 
         #region LROMethod
-        protected void WriteLROMethod(MgmtClientOperation clientOperation, string methodName, bool async)
+        protected void WriteLROMethod(MgmtClientOperation clientOperation, bool async)
         {
             _writer.Line();
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
-            WriteLROMethod(clientOperation, operationMappings, parameterMappings, methodParameters, methodName, async);
+            WriteLROMethod(clientOperation, operationMappings, parameterMappings, methodParameters, clientOperation.Name, async);
         }
 
         protected virtual void WriteLROMethod(MgmtClientOperation clientOperation, Dictionary<RequestPath, MgmtRestOperation> operationMappings,
@@ -639,7 +633,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"{ContextProperty}, ");
                 }
-                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientVariableName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Name)}(");
+                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientVariableName(operation.RestClient)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
                 _writer.Append($").Request, ");

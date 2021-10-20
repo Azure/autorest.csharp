@@ -822,11 +822,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        #region VirtualMachineExtension
+        #region VirtualMachineScaleSetVMExtension
 
-        /// <summary> Gets a list of VirtualMachineExtensions in the VirtualMachineScaleSetVM. </summary>
-        /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachineScaleSetVM. </returns>
-        public VirtualMachineScaleSetVMExtensionContainer GetVirtualMachineExtensions()
+        /// <summary> Gets a container of VirtualMachineScaleSetVMExtensions in the VirtualMachineScaleSetVM. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetVMExtensions and their operations over a VirtualMachineScaleSetVM. </returns>
+        public VirtualMachineScaleSetVMExtensionContainer GetVirtualMachineScaleSetVMExtensions()
         {
             return new VirtualMachineScaleSetVMExtensionContainer(this);
         }

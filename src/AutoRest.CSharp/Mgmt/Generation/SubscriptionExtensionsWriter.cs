@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private bool CheckGetByNameMethod(MgmtClientOperation clientOperation, [MaybeNullWhen(false)] out Resource resource)
         {
             resource = null;
-            if (clientOperation.First().IsListMethod(out var itemType, out _))
+            if (clientOperation.First().IsListMethod(out var itemType))
             {
                 if (Context.Library.TryGetTypeProvider(itemType.Name, out var provider) && provider is ResourceData data)
                 {

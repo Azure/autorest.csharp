@@ -23,6 +23,10 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public Operation Operation => Method.Operation;
         /// <summary>
+        /// We use the <see cref="OperationGroup"/> to get a fully quanlified name for this operation
+        /// </summary>
+        public OperationGroup OperationGroup => RestClient.OperationGroup;
+        /// <summary>
         /// The name of this operation
         /// </summary>
         public string Name { get; }
@@ -53,19 +57,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
-        }
-
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath)
-            : this(method, restClient, requestPath, contextualPath, method.Operation.CSharpName())
-        {
-        }
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public void Deconstruct(out RestClientMethod method, out MgmtRestClient restClient, out RequestPath contextualPath)
-        {
-            method = Method;
-            contextualPath = ContextualPath;
-            restClient = RestClient;
         }
     }
 }

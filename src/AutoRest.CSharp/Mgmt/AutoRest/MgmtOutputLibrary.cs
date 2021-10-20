@@ -444,6 +444,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var restClient = new MgmtRestClient(operationGroup, _context);
                 foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
                 {
+                    // this will throw an exception when there is a case that one request path has multiple rest clients
                     _rawRequestPathToRestClient.Add(requestPath, restClient);
                 }
             }

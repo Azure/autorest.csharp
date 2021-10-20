@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             operationSetOfResource = null;
             // first we need to ensure this operation at least returns a collection of something
             var restClientMethod = context.Library.RestClientMethods[operation];
-            if (!restClientMethod.IsListMethod(out var valueType, out _))
+            if (!restClientMethod.IsListMethod(out var valueType))
                 return false;
 
             // then check if its path is a prefix of which resource's operationSet

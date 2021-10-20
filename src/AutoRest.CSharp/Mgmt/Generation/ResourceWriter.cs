@@ -232,38 +232,30 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             //}
         }
 
-        protected override string GetMethodName(MgmtClientOperation clientOperation)
-        {
-            // we need to override the GetMethodName method to guarantee that we do not have a collision of method names
-            var operation = clientOperation.First();
-            var operationSet = Context.Library.GetOperationSet(operation.RequestPath);
-            return $"{operation.Name}{operationSet[operation.Operation].Key}";
-        }
-
         protected void WriteGetMethod(MgmtClientOperation operation, bool async)
         {
-            WriteNormalMethod(operation, "Get", async, shouldThrowExceptionWhenNull: true);
+            WriteNormalMethod(operation, async, shouldThrowExceptionWhenNull: true);
         }
 
         protected void WriteCreateOrUpdateMethod(MgmtClientOperation? operation, bool async)
         {
             if (operation == null)
                 return;
-            WriteLROMethod(operation, "CreateOrUpdate", async);
+            WriteLROMethod(operation, async);
         }
 
         protected void WriteDeleteMethod(MgmtClientOperation? operation, bool async)
         {
             if (operation == null)
                 return;
-            WriteLROMethod(operation, "Delete", async);
+            WriteLROMethod(operation, async);
         }
 
         private void WriteUpdateMethod(MgmtClientOperation? operation, bool async)
         {
             if (operation == null)
                 return;
-            WriteMethod(operation, async, "Update");
+            WriteMethod(operation, async);
         }
 
         protected override CSharpType? WrapResourceDataType(CSharpType? returnType)

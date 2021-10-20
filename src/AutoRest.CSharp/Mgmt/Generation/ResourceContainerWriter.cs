@@ -47,20 +47,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             : base(writer, resourceContainer.Resource, context)
         {
             _resourceContainer = resourceContainer;
-            _listMethods = _resourceContainer.ClientOperations.Where(operation => IsListMethod(operation));
-        }
-
-        private IEnumerable<MgmtClientOperation> _listMethods;
-
-        private bool IsListMethod(MgmtClientOperation clientOperation)
-        {
-            // we should have ensured that the response type in this operation is the same
-            if (clientOperation.First().IsListMethod(out var itemType, out _))
-            {
-                return itemType.Equals(_resourceData.Type);
-            }
-
-            return false;
         }
 
         public override void Write()
@@ -203,16 +189,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteListAsGenericResource(false);
                 WriteListAsGenericResource(true);
             }
-        }
-
-        protected override string GetMethodName(MgmtClientOperation clientOperation)
-        {
-            // TODO -- we might need to find a way to put this method to the corresponding ResourceContainer class
-            // in the resouce container, we should make the method that lists its corresponding ResourceData to "GetAll", and leave all other methods unchanged
-            if (_listMethods.Count() == 1 && _listMethods.Contains(clientOperation))
-                return "GetAll";
-
-            return base.GetMethodName(clientOperation);
         }
 
         private void WriteCheckIfExists(MgmtClientOperation clientOperation, bool async)

@@ -5,10 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -47,5 +50,25 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// The collection of <see cref="Resource"/> that is a child of this generated class.
         /// </summary>
         public virtual IEnumerable<Resource> ChildResources => _childResources ??= _context.Library.ArmResources.Where(resource => resource.Parent(_context).Contains(this));
+
+
+        /// <summary>
+        /// If the operationGroup of this operation is the same as the resource operation group, we just use operation.CSharpName()
+        /// If it is not, we append the operation group key after operation.CSharpName() to make sure this operation has an unique name.
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="resourceRestClient">This can be null when in the extension classes where we do not have a rest client for its "resource"</param>
+        /// <returns></returns>
+        protected virtual string GetOperationName(Operation operation, RequestPath contextualPath, MgmtRestClient? resourceRestClient)
+        {
+            var operationGroup = _context.Library.GetRestClient(operation.GetHttpPath()).OperationGroup;
+            var resourceOperationGroup = resourceRestClient?.OperationGroup;
+            if (operationGroup == resourceOperationGroup)
+            {
+                return operation.CSharpName();
+            }
+
+            return $"{operation.CSharpName()}{operationGroup.Key.ToSingular()}";
+        }
     }
 }
