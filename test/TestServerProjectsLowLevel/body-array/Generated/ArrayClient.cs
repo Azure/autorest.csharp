@@ -64,7 +64,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
@@ -93,7 +93,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNull(RequestOptions options)
+        public virtual Response GetNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
@@ -122,7 +122,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetInvalidAsync(RequestOptions options)
+        public virtual async Task<Response> GetInvalidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
@@ -151,7 +151,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetInvalid(RequestOptions options)
+        public virtual Response GetInvalid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
@@ -180,7 +180,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyAsync(RequestOptions options)
+        public virtual async Task<Response> GetEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -209,7 +209,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmpty(RequestOptions options)
+        public virtual Response GetEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -300,7 +300,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBooleanTfftAsync(RequestOptions options)
+        public virtual async Task<Response> GetBooleanTfftAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
@@ -329,7 +329,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBooleanTfft(RequestOptions options)
+        public virtual Response GetBooleanTfft(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
@@ -420,7 +420,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
@@ -449,7 +449,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBooleanInvalidNull(RequestOptions options)
+        public virtual Response GetBooleanInvalidNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
@@ -478,7 +478,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestOptions options)
+        public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
@@ -507,7 +507,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBooleanInvalidString(RequestOptions options)
+        public virtual Response GetBooleanInvalidString(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
@@ -536,7 +536,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntegerValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetIntegerValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
@@ -565,7 +565,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetIntegerValid(RequestOptions options)
+        public virtual Response GetIntegerValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
@@ -656,7 +656,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntInvalidNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetIntInvalidNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
@@ -685,7 +685,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetIntInvalidNull(RequestOptions options)
+        public virtual Response GetIntInvalidNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
@@ -714,7 +714,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntInvalidStringAsync(RequestOptions options)
+        public virtual async Task<Response> GetIntInvalidStringAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
@@ -743,7 +743,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetIntInvalidString(RequestOptions options)
+        public virtual Response GetIntInvalidString(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
@@ -772,7 +772,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetLongValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetLongValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
@@ -801,7 +801,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetLongValid(RequestOptions options)
+        public virtual Response GetLongValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
@@ -892,7 +892,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetLongInvalidNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetLongInvalidNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
@@ -921,7 +921,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetLongInvalidNull(RequestOptions options)
+        public virtual Response GetLongInvalidNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
@@ -950,7 +950,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetLongInvalidStringAsync(RequestOptions options)
+        public virtual async Task<Response> GetLongInvalidStringAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
@@ -979,7 +979,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetLongInvalidString(RequestOptions options)
+        public virtual Response GetLongInvalidString(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
@@ -1008,7 +1008,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFloatValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetFloatValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
@@ -1037,7 +1037,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFloatValid(RequestOptions options)
+        public virtual Response GetFloatValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
@@ -1128,7 +1128,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFloatInvalidNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetFloatInvalidNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
@@ -1157,7 +1157,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFloatInvalidNull(RequestOptions options)
+        public virtual Response GetFloatInvalidNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
@@ -1186,7 +1186,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFloatInvalidStringAsync(RequestOptions options)
+        public virtual async Task<Response> GetFloatInvalidStringAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
@@ -1215,7 +1215,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFloatInvalidString(RequestOptions options)
+        public virtual Response GetFloatInvalidString(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
@@ -1244,7 +1244,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDoubleValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetDoubleValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
@@ -1273,7 +1273,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDoubleValid(RequestOptions options)
+        public virtual Response GetDoubleValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
@@ -1364,7 +1364,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
@@ -1393,7 +1393,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDoubleInvalidNull(RequestOptions options)
+        public virtual Response GetDoubleInvalidNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
@@ -1422,7 +1422,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestOptions options)
+        public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
@@ -1451,7 +1451,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDoubleInvalidString(RequestOptions options)
+        public virtual Response GetDoubleInvalidString(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
@@ -1480,7 +1480,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetStringValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
@@ -1509,7 +1509,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetStringValid(RequestOptions options)
+        public virtual Response GetStringValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
@@ -1600,7 +1600,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEnumValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetEnumValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
@@ -1629,7 +1629,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEnumValid(RequestOptions options)
+        public virtual Response GetEnumValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
@@ -1720,7 +1720,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringEnumValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetStringEnumValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
@@ -1749,7 +1749,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetStringEnumValid(RequestOptions options)
+        public virtual Response GetStringEnumValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
@@ -1840,7 +1840,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringWithNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetStringWithNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
@@ -1869,7 +1869,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetStringWithNull(RequestOptions options)
+        public virtual Response GetStringWithNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
@@ -1898,7 +1898,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringWithInvalidAsync(RequestOptions options)
+        public virtual async Task<Response> GetStringWithInvalidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
@@ -1927,7 +1927,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetStringWithInvalid(RequestOptions options)
+        public virtual Response GetStringWithInvalid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
@@ -1956,7 +1956,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetUuidValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetUuidValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
@@ -1985,7 +1985,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetUuidValid(RequestOptions options)
+        public virtual Response GetUuidValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
@@ -2076,7 +2076,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestOptions options)
+        public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
@@ -2105,7 +2105,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetUuidInvalidChars(RequestOptions options)
+        public virtual Response GetUuidInvalidChars(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
@@ -2134,7 +2134,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetDateValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
@@ -2163,7 +2163,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateValid(RequestOptions options)
+        public virtual Response GetDateValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
@@ -2254,7 +2254,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateInvalidNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetDateInvalidNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
@@ -2283,7 +2283,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateInvalidNull(RequestOptions options)
+        public virtual Response GetDateInvalidNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
@@ -2312,7 +2312,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateInvalidCharsAsync(RequestOptions options)
+        public virtual async Task<Response> GetDateInvalidCharsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
@@ -2341,7 +2341,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateInvalidChars(RequestOptions options)
+        public virtual Response GetDateInvalidChars(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
@@ -2370,7 +2370,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetDateTimeValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
@@ -2399,7 +2399,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTimeValid(RequestOptions options)
+        public virtual Response GetDateTimeValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
@@ -2490,7 +2490,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
@@ -2519,7 +2519,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTimeInvalidNull(RequestOptions options)
+        public virtual Response GetDateTimeInvalidNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
@@ -2548,7 +2548,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestOptions options)
+        public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
@@ -2577,7 +2577,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTimeInvalidChars(RequestOptions options)
+        public virtual Response GetDateTimeInvalidChars(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
@@ -2606,7 +2606,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
@@ -2635,7 +2635,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTimeRfc1123Valid(RequestOptions options)
+        public virtual Response GetDateTimeRfc1123Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
@@ -2726,7 +2726,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDurationValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetDurationValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
@@ -2755,7 +2755,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDurationValid(RequestOptions options)
+        public virtual Response GetDurationValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
@@ -2846,7 +2846,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetByteValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetByteValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
@@ -2875,7 +2875,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetByteValid(RequestOptions options)
+        public virtual Response GetByteValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
@@ -2966,7 +2966,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetByteInvalidNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetByteInvalidNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
@@ -2995,7 +2995,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetByteInvalidNull(RequestOptions options)
+        public virtual Response GetByteInvalidNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
@@ -3024,7 +3024,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBase64UrlAsync(RequestOptions options)
+        public virtual async Task<Response> GetBase64UrlAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
@@ -3053,7 +3053,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBase64Url(RequestOptions options)
+        public virtual Response GetBase64Url(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
@@ -3088,7 +3088,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetComplexNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
@@ -3123,7 +3123,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexNull(RequestOptions options)
+        public virtual Response GetComplexNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
@@ -3158,7 +3158,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexEmptyAsync(RequestOptions options)
+        public virtual async Task<Response> GetComplexEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
@@ -3193,7 +3193,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexEmpty(RequestOptions options)
+        public virtual Response GetComplexEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
@@ -3228,7 +3228,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexItemNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetComplexItemNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
@@ -3263,7 +3263,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexItemNull(RequestOptions options)
+        public virtual Response GetComplexItemNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
@@ -3298,7 +3298,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexItemEmptyAsync(RequestOptions options)
+        public virtual async Task<Response> GetComplexItemEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
@@ -3333,7 +3333,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexItemEmpty(RequestOptions options)
+        public virtual Response GetComplexItemEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
@@ -3368,7 +3368,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetComplexValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
@@ -3403,7 +3403,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexValid(RequestOptions options)
+        public virtual Response GetComplexValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
@@ -3506,7 +3506,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetArrayNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
@@ -3535,7 +3535,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayNull(RequestOptions options)
+        public virtual Response GetArrayNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
@@ -3564,7 +3564,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayEmptyAsync(RequestOptions options)
+        public virtual async Task<Response> GetArrayEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
@@ -3593,7 +3593,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayEmpty(RequestOptions options)
+        public virtual Response GetArrayEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
@@ -3622,7 +3622,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayItemNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetArrayItemNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
@@ -3651,7 +3651,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayItemNull(RequestOptions options)
+        public virtual Response GetArrayItemNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
@@ -3680,7 +3680,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayItemEmptyAsync(RequestOptions options)
+        public virtual async Task<Response> GetArrayItemEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
@@ -3709,7 +3709,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayItemEmpty(RequestOptions options)
+        public virtual Response GetArrayItemEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
@@ -3738,7 +3738,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetArrayValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
@@ -3767,7 +3767,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayValid(RequestOptions options)
+        public virtual Response GetArrayValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
@@ -3858,7 +3858,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetDictionaryNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
@@ -3887,7 +3887,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryNull(RequestOptions options)
+        public virtual Response GetDictionaryNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
@@ -3916,7 +3916,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryEmptyAsync(RequestOptions options)
+        public virtual async Task<Response> GetDictionaryEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
@@ -3945,7 +3945,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryEmpty(RequestOptions options)
+        public virtual Response GetDictionaryEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
@@ -3974,7 +3974,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryItemNullAsync(RequestOptions options)
+        public virtual async Task<Response> GetDictionaryItemNullAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
@@ -4003,7 +4003,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryItemNull(RequestOptions options)
+        public virtual Response GetDictionaryItemNull(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
@@ -4032,7 +4032,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestOptions options)
+        public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
@@ -4061,7 +4061,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryItemEmpty(RequestOptions options)
+        public virtual Response GetDictionaryItemEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
@@ -4090,7 +4090,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetDictionaryValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
@@ -4119,7 +4119,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryValid(RequestOptions options)
+        public virtual Response GetDictionaryValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
