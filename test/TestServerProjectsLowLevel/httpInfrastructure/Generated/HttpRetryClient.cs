@@ -300,7 +300,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Options502Async(RequestOptions options)
+        public virtual async Task<Response> Options502Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
@@ -329,7 +329,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Options502(RequestOptions options)
+        public virtual Response Options502(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");

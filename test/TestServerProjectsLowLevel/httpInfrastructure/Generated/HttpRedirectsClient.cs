@@ -122,7 +122,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get300Async(RequestOptions options)
+        public virtual async Task<Response> Get300Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
@@ -151,7 +151,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get300(RequestOptions options)
+        public virtual Response Get300(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
