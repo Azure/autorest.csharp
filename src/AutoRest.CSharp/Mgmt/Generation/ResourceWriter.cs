@@ -734,24 +734,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             if (container == null)
                 return;
             _writer.Line();
-
-            if (container.IsExtension)
+            _writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
+            _writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
+            using (_writer.Scope($"public {container.Type} Get{container.ResourceName.ToPlural()}()"))
             {
-                _writer.WriteXmlDocumentationSummary($"Gets a list of {container.OriginResourceName.ToPlural()} in the {_resource.ResourceName}.");
-                _writer.WriteXmlDocumentationReturns($"An object representing collection of {container.OriginResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
-                using (_writer.Scope($"public {container.Type} Get{container.OriginResourceName.ToPlural()}()"))
-                {
-                    _writer.Line($"return new {container.Type}(this);");
-                }
-            }
-            else
-            {
-                _writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
-                _writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
-                using (_writer.Scope($"public {container.Type} Get{container.ResourceName.ToPlural()}()"))
-                {
-                    _writer.Line($"return new {container.Type}(this);");
-                }
+                _writer.Line($"return new {container.Type}(this);");
             }
         }
 

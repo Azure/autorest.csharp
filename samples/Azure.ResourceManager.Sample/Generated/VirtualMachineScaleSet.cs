@@ -1247,9 +1247,9 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachineScaleSetRollingUpgrade(this, Id + "/rollingUpgrades/latest");
         }
 
-        /// <summary> Gets a list of VirtualMachineExtensions in the VirtualMachineScaleSet. </summary>
-        /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachineScaleSet. </returns>
-        public VirtualMachineScaleSetVirtualMachineExtensionContainer GetVirtualMachineExtensions()
+        /// <summary> Gets a list of VirtualMachineScaleSetVirtualMachineExtensions in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetVirtualMachineExtensions and their operations over a VirtualMachineScaleSet. </returns>
+        public VirtualMachineScaleSetVirtualMachineExtensionContainer GetVirtualMachineScaleSetVirtualMachineExtensions()
         {
             return new VirtualMachineScaleSetVirtualMachineExtensionContainer(this);
         }

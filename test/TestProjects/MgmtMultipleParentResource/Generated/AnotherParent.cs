@@ -416,9 +416,9 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> Gets a list of ChildBodies in the AnotherParent. </summary>
-        /// <returns> An object representing collection of ChildBodies and their operations over a AnotherParent. </returns>
-        public AnotherParentChildBodyContainer GetChildBodies()
+        /// <summary> Gets a list of AnotherParentChildBodies in the AnotherParent. </summary>
+        /// <returns> An object representing collection of AnotherParentChildBodies and their operations over a AnotherParent. </returns>
+        public AnotherParentChildBodyContainer GetAnotherParentChildBodies()
         {
             return new AnotherParentChildBodyContainer(this);
         }

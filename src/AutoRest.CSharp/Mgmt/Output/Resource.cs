@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
         public bool IsScopeOrExtension { get; }
-        public bool IsExtension { get; }
 
         public Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context,
             IEnumerable<OperationGroup>? nonResourceOperationGroups = null): base(context)
@@ -60,8 +59,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             IsScopeOrExtension = isScope || isExtension;
-            IsExtension = isExtension;
-            OriginResourceName = operationGroup.Resource(context.Configuration.MgmtConfiguration);
             DefaultName = parentValue + operationGroup.Resource(context.Configuration.MgmtConfiguration) + SuffixValue;
             _childOperations = nonResourceOperationGroups?.ToDictionary(operationGroup => operationGroup,
                 operationGroup => new MgmtNonResourceOperation(operationGroup, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
@@ -76,7 +73,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceContainer? ResourceContainer => _context.Library.GetResourceContainer(OperationGroup);
 
         public virtual string ResourceName => Type.Name;
-        public string OriginResourceName { get; }
 
         protected virtual string SuffixValue => string.Empty;
 
