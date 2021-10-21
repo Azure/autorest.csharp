@@ -40,26 +40,29 @@ namespace AutoRest.CSharp.Mgmt.Output
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
         public bool IsScopeOrExtension { get; }
+        public bool IsExtension { get; }
 
         public Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context,
             IEnumerable<OperationGroup>? nonResourceOperationGroups = null): base(context)
         {
             _context = context;
             OperationGroup = operationGroup;
-            // check if this is an extension resource, if so, we need to append the name of its parent to this resource name unless it's also a scope resource
+            // check if this is an extension resource, if so, we need to add the name of its parent to the front of this resource name unless it's also a scope resource
             var isExtension = operationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration);
             var isScope = operationGroup.IsScopeResource(context.Configuration.MgmtConfiguration);
             string parentValue = "";
             if (isExtension && !isScope)
             {
                 var parentOperationGroup = operationGroup.ParentOperationGroup(context);
-                // if we cannot find a parent operation group, we just give up and append nothing.
+                // if we cannot find a parent operation group, we just give up and add nothing.
                 // this case will only happen when resource's parent is tenant, subscriptions, or resourceGroups
                 parentValue = parentOperationGroup?.Key.ToSingular(false) ?? string.Empty;
             }
 
             IsScopeOrExtension = isScope || isExtension;
-            DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration) + parentValue + SuffixValue;
+            IsExtension = isExtension;
+            OriginResourceName = operationGroup.Resource(context.Configuration.MgmtConfiguration);
+            DefaultName = parentValue + operationGroup.Resource(context.Configuration.MgmtConfiguration) + SuffixValue;
             _childOperations = nonResourceOperationGroups?.ToDictionary(operationGroup => operationGroup,
                 operationGroup => new MgmtNonResourceOperation(operationGroup, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
         }
@@ -73,6 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceContainer? ResourceContainer => _context.Library.GetResourceContainer(OperationGroup);
 
         public virtual string ResourceName => Type.Name;
+        public string OriginResourceName { get; }
 
         protected virtual string SuffixValue => string.Empty;
 
