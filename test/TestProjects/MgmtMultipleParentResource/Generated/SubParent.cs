@@ -416,11 +416,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> Gets a list of ChildBodySubParents in the SubParent. </summary>
-        /// <returns> An object representing collection of ChildBodySubParents and their operations over a SubParent. </returns>
-        public ChildBodySubParentContainer GetChildBodySubParents()
+        /// <summary> Gets a list of ChildBodies in the SubParent. </summary>
+        /// <returns> An object representing collection of ChildBodies and their operations over a SubParent. </returns>
+        public SubParentChildBodyContainer GetChildBodies()
         {
-            return new ChildBodySubParentContainer(this);
+            return new SubParentChildBodyContainer(this);
         }
     }
 }
