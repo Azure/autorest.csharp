@@ -1,6 +1,6 @@
 ## Operation groups
 
-autorest requires each operation in swagger file to define a unique string parameter `operationId` (this is different from [official OpenAPI specification](https://swagger.io/docs/specification/paths-and-operations/#operationId). If parameter value contains underscore, then part after underscore will be treated as operation name, and part before underscore will be treated as the name of the operation group to which this operation belong. Otherwise, operation will be belong to the group without a name:
+autorest requires each operation in swagger file to define a unique string parameter `operationId` (this is different from [official OpenAPI specification](https://swagger.io/docs/specification/paths-and-operations/#operationId)). If parameter value contains underscore, then part after underscore will be treated as operation name, and part before underscore will be treated as the name of the operation group to which this operation belongs. Otherwise, operation will be attributed to the group without a name::
 
 ```js
   "paths": {
