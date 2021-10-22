@@ -213,7 +213,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = _policyDefinitionsRestClient.GetBuiltIn(filter, top, cancellationToken: cancellationToken);
+                    var response = _policyDefinitionsRestClient.ListBuiltIn(filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -228,7 +228,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = _policyDefinitionsRestClient.GetBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
+                    var response = _policyDefinitionsRestClient.ListBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -253,7 +253,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = await _policyDefinitionsRestClient.GetBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _policyDefinitionsRestClient.ListBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -268,7 +268,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = await _policyDefinitionsRestClient.GetBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _policyDefinitionsRestClient.ListBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

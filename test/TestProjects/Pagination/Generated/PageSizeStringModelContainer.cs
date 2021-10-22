@@ -276,7 +276,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeStringModelsRestClient.GetAll(Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
+                    var response = _pageSizeStringModelsRestClient.List(Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -291,7 +291,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeStringModelsRestClient.GetAllNextPage(nextLink, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
+                    var response = _pageSizeStringModelsRestClient.ListNextPage(nextLink, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -314,7 +314,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeStringModelsRestClient.GetAllAsync(Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeStringModelsRestClient.ListAsync(Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -329,7 +329,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeStringModelsRestClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeStringModelsRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

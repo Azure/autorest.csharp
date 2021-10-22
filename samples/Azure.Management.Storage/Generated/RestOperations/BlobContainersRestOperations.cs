@@ -44,7 +44,7 @@ namespace Azure.Management.Storage
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string accountName, int? maxpagesize, string filter)
+        internal HttpMessage CreateListRequest(string resourceGroupName, string accountName, int? maxpagesize, string filter)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<ListContainerItems>> GetAllAsync(string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ListContainerItems>> ListAsync(string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -91,7 +91,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName, accountName, maxpagesize, filter);
+            using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -114,7 +114,7 @@ namespace Azure.Management.Storage
         /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<ListContainerItems> GetAll(string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
+        public Response<ListContainerItems> List(string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -125,7 +125,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName, accountName, maxpagesize, filter);
+            using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1433,7 +1433,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName, string accountName, int? maxpagesize, string filter)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string accountName, int? maxpagesize, string filter)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1455,7 +1455,7 @@ namespace Azure.Management.Storage
         /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<ListContainerItems>> GetAllNextPageAsync(string nextLink, string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ListContainerItems>> ListNextPageAsync(string nextLink, string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1470,7 +1470,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
+            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1494,7 +1494,7 @@ namespace Azure.Management.Storage
         /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="accountName"/> is null. </exception>
-        public Response<ListContainerItems> GetAllNextPage(string nextLink, string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
+        public Response<ListContainerItems> ListNextPage(string nextLink, string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1509,7 +1509,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
+            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

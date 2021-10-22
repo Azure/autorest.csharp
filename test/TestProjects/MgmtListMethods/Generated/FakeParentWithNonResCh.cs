@@ -320,7 +320,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithNonResChesRestClient.GetNonResourceChildAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithNonResChesRestClient.ListNonResourceChildAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
@@ -338,7 +338,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithNonResChesRestClient.GetNonResourceChild(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _fakeParentWithNonResChesRestClient.ListNonResourceChild(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)

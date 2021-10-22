@@ -291,7 +291,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = _fakesRestClient.GetAll(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
+                var response = _fakesRestClient.List(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new Fake(Parent, value)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -317,7 +317,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = await _fakesRestClient.GetAllAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
+                var response = await _fakesRestClient.ListAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new Fake(Parent, value)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)

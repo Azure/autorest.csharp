@@ -496,15 +496,15 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="DeploymentOperation" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DeploymentOperation> GetAtScopeDeploymentOperationAsync(int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DeploymentOperation> GetAtScopeDeploymentOperationsAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<DeploymentOperation>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
                 scope.Start();
                 try
                 {
-                    var response = await _deploymentOperationsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _deploymentOperationsRestClient.ListAtScopeAsync(Id.Parent, Id.Name, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -515,11 +515,11 @@ namespace MgmtScopeResource
             }
             async Task<Page<DeploymentOperation>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
                 scope.Start();
                 try
                 {
-                    var response = await _deploymentOperationsRestClient.GetAtScopeNextPageAsync(nextLink, Id.Parent, Id.Name, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _deploymentOperationsRestClient.ListAtScopeNextPageAsync(nextLink, Id.Parent, Id.Name, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -535,15 +535,15 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="DeploymentOperation" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DeploymentOperation> GetAtScopeDeploymentOperation(int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<DeploymentOperation> GetAtScopeDeploymentOperations(int? top = null, CancellationToken cancellationToken = default)
         {
             Page<DeploymentOperation> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
                 scope.Start();
                 try
                 {
-                    var response = _deploymentOperationsRestClient.GetAtScope(Id.Parent, Id.Name, top, cancellationToken: cancellationToken);
+                    var response = _deploymentOperationsRestClient.ListAtScope(Id.Parent, Id.Name, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -554,11 +554,11 @@ namespace MgmtScopeResource
             }
             Page<DeploymentOperation> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperation");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScopeDeploymentOperations");
                 scope.Start();
                 try
                 {
-                    var response = _deploymentOperationsRestClient.GetAtScopeNextPage(nextLink, Id.Parent, Id.Name, top, cancellationToken: cancellationToken);
+                    var response = _deploymentOperationsRestClient.ListAtScopeNextPage(nextLink, Id.Parent, Id.Name, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

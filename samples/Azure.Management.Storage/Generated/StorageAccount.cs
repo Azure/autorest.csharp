@@ -420,7 +420,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _storageAccountsRestClient.GetKeysAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountsRestClient.ListKeysAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -438,7 +438,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _storageAccountsRestClient.GetKeys(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _storageAccountsRestClient.ListKeys(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -513,7 +513,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _storageAccountsRestClient.GetAccountSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountsRestClient.ListAccountSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -538,7 +538,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _storageAccountsRestClient.GetAccountSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _storageAccountsRestClient.ListAccountSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -563,7 +563,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _storageAccountsRestClient.GetServiceSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountsRestClient.ListServiceSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -588,7 +588,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _storageAccountsRestClient.GetServiceSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _storageAccountsRestClient.ListServiceSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -738,13 +738,13 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<PrivateLinkResource>>> GetAllByStorageAccountPrivateLinkResourceAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<PrivateLinkResource>>> GetByStorageAccountPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetAllByStorageAccountPrivateLinkResource");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetByStorageAccountPrivateLinkResources");
             scope.Start();
             try
             {
-                var response = await _privateLinkResourcesRestClient.GetAllByStorageAccountAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _privateLinkResourcesRestClient.ListByStorageAccountAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
@@ -756,13 +756,13 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<PrivateLinkResource>> GetAllByStorageAccountPrivateLinkResource(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<PrivateLinkResource>> GetByStorageAccountPrivateLinkResources(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetAllByStorageAccountPrivateLinkResource");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.GetByStorageAccountPrivateLinkResources");
             scope.Start();
             try
             {
-                var response = _privateLinkResourcesRestClient.GetAllByStorageAccount(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _privateLinkResourcesRestClient.ListByStorageAccount(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)

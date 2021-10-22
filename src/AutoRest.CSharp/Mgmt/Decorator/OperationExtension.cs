@@ -14,11 +14,30 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OperationExtension
     {
+        /// <summary>
+        /// Returns the CSharpName of an operation in management plane pattern where we replace the word List with Get or GetAll depending on if there are following words
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="hasSuffix"></param>
+        /// <returns></returns>
+        public static string MgmtCSharpName(this Operation operation, bool hasSuffix)
+        {
+            var originalName = operation.CSharpName();
+            var words = originalName.SplitByCamelCase();
+            if (!words.First().Equals("List", StringComparison.InvariantCultureIgnoreCase))
+                return originalName;
+            hasSuffix = hasSuffix || words.Count() > 1;
+            var wordToReplace = hasSuffix ? "Get" : "GetAll";
+            var replacedWords = wordToReplace.AsIEnumerable().Concat(words.Skip(1));
+            return string.Join("", replacedWords);
+        }
+
         private static readonly ConcurrentDictionary<Operation, RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
 
         public static RequestPath GetRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)

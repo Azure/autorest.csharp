@@ -286,7 +286,7 @@ namespace MgmtScopeResource
                 scope0.Start();
                 try
                 {
-                    var response = _resourceLinksRestClient.GetAtSourceScope(scope, cancellationToken: cancellationToken);
+                    var response = _resourceLinksRestClient.ListAtSourceScope(scope, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -301,7 +301,7 @@ namespace MgmtScopeResource
                 scope0.Start();
                 try
                 {
-                    var response = _resourceLinksRestClient.GetAtSourceScopeNextPage(nextLink, scope, cancellationToken: cancellationToken);
+                    var response = _resourceLinksRestClient.ListAtSourceScopeNextPage(nextLink, scope, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -330,7 +330,7 @@ namespace MgmtScopeResource
                 scope0.Start();
                 try
                 {
-                    var response = await _resourceLinksRestClient.GetAtSourceScopeAsync(scope, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resourceLinksRestClient.ListAtSourceScopeAsync(scope, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -345,7 +345,7 @@ namespace MgmtScopeResource
                 scope0.Start();
                 try
                 {
-                    var response = await _resourceLinksRestClient.GetAtSourceScopeNextPageAsync(nextLink, scope, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resourceLinksRestClient.ListAtSourceScopeNextPageAsync(nextLink, scope, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

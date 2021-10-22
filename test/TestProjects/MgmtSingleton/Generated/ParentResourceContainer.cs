@@ -275,7 +275,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _parentResourcesRestClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                var response = _parentResourcesRestClient.List(Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new ParentResource(Parent, value)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -293,7 +293,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _parentResourcesRestClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _parentResourcesRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new ParentResource(Parent, value)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)

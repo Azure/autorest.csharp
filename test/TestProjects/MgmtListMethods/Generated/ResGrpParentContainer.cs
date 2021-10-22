@@ -277,7 +277,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentsRestClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                var response = _resGrpParentsRestClient.List(Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new ResGrpParent(Parent, value)).ToArray() as IReadOnlyList<ResGrpParent>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -295,7 +295,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentsRestClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentsRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new ResGrpParent(Parent, value)).ToArray() as IReadOnlyList<ResGrpParent>, response.GetRawResponse());
             }
             catch (Exception e)

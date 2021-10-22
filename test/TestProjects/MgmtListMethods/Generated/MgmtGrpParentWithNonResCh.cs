@@ -323,7 +323,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _mgmtGrpParentWithNonResChesRestClient.GetNonResourceChildAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGrpParentWithNonResChesRestClient.ListNonResourceChildAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -346,7 +346,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _mgmtGrpParentWithNonResChesRestClient.GetNonResourceChild(Id.Parent.Parent.Name, Id.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGrpParentWithNonResChesRestClient.ListNonResourceChild(Id.Parent.Parent.Name, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)

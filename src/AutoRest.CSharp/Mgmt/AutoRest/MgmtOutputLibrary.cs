@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             CategorizeOperationGroups();
 
             DecorateOperationGroup();
-            UpdateListMethodNames();
+            //UpdateListMethodNames();
         }
 
         private void UpdateListMethodNames()

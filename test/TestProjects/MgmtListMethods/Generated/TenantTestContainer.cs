@@ -293,7 +293,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _tenantTestsRestClient.GetAll(requiredParam, optionalParam, cancellationToken: cancellationToken);
+                    var response = _tenantTestsRestClient.List(requiredParam, optionalParam, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -308,7 +308,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _tenantTestsRestClient.GetAllNextPage(nextLink, requiredParam, optionalParam, cancellationToken: cancellationToken);
+                    var response = _tenantTestsRestClient.ListNextPage(nextLink, requiredParam, optionalParam, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -338,7 +338,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _tenantTestsRestClient.GetAllAsync(requiredParam, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _tenantTestsRestClient.ListAsync(requiredParam, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -353,7 +353,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _tenantTestsRestClient.GetAllNextPageAsync(nextLink, requiredParam, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _tenantTestsRestClient.ListNextPageAsync(nextLink, requiredParam, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

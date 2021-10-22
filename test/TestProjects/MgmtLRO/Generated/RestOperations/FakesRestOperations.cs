@@ -395,7 +395,7 @@ namespace MgmtLRO
             }
         }
 
-        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string requiredParam, string optionalParam)
+        internal HttpMessage CreateListRequest(string resourceGroupName, string requiredParam, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -425,7 +425,7 @@ namespace MgmtLRO
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="requiredParam"/> is null. </exception>
-        public async Task<Response<FakeListResult>> GetAllAsync(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeListResult>> ListAsync(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -436,7 +436,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(requiredParam));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName, requiredParam, optionalParam);
+            using var message = CreateListRequest(resourceGroupName, requiredParam, optionalParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -458,7 +458,7 @@ namespace MgmtLRO
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="requiredParam"/> is null. </exception>
-        public Response<FakeListResult> GetAll(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public Response<FakeListResult> List(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -469,7 +469,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(requiredParam));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName, requiredParam, optionalParam);
+            using var message = CreateListRequest(resourceGroupName, requiredParam, optionalParam);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

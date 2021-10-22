@@ -14,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
@@ -284,7 +283,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.GetForResourceGroup(Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForResourceGroup(Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -299,7 +298,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.GetForResourceGroupNextPage(nextLink, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForResourceGroupNextPage(nextLink, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -318,7 +317,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.GetForResource(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForResource(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -333,7 +332,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.GetForResourceNextPage(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForResourceNextPage(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -352,7 +351,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.GetForManagementGroup(Id.Parent.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForManagementGroup(Id.Parent.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -367,7 +366,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.GetForManagementGroupNextPage(nextLink, Id.Parent.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForManagementGroupNextPage(nextLink, Id.Parent.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -386,7 +385,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.GetAll(filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.List(filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -401,7 +400,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.GetAllNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -433,7 +432,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.GetForResourceGroupAsync(Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForResourceGroupAsync(Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -448,7 +447,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.GetForResourceGroupNextPageAsync(nextLink, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForResourceGroupNextPageAsync(nextLink, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -467,7 +466,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.GetForResourceAsync(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForResourceAsync(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -482,7 +481,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.GetForResourceNextPageAsync(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForResourceNextPageAsync(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -501,7 +500,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.GetForManagementGroupAsync(Id.Parent.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForManagementGroupAsync(Id.Parent.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -516,7 +515,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.GetForManagementGroupNextPageAsync(nextLink, Id.Parent.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForManagementGroupNextPageAsync(nextLink, Id.Parent.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -535,7 +534,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.GetAllAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -550,7 +549,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.GetAllNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -564,52 +563,6 @@ namespace MgmtScopeResource
             else
             {
                 throw new InvalidOperationException($"{Id.Parent.ResourceType} is not supported here");
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="PolicyAssignment" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAllAsGenericResources");
-            scope.Start();
-            try
-            {
-                var filters = new ResourceFilterCollection(PolicyAssignment.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="PolicyAssignment" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAllAsGenericResources");
-            scope.Start();
-            try
-            {
-                var filters = new ResourceFilterCollection(PolicyAssignment.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
             }
         }
 

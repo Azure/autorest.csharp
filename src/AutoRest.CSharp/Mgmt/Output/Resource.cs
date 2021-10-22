@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         var diff = resourceTrimmedPath.TrimAncestorFrom(requestTrimmedPath);
                         key = $"{method}{diff}";
                         contextualPath = ReplaceParameterizedScope(GetContextualPath(operationSet), requestPath.GetScopePath());
-                        methodName = GetOperationName(operation, contextualPath, resourceRestClient);
+                        methodName = GetOperationName(operation, resourceRestClient);
                     }
                     // get the MgmtRestOperation with a proper name
                     var restOperation = new MgmtRestOperation(
@@ -283,11 +283,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         public IDictionary<OperationSet, ResourceType> ResourceTypes => _resourceTypes ??= OperationSets.ToDictionary(
             operationSet => operationSet,
             operationSet => GetContextualPath(operationSet).GetResourceType(_context.Configuration.MgmtConfiguration));
-
-        public Diagnostic GetDiagnostic(RestClientMethod method)
-        {
-            return new Diagnostic($"{Declaration.Name}.{method.Name}", Array.Empty<DiagnosticAttribute>());
-        }
 
         protected virtual string CreateDescription(string clientPrefix)
         {

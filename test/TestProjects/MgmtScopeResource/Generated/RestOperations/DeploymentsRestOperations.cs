@@ -624,7 +624,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateGetAtScopeRequest(string scope, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateListAtScopeRequest(string scope, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -655,14 +655,14 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        public async Task<Response<DeploymentListResult>> GetAtScopeAsync(string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<DeploymentListResult>> ListAtScopeAsync(string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
                 throw new ArgumentNullException(nameof(scope));
             }
 
-            using var message = CreateGetAtScopeRequest(scope, filter, top);
+            using var message = CreateListAtScopeRequest(scope, filter, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -684,14 +684,14 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        public Response<DeploymentListResult> GetAtScope(string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<DeploymentListResult> ListAtScope(string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
                 throw new ArgumentNullException(nameof(scope));
             }
 
-            using var message = CreateGetAtScopeRequest(scope, filter, top);
+            using var message = CreateListAtScopeRequest(scope, filter, top);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1039,7 +1039,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateGetAtScopeNextPageRequest(string nextLink, string scope, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateListAtScopeNextPageRequest(string nextLink, string scope, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1060,7 +1060,7 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
-        public async Task<Response<DeploymentListResult>> GetAtScopeNextPageAsync(string nextLink, string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<DeploymentListResult>> ListAtScopeNextPageAsync(string nextLink, string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1071,7 +1071,7 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(scope));
             }
 
-            using var message = CreateGetAtScopeNextPageRequest(nextLink, scope, filter, top);
+            using var message = CreateListAtScopeNextPageRequest(nextLink, scope, filter, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1094,7 +1094,7 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
-        public Response<DeploymentListResult> GetAtScopeNextPage(string nextLink, string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<DeploymentListResult> ListAtScopeNextPage(string nextLink, string scope, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1105,7 +1105,7 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(scope));
             }
 
-            using var message = CreateGetAtScopeNextPageRequest(nextLink, scope, filter, top);
+            using var message = CreateListAtScopeNextPageRequest(nextLink, scope, filter, top);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

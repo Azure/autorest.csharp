@@ -28,9 +28,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public static readonly RequestPath ResourceGroup = new(new[] {
             new Segment("subscriptions"),
-            new Segment(new Reference("subscriptionId", typeof(string)), true),
+            new Segment(new Reference("subscriptionId", typeof(string)), true, true),
             new Segment("resourceGroups"),
-            new Segment(new Reference("resourceGroupName", typeof(string)), true)
+            new Segment(new Reference("resourceGroupName", typeof(string)), true, true)
         });
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public static readonly RequestPath Subscription = new(new[] {
             new Segment("subscriptions"),
-            new Segment(new Reference("subscriptionId", typeof(string)), true)
+            new Segment(new Reference("subscriptionId", typeof(string)), true, true)
         });
 
         /// <summary>

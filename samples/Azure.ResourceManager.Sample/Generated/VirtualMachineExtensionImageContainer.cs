@@ -310,7 +310,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImagesRestClient.GetTypes(location, publisherName, cancellationToken);
+                var response = _virtualMachineExtensionImagesRestClient.ListTypes(location, publisherName, cancellationToken);
                 return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -340,7 +340,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImagesRestClient.GetTypesAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImagesRestClient.ListTypesAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -378,7 +378,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImagesRestClient.GetVersions(location, publisherName, type, filter, top, orderby, cancellationToken);
+                var response = _virtualMachineExtensionImagesRestClient.ListVersions(location, publisherName, type, filter, top, orderby, cancellationToken);
                 return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -416,7 +416,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImagesRestClient.GetVersionsAsync(location, publisherName, type, filter, top, orderby, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImagesRestClient.ListVersionsAsync(location, publisherName, type, filter, top, orderby, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Select(value => new VirtualMachineExtensionImage(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineExtensionImage>, response.GetRawResponse());
             }
             catch (Exception e)

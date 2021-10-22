@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private ReferenceOrConstant _value;
         private string _stringValue;
 
-        public Segment(ReferenceOrConstant value, bool escape, bool strict = true)
+        public Segment(ReferenceOrConstant value, bool escape, bool strict = false)
         {
             _value = value;
             _stringValue = value.IsConstant ? value.Constant.Value?.ToString() ?? "null"
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Escape = escape;
         }
 
-        public Segment(string value, bool escape = true, bool strict = true)
+        public Segment(string value, bool escape = true, bool strict = false)
         {
             _stringValue = value;
             _value = new Constant(value, typeof(string));

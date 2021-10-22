@@ -183,5 +183,25 @@ namespace MgmtScopeResource
                 throw;
             }
         }
+
+        #region PolicyAssignment
+
+        /// <summary> Gets a container of PolicyAssignments in the ResourceLink. </summary>
+        /// <returns> An object representing collection of PolicyAssignments and their operations over a ResourceLink. </returns>
+        public PolicyAssignmentContainer GetPolicyAssignments()
+        {
+            return new PolicyAssignmentContainer(this);
+        }
+        #endregion
+
+        #region DeploymentExtended
+
+        /// <summary> Gets a container of DeploymentExtendeds in the ResourceLink. </summary>
+        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a ResourceLink. </returns>
+        public DeploymentExtendedContainer GetDeploymentExtendeds()
+        {
+            return new DeploymentExtendedContainer(this);
+        }
+        #endregion
     }
 }

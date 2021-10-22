@@ -59,16 +59,23 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <param name="operation"></param>
         /// <param name="resourceRestClient">This can be null when in the extension classes where we do not have a rest client for its "resource"</param>
         /// <returns></returns>
-        protected virtual string GetOperationName(Operation operation, RequestPath contextualPath, MgmtRestClient? resourceRestClient)
+        protected virtual string GetOperationName(Operation operation, MgmtRestClient? resourceRestClient)
         {
             var operationGroup = _context.Library.GetRestClient(operation.GetHttpPath()).OperationGroup;
             var resourceOperationGroup = resourceRestClient?.OperationGroup;
             if (operationGroup == resourceOperationGroup)
             {
-                return operation.CSharpName();
+                return operation.MgmtCSharpName(false);
             }
 
-            return $"{operation.CSharpName()}{operationGroup.Key.ToSingular()}";
+            var suffix = string.Empty;
+            if (_context.Library.RestClientMethods[operation].IsListMethod(out _))
+            {
+                suffix = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ToPlural();
+                return $"{operation.MgmtCSharpName(!suffix.IsNullOrEmpty())}{suffix}";
+            }
+            suffix = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ToSingular();
+            return $"{operation.MgmtCSharpName(!suffix.IsNullOrEmpty())}{suffix}";
         }
     }
 }
