@@ -147,7 +147,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetAccountPropertiesAsync(RequestOptions options)
+        public virtual async Task<Response> GetAccountPropertiesAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.GetAccountProperties");
@@ -253,7 +253,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetAccountProperties(RequestOptions options)
+        public virtual Response GetAccountProperties(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.GetAccountProperties");
@@ -525,7 +525,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetAccessKeysAsync(RequestOptions options)
+        public virtual async Task<Response> GetAccessKeysAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.GetAccessKeys");
@@ -571,7 +571,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetAccessKeys(RequestOptions options)
+        public virtual Response GetAccessKeys(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PurviewAccountsClient.GetAccessKeys");
@@ -695,8 +695,8 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary> List the collections in the account. </summary>
-        /// <param name="options"> The request options. </param>
         /// <param name="skipToken"> The String to use. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -744,7 +744,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetCollectionsAsync(RequestOptions options, string skipToken = null)
+        public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PurviewAccountsClient.GetCollections");
@@ -763,8 +763,8 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary> List the collections in the account. </summary>
-        /// <param name="options"> The request options. </param>
         /// <param name="skipToken"> The String to use. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -812,7 +812,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetCollections(RequestOptions options, string skipToken = null)
+        public virtual Pageable<BinaryData> GetCollections(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PurviewAccountsClient.GetCollections");
@@ -831,8 +831,8 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary> Get a resource set config service model. </summary>
-        /// <param name="options"> The request options. </param>
         /// <param name="skipToken"> The String to use. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -954,7 +954,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetResourceSetRulesAsync(RequestOptions options, string skipToken = null)
+        public virtual AsyncPageable<BinaryData> GetResourceSetRulesAsync(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PurviewAccountsClient.GetResourceSetRules");
@@ -973,8 +973,8 @@ namespace Azure.Analytics.Purview.Account
         }
 
         /// <summary> Get a resource set config service model. </summary>
-        /// <param name="options"> The request options. </param>
         /// <param name="skipToken"> The String to use. </param>
+        /// <param name="options"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1096,7 +1096,7 @@ namespace Azure.Analytics.Purview.Account
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetResourceSetRules(RequestOptions options, string skipToken = null)
+        public virtual Pageable<BinaryData> GetResourceSetRules(string skipToken = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PurviewAccountsClient.GetResourceSetRules");

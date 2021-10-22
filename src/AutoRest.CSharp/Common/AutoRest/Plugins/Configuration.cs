@@ -22,11 +22,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public const string HeadAsBoolean = "head-as-boolean";
             public const string SkipCSProjPackageReference = "skip-csproj-packagereference";
             public const string LowLevelClient = "low-level-client";
-            public const string RequestOptionsAllOptional = "request-options-all-optional";
             public const string AttachDebuggerFormat = "{0}.attach";
         }
 
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool requestOptionsAllOptional, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -39,7 +38,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;
-            RequestOptionsAllOptional = requestOptionsAllOptional;
             MgmtConfiguration = mgmtConfiguration;
         }
 
@@ -55,7 +53,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool SkipCSProjPackageReference { get; }
         public static string ProjectRelativeDirectory = "../";
         public bool LowLevelClient { get; }
-        public bool RequestOptionsAllOptional { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
@@ -72,7 +69,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 headAsBoolean: GetOptionValue(autoRest, Options.HeadAsBoolean),
                 skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
                 lowLevelClient: GetOptionValue(autoRest, Options.LowLevelClient),
-                requestOptionsAllOptional: GetOptionValue(autoRest, Options.RequestOptionsAllOptional),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
@@ -99,8 +95,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 case Options.SkipCSProjPackageReference:
                     return false;
                 case Options.LowLevelClient:
-                    return false;
-                case Options.RequestOptionsAllOptional:
                     return false;
                 default:
                     return null;

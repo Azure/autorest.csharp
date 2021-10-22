@@ -67,7 +67,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
@@ -101,7 +101,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200Model204NoModelDefaultError200Valid(RequestOptions options)
+        public virtual Response Get200Model204NoModelDefaultError200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
@@ -135,7 +135,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
@@ -169,7 +169,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200Model204NoModelDefaultError204Valid(RequestOptions options)
+        public virtual Response Get200Model204NoModelDefaultError204Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
@@ -203,7 +203,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
@@ -237,7 +237,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestOptions options)
+        public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
@@ -271,7 +271,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestOptions options)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
@@ -305,7 +305,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200Model204NoModelDefaultError202None(RequestOptions options)
+        public virtual Response Get200Model204NoModelDefaultError202None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
@@ -339,7 +339,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
@@ -373,7 +373,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200Model204NoModelDefaultError400Valid(RequestOptions options)
+        public virtual Response Get200Model204NoModelDefaultError400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
@@ -407,7 +407,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
@@ -441,7 +441,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200Model201ModelDefaultError200Valid(RequestOptions options)
+        public virtual Response Get200Model201ModelDefaultError200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
@@ -475,7 +475,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
@@ -509,7 +509,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200Model201ModelDefaultError201Valid(RequestOptions options)
+        public virtual Response Get200Model201ModelDefaultError201Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
@@ -543,7 +543,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
@@ -577,7 +577,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200Model201ModelDefaultError400Valid(RequestOptions options)
+        public virtual Response Get200Model201ModelDefaultError400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
@@ -611,7 +611,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
@@ -645,7 +645,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestOptions options)
+        public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
@@ -679,7 +679,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
@@ -713,7 +713,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestOptions options)
+        public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
@@ -747,7 +747,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
@@ -781,7 +781,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestOptions options)
+        public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
@@ -815,7 +815,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
@@ -849,7 +849,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestOptions options)
+        public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
@@ -1211,7 +1211,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
@@ -1239,7 +1239,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDefaultModelA200Valid(RequestOptions options)
+        public virtual Response GetDefaultModelA200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
@@ -1267,7 +1267,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestOptions options)
+        public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
@@ -1295,7 +1295,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDefaultModelA200None(RequestOptions options)
+        public virtual Response GetDefaultModelA200None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
@@ -1595,7 +1595,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA200NoneAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA200NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
@@ -1623,7 +1623,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA200None(RequestOptions options)
+        public virtual Response Get200ModelA200None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
@@ -1651,7 +1651,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA200ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA200ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
@@ -1679,7 +1679,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA200Valid(RequestOptions options)
+        public virtual Response Get200ModelA200Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
@@ -1707,7 +1707,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
@@ -1735,7 +1735,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA200Invalid(RequestOptions options)
+        public virtual Response Get200ModelA200Invalid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
@@ -1763,7 +1763,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA400NoneAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA400NoneAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
@@ -1791,7 +1791,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA400None(RequestOptions options)
+        public virtual Response Get200ModelA400None(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
@@ -1819,7 +1819,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA400ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA400ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
@@ -1847,7 +1847,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA400Valid(RequestOptions options)
+        public virtual Response Get200ModelA400Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
@@ -1875,7 +1875,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
@@ -1903,7 +1903,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA400Invalid(RequestOptions options)
+        public virtual Response Get200ModelA400Invalid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
@@ -1931,7 +1931,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200ModelA202ValidAsync(RequestOptions options)
+        public virtual async Task<Response> Get200ModelA202ValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
@@ -1959,7 +1959,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200ModelA202Valid(RequestOptions options)
+        public virtual Response Get200ModelA202Valid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");

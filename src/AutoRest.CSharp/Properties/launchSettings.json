@@ -384,10 +384,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RequestOptionsAllOptional-LowLevel\\Generated"
     },
-    "RequestOptionsRequired-LowLevel": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RequestOptionsRequired-LowLevel\\Generated"
-    },
     "required-optional": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional\\Generated"

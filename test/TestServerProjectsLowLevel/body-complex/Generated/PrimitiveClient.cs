@@ -68,7 +68,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntAsync(RequestOptions options)
+        public virtual async Task<Response> GetIntAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetInt");
@@ -103,7 +103,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetInt(RequestOptions options)
+        public virtual Response GetInt(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetInt");
@@ -212,7 +212,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetLongAsync(RequestOptions options)
+        public virtual async Task<Response> GetLongAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetLong");
@@ -247,7 +247,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetLong(RequestOptions options)
+        public virtual Response GetLong(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetLong");
@@ -356,7 +356,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFloatAsync(RequestOptions options)
+        public virtual async Task<Response> GetFloatAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
@@ -391,7 +391,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFloat(RequestOptions options)
+        public virtual Response GetFloat(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
@@ -500,7 +500,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDoubleAsync(RequestOptions options)
+        public virtual async Task<Response> GetDoubleAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
@@ -535,7 +535,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDouble(RequestOptions options)
+        public virtual Response GetDouble(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
@@ -644,7 +644,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBoolAsync(RequestOptions options)
+        public virtual async Task<Response> GetBoolAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetBool");
@@ -679,7 +679,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBool(RequestOptions options)
+        public virtual Response GetBool(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetBool");
@@ -789,7 +789,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringAsync(RequestOptions options)
+        public virtual async Task<Response> GetStringAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetString");
@@ -825,7 +825,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetString(RequestOptions options)
+        public virtual Response GetString(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetString");
@@ -936,7 +936,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateAsync(RequestOptions options)
+        public virtual async Task<Response> GetDateAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDate");
@@ -971,7 +971,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDate(RequestOptions options)
+        public virtual Response GetDate(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDate");
@@ -1080,7 +1080,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeAsync(RequestOptions options)
+        public virtual async Task<Response> GetDateTimeAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
@@ -1115,7 +1115,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTime(RequestOptions options)
+        public virtual Response GetDateTime(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
@@ -1224,7 +1224,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeRfc1123Async(RequestOptions options)
+        public virtual async Task<Response> GetDateTimeRfc1123Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
@@ -1259,7 +1259,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTimeRfc1123(RequestOptions options)
+        public virtual Response GetDateTimeRfc1123(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
@@ -1367,7 +1367,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDurationAsync(RequestOptions options)
+        public virtual async Task<Response> GetDurationAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
@@ -1401,7 +1401,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDuration(RequestOptions options)
+        public virtual Response GetDuration(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
@@ -1507,7 +1507,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetByteAsync(RequestOptions options)
+        public virtual async Task<Response> GetByteAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetByte");
@@ -1541,7 +1541,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetByte(RequestOptions options)
+        public virtual Response GetByte(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetByte");

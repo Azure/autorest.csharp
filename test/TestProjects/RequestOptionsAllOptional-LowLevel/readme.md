@@ -10,5 +10,4 @@ namespace: Azure.RequestOptionsAllOptional
 low-level-client: true
 security: AzureKey
 security-header-name: Fake-Subscription-Key
-request-options-all-optional: true
 ```

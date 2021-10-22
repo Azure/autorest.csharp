@@ -198,7 +198,7 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBodyAndPathsAsync(RequestOptions options)
+        public virtual async Task<Response> GetBodyAndPathsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -218,7 +218,7 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetBodyAndPaths(RequestOptions options)
+        public virtual Response GetBodyAndPaths(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -238,7 +238,7 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all products. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetItemsAsync(RequestOptions options)
+        public virtual async Task<Response> GetItemsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
@@ -258,7 +258,7 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all products. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetItems(RequestOptions options)
+        public virtual Response GetItems(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");

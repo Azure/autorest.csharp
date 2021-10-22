@@ -58,7 +58,7 @@ namespace SubClients_LowLevel
         /// <param name="options"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestOptions options)
+        public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
@@ -79,7 +79,7 @@ namespace SubClients_LowLevel
         /// <param name="options"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual Response GetSubParameter(string subParameter, RequestOptions options)
+        public virtual Response GetSubParameter(string subParameter, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");

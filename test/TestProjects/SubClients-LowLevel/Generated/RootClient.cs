@@ -59,7 +59,7 @@ namespace SubClients_LowLevel
 
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetCachedParameterAsync(RequestOptions options)
+        public virtual async Task<Response> GetCachedParameterAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RootClient.GetCachedParameter");
@@ -78,7 +78,7 @@ namespace SubClients_LowLevel
 
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetCachedParameter(RequestOptions options)
+        public virtual Response GetCachedParameter(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RootClient.GetCachedParameter");
