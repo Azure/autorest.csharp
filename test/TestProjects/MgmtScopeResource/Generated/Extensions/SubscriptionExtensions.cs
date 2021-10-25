@@ -20,6 +20,26 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
+        #region PolicyAssignment
+        /// <summary> Gets an object representing a PolicyAssignmentContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="PolicyAssignmentContainer" /> object. </returns>
+        public static PolicyAssignmentContainer GetPolicyAssignments(this Subscription subscription)
+        {
+            return new PolicyAssignmentContainer(subscription);
+        }
+        #endregion
+
+        #region DeploymentExtended
+        /// <summary> Gets an object representing a DeploymentExtendedContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="DeploymentExtendedContainer" /> object. </returns>
+        public static DeploymentExtendedContainer GetDeploymentExtendeds(this Subscription subscription)
+        {
+            return new DeploymentExtendedContainer(subscription);
+        }
+        #endregion
+
         private static ResourceLinksRestOperations GetResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ResourceLinksRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);

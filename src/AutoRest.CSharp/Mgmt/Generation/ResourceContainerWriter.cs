@@ -121,29 +121,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             FormattableString validResourceType;
             if (_resourceContainer.ResourceTypes.Count == 1)
-                validResourceType = GetResourceTypeExpression(_resourceContainer.ResourceTypes.Values.First());
+                validResourceType = GetResourceTypeExpression(_resourceContainer.ResourceTypes.First());
             else
                 validResourceType = $"{typeof(ResourceIdentifier)}.RootResourceIdentifier.ResourceType";
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
             _writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {validResourceType};");
-        }
-
-        private FormattableString GetResourceTypeExpression(ResourceType resourceType)
-        {
-            if (resourceType == ResourceType.ResourceGroup)
-                return $"{typeof(ResourceGroup)}.ResourceType";
-            if (resourceType == ResourceType.Subscription)
-                return $"{typeof(Subscription)}.ResourceType";
-            if (resourceType == ResourceType.Tenant)
-                return $"{typeof(Tenant)}.ResourceType";
-            if (resourceType == ResourceType.ManagementGroup)
-                return $"{typeof(ManagementGroup)}.ResourceType";
-
-            if (!resourceType.IsConstant)
-                throw new NotImplementedException($"ResourceType that contains variables are not supported yet");
-
-            return $"\"{resourceType.SerializedType}\"";
         }
 
         protected override void WriteMethods()

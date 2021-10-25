@@ -149,9 +149,14 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
-            // TODO -- what should we do if we have multiple types? or it contains variables?
-            // NOTE: we are possible to test if this resource type contains variables using `IsContant` property
-            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.ResourceTypes.Values.First()}\";");
+            // we should never have multiple resource types here, throw exception when this happens
+            if (_resource.ResourceTypes.Count > 1)
+                throw new InvalidOperationException($"Resource {_resource.Type.Name} has multiple resource types {string.Join(", ", _resource.ResourceTypes)}, which is unacceptable");
+            // now we should only have one resource type value
+            var resourceType = _resource.ResourceTypes.First();
+            if (!resourceType.IsConstant)
+                throw new NotImplementedException($"The resource type of resource {_resource.Type.Name} contains variables in it, this is not implemented yet");
+            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{resourceType}\";");
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for the operations");
             _writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");

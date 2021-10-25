@@ -14,6 +14,8 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Management;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using MgmtScopeResource.Models;
 
@@ -380,7 +382,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                if (Id.Parent.ResourceType == "Microsoft.Resources/resourceGroups")
+                if (Id.Parent.ResourceType == ResourceGroup.ResourceType)
                 {
                     var response = await _deploymentsRestClient.WhatIfAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
@@ -388,7 +390,7 @@ namespace MgmtScopeResource
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == "Microsoft.Resources/tenants")
+                else if (Id.Parent.ResourceType == Tenant.ResourceType)
                 {
                     var response = await _restClient.WhatIfAsync(Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Name, parameters).Request, response);
@@ -396,7 +398,7 @@ namespace MgmtScopeResource
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == "Microsoft.Management/managementGroups")
+                else if (Id.Parent.ResourceType == ManagementGroup.ResourceType)
                 {
                     var response = await _deploymentsRestClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Parent.Name, Id.Name, parameters).Request, response);
@@ -404,7 +406,7 @@ namespace MgmtScopeResource
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == "Microsoft.Resources/subscriptions")
+                else if (Id.Parent.ResourceType == Subscription.ResourceType)
                 {
                     var response = await _deploymentsRestClient.WhatIfAtSubscriptionScopeAsync(Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Name, parameters).Request, response);
@@ -452,7 +454,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                if (Id.Parent.ResourceType == "Microsoft.Resources/resourceGroups")
+                if (Id.Parent.ResourceType == ResourceGroup.ResourceType)
                 {
                     var response = _deploymentsRestClient.WhatIf(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                     var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
@@ -460,7 +462,7 @@ namespace MgmtScopeResource
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == "Microsoft.Resources/tenants")
+                else if (Id.Parent.ResourceType == Tenant.ResourceType)
                 {
                     var response = _restClient.WhatIf(Id.Name, parameters, cancellationToken);
                     var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Name, parameters).Request, response);
@@ -468,7 +470,7 @@ namespace MgmtScopeResource
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == "Microsoft.Management/managementGroups")
+                else if (Id.Parent.ResourceType == ManagementGroup.ResourceType)
                 {
                     var response = _deploymentsRestClient.WhatIfAtManagementGroupScope(Id.Parent.Parent.Name, Id.Name, parameters, cancellationToken);
                     var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Parent.Name, Id.Name, parameters).Request, response);
@@ -476,7 +478,7 @@ namespace MgmtScopeResource
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == "Microsoft.Resources/subscriptions")
+                else if (Id.Parent.ResourceType == Subscription.ResourceType)
                 {
                     var response = _deploymentsRestClient.WhatIfAtSubscriptionScope(Id.Name, parameters, cancellationToken);
                     var operation = new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _deploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Name, parameters).Request, response);

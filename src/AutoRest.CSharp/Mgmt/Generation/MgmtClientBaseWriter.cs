@@ -23,6 +23,8 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager.Management;
+using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Operation = AutoRest.CSharp.Input.Operation;
 
@@ -156,6 +158,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected FormattableString GetResourceTypeExpression(ResourceType resourceType)
+        {
+            if (resourceType == ResourceType.ResourceGroup)
+                return $"{typeof(ResourceGroup)}.ResourceType";
+            if (resourceType == ResourceType.Subscription)
+                return $"{typeof(Subscription)}.ResourceType";
+            if (resourceType == ResourceType.Tenant)
+                return $"{typeof(Tenant)}.ResourceType";
+            if (resourceType == ResourceType.ManagementGroup)
+                return $"{typeof(ManagementGroup)}.ResourceType";
+
+            if (!resourceType.IsConstant)
+                throw new NotImplementedException($"ResourceType that contains variables are not supported yet");
+
+            // find the corresponding class of this resource type. If we find only one, use the constant inside that class. If we have multiple, use the hard-coded magic string
+            var candidates = Context.Library.ArmResources.Where(resource => resource.ResourceTypes.Contains(resourceType));
+            if (candidates.Count() == 1)
+            {
+                return $"{candidates.First().Type.Name}.ResourceType";
+            }
+            return $"\"{resourceType.SerializedType}\"";
+        }
+
         protected void WriteMethod(MgmtClientOperation clientOperation, bool async)
         {
             // we need to identify this operation belongs to which category: NormalMethod, NormalListMethod, LROMethod or PagingMethod
@@ -244,7 +269,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         escapeBranches.Add(branch);
                         continue;
                     }
-                    using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == \"{resourceType}\")"))
+                    using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                     {
                         WritePagingMethodBranch(itemType, diagnostic, operation, parameterMappings[branch], async);
                     }
@@ -596,7 +621,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         escapeBranches.Add(branch);
                         continue;
                     }
-                    using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == \"{resourceType}\")"))
+                    using (_writer.Scope($"{keyword} ({BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                     {
                         WriteLROMethodBranch(lroObjectType, operation, parameterMappings[branch], async);
                     }

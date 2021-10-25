@@ -279,10 +279,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
 
-        private IDictionary<OperationSet, ResourceType>? _resourceTypes;
-        public IDictionary<OperationSet, ResourceType> ResourceTypes => _resourceTypes ??= OperationSets.ToDictionary(
-            operationSet => operationSet,
-            operationSet => GetContextualPath(operationSet).GetResourceType(_context.Configuration.MgmtConfiguration));
+        private ISet<ResourceType>? _resourceTypes;
+        public ISet<ResourceType> ResourceTypes => _resourceTypes ??= OperationSets.Select(operationSet => GetContextualPath(operationSet).GetResourceType(_context.Configuration.MgmtConfiguration)).ToHashSet();
 
         protected virtual string CreateDescription(string clientPrefix)
         {

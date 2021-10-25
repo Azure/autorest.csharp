@@ -162,9 +162,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // find a parent resource in the resource list
             // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
             // or null if none matched
+            // NOTE that we are always using fuzzy match in the IsAncestorOf method, we need to block the ById operations - they literally can be anyone's ancestor when there is no better choice.
+            // We will never want this
             var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
                 .Where(r => r.IsAncestorOf(requestPath)).OrderBy(r => r.Count);
-            if (candidates.Any())
+            if (candidates.Any(path => !path.IsById()))
                 return candidates.Last();
             // if we cannot find one, we try the 4 extensions
             // first try management group

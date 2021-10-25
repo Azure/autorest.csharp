@@ -5,10 +5,31 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Management;
+
 namespace MgmtScopeResource
 {
     /// <summary> A class to add extension methods to ManagementGroup. </summary>
     public static partial class ManagementGroupExtensions
     {
+        #region PolicyAssignment
+        /// <summary> Gets an object representing a PolicyAssignmentContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="PolicyAssignmentContainer" /> object. </returns>
+        public static PolicyAssignmentContainer GetPolicyAssignments(this ManagementGroup managementGroup)
+        {
+            return new PolicyAssignmentContainer(managementGroup);
+        }
+        #endregion
+
+        #region DeploymentExtended
+        /// <summary> Gets an object representing a DeploymentExtendedContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="DeploymentExtendedContainer" /> object. </returns>
+        public static DeploymentExtendedContainer GetDeploymentExtendeds(this ManagementGroup managementGroup)
+        {
+            return new DeploymentExtendedContainer(managementGroup);
+        }
+        #endregion
     }
 }

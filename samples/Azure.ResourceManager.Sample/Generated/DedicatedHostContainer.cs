@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Microsoft.Compute/hostGroups";
+        protected override ResourceType ValidResourceType => DedicatedHostGroup.ResourceType;
 
         // Container level operations.
 

@@ -14,6 +14,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
@@ -38,12 +39,12 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "";
+        protected override ResourceType ValidResourceType => ResourceLink.ResourceType;
 
         // Container level operations.
 
         /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// ContextualPath: /{linkId}
+        /// ContextualPath: /{scope}
         /// OperationId: PolicyAssignments_Create
         /// <summary> This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group. </summary>
         /// <param name="policyAssignmentName"> The name of the policy assignment. </param>
@@ -80,7 +81,7 @@ namespace MgmtScopeResource
         }
 
         /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// ContextualPath: /{linkId}
+        /// ContextualPath: /{scope}
         /// OperationId: PolicyAssignments_Create
         /// <summary> This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group. </summary>
         /// <param name="policyAssignmentName"> The name of the policy assignment. </param>
@@ -117,7 +118,7 @@ namespace MgmtScopeResource
         }
 
         /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// ContextualPath: /{linkId}
+        /// ContextualPath: /{scope}
         /// OperationId: PolicyAssignments_Get
         /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
@@ -147,7 +148,7 @@ namespace MgmtScopeResource
         }
 
         /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// ContextualPath: /{linkId}
+        /// ContextualPath: /{scope}
         /// OperationId: PolicyAssignments_Get
         /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
@@ -299,7 +300,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="PolicyAssignment" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PolicyAssignment> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (Id.ResourceType == "Microsoft.Resources/subscriptions")
+            if (Id.ResourceType == Subscription.ResourceType)
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -333,7 +334,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == "Microsoft.Resources/resourceGroups")
+            else if (Id.ResourceType == ResourceGroup.ResourceType)
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -367,7 +368,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == "Microsoft.Resources/tenants")
+            else if (Id.ResourceType == Tenant.ResourceType)
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -401,7 +402,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == "Microsoft.Resources/tenants")
+            else if (Id.ResourceType == Tenant.ResourceType)
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -460,7 +461,7 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="PolicyAssignment" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PolicyAssignment> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (Id.ResourceType == "Microsoft.Resources/subscriptions")
+            if (Id.ResourceType == Subscription.ResourceType)
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -494,7 +495,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == "Microsoft.Resources/resourceGroups")
+            else if (Id.ResourceType == ResourceGroup.ResourceType)
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -528,7 +529,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == "Microsoft.Resources/tenants")
+            else if (Id.ResourceType == Tenant.ResourceType)
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -562,7 +563,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == "Microsoft.Resources/tenants")
+            else if (Id.ResourceType == Tenant.ResourceType)
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -599,6 +600,52 @@ namespace MgmtScopeResource
             else
             {
                 throw new InvalidOperationException($"{Id.ResourceType} is not supported here");
+            }
+        }
+
+        /// <summary> Filters the list of <see cref="PolicyAssignment" /> for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAllAsGenericResources");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(PolicyAssignment.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of <see cref="PolicyAssignment" /> for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAllAsGenericResources");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(PolicyAssignment.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
             }
         }
 

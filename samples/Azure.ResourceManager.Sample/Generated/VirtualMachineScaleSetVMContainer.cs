@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Microsoft.Compute/virtualMachineScaleSets";
+        protected override ResourceType ValidResourceType => VirtualMachineScaleSet.ResourceType;
 
         // Container level operations.
 
