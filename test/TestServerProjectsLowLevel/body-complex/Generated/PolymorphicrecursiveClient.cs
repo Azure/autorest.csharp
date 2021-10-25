@@ -72,7 +72,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphicrecursiveClient.GetValid");
@@ -109,7 +109,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetValid(RequestOptions options)
+        public virtual Response GetValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphicrecursiveClient.GetValid");

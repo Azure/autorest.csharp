@@ -64,7 +64,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFileAsync(RequestOptions options)
+        public virtual async Task<Response> GetFileAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -93,7 +93,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFile(RequestOptions options)
+        public virtual Response GetFile(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -122,7 +122,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFileLargeAsync(RequestOptions options)
+        public virtual async Task<Response> GetFileLargeAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -151,7 +151,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFileLarge(RequestOptions options)
+        public virtual Response GetFileLarge(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -180,7 +180,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyFileAsync(RequestOptions options)
+        public virtual async Task<Response> GetEmptyFileAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
@@ -209,7 +209,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmptyFile(RequestOptions options)
+        public virtual Response GetEmptyFile(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
@@ -230,6 +230,7 @@ namespace body_file_LowLevel
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
+            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -244,6 +245,7 @@ namespace body_file_LowLevel
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
+            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -258,6 +260,7 @@ namespace body_file_LowLevel
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
+            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);

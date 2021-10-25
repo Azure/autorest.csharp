@@ -69,7 +69,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetValidAsync(RequestOptions options)
+        public virtual async Task<Response> GetValidAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetValid");
@@ -103,7 +103,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetValid(RequestOptions options)
+        public virtual Response GetValid(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetValid");
@@ -209,7 +209,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyAsync(RequestOptions options)
+        public virtual async Task<Response> GetEmptyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -243,7 +243,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmpty(RequestOptions options)
+        public virtual Response GetEmpty(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -349,7 +349,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions options)
+        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
@@ -383,7 +383,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNotProvided(RequestOptions options)
+        public virtual Response GetNotProvided(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNotProvided");

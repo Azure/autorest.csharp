@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace RequestOptionsRequired_LowLevel
+namespace custom_baseUrl_more_options_LowLevel
 {
-    /// <summary> Client options for RequestOptionsRequiredClient. </summary>
-    public partial class RequestOptionsRequiredClientOptions : ClientOptions
+    /// <summary> Client options for AutoRestParameterizedCustomHostTestClient. </summary>
+    public partial class AutoRestParameterizedCustomHostTestClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace RequestOptionsRequired_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of RequestOptionsRequiredClientOptions. </summary>
-        public RequestOptionsRequiredClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of AutoRestParameterizedCustomHostTestClientOptions. </summary>
+        public AutoRestParameterizedCustomHostTestClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

@@ -68,6 +68,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-array\\Generated"
     },
+    "body-array-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-array\\Generated"
+    },
     "body-boolean": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-boolean\\Generated"
@@ -167,6 +171,10 @@
     "custom-baseUrl-more-options": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options\\Generated"
+    },
+    "custom-baseUrl-more-options-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-more-options\\Generated"
     },
     "custom-baseUrl-paging": {
       "commandName": "Project",
@@ -332,6 +340,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\Generated"
     },
+    "NoTypeReplacement": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NoTypeReplacement\\Generated"
+    },
     "object-type": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type\\Generated"
@@ -367,10 +379,6 @@
     "RequestOptionsAllOptional-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RequestOptionsAllOptional-LowLevel\\Generated"
-    },
-    "RequestOptionsRequired-LowLevel": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RequestOptionsRequired-LowLevel\\Generated"
     },
     "required-optional": {
       "commandName": "Project",
