@@ -97,6 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             bool isPaging = _resourceCollection.ListMethods.First().PagingMethod != null;
             string value = isPaging ? string.Empty : ".Value";
 
+            _writer.Line();
             _writer.Line($"IEnumerator<{_resource.ResourceName}> IEnumerable<{_resource.ResourceName}>.GetEnumerator()");
             using (_writer.Scope())
             {
