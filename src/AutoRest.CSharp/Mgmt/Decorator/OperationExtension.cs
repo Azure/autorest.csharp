@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         private static int RankRequestPath(RequestPath requestPath)
         {
-            if (requestPath.IsById())
+            if (requestPath.IsById)
                 return int.MaxValue;
             if (requestPath.GetScopePath().IsParameterizedScope())
                 return 0;

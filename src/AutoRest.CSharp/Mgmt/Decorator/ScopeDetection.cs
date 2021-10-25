@@ -24,13 +24,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ConcurrentDictionary<RequestPath, RequestPath> _scopePathCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<RequestPath, ResourceType[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceType[]?>();
 
-        //public static bool ContainsResourceType(this ResourceType[] parameterizedScopeTypes, ResourceType resourceType)
-        //{
-        //    if (parameterizedScopeTypes.Length == 0)
-        //        return true;
-        //    return parameterizedScopeTypes.Contains(resourceType);
-        //}
-
         public static RequestPath GetScopePath(this RequestPath requestPath)
         {
             if (_scopePathCache.TryGetValue(requestPath, out var result))

@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// If this is a constant, escape is guranteed to be true, since our segment has been split by slashes.
         /// If this is a reference, escape is false when the corresponding parameter has x-ms-skip-url-encoding = true indicating this might be a scope variable
         /// </summary>
-        public bool Escape { get; private set; }
+        public bool Escape { get; init; }
 
         /// <summary>
         /// Mark if this segment is strict when comparing with each other.
@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// If IsStrict is false, and this is a Reference, we will only compare the type is the same when comparing
         /// But when IsStrict is true, or this is a Constant, we will always ensure we have the same value (for constant) or same reference name (for reference) and the same type
         /// </summary>
-        public bool IsStrict { get; private set; }
+        public bool IsStrict { get; init; }
 
         public bool IsConstant => _value.IsConstant;
 
@@ -103,7 +103,12 @@ namespace AutoRest.CSharp.Mgmt.Models
             return left._stringValue.Equals(right._stringValue, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public bool Equals(Segment other) => this.Equals(other, IsStrict && other.IsStrict);
+        /// <summary>
+        /// Test if a segment is the same to the other. We will use strict mode if either of these two is strict.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(Segment other) => this.Equals(other, IsStrict || other.IsStrict);
 
         public override bool Equals(object? obj)
         {

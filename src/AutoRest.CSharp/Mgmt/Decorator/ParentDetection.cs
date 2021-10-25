@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // We will never want this
             var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
                 .Where(r => r.IsAncestorOf(requestPath)).OrderBy(r => r.Count);
-            if (candidates.Any(path => !path.IsById()))
+            if (candidates.Any())
                 return candidates.Last();
             // if we cannot find one, we try the 4 extensions
             // first try management group

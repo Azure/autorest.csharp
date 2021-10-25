@@ -67,11 +67,26 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <param name="method"></param>
         public RequestPath(RestClientMethod method)
         {
-            _segments = method.Request.PathSegments
+            var segments = method.Request.PathSegments
                 .SelectMany(pathSegment => ParsePathSegment(pathSegment))
                 .ToList();
+            _segments = CheckByIdPath(segments);
             SerializedPath = method.Operation.GetHttpPath();
         }
+
+        private static IReadOnlyList<Segment> CheckByIdPath(IReadOnlyList<Segment> segments)
+        {
+            // if this is a byId request path, we need to make it strict, since it might be accidentally to be any scope request path's parent
+            if (segments.Count != 1)
+                return segments;
+            if (!segments.First().SkipUrlEncoding)
+                return segments;
+
+            // this is a ById request path
+            return new List<Segment> { segments.First() with { IsStrict = true } };
+        }
+
+        public bool IsById => Count == 1 && this.First().SkipUrlEncoding;
 
         /// <summary>
         /// Constructs the <see cref="RequestPath"/> instance using a collection of <see cref="Segment"/>

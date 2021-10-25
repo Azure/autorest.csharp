@@ -258,7 +258,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static Parameter UpdateParameterTypeOfByIdMethod(RequestPath requestPath, Parameter parameter)
         {
-            if (requestPath.IsById())
+            if (requestPath.IsById)
             {
                 var reference = requestPath.First().Reference;
                 if (parameter.Name.Equals(reference.Name, StringComparison.InvariantCultureIgnoreCase) && parameter.Type.EqualsByName(reference.Type))

@@ -36,17 +36,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_byIdCache.TryGetValue(operationSet, out var result))
                 return result;
 
-            result = operationSet.GetRequestPath(context).IsById();
+            result = operationSet.GetRequestPath(context).IsById;
             _byIdCache.TryAdd(operationSet, result);
             return result;
-        }
-
-        public static bool IsById(this RequestPath requestPath)
-        {
-            if (requestPath.Count != 1)
-                return false;
-
-            return requestPath.First().SkipUrlEncoding;
         }
 
         private static Operation GetOperation(OperationSet operationSet)
