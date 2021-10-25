@@ -275,7 +275,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="PolicyAssignment" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PolicyAssignment> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (Id.Parent.ResourceType == "Microsoft.Resources/subscriptions")
+            if (Id.ResourceType == "Microsoft.Resources/subscriptions")
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -309,7 +309,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.Parent.ResourceType == "Microsoft.Resources/resourceGroups")
+            else if (Id.ResourceType == "Microsoft.Resources/resourceGroups")
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -343,7 +343,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.Parent.ResourceType == "Microsoft.Resources/tenants")
+            else if (Id.ResourceType == "Microsoft.Resources/tenants")
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -377,7 +377,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.Parent.ResourceType == "Microsoft.Resources/tenants")
+            else if (Id.ResourceType == "Microsoft.Resources/tenants")
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -413,7 +413,7 @@ namespace MgmtScopeResource
             }
             else
             {
-                throw new InvalidOperationException($"{Id.Parent.ResourceType} is not supported here");
+                throw new InvalidOperationException($"{Id.ResourceType} is not supported here");
             }
         }
 
@@ -424,7 +424,7 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="PolicyAssignment" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PolicyAssignment> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (Id.Parent.ResourceType == "Microsoft.Resources/subscriptions")
+            if (Id.ResourceType == "Microsoft.Resources/subscriptions")
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -458,7 +458,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.Parent.ResourceType == "Microsoft.Resources/resourceGroups")
+            else if (Id.ResourceType == "Microsoft.Resources/resourceGroups")
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -492,7 +492,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.Parent.ResourceType == "Microsoft.Resources/tenants")
+            else if (Id.ResourceType == "Microsoft.Resources/tenants")
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -526,7 +526,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.Parent.ResourceType == "Microsoft.Resources/tenants")
+            else if (Id.ResourceType == "Microsoft.Resources/tenants")
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -562,7 +562,7 @@ namespace MgmtScopeResource
             }
             else
             {
-                throw new InvalidOperationException($"{Id.Parent.ResourceType} is not supported here");
+                throw new InvalidOperationException($"{Id.ResourceType} is not supported here");
             }
         }
 

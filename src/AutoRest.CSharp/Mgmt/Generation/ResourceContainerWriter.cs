@@ -43,6 +43,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override MgmtTypeProvider This => _resourceContainer;
 
+        protected override string BranchIdVariableName => "Id";
+
         public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
             : base(writer, resourceContainer.Resource, context)
         {
