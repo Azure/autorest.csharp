@@ -34,13 +34,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(isExists, method != null);
         }
 
-        [TestCase("ParentResourceContainer", true)]
-        [TestCase("SingletonResourceContainer", false)]
-        [TestCase("SingletonResource2Container", false)]
-        public void ValidateContainers(string container, bool isExists)
+        [TestCase("ParentResourceCollection", true)]
+        [TestCase("SingletonResourceCollection", false)]
+        [TestCase("SingletonResource2Collection", false)]
+        public void ValidateCollections(string collection, bool isExists)
         {
-            var containerTypeExists = FindAllContainers().Any(o => o.Name == container);
-            Assert.AreEqual(isExists, containerTypeExists);
+            var collectionTypeExists = FindAllCollections().Any(o => o.Name == collection);
+            Assert.AreEqual(isExists, collectionTypeExists);
         }
 
         [TestCase("ParentResource", "GetSingletonResource", true)]
@@ -51,7 +51,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("SubscriptionExtensions", "GetSubscriptionParentSingletons", false)]
         public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool isExist)
         {
-            var possibleTypesToFind = FindAllContainers().Concat(FindAllResources())
+            var possibleTypesToFind = FindAllCollections().Concat(FindAllResources())
                 .Append(FindResourceGroupExtensions()).Append(FindSubscriptionExtensions());
             var type = possibleTypesToFind.FirstOrDefault(r => r.Name == parent);
             Assert.IsNotNull(type, $"Cannot find parent {parent}");
