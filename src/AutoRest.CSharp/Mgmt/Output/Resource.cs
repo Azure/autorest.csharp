@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, ResourceName));
 
-        public ResourceContainer? ResourceContainer => _context.Library.GetResourceContainer(OperationGroup);
+        public ResourceCollection? ResourceCollection => _context.Library.GetResourceCollection(OperationGroup);
 
         public virtual string ResourceName => Type.Name;
 
@@ -115,11 +115,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             foreach (var clientMethod in Methods)
             {
                 var isMethodAlreadyExist = false;
-                if (ResourceContainer != null)
+                if (ResourceCollection != null)
                 {
-                    isMethodAlreadyExist = ResourceContainer.PutMethods.Any(m => m == clientMethod.RestClientMethod) ||
-                        ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod.RestClientMethod) ||
-                        ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod.RestClientMethod ||
+                    isMethodAlreadyExist = ResourceCollection.PutMethods.Any(m => m == clientMethod.RestClientMethod) ||
+                        ResourceCollection.RemainingMethods.Any(m => m.RestClientMethod == clientMethod.RestClientMethod) ||
+                        ResourceCollection.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod.RestClientMethod ||
                         SubscriptionExtensionsListMethods.Any(s => clientMethod.RestClientMethod == s.GetRestClientMethod()));
                 }
                 if (!isMethodAlreadyExist)
@@ -164,15 +164,15 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning)
                 {
-                    var isMethodExistInContainer = false;
-                    if (ResourceContainer != null)
+                    var isMethodExistInCollection = false;
+                    if (ResourceCollection != null)
                     {
-                        isMethodExistInContainer = ResourceContainer.PutMethods.Any(m => m == clientMethod) ||
-                            ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
-                            ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod ||
+                        isMethodExistInCollection = ResourceCollection.PutMethods.Any(m => m == clientMethod) ||
+                            ResourceCollection.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
+                            ResourceCollection.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod ||
                             SubscriptionExtensionsListMethods.Any(s => clientMethod == s.GetRestClientMethod()));
                     }
-                    if (!isMethodExistInContainer)
+                    if (!isMethodExistInCollection)
                     {
                         clientMethods.Add(clientMethod);
                     }

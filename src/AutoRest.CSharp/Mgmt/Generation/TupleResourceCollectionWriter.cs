@@ -11,10 +11,10 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class TupleResourceContainerWriter : ResourceContainerWriter
+    internal class TupleResourceCollectionWriter : ResourceCollectionWriter
     {
-        public TupleResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
-            : base(writer, resourceContainer, context)
+        public TupleResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context)
+            : base(writer, resourceCollection, context)
         {
         }
 

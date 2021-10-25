@@ -16,9 +16,9 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ResourceContainer : Resource
+    internal class ResourceCollection : Resource
     {
-        private const string _suffixValue = "Container";
+        private const string _suffixValue = "Collection";
         private BuildContext<MgmtOutputLibrary> _context;
         public const string ResourceGroupResourceType = "ResourceGroup.ResourceType";
         public const string SubscriptionResourceType = "Subscription.ResourceType";
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private List<ClientMethod>? _getMethods;
         private ClientMethod? _getByIdMethod;
 
-        public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        public ResourceCollection(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context)
         {
             _context = context;
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public RestClientMethod? PutByIdMethod => _putByIdMethod ??= GetPutByIdMethod();
 
-        public IEnumerable<ResourceListMethod> ListMethods => FindContainerListMethods(); // TODO: should only call once with lazy init
+        public IEnumerable<ResourceListMethod> ListMethods => FindCollectionListMethods(); // TODO: should only call once with lazy init
 
         public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetArmResource(OperationGroup).GetMethod;
 
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override ClientMethod? GetByIdMethod => _getByIdMethod ??= _context.Library.GetArmResource(OperationGroup).GetByIdMethod;
 
-        private IEnumerable<ResourceListMethod> FindContainerListMethods()
+        private IEnumerable<ResourceListMethod> FindCollectionListMethods()
         {
             return GetListMethods(true, true);
         }

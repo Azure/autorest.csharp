@@ -71,14 +71,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteGetResourceContainerMethod(CodeWriter writer, ResourceContainer container)
+        protected void WriteGetResourceCollectionMethod(CodeWriter writer, ResourceCollection collection)
         {
-            writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
+            writer.WriteXmlDocumentationSummary($"Gets an object representing a {collection.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {container.Type} Get{container.Resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{collection.Type.Name}\" /> object.");
+            using (writer.Scope($"public static {collection.Type} Get{collection.Resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
-                writer.Line($"return new {container.Type}({ExtensionOperationVariableName});");
+                writer.Line($"return new {collection.Type}({ExtensionOperationVariableName});");
             }
         }
 

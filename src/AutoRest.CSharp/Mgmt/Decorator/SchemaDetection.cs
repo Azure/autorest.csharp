@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <summary>
         /// Indicates if the given operation group is a ListOnly operation group.
         /// If the operation group is a ListOnly which corresponds to a NonResource,
-        /// this function will return true indicating the corresponding container, data... classes should not be generated.
+        /// this function will return true indicating the corresponding collection, data... classes should not be generated.
         /// </summary>
         /// <param name="operationGroup">Operation group.</param>
         /// <param name="config">Management plane configuration.</param>

@@ -58,7 +58,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 c => c.IsSingletonResource(result.Context.Configuration.MgmtConfiguration));
 
             Assert.AreEqual(count, context.Library.ArmResources.Count() + context.Library.TupleResources.Count(), "Did not find the expected resource count");
-            Assert.AreEqual(count - singletonCount, context.Library.ResourceContainers.Count() + context.Library.TupleResourceContainers.Count(), "Did not find the expected resourceContainers count");
+            Assert.AreEqual(count - singletonCount, context.Library.ResourceCollections.Count() + context.Library.TupleResourceCollections.Count(), "Did not find the expected resourceContainers count");
             Assert.AreEqual(count, context.Library.ResourceData.Count(), "Did not find the expected resourceData count");
         }
 
