@@ -3,18 +3,18 @@
 autorest requires each operation in swagger file to define a unique string parameter `operationId` (this is different from [official OpenAPI specification](https://swagger.io/docs/specification/paths-and-operations/#operationId)). If parameter value contains underscore, then part after underscore will be treated as operation name, and part before underscore will be treated as the name of the operation group to which this operation belongs. Otherwise, operation will be attributed to the group without a name::
 
 ```js
-  "paths": {
-    "/namedgroup/op": {
-      "get": {
-        "operationId": "NamedGroup_Op1",
-      }
-    },
-    "/nogroup/op": {
-      "get": {
-        "operationId": "Op2",
-      }
+"paths": {
+  "/namedgroup/op": {
+    "get": {
+      "operationId": "NamedGroup_Op1",
+    }
+  },
+  "/nogroup/op": {
+    "get": {
+      "operationId": "Op2",
     }
   }
+}
 ```
 
 ```yaml
@@ -129,3 +129,69 @@ public class DeviceUpdateClient {
     public virtual DeviceUpdateUpdates GetDeviceUpdateUpdates();
 }
 ```
+
+## Resource clients [NOT IMPLEMENTED, DESIGN ONLY]
+
+Operations inside one operation group may contain methods bound to a specific resource. When some of the operations have path parameter with  `"x-ms-parameter-resource-name": true`, operation group has non-empty name and client for that operation group is a subclient (either `--single-top-level-client=true` or `CodeGenClientAttribute.ParentClient` is set), **autorest.csharp** generates public get-only property initialized from subclient constructor to preserve value for said parameter and uses it for all operation in the operation group that have that parameter in their path. For all operations in the operation group that don't have said parameter, it is assumed that they aren't bound to a specific value of resource, hence **autorest.csharp** generates methods for these operations in parent client rather than in subclient. 
+
+```js
+"paths": {
+  "/collections/{collectionName}": {
+    "get": {
+      "operationId": "Collections_GetCollection",
+      "parameters": [
+        {
+          "$ref": "#/parameters/CollectionName"
+        }
+      ]
+    },
+    "put": {
+      "operationId": "Collections_CreateOrUpdateCollection",
+      "parameters": [
+        {
+          "$ref": "#/parameters/CollectionName"
+        }
+      ]
+    }
+  },
+  "/collections": {
+    "get": {
+      "operationId": "Collections_GetCollections"
+    }
+  }
+},
+"parameters": { 
+  "CollectionName": {
+    "name": "collectionName",
+    "in": "path",
+    "required": true,
+    "type": "string",
+    "x-ms-parameter-resource-name": true
+  }
+}
+```
+
+```cs
+public partial class PurviewAccountsClient
+{
+    public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken = null, RequestOptions options = null);
+    public virtual Pageable<BinaryData> GetCollections(string skipToken = null, RequestOptions options = null);
+
+    public virtual PurviewAccountCollections GetCollectionsClient(string collectionName)
+}
+```
+
+```cs
+public partial class PurviewAccountCollections
+{
+    public string CollectionName { get; }
+
+    public virtual async Task<Response> GetCollectionAsync(RequestOptions options = null);
+    public virtual Response GetCollection(RequestOptions options = null);
+
+    public virtual async Task<Response> CreateOrUpdateCollectionAsync(RequestContent content, RequestOptions options = null);
+    public virtual Response CreateOrUpdateCollection(RequestContent content, RequestOptions options = null);
+}
+```
+
+If more than one parameter is marked with `"x-ms-parameter-resource-name": true`, then `autorest` will report an error.
