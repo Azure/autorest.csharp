@@ -177,7 +177,7 @@ public partial class PurviewAccountsClient
     public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken = null, RequestOptions options = null);
     public virtual Pageable<BinaryData> GetCollections(string skipToken = null, RequestOptions options = null);
 
-    public virtual PurviewAccountCollections GetCollectionsClient(string collectionName)
+    public virtual PurviewAccountCollections GetPurviewAccountCollections(string collectionName)
 }
 ```
 
