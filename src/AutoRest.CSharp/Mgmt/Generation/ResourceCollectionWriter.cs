@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -61,16 +62,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public void WriteCollection()
         {
             WriteUsings(_writer);
+            _writer.UseNamespace(typeof(IEnumerator).Namespace!);
+            _writer.UseNamespace(typeof(IEnumerable<>).Namespace!);
 
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{_resourceCollection.Description}");
                 _writer.Append($"{_resourceCollection.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
-                _writer.Line($"{typeof(ArmCollection)}");
+                _writer.Append($"{typeof(ArmCollection)}, IEnumerable<{_resource.ResourceName}>");
+                bool isPaging = _resourceCollection.ListMethods.First().PagingMethod != null;
+                var asyncEnum = isPaging ? $", IAsyncEnumerable<{_resource.ResourceName}>" : string.Empty;
+                _writer.Line($"{asyncEnum}");
                 using (_writer.Scope())
                 {
                     WriteFields(_writer, _restClient!);
                     WriteCollectionCtors(_writer, _restClient!, typeof(ArmResource), "parent");
+                    WriteEnumerableImpl(_writer);
                     //TODO: this is a workaround to allow resource collection to accept multiple parent resource types
                     //Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
                     if (_resourceCollection.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceCollection.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceCollection.GetValidResourceValue() == ResourceCollection.TenantResourceType)
@@ -81,6 +88,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteResourceOperations();
                     WriteRemainingMethods();
                     WriteBuilders();
+                }
+            }
+        }
+
+        private void WriteEnumerableImpl(CodeWriter writer)
+        {
+            bool isPaging = _resourceCollection.ListMethods.First().PagingMethod != null;
+            string value = isPaging ? string.Empty : ".Value";
+
+            _writer.Line($"IEnumerator<{_resource.ResourceName}> IEnumerable<{_resource.ResourceName}>.GetEnumerator()");
+            using (_writer.Scope())
+            {
+                _writer.Line($"return GetAll(){value}.GetEnumerator();");
+            }
+            _writer.Line();
+            _writer.Line($"IEnumerator IEnumerable.GetEnumerator()");
+            using (_writer.Scope())
+            {
+                _writer.Line($"return GetAll(){value}.GetEnumerator();");
+            }
+
+            if (isPaging)
+            {
+                _writer.Line();
+                _writer.Line($"IAsyncEnumerator<{_resource.ResourceName}> IAsyncEnumerable<{_resource.ResourceName}>.GetAsyncEnumerator(CancellationToken cancellationToken)");
+                using (_writer.Scope())
+                {
+                    _writer.Line($"return GetAllAsync(cancellationToken: cancellationToken){value}.GetAsyncEnumerator(cancellationToken);");
                 }
             }
         }
