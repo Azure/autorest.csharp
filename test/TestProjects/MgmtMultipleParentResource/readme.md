@@ -9,4 +9,5 @@ input-file: $(this-folder)/mgmtMultipleParentResource.json
 namespace: MgmtMultipleParentResource
 modelerfour:
   lenient-model-deduplication: true
+show-request-path: true
 ```

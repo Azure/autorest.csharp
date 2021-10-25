@@ -89,6 +89,9 @@ namespace MgmtSingleton
         /// <summary> Gets the parent resource of this resource. </summary>
         public ArmResource Parent { get; }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_GetDefault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<TenantParentSingleton>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -108,6 +111,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_GetDefault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TenantParentSingleton> Get(CancellationToken cancellationToken = default)
         {
@@ -143,6 +149,9 @@ namespace MgmtSingleton
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_Delete
         /// <summary> Delete an TenantParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -165,6 +174,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_Delete
         /// <summary> Delete an TenantParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -187,6 +199,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_CreateOrUpdate
         /// <param name="parameters"> The TenantParentSingleton to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -215,6 +230,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_CreateOrUpdate
         /// <param name="parameters"> The TenantParentSingleton to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -243,6 +261,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_Update
         /// <summary> Update an TenantParentSingleton. </summary>
         /// <param name="parameters"> The TenantParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -268,6 +289,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_Update
         /// <summary> Update an TenantParentSingleton. </summary>
         /// <param name="parameters"> The TenantParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -293,6 +317,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_PostTest
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -316,6 +343,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// ContextualPath: /providers/Microsoft.Billing/TenantParentSingleton/default
+        /// OperationId: TenantParentSingleton_PostTest
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>

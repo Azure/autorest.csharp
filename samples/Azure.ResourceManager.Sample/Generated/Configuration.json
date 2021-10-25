@@ -12,5 +12,6 @@
   "RequestPathToResourceName": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}": "VirtualMachineExtension",
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}": "VirtualMachineScaleSetVMExtension"
-  }
+  },
+  "ShowRequestPathAndOperationId": true
 }

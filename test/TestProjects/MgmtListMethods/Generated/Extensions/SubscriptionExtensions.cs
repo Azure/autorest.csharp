@@ -118,6 +118,9 @@ namespace MgmtListMethods
             return new QuotasRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription
         /// <summary> Lists the FakeParentWithAncestorWithNonResChWithLocDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -163,6 +166,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription
         /// <summary> Lists the FakeParentWithAncestorWithNonResChWithLocDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -236,6 +242,9 @@ namespace MgmtListMethods
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations
         /// <summary> Lists the NonResourceChildren for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -273,6 +282,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations
         /// <summary> Lists the NonResourceChildren for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -310,6 +322,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChes
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithNonResChes_ListBySubscription
         /// <summary> Lists the FakeParentWithAncestorWithNonResChDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -355,6 +370,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChes
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithNonResChes_ListBySubscription
         /// <summary> Lists the FakeParentWithAncestorWithNonResChDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -428,6 +446,9 @@ namespace MgmtListMethods
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithLocs_ListBySubscription
         /// <summary> Lists the FakeParentWithAncestorWithLocDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -473,6 +494,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithLocs_ListBySubscription
         /// <summary> Lists the FakeParentWithAncestorWithLocDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -546,6 +570,9 @@ namespace MgmtListMethods
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/fakeParentWithAncestorWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithLocs_ListTestByLocations
         /// <summary> Lists the FakeParentWithAncestorWithLocDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -598,6 +625,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/fakeParentWithAncestorWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestorWithLocs_ListTestByLocations
         /// <summary> Lists the FakeParentWithAncestorWithLocDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -650,6 +680,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestors
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestors_ListBySubscription
         /// <summary> Lists the FakeParentWithAncestorDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -695,6 +728,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestors
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: FakeParentWithAncestors_ListBySubscription
         /// <summary> Lists the FakeParentWithAncestorDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -768,6 +804,9 @@ namespace MgmtListMethods
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription
         /// <summary> Lists the ResGrpParentWithAncestorWithNonResChWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
@@ -814,6 +853,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription
         /// <summary> Lists the ResGrpParentWithAncestorWithNonResChWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
@@ -888,6 +930,9 @@ namespace MgmtListMethods
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestorWithNonResChes_ListBySubscription
         /// <summary> Lists the ResGrpParentWithAncestorWithNonResChes for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
@@ -934,6 +979,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestorWithNonResChes_ListBySubscription
         /// <summary> Lists the ResGrpParentWithAncestorWithNonResChes for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
@@ -1008,6 +1056,9 @@ namespace MgmtListMethods
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestorWithLocs_ListTest
         /// <summary> Lists the ResGrpParentWithAncestorWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1053,6 +1104,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestorWithLocs_ListTest
         /// <summary> Lists the ResGrpParentWithAncestorWithLocs for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1126,6 +1180,9 @@ namespace MgmtListMethods
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/locations/{location}/resGrpParentWithAncestorWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestorWithLocs_ListAll
         /// <summary> Lists the ResGrpParentWithAncestorWithNonResChWithLocDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1178,6 +1235,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/locations/{location}/resGrpParentWithAncestorWithLocs
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestorWithLocs_ListAll
         /// <summary> Lists the ResGrpParentWithAncestorWithNonResChWithLocDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1230,6 +1290,9 @@ namespace MgmtListMethods
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestors_NonPageableListBySubscription
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1255,6 +1318,9 @@ namespace MgmtListMethods
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResGrpParentWithAncestors_NonPageableListBySubscription
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1308,6 +1374,9 @@ namespace MgmtListMethods
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Quotas_Update
         /// <summary> Update quota for each VM family in workspace. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>
@@ -1345,6 +1414,9 @@ namespace MgmtListMethods
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Quotas_Update
         /// <summary> Update quota for each VM family in workspace. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>

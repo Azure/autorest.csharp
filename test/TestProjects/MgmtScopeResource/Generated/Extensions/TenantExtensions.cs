@@ -35,6 +35,9 @@ namespace MgmtScopeResource
             return new DeploymentsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
+        /// RequestPath: /providers/Microsoft.Resources/calculateTemplateHash
+        /// ContextualPath: /
+        /// OperationId: Deployments_CalculateTemplateHash
         /// <summary> Calculate the hash of the given template. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
@@ -67,6 +70,9 @@ namespace MgmtScopeResource
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /providers/Microsoft.Resources/calculateTemplateHash
+        /// ContextualPath: /
+        /// OperationId: Deployments_CalculateTemplateHash
         /// <summary> Calculate the hash of the given template. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>

@@ -13,4 +13,5 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/AzureResource.json
 namespace: SupersetFlattenInheritance
+show-request-path: true
 ```

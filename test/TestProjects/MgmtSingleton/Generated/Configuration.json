@@ -12,5 +12,6 @@
   "skip-csproj-packagereference": true,
   "RequestPathToSingletonResource": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2": "singletonResources2/default"
-  }
+  },
+  "ShowRequestPathAndOperationId": true
 }

@@ -83,6 +83,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
+        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
+        /// OperationId: TenantParents_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<TenantParent>> GetAsync(CancellationToken cancellationToken = default)
@@ -103,6 +106,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
+        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
+        /// OperationId: TenantParents_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TenantParent> Get(CancellationToken cancellationToken = default)

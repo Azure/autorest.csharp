@@ -84,6 +84,9 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{linkId}
+        /// ContextualPath: /{linkId}
+        /// OperationId: ResourceLinks_Get
         /// <summary> Gets a resource link with the specified ID. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ResourceLink>> GetAsync(CancellationToken cancellationToken = default)
@@ -104,6 +107,9 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{linkId}
+        /// ContextualPath: /{linkId}
+        /// OperationId: ResourceLinks_Get
         /// <summary> Gets a resource link with the specified ID. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceLink> Get(CancellationToken cancellationToken = default)
@@ -140,6 +146,9 @@ namespace MgmtScopeResource
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
+        /// RequestPath: /{linkId}
+        /// ContextualPath: /{linkId}
+        /// OperationId: ResourceLinks_Delete
         /// <summary> Deletes a resource link with the specified ID. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -162,6 +171,9 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{linkId}
+        /// ContextualPath: /{linkId}
+        /// OperationId: ResourceLinks_Delete
         /// <summary> Deletes a resource link with the specified ID. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

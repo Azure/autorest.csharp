@@ -83,6 +83,9 @@ namespace SubscriptionExtensions
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// OperationId: Toasters_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Toaster>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -102,6 +105,9 @@ namespace SubscriptionExtensions
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// OperationId: Toasters_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Toaster> Get(CancellationToken cancellationToken = default)
         {

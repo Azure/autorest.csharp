@@ -83,6 +83,9 @@ namespace SupersetInheritance
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}
+        /// OperationId: SupersetModel1s_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SupersetModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -102,6 +105,9 @@ namespace SupersetInheritance
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}
+        /// OperationId: SupersetModel1s_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SupersetModel1> Get(CancellationToken cancellationToken = default)
         {

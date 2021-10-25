@@ -9,4 +9,5 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/TenantOnly.json
 namespace: Azure.TenantOnly
+show-request-path: true
 ```

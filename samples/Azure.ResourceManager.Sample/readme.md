@@ -10,11 +10,12 @@ namespace: Azure.ResourceManager.Sample
 model-namespace: false
 public-clients: false
 head-as-boolean: false
+modelerfour:
+  lenient-model-deduplication: true
+show-request-path: true
 request-path-to-resource-name:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}: VirtualMachineExtension
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}: VirtualMachineScaleSetVMExtension
-modelerfour:
-  lenient-model-deduplication: true
 directive:
   - rename-model:
       from: SshPublicKey

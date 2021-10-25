@@ -41,6 +41,9 @@ namespace SubscriptionExtensions
 
         // Container level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Toasters_CreateOrUpdate
         /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
@@ -75,6 +78,9 @@ namespace SubscriptionExtensions
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Toasters_CreateOrUpdate
         /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
@@ -109,6 +115,9 @@ namespace SubscriptionExtensions
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Toasters_Get
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
@@ -135,6 +144,9 @@ namespace SubscriptionExtensions
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Toasters_Get
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>

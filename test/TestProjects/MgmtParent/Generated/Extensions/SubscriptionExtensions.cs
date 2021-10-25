@@ -36,6 +36,9 @@ namespace MgmtParent
             return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: AvailabilitySets_ListBySubscription
         /// <summary> Lists the AvailabilitySets for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
@@ -82,6 +85,9 @@ namespace MgmtParent
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: AvailabilitySets_ListBySubscription
         /// <summary> Lists the AvailabilitySets for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>

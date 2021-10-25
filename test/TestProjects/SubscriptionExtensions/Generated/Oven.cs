@@ -83,6 +83,9 @@ namespace SubscriptionExtensions
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// OperationId: Ovens_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Oven>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -102,6 +105,9 @@ namespace SubscriptionExtensions
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// OperationId: Ovens_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Oven> Get(CancellationToken cancellationToken = default)
         {

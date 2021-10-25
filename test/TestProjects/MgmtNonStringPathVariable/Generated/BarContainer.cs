@@ -41,6 +41,9 @@ namespace MgmtNonStringPathVariable
 
         // Container level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Bars_Create
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the bar. </param>
         /// <param name="body"> The Bar to use. </param>
@@ -71,6 +74,9 @@ namespace MgmtNonStringPathVariable
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Bars_Create
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the bar. </param>
         /// <param name="body"> The Bar to use. </param>
@@ -101,6 +107,9 @@ namespace MgmtNonStringPathVariable
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Bars_Get
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -122,6 +131,9 @@ namespace MgmtNonStringPathVariable
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Bars_Get
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

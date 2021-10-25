@@ -16,6 +16,8 @@ modelerfour:
   lenient-model-deduplication: true
   seal-single-value-enum-by-default: true
 
+show-request-path: true
+
 directive:
   - rename-model:
       from: BlobServiceProperties

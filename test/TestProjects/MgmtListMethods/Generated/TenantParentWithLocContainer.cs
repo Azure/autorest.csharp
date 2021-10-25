@@ -42,6 +42,9 @@ namespace MgmtListMethods
 
         // Container level operations.
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// OperationId: TenantParentWithLocs_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -76,6 +79,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// OperationId: TenantParentWithLocs_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -110,6 +116,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// OperationId: TenantParentWithLocs_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -137,6 +146,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// OperationId: TenantParentWithLocs_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -268,6 +280,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs
+        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// OperationId: TenantParentWithLocs_List
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TenantParentWithLoc" /> that may take multiple service requests to iterate over. </returns>
@@ -306,6 +321,9 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs
+        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// OperationId: TenantParentWithLocs_List
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TenantParentWithLoc" /> that may take multiple service requests to iterate over. </returns>

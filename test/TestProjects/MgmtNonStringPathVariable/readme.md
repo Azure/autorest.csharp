@@ -7,4 +7,5 @@ azure-arm: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/mgmtNonStringPathVariable.json
 namespace: MgmtNonStringPathVariable
+show-request-path: true
 ```

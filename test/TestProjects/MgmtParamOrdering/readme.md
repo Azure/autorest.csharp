@@ -11,4 +11,5 @@ input-file: $(this-folder)/MgmtParamOrdering.json
 namespace: MgmtParamOrdering
 modelerfour:
   lenient-model-deduplication: true
+show-request-path: true
 ```

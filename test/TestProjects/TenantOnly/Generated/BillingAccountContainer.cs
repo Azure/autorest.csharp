@@ -41,6 +41,9 @@ namespace TenantOnly
 
         // Container level operations.
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_Create
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -75,6 +78,9 @@ namespace TenantOnly
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_Create
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -109,6 +115,9 @@ namespace TenantOnly
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_Get
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
@@ -137,6 +146,9 @@ namespace TenantOnly
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_Get
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>

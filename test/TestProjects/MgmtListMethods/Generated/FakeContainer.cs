@@ -43,6 +43,9 @@ namespace MgmtListMethods
 
         // Container level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Fakes_CreateOrUpdate
         /// <summary> Create or update an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
@@ -77,6 +80,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Fakes_CreateOrUpdate
         /// <summary> Create or update an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
@@ -111,6 +117,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Fakes_Get
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
@@ -139,6 +148,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Fakes_Get
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
@@ -275,6 +287,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Fakes_List
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
@@ -320,6 +335,9 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Fakes_List
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>

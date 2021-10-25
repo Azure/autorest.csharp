@@ -83,6 +83,9 @@ namespace TenantOnly
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// OperationId: BillingAccounts_Get
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -104,6 +107,9 @@ namespace TenantOnly
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// OperationId: BillingAccounts_Get
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

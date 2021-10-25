@@ -43,6 +43,9 @@ namespace MgmtListMethods
 
         // Container level operations.
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// ContextualPath: /
+        /// OperationId: TenantTests_Create
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -77,6 +80,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// ContextualPath: /
+        /// OperationId: TenantTests_Create
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -111,6 +117,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// ContextualPath: /
+        /// OperationId: TenantTests_Get
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
@@ -139,6 +148,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// ContextualPath: /
+        /// OperationId: TenantTests_Get
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
@@ -275,6 +287,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests
+        /// ContextualPath: /
+        /// OperationId: TenantTests_List
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
@@ -320,6 +335,9 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests
+        /// ContextualPath: /
+        /// OperationId: TenantTests_List
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>

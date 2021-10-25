@@ -11,6 +11,7 @@ input-file:
   - $(this-folder)/Deployments.json
   - $(this-folder)/Links.json
 namespace: MgmtScopeResource
+show-request-path: true
 request-path-to-resource-data:
   # model of this has id, type and name, but its type has the type of `object` instead of `string`
   /{linkId}: ResourceLink

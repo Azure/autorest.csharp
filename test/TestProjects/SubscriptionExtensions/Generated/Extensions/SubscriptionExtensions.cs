@@ -36,6 +36,9 @@ namespace SubscriptionExtensions
             return new OvensRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Ovens_ListAll
         /// <summary> Lists the Ovens for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -82,6 +85,9 @@ namespace SubscriptionExtensions
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Ovens_ListAll
         /// <summary> Lists the Ovens for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>

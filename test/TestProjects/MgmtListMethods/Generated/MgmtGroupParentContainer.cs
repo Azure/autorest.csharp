@@ -43,6 +43,9 @@ namespace MgmtListMethods
 
         // Container level operations.
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGroupParents_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -77,6 +80,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGroupParents_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -111,6 +117,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGroupParents_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -138,6 +147,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGroupParents_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -269,6 +281,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGroupParents_List
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="MgmtGroupParent" /> that may take multiple service requests to iterate over. </returns>
@@ -307,6 +322,9 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGroupParents_List
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="MgmtGroupParent" /> that may take multiple service requests to iterate over. </returns>

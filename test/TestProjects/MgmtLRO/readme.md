@@ -7,4 +7,5 @@ azure-arm: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/mgmtLRO.json
 namespace: MgmtLRO
+show-request-path: true
 ```

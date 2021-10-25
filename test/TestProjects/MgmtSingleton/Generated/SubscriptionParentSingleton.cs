@@ -89,6 +89,9 @@ namespace MgmtSingleton
         /// <summary> Gets the parent resource of this resource. </summary>
         public ArmResource Parent { get; }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_GetDefault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SubscriptionParentSingleton>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -108,6 +111,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_GetDefault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubscriptionParentSingleton> Get(CancellationToken cancellationToken = default)
         {
@@ -143,6 +149,9 @@ namespace MgmtSingleton
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_Delete
         /// <summary> Delete a SubscriptionParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -165,6 +174,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_Delete
         /// <summary> Delete a SubscriptionParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -187,6 +199,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_CreateOrUpdate
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -215,6 +230,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_CreateOrUpdate
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -243,6 +261,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_Update
         /// <summary> Update an SubscriptionParentSingleton. </summary>
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -268,6 +289,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_Update
         /// <summary> Update an SubscriptionParentSingleton. </summary>
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -293,6 +317,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_PostTest
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -316,6 +343,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
+        /// OperationId: SubscriptionParentSingleton_PostTest
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>

@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? requestPathToSingletonResource = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
+            JsonElement? showRequestPathAndOperationId = default,
             JsonElement? resourceModelRequiresType = default,
             JsonElement? resourceModelRequiresName = default)
         {
@@ -44,10 +45,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupsToOmit = operationGroupsToOmit;
             RequestPathIsNonResource = requestPathIsNonResource;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
+            ShowRequestPathAndOperationId = !IsValidJsonElement(showRequestPathAndOperationId) ? false : Convert.ToBoolean(showRequestPathAndOperationId.ToString());
             DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
             DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
         }
 
+        public bool ShowRequestPathAndOperationId { get; }
         /// <summary>
         /// Will the resource model detection require type property? Defaults to true
         /// </summary>
@@ -81,6 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
+                showRequestPathAndOperationId: autoRest.GetValue<JsonElement?>("show-request-path").GetAwaiter().GetResult(),
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult());
         }
@@ -98,6 +102,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
+            if (ShowRequestPathAndOperationId)
+                writer.WriteBoolean(nameof(ShowRequestPathAndOperationId), ShowRequestPathAndOperationId);
             if (!DoesResourceModelRequireType)
                 writer.WriteBoolean(nameof(DoesResourceModelRequireType), DoesResourceModelRequireType);
             if (!DoesResourceModelRequireName)
@@ -125,6 +131,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 : new string[0];
 
             root.TryGetProperty("ArmCore", out var isArmCore);
+            root.TryGetProperty(nameof(ShowRequestPathAndOperationId), out var showRequestPathAndOperationId);
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
 
@@ -139,6 +146,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
+                showRequestPathAndOperationId: showRequestPathAndOperationId,
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName);
         }

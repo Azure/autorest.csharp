@@ -42,6 +42,9 @@ namespace MgmtScopeResource
 
         // Container level operations.
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// ContextualPath: /{linkId}
+        /// OperationId: Deployments_CreateOrUpdateAtScope
         /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
@@ -76,6 +79,9 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// ContextualPath: /{linkId}
+        /// OperationId: Deployments_CreateOrUpdateAtScope
         /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
@@ -110,6 +116,9 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// ContextualPath: /{linkId}
+        /// OperationId: Deployments_GetAtScope
         /// <summary> Gets a deployment. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -137,6 +146,9 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// ContextualPath: /{linkId}
+        /// OperationId: Deployments_GetAtScope
         /// <summary> Gets a deployment. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -268,6 +280,9 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/
+        /// ContextualPath: /{scope}
+        /// OperationId: Deployments_ListAtScope
         /// <summary> Get all the deployments at the given scope. </summary>
         /// <param name="filter"> The filter to apply on the operation. For example, you can use $filter=provisioningState eq &apos;{state}&apos;. </param>
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
@@ -308,6 +323,9 @@ namespace MgmtScopeResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/
+        /// ContextualPath: /{scope}
+        /// OperationId: Deployments_ListAtScope
         /// <summary> Get all the deployments at the given scope. </summary>
         /// <param name="filter"> The filter to apply on the operation. For example, you can use $filter=provisioningState eq &apos;{state}&apos;. </param>
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>

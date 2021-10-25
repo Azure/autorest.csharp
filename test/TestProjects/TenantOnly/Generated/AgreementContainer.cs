@@ -39,6 +39,9 @@ namespace TenantOnly
 
         // Container level operations.
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// OperationId: Agreements_Get
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
@@ -67,6 +70,9 @@ namespace TenantOnly
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// OperationId: Agreements_Get
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>

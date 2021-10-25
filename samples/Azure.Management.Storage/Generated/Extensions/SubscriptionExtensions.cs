@@ -37,6 +37,9 @@ namespace Azure.Management.Storage
             return new UsagesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Skus_List
         /// <summary> Lists the SkuInformations for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -67,6 +70,9 @@ namespace Azure.Management.Storage
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Skus_List
         /// <summary> Lists the SkuInformations for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -97,6 +103,9 @@ namespace Azure.Management.Storage
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: StorageAccounts_CheckNameAvailability
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -129,6 +138,9 @@ namespace Azure.Management.Storage
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: StorageAccounts_CheckNameAvailability
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
@@ -161,6 +173,9 @@ namespace Azure.Management.Storage
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: StorageAccounts_List
         /// <summary> Lists the StorageAccounts for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -206,6 +221,9 @@ namespace Azure.Management.Storage
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: StorageAccounts_List
         /// <summary> Lists the StorageAccounts for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -279,6 +297,9 @@ namespace Azure.Management.Storage
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Usages_ListByLocation
         /// <summary> Lists the Usages for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
@@ -316,6 +337,9 @@ namespace Azure.Management.Storage
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Usages_ListByLocation
         /// <summary> Lists the Usages for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>

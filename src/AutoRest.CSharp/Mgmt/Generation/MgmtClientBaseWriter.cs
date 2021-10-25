@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual string ContextProperty => "";
         protected BuildContext<MgmtOutputLibrary> Context { get; }
         protected MgmtConfiguration Config => Context.Configuration.MgmtConfiguration;
+        protected bool ShowRequestPathAndOperationId => Config.ShowRequestPathAndOperationId;
 
         private MgmtTypeProvider _provider;
         protected virtual MgmtTypeProvider This => _provider;
@@ -145,9 +146,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return isInheritedMethod ? "override" : GetVirtual(isVirtual);
         }
 
-        protected virtual void WriteMethod(MgmtClientOperation clientOperation, bool async)
+        private void WriteRequestPathAndOperationId(MgmtClientOperation clientOperation)
         {
-            // we need to identify this operation belongs to which category: NormalMethod, LROMethod or PagingMethod
+            foreach (var operation in clientOperation)
+            {
+                _writer.Line($"/// RequestPath: {operation.RequestPath}");
+                _writer.Line($"/// ContextualPath: {operation.ContextualPath}");
+                _writer.Line($"/// OperationId: {operation.OperationId}");
+            }
+        }
+
+        protected void WriteMethod(MgmtClientOperation clientOperation, bool async)
+        {
+            // we need to identify this operation belongs to which category: NormalMethod, NormalListMethod, LROMethod or PagingMethod
             if (clientOperation.IsLongRunningOperation())
             {
                 // this is a long-running operation
@@ -174,6 +185,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WritePagingMethod(MgmtClientOperation clientOperation, bool async)
         {
             _writer.Line();
+            // write the extra information about the request path, operation id, etc
+            if (ShowRequestPathAndOperationId)
+                WriteRequestPathAndOperationId(clientOperation);
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
             WritePagingMethod(clientOperation, operationMappings, parameterMappings, methodParameters, clientOperation.Name, async);
@@ -343,6 +357,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteNormalMethod(MgmtClientOperation clientOperation, bool async, bool shouldThrowExceptionWhenNull = false)
         {
             _writer.Line();
+            // write the extra information about the request path, operation id, etc
+            if (ShowRequestPathAndOperationId)
+                WriteRequestPathAndOperationId(clientOperation);
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
             WriteNormalMethod(clientOperation, operationMappings, parameterMappings, methodParameters, clientOperation.Name, async, shouldThrowExceptionWhenNull);
@@ -379,6 +396,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteNormalListMethod(MgmtClientOperation clientOperation, CSharpType itemType, bool async)
         {
             _writer.Line();
+            // write the extra information about the request path, operation id, etc
+            if (ShowRequestPathAndOperationId)
+                WriteRequestPathAndOperationId(clientOperation);
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
             WriteNormalListMethod(clientOperation, operationMappings, parameterMappings, methodParameters, itemType, clientOperation.Name, async);
@@ -505,6 +525,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteLROMethod(MgmtClientOperation clientOperation, bool async)
         {
             _writer.Line();
+            // write the extra information about the request path, operation id, etc
+            if (ShowRequestPathAndOperationId)
+                WriteRequestPathAndOperationId(clientOperation);
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
 
             WriteLROMethod(clientOperation, operationMappings, parameterMappings, methodParameters, clientOperation.Name, async);

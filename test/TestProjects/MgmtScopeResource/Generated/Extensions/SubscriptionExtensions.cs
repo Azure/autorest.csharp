@@ -25,6 +25,9 @@ namespace MgmtScopeResource
             return new ResourceLinksRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResourceLinks_ListAtSubscription
         /// <summary> Lists the ResourceLinkDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
@@ -71,6 +74,9 @@ namespace MgmtScopeResource
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ResourceLinks_ListAtSubscription
         /// <summary> Lists the ResourceLinkDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>

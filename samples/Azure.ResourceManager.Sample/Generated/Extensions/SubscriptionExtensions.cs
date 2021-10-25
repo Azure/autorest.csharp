@@ -88,6 +88,9 @@ namespace Azure.ResourceManager.Sample
             return new LogAnalyticsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: AvailabilitySets_ListBySubscription
         /// <summary> Lists the AvailabilitySets for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
@@ -134,6 +137,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: AvailabilitySets_ListBySubscription
         /// <summary> Lists the AvailabilitySets for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
@@ -208,6 +214,9 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ProximityPlacementGroups_ListBySubscription
         /// <summary> Lists the ProximityPlacementGroups for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -253,6 +262,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: ProximityPlacementGroups_ListBySubscription
         /// <summary> Lists the ProximityPlacementGroups for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -326,6 +338,9 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/hostGroups
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: DedicatedHostGroups_ListBySubscription
         /// <summary> Lists the DedicatedHostGroups for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -371,6 +386,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/hostGroups
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: DedicatedHostGroups_ListBySubscription
         /// <summary> Lists the DedicatedHostGroups for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -444,6 +462,9 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/sshPublicKeys
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: SshPublicKeys_ListBySubscription
         /// <summary> Lists the SshPublicKeys for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -489,6 +510,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/sshPublicKeys
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: SshPublicKeys_ListBySubscription
         /// <summary> Lists the SshPublicKeys for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -562,6 +586,9 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_Get
         /// <summary> Gets a virtual machine image. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -614,6 +641,9 @@ namespace Azure.ResourceManager.Sample
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_Get
         /// <summary> Gets a virtual machine image. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -666,6 +696,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_List
         /// <summary> Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -716,6 +749,9 @@ namespace Azure.ResourceManager.Sample
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_List
         /// <summary> Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -766,6 +802,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_ListOffers
         /// <summary> Gets a list of virtual machine image offers for the specified location and publisher. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -803,6 +842,9 @@ namespace Azure.ResourceManager.Sample
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_ListOffers
         /// <summary> Gets a list of virtual machine image offers for the specified location and publisher. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -840,6 +882,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_ListPublishers
         /// <summary> Gets a list of virtual machine image publishers for the specified Azure location. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -872,6 +917,9 @@ namespace Azure.ResourceManager.Sample
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_ListPublishers
         /// <summary> Gets a list of virtual machine image publishers for the specified Azure location. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -904,6 +952,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_ListSkus
         /// <summary> Gets a list of virtual machine image SKUs for the specified location, publisher, and offer. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -946,6 +997,9 @@ namespace Azure.ResourceManager.Sample
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineImages_ListSkus
         /// <summary> Gets a list of virtual machine image SKUs for the specified location, publisher, and offer. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -988,6 +1042,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Usage_List
         /// <summary> Lists the Usages for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
@@ -1040,6 +1097,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Usage_List
         /// <summary> Lists the Usages for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
@@ -1092,6 +1152,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachines_ListByLocation
         /// <summary> Lists the VirtualMachineDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1144,6 +1207,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachines_ListByLocation
         /// <summary> Lists the VirtualMachineDatas for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -1224,6 +1290,9 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachines_ListAll
         /// <summary> Lists the VirtualMachines for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -1270,6 +1339,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachines_ListAll
         /// <summary> Lists the VirtualMachines for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -1316,6 +1388,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/vmSizes
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineSizes_List
         /// <summary> Lists the VirtualMachineSizes for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -1353,6 +1428,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/vmSizes
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineSizes_List
         /// <summary> Lists the VirtualMachineSizes for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -1390,6 +1468,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/images
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Images_List
         /// <summary> Lists the Images for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1435,6 +1516,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/images
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: Images_List
         /// <summary> Lists the Images for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1508,6 +1592,9 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineScaleSets_ListAll
         /// <summary> Lists the VirtualMachineScaleSets for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1553,6 +1640,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineScaleSets_ListAll
         /// <summary> Lists the VirtualMachineScaleSets for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1626,6 +1716,9 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: LogAnalytics_ExportRequestRateByInterval
         /// <summary> Export logs that show Api requests made by this subscription in the given time window to show throttling activities. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -1667,6 +1760,9 @@ namespace Azure.ResourceManager.Sample
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: LogAnalytics_ExportRequestRateByInterval
         /// <summary> Export logs that show Api requests made by this subscription in the given time window to show throttling activities. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -1708,6 +1804,9 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: LogAnalytics_ExportThrottledRequests
         /// <summary> Export logs that show total throttled Api requests for this subscription in the given time window. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -1749,6 +1848,9 @@ namespace Azure.ResourceManager.Sample
             ).ConfigureAwait(false);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: LogAnalytics_ExportThrottledRequests
         /// <summary> Export logs that show total throttled Api requests for this subscription in the given time window. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>

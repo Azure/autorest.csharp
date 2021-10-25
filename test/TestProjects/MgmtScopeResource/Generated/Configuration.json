@@ -19,5 +19,6 @@
   },
   "RequestPathToResourceData": {
     "/{linkId}": "ResourceLink"
-  }
+  },
+  "ShowRequestPathAndOperationId": true
 }
