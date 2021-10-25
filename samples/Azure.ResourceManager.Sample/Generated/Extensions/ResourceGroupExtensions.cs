@@ -13,72 +13,72 @@ namespace Azure.ResourceManager.Sample
     public static partial class ResourceGroupExtensions
     {
         #region AvailabilitySet
-        /// <summary> Gets an object representing a AvailabilitySetContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a AvailabilitySetCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetContainer" /> object. </returns>
-        public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="AvailabilitySetCollection" /> object. </returns>
+        public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
         {
-            return new AvailabilitySetContainer(resourceGroup);
+            return new AvailabilitySetCollection(resourceGroup);
         }
         #endregion
 
         #region ProximityPlacementGroup
-        /// <summary> Gets an object representing a ProximityPlacementGroupContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ProximityPlacementGroupCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ProximityPlacementGroupContainer" /> object. </returns>
-        public static ProximityPlacementGroupContainer GetProximityPlacementGroups(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="ProximityPlacementGroupCollection" /> object. </returns>
+        public static ProximityPlacementGroupCollection GetProximityPlacementGroups(this ResourceGroup resourceGroup)
         {
-            return new ProximityPlacementGroupContainer(resourceGroup);
+            return new ProximityPlacementGroupCollection(resourceGroup);
         }
         #endregion
 
         #region DedicatedHostGroup
-        /// <summary> Gets an object representing a DedicatedHostGroupContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a DedicatedHostGroupCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DedicatedHostGroupContainer" /> object. </returns>
-        public static DedicatedHostGroupContainer GetDedicatedHostGroups(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="DedicatedHostGroupCollection" /> object. </returns>
+        public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroup resourceGroup)
         {
-            return new DedicatedHostGroupContainer(resourceGroup);
+            return new DedicatedHostGroupCollection(resourceGroup);
         }
         #endregion
 
         #region SshPublicKey
-        /// <summary> Gets an object representing a SshPublicKeyContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SshPublicKeyCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SshPublicKeyContainer" /> object. </returns>
-        public static SshPublicKeyContainer GetSshPublicKeys(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="SshPublicKeyCollection" /> object. </returns>
+        public static SshPublicKeyCollection GetSshPublicKeys(this ResourceGroup resourceGroup)
         {
-            return new SshPublicKeyContainer(resourceGroup);
+            return new SshPublicKeyCollection(resourceGroup);
         }
         #endregion
 
         #region VirtualMachine
-        /// <summary> Gets an object representing a VirtualMachineContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a VirtualMachineCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="VirtualMachineContainer" /> object. </returns>
-        public static VirtualMachineContainer GetVirtualMachines(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="VirtualMachineCollection" /> object. </returns>
+        public static VirtualMachineCollection GetVirtualMachines(this ResourceGroup resourceGroup)
         {
-            return new VirtualMachineContainer(resourceGroup);
+            return new VirtualMachineCollection(resourceGroup);
         }
         #endregion
 
         #region Image
-        /// <summary> Gets an object representing a ImageContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ImageCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ImageContainer" /> object. </returns>
-        public static ImageContainer GetImages(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="ImageCollection" /> object. </returns>
+        public static ImageCollection GetImages(this ResourceGroup resourceGroup)
         {
-            return new ImageContainer(resourceGroup);
+            return new ImageCollection(resourceGroup);
         }
         #endregion
 
         #region VirtualMachineScaleSet
-        /// <summary> Gets an object representing a VirtualMachineScaleSetContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a VirtualMachineScaleSetCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetContainer" /> object. </returns>
-        public static VirtualMachineScaleSetContainer GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetCollection" /> object. </returns>
+        public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)
         {
-            return new VirtualMachineScaleSetContainer(resourceGroup);
+            return new VirtualMachineScaleSetCollection(resourceGroup);
         }
         #endregion
     }

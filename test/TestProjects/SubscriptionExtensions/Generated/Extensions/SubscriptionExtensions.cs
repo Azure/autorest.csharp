@@ -22,12 +22,12 @@ namespace SubscriptionExtensions
     public static partial class SubscriptionExtensions
     {
         #region Toaster
-        /// <summary> Gets an object representing a ToasterContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ToasterCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ToasterContainer" /> object. </returns>
-        public static ToasterContainer GetToasters(this Subscription subscription)
+        /// <returns> Returns a <see cref="ToasterCollection" /> object. </returns>
+        public static ToasterCollection GetToasters(this Subscription subscription)
         {
-            return new ToasterContainer(subscription);
+            return new ToasterCollection(subscription);
         }
         #endregion
 

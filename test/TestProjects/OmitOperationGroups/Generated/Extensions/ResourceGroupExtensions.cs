@@ -13,22 +13,22 @@ namespace OmitOperationGroups
     public static partial class ResourceGroupExtensions
     {
         #region Model2
-        /// <summary> Gets an object representing a Model2Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a Model2Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="Model2Container" /> object. </returns>
-        public static Model2Container GetModel2s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="Model2Collection" /> object. </returns>
+        public static Model2Collection GetModel2s(this ResourceGroup resourceGroup)
         {
-            return new Model2Container(resourceGroup);
+            return new Model2Collection(resourceGroup);
         }
         #endregion
 
         #region Model5
-        /// <summary> Gets an object representing a Model5Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a Model5Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="Model5Container" /> object. </returns>
-        public static Model5Container GetModel5s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="Model5Collection" /> object. </returns>
+        public static Model5Collection GetModel5s(this ResourceGroup resourceGroup)
         {
-            return new Model5Container(resourceGroup);
+            return new Model5Collection(resourceGroup);
         }
         #endregion
     }

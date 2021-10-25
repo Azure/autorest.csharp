@@ -21,102 +21,102 @@ namespace SupersetFlattenInheritance
     public static partial class ResourceGroupExtensions
     {
         #region CustomModel1
-        /// <summary> Gets an object representing a CustomModel1Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a CustomModel1Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="CustomModel1Container" /> object. </returns>
-        public static CustomModel1Container GetCustomModel1s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="CustomModel1Collection" /> object. </returns>
+        public static CustomModel1Collection GetCustomModel1s(this ResourceGroup resourceGroup)
         {
-            return new CustomModel1Container(resourceGroup);
+            return new CustomModel1Collection(resourceGroup);
         }
         #endregion
 
         #region CustomModel2
-        /// <summary> Gets an object representing a CustomModel2Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a CustomModel2Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="CustomModel2Container" /> object. </returns>
-        public static CustomModel2Container GetCustomModel2s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="CustomModel2Collection" /> object. </returns>
+        public static CustomModel2Collection GetCustomModel2s(this ResourceGroup resourceGroup)
         {
-            return new CustomModel2Container(resourceGroup);
+            return new CustomModel2Collection(resourceGroup);
         }
         #endregion
 
         #region SubResourceModel1
-        /// <summary> Gets an object representing a SubResourceModel1Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SubResourceModel1Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SubResourceModel1Container" /> object. </returns>
-        public static SubResourceModel1Container GetSubResourceModel1s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="SubResourceModel1Collection" /> object. </returns>
+        public static SubResourceModel1Collection GetSubResourceModel1s(this ResourceGroup resourceGroup)
         {
-            return new SubResourceModel1Container(resourceGroup);
+            return new SubResourceModel1Collection(resourceGroup);
         }
         #endregion
 
         #region SubResourceModel2
-        /// <summary> Gets an object representing a SubResourceModel2Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SubResourceModel2Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SubResourceModel2Container" /> object. </returns>
-        public static SubResourceModel2Container GetSubResourceModel2s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="SubResourceModel2Collection" /> object. </returns>
+        public static SubResourceModel2Collection GetSubResourceModel2s(this ResourceGroup resourceGroup)
         {
-            return new SubResourceModel2Container(resourceGroup);
+            return new SubResourceModel2Collection(resourceGroup);
         }
         #endregion
 
         #region WritableSubResourceModel1
-        /// <summary> Gets an object representing a WritableSubResourceModel1Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a WritableSubResourceModel1Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="WritableSubResourceModel1Container" /> object. </returns>
-        public static WritableSubResourceModel1Container GetWritableSubResourceModel1s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="WritableSubResourceModel1Collection" /> object. </returns>
+        public static WritableSubResourceModel1Collection GetWritableSubResourceModel1s(this ResourceGroup resourceGroup)
         {
-            return new WritableSubResourceModel1Container(resourceGroup);
+            return new WritableSubResourceModel1Collection(resourceGroup);
         }
         #endregion
 
         #region WritableSubResourceModel2
-        /// <summary> Gets an object representing a WritableSubResourceModel2Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a WritableSubResourceModel2Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="WritableSubResourceModel2Container" /> object. </returns>
-        public static WritableSubResourceModel2Container GetWritableSubResourceModel2s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="WritableSubResourceModel2Collection" /> object. </returns>
+        public static WritableSubResourceModel2Collection GetWritableSubResourceModel2s(this ResourceGroup resourceGroup)
         {
-            return new WritableSubResourceModel2Container(resourceGroup);
+            return new WritableSubResourceModel2Collection(resourceGroup);
         }
         #endregion
 
         #region ResourceModel1
-        /// <summary> Gets an object representing a ResourceModel1Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ResourceModel1Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResourceModel1Container" /> object. </returns>
-        public static ResourceModel1Container GetResourceModel1s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="ResourceModel1Collection" /> object. </returns>
+        public static ResourceModel1Collection GetResourceModel1s(this ResourceGroup resourceGroup)
         {
-            return new ResourceModel1Container(resourceGroup);
+            return new ResourceModel1Collection(resourceGroup);
         }
         #endregion
 
         #region ResourceModel2
-        /// <summary> Gets an object representing a ResourceModel2Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ResourceModel2Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResourceModel2Container" /> object. </returns>
-        public static ResourceModel2Container GetResourceModel2s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="ResourceModel2Collection" /> object. </returns>
+        public static ResourceModel2Collection GetResourceModel2s(this ResourceGroup resourceGroup)
         {
-            return new ResourceModel2Container(resourceGroup);
+            return new ResourceModel2Collection(resourceGroup);
         }
         #endregion
 
         #region TrackedResourceModel1
-        /// <summary> Gets an object representing a TrackedResourceModel1Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a TrackedResourceModel1Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="TrackedResourceModel1Container" /> object. </returns>
-        public static TrackedResourceModel1Container GetTrackedResourceModel1s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="TrackedResourceModel1Collection" /> object. </returns>
+        public static TrackedResourceModel1Collection GetTrackedResourceModel1s(this ResourceGroup resourceGroup)
         {
-            return new TrackedResourceModel1Container(resourceGroup);
+            return new TrackedResourceModel1Collection(resourceGroup);
         }
         #endregion
 
         #region TrackedResourceModel2
-        /// <summary> Gets an object representing a TrackedResourceModel2Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a TrackedResourceModel2Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="TrackedResourceModel2Container" /> object. </returns>
-        public static TrackedResourceModel2Container GetTrackedResourceModel2s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="TrackedResourceModel2Collection" /> object. </returns>
+        public static TrackedResourceModel2Collection GetTrackedResourceModel2s(this ResourceGroup resourceGroup)
         {
-            return new TrackedResourceModel2Container(resourceGroup);
+            return new TrackedResourceModel2Collection(resourceGroup);
         }
         #endregion
 

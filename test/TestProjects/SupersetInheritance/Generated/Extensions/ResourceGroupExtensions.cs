@@ -21,22 +21,22 @@ namespace SupersetInheritance
     public static partial class ResourceGroupExtensions
     {
         #region SupersetModel1
-        /// <summary> Gets an object representing a SupersetModel1Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SupersetModel1Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SupersetModel1Container" /> object. </returns>
-        public static SupersetModel1Container GetSupersetModel1s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="SupersetModel1Collection" /> object. </returns>
+        public static SupersetModel1Collection GetSupersetModel1s(this ResourceGroup resourceGroup)
         {
-            return new SupersetModel1Container(resourceGroup);
+            return new SupersetModel1Collection(resourceGroup);
         }
         #endregion
 
         #region SupersetModel4
-        /// <summary> Gets an object representing a SupersetModel4Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SupersetModel4Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SupersetModel4Container" /> object. </returns>
-        public static SupersetModel4Container GetSupersetModel4s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="SupersetModel4Collection" /> object. </returns>
+        public static SupersetModel4Collection GetSupersetModel4s(this ResourceGroup resourceGroup)
         {
-            return new SupersetModel4Container(resourceGroup);
+            return new SupersetModel4Collection(resourceGroup);
         }
         #endregion
 
