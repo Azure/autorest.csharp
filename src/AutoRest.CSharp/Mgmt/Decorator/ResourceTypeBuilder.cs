@@ -44,9 +44,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (config.RequestPathToResourceType.TryGetValue(requestPath.SerializedPath, out var resourceType))
                 return new ResourceType(resourceType);
 
-            // we cannot directly return the new ResourceType here, the requestPath here can be a parameterized scope, which does not have a resource type.
+            // we cannot directly return the new ResourceType here, the requestPath here can be a parameterized scope, which does not have a resource type
+            // even if we have the configuration to assign explicit types to a parameterized scope, we do not have enough information to get which request path the current scope variable belongs
+            // therefore we can only return a place holder here to let the caller decide the actual resource type
             if (requestPath.IsParameterizedScope())
-                return ResourceType.Null;
+                return ResourceType.Scope;
             return ResourceType.ParseRequestPath(requestPath);
         }
     }

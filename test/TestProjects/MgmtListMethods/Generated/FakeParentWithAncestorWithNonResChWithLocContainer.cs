@@ -38,7 +38,7 @@ namespace MgmtListMethods
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Microsoft.Fake/fakes";
+        protected override ResourceType ValidResourceType => Fake.ResourceType;
 
         // Container level operations.
 

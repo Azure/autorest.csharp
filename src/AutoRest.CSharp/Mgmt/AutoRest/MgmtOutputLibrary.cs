@@ -465,36 +465,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var operation in operationSet)
                 {
                     var parentRequestPath = operation.ParentRequestPath(_context);
-                    //// here we get the parent request path, and expand the parameterized scope if this parent is a parameterized scope
-                    //var possibleParentPaths = ExpandParameterizedScope(operation.ParentRequestPath(_context), operation.GetRequestPath(_context));
-                    //foreach (var parentRequestPath in possibleParentPaths)
-                    //{
                     if (_childOperations.TryGetValue(parentRequestPath, out var list))
                         list.Add(operation);
                     else
                         _childOperations.Add(parentRequestPath, new HashSet<Operation> { operation });
-                    //}
                 }
             }
 
             return _childOperations;
         }
-
-        //private IEnumerable<RequestPath> ExpandParameterizedScope(RequestPath parent, RequestPath original)
-        //{
-        //    if (parent.IsParameterizedScope())
-        //    {
-        //        var possibleTypes = original.GetParameterizedScopeResourceTypes(_mgmtConfiguration)!; // this will never be null, since we have checked this is a parameterized scope
-        //        foreach (var type in possibleTypes)
-        //        {
-        //            var path = type.GetRequestPath();
-        //            if (path != null)
-        //                yield return (RequestPath)path;
-        //        }
-        //    }
-
-        //    yield return parent;
-        //}
 
         private IDictionary<string, ResourceData> EnsureRequestPathToResourceData()
         {

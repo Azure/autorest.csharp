@@ -20,5 +20,8 @@
   "RequestPathToResourceData": {
     "/{linkId}": "ResourceLink"
   },
+  "RequestPathToResourceType": {
+    "/{linkId}": "Microsoft.Resources/links"
+  },
   "ShowRequestPathAndOperationId": true
 }

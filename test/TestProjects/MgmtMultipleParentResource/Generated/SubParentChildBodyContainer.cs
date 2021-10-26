@@ -38,7 +38,7 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Microsoft.Compute/parents/subParents";
+        protected override ResourceType ValidResourceType => SubParent.ResourceType;
 
         // Container level operations.
 

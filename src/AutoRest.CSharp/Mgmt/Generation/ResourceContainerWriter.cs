@@ -100,7 +100,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteValidate()
         {
-            if (_resourceContainer.ResourceTypes.Count == 1)
+            var allPossibleTypes = _resourceContainer.ResourceTypes.SelectMany(p => p.Value).Distinct();
+            if (allPossibleTypes.Count() == 1)
                 return;
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid container for this type.");
@@ -119,9 +120,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             //    resourceType = $"\"{resourceType}\"";
             //}
 
+            var allPossibleTypes = _resourceContainer.ResourceTypes.SelectMany(p => p.Value).Distinct();
+
             FormattableString validResourceType;
-            if (_resourceContainer.ResourceTypes.Count == 1)
-                validResourceType = GetResourceTypeExpression(_resourceContainer.ResourceTypes.First());
+            if (allPossibleTypes.Count() == 1)
+                validResourceType = GetResourceTypeExpression(allPossibleTypes.First());
             else
                 validResourceType = $"{typeof(ResourceIdentifier)}.RootResourceIdentifier.ResourceType";
             _writer.Line();

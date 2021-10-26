@@ -79,11 +79,14 @@ namespace AutoRest.CSharp.Mgmt.Models
             // if this is a byId request path, we need to make it strict, since it might be accidentally to be any scope request path's parent
             if (segments.Count != 1)
                 return segments;
-            if (!segments.First().SkipUrlEncoding)
+            var first = segments.First();
+            if (first.IsConstant)
+                return segments;
+            if (!first.SkipUrlEncoding)
                 return segments;
 
             // this is a ById request path
-            return new List<Segment> { segments.First() with { IsStrict = true } };
+            return new List<Segment> { new Segment(first.Reference, first.Escape, true) };
         }
 
         public bool IsById => Count == 1 && this.First().SkipUrlEncoding;

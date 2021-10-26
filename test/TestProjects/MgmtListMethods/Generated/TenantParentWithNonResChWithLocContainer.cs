@@ -38,7 +38,7 @@ namespace MgmtListMethods
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Microsoft.Tenant/tenantTests";
+        protected override ResourceType ValidResourceType => TenantTest.ResourceType;
 
         // Container level operations.
 

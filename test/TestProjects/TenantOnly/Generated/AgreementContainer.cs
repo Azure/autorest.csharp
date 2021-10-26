@@ -35,7 +35,7 @@ namespace TenantOnly
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Microsoft.Billing/billingAccounts";
+        protected override ResourceType ValidResourceType => BillingAccount.ResourceType;
 
         // Container level operations.
 

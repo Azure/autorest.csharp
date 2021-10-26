@@ -38,7 +38,7 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Microsoft.Storage/storageAccounts/fileServices";
+        protected override ResourceType ValidResourceType => FileService.ResourceType;
 
         // Container level operations.
 

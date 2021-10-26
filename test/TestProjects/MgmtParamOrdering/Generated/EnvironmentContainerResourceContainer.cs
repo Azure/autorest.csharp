@@ -36,7 +36,7 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Microsoft.MachineLearningServices/workspaces";
+        protected override ResourceType ValidResourceType => Workspace.ResourceType;
 
         // Container level operations.
 

@@ -173,10 +173,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 throw new NotImplementedException($"ResourceType that contains variables are not supported yet");
 
             // find the corresponding class of this resource type. If we find only one, use the constant inside that class. If we have multiple, use the hard-coded magic string
-            var candidates = Context.Library.ArmResources.Where(resource => resource.ResourceTypes.Contains(resourceType));
+            var candidates = Context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
             if (candidates.Count() == 1)
             {
-                return $"{candidates.First().Type.Name}.ResourceType";
+                return $"{candidates.First().Type}.ResourceType";
             }
             return $"\"{resourceType.SerializedType}\"";
         }

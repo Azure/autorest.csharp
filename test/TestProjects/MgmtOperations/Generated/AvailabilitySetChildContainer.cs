@@ -36,7 +36,7 @@ namespace MgmtOperations
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "Microsoft.Compute/availabilitySets";
+        protected override ResourceType ValidResourceType => AvailabilitySet.ResourceType;
 
         // Container level operations.
 
