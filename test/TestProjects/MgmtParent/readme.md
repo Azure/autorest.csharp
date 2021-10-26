@@ -18,6 +18,8 @@ operation-group-to-resource:
 operation-group-to-parent:
    VirtualMachineExtensionImages: subscriptions
    DedicatedHosts: Microsoft.Compute/hostGroups
+list-exception:
+   DedicatedHostGroups
 modelerfour:
   lenient-model-deduplication: true
 ```
