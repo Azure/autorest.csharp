@@ -6,7 +6,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
     public class MgmtParentTests : TestProjectTests
     {
-        public MgmtParentTests() : base("MgmtParent") { }
+        public MgmtParentTests()
+            : base("MgmtParent")
+        {
+            ListExceptions.Add("DedicatedHostGroupCollection");
+        }
 
         [TestCase("AvailabilitySet", true)]
         [TestCase("DedicatedHostGroup", true)]
