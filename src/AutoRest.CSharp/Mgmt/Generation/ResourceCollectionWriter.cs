@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private ResourceData _resourceData;
         private Resource _resource;
         private BuildContext<MgmtOutputLibrary> _context;
+        private bool _isPaging;
 
         protected override string ContextProperty => "Parent";
 
@@ -57,6 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _restClient = context.Library.GetRestClient(operationGroup);
             _resource = context.Library.GetArmResource(operationGroup);
             _context = context;
+            _isPaging = _resourceCollection.ListMethods.FirstOrDefault()?.PagingMethod != null;
         }
 
         public void WriteCollection()
@@ -70,8 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{_resourceCollection.Description}");
                 _writer.Append($"{_resourceCollection.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
                 _writer.Append($"{typeof(ArmCollection)}, IEnumerable<{_resource.ResourceName}>");
-                bool isPaging = _resourceCollection.ListMethods.First().PagingMethod != null;
-                var asyncEnum = isPaging ? $", IAsyncEnumerable<{_resource.ResourceName}>" : string.Empty;
+                var asyncEnum = _isPaging ? $", IAsyncEnumerable<{_resource.ResourceName}>" : string.Empty;
                 _writer.Line($"{asyncEnum}");
                 using (_writer.Scope())
                 {
@@ -94,8 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteEnumerableImpl(CodeWriter writer)
         {
-            bool isPaging = _resourceCollection.ListMethods.First().PagingMethod != null;
-            string value = isPaging ? string.Empty : ".Value";
+            string value = _isPaging ? string.Empty : ".Value";
 
             _writer.Line();
             _writer.Line($"IEnumerator<{_resource.ResourceName}> IEnumerable<{_resource.ResourceName}>.GetEnumerator()");
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"return GetAll(){value}.GetEnumerator();");
             }
 
-            if (isPaging)
+            if (_isPaging)
             {
                 _writer.Line();
                 _writer.Line($"IAsyncEnumerator<{_resource.ResourceName}> IAsyncEnumerable<{_resource.ResourceName}>.GetAsyncEnumerator(CancellationToken cancellationToken)");

@@ -37,6 +37,7 @@ operation-group-to-singleton-resource:
   BlobServices: blobServices/default
   ImmutabilityPolicies: immutabilityPolicies/default
   FileServices: fileServices/default
+  ManagementPolicies: managementPolicies/default
 directive:
   - rename-model:
       from: BlobServiceProperties
@@ -44,6 +45,9 @@ directive:
   - rename-model:
       from: FileServiceProperties
       to: FileService
+  - rename-operation:
+      from: PrivateLinkResources_ListByStorageAccount
+      to: PrivateLinkResources_List
   - from: swagger-document
     where: $.definitions.FileShareItems.properties.value.items["$ref"]
     transform: return "#/definitions/FileShare"
