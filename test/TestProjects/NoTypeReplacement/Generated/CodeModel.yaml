@@ -10,7 +10,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_21
       type: string
       apiVersions:
         - !ApiVersion 
@@ -60,6 +60,16 @@ schemas: !Schemas
           name: ResourceType
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: NoTypeReplacementModel1ListResultNextLink
+          description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
+      protocol: !Protocols {}
     - !StringSchema &ref_3
       type: string
       apiVersions:
@@ -69,6 +79,16 @@ schemas: !Schemas
         default:
           name: NoSubResourceModelId
           description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_13
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: NoTypeReplacementModel2ListResultNextLink
+          description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
       protocol: !Protocols {}
     - !StringSchema &ref_4
       type: string
@@ -80,8 +100,18 @@ schemas: !Schemas
           name: NoSubResourceModel2Id
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_15
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: NoTypeReplacementModel3ListResultNextLink
+          description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_16
+    - !ConstantSchema &ref_22
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -91,17 +121,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_20
-      type: constant
-      value: !ConstantValue 
-        value: application/json
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: ApplicationJson
-          description: Content Type 'application/json'
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_21
+    - !ConstantSchema &ref_26
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -111,256 +131,402 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
+    - !ConstantSchema &ref_29
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_1
+    - !ObjectSchema &ref_28
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      parents: !Relations 
-        all:
-          - !ObjectSchema &ref_2
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            children: !Relations 
-              all:
-                - *ref_1
-                - !ObjectSchema &ref_5
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  parents: !Relations 
-                    all:
-                      - *ref_2
-                    immediate:
-                      - *ref_2
-                  properties:
-                    - !Property 
-                      schema: !ObjectSchema &ref_12
-                        type: object
-                        apiVersions:
-                          - !ApiVersion 
-                            version: '2020-06-01'
-                        properties:
-                          - !Property 
-                            schema: *ref_3
-                            readOnly: true
-                            serializedName: id
-                            language: !Languages 
-                              default:
-                                name: id
-                                description: ''
-                            protocol: !Protocols {}
-                        serializationFormats:
-                          - json
-                        usage:
-                          - input
-                          - output
-                        language: !Languages 
-                          default:
-                            name: NoSubResourceModel
-                            description: ''
-                            namespace: ''
-                        protocol: !Protocols {}
-                      serializedName: foo
-                      language: !Languages 
-                        default:
-                          name: foo
-                          description: ''
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
-                  language: !Languages 
-                    default:
-                      name: NoTypeReplacementModel2
-                      description: ''
-                      namespace: ''
-                  protocol: !Protocols {}
-                - !ObjectSchema &ref_6
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  parents: !Relations 
-                    all:
-                      - *ref_2
-                    immediate:
-                      - *ref_2
-                  properties:
-                    - !Property 
-                      schema: !ObjectSchema &ref_13
-                        type: object
-                        apiVersions:
-                          - !ApiVersion 
-                            version: '2020-06-01'
-                        properties:
-                          - !Property 
-                            schema: !ObjectSchema &ref_14
-                              type: object
-                              apiVersions:
-                                - !ApiVersion 
-                                  version: '2020-06-01'
-                              properties:
-                                - !Property 
-                                  schema: *ref_4
-                                  readOnly: true
-                                  serializedName: id
-                                  language: !Languages 
-                                    default:
-                                      name: id
-                                      description: ''
-                                  protocol: !Protocols {}
-                              serializationFormats:
-                                - json
-                              usage:
-                                - input
-                                - output
-                              language: !Languages 
-                                default:
-                                  name: NoSubResourceModel2
-                                  description: ''
-                                  namespace: ''
-                              protocol: !Protocols {}
-                            serializedName: foo
-                            language: !Languages 
-                              default:
-                                name: foo
-                                description: ''
-                            protocol: !Protocols {}
-                        serializationFormats:
-                          - json
-                        usage:
-                          - input
-                          - output
-                        language: !Languages 
-                          default:
-                            name: MiddleResourceModel
-                            description: ''
-                            namespace: ''
-                        protocol: !Protocols {}
-                      serializedName: foo
-                      language: !Languages 
-                        default:
-                          name: foo
-                          description: ''
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
-                  language: !Languages 
-                    default:
-                      name: NoTypeReplacementModel3
-                      description: ''
-                      namespace: ''
-                  protocol: !Protocols {}
-              immediate:
-                - *ref_1
-                - *ref_5
-                - *ref_6
-            properties:
-              - !Property 
-                schema: *ref_7
-                readOnly: true
-                serializedName: id
-                language: !Languages 
-                  default:
-                    name: id
-                    description: ''
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_8
-                readOnly: true
-                serializedName: name
-                language: !Languages 
-                  default:
-                    name: name
-                    description: ''
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_9
-                readOnly: true
-                serializedName: type
-                language: !Languages 
-                  default:
-                    name: type
-                    description: ''
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: Resource
-                description: ''
-                namespace: ''
-            protocol: !Protocols {}
-        immediate:
-          - *ref_2
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_11
-            type: object
+          schema: !ArraySchema &ref_18
+            type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            properties:
-              - !Property 
-                schema: *ref_10
-                readOnly: true
-                serializedName: id
-                language: !Languages 
-                  default:
-                    name: id
-                    description: ''
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
+            elementType: !ObjectSchema &ref_1
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2020-06-01'
+              parents: !Relations 
+                all:
+                  - !ObjectSchema &ref_2
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: '2020-06-01'
+                    children: !Relations 
+                      all:
+                        - *ref_1
+                        - !ObjectSchema &ref_5
+                          type: object
+                          apiVersions:
+                            - !ApiVersion 
+                              version: '2020-06-01'
+                          parents: !Relations 
+                            all:
+                              - *ref_2
+                            immediate:
+                              - *ref_2
+                          properties:
+                            - !Property 
+                              schema: !ObjectSchema &ref_14
+                                type: object
+                                apiVersions:
+                                  - !ApiVersion 
+                                    version: '2020-06-01'
+                                properties:
+                                  - !Property 
+                                    schema: *ref_3
+                                    readOnly: true
+                                    serializedName: id
+                                    language: !Languages 
+                                      default:
+                                        name: id
+                                        description: ''
+                                    protocol: !Protocols {}
+                                serializationFormats:
+                                  - json
+                                usage:
+                                  - output
+                                  - input
+                                language: !Languages 
+                                  default:
+                                    name: NoSubResourceModel
+                                    description: ''
+                                    namespace: ''
+                                protocol: !Protocols {}
+                              serializedName: foo
+                              language: !Languages 
+                                default:
+                                  name: foo
+                                  description: ''
+                              protocol: !Protocols {}
+                          serializationFormats:
+                            - json
+                          usage:
+                            - input
+                            - output
+                          language: !Languages 
+                            default:
+                              name: NoTypeReplacementModel2
+                              description: ''
+                              namespace: ''
+                          protocol: !Protocols {}
+                        - !ObjectSchema &ref_6
+                          type: object
+                          apiVersions:
+                            - !ApiVersion 
+                              version: '2020-06-01'
+                          parents: !Relations 
+                            all:
+                              - *ref_2
+                            immediate:
+                              - *ref_2
+                          properties:
+                            - !Property 
+                              schema: !ObjectSchema &ref_16
+                                type: object
+                                apiVersions:
+                                  - !ApiVersion 
+                                    version: '2020-06-01'
+                                properties:
+                                  - !Property 
+                                    schema: !ObjectSchema &ref_17
+                                      type: object
+                                      apiVersions:
+                                        - !ApiVersion 
+                                          version: '2020-06-01'
+                                      properties:
+                                        - !Property 
+                                          schema: *ref_4
+                                          readOnly: true
+                                          serializedName: id
+                                          language: !Languages 
+                                            default:
+                                              name: id
+                                              description: ''
+                                          protocol: !Protocols {}
+                                      serializationFormats:
+                                        - json
+                                      usage:
+                                        - output
+                                        - input
+                                      language: !Languages 
+                                        default:
+                                          name: NoSubResourceModel2
+                                          description: ''
+                                          namespace: ''
+                                      protocol: !Protocols {}
+                                    serializedName: foo
+                                    language: !Languages 
+                                      default:
+                                        name: foo
+                                        description: ''
+                                    protocol: !Protocols {}
+                                serializationFormats:
+                                  - json
+                                usage:
+                                  - output
+                                  - input
+                                language: !Languages 
+                                  default:
+                                    name: MiddleResourceModel
+                                    description: ''
+                                    namespace: ''
+                                protocol: !Protocols {}
+                              serializedName: foo
+                              language: !Languages 
+                                default:
+                                  name: foo
+                                  description: ''
+                              protocol: !Protocols {}
+                          serializationFormats:
+                            - json
+                          usage:
+                            - input
+                            - output
+                          language: !Languages 
+                            default:
+                              name: NoTypeReplacementModel3
+                              description: ''
+                              namespace: ''
+                          protocol: !Protocols {}
+                      immediate:
+                        - *ref_1
+                        - *ref_5
+                        - *ref_6
+                    properties:
+                      - !Property 
+                        schema: *ref_7
+                        readOnly: true
+                        serializedName: id
+                        language: !Languages 
+                          default:
+                            name: id
+                            description: ''
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_8
+                        readOnly: true
+                        serializedName: name
+                        language: !Languages 
+                          default:
+                            name: name
+                            description: ''
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_9
+                        readOnly: true
+                        serializedName: type
+                        language: !Languages 
+                          default:
+                            name: type
+                            description: ''
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - output
+                      - input
+                    language: !Languages 
+                      default:
+                        name: Resource
+                        description: ''
+                        namespace: ''
+                    protocol: !Protocols {}
+                immediate:
+                  - *ref_2
+              properties:
+                - !Property 
+                  schema: !ObjectSchema &ref_12
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: '2020-06-01'
+                    properties:
+                      - !Property 
+                        schema: *ref_10
+                        readOnly: true
+                        serializedName: id
+                        language: !Languages 
+                          default:
+                            name: id
+                            description: ''
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - output
+                      - input
+                    language: !Languages 
+                      default:
+                        name: SubResourceModel
+                        description: ''
+                        namespace: ''
+                    protocol: !Protocols {}
+                  serializedName: foo
+                  language: !Languages 
+                    default:
+                      name: foo
+                      description: ''
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - input
+                - output
+              language: !Languages 
+                default:
+                  name: NoTypeReplacementModel1
+                  description: ''
+                  namespace: ''
+              protocol: !Protocols {}
             language: !Languages 
               default:
-                name: SubResourceModel
-                description: ''
-                namespace: ''
+                name: NoTypeReplacementModel1ListResultValue
+                description: Gets the list of storage accounts and their properties.
             protocol: !Protocols {}
-          serializedName: foo
+          readOnly: true
+          serializedName: value
           language: !Languages 
             default:
-              name: foo
-              description: ''
+              name: value
+              description: Gets the list of storage accounts and their properties.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_11
+          readOnly: true
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
-        - input
         - output
       language: !Languages 
         default:
-          name: NoTypeReplacementModel1
-          description: ''
+          name: NoTypeReplacementModel1ListResult
+          description: The response from the List Storage Accounts operation.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_11
-    - *ref_2
-    - *ref_5
+    - *ref_1
     - *ref_12
-    - *ref_6
-    - *ref_13
+    - *ref_2
+    - !ObjectSchema &ref_36
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_19
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_5
+            language: !Languages 
+              default:
+                name: NoTypeReplacementModel2ListResultValue
+                description: Gets the list of storage accounts and their properties.
+            protocol: !Protocols {}
+          readOnly: true
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: Gets the list of storage accounts and their properties.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_13
+          readOnly: true
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: NoTypeReplacementModel2ListResult
+          description: The response from the List Storage Accounts operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_5
     - *ref_14
+    - !ObjectSchema &ref_43
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_20
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_6
+            language: !Languages 
+              default:
+                name: NoTypeReplacementModel3ListResultValue
+                description: Gets the list of storage accounts and their properties.
+            protocol: !Protocols {}
+          readOnly: true
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: Gets the list of storage accounts and their properties.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_15
+          readOnly: true
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: NoTypeReplacementModel3ListResult
+          description: The response from the List Storage Accounts operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_6
+    - *ref_16
+    - *ref_17
+  arrays:
+    - *ref_18
+    - *ref_19
+    - *ref_20
 globalParameters:
-  - !Parameter &ref_19
-    schema: *ref_15
+  - !Parameter &ref_25
+    schema: *ref_21
     implementation: Client
     required: true
     extensions:
@@ -373,7 +539,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_17
+  - !Parameter &ref_23
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -389,8 +555,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_18
-    schema: *ref_16
+  - !Parameter &ref_24
+    schema: *ref_22
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -411,9 +577,76 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_17
-          - !Parameter &ref_23
-            schema: *ref_15
+          - *ref_23
+          - !Parameter &ref_27
+            schema: *ref_21
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_24
+          - *ref_25
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_27
+        responses:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_23
+          - !Parameter &ref_31
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -424,8 +657,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_24
-            schema: *ref_15
+          - !Parameter &ref_32
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -436,13 +669,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_18
-          - *ref_19
+          - *ref_24
+          - *ref_25
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_20
+                schema: *ref_29
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -454,7 +687,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_22
+              - !Parameter &ref_30
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -467,7 +700,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_21
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -480,7 +713,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_22
+              - *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -494,8 +727,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_23
-          - *ref_24
+          - *ref_31
+          - *ref_32
         responses:
           - !SchemaResponse 
             schema: *ref_1
@@ -520,9 +753,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_17
-          - !Parameter &ref_25
-            schema: *ref_15
+          - *ref_23
+          - !Parameter &ref_33
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -533,8 +766,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_26
-            schema: *ref_15
+          - !Parameter &ref_34
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -545,13 +778,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_18
-          - *ref_19
+          - *ref_24
+          - *ref_25
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_21
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -574,8 +807,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_25
-          - *ref_26
+          - *ref_33
+          - *ref_34
         responses:
           - !SchemaResponse 
             schema: *ref_1
@@ -608,9 +841,76 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_17
-          - !Parameter &ref_28
-            schema: *ref_15
+          - *ref_23
+          - !Parameter &ref_35
+            schema: *ref_21
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_24
+          - *ref_25
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_35
+        responses:
+          - !SchemaResponse 
+            schema: *ref_36
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_23
+          - !Parameter &ref_38
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -621,8 +921,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_29
-            schema: *ref_15
+          - !Parameter &ref_39
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -633,13 +933,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_18
-          - *ref_19
+          - *ref_24
+          - *ref_25
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_20
+                schema: *ref_29
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -651,7 +951,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_27
+              - !Parameter &ref_37
                 schema: *ref_5
                 implementation: Method
                 required: true
@@ -664,7 +964,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_21
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -677,7 +977,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_27
+              - *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -691,8 +991,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_28
-          - *ref_29
+          - *ref_38
+          - *ref_39
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -717,9 +1017,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_17
-          - !Parameter &ref_30
-            schema: *ref_15
+          - *ref_23
+          - !Parameter &ref_40
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -730,8 +1030,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_31
-            schema: *ref_15
+          - !Parameter &ref_41
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -742,13 +1042,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_18
-          - *ref_19
+          - *ref_24
+          - *ref_25
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_21
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -771,8 +1071,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_30
-          - *ref_31
+          - *ref_40
+          - *ref_41
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -805,9 +1105,76 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_17
-          - !Parameter &ref_33
-            schema: *ref_15
+          - *ref_23
+          - !Parameter &ref_42
+            schema: *ref_21
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_24
+          - *ref_25
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_42
+        responses:
+          - !SchemaResponse 
+            schema: *ref_43
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_23
+          - !Parameter &ref_45
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -818,8 +1185,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_34
-            schema: *ref_15
+          - !Parameter &ref_46
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -830,13 +1197,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_18
-          - *ref_19
+          - *ref_24
+          - *ref_25
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_20
+                schema: *ref_29
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -848,7 +1215,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_32
+              - !Parameter &ref_44
                 schema: *ref_6
                 implementation: Method
                 required: true
@@ -861,7 +1228,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_21
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -874,7 +1241,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_32
+              - *ref_44
             language: !Languages 
               default:
                 name: ''
@@ -888,8 +1255,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_33
-          - *ref_34
+          - *ref_45
+          - *ref_46
         responses:
           - !SchemaResponse 
             schema: *ref_6
@@ -914,9 +1281,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_17
-          - !Parameter &ref_35
-            schema: *ref_15
+          - *ref_23
+          - !Parameter &ref_47
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -927,8 +1294,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_36
-            schema: *ref_15
+          - !Parameter &ref_48
+            schema: *ref_21
             implementation: Method
             required: true
             language: !Languages 
@@ -939,13 +1306,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_18
-          - *ref_19
+          - *ref_24
+          - *ref_25
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_21
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -968,8 +1335,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_35
-          - *ref_36
+          - *ref_47
+          - *ref_48
         responses:
           - !SchemaResponse 
             schema: *ref_6

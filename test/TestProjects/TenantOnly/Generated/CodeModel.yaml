@@ -78,10 +78,20 @@ schemas: !Schemas
           version: '2020-05-01'
       language: !Languages 
         default:
+          name: BillingAccountListResultNextLink
+          description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
           name: ErrorResponseError
           description: The details of the error.
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
@@ -91,7 +101,7 @@ schemas: !Schemas
           name: AgreementFoo
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -101,7 +111,7 @@ schemas: !Schemas
           name: AgreementId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_13
       type: string
       apiVersions:
         - !ApiVersion 
@@ -111,7 +121,7 @@ schemas: !Schemas
           name: AgreementName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_14
       type: string
       apiVersions:
         - !ApiVersion 
@@ -121,7 +131,7 @@ schemas: !Schemas
           name: AgreementType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -131,8 +141,18 @@ schemas: !Schemas
           name: AgreementLocation
           description: Resource location
       protocol: !Protocols {}
+    - !StringSchema &ref_17
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
+          name: AgreementListResultNextLink
+          description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_15
+    - !ConstantSchema &ref_21
       type: constant
       value: !ConstantValue 
         value: '2020-05-01'
@@ -142,7 +162,7 @@ schemas: !Schemas
           name: ApiVersion20200501
           description: Api Version (2020-05-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_18
+    - !ConstantSchema &ref_24
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -152,7 +172,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_23
+    - !ConstantSchema &ref_30
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -171,7 +191,7 @@ schemas: !Schemas
           name: BillingAccountTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_14
+    - !DictionarySchema &ref_16
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -180,82 +200,126 @@ schemas: !Schemas
           description: Resource tags
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_21
+    - !ObjectSchema &ref_26
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       properties:
         - !Property 
-          schema: *ref_2
-          serializedName: bar
-          language: !Languages 
-            default:
-              name: bar
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_3
+          schema: !ArraySchema &ref_19
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-05-01'
+            elementType: !ObjectSchema &ref_9
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2020-05-01'
+              properties:
+                - !Property 
+                  schema: *ref_2
+                  serializedName: bar
+                  language: !Languages 
+                    default:
+                      name: bar
+                      description: ''
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_3
+                  readOnly: true
+                  serializedName: id
+                  language: !Languages 
+                    default:
+                      name: id
+                      description: Resource Id
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_4
+                  readOnly: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: Resource name
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_5
+                  readOnly: true
+                  serializedName: type
+                  language: !Languages 
+                    default:
+                      name: type
+                      description: Resource type
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_6
+                  serializedName: location
+                  language: !Languages 
+                    default:
+                      name: location
+                      description: Resource location
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_7
+                  serializedName: tags
+                  language: !Languages 
+                    default:
+                      name: tags
+                      description: Resource tags
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - output
+                - input
+              language: !Languages 
+                default:
+                  name: BillingAccount
+                  description: A billing account.
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: BillingAccountListResultValue
+                description: Gets the list of storage accounts and their properties.
+            protocol: !Protocols {}
           readOnly: true
-          serializedName: id
+          serializedName: value
           language: !Languages 
             default:
-              name: id
-              description: Resource Id
+              name: value
+              description: Gets the list of storage accounts and their properties.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_4
+          schema: *ref_8
           readOnly: true
-          serializedName: name
+          serializedName: nextLink
           language: !Languages 
             default:
-              name: name
-              description: Resource name
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_5
-          readOnly: true
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: Resource type
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_6
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: Resource location
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_7
-          serializedName: tags
-          language: !Languages 
-            default:
-              name: tags
-              description: Resource tags
+              name: nextLink
+              description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - output
-        - input
       language: !Languages 
         default:
-          name: BillingAccount
-          description: A billing account.
+          name: BillingAccountListResult
+          description: The response from the List Storage Accounts operation.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_22
+    - *ref_9
+    - !ObjectSchema &ref_27
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       properties:
         - !Property 
-          schema: *ref_8
+          schema: *ref_10
           serializedName: error
           language: !Languages 
             default:
@@ -272,62 +336,105 @@ schemas: !Schemas
           description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_29
+    - !ObjectSchema &ref_35
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       properties:
         - !Property 
-          schema: *ref_9
-          serializedName: foo
-          language: !Languages 
-            default:
-              name: foo
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_10
+          schema: !ArraySchema &ref_20
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-05-01'
+            elementType: !ObjectSchema &ref_18
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2020-05-01'
+              properties:
+                - !Property 
+                  schema: *ref_11
+                  serializedName: foo
+                  language: !Languages 
+                    default:
+                      name: foo
+                      description: ''
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_12
+                  readOnly: true
+                  serializedName: id
+                  language: !Languages 
+                    default:
+                      name: id
+                      description: Resource Id
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_13
+                  readOnly: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: Resource name
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_14
+                  readOnly: true
+                  serializedName: type
+                  language: !Languages 
+                    default:
+                      name: type
+                      description: Resource type
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_15
+                  serializedName: location
+                  language: !Languages 
+                    default:
+                      name: location
+                      description: Resource location
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_16
+                  serializedName: tags
+                  language: !Languages 
+                    default:
+                      name: tags
+                      description: Resource tags
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - output
+              language: !Languages 
+                default:
+                  name: Agreement
+                  description: An agreement.
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: AgreementListResultValue
+                description: Gets the list of storage accounts and their properties.
+            protocol: !Protocols {}
           readOnly: true
-          serializedName: id
+          serializedName: value
           language: !Languages 
             default:
-              name: id
-              description: Resource Id
+              name: value
+              description: Gets the list of storage accounts and their properties.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_11
+          schema: *ref_17
           readOnly: true
-          serializedName: name
+          serializedName: nextLink
           language: !Languages 
             default:
-              name: name
-              description: Resource name
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_12
-          readOnly: true
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: Resource type
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_13
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: Resource location
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_14
-          serializedName: tags
-          language: !Languages 
-            default:
-              name: tags
-              description: Resource tags
+              name: nextLink
+              description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -335,12 +442,16 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: Agreement
-          description: An agreement.
+          name: AgreementListResult
+          description: The response from the List Storage Accounts operation.
           namespace: ''
       protocol: !Protocols {}
+    - *ref_18
+  arrays:
+    - *ref_19
+    - *ref_20
 globalParameters:
-  - !Parameter &ref_16
+  - !Parameter &ref_22
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -356,8 +467,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_17
-    schema: *ref_15
+  - !Parameter &ref_23
+    schema: *ref_21
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -378,21 +489,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
-          - *ref_16
-          - *ref_17
-          - !Parameter &ref_19
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingAccountName
-                description: The ID that uniquely identifies a billing account.
-                serializedName: billingAccountName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_20
+          - *ref_22
+          - *ref_23
+          - !Parameter &ref_25
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -407,7 +506,98 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_18
+                schema: *ref_24
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Billing/billingAccounts
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_25
+        responses:
+          - !SchemaResponse 
+            schema: *ref_26
+            language: !Languages 
+              default:
+                name: ''
+                description: OK. The request has succeeded.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: List
+            description: Gets a billing account by its ID.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-05-01'
+        parameters:
+          - *ref_22
+          - *ref_23
+          - !Parameter &ref_28
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: billingAccountName
+                description: The ID that uniquely identifies a billing account.
+                serializedName: billingAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_29
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: expand
+                description: May be used to expand the soldTo, invoice sections and billing profiles.
+                serializedName: $expand
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -430,11 +620,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_19
-          - *ref_20
+          - *ref_28
+          - *ref_29
         responses:
           - !SchemaResponse 
-            schema: *ref_21
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -448,7 +638,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_27
             language: !Languages 
               default:
                 name: ''
@@ -470,9 +660,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
-          - *ref_16
-          - *ref_17
-          - !Parameter &ref_25
+          - *ref_22
+          - *ref_23
+          - !Parameter &ref_32
             schema: *ref_1
             implementation: Method
             required: true
@@ -488,7 +678,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -500,8 +690,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_24
-                schema: *ref_21
+              - !Parameter &ref_31
+                schema: *ref_9
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -513,7 +703,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_18
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -526,7 +716,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_24
+              - *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -540,10 +730,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_25
+          - *ref_32
         responses:
           - !SchemaResponse 
-            schema: *ref_21
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -566,7 +756,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_27
             language: !Languages 
               default:
                 name: ''
@@ -600,9 +790,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
-          - *ref_16
-          - *ref_17
-          - !Parameter &ref_26
+          - *ref_22
+          - *ref_23
+          - !Parameter &ref_33
             schema: *ref_1
             implementation: Method
             required: true
@@ -614,19 +804,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_27
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: agreementName
-                description: The ID that uniquely identifies an agreement.
-                serializedName: agreementName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_28
+          - !Parameter &ref_34
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -641,7 +819,111 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_18
+                schema: *ref_24
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_33
+          - *ref_34
+        responses:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: OK. The request has succeeded.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: List
+            description: Gets an agreement by ID.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-05-01'
+        parameters:
+          - *ref_22
+          - *ref_23
+          - !Parameter &ref_36
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: billingAccountName
+                description: The ID that uniquely identifies a billing account.
+                serializedName: billingAccountName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_37
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: agreementName
+                description: The ID that uniquely identifies an agreement.
+                serializedName: agreementName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_38
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: expand
+                description: May be used to expand the participants.
+                serializedName: $expand
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -664,12 +946,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_26
-          - *ref_27
-          - *ref_28
+          - *ref_36
+          - *ref_37
+          - *ref_38
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_18
             language: !Languages 
               default:
                 name: ''
@@ -683,7 +965,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_27
             language: !Languages 
               default:
                 name: ''

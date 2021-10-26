@@ -13,12 +13,12 @@ namespace MgmtExtensionResource
     public static partial class ManagementGroupExtensions
     {
         #region PolicyDefinition
-        /// <summary> Gets an object representing a PolicyDefinitionContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a PolicyDefinitionCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PolicyDefinitionContainer" /> object. </returns>
-        public static PolicyDefinitionContainer GetPolicyDefinitions(this ManagementGroup managementGroup)
+        /// <returns> Returns a <see cref="PolicyDefinitionCollection" /> object. </returns>
+        public static PolicyDefinitionCollection GetPolicyDefinitions(this ManagementGroup managementGroup)
         {
-            return new PolicyDefinitionContainer(managementGroup);
+            return new PolicyDefinitionCollection(managementGroup);
         }
         #endregion
     }

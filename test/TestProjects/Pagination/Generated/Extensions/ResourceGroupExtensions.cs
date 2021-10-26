@@ -13,82 +13,82 @@ namespace Pagination
     public static partial class ResourceGroupExtensions
     {
         #region PageSizeIntegerModel
-        /// <summary> Gets an object representing a PageSizeIntegerModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a PageSizeIntegerModelCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeIntegerModelContainer" /> object. </returns>
-        public static PageSizeIntegerModelContainer GetPageSizeIntegerModels(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="PageSizeIntegerModelCollection" /> object. </returns>
+        public static PageSizeIntegerModelCollection GetPageSizeIntegerModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeIntegerModelContainer(resourceGroup);
+            return new PageSizeIntegerModelCollection(resourceGroup);
         }
         #endregion
 
         #region PageSizeInt64Model
-        /// <summary> Gets an object representing a PageSizeInt64ModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a PageSizeInt64ModelCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeInt64ModelContainer" /> object. </returns>
-        public static PageSizeInt64ModelContainer GetPageSizeInt64Models(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="PageSizeInt64ModelCollection" /> object. </returns>
+        public static PageSizeInt64ModelCollection GetPageSizeInt64Models(this ResourceGroup resourceGroup)
         {
-            return new PageSizeInt64ModelContainer(resourceGroup);
+            return new PageSizeInt64ModelCollection(resourceGroup);
         }
         #endregion
 
         #region PageSizeInt32Model
-        /// <summary> Gets an object representing a PageSizeInt32ModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a PageSizeInt32ModelCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeInt32ModelContainer" /> object. </returns>
-        public static PageSizeInt32ModelContainer GetPageSizeInt32Models(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="PageSizeInt32ModelCollection" /> object. </returns>
+        public static PageSizeInt32ModelCollection GetPageSizeInt32Models(this ResourceGroup resourceGroup)
         {
-            return new PageSizeInt32ModelContainer(resourceGroup);
+            return new PageSizeInt32ModelCollection(resourceGroup);
         }
         #endregion
 
         #region PageSizeNumericModel
-        /// <summary> Gets an object representing a PageSizeNumericModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a PageSizeNumericModelCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeNumericModelContainer" /> object. </returns>
-        public static PageSizeNumericModelContainer GetPageSizeNumericModels(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="PageSizeNumericModelCollection" /> object. </returns>
+        public static PageSizeNumericModelCollection GetPageSizeNumericModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeNumericModelContainer(resourceGroup);
+            return new PageSizeNumericModelCollection(resourceGroup);
         }
         #endregion
 
         #region PageSizeFloatModel
-        /// <summary> Gets an object representing a PageSizeFloatModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a PageSizeFloatModelCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeFloatModelContainer" /> object. </returns>
-        public static PageSizeFloatModelContainer GetPageSizeFloatModels(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="PageSizeFloatModelCollection" /> object. </returns>
+        public static PageSizeFloatModelCollection GetPageSizeFloatModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeFloatModelContainer(resourceGroup);
+            return new PageSizeFloatModelCollection(resourceGroup);
         }
         #endregion
 
         #region PageSizeDoubleModel
-        /// <summary> Gets an object representing a PageSizeDoubleModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a PageSizeDoubleModelCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeDoubleModelContainer" /> object. </returns>
-        public static PageSizeDoubleModelContainer GetPageSizeDoubleModels(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="PageSizeDoubleModelCollection" /> object. </returns>
+        public static PageSizeDoubleModelCollection GetPageSizeDoubleModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeDoubleModelContainer(resourceGroup);
+            return new PageSizeDoubleModelCollection(resourceGroup);
         }
         #endregion
 
         #region PageSizeDecimalModel
-        /// <summary> Gets an object representing a PageSizeDecimalModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a PageSizeDecimalModelCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeDecimalModelContainer" /> object. </returns>
-        public static PageSizeDecimalModelContainer GetPageSizeDecimalModels(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="PageSizeDecimalModelCollection" /> object. </returns>
+        public static PageSizeDecimalModelCollection GetPageSizeDecimalModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeDecimalModelContainer(resourceGroup);
+            return new PageSizeDecimalModelCollection(resourceGroup);
         }
         #endregion
 
         #region PageSizeStringModel
-        /// <summary> Gets an object representing a PageSizeStringModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a PageSizeStringModelCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeStringModelContainer" /> object. </returns>
-        public static PageSizeStringModelContainer GetPageSizeStringModels(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="PageSizeStringModelCollection" /> object. </returns>
+        public static PageSizeStringModelCollection GetPageSizeStringModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeStringModelContainer(resourceGroup);
+            return new PageSizeStringModelCollection(resourceGroup);
         }
         #endregion
     }

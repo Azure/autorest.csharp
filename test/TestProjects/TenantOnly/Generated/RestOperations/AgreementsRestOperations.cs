@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using TenantOnly.Models;
 
 namespace TenantOnly
 {
@@ -38,6 +39,83 @@ namespace TenantOnly
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
+        }
+
+        internal HttpMessage CreateGetAllRequest(string billingAccountName, string expand)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/providers/Microsoft.Billing/billingAccounts/", false);
+            uri.AppendPath(billingAccountName, true);
+            uri.AppendPath("/agreements", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Gets an agreement by ID. </summary>
+        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
+        public async Task<Response<AgreementListResult>> GetAllAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            if (billingAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(billingAccountName));
+            }
+
+            using var message = CreateGetAllRequest(billingAccountName, expand);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        AgreementListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = AgreementListResult.DeserializeAgreementListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Gets an agreement by ID. </summary>
+        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
+        public Response<AgreementListResult> GetAll(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            if (billingAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(billingAccountName));
+            }
+
+            using var message = CreateGetAllRequest(billingAccountName, expand);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        AgreementListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = AgreementListResult.DeserializeAgreementListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
         }
 
         internal HttpMessage CreateGetRequest(string billingAccountName, string agreementName, string expand)

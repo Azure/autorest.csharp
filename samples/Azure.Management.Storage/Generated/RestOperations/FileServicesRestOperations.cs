@@ -34,7 +34,7 @@ namespace Azure.Management.Storage
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public FileServicesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        public FileServicesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2021-06-01")
         {
             this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
@@ -129,7 +129,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, Enum2 fileServicesName, FileServiceData parameters)
+        internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, Enum3 fileServicesName, FileServiceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -162,7 +162,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<FileServiceData>> SetServicePropertiesAsync(string resourceGroupName, string accountName, Enum2 fileServicesName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<FileServiceData>> SetServicePropertiesAsync(string resourceGroupName, string accountName, Enum3 fileServicesName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -200,7 +200,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<FileServiceData> SetServiceProperties(string resourceGroupName, string accountName, Enum2 fileServicesName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        public Response<FileServiceData> SetServiceProperties(string resourceGroupName, string accountName, Enum3 fileServicesName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -231,7 +231,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateGetServicePropertiesRequest(string resourceGroupName, string accountName, Enum2 fileServicesName)
+        internal HttpMessage CreateGetServicePropertiesRequest(string resourceGroupName, string accountName, Enum3 fileServicesName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -259,7 +259,7 @@ namespace Azure.Management.Storage
         /// <param name="fileServicesName"> The name of the file Service within the specified storage account. File Service Name must be &quot;default&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<FileServiceData>> GetServicePropertiesAsync(string resourceGroupName, string accountName, Enum2 fileServicesName, CancellationToken cancellationToken = default)
+        public async Task<Response<FileServiceData>> GetServicePropertiesAsync(string resourceGroupName, string accountName, Enum3 fileServicesName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -292,7 +292,7 @@ namespace Azure.Management.Storage
         /// <param name="fileServicesName"> The name of the file Service within the specified storage account. File Service Name must be &quot;default&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<FileServiceData> GetServiceProperties(string resourceGroupName, string accountName, Enum2 fileServicesName, CancellationToken cancellationToken = default)
+        public Response<FileServiceData> GetServiceProperties(string resourceGroupName, string accountName, Enum3 fileServicesName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

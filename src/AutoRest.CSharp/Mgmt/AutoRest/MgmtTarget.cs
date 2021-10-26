@@ -52,13 +52,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
-            foreach (var resourceContainer in context.Library.ResourceContainers)
+            foreach (var resourceCollection in context.Library.ResourceCollections)
             {
                 var codeWriter = new CodeWriter();
-                var containerWriter = new ResourceContainerWriter(codeWriter, resourceContainer, context);
-                containerWriter.WriteContainer();
+                var collectionWriter = new ResourceCollectionWriter(codeWriter, resourceCollection, context);
+                collectionWriter.WriteCollection();
 
-                project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"{resourceCollection.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var model in context.Library.ResourceData)
@@ -108,12 +108,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{tupleResource.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var tupleResourceContainer in context.Library.TupleResourceContainers)
+            foreach (var tupleResourceCollection in context.Library.TupleResourceCollections)
             {
                 var codeWriter = new CodeWriter();
-                new TupleResourceContainerWriter(codeWriter, tupleResourceContainer, context).WriteContainer();
+                new TupleResourceCollectionWriter(codeWriter, tupleResourceCollection, context).WriteCollection();
 
-                project.AddGeneratedFile($"{tupleResourceContainer.Type.Name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"{tupleResourceCollection.Type.Name}.cs", codeWriter.ToString());
             }
 
             var resourceGroupExtensionsCodeWriter = new CodeWriter();

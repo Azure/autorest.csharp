@@ -16,6 +16,44 @@
         "application/json"
     ],
     "paths": {
+        "/providers/Microsoft.Billing/billingAccounts": {
+            "get": {
+                "tags": [
+                    "BillingAccounts"
+                ],
+                "operationId": "BillingAccounts_List",
+                "description": "Gets a billing account by its ID.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "name": "$expand",
+                        "description": "May be used to expand the soldTo, invoice sections and billing profiles.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/BillingAccountListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}": {
             "get": {
                 "tags": [
@@ -107,6 +145,47 @@
                 }
             }
         },
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements": {
+            "get": {
+                "tags": [
+                    "Agreements"
+                ],
+                "operationId": "Agreements_List",
+                "description": "Gets an agreement by ID.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "name": "$expand",
+                        "description": "May be used to expand the participants.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/AgreementListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": {
             "get": {
                 "tags": [
@@ -158,6 +237,24 @@
         }
     },
     "definitions": {
+        "BillingAccountListResult": {
+            "properties": {
+                "value": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/BillingAccount"
+                    },
+                    "description": "Gets the list of storage accounts and their properties."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.",
+                    "readOnly": true
+                }
+            },
+            "description": "The response from the List Storage Accounts operation."
+        },
         "BillingAccount": {
             "description": "A billing account.",
             "type": "object",
@@ -202,6 +299,24 @@
                     "description": "The details of the error."
                 }
             }
+        },
+        "AgreementListResult": {
+            "properties": {
+                "value": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Agreement"
+                    },
+                    "description": "Gets the list of storage accounts and their properties."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.",
+                    "readOnly": true
+                }
+            },
+            "description": "The response from the List Storage Accounts operation."
         },
         "Agreement": {
             "description": "An agreement.",

@@ -395,7 +395,7 @@ namespace MgmtLRO
             }
         }
 
-        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string requiredParam, string optionalParam)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -407,7 +407,6 @@ namespace MgmtLRO
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Fake/fakes", false);
-            uri.AppendQuery("requiredParam", requiredParam, true);
             if (optionalParam != null)
             {
                 uri.AppendQuery("optionalParam", optionalParam, true);
@@ -421,22 +420,17 @@ namespace MgmtLRO
 
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="requiredParam"/> is null. </exception>
-        public async Task<Response<FakeListResult>> GetAllAsync(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<FakeListResult>> GetAllAsync(string resourceGroupName, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
 
-            using var message = CreateGetAllRequest(resourceGroupName, requiredParam, optionalParam);
+            using var message = CreateGetAllRequest(resourceGroupName, optionalParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -454,22 +448,17 @@ namespace MgmtLRO
 
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="requiredParam"/> is null. </exception>
-        public Response<FakeListResult> GetAll(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<FakeListResult> GetAll(string resourceGroupName, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
 
-            using var message = CreateGetAllRequest(resourceGroupName, requiredParam, optionalParam);
+            using var message = CreateGetAllRequest(resourceGroupName, optionalParam);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

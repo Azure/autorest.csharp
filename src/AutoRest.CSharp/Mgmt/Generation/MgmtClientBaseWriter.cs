@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"return {typeof(Response)}.FromValue(new {resourcetype}({ContextProperty}, response.Value), response.GetRawResponse());");
         }
 
-        protected void WriteContainerCtors(CodeWriter writer, RestClient restClient, Type contextArgumentType, string parentArguments)
+        protected void WriteCollectionCtors(CodeWriter writer, RestClient restClient, Type contextArgumentType, string parentArguments)
         {
             // write protected default constructor
             writer.Line();
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteContainerProperties(CodeWriter writer, string resourceType)
+        protected void WriteCollectionProperties(CodeWriter writer, string resourceType)
         {
             // TODO: Remove this if condition after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5800
             if (!resourceType.Contains(".ResourceType"))
@@ -395,7 +395,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         /// <summary>
-        /// Represents how a parameter of rest operation is mapped to a parameter of a container method or an expression.
+        /// Represents how a parameter of rest operation is mapped to a parameter of a collection method or an expression.
         /// </summary>
         protected class ParameterMapping
         {
@@ -404,7 +404,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             /// </summary>
             public Parameter Parameter;
             /// <summary>
-            /// Should the parameter be passed through from the method in container class?
+            /// Should the parameter be passed through from the method in collection class?
             /// </summary>
             public bool IsPassThru;
             /// <summary>

@@ -147,6 +147,16 @@ namespace Azure.Management.Storage
         }
         #endregion
 
+        #region DeletedAccount
+        /// <summary> Gets an object representing a DeletedAccountCollection along with the instance operations that can be performed on it. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="DeletedAccountCollection" /> object. </returns>
+        public static DeletedAccountCollection GetDeletedAccounts(this Subscription subscription)
+        {
+            return new DeletedAccountCollection(subscription);
+        }
+        #endregion
+
         #region Sku
         private static SkusRestOperations GetSkusRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {

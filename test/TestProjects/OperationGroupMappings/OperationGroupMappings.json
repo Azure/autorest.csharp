@@ -34,6 +34,38 @@
         }
     },
     "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets": {
+            "get": {
+                "tags": [
+                    "AvailabilitySets"
+                ],
+                "operationId": "AvailabilitySets_List",
+                "description": "Retrieves information about an availability set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AvailabilitySetListResult"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
             "get": {
                 "tags": [
@@ -111,6 +143,25 @@
         }
     },
     "definitions": {
+        "AvailabilitySetListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AvailabilitySet"
+                    },
+                    "description": "The list of compute resource usages."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Usages operation response."
+        },
         "AvailabilitySet": {
             "properties": {
                 "foo": {

@@ -7,9 +7,9 @@
 azure-arm: true
 require: $(this-folder)/../../readme.md
 input-file:
-  - https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/blob.json
-  - https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/file.json
-  - https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/storage.json
+  - https://github.com/Azure/azure-rest-api-specs/blob/cfa9e0f3df4553767d7915ec8f471ff7d4931ed1/specification/storage/resource-manager/Microsoft.Storage/stable/2021-06-01/blob.json
+  - https://github.com/Azure/azure-rest-api-specs/blob/cfa9e0f3df4553767d7915ec8f471ff7d4931ed1/specification/storage/resource-manager/Microsoft.Storage/stable/2021-06-01/file.json
+  - https://github.com/Azure/azure-rest-api-specs/blob/cfa9e0f3df4553767d7915ec8f471ff7d4931ed1/specification/storage/resource-manager/Microsoft.Storage/stable/2021-06-01/storage.json
 namespace: Azure.Management.Storage
 
 modelerfour:
@@ -22,8 +22,10 @@ operation-group-to-resource-type:
   ImmutabilityPolicies: Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies
   FileShares: Microsoft.Storage/storageAccounts/fileServices/shares
   PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
+  DeletedAccounts: Microsoft.Storage/deletedAccounts
 operation-group-to-resource:
   StorageAccounts: StorageAccount
+  DeletedAccounts: DeletedAccount
 operation-group-to-parent:
   Skus: subscriptions
   BlobServices: Microsoft.Storage/storageAccounts
@@ -37,6 +39,7 @@ operation-group-to-singleton-resource:
   BlobServices: blobServices/default
   ImmutabilityPolicies: immutabilityPolicies/default
   FileServices: fileServices/default
+  ManagementPolicies: managementPolicies/default
 directive:
   - rename-model:
       from: BlobServiceProperties
