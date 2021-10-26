@@ -9,6 +9,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
+using Azure;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
@@ -515,6 +516,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 Assert.AreEqual(paramNames[i], parameters[i].Name);
                 Assert.AreEqual(paramTypes[i], parameters[i].ParameterType);
+            }
+        }
+
+        [Test]
+        public void VerifiyEnumerable()
+        {
+            foreach (var collection in FindAllCollections())
+            {
+                Assert.NotNull(collection.GetInterface("IEnumerable"), $"{collection.Name} did not implement IEnumerable");
+                Assert.NotNull(collection.GetInterface("IEnumerable`1"), $"{collection.Name} did not implement IEnumerable<T>");
+                var pageable = typeof(Pageable<>);
+                if (collection.GetMethod("GetAll").ReturnType.Name == pageable.Name)
+                {
+                    Assert.NotNull(collection.GetInterface("IAsyncEnumerable`1"), $"{collection.Name} did not implement IAsyncEnumerable<T>");
+                }
             }
         }
     }
