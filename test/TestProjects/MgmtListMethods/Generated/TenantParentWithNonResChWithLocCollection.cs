@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TenantParentWithNonResChWithLoc and their operations over a TenantTest. </summary>
-    public partial class TenantParentWithNonResChWithLocCollection : ArmCollection
+    public partial class TenantParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<TenantParentWithNonResChWithLoc>, IAsyncEnumerable<TenantParentWithNonResChWithLoc>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantParentWithNonResChWithLocsRestOperations _restClient;
@@ -35,6 +37,21 @@ namespace MgmtListMethods
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new TenantParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+        }
+
+        IEnumerator<TenantParentWithNonResChWithLoc> IEnumerable<TenantParentWithNonResChWithLoc>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<TenantParentWithNonResChWithLoc> IAsyncEnumerable<TenantParentWithNonResChWithLoc>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

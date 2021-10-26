@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TenantParentWithLoc and their operations over a TenantTest. </summary>
-    public partial class TenantParentWithLocCollection : ArmCollection
+    public partial class TenantParentWithLocCollection : ArmCollection, IEnumerable<TenantParentWithLoc>, IAsyncEnumerable<TenantParentWithLoc>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TenantParentWithLocsRestOperations _restClient;
@@ -35,6 +37,21 @@ namespace MgmtListMethods
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new TenantParentWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+        }
+
+        IEnumerator<TenantParentWithLoc> IEnumerable<TenantParentWithLoc>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<TenantParentWithLoc> IAsyncEnumerable<TenantParentWithLoc>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

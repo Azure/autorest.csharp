@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using SupersetFlattenInheritance.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of TrackedResourceModel2 and their operations over a ResourceGroup. </summary>
-    public partial class TrackedResourceModel2Collection : ArmCollection
+    public partial class TrackedResourceModel2Collection : ArmCollection, IEnumerable<TrackedResourceModel2>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly TrackedResourceModel2SRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace SupersetFlattenInheritance
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new TrackedResourceModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<TrackedResourceModel2> IEnumerable<TrackedResourceModel2>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -251,6 +264,40 @@ namespace SupersetFlattenInheritance
 
                 var response = await GetIfExistsAsync(trackedResourceModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<TrackedResourceModel2>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new TrackedResourceModel2(Parent, data)).ToArray() as IReadOnlyList<TrackedResourceModel2>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<TrackedResourceModel2>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new TrackedResourceModel2(Parent, data)).ToArray() as IReadOnlyList<TrackedResourceModel2>, response.GetRawResponse());
             }
             catch (Exception e)
             {

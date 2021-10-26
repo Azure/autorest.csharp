@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -20,7 +21,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of ResGrpParent and their operations over a ResourceGroup. </summary>
-    public partial class ResGrpParentCollection : ArmCollection
+    public partial class ResGrpParentCollection : ArmCollection, IEnumerable<ResGrpParent>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResGrpParentsRestOperations _restClient;
@@ -36,6 +37,16 @@ namespace MgmtListMethods
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ResGrpParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<ResGrpParent> IEnumerable<ResGrpParent>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

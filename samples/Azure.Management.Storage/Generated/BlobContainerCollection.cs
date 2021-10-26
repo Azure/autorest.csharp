@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobContainer and their operations over a BlobService. </summary>
-    public partial class BlobContainerCollection : ArmCollection
+    public partial class BlobContainerCollection : ArmCollection, IEnumerable<BlobContainer>, IAsyncEnumerable<BlobContainer>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BlobContainersRestOperations _restClient;
@@ -35,6 +37,21 @@ namespace Azure.Management.Storage
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<BlobContainer> IEnumerable<BlobContainer>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<BlobContainer> IAsyncEnumerable<BlobContainer>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -264,9 +281,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token. </summary>
         /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
+        /// <param name="include"> Optional, used to include the properties for soft deleted blob containers. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BlobContainer" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<BlobContainer> GetAll(string filter = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<BlobContainer> GetAll(string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
         {
             Page<BlobContainer> FirstPageFunc(int? pageSizeHint)
             {
@@ -274,7 +292,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAll(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -289,7 +307,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -303,9 +321,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token. </summary>
         /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
+        /// <param name="include"> Optional, used to include the properties for soft deleted blob containers. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BlobContainer" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<BlobContainer> GetAllAsync(string filter = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<BlobContainer> GetAllAsync(string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<BlobContainer>> FirstPageFunc(int? pageSizeHint)
             {
@@ -313,7 +332,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -328,7 +347,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

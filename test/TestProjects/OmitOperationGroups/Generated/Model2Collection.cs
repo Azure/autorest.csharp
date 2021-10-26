@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using OmitOperationGroups.Models;
 namespace OmitOperationGroups
 {
     /// <summary> A class representing collection of Model2 and their operations over a ResourceGroup. </summary>
-    public partial class Model2Collection : ArmCollection
+    public partial class Model2Collection : ArmCollection, IEnumerable<Model2>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Model2SRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace OmitOperationGroups
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<Model2> IEnumerable<Model2>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -251,6 +264,40 @@ namespace OmitOperationGroups
 
                 var response = await GetIfExistsAsync(model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<Model2>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new Model2(Parent, data)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<Model2>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new Model2(Parent, data)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
             }
             catch (Exception e)
             {

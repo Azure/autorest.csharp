@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ using Pagination.Models;
 namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeStringModel and their operations over a ResourceGroup. </summary>
-    public partial class PageSizeStringModelCollection : ArmCollection
+    public partial class PageSizeStringModelCollection : ArmCollection, IEnumerable<PageSizeStringModel>, IAsyncEnumerable<PageSizeStringModel>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeStringModelsRestOperations _restClient;
@@ -36,6 +38,21 @@ namespace Pagination
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PageSizeStringModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<PageSizeStringModel> IEnumerable<PageSizeStringModel>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<PageSizeStringModel> IAsyncEnumerable<PageSizeStringModel>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

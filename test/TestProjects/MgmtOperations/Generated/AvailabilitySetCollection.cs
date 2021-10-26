@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using MgmtOperations.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing collection of AvailabilitySet and their operations over a ResourceGroup. </summary>
-    public partial class AvailabilitySetCollection : ArmCollection
+    public partial class AvailabilitySetCollection : ArmCollection, IEnumerable<AvailabilitySet>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AvailabilitySetsRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace MgmtOperations
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<AvailabilitySet> IEnumerable<AvailabilitySet>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -259,6 +272,44 @@ namespace MgmtOperations
 
                 var response = await GetIfExistsAsync(availabilitySetName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<AvailabilitySet>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, expand, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(Parent, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<AvailabilitySet>> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, expand, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(Parent, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
             }
             catch (Exception e)
             {

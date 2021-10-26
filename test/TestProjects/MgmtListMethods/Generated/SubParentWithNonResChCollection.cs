@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of SubParentWithNonResCh and their operations over a Subscription. </summary>
-    public partial class SubParentWithNonResChCollection : ArmCollection
+    public partial class SubParentWithNonResChCollection : ArmCollection, IEnumerable<SubParentWithNonResCh>, IAsyncEnumerable<SubParentWithNonResCh>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubParentWithNonResChesRestOperations _restClient;
@@ -36,6 +38,21 @@ namespace MgmtListMethods
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<SubParentWithNonResCh> IEnumerable<SubParentWithNonResCh>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<SubParentWithNonResCh> IAsyncEnumerable<SubParentWithNonResCh>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

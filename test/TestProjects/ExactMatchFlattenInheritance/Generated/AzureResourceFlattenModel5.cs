@@ -63,7 +63,7 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/azureResourceFlattenModel5";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/azureResourceFlattenModel5s";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;

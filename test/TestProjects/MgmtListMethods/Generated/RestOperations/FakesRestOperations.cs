@@ -212,7 +212,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetAllRequest(string requiredParam, string optionalParam)
+        internal HttpMessage CreateGetAllRequest(string optionalParam)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -222,7 +222,6 @@ namespace MgmtListMethods
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/providers/Microsoft.Fake/fakes", false);
-            uri.AppendQuery("requiredParam", requiredParam, true);
             if (optionalParam != null)
             {
                 uri.AppendQuery("optionalParam", optionalParam, true);
@@ -235,18 +234,11 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public async Task<Response<FakeListResult>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeListResult>> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
-            using var message = CreateGetAllRequest(requiredParam, optionalParam);
+            using var message = CreateGetAllRequest(optionalParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -263,18 +255,11 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public Response<FakeListResult> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public Response<FakeListResult> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
-            using var message = CreateGetAllRequest(requiredParam, optionalParam);
+            using var message = CreateGetAllRequest(optionalParam);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -290,7 +275,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string requiredParam, string optionalParam)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -306,22 +291,17 @@ namespace MgmtListMethods
 
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="requiredParam"/> is null. </exception>
-        public async Task<Response<FakeListResult>> GetAllNextPageAsync(string nextLink, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        public async Task<Response<FakeListResult>> GetAllNextPageAsync(string nextLink, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, requiredParam, optionalParam);
+            using var message = CreateGetAllNextPageRequest(nextLink, optionalParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -339,22 +319,17 @@ namespace MgmtListMethods
 
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="requiredParam"/> is null. </exception>
-        public Response<FakeListResult> GetAllNextPage(string nextLink, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
+        public Response<FakeListResult> GetAllNextPage(string nextLink, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, requiredParam, optionalParam);
+            using var message = CreateGetAllNextPageRequest(nextLink, optionalParam);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

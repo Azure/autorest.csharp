@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ using MgmtParent.Models;
 namespace MgmtParent
 {
     /// <summary> A class representing collection of AvailabilitySet and their operations over a ResourceGroup. </summary>
-    public partial class AvailabilitySetCollection : ArmCollection
+    public partial class AvailabilitySetCollection : ArmCollection, IEnumerable<AvailabilitySet>, IAsyncEnumerable<AvailabilitySet>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AvailabilitySetsRestOperations _restClient;
@@ -36,6 +38,21 @@ namespace MgmtParent
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<AvailabilitySet> IEnumerable<AvailabilitySet>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<AvailabilitySet> IAsyncEnumerable<AvailabilitySet>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

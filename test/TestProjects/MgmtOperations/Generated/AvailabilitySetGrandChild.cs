@@ -63,7 +63,7 @@ namespace MgmtOperations
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets/availabilitySetChild/availabilitySetGrandChild";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets/availabilitySetChildren/availabilitySetGrandChildren";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;

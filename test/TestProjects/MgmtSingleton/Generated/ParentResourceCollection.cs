@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -20,7 +21,7 @@ using MgmtSingleton.Models;
 namespace MgmtSingleton
 {
     /// <summary> A class representing collection of ParentResource and their operations over a ResourceGroup. </summary>
-    public partial class ParentResourceCollection : ArmCollection
+    public partial class ParentResourceCollection : ArmCollection, IEnumerable<ParentResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ParentResourcesRestOperations _restClient;
@@ -36,6 +37,16 @@ namespace MgmtSingleton
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<ParentResource> IEnumerable<ParentResource>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

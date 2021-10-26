@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing collection of Bar and their operations over a ResourceGroup. </summary>
-    public partial class BarCollection : ArmCollection
+    public partial class BarCollection : ArmCollection, IEnumerable<Bar>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BarsRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace MgmtLRO
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<Bar> IEnumerable<Bar>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -253,6 +266,42 @@ namespace MgmtLRO
 
                 var response = await GetIfExistsAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<Bar>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new Bar(Parent, data)).ToArray() as IReadOnlyList<Bar>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<Bar>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BarCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new Bar(Parent, data)).ToArray() as IReadOnlyList<Bar>, response.GetRawResponse());
             }
             catch (Exception e)
             {

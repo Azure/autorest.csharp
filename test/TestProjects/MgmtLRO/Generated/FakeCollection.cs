@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -20,7 +21,7 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing collection of Fake and their operations over a ResourceGroup. </summary>
-    public partial class FakeCollection : ArmCollection
+    public partial class FakeCollection : ArmCollection, IEnumerable<Fake>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakesRestOperations _restClient;
@@ -36,6 +37,16 @@ namespace MgmtLRO
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<Fake> IEnumerable<Fake>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -270,22 +281,15 @@ namespace MgmtLRO
         }
 
         /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual async Task<Response<IReadOnlyList<Fake>>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<Fake>>> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAll");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, optionalParam, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(data => new Fake(Parent, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -296,22 +300,15 @@ namespace MgmtLRO
         }
 
         /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<IReadOnlyList<Fake>> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<Fake>> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAll");
             scope.Start();
             try
             {
-                var response = _restClient.GetAll(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
+                var response = _restClient.GetAll(Id.ResourceGroupName, optionalParam, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(data => new Fake(Parent, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)

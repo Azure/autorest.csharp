@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of EncryptionScope and their operations over a StorageAccount. </summary>
-    public partial class EncryptionScopeCollection : ArmCollection
+    public partial class EncryptionScopeCollection : ArmCollection, IEnumerable<EncryptionScope>, IAsyncEnumerable<EncryptionScope>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly EncryptionScopesRestOperations _restClient;
@@ -35,6 +37,21 @@ namespace Azure.Management.Storage
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<EncryptionScope> IEnumerable<EncryptionScope>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<EncryptionScope> IAsyncEnumerable<EncryptionScope>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

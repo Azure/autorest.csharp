@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -400,58 +399,6 @@ namespace MgmtOperations
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all availability sets in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual async Task<Response<IReadOnlyList<AvailabilitySet>>> TestMethodAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
-        {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestMethod");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.TestMethodAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all availability sets in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<IReadOnlyList<AvailabilitySet>> TestMethod(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
-        {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestMethod");
-            scope.Start();
-            try
-            {
-                var response = _restClient.TestMethod(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using SupersetFlattenInheritance.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of CustomModel2 and their operations over a ResourceGroup. </summary>
-    public partial class CustomModel2Collection : ArmCollection
+    public partial class CustomModel2Collection : ArmCollection, IEnumerable<CustomModel2>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly CustomModel2SRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace SupersetFlattenInheritance
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<CustomModel2> IEnumerable<CustomModel2>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -251,6 +264,40 @@ namespace SupersetFlattenInheritance
 
                 var response = await GetIfExistsAsync(customModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<CustomModel2>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new CustomModel2(Parent, data)).ToArray() as IReadOnlyList<CustomModel2>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<CustomModel2>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new CustomModel2(Parent, data)).ToArray() as IReadOnlyList<CustomModel2>, response.GetRawResponse());
             }
             catch (Exception e)
             {

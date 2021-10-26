@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +19,7 @@ using Azure.ResourceManager.Core;
 namespace TenantOnly
 {
     /// <summary> A class representing collection of Agreement and their operations over a BillingAccount. </summary>
-    public partial class AgreementCollection : ArmCollection
+    public partial class AgreementCollection : ArmCollection, IEnumerable<Agreement>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AgreementsRestOperations _restClient;
@@ -32,6 +35,16 @@ namespace TenantOnly
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+        }
+
+        IEnumerator<Agreement> IEnumerable<Agreement>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -189,6 +202,44 @@ namespace TenantOnly
 
                 var response = await GetIfExistsAsync(agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets an agreement by ID. </summary>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<Agreement>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new Agreement(Parent, data)).ToArray() as IReadOnlyList<Agreement>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets an agreement by ID. </summary>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<Agreement>> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AgreementCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.Name, expand, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new Agreement(Parent, data)).ToArray() as IReadOnlyList<Agreement>, response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -21,7 +22,7 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary> A class representing collection of PolicyAssignment and their operations over a Tenant. </summary>
-    public partial class PolicyAssignmentCollection : ArmCollection
+    public partial class PolicyAssignmentCollection : ArmCollection, IEnumerable<PolicyAssignment>, IAsyncEnumerable<PolicyAssignment>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyAssignmentsRestOperations _restClient;
@@ -37,6 +38,21 @@ namespace MgmtScopeResource
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+        }
+
+        IEnumerator<PolicyAssignment> IEnumerable<PolicyAssignment>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<PolicyAssignment> IAsyncEnumerable<PolicyAssignment>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Verify that the input resource Id is a valid collection for this type. </summary>

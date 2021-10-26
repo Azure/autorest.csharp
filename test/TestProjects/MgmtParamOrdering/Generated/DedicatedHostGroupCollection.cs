@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing collection of DedicatedHostGroup and their operations over a ResourceGroup. </summary>
-    public partial class DedicatedHostGroupCollection : ArmCollection
+    public partial class DedicatedHostGroupCollection : ArmCollection, IEnumerable<DedicatedHostGroup>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DedicatedHostGroupsRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace MgmtParamOrdering
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<DedicatedHostGroup> IEnumerable<DedicatedHostGroup>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -253,6 +266,42 @@ namespace MgmtParamOrdering
 
                 var response = await GetIfExistsAsync(hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about a dedicated host group. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<DedicatedHostGroup>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new DedicatedHostGroup(Parent, data)).ToArray() as IReadOnlyList<DedicatedHostGroup>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about a dedicated host group. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<DedicatedHostGroup>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new DedicatedHostGroup(Parent, data)).ToArray() as IReadOnlyList<DedicatedHostGroup>, response.GetRawResponse());
             }
             catch (Exception e)
             {

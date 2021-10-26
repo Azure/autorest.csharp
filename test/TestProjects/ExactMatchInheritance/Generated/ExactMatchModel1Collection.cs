@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using ExactMatchInheritance.Models;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel1 and their operations over a ResourceGroup. </summary>
-    public partial class ExactMatchModel1Collection : ArmCollection
+    public partial class ExactMatchModel1Collection : ArmCollection, IEnumerable<ExactMatchModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ExactMatchModel1SRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace ExactMatchInheritance
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<ExactMatchModel1> IEnumerable<ExactMatchModel1>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -251,6 +264,40 @@ namespace ExactMatchInheritance
 
                 var response = await GetIfExistsAsync(exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<ExactMatchModel1>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new ExactMatchModel1(Parent, data)).ToArray() as IReadOnlyList<ExactMatchModel1>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<ExactMatchModel1>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new ExactMatchModel1(Parent, data)).ToArray() as IReadOnlyList<ExactMatchModel1>, response.GetRawResponse());
             }
             catch (Exception e)
             {

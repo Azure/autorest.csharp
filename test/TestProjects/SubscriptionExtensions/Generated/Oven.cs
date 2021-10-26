@@ -63,7 +63,7 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/ovens";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;

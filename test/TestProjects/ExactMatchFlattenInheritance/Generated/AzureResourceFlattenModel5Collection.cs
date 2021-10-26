@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using ExactMatchFlattenInheritance.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of AzureResourceFlattenModel5 and their operations over a ResourceGroup. </summary>
-    public partial class AzureResourceFlattenModel5Collection : ArmCollection
+    public partial class AzureResourceFlattenModel5Collection : ArmCollection, IEnumerable<AzureResourceFlattenModel5>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AzureResourceFlattenModel5SRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace ExactMatchFlattenInheritance
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AzureResourceFlattenModel5SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<AzureResourceFlattenModel5> IEnumerable<AzureResourceFlattenModel5>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -245,6 +258,42 @@ namespace ExactMatchFlattenInheritance
 
                 var response = await GetIfExistsAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an AzureResourceFlattenModel5. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<AzureResourceFlattenModel5>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new AzureResourceFlattenModel5(Parent, data)).ToArray() as IReadOnlyList<AzureResourceFlattenModel5>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an AzureResourceFlattenModel5. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<AzureResourceFlattenModel5>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new AzureResourceFlattenModel5(Parent, data)).ToArray() as IReadOnlyList<AzureResourceFlattenModel5>, response.GetRawResponse());
             }
             catch (Exception e)
             {

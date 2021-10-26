@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ using MgmtMultipleParentResource.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of SubParentChildBody and their operations over a SubParent. </summary>
-    public partial class SubParentChildBodyCollection : ArmCollection
+    public partial class SubParentChildBodyCollection : ArmCollection, IEnumerable<SubParentChildBody>, IAsyncEnumerable<SubParentChildBody>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ChildrenRestOperations _restClient;
@@ -35,6 +37,21 @@ namespace MgmtMultipleParentResource
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<SubParentChildBody> IEnumerable<SubParentChildBody>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<SubParentChildBody> IAsyncEnumerable<SubParentChildBody>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ using MgmtExtensionResource.Models;
 namespace MgmtExtensionResource
 {
     /// <summary> A class representing collection of PolicyDefinition and their operations over a Tenant. </summary>
-    public partial class PolicyDefinitionCollection : ArmCollection
+    public partial class PolicyDefinitionCollection : ArmCollection, IEnumerable<PolicyDefinition>, IAsyncEnumerable<PolicyDefinition>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyDefinitionsRestOperations _restClient;
@@ -36,6 +38,21 @@ namespace MgmtExtensionResource
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+        }
+
+        IEnumerator<PolicyDefinition> IEnumerable<PolicyDefinition>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<PolicyDefinition> IAsyncEnumerable<PolicyDefinition>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Verify that the input resource Id is a valid collection for this type. </summary>

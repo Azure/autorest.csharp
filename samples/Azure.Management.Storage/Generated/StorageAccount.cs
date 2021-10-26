@@ -763,6 +763,108 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> Live Migration of storage account to enable Hns. </summary>
+        /// <param name="requestType"> Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request &apos;HnsOnValidationRequest&apos; or a hydration request &apos;HnsOnHydrationRequest&apos;. The validation request will validate the migration whereas the hydration request will migrate the account. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requestType"/> is null. </exception>
+        public async virtual Task<StorageAccountHierarchicalNamespaceMigrationOperation> HierarchicalNamespaceMigrationAsync(string requestType, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (requestType == null)
+            {
+                throw new ArgumentNullException(nameof(requestType));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.HierarchicalNamespaceMigration");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.HierarchicalNamespaceMigrationAsync(Id.ResourceGroupName, Id.Name, requestType, cancellationToken).ConfigureAwait(false);
+                var operation = new StorageAccountHierarchicalNamespaceMigrationOperation(_clientDiagnostics, Pipeline, _restClient.CreateHierarchicalNamespaceMigrationRequest(Id.ResourceGroupName, Id.Name, requestType).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Live Migration of storage account to enable Hns. </summary>
+        /// <param name="requestType"> Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request &apos;HnsOnValidationRequest&apos; or a hydration request &apos;HnsOnHydrationRequest&apos;. The validation request will validate the migration whereas the hydration request will migrate the account. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requestType"/> is null. </exception>
+        public virtual StorageAccountHierarchicalNamespaceMigrationOperation HierarchicalNamespaceMigration(string requestType, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (requestType == null)
+            {
+                throw new ArgumentNullException(nameof(requestType));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.HierarchicalNamespaceMigration");
+            scope.Start();
+            try
+            {
+                var response = _restClient.HierarchicalNamespaceMigration(Id.ResourceGroupName, Id.Name, requestType, cancellationToken);
+                var operation = new StorageAccountHierarchicalNamespaceMigrationOperation(_clientDiagnostics, Pipeline, _restClient.CreateHierarchicalNamespaceMigrationRequest(Id.ResourceGroupName, Id.Name, requestType).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Abort live Migration of storage account to enable Hns. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<StorageAccountAbortHierarchicalNamespaceMigrationOperation> AbortHierarchicalNamespaceMigrationAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.AbortHierarchicalNamespaceMigration");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.AbortHierarchicalNamespaceMigrationAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new StorageAccountAbortHierarchicalNamespaceMigrationOperation(_clientDiagnostics, Pipeline, _restClient.CreateAbortHierarchicalNamespaceMigrationRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Abort live Migration of storage account to enable Hns. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual StorageAccountAbortHierarchicalNamespaceMigrationOperation AbortHierarchicalNamespaceMigration(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccount.AbortHierarchicalNamespaceMigration");
+            scope.Start();
+            try
+            {
+                var response = _restClient.AbortHierarchicalNamespaceMigration(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new StorageAccountAbortHierarchicalNamespaceMigrationOperation(_clientDiagnostics, Pipeline, _restClient.CreateAbortHierarchicalNamespaceMigrationRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Restore blobs in the specified blob ranges. </summary>
         /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -842,11 +944,18 @@ namespace Azure.Management.Storage
             return new FileShareCollection(this);
         }
 
-        /// <summary> Gets a list of ManagementPolicies in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ManagementPolicies and their operations over a StorageAccount. </returns>
-        public ManagementPolicyCollection GetManagementPolicies()
+        /// <summary> Gets an object representing a ManagementPolicy along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="ManagementPolicy" /> object. </returns>
+        public ManagementPolicy GetManagementPolicy()
         {
-            return new ManagementPolicyCollection(this);
+            return new ManagementPolicy(this, Id + "/managementPolicies/default");
+        }
+
+        /// <summary> Gets a list of BlobInventoryPolicies in the StorageAccount. </summary>
+        /// <returns> An object representing collection of BlobInventoryPolicies and their operations over a StorageAccount. </returns>
+        public BlobInventoryPolicyCollection GetBlobInventoryPolicies()
+        {
+            return new BlobInventoryPolicyCollection(this);
         }
 
         /// <summary> Gets a list of PrivateEndpointConnections in the StorageAccount. </summary>

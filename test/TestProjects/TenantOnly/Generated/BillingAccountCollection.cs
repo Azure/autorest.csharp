@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -17,7 +20,7 @@ using TenantOnly.Models;
 namespace TenantOnly
 {
     /// <summary> A class representing collection of BillingAccount and their operations over a Tenant. </summary>
-    public partial class BillingAccountCollection : ArmCollection
+    public partial class BillingAccountCollection : ArmCollection, IEnumerable<BillingAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BillingAccountsRestOperations _restClient;
@@ -33,6 +36,16 @@ namespace TenantOnly
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+        }
+
+        IEnumerator<BillingAccount> IEnumerable<BillingAccount>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -258,6 +271,44 @@ namespace TenantOnly
 
                 var response = await GetIfExistsAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets a billing account by its ID. </summary>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<BillingAccount>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(expand, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new BillingAccount(Parent, data)).ToArray() as IReadOnlyList<BillingAccount>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets a billing account by its ID. </summary>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<BillingAccount>> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(expand, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new BillingAccount(Parent, data)).ToArray() as IReadOnlyList<BillingAccount>, response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -17,7 +20,7 @@ using MgmtOperations.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing collection of AvailabilitySetGrandChild and their operations over a AvailabilitySetChild. </summary>
-    public partial class AvailabilitySetGrandChildCollection : ArmCollection
+    public partial class AvailabilitySetGrandChildCollection : ArmCollection, IEnumerable<AvailabilitySetGrandChild>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AvailabilitySetGrandChildRestOperations _restClient;
@@ -33,6 +36,16 @@ namespace MgmtOperations
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<AvailabilitySetGrandChild> IEnumerable<AvailabilitySetGrandChild>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -252,6 +265,42 @@ namespace MgmtOperations
 
                 var response = await GetIfExistsAsync(availabilitySetGrandChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<AvailabilitySetGrandChild>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySetGrandChild(Parent, data)).ToArray() as IReadOnlyList<AvailabilitySetGrandChild>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<AvailabilitySetGrandChild>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySetGrandChild(Parent, data)).ToArray() as IReadOnlyList<AvailabilitySetGrandChild>, response.GetRawResponse());
             }
             catch (Exception e)
             {

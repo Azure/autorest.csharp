@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using SupersetInheritance.Models;
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel4 and their operations over a ResourceGroup. </summary>
-    public partial class SupersetModel4Collection : ArmCollection
+    public partial class SupersetModel4Collection : ArmCollection, IEnumerable<SupersetModel4>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SupersetModel4SRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace SupersetInheritance
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SupersetModel4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<SupersetModel4> IEnumerable<SupersetModel4>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -251,6 +264,40 @@ namespace SupersetInheritance
 
                 var response = await GetIfExistsAsync(supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<SupersetModel4>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new SupersetModel4(Parent, data)).ToArray() as IReadOnlyList<SupersetModel4>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<SupersetModel4>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new SupersetModel4(Parent, data)).ToArray() as IReadOnlyList<SupersetModel4>, response.GetRawResponse());
             }
             catch (Exception e)
             {

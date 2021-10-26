@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of ResGrpParentWithAncestor and their operations over a ResourceGroup. </summary>
-    public partial class ResGrpParentWithAncestorCollection : ArmCollection
+    public partial class ResGrpParentWithAncestorCollection : ArmCollection, IEnumerable<ResGrpParentWithAncestor>, IAsyncEnumerable<ResGrpParentWithAncestor>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResGrpParentWithAncestorsRestOperations _restClient;
@@ -36,6 +38,21 @@ namespace MgmtListMethods
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ResGrpParentWithAncestorsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<ResGrpParentWithAncestor> IEnumerable<ResGrpParentWithAncestor>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<ResGrpParentWithAncestor> IAsyncEnumerable<ResGrpParentWithAncestor>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

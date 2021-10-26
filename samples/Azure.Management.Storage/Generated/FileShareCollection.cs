@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +21,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileShare and their operations over a StorageAccount. </summary>
-    public partial class FileShareCollection : ArmCollection
+    public partial class FileShareCollection : ArmCollection, IEnumerable<FileShare>, IAsyncEnumerable<FileShare>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FileSharesRestOperations _restClient;
@@ -37,6 +39,21 @@ namespace Azure.Management.Storage
             _restClient = new FileSharesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
+        IEnumerator<FileShare> IEnumerable<FileShare>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<FileShare> IAsyncEnumerable<FileShare>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => StorageAccount.ResourceType;
 
@@ -45,10 +62,11 @@ namespace Azure.Management.Storage
         /// <summary> Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public virtual FileShareCreateOperation CreateOrUpdate(string shareName, FileShareData fileShare, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual FileShareCreateOperation CreateOrUpdate(string shareName, FileShareData fileShare, string expand = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (shareName == null)
             {
@@ -63,7 +81,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Create(Id.ResourceGroupName, Id.Name, shareName, fileShare, cancellationToken);
+                var response = _restClient.Create(Id.ResourceGroupName, Id.Name, shareName, fileShare, expand, cancellationToken);
                 var operation = new FileShareCreateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -79,10 +97,11 @@ namespace Azure.Management.Storage
         /// <summary> Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public async virtual Task<FileShareCreateOperation> CreateOrUpdateAsync(string shareName, FileShareData fileShare, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<FileShareCreateOperation> CreateOrUpdateAsync(string shareName, FileShareData fileShare, string expand = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (shareName == null)
             {
@@ -97,7 +116,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Name, shareName, fileShare, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Name, shareName, fileShare, expand, cancellationToken).ConfigureAwait(false);
                 var operation = new FileShareCreateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -112,8 +131,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
+        /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<FileShare> Get(string shareName, CancellationToken cancellationToken = default)
+        public virtual Response<FileShare> Get(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.Get");
             scope.Start();
@@ -124,7 +145,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(shareName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FileShare(Parent, response.Value), response.GetRawResponse());
@@ -138,8 +159,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
+        /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<FileShare>> GetAsync(string shareName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FileShare>> GetAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.Get");
             scope.Start();
@@ -150,7 +173,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(shareName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FileShare(Parent, response.Value), response.GetRawResponse());
@@ -164,8 +187,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
+        /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<FileShare> GetIfExists(string shareName, CancellationToken cancellationToken = default)
+        public virtual Response<FileShare> GetIfExists(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.GetIfExists");
             scope.Start();
@@ -176,7 +201,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(shareName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<FileShare>(null, response.GetRawResponse())
                     : Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
@@ -190,8 +215,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
+        /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<FileShare>> GetIfExistsAsync(string shareName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FileShare>> GetIfExistsAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.GetIfExists");
             scope.Start();
@@ -202,7 +229,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(shareName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<FileShare>(null, response.GetRawResponse())
                     : Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
@@ -216,8 +243,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
+        /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<bool> CheckIfExists(string shareName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.CheckIfExists");
             scope.Start();
@@ -228,7 +257,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(shareName));
                 }
 
-                var response = GetIfExists(shareName, cancellationToken: cancellationToken);
+                var response = GetIfExists(shareName, expand, xMsSnapshot, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -240,8 +269,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
+        /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string shareName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareCollection.CheckIfExists");
             scope.Start();
@@ -252,7 +283,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(shareName));
                 }
 
-                var response = await GetIfExistsAsync(shareName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await GetIfExistsAsync(shareName, expand, xMsSnapshot, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -264,9 +295,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Lists all shares. </summary>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FileShare" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FileShare> GetAll(string filter = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<FileShare> GetAll(string filter = null, string expand = null, CancellationToken cancellationToken = default)
         {
             Page<FileShare> FirstPageFunc(int? pageSizeHint)
             {
@@ -274,7 +306,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAll(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FileShare(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -289,7 +321,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FileShare(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -303,9 +335,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Lists all shares. </summary>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FileShare" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FileShare> GetAllAsync(string filter = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<FileShare> GetAllAsync(string filter = null, string expand = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<FileShare>> FirstPageFunc(int? pageSizeHint)
             {
@@ -313,7 +346,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FileShare(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -328,7 +361,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FileShare(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

@@ -6,6 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -18,7 +21,7 @@ using MgmtPropertyChooser.Models;
 namespace MgmtPropertyChooser
 {
     /// <summary> A class representing collection of VirtualMachine and their operations over a ResourceGroup. </summary>
-    public partial class VirtualMachineCollection : ArmCollection
+    public partial class VirtualMachineCollection : ArmCollection, IEnumerable<VirtualMachine>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly VirtualMachinesRestOperations _restClient;
@@ -34,6 +37,16 @@ namespace MgmtPropertyChooser
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new VirtualMachinesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+        }
+
+        IEnumerator<VirtualMachine> IEnumerable<VirtualMachine>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -253,6 +266,42 @@ namespace MgmtPropertyChooser
 
                 var response = await GetIfExistsAsync(vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<VirtualMachine>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new VirtualMachine(Parent, data)).ToArray() as IReadOnlyList<VirtualMachine>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<VirtualMachine>> GetAll(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new VirtualMachine(Parent, data)).ToArray() as IReadOnlyList<VirtualMachine>, response.GetRawResponse());
             }
             catch (Exception e)
             {

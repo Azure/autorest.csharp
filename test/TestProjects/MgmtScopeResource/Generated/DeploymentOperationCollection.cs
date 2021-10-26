@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtScopeResource
 {
     /// <summary> A class representing collection of DeploymentOperation and their operations over a DeploymentExtended. </summary>
-    public partial class DeploymentOperationCollection : ArmCollection
+    public partial class DeploymentOperationCollection : ArmCollection, IEnumerable<DeploymentOperation>, IAsyncEnumerable<DeploymentOperation>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DeploymentRestOperations _restClient;
@@ -34,6 +36,21 @@ namespace MgmtScopeResource
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+        }
+
+        IEnumerator<DeploymentOperation> IEnumerable<DeploymentOperation>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<DeploymentOperation> IAsyncEnumerable<DeploymentOperation>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
