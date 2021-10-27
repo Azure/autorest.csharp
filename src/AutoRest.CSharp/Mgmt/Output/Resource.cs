@@ -92,23 +92,31 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            int count = ResourceWithSameResourceNameCount();
+            int countOfSameResourceDataName = ResourceWithSameResourceNameCount();
+            int countOfSameResourceTypeName = ResourceWithSameResourceTypeCount();
             if (!IsById)
             {
                 // this is a regular resource and the name is unique
-                if (count == 1)
+                if (countOfSameResourceDataName == 1)
                     return ResourceName;
-                // otherwise we need prefix to distinguish the resources
-                // TODO -- introduce a flag that suppress the exception here to be thrown which notice the user to assign a proper name in config
 
-                // note that we need to ensure the resource class name is unique. If we only add the the parent name, we can still hit the case that we still have duplicate names.
-                // therefore we are adding the resource type as a prefix here which is ensure as unique.
+                // if countOfSameResourceDataName > 1, we need to have the resource types as the resource type name
+                // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
+
+                // here first we try the resource types
                 var types = ResourceType.Types;
-                return string.Join("", types.Select(segment => segment.ConstantValue.ToSingular().FirstCharToUpperCase()));
+                var name = string.Join("", types.Select(segment => segment.ConstantValue.ToSingular().FirstCharToUpperCase()));
+                if (countOfSameResourceTypeName > 1)
+                {
+                    // resource type is not unique enough, we add the scope as prefix. And in this case, parent of myself must be an extension (otherwise the resource types should be different)
+                    var parents = this.Parent(_context);
+                    name = string.Join("", parents.Select(p => p.ResourceName)) + name;
+                }
+                return name;
             }
             // if this resource is based on a "ById" operation
             // if we only have one resource class with this name - we have no choice but use this "ById" resource
-            if (count == 1)
+            if (countOfSameResourceDataName == 1)
                 return ResourceName;
 
             // otherwise we need to add a "ById" suffix to make this resource to have a different name
@@ -130,6 +138,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         private int ResourceWithSameResourceNameCount()
         {
             return _context.Library.ArmResources.Count(resource => resource.ResourceName == this.ResourceName);
+        }
+
+        private int ResourceWithSameResourceTypeCount()
+        {
+            return _context.Library.ArmResources.Count(resource => resource.ResourceType == this.ResourceType);
         }
 
         protected override string DefaultAccessibility => "public";

@@ -19,39 +19,39 @@ using MgmtMultipleParentResource.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of ChildBody and their operations over its parent. </summary>
-    public partial class AnotherParentChildBodyContainer : ArmContainer
+    public partial class ParentSubParentChildContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AnotherChildrenRestOperations _anotherChildrenRestClient;
+        private readonly ChildrenRestOperations _childrenRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="AnotherParentChildBodyContainer"/> class for mocking. </summary>
-        protected AnotherParentChildBodyContainer()
+        /// <summary> Initializes a new instance of the <see cref="ParentSubParentChildContainer"/> class for mocking. </summary>
+        protected ParentSubParentChildContainer()
         {
         }
 
-        /// <summary> Initializes a new instance of AnotherParentChildBodyContainer class. </summary>
+        /// <summary> Initializes a new instance of ParentSubParentChildContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AnotherParentChildBodyContainer(ArmResource parent) : base(parent)
+        internal ParentSubParentChildContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _childrenRestClient = new ChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => AnotherParent.ResourceType;
+        protected override ResourceType ValidResourceType => SubParent.ResourceType;
 
         // Container level operations.
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// OperationId: AnotherChildren_CreateOrUpdate
-        /// <summary> The operation to create or update the run command. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children/{childName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+        /// OperationId: Children_CreateOrUpdate
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public virtual AnotherChildCreateOrUpdateOperation CreateOrUpdate(string childName, ChildBodyData childBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ChildCreateOrUpdateOperation CreateOrUpdate(string childName, ChildBodyData childBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
@@ -62,12 +62,12 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _anotherChildrenRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, childName, childBody, cancellationToken);
-                var operation = new AnotherChildCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, childName, childBody).Request, response);
+                var response = _childrenRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken);
+                var operation = new ChildCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _childrenRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -79,16 +79,16 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// OperationId: AnotherChildren_CreateOrUpdate
-        /// <summary> The operation to create or update the run command. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children/{childName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+        /// OperationId: Children_CreateOrUpdate
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public async virtual Task<AnotherChildCreateOrUpdateOperation> CreateOrUpdateAsync(string childName, ChildBodyData childBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ChildCreateOrUpdateOperation> CreateOrUpdateAsync(string childName, ChildBodyData childBody, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
@@ -99,12 +99,12 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _anotherChildrenRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, childName, childBody, cancellationToken).ConfigureAwait(false);
-                var operation = new AnotherChildCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _anotherChildrenRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, childName, childBody).Request, response);
+                var response = await _childrenRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken).ConfigureAwait(false);
+                var operation = new ChildCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _childrenRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -116,29 +116,29 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// OperationId: AnotherChildren_Get
-        /// <summary> The operation to get the run command. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children/{childName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+        /// OperationId: Children_Get
+        /// <summary> The operation to get the VMSS VM run command. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public virtual Response<AnotherParentChildBody> Get(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<ParentSubParentChild> Get(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.Get");
+            using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.Get");
             scope.Start();
             try
             {
-                var response = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken);
+                var response = _childrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AnotherParentChildBody(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ParentSubParentChild(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -147,29 +147,29 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// OperationId: AnotherChildren_Get
-        /// <summary> The operation to get the run command. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children/{childName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+        /// OperationId: Children_Get
+        /// <summary> The operation to get the VMSS VM run command. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public async virtual Task<Response<AnotherParentChildBody>> GetAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ParentSubParentChild>> GetAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.Get");
+            using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.Get");
             scope.Start();
             try
             {
-                var response = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _childrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new AnotherParentChildBody(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ParentSubParentChild(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -183,21 +183,21 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public virtual Response<AnotherParentChildBody> GetIfExists(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<ParentSubParentChild> GetIfExists(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.GetIfExists");
             scope.Start();
             try
             {
-                var response = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken: cancellationToken);
+                var response = _childrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
-                    ? Response.FromValue<AnotherParentChildBody>(null, response.GetRawResponse())
-                    : Response.FromValue(new AnotherParentChildBody(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<ParentSubParentChild>(null, response.GetRawResponse())
+                    : Response.FromValue(new ParentSubParentChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -211,21 +211,21 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public async virtual Task<Response<AnotherParentChildBody>> GetIfExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ParentSubParentChild>> GetIfExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (childName == null)
             {
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
-                var response = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Name, childName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _childrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
-                    ? Response.FromValue<AnotherParentChildBody>(null, response.GetRawResponse())
-                    : Response.FromValue(new AnotherParentChildBody(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<ParentSubParentChild>(null, response.GetRawResponse())
+                    : Response.FromValue(new ParentSubParentChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -246,7 +246,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -272,7 +272,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -286,23 +286,23 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// OperationId: AnotherChildren_List
-        /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+        /// OperationId: Children_List
+        /// <summary> The operation to get all run commands of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AnotherParentChildBody" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<AnotherParentChildBody> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ParentSubParentChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ParentSubParentChild> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<AnotherParentChildBody> FirstPageFunc(int? pageSizeHint)
+            Page<ParentSubParentChild> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _anotherChildrenRestClient.List(Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChildBody(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _childrenRestClient.List(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ParentSubParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -310,14 +310,14 @@ namespace MgmtMultipleParentResource
                     throw;
                 }
             }
-            Page<AnotherParentChildBody> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<ParentSubParentChild> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _anotherChildrenRestClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChildBody(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _childrenRestClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ParentSubParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -328,23 +328,23 @@ namespace MgmtMultipleParentResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// OperationId: AnotherChildren_List
-        /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}
+        /// OperationId: Children_List
+        /// <summary> The operation to get all run commands of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AnotherParentChildBody" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<AnotherParentChildBody> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ParentSubParentChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ParentSubParentChild> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<AnotherParentChildBody>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<ParentSubParentChild>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _anotherChildrenRestClient.ListAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChildBody(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _childrenRestClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ParentSubParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -352,14 +352,14 @@ namespace MgmtMultipleParentResource
                     throw;
                 }
             }
-            async Task<Page<AnotherParentChildBody>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<ParentSubParentChild>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBodyContainer.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("ParentSubParentChildContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _anotherChildrenRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AnotherParentChildBody(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _childrenRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ParentSubParentChild(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -371,6 +371,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AnotherParentChildBody, ChildBodyData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, ParentSubParentChild, ChildBodyData> Construct() { }
     }
 }
