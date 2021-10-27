@@ -54,6 +54,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // Check if the request path has even number of segments after the providers segment
             // TODO -- do we need this criteria?
 
+            // before we are finding any operations, we need to ensure this operation set has a GET request.
+            if (FindOperation(set, HttpMethod.Get) is null)
+                return false;
+
             // try put operation to get the resource name
             if (set.TryOperationWithMethod(HttpMethod.Put, config, out resourceName))
             {
