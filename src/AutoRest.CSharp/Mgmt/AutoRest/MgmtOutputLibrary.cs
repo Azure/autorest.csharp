@@ -721,39 +721,5 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
         }
-
-        public void LevelTraverseResourceHierarchyTree()
-        {
-            var levels = new List<IEnumerable<Resource>>();
-            // initial level
-            var queue = new Queue<MgmtTypeProvider>();
-            var next = new Queue<MgmtTypeProvider>();
-            queue.Enqueue(TenantExtensions);
-            queue.Enqueue(SubscriptionExtensions);
-            queue.Enqueue(ResourceGroupExtensions);
-            queue.Enqueue(ManagementGroupExtensions);
-            while (queue.Count > 0)
-            {
-                var node = queue.Dequeue();
-                // add the child of current level to the queue of next level
-                foreach (var r in node.ChildResources)
-                    next.Enqueue(r);
-                // if current level is empty, switch to next level
-                if (queue.Count == 0 && next.Count != 0)
-                {
-                    // add the next level to the resource
-                    var level = new List<Resource>();
-                    level.AddRange(next.Cast<Resource>());
-                    levels.Add(level.Distinct().OrderBy(r => r.ResourceName));
-                    queue = next;
-                    next = new Queue<MgmtTypeProvider>();
-                }
-            }
-
-            foreach (var level in levels)
-            {
-                // assign prefix to everyone of the resources
-            }
-        }
     }
 }

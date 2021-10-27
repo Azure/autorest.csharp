@@ -19,19 +19,19 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineExtension and their operations over its parent. </summary>
-    public partial class VirtualMachineScaleSetVMExtensionContainer : ArmContainer
+    public partial class VirtualMachineScaleSetVirtualMachineExtensionContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly VirtualMachineScaleSetVMExtensionsRestOperations _virtualMachineScaleSetVMExtensionsRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVMExtensionContainer"/> class for mocking. </summary>
-        protected VirtualMachineScaleSetVMExtensionContainer()
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVirtualMachineExtensionContainer"/> class for mocking. </summary>
+        protected VirtualMachineScaleSetVirtualMachineExtensionContainer()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMExtensionContainer class. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVirtualMachineExtensionContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal VirtualMachineScaleSetVMExtensionContainer(ArmResource parent) : base(parent)
+        internal VirtualMachineScaleSetVirtualMachineExtensionContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _virtualMachineScaleSetVMExtensionsRestClient = new VirtualMachineScaleSetVMExtensionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(extensionParameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -99,7 +99,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(extensionParameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -124,21 +124,21 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
-        public virtual Response<VirtualMachineScaleSetVMExtension> Get(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineScaleSetVirtualMachineExtension> Get(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {
                 throw new ArgumentNullException(nameof(vmExtensionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.Get");
             scope.Start();
             try
             {
                 var response = _virtualMachineScaleSetVMExtensionsRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSetVMExtension(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSetVirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,21 +155,21 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
-        public async virtual Task<Response<VirtualMachineScaleSetVMExtension>> GetAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineScaleSetVirtualMachineExtension>> GetAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {
                 throw new ArgumentNullException(nameof(vmExtensionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.Get");
             scope.Start();
             try
             {
                 var response = await _virtualMachineScaleSetVMExtensionsRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineScaleSetVMExtension(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSetVirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -183,21 +183,21 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
-        public virtual Response<VirtualMachineScaleSetVMExtension> GetIfExists(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineScaleSetVirtualMachineExtension> GetIfExists(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {
                 throw new ArgumentNullException(nameof(vmExtensionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.GetIfExists");
             scope.Start();
             try
             {
                 var response = _virtualMachineScaleSetVMExtensionsRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
-                    ? Response.FromValue<VirtualMachineScaleSetVMExtension>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachineScaleSetVMExtension(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<VirtualMachineScaleSetVirtualMachineExtension>(null, response.GetRawResponse())
+                    : Response.FromValue(new VirtualMachineScaleSetVirtualMachineExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -211,21 +211,21 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
-        public async virtual Task<Response<VirtualMachineScaleSetVMExtension>> GetIfExistsAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineScaleSetVirtualMachineExtension>> GetIfExistsAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {
                 throw new ArgumentNullException(nameof(vmExtensionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.GetIfExistsAsync");
             scope.Start();
             try
             {
                 var response = await _virtualMachineScaleSetVMExtensionsRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
-                    ? Response.FromValue<VirtualMachineScaleSetVMExtension>(null, response.GetRawResponse())
-                    : Response.FromValue(new VirtualMachineScaleSetVMExtension(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<VirtualMachineScaleSetVirtualMachineExtension>(null, response.GetRawResponse())
+                    : Response.FromValue(new VirtualMachineScaleSetVirtualMachineExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -246,7 +246,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmExtensionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -272,7 +272,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmExtensionName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -292,14 +292,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<VirtualMachineScaleSetVMExtension>> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<VirtualMachineScaleSetVirtualMachineExtension>> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.GetAll");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.GetAll");
             scope.Start();
             try
             {
                 var response = _virtualMachineScaleSetVMExtensionsRestClient.List(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineScaleSetVMExtension(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineScaleSetVMExtension>, response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineScaleSetVirtualMachineExtension(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineScaleSetVirtualMachineExtension>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -314,14 +314,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<VirtualMachineScaleSetVMExtension>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<VirtualMachineScaleSetVirtualMachineExtension>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMExtensionContainer.GetAll");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVirtualMachineExtensionContainer.GetAll");
             scope.Start();
             try
             {
                 var response = await _virtualMachineScaleSetVMExtensionsRestClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineScaleSetVMExtension(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineScaleSetVMExtension>, response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachineScaleSetVirtualMachineExtension(Parent, value)).ToArray() as IReadOnlyList<VirtualMachineScaleSetVirtualMachineExtension>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -331,6 +331,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, VirtualMachineScaleSetVMExtension, VirtualMachineExtensionData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, VirtualMachineScaleSetVirtualMachineExtension, VirtualMachineExtensionData> Construct() { }
     }
 }

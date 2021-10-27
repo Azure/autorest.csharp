@@ -102,6 +102,10 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public string SerializedType { get; }
 
+        public Segment Namespace => this[0];
+
+        public IEnumerable<Segment> Types => _segments.Skip(1);
+
         public Segment this[int index] => _segments[index];
 
         public int Count => _segments.Count;

@@ -89,14 +89,14 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region VirtualMachineScaleSetVMExtension
-        /// <summary> Gets an object representing a VirtualMachineScaleSetVMExtension along with the instance operations that can be performed on it but with no data. </summary>
+        #region VirtualMachineScaleSetVirtualMachineExtension
+        /// <summary> Gets an object representing a VirtualMachineScaleSetVirtualMachineExtension along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetVMExtension" /> object. </returns>
-        public static VirtualMachineScaleSetVMExtension GetVirtualMachineScaleSetVMExtension(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetVirtualMachineExtension" /> object. </returns>
+        public static VirtualMachineScaleSetVirtualMachineExtension GetVirtualMachineScaleSetVirtualMachineExtension(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachineScaleSetVMExtension(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new VirtualMachineScaleSetVirtualMachineExtension(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 

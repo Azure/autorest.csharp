@@ -11,6 +11,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -84,9 +85,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultName;
         protected override string DefaultName => _defaultName ??= EnsureResourceDefaultName();
 
-        public virtual string Prefix { get; internal set; } = string.Empty;
-        public virtual string Suffix { get; internal set; } = string.Empty;
-
         private string EnsureResourceDefaultName()
         {
             // read configuration to see if we could get a configuration for this resource
@@ -94,10 +92,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            //_context.Library.LevelTraverseResourceHierarchyTree();
-
-            // TODO -- change the way that we determine the name of resource classes by
-            // "Travesal from the root of resource tree the first one with same resource data name will have the name, and the following ones will has the name of its parent as prefix"
             int count = ResourceWithSameResourceNameCount();
             if (!IsById)
             {
@@ -107,10 +101,10 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // otherwise we need prefix to distinguish the resources
                 // TODO -- introduce a flag that suppress the exception here to be thrown which notice the user to assign a proper name in config
 
-                // otherwise we append the parent name to it
-                var parents = this.Parent(_context);
-                var parentSuffix = string.Join("", parents.Select(p => p.ResourceName));
-                return $"{parentSuffix}{ResourceName}";
+                // note that we need to ensure the resource class name is unique. If we only add the the parent name, we can still hit the case that we still have duplicate names.
+                // therefore we are adding the resource type as a prefix here which is ensure as unique.
+                var types = ResourceType.Types;
+                return string.Join("", types.Select(segment => segment.ConstantValue.ToSingular().FirstCharToUpperCase()));
             }
             // if this resource is based on a "ById" operation
             // if we only have one resource class with this name - we have no choice but use this "ById" resource
