@@ -18,12 +18,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     internal class MgmtTarget
     {
         private static ISet<string> _addedFilenames = new HashSet<string>();
+        private static IList<string> _overridenFilenames = new List<string>();
 
         private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
         {
             if (_addedFilenames.Contains(filename))
-                throw new InvalidOperationException($"Cannot add {filename} because it is already added.");
-            _addedFilenames.Add(filename);
+                _overridenFilenames.Add(filename);
+            else
+                _addedFilenames.Add(filename);
             project.AddGeneratedFile(filename, text);
         }
 
@@ -127,6 +129,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var armClientExtensionsCodeWriter = new CodeWriter();
             new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context.Library.ArmClientExtensions, context).Write();
             AddGeneratedFile(project, $"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
+
+            if (_overridenFilenames.Count != 0)
+                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", _overridenFilenames)}");
         }
 
         private static bool ShouldSkipModelGeneration(TypeProvider model, BuildContext<MgmtOutputLibrary> context)
