@@ -13,12 +13,12 @@ namespace MgmtOperations
     public static partial class ResourceGroupExtensions
     {
         #region AvailabilitySet
-        /// <summary> Gets an object representing a AvailabilitySetContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a AvailabilitySetCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetContainer" /> object. </returns>
-        public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="AvailabilitySetCollection" /> object. </returns>
+        public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
         {
-            return new AvailabilitySetContainer(resourceGroup);
+            return new AvailabilitySetCollection(resourceGroup);
         }
         #endregion
     }

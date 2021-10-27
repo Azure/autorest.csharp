@@ -111,13 +111,6 @@
                 "description": "Lists all fakes in a resource group.",
                 "parameters": [
                     {
-                        "name": "requiredParam",
-                        "in": "query",
-                        "required": true,
-                        "type": "string",
-                        "description": "The expand expression to apply on the operation."
-                    },
-                    {
                         "name": "optionalParam",
                         "in": "query",
                         "required": false,
@@ -3331,13 +3324,6 @@
                 "operationId": "TenantTests_List",
                 "description": "Lists all fakes in a resource group.",
                 "parameters": [
-                    {
-                        "name": "requiredParam",
-                        "in": "query",
-                        "required": true,
-                        "type": "string",
-                        "description": "The expand expression to apply on the operation."
-                    },
                     {
                         "name": "optionalParam",
                         "in": "query",

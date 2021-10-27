@@ -63,7 +63,7 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/customModel2";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/customModel2s";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;

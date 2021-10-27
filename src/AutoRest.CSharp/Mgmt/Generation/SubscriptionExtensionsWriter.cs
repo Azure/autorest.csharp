@@ -54,8 +54,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             }
                             else
                             {
-                                // a non-singleton resource must have a resource container
-                                WriteGetResourceContainerMethod(_writer, resource.ResourceContainer!);
+                                // a non-singleton resource must have a resource collection
+                                WriteGetResourceCollectionMethod(_writer, resource.ResourceCollection!);
                             }
                             _writer.LineRaw("#endregion");
                             _writer.Line();

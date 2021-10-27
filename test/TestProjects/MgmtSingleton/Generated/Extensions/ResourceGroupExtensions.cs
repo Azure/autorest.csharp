@@ -13,12 +13,12 @@ namespace MgmtSingleton
     public static partial class ResourceGroupExtensions
     {
         #region ParentResource
-        /// <summary> Gets an object representing a ParentResourceContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ParentResourceCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ParentResourceContainer" /> object. </returns>
-        public static ParentResourceContainer GetParentResources(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="ParentResourceCollection" /> object. </returns>
+        public static ParentResourceCollection GetParentResources(this ResourceGroup resourceGroup)
         {
-            return new ParentResourceContainer(resourceGroup);
+            return new ParentResourceCollection(resourceGroup);
         }
         #endregion
     }

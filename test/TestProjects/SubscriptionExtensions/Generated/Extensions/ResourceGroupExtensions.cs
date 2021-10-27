@@ -13,12 +13,12 @@ namespace SubscriptionExtensions
     public static partial class ResourceGroupExtensions
     {
         #region Oven
-        /// <summary> Gets an object representing a OvenContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a OvenCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="OvenContainer" /> object. </returns>
-        public static OvenContainer GetOvens(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="OvenCollection" /> object. </returns>
+        public static OvenCollection GetOvens(this ResourceGroup resourceGroup)
         {
-            return new OvenContainer(resourceGroup);
+            return new OvenCollection(resourceGroup);
         }
         #endregion
     }

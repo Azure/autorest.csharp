@@ -159,7 +159,7 @@ namespace MgmtListMethods
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -188,7 +188,7 @@ namespace MgmtListMethods
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -217,7 +217,7 @@ namespace MgmtListMethods
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -246,7 +246,7 @@ namespace MgmtListMethods
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -274,7 +274,7 @@ namespace MgmtListMethods
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -302,7 +302,7 @@ namespace MgmtListMethods
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new TenantTest(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -315,30 +315,30 @@ namespace MgmtListMethods
 
         /// <summary> Gets a list of TenantParentWithNonResChWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocs and their operations over a TenantTest. </returns>
-        public TenantParentWithNonResChWithLocContainer GetTenantParentWithNonResChWithLocs()
+        public TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
         {
-            return new TenantParentWithNonResChWithLocContainer(this);
+            return new TenantParentWithNonResChWithLocCollection(this);
         }
 
         /// <summary> Gets a list of TenantParentWithNonResChes in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChes and their operations over a TenantTest. </returns>
-        public TenantParentWithNonResChContainer GetTenantParentWithNonResChes()
+        public TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
-            return new TenantParentWithNonResChContainer(this);
+            return new TenantParentWithNonResChCollection(this);
         }
 
         /// <summary> Gets a list of TenantParentWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithLocs and their operations over a TenantTest. </returns>
-        public TenantParentWithLocContainer GetTenantParentWithLocs()
+        public TenantParentWithLocCollection GetTenantParentWithLocs()
         {
-            return new TenantParentWithLocContainer(this);
+            return new TenantParentWithLocCollection(this);
         }
 
         /// <summary> Gets a list of TenantParents in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParents and their operations over a TenantTest. </returns>
-        public TenantParentContainer GetTenantParents()
+        public TenantParentCollection GetTenantParents()
         {
-            return new TenantParentContainer(this);
+            return new TenantParentCollection(this);
         }
     }
 }

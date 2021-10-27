@@ -11,20 +11,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtLROTests() : base("MgmtLRO") { }
 
-        [TestCase("BarContainer", "CreateOrUpdate", typeof(BarCreateOperation))]
-        [TestCase("FakeContainer", "CreateOrUpdate", typeof(FakeCreateOrUpdateOperation))]
-        public void ValidateLongRunningOperationFunctionInContainer(string className, string functionName, Type returnType)
+        [TestCase("BarCollection", "CreateOrUpdate", typeof(BarCreateOperation))]
+        [TestCase("FakeCollection", "CreateOrUpdate", typeof(FakeCreateOrUpdateOperation))]
+        public void ValidateLongRunningOperationFunctionInCollection(string className, string functionName, Type returnType)
         {
-            var container = FindAllContainers().First(c => c.Name == className);
-            var method = container.GetMethod(functionName);
+            var collections = FindAllCollections().First(c => c.Name == className);
+            var method = collections.GetMethod(functionName);
             Assert.NotNull(method, $"cannot find {className}.{functionName}");
             Assert.AreEqual(method.ReturnType, returnType, $"method {className}.{functionName} does not return type {returnType}");
         }
 
-        [TestCase("FakeContainer", "CreateOrUpdate")]
+        [TestCase("FakeCollection", "CreateOrUpdate")]
         [TestCase("Fake", "Delete")]
         [TestCase("Fake", "DoSomethingSlro")]
-        [TestCase("BarContainer", "CreateOrUpdate")]
+        [TestCase("BarCollection", "CreateOrUpdate")]
         [TestCase("Bar", "Update")]
         public void ValidateSLROMethods(string className, string methodName)
         {
@@ -41,7 +41,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         public void ValidateMethods(string className, string methodName, bool exist, bool isSLRO)
         {
-            var classesToCheck = FindAllContainers().Concat(FindAllResources());
+            var classesToCheck = FindAllCollections().Concat(FindAllResources());
             var classToCheck = classesToCheck.First(t => t.Name == className);
             var methodInfo = classToCheck.GetMethod(methodName);
             Assert.AreEqual(exist, methodInfo != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");

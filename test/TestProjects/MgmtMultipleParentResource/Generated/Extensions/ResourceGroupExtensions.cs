@@ -13,22 +13,22 @@ namespace MgmtMultipleParentResource
     public static partial class ResourceGroupExtensions
     {
         #region AnotherParent
-        /// <summary> Gets an object representing a AnotherParentContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a AnotherParentCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="AnotherParentContainer" /> object. </returns>
-        public static AnotherParentContainer GetAnotherParents(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="AnotherParentCollection" /> object. </returns>
+        public static AnotherParentCollection GetAnotherParents(this ResourceGroup resourceGroup)
         {
-            return new AnotherParentContainer(resourceGroup);
+            return new AnotherParentCollection(resourceGroup);
         }
         #endregion
 
         #region Parent
-        /// <summary> Gets an object representing a ParentContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ParentCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ParentContainer" /> object. </returns>
-        public static ParentContainer GetParents(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="ParentCollection" /> object. </returns>
+        public static ParentCollection GetParents(this ResourceGroup resourceGroup)
         {
-            return new ParentContainer(resourceGroup);
+            return new ParentCollection(resourceGroup);
         }
         #endregion
     }

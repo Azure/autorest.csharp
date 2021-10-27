@@ -24,12 +24,12 @@ namespace MgmtListMethods
     public static partial class SubscriptionExtensions
     {
         #region Fake
-        /// <summary> Gets an object representing a FakeContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a FakeCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="FakeContainer" /> object. </returns>
-        public static FakeContainer GetFakes(this Subscription subscription)
+        /// <returns> Returns a <see cref="FakeCollection" /> object. </returns>
+        public static FakeCollection GetFakes(this Subscription subscription)
         {
-            return new FakeContainer(subscription);
+            return new FakeCollection(subscription);
         }
         #endregion
 
@@ -1384,42 +1384,42 @@ namespace MgmtListMethods
         #endregion
 
         #region SubParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a SubParentWithNonResChWithLocContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SubParentWithNonResChWithLocCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResChWithLocContainer" /> object. </returns>
-        public static SubParentWithNonResChWithLocContainer GetSubParentWithNonResChWithLocs(this Subscription subscription)
+        /// <returns> Returns a <see cref="SubParentWithNonResChWithLocCollection" /> object. </returns>
+        public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs(this Subscription subscription)
         {
-            return new SubParentWithNonResChWithLocContainer(subscription);
+            return new SubParentWithNonResChWithLocCollection(subscription);
         }
         #endregion
 
         #region SubParentWithNonResCh
-        /// <summary> Gets an object representing a SubParentWithNonResChContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SubParentWithNonResChCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResChContainer" /> object. </returns>
-        public static SubParentWithNonResChContainer GetSubParentWithNonResChes(this Subscription subscription)
+        /// <returns> Returns a <see cref="SubParentWithNonResChCollection" /> object. </returns>
+        public static SubParentWithNonResChCollection GetSubParentWithNonResChes(this Subscription subscription)
         {
-            return new SubParentWithNonResChContainer(subscription);
+            return new SubParentWithNonResChCollection(subscription);
         }
         #endregion
 
         #region SubParentWithLoc
-        /// <summary> Gets an object representing a SubParentWithLocContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SubParentWithLocCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SubParentWithLocContainer" /> object. </returns>
-        public static SubParentWithLocContainer GetSubParentWithLocs(this Subscription subscription)
+        /// <returns> Returns a <see cref="SubParentWithLocCollection" /> object. </returns>
+        public static SubParentWithLocCollection GetSubParentWithLocs(this Subscription subscription)
         {
-            return new SubParentWithLocContainer(subscription);
+            return new SubParentWithLocCollection(subscription);
         }
         #endregion
 
         #region SubParent
-        /// <summary> Gets an object representing a SubParentContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SubParentCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SubParentContainer" /> object. </returns>
-        public static SubParentContainer GetSubParents(this Subscription subscription)
+        /// <returns> Returns a <see cref="SubParentCollection" /> object. </returns>
+        public static SubParentCollection GetSubParents(this Subscription subscription)
         {
-            return new SubParentContainer(subscription);
+            return new SubParentCollection(subscription);
         }
         #endregion
 

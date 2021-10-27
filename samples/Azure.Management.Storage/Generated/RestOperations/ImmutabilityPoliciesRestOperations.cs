@@ -34,7 +34,7 @@ namespace Azure.Management.Storage
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public ImmutabilityPoliciesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        public ImmutabilityPoliciesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2021-06-01")
         {
             this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
@@ -44,7 +44,7 @@ namespace Azure.Management.Storage
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, string containerName, Enum2 immutabilityPolicyName, string ifMatch, ImmutabilityPolicyData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, string containerName, Enum3 immutabilityPolicyName, string ifMatch, ImmutabilityPolicyData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="containerName"/> is null. </exception>
-        public async Task<Response<ImmutabilityPolicyData>> CreateOrUpdateAsync(string resourceGroupName, string accountName, string containerName, Enum2 immutabilityPolicyName, string ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicyData>> CreateOrUpdateAsync(string resourceGroupName, string accountName, string containerName, Enum3 immutabilityPolicyName, string ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -128,7 +128,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="containerName"/> is null. </exception>
-        public Response<ImmutabilityPolicyData> CreateOrUpdate(string resourceGroupName, string accountName, string containerName, Enum2 immutabilityPolicyName, string ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicyData> CreateOrUpdate(string resourceGroupName, string accountName, string containerName, Enum3 immutabilityPolicyName, string ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -159,7 +159,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string accountName, string containerName, Enum2 immutabilityPolicyName, string ifMatch)
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string accountName, string containerName, Enum3 immutabilityPolicyName, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -195,7 +195,7 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="containerName"/> is null. </exception>
-        public async Task<Response<ImmutabilityPolicyData>> GetAsync(string resourceGroupName, string accountName, string containerName, Enum2 immutabilityPolicyName, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicyData>> GetAsync(string resourceGroupName, string accountName, string containerName, Enum3 immutabilityPolicyName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -234,7 +234,7 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="containerName"/> is null. </exception>
-        public Response<ImmutabilityPolicyData> Get(string resourceGroupName, string accountName, string containerName, Enum2 immutabilityPolicyName, string ifMatch = null, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicyData> Get(string resourceGroupName, string accountName, string containerName, Enum3 immutabilityPolicyName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -265,7 +265,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName, string containerName, Enum2 immutabilityPolicyName, string ifMatch)
+        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName, string containerName, Enum3 immutabilityPolicyName, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -290,7 +290,7 @@ namespace Azure.Management.Storage
             return message;
         }
 
-        /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
+        /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, the only way is to delete the container after deleting all expired blobs inside the policy locked container. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
@@ -298,7 +298,7 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="ifMatch"/> is null. </exception>
-        public async Task<Response<ImmutabilityPolicyData>> DeleteAsync(string resourceGroupName, string accountName, string containerName, Enum2 immutabilityPolicyName, string ifMatch, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicyData>> DeleteAsync(string resourceGroupName, string accountName, string containerName, Enum3 immutabilityPolicyName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -333,7 +333,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
+        /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, the only way is to delete the container after deleting all expired blobs inside the policy locked container. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
@@ -341,7 +341,7 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="ifMatch"/> is null. </exception>
-        public Response<ImmutabilityPolicyData> Delete(string resourceGroupName, string accountName, string containerName, Enum2 immutabilityPolicyName, string ifMatch, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicyData> Delete(string resourceGroupName, string accountName, string containerName, Enum3 immutabilityPolicyName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

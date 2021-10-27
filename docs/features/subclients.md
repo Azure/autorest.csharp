@@ -63,7 +63,7 @@ public partial class MyServiceClient
 
 ## Client hierarchy
 
-Each client can be made a subclient of another client (without circular dependency) using `CodeGenClientAttribute.ParentClient` parameter. Since `CodeGenClientAttribute` is applied to the client type, user will explicitly specify new client type name. According to [guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-subclients), type should have a name without "Client" suffix. **autorest.csharp** will add a factory method to the type, specified in `ParentClient`.
+Each client can be made a subclient of another client (without circular dependency) using `CodeGenClientAttribute.ParentClient` parameter. Since `CodeGenClientAttribute` is applied to the client type, user will explicitly specify new client type name. According to [guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-subclients), type should have a name without "Client" suffix and an internal constructor. **autorest.csharp** will add a factory method to the type, specified in `ParentClient`.
 
 ```cs
 [CodeGenClient("CollectionsClient", ParentClient = typeof(PurviewAccountsClient), ForcePublicConstructors = true)]
@@ -132,7 +132,7 @@ public class DeviceUpdateClient {
 
 ## Resource clients [NOT IMPLEMENTED, DESIGN ONLY]
 
-Operations inside one operation group may contain methods bound to a specific resource. When some of the operations have path parameter with  `"x-ms-parameter-resource-name": true`, operation group has non-empty name and client for that operation group is a subclient (either `--single-top-level-client=true` or `CodeGenClientAttribute.ParentClient` is set), **autorest.csharp** generates public get-only property initialized from subclient constructor to preserve value for said parameter and uses it for all operation in the operation group that have that parameter in their path. For all operations in the operation group that don't have said parameter, it is assumed that they aren't bound to a specific value of resource, hence **autorest.csharp** generates methods for these operations in parent client rather than in subclient. 
+Operations inside one operation group may contain methods bound to a specific resource. When some of the operations have path parameter with  `"x-ms-parameter-resource-name": true`, operation group has non-empty name and client for that operation group is a subclient (either `--single-top-level-client=true` or `CodeGenClientAttribute.ParentClient` is set), **autorest.csharp** generates public get-only property initialized from subclient internal constructor to preserve value for said parameter and uses it for all operation in the operation group that have that parameter in their path. For all operations in the operation group that don't have said parameter, it is assumed that they aren't bound to a specific value of resource, hence **autorest.csharp** generates methods for these operations in parent client rather than in subclient. 
 
 ```js
 "paths": {
