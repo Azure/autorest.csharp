@@ -53,13 +53,16 @@ namespace AutoRest.CSharp.Mgmt.Output
             return operationRequestPath.GetScopePath().Append(contextualPath.TrimScope());
         }
 
-        protected override string DefaultName => base.DefaultName + _suffixValue;
+        protected override string DefaultName => Resource.Type.Name + _suffixValue;
 
         protected override string CreateDescription(string clientPrefix)
         {
             return $"A class representing collection of {clientPrefix} and their operations over its parent.";
         }
 
+        /// <summary>
+        /// The resource container might support multiple resource types, therefore we should never use this property in <see cref="ResourceContainer"/>
+        /// </summary>
         public override ResourceType ResourceType => throw new InvalidOperationException($"We should not use the property `ResourceType` in ResourceContainer. This is a bug in autorest.csharp, please file an issue about this");
 
         private IEnumerable<MgmtClientOperation>? _allOperations;

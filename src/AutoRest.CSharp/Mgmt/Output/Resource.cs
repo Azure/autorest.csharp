@@ -84,6 +84,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultName;
         protected override string DefaultName => _defaultName ??= EnsureResourceDefaultName();
 
+        public virtual string Prefix { get; internal set; } = string.Empty;
+        public virtual string Suffix { get; internal set; } = string.Empty;
+
         private string EnsureResourceDefaultName()
         {
             // read configuration to see if we could get a configuration for this resource
@@ -91,6 +94,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
+            //_context.Library.LevelTraverseResourceHierarchyTree();
+
+            // TODO -- change the way that we determine the name of resource classes by
+            // "Travesal from the root of resource tree the first one with same resource data name will have the name, and the following ones will has the name of its parent as prefix"
             int count = ResourceWithSameResourceNameCount();
             if (!IsById)
             {
