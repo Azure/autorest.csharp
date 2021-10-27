@@ -67,7 +67,7 @@ schemas: !Schemas
           name: DedicatedHostPropertiesPlatformFaultDomain
           description: Fault domain of the dedicated host within a dedicated host group.
       protocol: !Protocols {}
-    - !NumberSchema &ref_99
+    - !NumberSchema &ref_97
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -166,16 +166,6 @@ schemas: !Schemas
           name: DedicatedHostGroupFoo
           description: specifies the foo
       protocol: !Protocols {}
-    - !StringSchema &ref_32
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: DedicatedHostGroupListResultNextLink
-          description: The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts.
-      protocol: !Protocols {}
     - !StringSchema &ref_18
       type: string
       apiVersions:
@@ -216,7 +206,7 @@ schemas: !Schemas
           name: DedicatedHostPropertiesProvisioningState
           description: The provisioning state, which only appears in the response.
       protocol: !Protocols {}
-    - !StringSchema &ref_33
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
@@ -235,6 +225,16 @@ schemas: !Schemas
         default:
           name: VirtualMachineExtensionImageBar
           description: specifies the bar
+      protocol: !Protocols {}
+    - !StringSchema &ref_33
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: DedicatedHostGroupListResultNextLink
+          description: The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts.
       protocol: !Protocols {}
   constants:
     - !ConstantSchema &ref_38
@@ -267,7 +267,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_57
+    - !ConstantSchema &ref_65
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -537,7 +537,7 @@ schemas: !Schemas
                       - *ref_17
                   properties:
                     - !Property 
-                      schema: !ArraySchema &ref_36
+                      schema: !ArraySchema &ref_35
                         type: array
                         apiVersions:
                           - !ApiVersion 
@@ -774,22 +774,26 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_59
+    - *ref_7
+    - *ref_26
+    - *ref_8
+    - *ref_27
+    - !ObjectSchema &ref_84
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_35
+          schema: !ArraySchema &ref_36
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_7
+            elementType: *ref_8
             language: !Languages 
               default:
-                name: DedicatedHostGroupListResultValue
+                name: DedicatedHostListResultValue
                 description: The list of dedicated hosts
             protocol: !Protocols {}
           required: true
@@ -814,15 +818,12 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: DedicatedHostGroupListResult
+          name: DedicatedHostListResult
           description: The list dedicated host operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_7
-    - *ref_26
-    - *ref_8
-    - *ref_27
-    - !ObjectSchema &ref_86
+    - *ref_9
+    - !ObjectSchema 
       type: object
       apiVersions:
         - !ApiVersion 
@@ -834,10 +835,10 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_8
+            elementType: *ref_7
             language: !Languages 
               default:
-                name: DedicatedHostListResultValue
+                name: DedicatedHostGroupListResultValue
                 description: The list of dedicated hosts
             protocol: !Protocols {}
           required: true
@@ -856,44 +857,39 @@ schemas: !Schemas
               name: nextLink
               description: The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts.
           protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - output
       language: !Languages 
         default:
-          name: DedicatedHostListResult
+          name: DedicatedHostGroupListResult
           description: The list dedicated host operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_9
   arrays:
     - *ref_34
     - *ref_35
     - *ref_36
+    - !ArraySchema &ref_96
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      elementType: *ref_9
+      language: !Languages 
+        default:
+          name: ArrayOfVirtualMachineExtensionImage
+          description: Array of VirtualMachineExtensionImage
+      protocol: !Protocols {}
+    - !ArraySchema &ref_104
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      elementType: *ref_9
+      language: !Languages 
+        default:
+          name: ArrayOfVirtualMachineExtensionImage
+          description: Array of VirtualMachineExtensionImage
+      protocol: !Protocols {}
     - *ref_37
-    - !ArraySchema &ref_98
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      elementType: *ref_9
-      language: !Languages 
-        default:
-          name: ArrayOfVirtualMachineExtensionImage
-          description: Array of VirtualMachineExtensionImage
-      protocol: !Protocols {}
-    - !ArraySchema &ref_106
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      elementType: *ref_9
-      language: !Languages 
-        default:
-          name: ArrayOfVirtualMachineExtensionImage
-          description: Array of VirtualMachineExtensionImage
-      protocol: !Protocols {}
 globalParameters:
   - !Parameter &ref_41
     schema: *ref_1
@@ -1479,22 +1475,48 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter 
-            schema: *ref_57
+          - !Parameter &ref_59
+            schema: *ref_1
             implementation: Method
+            required: true
             language: !Languages 
               default:
-                name: expand
-                description: The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group.
-                serializedName: $expand
+                name: hostGroupName
+                description: The name of the dedicated host group.
+                serializedName: hostGroupName
             protocol: !Protocols 
               http: !HttpParameter 
-                in: query
+                in: path
           - *ref_40
           - *ref_41
         requests:
           - !Request 
             parameters:
+              - !Parameter 
+                schema: *ref_42
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_57
+                schema: *ref_7
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the Create Dedicated Host Group.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
               - !Parameter 
                 schema: *ref_43
                 implementation: Method
@@ -1508,21 +1530,26 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-            signatureParameters: []
+            signatureParameters:
+              - *ref_57
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups
-                method: get
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
                 uri: '{$host}'
         signatureParameters:
           - *ref_58
+          - *ref_59
         responses:
           - !SchemaResponse 
-            schema: *ref_59
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''
@@ -1534,10 +1561,23 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+          - !SchemaResponse 
+            schema: *ref_7
+            language: !Languages 
+              default:
+                name: ''
+                description: Created
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '201'
         language: !Languages 
           default:
-            name: List
-            description: Retrieves information about a dedicated host group.
+            name: CreateOrUpdate
+            description: Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -1588,13 +1628,13 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_60
-                schema: *ref_7
+                schema: *ref_26
                 implementation: Method
                 required: true
                 language: !Languages 
                   default:
                     name: parameters
-                    description: Parameters supplied to the Create Dedicated Host Group.
+                    description: Parameters supplied to the Update Dedicated Host Group operation.
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
@@ -1621,7 +1661,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
                 path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-                method: put
+                method: patch
                 knownMediaType: json
                 mediaTypes:
                   - application/json
@@ -1643,23 +1683,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-          - !SchemaResponse 
-            schema: *ref_7
-            language: !Languages 
-              default:
-                name: ''
-                description: Created
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '201'
         language: !Languages 
           default:
-            name: CreateOrUpdate
-            description: Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)
+            name: Update
+            description: Update an dedicated host group.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -1667,7 +1694,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_64
+          - !Parameter &ref_63
             schema: *ref_1
             implementation: Method
             required: true
@@ -1679,7 +1706,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_65
+          - !Parameter &ref_64
             schema: *ref_1
             implementation: Method
             required: true
@@ -1695,80 +1722,41 @@ operationGroups:
           - *ref_41
         requests:
           - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_42
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_63
-                schema: *ref_26
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: Parameters supplied to the Update Dedicated Host Group operation.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_43
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_63
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpRequest 
                 path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-                method: patch
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
+                method: delete
                 uri: '{$host}'
         signatureParameters:
+          - *ref_63
           - *ref_64
-          - *ref_65
         responses:
-          - !SchemaResponse 
-            schema: *ref_7
+          - !Response 
             language: !Languages 
               default:
                 name: ''
                 description: OK
             protocol: !Protocols 
               http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
                 statusCodes:
                   - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
         language: !Languages 
           default:
-            name: Update
-            description: Update an dedicated host group.
+            name: Delete
+            description: Delete a dedicated host group.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -1800,78 +1788,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_40
-          - *ref_41
-        requests:
-          - !Request 
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-                method: delete
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_66
-          - *ref_67
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: No Content
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '204'
-        language: !Languages 
-          default:
-            name: Delete
-            description: Delete a dedicated host group.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_39
-          - !Parameter &ref_68
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_69
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: hostGroupName
-                description: The name of the dedicated host group.
-                serializedName: hostGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
           - !Parameter 
-            schema: *ref_57
+            schema: *ref_65
             implementation: Method
             language: !Languages 
               default:
@@ -1910,8 +1828,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_68
-          - *ref_69
+          - *ref_66
+          - *ref_67
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -1945,7 +1863,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_71
+          - !Parameter &ref_69
             schema: *ref_1
             implementation: Method
             required: true
@@ -1957,7 +1875,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_72
+          - !Parameter &ref_70
             schema: *ref_1
             implementation: Method
             required: true
@@ -1969,7 +1887,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_73
+          - !Parameter &ref_71
             schema: *ref_1
             implementation: Method
             required: true
@@ -1999,7 +1917,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_70
+              - !Parameter &ref_68
                 schema: *ref_8
                 implementation: Method
                 required: true
@@ -2025,7 +1943,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_70
+              - *ref_68
             language: !Languages 
               default:
                 name: ''
@@ -2039,9 +1957,9 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
+          - *ref_69
+          - *ref_70
           - *ref_71
-          - *ref_72
-          - *ref_73
         responses:
           - !SchemaResponse 
             schema: *ref_8
@@ -2082,7 +2000,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_75
+          - !Parameter &ref_73
             schema: *ref_1
             implementation: Method
             required: true
@@ -2094,7 +2012,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_76
+          - !Parameter &ref_74
             schema: *ref_1
             implementation: Method
             required: true
@@ -2106,7 +2024,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_77
+          - !Parameter &ref_75
             schema: *ref_1
             implementation: Method
             required: true
@@ -2136,7 +2054,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_74
+              - !Parameter &ref_72
                 schema: *ref_27
                 implementation: Method
                 required: true
@@ -2162,7 +2080,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_74
+              - *ref_72
             language: !Languages 
               default:
                 name: ''
@@ -2176,9 +2094,9 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
+          - *ref_73
+          - *ref_74
           - *ref_75
-          - *ref_76
-          - *ref_77
         responses:
           - !SchemaResponse 
             schema: *ref_8
@@ -2206,7 +2124,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_78
+          - !Parameter &ref_76
             schema: *ref_1
             implementation: Method
             required: true
@@ -2218,7 +2136,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_79
+          - !Parameter &ref_77
             schema: *ref_1
             implementation: Method
             required: true
@@ -2230,7 +2148,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_80
+          - !Parameter &ref_78
             schema: *ref_1
             implementation: Method
             required: true
@@ -2256,9 +2174,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
+          - *ref_76
+          - *ref_77
           - *ref_78
-          - *ref_79
-          - *ref_80
         responses:
           - !Response 
             language: !Languages 
@@ -2300,7 +2218,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_81
+          - !Parameter &ref_79
             schema: *ref_1
             implementation: Method
             required: true
@@ -2312,7 +2230,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_82
+          - !Parameter &ref_80
             schema: *ref_1
             implementation: Method
             required: true
@@ -2324,7 +2242,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_83
+          - !Parameter &ref_81
             schema: *ref_1
             implementation: Method
             required: true
@@ -2337,7 +2255,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_57
+            schema: *ref_65
             implementation: Method
             language: !Languages 
               default:
@@ -2376,9 +2294,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_79
+          - *ref_80
           - *ref_81
-          - *ref_82
-          - *ref_83
         responses:
           - !SchemaResponse 
             schema: *ref_8
@@ -2404,7 +2322,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_84
+          - !Parameter &ref_82
             schema: *ref_1
             implementation: Method
             required: true
@@ -2416,7 +2334,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_85
+          - !Parameter &ref_83
             schema: *ref_1
             implementation: Method
             required: true
@@ -2457,11 +2375,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_84
-          - *ref_85
+          - *ref_82
+          - *ref_83
         responses:
           - !SchemaResponse 
-            schema: *ref_86
+            schema: *ref_84
             language: !Languages 
               default:
                 name: ''
@@ -2497,7 +2415,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_87
+          - !Parameter &ref_85
             schema: *ref_1
             implementation: Method
             required: true
@@ -2509,7 +2427,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_88
+          - !Parameter &ref_86
             schema: *ref_1
             implementation: Method
             required: true
@@ -2521,7 +2439,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_89
+          - !Parameter &ref_87
             schema: *ref_1
             implementation: Method
             required: true
@@ -2533,7 +2451,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_90
+          - !Parameter &ref_88
             schema: *ref_1
             implementation: Method
             required: true
@@ -2574,10 +2492,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_85
+          - *ref_86
           - *ref_87
           - *ref_88
-          - *ref_89
-          - *ref_90
         responses:
           - !SchemaResponse 
             schema: *ref_9
@@ -2603,7 +2521,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_92
+          - !Parameter &ref_90
             schema: *ref_1
             implementation: Method
             required: true
@@ -2615,7 +2533,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_93
+          - !Parameter &ref_91
             schema: *ref_1
             implementation: Method
             required: true
@@ -2627,7 +2545,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_94
+          - !Parameter &ref_92
             schema: *ref_1
             implementation: Method
             required: true
@@ -2639,7 +2557,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_95
+          - !Parameter &ref_93
             schema: *ref_1
             implementation: Method
             required: true
@@ -2669,7 +2587,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_91
+              - !Parameter &ref_89
                 schema: *ref_9
                 implementation: Method
                 required: true
@@ -2695,7 +2613,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_91
+              - *ref_89
             language: !Languages 
               default:
                 name: ''
@@ -2709,10 +2627,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
+          - *ref_90
+          - *ref_91
           - *ref_92
           - *ref_93
-          - *ref_94
-          - *ref_95
         responses:
           - !SchemaResponse 
             schema: *ref_9
@@ -2738,7 +2656,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_96
+          - !Parameter &ref_94
             schema: *ref_1
             implementation: Method
             required: true
@@ -2750,7 +2668,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_97
+          - !Parameter &ref_95
             schema: *ref_1
             implementation: Method
             required: true
@@ -2791,11 +2709,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_96
-          - *ref_97
+          - *ref_94
+          - *ref_95
         responses:
           - !SchemaResponse 
-            schema: *ref_98
+            schema: *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -2818,7 +2736,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_39
-          - !Parameter &ref_100
+          - !Parameter &ref_98
             schema: *ref_1
             implementation: Method
             required: true
@@ -2830,7 +2748,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_101
+          - !Parameter &ref_99
             schema: *ref_1
             implementation: Method
             required: true
@@ -2842,7 +2760,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_102
+          - !Parameter &ref_100
             schema: *ref_1
             implementation: Method
             required: true
@@ -2854,7 +2772,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_103
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2865,8 +2783,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_104
-            schema: *ref_99
+          - !Parameter &ref_102
+            schema: *ref_97
             implementation: Method
             language: !Languages 
               default:
@@ -2876,7 +2794,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_105
+          - !Parameter &ref_103
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2916,15 +2834,15 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_98
+          - *ref_99
           - *ref_100
           - *ref_101
           - *ref_102
           - *ref_103
-          - *ref_104
-          - *ref_105
         responses:
           - !SchemaResponse 
-            schema: *ref_106
+            schema: *ref_104
             language: !Languages 
               default:
                 name: ''

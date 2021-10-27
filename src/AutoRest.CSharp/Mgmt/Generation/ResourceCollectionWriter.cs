@@ -43,6 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private Resource _resource;
         private BuildContext<MgmtOutputLibrary> _context;
         private bool _isPaging;
+        private bool _isListException;
 
         protected override string ContextProperty => "Parent";
 
@@ -59,6 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _resource = context.Library.GetArmResource(operationGroup);
             _context = context;
             _isPaging = _resourceCollection.ListMethods.FirstOrDefault()?.PagingMethod != null;
+            _isListException = _context.Configuration.MgmtConfiguration.ListException.Contains(resourceCollection.OperationGroup.Key);
         }
 
         public void WriteCollection()
@@ -71,7 +73,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteXmlDocumentationSummary($"{_resourceCollection.Description}");
                 _writer.Append($"{_resourceCollection.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
-                _writer.Append($"{typeof(ArmCollection)}, IEnumerable<{_resource.ResourceName}>");
+                //only skip if
+                var enumerable = _isListException ? string.Empty : $", IEnumerable<{_resource.ResourceName}>";
+                _writer.Append($"{typeof(ArmCollection)}{enumerable}");
                 var asyncEnum = _isPaging ? $", IAsyncEnumerable<{_resource.ResourceName}>" : string.Empty;
                 _writer.Line($"{asyncEnum}");
                 using (_writer.Scope())
@@ -95,6 +99,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteEnumerableImpl(CodeWriter writer)
         {
+            if (_isListException)
+                return;
+
             string value = _isPaging ? string.Empty : ".Value";
 
             _writer.Line();
