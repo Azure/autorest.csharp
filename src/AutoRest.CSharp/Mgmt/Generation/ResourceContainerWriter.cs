@@ -63,9 +63,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteFields();
                     WriteCtors();
-                    // TODO: this is a workaround to allow resource container to accept multiple parent resource types
-                    // Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
-                    WriteValidate();
                     WriteProperties();
                     WriteMethods();
 
@@ -98,20 +95,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteValidate()
-        {
-            var allPossibleTypes = _resourceContainer.ResourceTypes.SelectMany(p => p.Value).Distinct();
-            if (allPossibleTypes.Count() == 1)
-                return;
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid container for this type.");
-            _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
-            _writer.Line($"protected override void ValidateResourceType(ResourceIdentifier identifier)");
-            using (_writer.Scope())
-            {
-            }
-        }
-
         protected override void WriteProperties()
         {
             // TODO: Remove this if condition after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5800
@@ -130,6 +113,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
             _writer.Line($"protected override {typeof(Azure.ResourceManager.ResourceType)} ValidResourceType => {validResourceType};");
+
+            if (allPossibleTypes.Count() != 1)
+            {
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid container for this type.");
+                _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
+                _writer.Line($"protected override void ValidateResourceType(ResourceIdentifier identifier)");
+                using (_writer.Scope())
+                {
+                }
+            }
         }
 
         protected override void WriteMethods()
@@ -153,17 +147,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteCheckIfExists(_resourceContainer.GetOperation, true);
             }
 
-            // TODO: Add back code with refactored base method as in WriteCreateOrUpdateVariants
-            // if (_resourceContainer.PutByIdMethod != null)
-            // {
-            //     WriteCreateByIdVariants(_resourceContainer.PutByIdMethod);
-            // }
-
-            // if (_resourceContainer.GetByIdMethod?.RestClientMethod != null && _resourceContainer.GetMethod?.RestClientMethod != _resourceContainer.GetByIdMethod.RestClientMethod)
-            // {
-            //     WriteGetByIdVariants(_resourceContainer.GetByIdMethod.RestClientMethod);
-            // }
-
             // write all the methods that should belong to this resouce container
             foreach (var clientOperation in _resourceContainer.ClientOperations)
             {
@@ -171,11 +154,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteMethod(clientOperation, true);
             }
 
-            var parents = _resource.Parent(Context);
-            if (parents.Contains(Context.Library.ResourceGroupExtensions) || parents.Contains(Context.Library.SubscriptionExtensions))
+            var validResourceTypes = _resourceContainer.ResourceTypes.SelectMany(p => p.Value).Distinct();
+            var resourceType = validResourceTypes.First();
+            if (validResourceTypes.Count() == 1 && (resourceType == ResourceType.ResourceGroup || resourceType == ResourceType.Subscription))
             {
-                WriteListAsGenericResource(false);
-                WriteListAsGenericResource(true);
+                WriteListAsGenericResource(resourceType, false);
+                WriteListAsGenericResource(resourceType, true);
             }
         }
 
@@ -315,10 +299,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteListAsGenericResource(bool async)
+        private void WriteListAsGenericResource(ResourceType resourceType, bool async)
         {
             const string syncMethodName = "GetAllAsGenericResources";
-            var listScope = _resource.Parent(Context).Contains(Context.Library.ResourceGroupExtensions) ? "resource group" : "subscription";
+            var listScope = resourceType == ResourceType.ResourceGroup ? "resource group" : "subscription";
             var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this {listScope} represented as generic resources.");
@@ -334,12 +318,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    if (listScope.Equals("resource group"))
+                    if (resourceType == ResourceType.ResourceGroup)
                     {
                         _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(ResourceGroup)}, filters, expand, top, cancellationToken);");
                     }
                     else
                     {
+                        // this must be ResourceType.Subscription
                         _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(Subscription)}, filters, expand, top, cancellationToken);");
                     }
                 }
