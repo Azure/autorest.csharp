@@ -41,6 +41,14 @@ namespace Azure.Core
             _source = source;
         }
 
+        public OperationInternals(
+            IOperationSource<T> source,
+            OperationInternals op)
+            : base(op)
+        {
+            _source = source;
+        }
+
         public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
         {
             return WaitForCompletionAsync(DefaultPollingInterval, cancellationToken);

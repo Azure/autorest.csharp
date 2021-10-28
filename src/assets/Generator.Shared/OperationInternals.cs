@@ -62,6 +62,19 @@ namespace Azure.Core
             _shouldPoll = _headerFrom != HeaderFrom.None;
         }
 
+        public OperationInternals(OperationInternals op)
+        {
+            _rawResponse = op._rawResponse;
+            _requestMethod = op._requestMethod;
+            _originalUri = op._originalUri;
+            _finalStateVia = op._finalStateVia;
+            InitializeScenarioInfo();
+            _pipeline = op._pipeline;
+            _clientDiagnostics = op._clientDiagnostics;
+            _scopeName = op._scopeName;
+            _shouldPoll = op._shouldPoll;
+        }
+
         public Response GetRawResponse() => _rawResponse;
 
         public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default)

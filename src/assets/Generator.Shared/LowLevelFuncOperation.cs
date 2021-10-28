@@ -23,6 +23,12 @@ namespace Azure.Core
             _resultSelector = resultSelector;
         }
 
+        internal LowLevelFuncOperation(OperationInternals op, Func<Response, T> resultSelector)
+        {
+            _operation = new OperationInternals<T>(this, op);
+            _resultSelector = resultSelector;
+        }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
@@ -53,5 +59,10 @@ namespace Azure.Core
         T IOperationSource<T>.CreateResult(Response response, CancellationToken cancellationToken) => _resultSelector(response);
 
         ValueTask<T> IOperationSource<T>.CreateResultAsync(Response response, CancellationToken cancellationToken) => new ValueTask<T>(_resultSelector(response));
+
+        public static implicit operator LowLevelFuncOperation<T>(LowLevelFuncOperation<BinaryData> operation)
+        {
+            return new LowLevelFuncOperation<T>((OperationInternals)(operation._operation), r => (T)(object)r);
+        }
     }
 }
