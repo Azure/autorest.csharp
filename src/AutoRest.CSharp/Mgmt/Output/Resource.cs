@@ -22,8 +22,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperationMap;
 
-        private IEnumerable<string>? _requestPaths;
-        public IEnumerable<string> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.RequestPath);
+        private IEnumerable<RequestPath>? _requestPaths;
+        public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
 
         public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, BuildContext<MgmtOutputLibrary> context)
             : base(context)
@@ -94,8 +94,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            int countOfSameResourceDataName = ResourceWithSameResourceNameCount();
-            int countOfSameResourceTypeName = ResourceWithSameResourceTypeCount();
+            var resourcesWithSameName = ResourcesWithSameResourceName();
+            var resourcesWithSameType = ResourcesWithSameResourceType();
+            int countOfSameResourceDataName = resourcesWithSameName.Count();
+            int countOfSameResourceTypeName = resourcesWithSameType.Count();
             if (!IsById)
             {
                 // this is a regular resource and the name is unique
@@ -103,18 +105,28 @@ namespace AutoRest.CSharp.Mgmt.Output
                     return ResourceName;
 
                 // if countOfSameResourceDataName > 1, we need to have the resource types as the resource type name
-                // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
 
-                // here first we try the resource types
+                // if we have the unique resource type, we just use the resource type to construct our resource type name
                 var types = ResourceType.Types;
                 var name = string.Join("", types.Select(segment => segment.ConstantValue.ToSingular().FirstCharToUpperCase()));
-                if (countOfSameResourceTypeName > 1)
+                if (countOfSameResourceTypeName == 1)
+                    return name;
+
+                // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
+                // first we try to add the parent name as prefix
+                var prefixes = resourcesWithSameType.Select(resource => ParentPrefix(resource)).Distinct();
+                if (prefixes.Count() == countOfSameResourceTypeName)
                 {
-                    // resource type is not unique enough, we add the scope as prefix. And in this case, parent of myself must be an extension (otherwise the resource types should be different)
-                    var parents = this.Parent(_context);
-                    name = string.Join("", parents.Select(p => p.ResourceName)) + name;
+                    // this means that we have unique parent prefix for each resource with the same type, use the parent as prefix
+                    return ParentPrefix(this) + name;
                 }
-                return name;
+                // if we get here, parent prefix is not enough, we try the resource name if it is a constant
+                var nameSegments = RequestPaths.Select(p => p.Last()).Where(segment => segment.IsConstant).Select(segment => segment.ConstantValue.FirstCharToUpperCase());
+                if (nameSegments.Any())
+                    return name + string.Join("", nameSegments);
+
+                // if we get here, we have tried all approaches to get a solid resource type name, throw an exception
+                throw new InvalidOperationException($"Cannot determine a resource class name for resource with the request path(s): {string.Join(", ", RequestPaths)}, please assign a valid resource name in `request-path-to-resource-name` section");
             }
             // if this resource is based on a "ById" operation
             // if we only have one resource class with this name - we have no choice but use this "ById" resource
@@ -137,15 +149,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
-        private int ResourceWithSameResourceNameCount()
-        {
-            return _context.Library.ArmResources.Count(resource => resource.ResourceName == this.ResourceName);
-        }
+        private IEnumerable<Resource> ResourcesWithSameResourceName() => _context.Library.ArmResources.Where(resource => resource.ResourceName == ResourceName);
 
-        private int ResourceWithSameResourceTypeCount()
-        {
-            return _context.Library.ArmResources.Count(resource => resource.ResourceType == this.ResourceType);
-        }
+        private IEnumerable<Resource> ResourcesWithSameResourceType() => _context.Library.ArmResources.Where(resource => resource.ResourceType == ResourceType);
 
         protected override string DefaultAccessibility => "public";
 
@@ -318,5 +324,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.";
         }
+
+        private static string ParentPrefix(Resource resource) => string.Join("", resource.Parent(_context).Select(p => p.ResourceName));
     }
 }

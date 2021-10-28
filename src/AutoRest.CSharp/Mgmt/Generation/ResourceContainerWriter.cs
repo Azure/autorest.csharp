@@ -116,10 +116,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (allPossibleTypes.Count() != 1)
             {
+                // TODO -- if the container has a limited list of possible resource types, we need to verify them one by one
                 _writer.Line();
                 _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid container for this type.");
                 _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
-                _writer.Line($"protected override void ValidateResourceType(ResourceIdentifier identifier)");
+                _writer.Line($"protected override void ValidateResourceType({typeof(ResourceIdentifier)} identifier)");
                 using (_writer.Scope())
                 {
                 }
