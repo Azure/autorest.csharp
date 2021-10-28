@@ -179,6 +179,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected override ResourceType GetBranchResourceType(RequestPath branch)
+        {
+            return branch.GetResourceType(Config);
+        }
+
         private void WriteCheckIfExists(MgmtClientOperation clientOperation, bool async)
         {
             _writer.Line();

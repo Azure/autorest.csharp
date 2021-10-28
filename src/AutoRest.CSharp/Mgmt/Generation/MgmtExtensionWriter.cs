@@ -417,6 +417,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"var {GetRestClientVariableName(restClient)} = Get{restClient.Type.Name}({ClientDiagnosticsVariable}, credential, options, pipeline{subIdIfNeeded}, baseUri);");
         }
 
+        protected override Models.ResourceType GetBranchResourceType(RequestPath branch)
+        {
+            // we should never have a branch in the operations in an extension class, therefore throwing an exception here
+            throw new InvalidOperationException();
+        }
+
         protected static IDisposable WriteExtensionContextScope(CodeWriter writer, string extensionVariableName, bool async)
         {
             writer.Append($"return {GetAwait(async)} {extensionVariableName}.UseClientContext({GetAsyncKeyword(async)} (baseUri, credential, options, pipeline) =>");

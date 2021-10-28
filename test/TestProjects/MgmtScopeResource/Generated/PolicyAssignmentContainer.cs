@@ -14,6 +14,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using MgmtScopeResource.Models;
 
@@ -306,7 +307,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="PolicyAssignment" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PolicyAssignment> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (Id.ResourceType == Subscription.ResourceType)
+            if (Id.ResourceType == ResourceGroup.ResourceType)
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -340,41 +341,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == ResourceGroup.ResourceType)
-            {
-                Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _policyAssignmentsRestClient.ListForResource(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                Page<PolicyAssignment> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = _policyAssignmentsRestClient.ListForResourceNextPage(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            else if (Id.ResourceType == Tenant.ResourceType)
+            else if (Id.ResourceType == ManagementGroup.ResourceType)
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -408,7 +375,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == Tenant.ResourceType)
+            else if (Id.ResourceType == Subscription.ResourceType)
             {
                 Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
                 {
@@ -444,7 +411,37 @@ namespace MgmtScopeResource
             }
             else
             {
-                throw new InvalidOperationException($"{Id.ResourceType} is not supported here");
+                Page<PolicyAssignment> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = _policyAssignmentsRestClient.ListForResource(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<PolicyAssignment> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = _policyAssignmentsRestClient.ListForResourceNextPage(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
         }
 
@@ -467,7 +464,7 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="PolicyAssignment" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PolicyAssignment> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (Id.ResourceType == Subscription.ResourceType)
+            if (Id.ResourceType == ResourceGroup.ResourceType)
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -501,41 +498,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == ResourceGroup.ResourceType)
-            {
-                async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _policyAssignmentsRestClient.ListForResourceAsync(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                async Task<Page<PolicyAssignment>> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAll");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _policyAssignmentsRestClient.ListForResourceNextPageAsync(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            else if (Id.ResourceType == Tenant.ResourceType)
+            else if (Id.ResourceType == ManagementGroup.ResourceType)
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -569,7 +532,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == Tenant.ResourceType)
+            else if (Id.ResourceType == Subscription.ResourceType)
             {
                 async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -605,7 +568,37 @@ namespace MgmtScopeResource
             }
             else
             {
-                throw new InvalidOperationException($"{Id.ResourceType} is not supported here");
+                async Task<Page<PolicyAssignment>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = await _policyAssignmentsRestClient.ListForResourceAsync(Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<PolicyAssignment>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = await _policyAssignmentsRestClient.ListForResourceNextPageAsync(nextLink, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.GetParts(1), Id.ResourceType.Types.Last(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
         }
 

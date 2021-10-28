@@ -231,6 +231,11 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             //}
         }
 
+        protected override Models.ResourceType GetBranchResourceType(RequestPath branch)
+        {
+            return branch.ParentRequestPath(Context).GetResourceType(Config);
+        }
+
         protected void WriteGetMethod(MgmtClientOperation operation, bool async)
         {
             WriteNormalMethod(operation, async, shouldThrowExceptionWhenNull: true);

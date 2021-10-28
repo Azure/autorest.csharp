@@ -594,10 +594,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual ResourceType GetBranchResourceType(RequestPath branch)
-        {
-            return branch.ParentRequestPath(Context).GetResourceType(Config);
-        }
+        protected abstract ResourceType GetBranchResourceType(RequestPath branch);
 
         protected virtual void WriteLROMethodBody(CSharpType lroObjectType, IDictionary<RequestPath, MgmtRestOperation> operationMappings, IDictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, bool async)
         {
