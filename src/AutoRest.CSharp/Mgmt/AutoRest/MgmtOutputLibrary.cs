@@ -387,7 +387,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach (var resourceOperations in resourceOperationsList)
                 {
-                    var resource = new Resource(resourceOperations, resourceName, _context);
+                    // TODO -- support the request path that contains multiple resource types
+                    // we calculate the resource type of the resource
+                    var resourceType = GetResourceType(resourceOperations.Keys);
+                    var resource = new Resource(resourceOperations, resourceName, resourceType, _context);
                     // one resource might appear multiple times since one resource might corresponds to multiple request paths
                     foreach (var resourceOperationSet in resourceOperations.Keys)
                     {
@@ -397,6 +400,24 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _rawRequestPathToArmResource;
+        }
+
+        private ResourceType GetResourceType(IEnumerable<OperationSet> operationSets)
+        {
+            var resourceTypes = operationSets.Select(operationSet => operationSet.GetRequestPath(_context).GetResourceType(_mgmtConfiguration)).Distinct();
+
+            if (resourceTypes.Count() > 1)
+                throw new InvalidOperationException($"Request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} contain multiple resource types in it ({string.Join(", ", resourceTypes)}), please double check and override it in `request-path-to-resource-type` section.");
+
+            var resourceType = resourceTypes.First();
+
+            if (!resourceType.IsConstant)
+                throw new InvalidOperationException($"The resource type of request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} contains variables in it, please double check and override it in `request-path-to-resource-type` section.");
+
+            if (resourceType == ResourceType.Scope)
+                throw new InvalidOperationException($"Request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} is a 'ById' resource, we cannot derive a resource type from its request path, please double check and override it in `request-path-to-resource-type` section.");
+
+            return resourceType;
         }
 
         private Dictionary<string, ResourceContainer> EnsureRequestPathToResourceContainers()

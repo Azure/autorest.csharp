@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string _suffixValue = "Container";
 
         public ResourceContainer(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
-            : base(operationSets, resourceName, context)
+            : base(operationSets, resourceName, ResourceType.Any, context) // The container might include multiple resource types, therefore we do not need the ResourceType property in Resource base class
         {
         }
 

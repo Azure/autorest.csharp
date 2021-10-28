@@ -25,11 +25,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<string>? _requestPaths;
         public IEnumerable<string> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.RequestPath);
 
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context)
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, BuildContext<MgmtOutputLibrary> context)
+            : base(context)
         {
             _context = context;
             OperationSets = allOperations.Keys;
             ResourceName = resourceName;
+            ResourceType = resourceType;
 
             if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
@@ -310,26 +312,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
 
-        private ResourceType? _resourceType;
-        public virtual ResourceType ResourceType => _resourceType ??= EnsureResourceType();
-
-        private ResourceType EnsureResourceType()
-        {
-            var resourceTypes = OperationSets.Select(operationSet => GetContextualPath(operationSet, operationSet.GetRequestPath(_context)).GetResourceType(_context.Configuration.MgmtConfiguration)).Distinct();
-
-            if (resourceTypes.Count() > 1)
-                throw new InvalidOperationException($"Resource {Type.Name} contains multiple resource types in it, please double check and override it in `request-path-to-resource-type` section. RequestPaths: {string.Join(", ", RequestPaths)}");
-
-            var resourceType = resourceTypes.First();
-
-            if (!resourceType.IsConstant)
-                throw new InvalidOperationException($"The resource type of resource {Type.Name} contains variables in it, please double check and override it in `request-path-to-resource-type` section. RequestPaths: {string.Join(", ", RequestPaths)}");
-
-            if (resourceType == ResourceType.Scope)
-                throw new InvalidOperationException($"Resource {Type.Name} is a 'ById' resource, we cannot derive a resource type from its request path, please double check and override it in `request-path-to-resource-type` section. RequestPaths: {string.Join(", ", RequestPaths)}");
-
-            return resourceType;
-        }
+        public virtual ResourceType ResourceType { get; }
 
         protected virtual string CreateDescription(string clientPrefix)
         {
