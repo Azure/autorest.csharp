@@ -67,7 +67,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _mgmtGrpParentWithLocsRestClient.CreateOrUpdate(Id.Parent.Name, mgmtGrpParentWithLocName, parameters, cancellationToken);
+                var response = _mgmtGrpParentWithLocsRestClient.CreateOrUpdate(Id.Name, mgmtGrpParentWithLocName, parameters, cancellationToken);
                 var operation = new MgmtGrpParentWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -104,7 +104,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _mgmtGrpParentWithLocsRestClient.CreateOrUpdateAsync(Id.Parent.Name, mgmtGrpParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithLocsRestClient.CreateOrUpdateAsync(Id.Name, mgmtGrpParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtGrpParentWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -135,7 +135,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _mgmtGrpParentWithLocsRestClient.Get(Id.Parent.Name, mgmtGrpParentWithLocName, cancellationToken);
+                var response = _mgmtGrpParentWithLocsRestClient.Get(Id.Name, mgmtGrpParentWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MgmtGrpParentWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -165,7 +165,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _mgmtGrpParentWithLocsRestClient.GetAsync(Id.Parent.Name, mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithLocsRestClient.GetAsync(Id.Name, mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -192,7 +192,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _mgmtGrpParentWithLocsRestClient.Get(Id.Parent.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken);
+                var response = _mgmtGrpParentWithLocsRestClient.Get(Id.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<MgmtGrpParentWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new MgmtGrpParentWithLoc(this, response.Value), response.GetRawResponse());
@@ -219,7 +219,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _mgmtGrpParentWithLocsRestClient.GetAsync(Id.Parent.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithLocsRestClient.GetAsync(Id.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<MgmtGrpParentWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new MgmtGrpParentWithLoc(this, response.Value), response.GetRawResponse());
@@ -295,7 +295,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _mgmtGrpParentWithLocsRestClient.List(Id.Parent.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGrpParentWithLocsRestClient.List(Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -310,7 +310,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _mgmtGrpParentWithLocsRestClient.ListNextPage(nextLink, Id.Parent.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGrpParentWithLocsRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -336,7 +336,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _mgmtGrpParentWithLocsRestClient.ListAsync(Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGrpParentWithLocsRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -351,7 +351,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _mgmtGrpParentWithLocsRestClient.ListNextPageAsync(nextLink, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGrpParentWithLocsRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

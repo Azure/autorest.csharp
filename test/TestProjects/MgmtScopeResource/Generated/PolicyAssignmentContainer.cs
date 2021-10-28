@@ -349,7 +349,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.ListForManagementGroup(Id.Parent.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -364,7 +364,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = _policyAssignmentsRestClient.ListForManagementGroupNextPage(nextLink, Id.Parent.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _policyAssignmentsRestClient.ListForManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -506,7 +506,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.ListForManagementGroupAsync(Id.Parent.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -521,7 +521,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await _policyAssignmentsRestClient.ListForManagementGroupNextPageAsync(nextLink, Id.Parent.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _policyAssignmentsRestClient.ListForManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)

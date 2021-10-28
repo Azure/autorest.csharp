@@ -67,7 +67,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroup(Id.Parent.Name, policyDefinitionName, parameters, cancellationToken);
+                var response = _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
                 var operation = new PolicyDefinitionCreateOrUpdateAtManagementGroupOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -104,7 +104,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroupAsync(Id.Parent.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new PolicyDefinitionCreateOrUpdateAtManagementGroupOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -135,7 +135,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Name, policyDefinitionName, cancellationToken);
+                var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagementGroupPolicyDefinition(Parent, response.Value), response.GetRawResponse());
@@ -165,7 +165,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Name, policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ManagementGroupPolicyDefinition(Parent, response.Value), response.GetRawResponse());
@@ -192,7 +192,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Name, policyDefinitionName, cancellationToken: cancellationToken);
+                var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ManagementGroupPolicyDefinition>(null, response.GetRawResponse())
                     : Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
@@ -219,7 +219,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ManagementGroupPolicyDefinition>(null, response.GetRawResponse())
                     : Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
@@ -297,7 +297,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = _policyDefinitionsRestClient.ListByManagementGroup(Id.Parent.Name, filter, top, cancellationToken: cancellationToken);
+                    var response = _policyDefinitionsRestClient.ListByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -312,7 +312,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = _policyDefinitionsRestClient.ListByManagementGroupNextPage(nextLink, Id.Parent.Name, filter, top, cancellationToken: cancellationToken);
+                    var response = _policyDefinitionsRestClient.ListByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -340,7 +340,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = await _policyDefinitionsRestClient.ListByManagementGroupAsync(Id.Parent.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _policyDefinitionsRestClient.ListByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -355,7 +355,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = await _policyDefinitionsRestClient.ListByManagementGroupNextPageAsync(nextLink, Id.Parent.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _policyDefinitionsRestClient.ListByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ManagementGroupPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

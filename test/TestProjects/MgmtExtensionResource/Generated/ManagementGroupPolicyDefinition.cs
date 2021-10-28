@@ -95,7 +95,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
@@ -118,7 +118,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Parent.Name, Id.Name, cancellationToken);
+                var response = _policyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagementGroupPolicyDefinition(this, response.Value), response.GetRawResponse());
@@ -158,7 +158,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.DeleteAtManagementGroupAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.DeleteAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new PolicyDefinitionDeleteAtManagementGroupOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -183,7 +183,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.DeleteAtManagementGroup(Id.Parent.Parent.Name, Id.Name, cancellationToken);
+                var response = _policyDefinitionsRestClient.DeleteAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new PolicyDefinitionDeleteAtManagementGroupOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);

@@ -95,7 +95,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
@@ -118,7 +118,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Parent.Name, Id.Name, cancellationToken);
+                var response = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
@@ -165,7 +165,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -194,7 +194,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -223,7 +223,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -252,7 +252,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -280,7 +280,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -308,7 +308,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -332,7 +332,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _mgmtGrpParentWithNonResChWithLocsRestClient.ListNonResourceChildAsync(Id.Parent.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGrpParentWithNonResChWithLocsRestClient.ListNonResourceChildAsync(Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -358,7 +358,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _mgmtGrpParentWithNonResChWithLocsRestClient.ListNonResourceChild(Id.Parent.Parent.Name, Id.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGrpParentWithNonResChWithLocsRestClient.ListNonResourceChild(Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)

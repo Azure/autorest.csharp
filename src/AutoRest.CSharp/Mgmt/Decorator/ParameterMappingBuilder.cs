@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             else if (current == RequestPath.ManagementGroup)
             {
                 // using the reference name of the last segment as the parameter name, aka, groupId
-                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), $"{idVariableName}{invocationSuffix}.Parent.Name"));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), $"{idVariableName}{invocationSuffix}.Name"));
             }
             // ResourceGroup is not terminal state - Subscription is its parent
             else if (current == RequestPath.ResourceGroup)
