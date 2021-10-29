@@ -13,12 +13,12 @@ namespace MgmtPropertyChooser
     public static partial class ResourceGroupExtensions
     {
         #region VirtualMachine
-        /// <summary> Gets an object representing a VirtualMachineContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a VirtualMachineCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="VirtualMachineContainer" /> object. </returns>
-        public static VirtualMachineContainer GetVirtualMachines(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="VirtualMachineCollection" /> object. </returns>
+        public static VirtualMachineCollection GetVirtualMachines(this ResourceGroup resourceGroup)
         {
-            return new VirtualMachineContainer(resourceGroup);
+            return new VirtualMachineCollection(resourceGroup);
         }
         #endregion
     }

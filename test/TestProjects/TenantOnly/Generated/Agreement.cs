@@ -22,7 +22,7 @@ namespace TenantOnly
     public partial class Agreement : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AgreementsRestOperations _agreementsRestClient;
+        private readonly AgreementsRestOperations _restClient;
         private readonly AgreementData _data;
 
         /// <summary> Initializes a new instance of the <see cref="Agreement"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace TenantOnly
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Agreement"/> class. </summary>
@@ -47,7 +47,7 @@ namespace TenantOnly
         internal Agreement(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Agreement"/> class. </summary>
@@ -59,7 +59,7 @@ namespace TenantOnly
         internal Agreement(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _agreementsRestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -83,9 +83,6 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// OperationId: Agreements_Get
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -95,7 +92,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await _agreementsRestClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
@@ -107,9 +104,6 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// OperationId: Agreements_Get
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -119,7 +113,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _agreementsRestClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
+                var response = _restClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());

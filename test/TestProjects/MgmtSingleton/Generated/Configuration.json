@@ -10,11 +10,18 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "RequestPathToResourceData": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2": "SingletonResource2"
+  "OperationGroupToResourceType": {
+    "SingletonResources": "Microsoft.Billing/parentResources/singletonResources",
+    "SingletonResources2": "Microsoft.Billing/parentResources/singletonResources2"
   },
-  "RequestPathToSingletonResource": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2": "singletonResources2/default"
+  "OperationGroupToResource": {
+    "SingletonResources": "SingletonResource",
+    "SingletonResources2": "SingletonResource2"
   },
-  "ShowRequestPathAndOperationId": true
+  "OperationGroupToParent": {
+    "SingletonResources": "Microsoft.Billing/parentResources"
+  },
+  "OperationGroupToSingletonResource": {
+    "SingletonResources2": "singletonResources2/default"
+  }
 }

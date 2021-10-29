@@ -22,7 +22,7 @@ namespace SubscriptionExtensions
     public partial class Toaster : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ToastersRestOperations _toastersRestClient;
+        private readonly ToastersRestOperations _restClient;
         private readonly ToasterData _data;
 
         /// <summary> Initializes a new instance of the <see cref="Toaster"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace SubscriptionExtensions
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _toastersRestClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Toaster"/> class. </summary>
@@ -47,7 +47,7 @@ namespace SubscriptionExtensions
         internal Toaster(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _toastersRestClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Toaster"/> class. </summary>
@@ -59,11 +59,11 @@ namespace SubscriptionExtensions
         internal Toaster(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _toastersRestClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/toasters";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -83,9 +83,6 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
-        /// OperationId: Toasters_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Toaster>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -93,7 +90,7 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = await _toastersRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
@@ -105,9 +102,6 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
-        /// OperationId: Toasters_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Toaster> Get(CancellationToken cancellationToken = default)
         {
@@ -115,7 +109,7 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = _toastersRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
@@ -161,8 +155,8 @@ namespace SubscriptionExtensions
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _toastersRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Toaster(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -190,8 +184,8 @@ namespace SubscriptionExtensions
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _toastersRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new Toaster(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -219,8 +213,8 @@ namespace SubscriptionExtensions
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _toastersRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Toaster(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -248,8 +242,8 @@ namespace SubscriptionExtensions
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _toastersRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new Toaster(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -276,8 +270,8 @@ namespace SubscriptionExtensions
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _toastersRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Toaster(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -304,8 +298,8 @@ namespace SubscriptionExtensions
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _toastersRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new Toaster(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

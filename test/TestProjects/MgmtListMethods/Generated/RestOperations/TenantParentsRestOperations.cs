@@ -223,7 +223,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListRequest(string tenantTestName)
+        internal HttpMessage CreateGetAllRequest(string tenantTestName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -244,14 +244,14 @@ namespace MgmtListMethods
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public async Task<Response<TenantParentListResult>> ListAsync(string tenantTestName, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantParentListResult>> GetAllAsync(string tenantTestName, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
                 throw new ArgumentNullException(nameof(tenantTestName));
             }
 
-            using var message = CreateListRequest(tenantTestName);
+            using var message = CreateGetAllRequest(tenantTestName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -271,14 +271,14 @@ namespace MgmtListMethods
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public Response<TenantParentListResult> List(string tenantTestName, CancellationToken cancellationToken = default)
+        public Response<TenantParentListResult> GetAll(string tenantTestName, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
                 throw new ArgumentNullException(nameof(tenantTestName));
             }
 
-            using var message = CreateListRequest(tenantTestName);
+            using var message = CreateGetAllRequest(tenantTestName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -294,7 +294,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string tenantTestName)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string tenantTestName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -313,7 +313,7 @@ namespace MgmtListMethods
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="tenantTestName"/> is null. </exception>
-        public async Task<Response<TenantParentListResult>> ListNextPageAsync(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantParentListResult>> GetAllNextPageAsync(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -324,7 +324,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantTestName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, tenantTestName);
+            using var message = CreateGetAllNextPageRequest(nextLink, tenantTestName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -345,7 +345,7 @@ namespace MgmtListMethods
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="tenantTestName"/> is null. </exception>
-        public Response<TenantParentListResult> ListNextPage(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
+        public Response<TenantParentListResult> GetAllNextPage(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -356,7 +356,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantTestName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, tenantTestName);
+            using var message = CreateGetAllNextPageRequest(nextLink, tenantTestName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

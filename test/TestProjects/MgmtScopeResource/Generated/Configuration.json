@@ -10,18 +10,27 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "RequestPathToParent": {
-    "/{scope}/providers/Microsoft.Resources/links": "/{linkId}",
-    "/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
-    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}"
+  "OperationGroupToResourceType": {
+    "Deployments": "Microsoft.Resources/deployments",
+    "DeploymentOperations": "Microsoft.Resources/deployments/operations",
+    "ResourceLinks": "Microsoft.Resources/links"
   },
-  "RequestPathToResourceData": {
-    "/{linkId}": "ResourceLink"
+  "OperationGroupToResource": {
+    "DeploymentOperations": "DeploymentOperation",
+    "Deployments": "DeploymentExtended",
+    "ResourceLinks": "ResourceLink"
   },
-  "RequestPathToResourceType": {
-    "/{linkId}": "Microsoft.Resources/links"
+  "OperationGroupToParent": {
+    "Deployments": "tenant",
+    "PolicyAssignments": "tenant",
+    "ResourceLinks": "tenant"
   },
-  "ShowRequestPathAndOperationId": true
+  "MergeOperations": {
+    "WhatIf": [
+      "Deployments_WhatIf_POST",
+      "Deployments_WhatIfAtTenantScope_POST",
+      "Deployments_WhatIfAtManagementGroupScope_POST",
+      "Deployments_WhatIfAtSubscriptionScope_POST"
+    ]
+  }
 }

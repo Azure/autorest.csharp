@@ -22,7 +22,7 @@ namespace MgmtListMethods
     public partial class FakeParent : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FakeParentsRestOperations _fakeParentsRestClient;
+        private readonly FakeParentsRestOperations _restClient;
         private readonly FakeParentData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FakeParent"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace MgmtListMethods
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakeParentsRestClient = new FakeParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new FakeParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="FakeParent"/> class. </summary>
@@ -47,7 +47,7 @@ namespace MgmtListMethods
         internal FakeParent(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakeParentsRestClient = new FakeParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new FakeParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="FakeParent"/> class. </summary>
@@ -59,7 +59,7 @@ namespace MgmtListMethods
         internal FakeParent(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakeParentsRestClient = new FakeParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new FakeParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -83,9 +83,6 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParents/{fakeParentName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParents/{fakeParentName}
-        /// OperationId: FakeParents_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<FakeParent>> GetAsync(CancellationToken cancellationToken = default)
@@ -94,7 +91,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FakeParent(this, response.Value), response.GetRawResponse());
@@ -106,9 +103,6 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParents/{fakeParentName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParents/{fakeParentName}
-        /// OperationId: FakeParents_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FakeParent> Get(CancellationToken cancellationToken = default)
@@ -117,7 +111,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParent(this, response.Value), response.GetRawResponse());
@@ -163,8 +157,8 @@ namespace MgmtListMethods
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeParentsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -192,8 +186,8 @@ namespace MgmtListMethods
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeParentsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new FakeParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -221,8 +215,8 @@ namespace MgmtListMethods
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeParentsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -250,8 +244,8 @@ namespace MgmtListMethods
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeParentsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new FakeParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -278,8 +272,8 @@ namespace MgmtListMethods
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeParentsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -306,8 +300,8 @@ namespace MgmtListMethods
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeParentsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new FakeParent(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

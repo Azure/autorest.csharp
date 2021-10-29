@@ -23,7 +23,7 @@ namespace MgmtSingleton
     public partial class SingletonResource2 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SingletonResources2RestOperations _singletonResources2RestClient;
+        private readonly SingletonResources2RestOperations _restClient;
         private readonly SingletonResource2Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="SingletonResource2"/> class for mocking. </summary>
@@ -40,7 +40,7 @@ namespace MgmtSingleton
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _singletonResources2RestClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SingletonResource2"/> class. </summary>
@@ -50,7 +50,7 @@ namespace MgmtSingleton
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _singletonResources2RestClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SingletonResource2"/> class. </summary>
@@ -62,7 +62,7 @@ namespace MgmtSingleton
         internal SingletonResource2(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _singletonResources2RestClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -89,9 +89,6 @@ namespace MgmtSingleton
         /// <summary> Gets the parent resource of this resource. </summary>
         public ArmResource Parent { get; }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_GetDefault
         /// <summary> Singleton Test Example without explicit /default, /latest ending. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SingletonResource2>> GetAsync(CancellationToken cancellationToken = default)
@@ -100,7 +97,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResources2RestClient.GetDefaultAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetDefaultAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
@@ -112,9 +109,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_GetDefault
         /// <summary> Singleton Test Example without explicit /default, /latest ending. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SingletonResource2> Get(CancellationToken cancellationToken = default)
@@ -123,7 +117,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResources2RestClient.GetDefault(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.GetDefault(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
@@ -151,9 +145,6 @@ namespace MgmtSingleton
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_Delete
         /// <summary> Delete an SingletonResources2. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -163,7 +154,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResources2RestClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new SingletonResources2DeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -176,9 +167,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_Delete
         /// <summary> Delete an SingletonResources2. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -188,7 +176,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResources2RestClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new SingletonResources2DeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -200,15 +188,10 @@ namespace MgmtSingleton
                 throw;
             }
         }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_CreateOrUpdate
         /// <param name="parameters"> The SingletonResource2 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SingletonResources2CreateOrUpdateOperation> CreateOrUpdateAsync(SingletonResource2Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SingletonResource2>> CreateOrUpdateAsync(SingletonResource2Data parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -219,11 +202,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResources2RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SingletonResources2CreateOrUpdateOperation(this, response);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -232,14 +212,10 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_CreateOrUpdate
         /// <param name="parameters"> The SingletonResource2 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual SingletonResources2CreateOrUpdateOperation CreateOrUpdate(SingletonResource2Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual Response<SingletonResource2> CreateOrUpdate(SingletonResource2Data parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -250,11 +226,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResources2RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new SingletonResources2CreateOrUpdateOperation(this, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,14 +236,11 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_Update
         /// <summary> Update an SingletonResources2. </summary>
         /// <param name="parameters"> The SingletonResource2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<SingletonResource2>> UpdateAsync(SingletonResource2Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SingletonResource2>> UpdateAsync(SingletonResource2Data parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -281,7 +251,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResources2RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -291,9 +261,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_Update
         /// <summary> Update an SingletonResources2. </summary>
         /// <param name="parameters"> The SingletonResource2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -309,7 +276,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResources2RestClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return Response.FromValue(new SingletonResource2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -319,9 +286,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_PostTest
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -332,8 +296,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResources2RestClient.PostTestAsync(Id.ResourceGroupName, Id.Name, postParameter, cancellationToken).ConfigureAwait(false);
-                var operation = new SingletonResources2PostTestOperation(_clientDiagnostics, Pipeline, _singletonResources2RestClient.CreatePostTestRequest(Id.ResourceGroupName, Id.Name, postParameter).Request, response);
+                var response = await _restClient.PostTestAsync(Id.ResourceGroupName, Id.Name, postParameter, cancellationToken).ConfigureAwait(false);
+                var operation = new SingletonResources2PostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(Id.ResourceGroupName, Id.Name, postParameter).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -345,9 +309,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2
-        /// OperationId: SingletonResources2_PostTest
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -358,8 +319,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResources2RestClient.PostTest(Id.ResourceGroupName, Id.Name, postParameter, cancellationToken);
-                var operation = new SingletonResources2PostTestOperation(_clientDiagnostics, Pipeline, _singletonResources2RestClient.CreatePostTestRequest(Id.ResourceGroupName, Id.Name, postParameter).Request, response);
+                var response = _restClient.PostTest(Id.ResourceGroupName, Id.Name, postParameter, cancellationToken);
+                var operation = new SingletonResources2PostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(Id.ResourceGroupName, Id.Name, postParameter).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

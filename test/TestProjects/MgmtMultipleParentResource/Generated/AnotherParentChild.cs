@@ -19,13 +19,19 @@ using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
     /// <summary> A Class representing a AnotherParentChild along with the instance operations that can be performed on it. </summary>
     public partial class AnotherParentChild : ArmResource
+=======
+    /// <summary> A Class representing a SubParentChildBody along with the instance operations that can be performed on it. </summary>
+    public partial class SubParentChildBody : ArmResource
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AnotherChildrenRestOperations _anotherChildrenRestClient;
         private readonly ChildBodyData _data;
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         /// <summary> Initializes a new instance of the <see cref="AnotherParentChild"/> class for mocking. </summary>
         protected AnotherParentChild()
         {
@@ -35,6 +41,17 @@ namespace MgmtMultipleParentResource
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
         internal AnotherParentChild(ArmResource options, ChildBodyData resource) : base(options, resource.Id)
+=======
+        /// <summary> Initializes a new instance of the <see cref="SubParentChildBody"/> class for mocking. </summary>
+        protected SubParentChildBody()
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref = "SubParentChildBody"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="resource"> The resource that is the target of operations. </param>
+        internal SubParentChildBody(ArmResource options, ChildBodyData resource) : base(options, resource.Id)
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         {
             HasData = true;
             _data = resource;
@@ -42,22 +59,37 @@ namespace MgmtMultipleParentResource
             _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         /// <summary> Initializes a new instance of the <see cref="AnotherParentChild"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal AnotherParentChild(ArmResource options, ResourceIdentifier id) : base(options, id)
+=======
+        /// <summary> Initializes a new instance of the <see cref="SubParentChildBody"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        internal SubParentChildBody(ArmResource options, ResourceIdentifier id) : base(options, id)
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         /// <summary> Initializes a new instance of the <see cref="AnotherParentChild"/> class. </summary>
+=======
+        /// <summary> Initializes a new instance of the <see cref="SubParentChildBody"/> class. </summary>
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         /// <param name="clientOptions"> The client options to build client context. </param>
         /// <param name="credential"> The credential to build client context. </param>
         /// <param name="uri"> The uri to build client context. </param>
         /// <param name="pipeline"> The pipeline to build client context. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         internal AnotherParentChild(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
+=======
+        internal SubParentChildBody(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _anotherChildrenRestClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
@@ -90,16 +122,26 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         public async virtual Task<Response<AnotherParentChild>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.Get");
+=======
+        public async virtual Task<Response<SubParentChildBody>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.Get");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
                 var response = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
                 return Response.FromValue(new AnotherParentChild(this, response.Value), response.GetRawResponse());
+=======
+                return Response.FromValue(new SubParentChildBody(this, response.Value), response.GetRawResponse());
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -114,16 +156,26 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         public virtual Response<AnotherParentChild> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.Get");
+=======
+        public virtual Response<SubParentChildBody> Get(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.Get");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
                 var response = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
                 return Response.FromValue(new AnotherParentChild(this, response.Value), response.GetRawResponse());
+=======
+                return Response.FromValue(new SubParentChildBody(this, response.Value), response.GetRawResponse());
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -156,7 +208,11 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<AnotherChildDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.Delete");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.Delete");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
@@ -181,7 +237,11 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AnotherChildDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.Delete");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.Delete");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
@@ -203,22 +263,36 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         public async virtual Task<Response<AnotherParentChild>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+=======
+        public async virtual Task<Response<SubParentChildBody>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.AddTag");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.AddTag");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParentChild(this, originalResponse.Value), originalResponse.GetRawResponse());
+=======
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -232,22 +306,36 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         public virtual Response<AnotherParentChild> AddTag(string key, string value, CancellationToken cancellationToken = default)
+=======
+        public virtual Response<SubParentChildBody> AddTag(string key, string value, CancellationToken cancellationToken = default)
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.AddTag");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.AddTag");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParentChild(this, originalResponse.Value), originalResponse.GetRawResponse());
+=======
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
+                return Response.FromValue(new SubParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -260,23 +348,37 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         public async virtual Task<Response<AnotherParentChild>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+=======
+        public async virtual Task<Response<SubParentChildBody>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.SetTags");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.SetTags");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParentChild(this, originalResponse.Value), originalResponse.GetRawResponse());
+=======
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -289,23 +391,37 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         public virtual Response<AnotherParentChild> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+=======
+        public virtual Response<SubParentChildBody> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.SetTags");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.SetTags");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParentChild(this, originalResponse.Value), originalResponse.GetRawResponse());
+=======
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
+                return Response.FromValue(new SubParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -318,22 +434,36 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         public async virtual Task<Response<AnotherParentChild>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+=======
+        public async virtual Task<Response<SubParentChildBody>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.RemoveTag");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.RemoveTag");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _anotherChildrenRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParentChild(this, originalResponse.Value), originalResponse.GetRawResponse());
+=======
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -346,22 +476,36 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
         public virtual Response<AnotherParentChild> RemoveTag(string key, CancellationToken cancellationToken = default)
+=======
+        public virtual Response<SubParentChildBody> RemoveTag(string key, CancellationToken cancellationToken = default)
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.RemoveTag");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.RemoveTag");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _anotherChildrenRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParentChild(this, originalResponse.Value), originalResponse.GetRawResponse());
+=======
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
+                return Response.FromValue(new SubParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -385,7 +529,11 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childBody));
             }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.Update");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.Update");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {
@@ -417,7 +565,11 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(childBody));
             }
 
+<<<<<<< HEAD:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChild.cs
             using var scope = _clientDiagnostics.CreateScope("AnotherParentChild.Update");
+=======
+            using var scope = _clientDiagnostics.CreateScope("SubParentChildBody.Update");
+>>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/SubParentChildBody.cs
             scope.Start();
             try
             {

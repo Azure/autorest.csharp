@@ -14,17 +14,22 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public MgmtParamOrderingTests() : base("MgmtParamOrdering") { }
 
-        [TestCase("VirtualMachineExtensionImage", "SubscriptionExtensions")]
-        [TestCase("AvailabilitySet", "ResourceGroupExtensions")]
-        [TestCase("DedicatedHost", "DedicatedHostGroup")]
-        public void TestParent(string resourceName, string parentName)
+        [Test]
+        public void TestParentComputer()
         {
-            (_, var context) = Generate("MgmtParamOrdering").Result;
-
-            var resource = context.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
-            Assert.IsNotNull(resource);
-            var parents = resource.Parent(context);
-            Assert.IsTrue(parents.Any(r => r.Type.Name == parentName));
+            var result = Generate("MgmtParamOrdering").Result;
+            var model = result.Model;
+            var context = result.Context;
+            foreach (var operations in model.OperationGroups)
+            {
+                Assert.IsNotNull(operations.ParentResourceType(context.Configuration.MgmtConfiguration));
+                if (operations.Key.Equals("VirtualMachineExtensionImages"))
+                    Assert.AreEqual("subscriptions", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
+                else if (operations.Key.Equals("AvailabilitySets"))
+                    Assert.AreEqual("resourceGroups", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
+                else if (operations.Key.Equals("DedicatedHosts"))
+                    Assert.AreEqual("Microsoft.Compute/hostGroups", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
+            }
         }
 
         [TestCase("DedicatedHosts", "CreateOrUpdate", new[] { "subscriptionId", "resourceGroupName", "hostGroupName", "hostName"})]

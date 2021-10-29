@@ -13,32 +13,32 @@ namespace NoTypeReplacement
     public static partial class ResourceGroupExtensions
     {
         #region NoTypeReplacementModel1
-        /// <summary> Gets an object representing a NoTypeReplacementModel1Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a NoTypeReplacementModel1Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel1Container" /> object. </returns>
-        public static NoTypeReplacementModel1Container GetNoTypeReplacementModel1s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="NoTypeReplacementModel1Collection" /> object. </returns>
+        public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroup resourceGroup)
         {
-            return new NoTypeReplacementModel1Container(resourceGroup);
+            return new NoTypeReplacementModel1Collection(resourceGroup);
         }
         #endregion
 
         #region NoTypeReplacementModel2
-        /// <summary> Gets an object representing a NoTypeReplacementModel2Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a NoTypeReplacementModel2Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel2Container" /> object. </returns>
-        public static NoTypeReplacementModel2Container GetNoTypeReplacementModel2s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="NoTypeReplacementModel2Collection" /> object. </returns>
+        public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroup resourceGroup)
         {
-            return new NoTypeReplacementModel2Container(resourceGroup);
+            return new NoTypeReplacementModel2Collection(resourceGroup);
         }
         #endregion
 
         #region NoTypeReplacementModel3
-        /// <summary> Gets an object representing a NoTypeReplacementModel3Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a NoTypeReplacementModel3Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel3Container" /> object. </returns>
-        public static NoTypeReplacementModel3Container GetNoTypeReplacementModel3s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="NoTypeReplacementModel3Collection" /> object. </returns>
+        public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroup resourceGroup)
         {
-            return new NoTypeReplacementModel3Container(resourceGroup);
+            return new NoTypeReplacementModel3Collection(resourceGroup);
         }
         #endregion
     }

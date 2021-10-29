@@ -19,10 +19,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel1Data))]
-        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel2))]
-        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel3))]
-        [TestCase(typeof(object), typeof(AzureResourceFlattenModel4))]
-        [TestCase(typeof(Resource), typeof(AzureResourceFlattenModel5))]
+        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel2Data))]
+        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel3Data))]
+        [TestCase(typeof(object), typeof(AzureResourceFlattenModel4Data))]
+        [TestCase(typeof(Resource), typeof(AzureResourceFlattenModel5Data))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);
@@ -33,10 +33,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase(typeof(AzureResourceFlattenModel1Data), new string[] { "location", "foo", "fooPropertiesFoo" }, new Type[] { typeof(Location), typeof(string), typeof(int) })]
-        [TestCase(typeof(AzureResourceFlattenModel2), new string[] { "location", "new" }, new Type[] { typeof(Location), typeof(int) })]
-        [TestCase(typeof(AzureResourceFlattenModel3), new string[] { "location", "new" }, new Type[] { typeof(Location), typeof(int) })]
-        [TestCase(typeof(AzureResourceFlattenModel4), new string[] { "id", "name", "type", "foo" }, new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) })]
-        [TestCase(typeof(AzureResourceFlattenModel5), new string[] { "id", "name", "type", "foo" }, new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) })]
+        [TestCase(typeof(AzureResourceFlattenModel2Data), new string[] { "location", "new" }, new Type[] { typeof(Location), typeof(int) })]
+        [TestCase(typeof(AzureResourceFlattenModel3Data), new string[] { "location", "new" }, new Type[] { typeof(Location), typeof(int) })]
+        [TestCase(typeof(AzureResourceFlattenModel4Data), new string[] { "id", "name", "type", "foo" }, new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) })]
+        [TestCase(typeof(AzureResourceFlattenModel5Data), new string[] { "id", "name", "type", "foo" }, new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) })]
         [TestCase(typeof(AzureResourceFlattenModel7), new string[] { "id", "name", "type" }, new Type[] { typeof(string), typeof(string), typeof(string) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }

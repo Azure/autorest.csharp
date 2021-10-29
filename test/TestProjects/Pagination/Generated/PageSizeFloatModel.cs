@@ -22,7 +22,7 @@ namespace Pagination
     public partial class PageSizeFloatModel : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PageSizeFloatModelsRestOperations _pageSizeFloatModelsRestClient;
+        private readonly PageSizeFloatModelsRestOperations _restClient;
         private readonly PageSizeFloatModelData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeFloatModel"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace Pagination
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeFloatModelsRestClient = new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeFloatModel"/> class. </summary>
@@ -47,7 +47,7 @@ namespace Pagination
         internal PageSizeFloatModel(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeFloatModelsRestClient = new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeFloatModel"/> class. </summary>
@@ -59,7 +59,7 @@ namespace Pagination
         internal PageSizeFloatModel(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeFloatModelsRestClient = new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -90,7 +90,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = await _pageSizeFloatModelsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeFloatModel(this, response.Value), response.GetRawResponse());
@@ -109,7 +109,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = _pageSizeFloatModelsRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeFloatModel(this, response.Value), response.GetRawResponse());

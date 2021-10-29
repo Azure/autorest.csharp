@@ -22,7 +22,7 @@ namespace SupersetFlattenInheritance
     public partial class ResourceModel1 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResourceModel1SRestOperations _resourceModel1sRestClient;
+        private readonly ResourceModel1SRestOperations _restClient;
         private readonly ResourceModel1Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace SupersetFlattenInheritance
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resourceModel1sRestClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1"/> class. </summary>
@@ -47,7 +47,7 @@ namespace SupersetFlattenInheritance
         internal ResourceModel1(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resourceModel1sRestClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1"/> class. </summary>
@@ -59,7 +59,7 @@ namespace SupersetFlattenInheritance
         internal ResourceModel1(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resourceModel1sRestClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -83,9 +83,6 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1sName}
-        /// OperationId: ResourceModel1s_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ResourceModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -93,7 +90,7 @@ namespace SupersetFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _resourceModel1sRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());
@@ -105,9 +102,6 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1sName}
-        /// OperationId: ResourceModel1s_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceModel1> Get(CancellationToken cancellationToken = default)
         {
@@ -115,7 +109,7 @@ namespace SupersetFlattenInheritance
             scope.Start();
             try
             {
-                var response = _resourceModel1sRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());

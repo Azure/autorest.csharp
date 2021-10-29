@@ -7,5 +7,10 @@ azure-arm: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/mgmtListMethods.json
 namespace: MgmtListMethods
-show-request-path: true
+operation-group-to-resource-type:
+  Quotas: something
+operation-group-to-resource:
+  Quotas: NonResource
+operation-group-to-parent:
+  Quotas: subscriptions
 ```

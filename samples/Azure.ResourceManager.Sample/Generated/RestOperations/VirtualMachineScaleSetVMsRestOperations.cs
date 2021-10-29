@@ -706,7 +706,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string virtualMachineScaleSetName, string filter, string select, string expand)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string virtualMachineScaleSetName, string filter, string select, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -747,7 +747,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSetVMListResult>> ListAsync(string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineScaleSetVMListResult>> GetAllAsync(string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -758,7 +758,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(virtualMachineScaleSetName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -782,7 +782,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        public Response<VirtualMachineScaleSetVMListResult> List(string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineScaleSetVMListResult> GetAll(string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -793,7 +793,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(virtualMachineScaleSetName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1444,7 +1444,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string virtualMachineScaleSetName, string filter, string select, string expand)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName, string virtualMachineScaleSetName, string filter, string select, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1467,7 +1467,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSetVMListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineScaleSetVMListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1482,7 +1482,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(virtualMachineScaleSetName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1507,7 +1507,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        public Response<VirtualMachineScaleSetVMListResult> ListNextPage(string nextLink, string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineScaleSetVMListResult> GetAllNextPage(string nextLink, string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1522,7 +1522,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(virtualMachineScaleSetName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

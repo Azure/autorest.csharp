@@ -34,6 +34,60 @@
         }
     },
     "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines": {
+            "get": {
+                "tags": [
+                    "VirtualMachines"
+                ],
+                "operationId": "VirtualMachines_List",
+                "description": "Retrieves information about the model view or the instance view of a virtual machine.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation.",
+                        "enum": [
+                            "instanceView"
+                        ],
+                        "x-ms-enum": {
+                            "name": "InstanceViewTypes",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineListResult"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get a Virtual Machine.": {
+                        "$ref": "./examples/GetVirtualMachine.json"
+                    },
+                    "Get a virtual machine placed on a dedicated host group through automatic placement": {
+                        "$ref": "./examples/GetVirtualMachineAutoPlacedOnDedicatedHostGroup.json"
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
             "put": {
                 "tags": [

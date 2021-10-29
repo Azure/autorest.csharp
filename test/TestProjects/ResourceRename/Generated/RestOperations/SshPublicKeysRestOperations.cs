@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using ResourceRename.Models;
 
 namespace ResourceRename
 {
@@ -43,7 +44,7 @@ namespace ResourceRename
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateRequest(string resourceGroupName, string sshPublicKeyName, SshPublicKeyInfoData parameters)
+        internal HttpMessage CreateCreateRequest(string resourceGroupName, string sshPublicKeyName, string path, string keyData)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -60,8 +61,13 @@ namespace ResourceRename
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
+            var model = new SshPublicKeyInfo()
+            {
+                Path = path,
+                KeyData = keyData
+            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             message.SetProperty("UserAgentOverride", _userAgent);
             return message;
@@ -70,10 +76,11 @@ namespace ResourceRename
         /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
+        /// <param name="path"> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </param>
+        /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SshPublicKeyInfoData>> CreateAsync(string resourceGroupName, string sshPublicKeyName, SshPublicKeyInfoData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
+        public async Task<Response<SshPublicKeyInfo>> CreateAsync(string resourceGroupName, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -83,21 +90,17 @@ namespace ResourceRename
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
 
-            using var message = CreateCreateRequest(resourceGroupName, sshPublicKeyName, parameters);
+            using var message = CreateCreateRequest(resourceGroupName, sshPublicKeyName, path, keyData);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                 case 201:
                     {
-                        SshPublicKeyInfoData value = default;
+                        SshPublicKeyInfo value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(document.RootElement);
+                        value = SshPublicKeyInfo.DeserializeSshPublicKeyInfo(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -108,10 +111,11 @@ namespace ResourceRename
         /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
+        /// <param name="path"> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </param>
+        /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SshPublicKeyInfoData> Create(string resourceGroupName, string sshPublicKeyName, SshPublicKeyInfoData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
+        public Response<SshPublicKeyInfo> Create(string resourceGroupName, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -121,21 +125,17 @@ namespace ResourceRename
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
 
-            using var message = CreateCreateRequest(resourceGroupName, sshPublicKeyName, parameters);
+            using var message = CreateCreateRequest(resourceGroupName, sshPublicKeyName, path, keyData);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                 case 201:
                     {
-                        SshPublicKeyInfoData value = default;
+                        SshPublicKeyInfo value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(document.RootElement);
+                        value = SshPublicKeyInfo.DeserializeSshPublicKeyInfo(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -243,7 +243,7 @@ namespace ResourceRename
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async Task<Response<SshPublicKeyInfoData>> GetAsync(string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public async Task<Response<SshPublicKeyInfo>> GetAsync(string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -260,13 +260,11 @@ namespace ResourceRename
             {
                 case 200:
                     {
-                        SshPublicKeyInfoData value = default;
+                        SshPublicKeyInfo value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(document.RootElement);
+                        value = SshPublicKeyInfo.DeserializeSshPublicKeyInfo(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((SshPublicKeyInfoData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -277,7 +275,7 @@ namespace ResourceRename
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        public Response<SshPublicKeyInfoData> Get(string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public Response<SshPublicKeyInfo> Get(string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -294,13 +292,11 @@ namespace ResourceRename
             {
                 case 200:
                     {
-                        SshPublicKeyInfoData value = default;
+                        SshPublicKeyInfo value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(document.RootElement);
+                        value = SshPublicKeyInfo.DeserializeSshPublicKeyInfo(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((SshPublicKeyInfoData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

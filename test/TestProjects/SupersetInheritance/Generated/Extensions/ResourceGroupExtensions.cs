@@ -21,38 +21,31 @@ namespace SupersetInheritance
     public static partial class ResourceGroupExtensions
     {
         #region SupersetModel1
-        /// <summary> Gets an object representing a SupersetModel1Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SupersetModel1Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SupersetModel1Container" /> object. </returns>
-        public static SupersetModel1Container GetSupersetModel1s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="SupersetModel1Collection" /> object. </returns>
+        public static SupersetModel1Collection GetSupersetModel1s(this ResourceGroup resourceGroup)
         {
-            return new SupersetModel1Container(resourceGroup);
+            return new SupersetModel1Collection(resourceGroup);
         }
         #endregion
 
         #region SupersetModel4
-        /// <summary> Gets an object representing a SupersetModel4Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a SupersetModel4Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SupersetModel4Container" /> object. </returns>
-        public static SupersetModel4Container GetSupersetModel4s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="SupersetModel4Collection" /> object. </returns>
+        public static SupersetModel4Collection GetSupersetModel4s(this ResourceGroup resourceGroup)
         {
-            return new SupersetModel4Container(resourceGroup);
+            return new SupersetModel4Collection(resourceGroup);
         }
         #endregion
 
+        #region SupersetModel2
         private static SupersetModel2SRestOperations GetSupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
-        private static SupersetModel3SRestOperations GetSupersetModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
-        {
-            return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel2s_Put
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
@@ -72,12 +65,12 @@ namespace SupersetInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2");
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.ResourceGroupName, supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -89,9 +82,6 @@ namespace SupersetInheritance
             ).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel2s_Put
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
@@ -111,12 +101,12 @@ namespace SupersetInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2");
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.ResourceGroupName, supersetModel2SName, parameters, cancellationToken);
+                    var response = restOperations.Put(resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -128,9 +118,6 @@ namespace SupersetInheritance
             );
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel2s_Get
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -145,12 +132,12 @@ namespace SupersetInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2");
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, supersetModel2SName, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, supersetModel2SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -162,9 +149,6 @@ namespace SupersetInheritance
             ).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel2s_Get
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -179,12 +163,12 @@ namespace SupersetInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2");
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, supersetModel2SName, cancellationToken);
+                    var response = restOperations.Get(resourceGroup.Id.Name, supersetModel2SName, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -196,9 +180,14 @@ namespace SupersetInheritance
             );
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel3s_Put
+        #endregion
+
+        #region SupersetModel3
+        private static SupersetModel3SRestOperations GetSupersetModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel3 to use. </param>
@@ -218,12 +207,12 @@ namespace SupersetInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3");
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.ResourceGroupName, supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -235,9 +224,6 @@ namespace SupersetInheritance
             ).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel3s_Put
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel3 to use. </param>
@@ -257,12 +243,12 @@ namespace SupersetInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3");
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.ResourceGroupName, supersetModel3SName, parameters, cancellationToken);
+                    var response = restOperations.Put(resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -274,9 +260,6 @@ namespace SupersetInheritance
             );
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel3s_Get
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -291,12 +274,12 @@ namespace SupersetInheritance
             return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3");
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, supersetModel3SName, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, supersetModel3SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -308,9 +291,6 @@ namespace SupersetInheritance
             ).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel3s_Get
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -325,12 +305,12 @@ namespace SupersetInheritance
             return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3");
                 scope.Start();
                 try
                 {
-                    var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, supersetModel3SName, cancellationToken);
+                    var response = restOperations.Get(resourceGroup.Id.Name, supersetModel3SName, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -341,5 +321,7 @@ namespace SupersetInheritance
             }
             );
         }
+
+        #endregion
     }
 }

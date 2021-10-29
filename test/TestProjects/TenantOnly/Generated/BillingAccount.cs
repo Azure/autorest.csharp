@@ -22,7 +22,7 @@ namespace TenantOnly
     public partial class BillingAccount : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BillingAccountsRestOperations _billingAccountsRestClient;
+        private readonly BillingAccountsRestOperations _restClient;
         private readonly BillingAccountData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccount"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace TenantOnly
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccount"/> class. </summary>
@@ -47,7 +47,7 @@ namespace TenantOnly
         internal BillingAccount(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccount"/> class. </summary>
@@ -59,7 +59,7 @@ namespace TenantOnly
         internal BillingAccount(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -83,9 +83,6 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: BillingAccounts_Get
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -95,7 +92,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await _billingAccountsRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
@@ -107,9 +104,6 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: BillingAccounts_Get
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -119,7 +113,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _billingAccountsRestClient.Get(Id.Name, expand, cancellationToken);
+                var response = _restClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
@@ -165,8 +159,8 @@ namespace TenantOnly
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _billingAccountsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -194,8 +188,8 @@ namespace TenantOnly
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _billingAccountsRestClient.Get(Id.Name, null, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -223,8 +217,8 @@ namespace TenantOnly
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _billingAccountsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -252,8 +246,8 @@ namespace TenantOnly
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _billingAccountsRestClient.Get(Id.Name, null, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -280,8 +274,8 @@ namespace TenantOnly
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _billingAccountsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -308,8 +302,8 @@ namespace TenantOnly
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _billingAccountsRestClient.Get(Id.Name, null, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -319,14 +313,11 @@ namespace TenantOnly
             }
         }
 
-        #region Agreement
-
-        /// <summary> Gets a container of Agreements in the BillingAccount. </summary>
+        /// <summary> Gets a list of Agreements in the BillingAccount. </summary>
         /// <returns> An object representing collection of Agreements and their operations over a BillingAccount. </returns>
-        public AgreementContainer GetAgreements()
+        public AgreementCollection GetAgreements()
         {
-            return new AgreementContainer(this);
+            return new AgreementCollection(this);
         }
-        #endregion
     }
 }

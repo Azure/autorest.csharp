@@ -90,7 +90,7 @@
                 "x-ms-long-running-operation-options": {
                     "final-state-via": "location",
                     "x-ms-long-running-reallyLong": true
-                  }
+                }
             },
             "patch": {
                 "tags": [
@@ -147,7 +147,7 @@
                 "x-ms-long-running-operation-options": {
                     "final-state-via": "location",
                     "x-ms-long-running-reallyLong": true
-                  }
+                }
             },
             "delete": {
                 "tags": [
@@ -248,13 +248,6 @@
                         "required": true,
                         "type": "string",
                         "description": "The name of the resource group."
-                    },
-                    {
-                        "name": "requiredParam",
-                        "in": "query",
-                        "required": true,
-                        "type": "string",
-                        "description": "The expand expression to apply on the operation."
                     },
                     {
                         "name": "optionalParam",
@@ -361,7 +354,39 @@
                 "x-ms-long-running-operation-options": {
                     "final-state-via": "location",
                     "x-ms-long-running-reallyLong": true
-                  }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars": {
+            "get": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_List",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/BarListResult"
+                        }
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}": {
@@ -403,16 +428,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Bar"
-                        }
+                        "description": "OK"
                     },
                     "201": {
-                        "description": "Accepted",
-                        "schema": {
-                            "$ref": "#/definitions/Bar"
-                        }
+                        "description": "Accepted"
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -550,7 +569,7 @@
                 "x-ms-long-running-operation-options": {
                     "final-state-via": "location",
                     "x-ms-long-running-reallyLong": true
-                  }
+                }
             }
         }
     },
@@ -567,6 +586,25 @@
                 }
             ],
             "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
+        },
+        "BarListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Bar"
+                    },
+                    "description": "The list of bars"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Availability Set operation response."
         },
         "Bar": {
             "properties": {

@@ -9,5 +9,4 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/MgmtPropertyChooser.json
 namespace: MgmtPropertyChooser
-show-request-path: true
 ```

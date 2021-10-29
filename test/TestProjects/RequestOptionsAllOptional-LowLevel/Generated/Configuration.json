@@ -8,6 +8,5 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "low-level-client": true,
-  "request-options-all-optional": true
+  "low-level-client": true
 }

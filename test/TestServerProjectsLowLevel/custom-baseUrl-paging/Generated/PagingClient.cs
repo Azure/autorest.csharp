@@ -78,7 +78,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestOptions options)
+        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -122,7 +122,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestOptions options)
+        public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -166,7 +166,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestOptions options)
+        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -210,7 +210,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestOptions options)
+        public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -255,7 +255,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestOptions options)
+        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -302,7 +302,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestOptions options)
+        public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)

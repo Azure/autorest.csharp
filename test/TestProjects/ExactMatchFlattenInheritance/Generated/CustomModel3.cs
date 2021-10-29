@@ -22,7 +22,7 @@ namespace ExactMatchFlattenInheritance
     public partial class CustomModel3 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CustomModel3SRestOperations _customModel3sRestClient;
+        private readonly CustomModel3SRestOperations _restClient;
         private readonly CustomModel3Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel3"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace ExactMatchFlattenInheritance
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel3"/> class. </summary>
@@ -47,7 +47,7 @@ namespace ExactMatchFlattenInheritance
         internal CustomModel3(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel3"/> class. </summary>
@@ -59,11 +59,11 @@ namespace ExactMatchFlattenInheritance
         internal CustomModel3(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _customModel3sRestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/customModel3";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/customModel3s";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -91,7 +91,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _customModel3sRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());
@@ -111,7 +111,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _customModel3sRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel3(this, response.Value), response.GetRawResponse());

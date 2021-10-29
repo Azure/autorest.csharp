@@ -23,7 +23,7 @@ namespace MgmtListMethods
     public partial class MgmtGrpParentWithNonResChWithLoc : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly MgmtGrpParentWithNonResChWithLocsRestOperations _mgmtGrpParentWithNonResChWithLocsRestClient;
+        private readonly MgmtGrpParentWithNonResChWithLocsRestOperations _restClient;
         private readonly MgmtGrpParentWithNonResChWithLocData _data;
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChWithLoc"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace MgmtListMethods
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _mgmtGrpParentWithNonResChWithLocsRestClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChWithLoc"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtListMethods
         internal MgmtGrpParentWithNonResChWithLoc(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _mgmtGrpParentWithNonResChWithLocsRestClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChWithLoc"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtListMethods
         internal MgmtGrpParentWithNonResChWithLoc(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _mgmtGrpParentWithNonResChWithLocsRestClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _restClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -84,9 +84,6 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
-        /// OperationId: MgmtGrpParentWithNonResChWithLocs_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetAsync(CancellationToken cancellationToken = default)
@@ -95,7 +92,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
@@ -107,9 +104,6 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
-        /// OperationId: MgmtGrpParentWithNonResChWithLocs_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<MgmtGrpParentWithNonResChWithLoc> Get(CancellationToken cancellationToken = default)
@@ -118,7 +112,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
@@ -164,8 +158,8 @@ namespace MgmtListMethods
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -193,8 +187,8 @@ namespace MgmtListMethods
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -222,8 +216,8 @@ namespace MgmtListMethods
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -251,8 +245,8 @@ namespace MgmtListMethods
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -279,8 +273,8 @@ namespace MgmtListMethods
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _mgmtGrpParentWithNonResChWithLocsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -307,8 +301,8 @@ namespace MgmtListMethods
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _mgmtGrpParentWithNonResChWithLocsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -318,35 +312,6 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}/nonResourceChild
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
-        /// OperationId: MgmtGrpParentWithNonResChWithLocs_ListNonResourceChild
-        /// <summary> Lists all. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
-        {
-            async Task<Page<NonResourceChild>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLoc.GetNonResourceChild");
-                scope.Start();
-                try
-                {
-                    var response = await _mgmtGrpParentWithNonResChWithLocsRestClient.ListNonResourceChildAsync(Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-        }
-
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}/nonResourceChild
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
-        /// OperationId: MgmtGrpParentWithNonResChWithLocs_ListNonResourceChild
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
@@ -358,7 +323,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _mgmtGrpParentWithNonResChWithLocsRestClient.ListNonResourceChild(Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.GetNonResourceChild(Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -368,6 +333,29 @@ namespace MgmtListMethods
                 }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary> Lists all. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<NonResourceChild>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChWithLoc.GetNonResourceChild");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.GetNonResourceChildAsync(Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
     }
 }

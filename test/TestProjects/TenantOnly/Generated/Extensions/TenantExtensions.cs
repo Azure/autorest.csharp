@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 
 namespace TenantOnly
@@ -13,12 +14,24 @@ namespace TenantOnly
     public static partial class TenantExtensions
     {
         #region BillingAccount
-        /// <summary> Gets an object representing a BillingAccountContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a BillingAccount along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="BillingAccountContainer" /> object. </returns>
-        public static BillingAccountContainer GetBillingAccounts(this Tenant tenant)
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="BillingAccount" /> object. </returns>
+        public static BillingAccount GetBillingAccount(this Tenant tenant, ResourceIdentifier id)
         {
-            return new BillingAccountContainer(tenant);
+            return new BillingAccount(tenant, id);
+        }
+        #endregion
+
+        #region Agreement
+        /// <summary> Gets an object representing a Agreement along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="Agreement" /> object. </returns>
+        public static Agreement GetAgreement(this Tenant tenant, ResourceIdentifier id)
+        {
+            return new Agreement(tenant, id);
         }
         #endregion
     }

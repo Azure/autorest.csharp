@@ -23,7 +23,7 @@ namespace MgmtParamOrdering
     public partial class DedicatedHostGroup : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DedicatedHostGroupsRestOperations _dedicatedHostGroupsRestClient;
+        private readonly DedicatedHostGroupsRestOperations _restClient;
         private readonly DedicatedHostGroupData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroup"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace MgmtParamOrdering
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _dedicatedHostGroupsRestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroup"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtParamOrdering
         internal DedicatedHostGroup(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _dedicatedHostGroupsRestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroup"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtParamOrdering
         internal DedicatedHostGroup(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _dedicatedHostGroupsRestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -84,9 +84,6 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// OperationId: DedicatedHostGroups_Get
         /// <summary> Retrieves information about a dedicated host group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<DedicatedHostGroup>> GetAsync(CancellationToken cancellationToken = default)
@@ -95,7 +92,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
@@ -107,9 +104,6 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// OperationId: DedicatedHostGroups_Get
         /// <summary> Retrieves information about a dedicated host group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DedicatedHostGroup> Get(CancellationToken cancellationToken = default)
@@ -118,7 +112,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupsRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
@@ -146,9 +140,6 @@ namespace MgmtParamOrdering
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// OperationId: DedicatedHostGroups_Delete
         /// <summary> Delete a dedicated host group. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -158,7 +149,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupsRestClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new DedicatedHostGroupDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -171,9 +162,6 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// OperationId: DedicatedHostGroups_Delete
         /// <summary> Delete a dedicated host group. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -183,7 +171,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupsRestClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new DedicatedHostGroupDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -214,8 +202,8 @@ namespace MgmtParamOrdering
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _dedicatedHostGroupsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -243,8 +231,8 @@ namespace MgmtParamOrdering
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _dedicatedHostGroupsRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -272,8 +260,8 @@ namespace MgmtParamOrdering
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _dedicatedHostGroupsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -301,8 +289,8 @@ namespace MgmtParamOrdering
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _dedicatedHostGroupsRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -329,8 +317,8 @@ namespace MgmtParamOrdering
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _dedicatedHostGroupsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -357,8 +345,8 @@ namespace MgmtParamOrdering
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _dedicatedHostGroupsRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -367,15 +355,11 @@ namespace MgmtParamOrdering
                 throw;
             }
         }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// OperationId: DedicatedHostGroups_Update
         /// <summary> Update an dedicated host group. </summary>
         /// <param name="parameters"> Parameters supplied to the Update Dedicated Host Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<DedicatedHostGroup>> UpdateAsync(DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostGroup>> UpdateAsync(DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -386,7 +370,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupsRestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -396,9 +380,6 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-        /// OperationId: DedicatedHostGroups_Update
         /// <summary> Update an dedicated host group. </summary>
         /// <param name="parameters"> Parameters supplied to the Update Dedicated Host Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -414,7 +395,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupsRestClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -424,14 +405,11 @@ namespace MgmtParamOrdering
             }
         }
 
-        #region DedicatedHost
-
-        /// <summary> Gets a container of DedicatedHosts in the DedicatedHostGroup. </summary>
+        /// <summary> Gets a list of DedicatedHosts in the DedicatedHostGroup. </summary>
         /// <returns> An object representing collection of DedicatedHosts and their operations over a DedicatedHostGroup. </returns>
-        public DedicatedHostContainer GetDedicatedHosts()
+        public DedicatedHostCollection GetDedicatedHosts()
         {
-            return new DedicatedHostContainer(this);
+            return new DedicatedHostCollection(this);
         }
-        #endregion
     }
 }

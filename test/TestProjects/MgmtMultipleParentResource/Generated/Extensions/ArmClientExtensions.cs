@@ -23,25 +23,14 @@ namespace MgmtMultipleParentResource
         }
         #endregion
 
-        #region AnotherParentChild
-        /// <summary> Gets an object representing a AnotherParentChild along with the instance operations that can be performed on it but with no data. </summary>
+        #region AnotherParentChildBody
+        /// <summary> Gets an object representing a AnotherParentChildBody along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AnotherParentChild" /> object. </returns>
-        public static AnotherParentChild GetAnotherParentChild(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="AnotherParentChildBody" /> object. </returns>
+        public static AnotherParentChildBody GetAnotherParentChildBody(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AnotherParentChild(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
-        #region ParentSubParentChild
-        /// <summary> Gets an object representing a ParentSubParentChild along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ParentSubParentChild" /> object. </returns>
-        public static ParentSubParentChild GetParentSubParentChild(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ParentSubParentChild(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new AnotherParentChildBody(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
@@ -64,6 +53,17 @@ namespace MgmtMultipleParentResource
         public static SubParent GetSubParent(this ArmClient armClient, ResourceIdentifier id)
         {
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SubParent(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
+
+        #region SubParentChildBody
+        /// <summary> Gets an object representing a SubParentChildBody along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SubParentChildBody" /> object. </returns>
+        public static SubParentChildBody GetSubParentChildBody(this ArmClient armClient, ResourceIdentifier id)
+        {
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SubParentChildBody(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
     }

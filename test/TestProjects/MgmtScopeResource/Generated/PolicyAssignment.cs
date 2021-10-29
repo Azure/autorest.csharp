@@ -23,7 +23,7 @@ namespace MgmtScopeResource
     public partial class PolicyAssignment : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PolicyAssignmentsRestOperations _policyAssignmentsRestClient;
+        private readonly PolicyAssignmentsRestOperations _restClient;
         private readonly PolicyAssignmentData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PolicyAssignment"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace MgmtScopeResource
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyAssignmentsRestClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PolicyAssignment"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtScopeResource
         internal PolicyAssignment(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyAssignmentsRestClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PolicyAssignment"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtScopeResource
         internal PolicyAssignment(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyAssignmentsRestClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -84,9 +84,6 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// ContextualPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// OperationId: PolicyAssignments_Get
         /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<PolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
@@ -95,7 +92,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = await _policyAssignmentsRestClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
@@ -107,9 +104,6 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// ContextualPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// OperationId: PolicyAssignments_Get
         /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PolicyAssignment> Get(CancellationToken cancellationToken = default)
@@ -118,7 +112,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = _policyAssignmentsRestClient.Get(Id.Parent, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
@@ -146,9 +140,6 @@ namespace MgmtScopeResource
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// ContextualPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// OperationId: PolicyAssignments_Delete
         /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -158,7 +149,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = await _policyAssignmentsRestClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new PolicyAssignmentDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -171,9 +162,6 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// ContextualPath: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
-        /// OperationId: PolicyAssignments_Delete
         /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -183,7 +171,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = _policyAssignmentsRestClient.Delete(Id.Parent, Id.Name, cancellationToken);
+                var response = _restClient.Delete(Id.Parent, Id.Name, cancellationToken);
                 var operation = new PolicyAssignmentDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);

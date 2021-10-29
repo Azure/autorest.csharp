@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Linq;
 using AutoRest.CSharp.Mgmt.Decorator;
 using NUnit.Framework;
 
@@ -11,18 +10,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public MgmtSingletonTests() : base("MgmtSingleton") { }
 
-        [TestCase("ParentResource", false)]
-        [TestCase("SingletonResource", true)]
-        [TestCase("SingletonResource2", true)]
-        [TestCase("SubscriptionParentSingleton", true)]
-        [TestCase("TenantParentSingleton", true)]
-        public void TestSingletonDetection(string resourceName, bool isSingleton)
+        [Test]
+        public void TestSingletonDetection()
         {
-            (_, var context) = Generate("MgmtSingleton").Result;
-
-            var resource = context.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
-            Assert.NotNull(resource);
-            Assert.AreEqual(isSingleton, resource.IsSingleton);
+            var result = Generate("MgmtSingleton").Result;
+            var model = result.Model;
+            var context = result.Context;
+            foreach (var og in model.OperationGroups)
+            {
+                if (og.Key.StartsWith("SingletonResources") || og.Key.EndsWith("Singleton"))
+                    Assert.IsTrue(og.IsSingletonResource(context.Configuration.MgmtConfiguration));
+                else
+                    Assert.IsFalse(og.IsSingletonResource(context.Configuration.MgmtConfiguration));
+            }
         }
     }
 }

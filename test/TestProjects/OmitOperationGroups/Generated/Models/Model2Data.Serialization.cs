@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
@@ -17,6 +16,11 @@ namespace OmitOperationGroups
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
             if (Optional.IsDefined(B))
             {
                 writer.WritePropertyName("b");
@@ -32,15 +36,18 @@ namespace OmitOperationGroups
 
         internal static Model2Data DeserializeModel2Data(JsonElement element)
         {
+            Optional<string> id = default;
             Optional<string> b = default;
             Optional<ModelX> modelx = default;
             Optional<string> f = default;
             Optional<string> g = default;
-            ResourceIdentifier id = default;
-            string name = default;
-            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("b"))
                 {
                     b = property.Value.GetString();
@@ -66,23 +73,8 @@ namespace OmitOperationGroups
                     g = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
-                    continue;
-                }
             }
-            return new Model2Data(id, name, type, f.Value, g.Value, b.Value, modelx.Value);
+            return new Model2Data(f.Value, g.Value, id.Value, b.Value, modelx.Value);
         }
     }
 }

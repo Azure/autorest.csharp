@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionResource
@@ -12,13 +13,14 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to Tenant. </summary>
     public static partial class TenantExtensions
     {
-        #region BuiltInPolicyDefinition
-        /// <summary> Gets an object representing a BuiltInPolicyDefinitionContainer along with the instance operations that can be performed on it. </summary>
+        #region PolicyDefinition
+        /// <summary> Gets an object representing a PolicyDefinition along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionContainer" /> object. </returns>
-        public static BuiltInPolicyDefinitionContainer GetBuiltInPolicyDefinitions(this Tenant tenant)
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="PolicyDefinition" /> object. </returns>
+        public static PolicyDefinition GetPolicyDefinition(this Tenant tenant, ResourceIdentifier id)
         {
-            return new BuiltInPolicyDefinitionContainer(tenant);
+            return new PolicyDefinition(tenant, id);
         }
         #endregion
     }

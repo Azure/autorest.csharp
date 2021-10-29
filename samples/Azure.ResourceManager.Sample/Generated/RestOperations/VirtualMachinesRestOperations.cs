@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Sample
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateListByLocationRequest(string location)
+        internal HttpMessage CreateGetAllByLocationRequest(string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -67,14 +67,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public async Task<Response<VirtualMachineListResult>> ListByLocationAsync(string location, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineListResult>> GetAllByLocationAsync(string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationRequest(location);
+            using var message = CreateGetAllByLocationRequest(location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -94,14 +94,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public Response<VirtualMachineListResult> ListByLocation(string location, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineListResult> GetAllByLocation(string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationRequest(location);
+            using var message = CreateGetAllByLocationRequest(location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -871,7 +871,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -894,14 +894,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<VirtualMachineListResult>> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineListResult>> GetAllAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName);
+            using var message = CreateGetAllRequest(resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -921,14 +921,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<VirtualMachineListResult> List(string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineListResult> GetAll(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName);
+            using var message = CreateGetAllRequest(resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -944,7 +944,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListAllRequest(string statusOnly)
+        internal HttpMessage CreateGetBySubscriptionRequest(string statusOnly)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -968,9 +968,9 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<VirtualMachineListResult>> ListAllAsync(string statusOnly = null, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineListResult>> GetBySubscriptionAsync(string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListAllRequest(statusOnly);
+            using var message = CreateGetBySubscriptionRequest(statusOnly);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -989,9 +989,9 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<VirtualMachineListResult> ListAll(string statusOnly = null, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineListResult> GetBySubscription(string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListAllRequest(statusOnly);
+            using var message = CreateGetBySubscriptionRequest(statusOnly);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1007,7 +1007,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListAvailableSizesRequest(string resourceGroupName, string vmName)
+        internal HttpMessage CreateGetAvailableSizesRequest(string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1033,7 +1033,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
-        public async Task<Response<VirtualMachineSizeListResult>> ListAvailableSizesAsync(string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineSizeListResult>> GetAvailableSizesAsync(string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1044,7 +1044,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var message = CreateListAvailableSizesRequest(resourceGroupName, vmName);
+            using var message = CreateGetAvailableSizesRequest(resourceGroupName, vmName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1065,7 +1065,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
-        public Response<VirtualMachineSizeListResult> ListAvailableSizes(string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineSizeListResult> GetAvailableSizes(string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1076,7 +1076,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var message = CreateListAvailableSizesRequest(resourceGroupName, vmName);
+            using var message = CreateGetAvailableSizesRequest(resourceGroupName, vmName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1882,7 +1882,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListByLocationNextPageRequest(string nextLink, string location)
+        internal HttpMessage CreateGetAllByLocationNextPageRequest(string nextLink, string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1901,7 +1901,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="location"/> is null. </exception>
-        public async Task<Response<VirtualMachineListResult>> ListByLocationNextPageAsync(string nextLink, string location, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineListResult>> GetAllByLocationNextPageAsync(string nextLink, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1912,7 +1912,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationNextPageRequest(nextLink, location);
+            using var message = CreateGetAllByLocationNextPageRequest(nextLink, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1933,7 +1933,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="location"/> is null. </exception>
-        public Response<VirtualMachineListResult> ListByLocationNextPage(string nextLink, string location, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineListResult> GetAllByLocationNextPage(string nextLink, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1944,7 +1944,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationNextPageRequest(nextLink, location);
+            using var message = CreateGetAllByLocationNextPageRequest(nextLink, location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1960,7 +1960,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1979,7 +1979,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<VirtualMachineListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1990,7 +1990,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -2011,7 +2011,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<VirtualMachineListResult> ListNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineListResult> GetAllNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2022,7 +2022,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -2038,7 +2038,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListAllNextPageRequest(string nextLink, string statusOnly)
+        internal HttpMessage CreateGetBySubscriptionNextPageRequest(string nextLink, string statusOnly)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -2057,14 +2057,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<VirtualMachineListResult>> ListAllNextPageAsync(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineListResult>> GetBySubscriptionNextPageAsync(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateListAllNextPageRequest(nextLink, statusOnly);
+            using var message = CreateGetBySubscriptionNextPageRequest(nextLink, statusOnly);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -2085,14 +2085,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<VirtualMachineListResult> ListAllNextPage(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineListResult> GetBySubscriptionNextPage(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateListAllNextPageRequest(nextLink, statusOnly);
+            using var message = CreateGetBySubscriptionNextPageRequest(nextLink, statusOnly);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

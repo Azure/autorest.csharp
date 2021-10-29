@@ -5,15 +5,7 @@
 
 #nullable disable
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Azure;
-using Azure.Core;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
 {
@@ -21,152 +13,23 @@ namespace OmitOperationGroups
     public static partial class ResourceGroupExtensions
     {
         #region Model2
-        /// <summary> Gets an object representing a Model2Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a Model2Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="Model2Container" /> object. </returns>
-        public static Model2Container GetModel2s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="Model2Collection" /> object. </returns>
+        public static Model2Collection GetModel2s(this ResourceGroup resourceGroup)
         {
-            return new Model2Container(resourceGroup);
+            return new Model2Collection(resourceGroup);
         }
         #endregion
 
-        private static Model5SRestOperations GetModel5SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
-        {
-            return new Model5SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
-        }
-
+        #region Model5
+        /// <summary> Gets an object representing a Model5Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="model5SName"> The String to use. </param>
-        /// <param name="parameters"> The Model5 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<Model5>> CreateOrUpdateModel5Async(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        /// <returns> Returns a <see cref="Model5Collection" /> object. </returns>
+        public static Model5Collection GetModel5s(this ResourceGroup resourceGroup)
         {
-            if (model5SName == null)
-            {
-                throw new ArgumentNullException(nameof(model5SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateOrUpdateModel5");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.CreateOrUpdateAsync(resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return new Model5Collection(resourceGroup);
         }
-
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="model5SName"> The String to use. </param>
-        /// <param name="parameters"> The Model5 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<Model5> CreateOrUpdateModel5(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
-        {
-            if (model5SName == null)
-            {
-                throw new ArgumentNullException(nameof(model5SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateOrUpdateModel5");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.CreateOrUpdate(resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
-        }
-
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="model5SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
-        public static async Task<Response<Model5>> GetModel5Async(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
-        {
-            if (model5SName == null)
-            {
-                throw new ArgumentNullException(nameof(model5SName));
-            }
-
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetModel5");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
-        }
-
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="model5SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
-        public static Response<Model5> GetModel5(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
-        {
-            if (model5SName == null)
-            {
-                throw new ArgumentNullException(nameof(model5SName));
-            }
-
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetModel5");
-                scope.Start();
-                try
-                {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
-        }
+        #endregion
     }
 }

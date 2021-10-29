@@ -148,7 +148,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create deployment at a given scope.": {
+            "$ref": "./examples/PutDeploymentAtScope.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -403,6 +408,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Predict template changes at management group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnTenant.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -463,6 +473,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Predict template changes at management group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnManagementGroup.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -521,6 +536,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at subscription scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnSubscription.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -591,6 +611,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at resource group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnResourceGroup.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -706,6 +731,11 @@
             "description": "The template provided to calculate hash."
           }
         ],
+        "x-ms-examples": {
+          "Calculate template hash": {
+            "$ref": "./examples/CalculateTemplateHash.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK - Returns the hash.",

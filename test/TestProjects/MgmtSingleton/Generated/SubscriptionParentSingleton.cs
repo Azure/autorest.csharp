@@ -23,7 +23,7 @@ namespace MgmtSingleton
     public partial class SubscriptionParentSingleton : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SubscriptionParentSingletonRestOperations _subscriptionParentSingletonRestClient;
+        private readonly SubscriptionParentSingletonRestOperations _restClient;
         private readonly SubscriptionParentSingletonData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class for mocking. </summary>
@@ -40,7 +40,7 @@ namespace MgmtSingleton
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
@@ -50,7 +50,7 @@ namespace MgmtSingleton
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
@@ -62,11 +62,11 @@ namespace MgmtSingleton
         internal SubscriptionParentSingleton(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _subscriptionParentSingletonRestClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Billing/SubscriptionParentSingleton";
+        public static readonly ResourceType ResourceType = "Microsoft.Billing/SubscriptionParentSingleton/default";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -89,9 +89,6 @@ namespace MgmtSingleton
         /// <summary> Gets the parent resource of this resource. </summary>
         public ArmResource Parent { get; }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_GetDefault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SubscriptionParentSingleton>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -99,7 +96,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.GetDefaultAsync(cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetDefaultAsync(cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
@@ -111,9 +108,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_GetDefault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubscriptionParentSingleton> Get(CancellationToken cancellationToken = default)
         {
@@ -121,7 +115,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.GetDefault(cancellationToken);
+                var response = _restClient.GetDefault(cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
@@ -149,9 +143,6 @@ namespace MgmtSingleton
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_Delete
         /// <summary> Delete a SubscriptionParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -161,7 +152,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(cancellationToken).ConfigureAwait(false);
                 var operation = new SubscriptionParentSingletonDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -174,9 +165,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_Delete
         /// <summary> Delete a SubscriptionParentSingleton. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -186,7 +174,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.Delete(cancellationToken);
+                var response = _restClient.Delete(cancellationToken);
                 var operation = new SubscriptionParentSingletonDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -198,15 +186,10 @@ namespace MgmtSingleton
                 throw;
             }
         }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_CreateOrUpdate
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SubscriptionParentSingletonCreateOrUpdateOperation> CreateOrUpdateAsync(SubscriptionParentSingletonData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubscriptionParentSingleton>> CreateOrUpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -217,11 +200,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.CreateOrUpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionParentSingletonCreateOrUpdateOperation(this, response);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                var response = await _restClient.CreateOrUpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,14 +210,10 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_CreateOrUpdate
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual SubscriptionParentSingletonCreateOrUpdateOperation CreateOrUpdate(SubscriptionParentSingletonData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual Response<SubscriptionParentSingleton> CreateOrUpdate(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -248,11 +224,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.CreateOrUpdate(parameters, cancellationToken);
-                var operation = new SubscriptionParentSingletonCreateOrUpdateOperation(this, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                var response = _restClient.CreateOrUpdate(parameters, cancellationToken);
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -261,14 +234,11 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_Update
         /// <summary> Update an SubscriptionParentSingleton. </summary>
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<SubscriptionParentSingleton>> UpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubscriptionParentSingleton>> UpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -279,7 +249,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.UpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -289,9 +259,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_Update
         /// <summary> Update an SubscriptionParentSingleton. </summary>
         /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -307,7 +274,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.Update(parameters, cancellationToken);
+                var response = _restClient.Update(parameters, cancellationToken);
                 return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -317,9 +284,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_PostTest
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -330,8 +294,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _subscriptionParentSingletonRestClient.PostTestAsync(postParameter, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _subscriptionParentSingletonRestClient.CreatePostTestRequest(postParameter).Request, response);
+                var response = await _restClient.PostTestAsync(postParameter, cancellationToken).ConfigureAwait(false);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -343,9 +307,6 @@ namespace MgmtSingleton
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
-        /// OperationId: SubscriptionParentSingleton_PostTest
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -356,8 +317,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _subscriptionParentSingletonRestClient.PostTest(postParameter, cancellationToken);
-                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _subscriptionParentSingletonRestClient.CreatePostTestRequest(postParameter).Request, response);
+                var response = _restClient.PostTest(postParameter, cancellationToken);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -10,5 +10,12 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "ShowRequestPathAndOperationId": true
+  "OperationGroupToParent": {
+    "Children": "Microsoft.Compute/parents/subParents",
+    "AnotherChildren": "Microsoft.Compute/anotherParents"
+  },
+  "OperationGroupIsExtension": [
+    "Children",
+    "AnotherChildren"
+  ]
 }

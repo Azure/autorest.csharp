@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtSingleton
@@ -13,12 +14,13 @@ namespace MgmtSingleton
     public static partial class TenantExtensions
     {
         #region TenantParentSingleton
-        /// <summary> Gets an object representing a TenantParentSingleton along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a TenantParentSingleton along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TenantParentSingleton" /> object. </returns>
-        public static TenantParentSingleton GetTenantParentSingleton(this Tenant tenant)
+        public static TenantParentSingleton GetTenantParentSingleton(this Tenant tenant, ResourceIdentifier id)
         {
-            return new TenantParentSingleton(tenant, tenant.Id + "/providers/Microsoft.Billing/TenantParentSingleton/default");
+            return new TenantParentSingleton(tenant, id);
         }
         #endregion
     }

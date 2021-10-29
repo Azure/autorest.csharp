@@ -44,7 +44,78 @@ namespace SupersetFlattenInheritance
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string customModel1SName, CustomModel1 parameters)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/customModel1s", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<CustomModel1ListResult>> GetAllAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateGetAllRequest(resourceGroupName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        CustomModel1ListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = CustomModel1ListResult.DeserializeCustomModel1ListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<CustomModel1ListResult> GetAll(string resourceGroupName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateGetAllRequest(resourceGroupName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        CustomModel1ListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = CustomModel1ListResult.DeserializeCustomModel1ListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string customModel1SName, CustomModel1Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -73,7 +144,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<CustomModel1>> PutAsync(string resourceGroupName, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<CustomModel1Data>> PutAsync(string resourceGroupName, string customModel1SName, CustomModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -94,9 +165,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel1 value = default;
+                        CustomModel1Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = CustomModel1.DeserializeCustomModel1(document.RootElement);
+                        value = CustomModel1Data.DeserializeCustomModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -109,7 +180,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<CustomModel1> Put(string resourceGroupName, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        public Response<CustomModel1Data> Put(string resourceGroupName, string customModel1SName, CustomModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -130,9 +201,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel1 value = default;
+                        CustomModel1Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = CustomModel1.DeserializeCustomModel1(document.RootElement);
+                        value = CustomModel1Data.DeserializeCustomModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -164,7 +235,7 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is null. </exception>
-        public async Task<Response<CustomModel1>> GetAsync(string resourceGroupName, string customModel1SName, CancellationToken cancellationToken = default)
+        public async Task<Response<CustomModel1Data>> GetAsync(string resourceGroupName, string customModel1SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -181,11 +252,13 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel1 value = default;
+                        CustomModel1Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = CustomModel1.DeserializeCustomModel1(document.RootElement);
+                        value = CustomModel1Data.DeserializeCustomModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((CustomModel1Data)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -195,7 +268,7 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is null. </exception>
-        public Response<CustomModel1> Get(string resourceGroupName, string customModel1SName, CancellationToken cancellationToken = default)
+        public Response<CustomModel1Data> Get(string resourceGroupName, string customModel1SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -212,11 +285,13 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel1 value = default;
+                        CustomModel1Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = CustomModel1.DeserializeCustomModel1(document.RootElement);
+                        value = CustomModel1Data.DeserializeCustomModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((CustomModel1Data)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

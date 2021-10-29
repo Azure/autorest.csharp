@@ -10,7 +10,16 @@ namespace: MgmtParent
 model-namespace: false
 public-clients: false
 head-as-boolean: false
+payload-flattening-threshold: 2
+operation-group-to-resource-type:
+   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/vmextension
+operation-group-to-resource:
+   VirtualMachineExtensionImages: NonResource
+operation-group-to-parent:
+   VirtualMachineExtensionImages: subscriptions
+   DedicatedHosts: Microsoft.Compute/hostGroups
+list-exception:
+   DedicatedHostGroups
 modelerfour:
   lenient-model-deduplication: true
-show-request-path: true
 ```

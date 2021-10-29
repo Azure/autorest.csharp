@@ -23,7 +23,7 @@ namespace Azure.Management.Storage
     public partial class BlobContainer : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BlobContainersRestOperations _blobContainersRestClient;
+        private readonly BlobContainersRestOperations _restClient;
         private readonly BlobContainerData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class. </summary>
@@ -48,7 +48,7 @@ namespace Azure.Management.Storage
         internal BlobContainer(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class. </summary>
@@ -60,7 +60,7 @@ namespace Azure.Management.Storage
         internal BlobContainer(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -84,9 +84,6 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_Get
         /// <summary> Gets properties of a specified container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<BlobContainer>> GetAsync(CancellationToken cancellationToken = default)
@@ -95,7 +92,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
@@ -107,9 +104,6 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_Get
         /// <summary> Gets properties of a specified container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobContainer> Get(CancellationToken cancellationToken = default)
@@ -118,7 +112,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
@@ -146,9 +140,6 @@ namespace Azure.Management.Storage
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_Delete
         /// <summary> Deletes specified container under its account. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -158,7 +149,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new BlobContainerDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -171,9 +162,6 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_Delete
         /// <summary> Deletes specified container under its account. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -183,7 +171,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.Delete(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new BlobContainerDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -195,15 +183,11 @@ namespace Azure.Management.Storage
                 throw;
             }
         }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_Update
         /// <summary> Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn&apos;t already exist. </summary>
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
-        public async virtual Task<Response<BlobContainer>> UpdateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BlobContainer>> UpdateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (blobContainer == null)
             {
@@ -214,7 +198,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, blobContainer, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -224,9 +208,6 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_Update
         /// <summary> Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn&apos;t already exist. </summary>
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -242,7 +223,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.Update(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, blobContainer, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken);
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -252,14 +233,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_SetLegalHold
         /// <summary> Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request. </summary>
         /// <param name="legalHold"> The LegalHold property that will be set to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="legalHold"/> is null. </exception>
-        public async virtual Task<Response<LegalHold>> SetLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LegalHold>> SetLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             if (legalHold == null)
             {
@@ -270,7 +248,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.SetLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.SetLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -280,9 +258,6 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_SetLegalHold
         /// <summary> Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request. </summary>
         /// <param name="legalHold"> The LegalHold property that will be set to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -298,7 +273,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.SetLegalHold(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken);
+                var response = _restClient.SetLegalHold(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -308,14 +283,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_ClearLegalHold
         /// <summary> Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request. </summary>
         /// <param name="legalHold"> The LegalHold property that will be clear from a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="legalHold"/> is null. </exception>
-        public async virtual Task<Response<LegalHold>> ClearLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LegalHold>> ClearLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             if (legalHold == null)
             {
@@ -326,7 +298,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.ClearLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.ClearLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -336,9 +308,6 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_ClearLegalHold
         /// <summary> Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request. </summary>
         /// <param name="legalHold"> The LegalHold property that will be clear from a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -354,7 +323,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.ClearLegalHold(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken);
+                var response = _restClient.ClearLegalHold(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -364,19 +333,16 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_Lease
         /// <summary> The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. </summary>
         /// <param name="parameters"> Lease Container request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<LeaseContainerResponse>> LeaseAsync(LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LeaseContainerResponse>> LeaseAsync(LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobContainer.Lease");
             scope.Start();
             try
             {
-                var response = await _blobContainersRestClient.LeaseAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.LeaseAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -386,9 +352,6 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
-        /// OperationId: BlobContainers_Lease
         /// <summary> The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. </summary>
         /// <param name="parameters"> Lease Container request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -398,7 +361,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _blobContainersRestClient.Lease(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, parameters, cancellationToken);
+                var response = _restClient.Lease(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -408,14 +371,55 @@ namespace Azure.Management.Storage
             }
         }
 
-        #region ImmutabilityPolicy
+        /// <summary> This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<BlobContainerObjectLevelWormOperation> ObjectLevelWormAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BlobContainer.ObjectLevelWorm");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.ObjectLevelWormAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new BlobContainerObjectLevelWormOperation(_clientDiagnostics, Pipeline, _restClient.CreateObjectLevelWormRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
 
-        /// <summary> Gets an object representing a ImmutabilityPolicy along with the instance operations that can be performed on it in the BlobContainer. </summary>
+        /// <summary> This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual BlobContainerObjectLevelWormOperation ObjectLevelWorm(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BlobContainer.ObjectLevelWorm");
+            scope.Start();
+            try
+            {
+                var response = _restClient.ObjectLevelWorm(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var operation = new BlobContainerObjectLevelWormOperation(_clientDiagnostics, Pipeline, _restClient.CreateObjectLevelWormRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets an object representing a ImmutabilityPolicy along with the instance operations that can be performed on it. </summary>
         /// <returns> Returns a <see cref="ImmutabilityPolicy" /> object. </returns>
         public ImmutabilityPolicy GetImmutabilityPolicy()
         {
             return new ImmutabilityPolicy(this, Id + "/immutabilityPolicies/default");
         }
-        #endregion
     }
 }

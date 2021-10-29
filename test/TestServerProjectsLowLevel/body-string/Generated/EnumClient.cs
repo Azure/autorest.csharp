@@ -64,7 +64,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNotExpandableAsync(RequestOptions options)
+        public virtual async Task<Response> GetNotExpandableAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
@@ -93,7 +93,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNotExpandable(RequestOptions options)
+        public virtual Response GetNotExpandable(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
@@ -184,7 +184,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetReferencedAsync(RequestOptions options)
+        public virtual async Task<Response> GetReferencedAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
@@ -213,7 +213,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetReferenced(RequestOptions options)
+        public virtual Response GetReferenced(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
@@ -310,7 +310,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetReferencedConstantAsync(RequestOptions options)
+        public virtual async Task<Response> GetReferencedConstantAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
@@ -345,7 +345,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetReferencedConstant(RequestOptions options)
+        public virtual Response GetReferencedConstant(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");

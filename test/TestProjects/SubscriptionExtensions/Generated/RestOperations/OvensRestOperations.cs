@@ -44,7 +44,86 @@ namespace SubscriptionExtensions
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string vmName, OvenData parameters)
+        internal HttpMessage CreateGetByResourceGroupRequest(string resourceGroupName, string statusOnly)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/ovens", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            if (statusOnly != null)
+            {
+                uri.AppendQuery("statusOnly", statusOnly, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<OvenListResult>> GetByResourceGroupAsync(string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateGetByResourceGroupRequest(resourceGroupName, statusOnly);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        OvenListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = OvenListResult.DeserializeOvenListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<OvenListResult> GetByResourceGroup(string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateGetByResourceGroupRequest(resourceGroupName, statusOnly);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        OvenListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = OvenListResult.DeserializeOvenListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string ovenName, OvenData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -55,8 +134,8 @@ namespace SubscriptionExtensions
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachines/", false);
-            uri.AppendPath(vmName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/ovens/", false);
+            uri.AppendPath(ovenName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -70,26 +149,26 @@ namespace SubscriptionExtensions
 
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="ovenName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (vmName == null)
+            if (ovenName == null)
             {
-                throw new ArgumentNullException(nameof(vmName));
+                throw new ArgumentNullException(nameof(ovenName));
             }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, vmName, parameters);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, ovenName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -103,26 +182,26 @@ namespace SubscriptionExtensions
 
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string resourceGroupName, string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="ovenName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response CreateOrUpdate(string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (vmName == null)
+            if (ovenName == null)
             {
-                throw new ArgumentNullException(nameof(vmName));
+                throw new ArgumentNullException(nameof(ovenName));
             }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, vmName, parameters);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, ovenName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -134,7 +213,7 @@ namespace SubscriptionExtensions
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string vmName)
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string ovenName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -145,8 +224,8 @@ namespace SubscriptionExtensions
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachines/", false);
-            uri.AppendPath(vmName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/ovens/", false);
+            uri.AppendPath(ovenName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -155,21 +234,21 @@ namespace SubscriptionExtensions
         }
 
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
-        public async Task<Response<OvenData>> GetAsync(string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is null. </exception>
+        public async Task<Response<OvenData>> GetAsync(string resourceGroupName, string ovenName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (vmName == null)
+            if (ovenName == null)
             {
-                throw new ArgumentNullException(nameof(vmName));
+                throw new ArgumentNullException(nameof(ovenName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, vmName);
+            using var message = CreateGetRequest(resourceGroupName, ovenName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -188,21 +267,21 @@ namespace SubscriptionExtensions
         }
 
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
-        public Response<OvenData> Get(string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is null. </exception>
+        public Response<OvenData> Get(string resourceGroupName, string ovenName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (vmName == null)
+            if (ovenName == null)
             {
-                throw new ArgumentNullException(nameof(vmName));
+                throw new ArgumentNullException(nameof(ovenName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, vmName);
+            using var message = CreateGetRequest(resourceGroupName, ovenName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -220,70 +299,7 @@ namespace SubscriptionExtensions
             }
         }
 
-        internal HttpMessage CreateListAllRequest(string statusOnly)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachines", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (statusOnly != null)
-            {
-                uri.AppendQuery("statusOnly", statusOnly, true);
-            }
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<OvenListResult>> ListAllAsync(string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateListAllRequest(statusOnly);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        OvenListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = OvenListResult.DeserializeOvenListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OvenListResult> ListAll(string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateListAllRequest(statusOnly);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        OvenListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = OvenListResult.DeserializeOvenListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateListAllNextPageRequest(string nextLink, string statusOnly)
+        internal HttpMessage CreateGetByResourceGroupNextPageRequest(string nextLink, string resourceGroupName, string statusOnly)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -299,17 +315,22 @@ namespace SubscriptionExtensions
 
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<OvenListResult>> ListAllNextPageAsync(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<OvenListResult>> GetByResourceGroupNextPageAsync(string nextLink, string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
 
-            using var message = CreateListAllNextPageRequest(nextLink, statusOnly);
+            using var message = CreateGetByResourceGroupNextPageRequest(nextLink, resourceGroupName, statusOnly);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -327,17 +348,22 @@ namespace SubscriptionExtensions
 
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<OvenListResult> ListAllNextPage(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<OvenListResult> GetByResourceGroupNextPage(string nextLink, string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
 
-            using var message = CreateListAllNextPageRequest(nextLink, statusOnly);
+            using var message = CreateGetByResourceGroupNextPageRequest(nextLink, resourceGroupName, statusOnly);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

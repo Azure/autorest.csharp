@@ -22,7 +22,7 @@ namespace Pagination
     public partial class PageSizeIntegerModel : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PageSizeIntegerModelsRestOperations _pageSizeIntegerModelsRestClient;
+        private readonly PageSizeIntegerModelsRestOperations _restClient;
         private readonly PageSizeIntegerModelData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeIntegerModel"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace Pagination
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeIntegerModelsRestClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeIntegerModel"/> class. </summary>
@@ -47,7 +47,7 @@ namespace Pagination
         internal PageSizeIntegerModel(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeIntegerModelsRestClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeIntegerModel"/> class. </summary>
@@ -59,7 +59,7 @@ namespace Pagination
         internal PageSizeIntegerModel(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pageSizeIntegerModelsRestClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _restClient = new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -90,7 +90,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = await _pageSizeIntegerModelsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());
@@ -109,7 +109,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = _pageSizeIntegerModelsRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeIntegerModel(this, response.Value), response.GetRawResponse());

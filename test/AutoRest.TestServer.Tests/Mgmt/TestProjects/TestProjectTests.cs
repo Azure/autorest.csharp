@@ -9,6 +9,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
+using Azure;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
@@ -31,6 +32,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             _projectName = projectName;
         }
+
+        protected HashSet<string> ListExceptions = new HashSet<string>();
 
         protected virtual IEnumerable<Type> MyTypes()
         {
@@ -186,16 +189,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Type resourceExtensions = FindResourceGroupExtensions();
             Assert.NotNull(resourceExtensions);
 
-            foreach (var type in FindAllContainers())
+            foreach (var type in FindAllCollections())
             {
-                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
-                ResourceType resourceType = GetContainerValidResourceType(type);
+                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Collection"));
+                ResourceType resourceType = GetCollectionValidResourceType(type);
                 if (resourceType.Equals(ResourceGroup.ResourceType))
                 {
-                    var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}".ToPlural());
-                    Assert.NotNull(getContainerMethod);
-                    Assert.AreEqual(1, getContainerMethod.GetParameters().Length);
-                    var param = TypeAsserts.HasParameter(getContainerMethod, "resourceGroup");
+                    var getCollectionMethod = resourceExtensions.GetMethod($"Get{resourceName}".ToPlural());
+                    Assert.NotNull(getCollectionMethod);
+                    Assert.AreEqual(1, getCollectionMethod.GetParameters().Length);
+                    var param = TypeAsserts.HasParameter(getCollectionMethod, "resourceGroup");
                     Assert.AreEqual(typeof(ResourceGroup), param.ParameterType);
                 }
             }
@@ -233,9 +236,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("ValidResourceType")]
-        public void ValidateContainerPropertyExists(string propertyName)
+        public void ValidateCollectionPropertyExists(string propertyName)
         {
-            foreach (var type in FindAllContainers())
+            foreach (var type in FindAllCollections())
             {
                 var propertyInfo = type.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
                 Assert.NotNull(propertyInfo, $"Property '{type.Name}' is not found");
@@ -243,13 +246,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        public IEnumerable<Type> FindAllContainers()
+        public IEnumerable<Type> FindAllCollections()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.EndsWith("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.Name.EndsWith("Collection") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
                 {
                     yield return t;
                 }
@@ -294,16 +297,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             return allTypes.FirstOrDefault(t => t.Name == "SubscriptionExtensions" && !t.Name.Contains("Tests") && t.Namespace == _projectName);
         }
 
-        private ResourceType GetContainerValidResourceType(Type containerType)
+        private ResourceType GetCollectionValidResourceType(Type collectionType)
         {
-            var containerObj = Activator.CreateInstance(containerType, true);
-            var validResourceTypeProperty = containerObj.GetType().GetProperty("ValidResourceType", BindingFlags.NonPublic | BindingFlags.Instance);
-            ResourceType resourceType = validResourceTypeProperty.GetValue(containerObj) as ResourceType;
+            var collectionObj = Activator.CreateInstance(collectionType, true);
+            var validResourceTypeProperty = collectionObj.GetType().GetProperty("ValidResourceType", BindingFlags.NonPublic | BindingFlags.Instance);
+            ResourceType resourceType = validResourceTypeProperty.GetValue(collectionObj) as ResourceType;
             return resourceType;
         }
 
         [Test]
-        public void ValidateSubscriptionExtensionsGetResourceContainer()
+        public void ValidateSubscriptionExtensionsGetResourceCollection()
         {
             if (_projectName.Equals(""))
             {
@@ -313,10 +316,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Type subscriptionExtension = FindSubscriptionExtensions();
             Assert.NotNull(subscriptionExtension);
 
-            foreach (Type type in FindAllContainers())
+            foreach (Type type in FindAllCollections())
             {
-                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
-                ResourceType resourceType = GetContainerValidResourceType(type);
+                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Collection"));
+                ResourceType resourceType = GetCollectionValidResourceType(type);
 
                 if (resourceType.Equals(Subscription.ResourceType))
                 {
@@ -329,10 +332,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        private Type GetResourceRestOperationsType(Type containerType)
+        private Type GetResourceRestOperationsType(Type collectionType)
         {
-            var containerObj = Activator.CreateInstance(containerType, true);
-            return containerObj.GetType().GetField("_restClient", BindingFlags.NonPublic | BindingFlags.Instance).FieldType;
+            var collectionObj = Activator.CreateInstance(collectionType, true);
+            return collectionObj.GetType().GetField("_restClient", BindingFlags.NonPublic | BindingFlags.Instance).FieldType;
         }
 
         [Test]
@@ -346,10 +349,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Type subscriptionExtension = FindSubscriptionExtensions();
             Assert.NotNull(subscriptionExtension);
 
-            foreach (Type type in FindAllContainers())
+            foreach (Type type in FindAllCollections())
             {
-                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
-                ResourceType resourceType = GetContainerValidResourceType(type);
+                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Collection"));
+                ResourceType resourceType = GetCollectionValidResourceType(type);
 
                 var restOperation = GetResourceRestOperationsType(type);
                 var listAllMethod = restOperation.GetMethod("ListAll");
@@ -388,10 +391,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Type subscriptionExtension = FindSubscriptionExtensions();
             Assert.NotNull(subscriptionExtension);
 
-            foreach (Type type in FindAllContainers())
+            foreach (Type type in FindAllCollections())
             {
-                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
-                ResourceType resourceType = GetContainerValidResourceType(type);
+                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Collection"));
+                ResourceType resourceType = GetCollectionValidResourceType(type);
 
                 var restOperation = GetResourceRestOperationsType(type);
                 var listBySubscriptionMethod = restOperation.GetMethod("GetBySubscription");
@@ -421,15 +424,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 var operationTypeProperty = operation.GetField("ResourceType");
                 ResourceType operationType = operationTypeProperty.GetValue(operation) as ResourceType;
-                foreach (var container in FindAllContainers())
+                foreach (var collection in FindAllCollections())
                 {
-                    ResourceType containerType = GetContainerValidResourceType(container);
-                    if (containerType.Equals(operationType))
+                    ResourceType collectionType = GetCollectionValidResourceType(collection);
+                    if (collectionType.Equals(operationType))
                     {
-                        var name = container.Name.Remove(container.Name.LastIndexOf("Container"));
+                        var name = collection.Name.Remove(collection.Name.LastIndexOf("Collection"));
                         var method = operation.GetMethod($"Get{name.ToPlural()}");
                         Assert.NotNull(method);
-                        Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace + "." + container.Name));
+                        Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(collection.Namespace + "." + collection.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);
                     }
                 }
@@ -515,6 +518,23 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 Assert.AreEqual(paramNames[i], parameters[i].Name);
                 Assert.AreEqual(paramTypes[i], parameters[i].ParameterType);
+            }
+        }
+
+        [Test]
+        public void VerifiyEnumerable()
+        {
+            foreach (var collection in FindAllCollections())
+            {
+                if (ListExceptions.Contains(collection.Name))
+                    continue;
+                Assert.NotNull(collection.GetInterface("IEnumerable"), $"{collection.Name} did not implement IEnumerable");
+                Assert.NotNull(collection.GetInterface("IEnumerable`1"), $"{collection.Name} did not implement IEnumerable<T>");
+                var pageable = typeof(Pageable<>);
+                if (collection.GetMethod("GetAll").ReturnType.Name == pageable.Name)
+                {
+                    Assert.NotNull(collection.GetInterface("IAsyncEnumerable`1"), $"{collection.Name} did not implement IAsyncEnumerable<T>");
+                }
             }
         }
     }

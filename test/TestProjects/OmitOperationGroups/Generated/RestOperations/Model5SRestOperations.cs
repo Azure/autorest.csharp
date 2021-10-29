@@ -44,7 +44,78 @@ namespace OmitOperationGroups
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string model5SName, Model5 parameters)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/model5s", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<Model5ListResult>> GetAllAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateGetAllRequest(resourceGroupName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Model5ListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = Model5ListResult.DeserializeModel5ListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<Model5ListResult> GetAll(string resourceGroupName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateGetAllRequest(resourceGroupName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Model5ListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = Model5ListResult.DeserializeModel5ListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string model5SName, Model5Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -73,7 +144,7 @@ namespace OmitOperationGroups
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="model5SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<Model5>> CreateOrUpdateAsync(string resourceGroupName, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<Model5Data>> CreateOrUpdateAsync(string resourceGroupName, string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -94,9 +165,9 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model5 value = default;
+                        Model5Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Model5.DeserializeModel5(document.RootElement);
+                        value = Model5Data.DeserializeModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -109,7 +180,7 @@ namespace OmitOperationGroups
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="model5SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<Model5> CreateOrUpdate(string resourceGroupName, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        public Response<Model5Data> CreateOrUpdate(string resourceGroupName, string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -130,9 +201,9 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model5 value = default;
+                        Model5Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Model5.DeserializeModel5(document.RootElement);
+                        value = Model5Data.DeserializeModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -164,7 +235,7 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="model5SName"/> is null. </exception>
-        public async Task<Response<Model5>> GetAsync(string resourceGroupName, string model5SName, CancellationToken cancellationToken = default)
+        public async Task<Response<Model5Data>> GetAsync(string resourceGroupName, string model5SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -181,11 +252,13 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model5 value = default;
+                        Model5Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Model5.DeserializeModel5(document.RootElement);
+                        value = Model5Data.DeserializeModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((Model5Data)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -195,7 +268,7 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="model5SName"/> is null. </exception>
-        public Response<Model5> Get(string resourceGroupName, string model5SName, CancellationToken cancellationToken = default)
+        public Response<Model5Data> Get(string resourceGroupName, string model5SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -212,11 +285,13 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model5 value = default;
+                        Model5Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Model5.DeserializeModel5(document.RootElement);
+                        value = Model5Data.DeserializeModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((Model5Data)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

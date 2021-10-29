@@ -44,7 +44,78 @@ namespace SupersetFlattenInheritance
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/writableSubResourceModel1s", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<WritableSubResourceModel1ListResult>> GetAllAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateGetAllRequest(resourceGroupName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        WritableSubResourceModel1ListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = WritableSubResourceModel1ListResult.DeserializeWritableSubResourceModel1ListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<WritableSubResourceModel1ListResult> GetAll(string resourceGroupName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateGetAllRequest(resourceGroupName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        WritableSubResourceModel1ListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = WritableSubResourceModel1ListResult.DeserializeWritableSubResourceModel1ListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -73,7 +144,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="writableSubResourceModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<WritableSubResourceModel1>> PutAsync(string resourceGroupName, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<WritableSubResourceModel1Data>> PutAsync(string resourceGroupName, string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -94,9 +165,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        WritableSubResourceModel1 value = default;
+                        WritableSubResourceModel1Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = WritableSubResourceModel1.DeserializeWritableSubResourceModel1(document.RootElement);
+                        value = WritableSubResourceModel1Data.DeserializeWritableSubResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -109,7 +180,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="writableSubResourceModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<WritableSubResourceModel1> Put(string resourceGroupName, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public Response<WritableSubResourceModel1Data> Put(string resourceGroupName, string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -130,9 +201,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        WritableSubResourceModel1 value = default;
+                        WritableSubResourceModel1Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = WritableSubResourceModel1.DeserializeWritableSubResourceModel1(document.RootElement);
+                        value = WritableSubResourceModel1Data.DeserializeWritableSubResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -164,7 +235,7 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="writableSubResourceModel1SName"/> is null. </exception>
-        public async Task<Response<WritableSubResourceModel1>> GetAsync(string resourceGroupName, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
+        public async Task<Response<WritableSubResourceModel1Data>> GetAsync(string resourceGroupName, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -181,11 +252,13 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        WritableSubResourceModel1 value = default;
+                        WritableSubResourceModel1Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = WritableSubResourceModel1.DeserializeWritableSubResourceModel1(document.RootElement);
+                        value = WritableSubResourceModel1Data.DeserializeWritableSubResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((WritableSubResourceModel1Data)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -195,7 +268,7 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="writableSubResourceModel1SName"/> is null. </exception>
-        public Response<WritableSubResourceModel1> Get(string resourceGroupName, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
+        public Response<WritableSubResourceModel1Data> Get(string resourceGroupName, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -212,11 +285,13 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        WritableSubResourceModel1 value = default;
+                        WritableSubResourceModel1Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = WritableSubResourceModel1.DeserializeWritableSubResourceModel1(document.RootElement);
+                        value = WritableSubResourceModel1Data.DeserializeWritableSubResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((WritableSubResourceModel1Data)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
