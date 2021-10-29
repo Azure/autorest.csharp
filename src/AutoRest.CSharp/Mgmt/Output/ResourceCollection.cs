@@ -17,12 +17,12 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ResourceContainer : Resource
+    internal class ResourceCollection : Resource
     {
-        private const string _suffixValue = "Container";
+        private const string _suffixValue = "Collection";
 
-        public ResourceContainer(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
-            : base(operationSets, resourceName, ResourceType.Any, context) // The container might include multiple resource types, therefore we do not need the ResourceType property in Resource base class
+        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
+            : base(operationSets, resourceName, ResourceType.Any, context) // The collection might include multiple resource types, therefore we do not need the ResourceType property in Resource base class
         {
         }
 
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         /// <summary>
         /// This method returns the contextual path from one resource <see cref="OperationSet"/>
-        /// In the <see cref="ResourceContainer"/> class, we need to use the parent RequestPath of the OperationSet as its contextual path
+        /// In the <see cref="ResourceCollection"/> class, we need to use the parent RequestPath of the OperationSet as its contextual path
         /// </summary>
         /// <param name="operationSet"></param>
         /// <param name="operationRequestPath"></param>
@@ -61,9 +61,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         /// <summary>
-        /// The resource container might support multiple resource types, therefore we should never use this property in <see cref="ResourceContainer"/>
+        /// The resource collection might support multiple resource types, therefore we should never use this property in <see cref="ResourceCollection"/>
         /// </summary>
-        public override ResourceType ResourceType => throw new InvalidOperationException($"We should not use the property `ResourceType` in ResourceContainer. This is a bug in autorest.csharp, please file an issue about this");
+        public override ResourceType ResourceType => throw new InvalidOperationException($"We should not use the property `ResourceType` in ResourceCollection. This is a bug in autorest.csharp, please file an issue about this");
 
         private IEnumerable<MgmtClientOperation>? _allOperations;
         public override IEnumerable<MgmtClientOperation> AllOperations => _allOperations ??= EnsureAllOperations();
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (GetOperation != null)
                 result.Add(GetOperation);
             //if (DeleteOperation != null)
-            //    result.Add(DeleteOperation); // comment this back if we decide to include delete method in containers
+            //    result.Add(DeleteOperation); // comment this back if we decide to include delete method in collections
             result.AddRange(ClientOperations);
 
             return result;

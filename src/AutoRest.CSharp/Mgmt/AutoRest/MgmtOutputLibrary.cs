@@ -39,9 +39,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, Resource>? _rawRequestPathToArmResource;
 
         /// <summary>
-        /// This is a map from raw request path to the corresponding <see cref="ResourceContainer"/>
+        /// This is a map from raw request path to the corresponding <see cref="ResourceCollection"/>
         /// </summary>
-        private Dictionary<string, ResourceContainer>? _rawRequestPathToResourceContainer;
+        private Dictionary<string, ResourceCollection>? _rawRequestPathToResourceCollection;
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="ResourceData"/>
@@ -253,7 +253,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<Resource> ArmResources => EnsureRequestPathToArmResources().Values.Distinct();
 
-        public IEnumerable<ResourceContainer> ResourceContainers => EnsureRequestPathToResourceContainers().Values.Distinct();
+        public IEnumerable<ResourceCollection> ResourceCollections => EnsureRequestPathToResourceCollections().Values.Distinct();
 
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
@@ -297,17 +297,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
 
-        public ResourceContainer? GetResourceContainer(string requestPath)
+        public ResourceCollection? GetResourceCollection(string requestPath)
         {
-            if (TryGetResourceContainer(requestPath, out var container))
-                return container;
+            if (TryGetResourceCollection(requestPath, out var collection))
+                return collection;
 
             return null;
         }
 
-        public bool TryGetResourceContainer(string requestPath, [MaybeNullWhen(false)] out ResourceContainer container)
+        public bool TryGetResourceCollection(string requestPath, [MaybeNullWhen(false)] out ResourceCollection collection)
         {
-            return EnsureRequestPathToResourceContainers().TryGetValue(requestPath, out container);
+            return EnsureRequestPathToResourceCollections().TryGetValue(requestPath, out collection);
         }
 
         public ResourceData GetResourceData(string requestPath)
@@ -420,12 +420,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return resourceType;
         }
 
-        private Dictionary<string, ResourceContainer> EnsureRequestPathToResourceContainers()
+        private Dictionary<string, ResourceCollection> EnsureRequestPathToResourceCollections()
         {
-            if (_rawRequestPathToResourceContainer != null)
-                return _rawRequestPathToResourceContainer;
+            if (_rawRequestPathToResourceCollection != null)
+                return _rawRequestPathToResourceCollection;
 
-            _rawRequestPathToResourceContainer = new Dictionary<string, ResourceContainer>();
+            _rawRequestPathToResourceCollection = new Dictionary<string, ResourceCollection>();
             foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
@@ -434,19 +434,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // ensure this set of OperationSets are either all singletons, or none of them is singleton
                     Debug.Assert(resourceOperations.Keys.All(operationSet => operationSet.IsSingletonResource(_context))
                         || resourceOperations.Keys.All(operationSet => !operationSet.IsSingletonResource(_context)));
-                    // check if this set of OperationSets are all singleton, singleton resource does not need resource containers
+                    // check if this set of OperationSets are all singleton, singleton resource does not need resource collections
                     if (resourceOperations.Keys.All(operationSet => operationSet.IsSingletonResource(_context)))
                         continue;
-                    var container = new ResourceContainer(resourceOperations, resourceName, _context);
+                    var collection = new ResourceCollection(resourceOperations, resourceName, _context);
                     // one resource might appear multiple times since one resource might corresponds to multiple request paths
                     foreach (var resourceOperationSet in resourceOperations.Keys)
                     {
-                        _rawRequestPathToResourceContainer.Add(resourceOperationSet.RequestPath, container);
+                        _rawRequestPathToResourceCollection.Add(resourceOperationSet.RequestPath, collection);
                     }
                 }
             }
 
-            return _rawRequestPathToResourceContainer;
+            return _rawRequestPathToResourceCollection;
         }
 
         private IEnumerable<Dictionary<OperationSet, IEnumerable<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)

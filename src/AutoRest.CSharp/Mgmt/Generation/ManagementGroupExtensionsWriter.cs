@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    // Write resource container entries
+                    // Write resource collection entries
                     WriteChildResourceEntries();
 
                     // Write RestOperations

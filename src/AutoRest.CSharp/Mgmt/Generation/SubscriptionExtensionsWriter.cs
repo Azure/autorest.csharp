@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    // Write resource container entries
+                    // Write resource collection entries
                     WriteChildResourceEntries();
 
                     // Write RestOperations
@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteMethod(clientOperation, false);
 
                         // we only check if a resource needs a GetByName method when it has a List operation in the subscription extension.
-                        // If its parent is Subscription, we will have a GetContainer method of that resource, which contains a GetAllAsGenericResource serves the same purpose.
+                        // If its parent is Subscription, we will have a GetCollection method of that resource, which contains a GetAllAsGenericResource serves the same purpose.
                         if (CheckGetByNameMethod(clientOperation, out var resource))
                         {
                             // in case that a resource has multiple list methods at the subscription level (for instance one ListBySusbcription and one ListByLocation, location is not an available parent therefore it will show up here)

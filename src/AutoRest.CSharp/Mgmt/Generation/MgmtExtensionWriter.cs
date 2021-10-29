@@ -76,17 +76,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        protected override void WriteResourceContainerEntry(Resource resource)
+        protected override void WriteResourceCollectionEntry(Resource resource)
         {
-            var container = resource.ResourceContainer;
-            if (container == null)
-                throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry, but it does not have a container, this cannot happen");
-            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
+            var collection = resource.ResourceCollection;
+            if (collection == null)
+                throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry, but it does not have a collection, this cannot happen");
+            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {collection.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type}\" /> object.");
-            using (_writer.Scope($"public static {container.Type.Name} Get{resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{collection.Type}\" /> object.");
+            using (_writer.Scope($"public static {collection.Type.Name} Get{resource.Type.Name.ToPlural()}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
-                _writer.Line($"return new {container.Type.Name}({ExtensionOperationVariableName});");
+                _writer.Line($"return new {collection.Type.Name}({ExtensionOperationVariableName});");
             }
         }
 

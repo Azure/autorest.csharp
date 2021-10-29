@@ -213,7 +213,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             WriteUpdateMethod(_resource.UpdateOperation, true);
             WriteUpdateMethod(_resource.UpdateOperation, false);
 
-            // 1. Listing myself at parent scope -> on the container named list
+            // 1. Listing myself at parent scope -> on the collection named list
             // 2. Listing myself at ancestor scope -> extension method if the ancestor is not in this RP, or follow #3 by listing myself as the children of the ancestor in the operations of the ancestor
             // 3. Listing children (might be resource or not) -> on the operations
 
@@ -403,7 +403,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
 
         private void WriteTaggableCommonMethod(bool async)
         {
-            _writer.Line($"{GetAwait(async)} TagContainer.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
             // get the corresponding MgmtClientOperation mapping
             var operationMappings = _resource.GetOperation.ToDictionary(
                 clientOperation => clientOperation.ContextualPath,
@@ -441,17 +441,17 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Line($"return {typeof(Response)}.FromValue(new {TypeOfThis}(this, originalResponse.Value), originalResponse.GetRawResponse());");
         }
 
-        protected override void WriteResourceContainerEntry(Resource resource)
+        protected override void WriteResourceCollectionEntry(Resource resource)
         {
-            var container = resource.ResourceContainer;
-            if (container == null)
-                throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry in {_resource.Type.Name} resource, but it does not have a container, this cannot happen");
+            var collection = resource.ResourceCollection;
+            if (collection == null)
+                throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry in {_resource.Type.Name} resource, but it does not have a collection, this cannot happen");
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets a container of {resource.Type.Name.ToPlural()} in the {_resource.Type.Name}.");
+            _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.ToPlural()} in the {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.ToPlural()} and their operations over a {_resource.Type.Name}.");
-            using (_writer.Scope($"public {container.Type.Name} Get{resource.Type.Name.ToPlural()}()"))
+            using (_writer.Scope($"public {collection.Type.Name} Get{resource.Type.Name.ToPlural()}()"))
             {
-                _writer.Line($"return new {container.Type.Name}(this);");
+                _writer.Line($"return new {collection.Type.Name}(this);");
             }
         }
 

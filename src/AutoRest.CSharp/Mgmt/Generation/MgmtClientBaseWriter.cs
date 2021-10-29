@@ -74,14 +74,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (resource.IsSingleton)
                     WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!);
                 else
-                    WriteResourceContainerEntry(resource);
+                    WriteResourceCollectionEntry(resource);
                 _writer.Line($"#endregion");
             }
         }
 
         protected abstract void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix);
 
-        protected abstract void WriteResourceContainerEntry(Resource resource);
+        protected abstract void WriteResourceCollectionEntry(Resource resource);
 
         protected void WriteUsings(CodeWriter writer)
         {

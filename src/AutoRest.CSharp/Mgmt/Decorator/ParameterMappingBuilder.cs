@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         /// <summary>
         /// Builds the parameter mapping for contextual paths. The parameters in the contextual path will be treated as "known information"
-        /// when writing other operations in the same resource or resource container class and be passed into the corresponding RestOperation
+        /// when writing other operations in the same resource or resource collection class and be passed into the corresponding RestOperation
         /// method using their "value expression"s
         /// </summary>
         /// <param name="requestPath">The contextual path, which is usually the path creating a resource</param>
@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         /// <summary>
-        /// Represents how a parameter of rest operation is mapped to a parameter of a container method or an expression.
+        /// Represents how a parameter of rest operation is mapped to a parameter of a collection method or an expression.
         /// </summary>
         public record ContextualParameterMapping
         {
@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         /// <summary>
-        /// Represents how a parameter of rest operation is mapped to a parameter of a container method or an expression.
+        /// Represents how a parameter of rest operation is mapped to a parameter of a collection method or an expression.
         /// </summary>
         public record ParameterMapping
         {
@@ -285,7 +285,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// </summary>
             public Parameter Parameter;
             /// <summary>
-            /// Should the parameter be passed through from the method in container class?
+            /// Should the parameter be passed through from the method in collection class?
             /// </summary>
             public bool IsPassThru;
             /// <summary>

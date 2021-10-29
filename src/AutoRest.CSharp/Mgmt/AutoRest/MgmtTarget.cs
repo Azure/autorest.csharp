@@ -65,12 +65,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
-            foreach (var resourceContainer in context.Library.ResourceContainers)
+            foreach (var resourceCollection in context.Library.ResourceCollections)
             {
                 var codeWriter = new CodeWriter();
-                new ResourceContainerWriter(codeWriter, resourceContainer, context).Write();
+                new ResourceCollectionWriter(codeWriter, resourceCollection, context).Write();
 
-                AddGeneratedFile(project, $"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var model in context.Library.ResourceData)

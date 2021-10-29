@@ -162,10 +162,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string? SingletonResourceIdSuffix { get; }
 
         /// <summary>
-        /// Finds the corresponding <see cref="ResourceContainer"/> of this <see cref="Resource"/>
+        /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>
         /// Return null when this resource is a singleton.
         /// </summary>
-        public ResourceContainer? ResourceContainer => _context.Library.GetResourceContainer(RequestPaths.First());
+        public ResourceCollection? ResourceCollection => _context.Library.GetResourceCollection(RequestPaths.First());
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
@@ -228,7 +228,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 foreach (var operation in operations)
                 {
                     if (!ShouldIncludeOperation(operation))
-                        continue; // meaning this operation will be included in the container
+                        continue; // meaning this operation will be included in the collection
                     var method = operation.GetHttpMethod();
                     // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
                     // therefore we trim the scope off and then calculate the diff
