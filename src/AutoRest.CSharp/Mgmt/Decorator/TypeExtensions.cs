@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             else
             {
-                return type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string));
+                return type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string)) && enumType.IsExtendable;
             };
         }
 

@@ -217,8 +217,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     return rawExpression;
 
                 if (!type.IsFrameworkType)
+                {
+                    if (type.Implementation is EnumType enumType && !enumType.IsExtendable)
+                    {
+                        return $"{rawExpression}.To{enumType.Declaration.Name}()";
+                    }
                     throw new System.InvalidOperationException($"Type {type} is not supported to construct contextual parameter mapping");
-
+                }
                 return $"{type.FrameworkType}.Parse({rawExpression})";
             }
 
