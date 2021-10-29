@@ -13,6 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceDetection
     {
+        private const string ProvidersSegment = "/providers/";
         private static ConcurrentDictionary<string, string?> _resourceDataSchemaNameCache = new ConcurrentDictionary<string, string?>();
 
         public static bool IsResource(this OperationSet set, MgmtConfiguration config)
@@ -52,7 +53,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             // Check if the request path has even number of segments after the providers segment
-            // TODO -- do we need this criteria?
+            if (!CheckEvenSegments(set.RequestPath))
+                return false;
 
             // before we are finding any operations, we need to ensure this operation set has a GET request.
             if (FindOperation(set, HttpMethod.Get) is null)
@@ -75,6 +77,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // We tried everything, this is not a resource
             _resourceDataSchemaNameCache.TryAdd(set.RequestPath, null);
             return false;
+        }
+
+        private static bool CheckEvenSegments(string requestPath)
+        {
+            var index = requestPath.LastIndexOf(ProvidersSegment);
+            // this request path does not have providers segment - it can be a "ById" request, skip to next criteria
+            if (index < 0)
+                return true;
+            // get whatever following the providers
+            var following = requestPath.Substring(index);
+            var segments = following.Split("/", StringSplitOptions.RemoveEmptyEntries);
+            return segments.Length % 2 == 0;
         }
 
         private static bool TryOperationWithMethod(this OperationSet set, HttpMethod method, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceName)
