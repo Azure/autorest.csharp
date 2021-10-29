@@ -36,9 +36,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string AuthorizationHeaderConstantName = "AuthorizationHeader";
         private const string ScopesConstantName = "AuthorizationScopes";
 
-        private static readonly CSharpType RequestOptionsParameterType = new(typeof(RequestOptions), true);
+        private static readonly CSharpType RequestOptionsParameterType = new(typeof(RequestContext), true);
 
-        private static readonly Parameter RequestOptionsParameter = new("options", "The request options", RequestOptionsParameterType, Constant.Default(RequestOptionsParameterType), false);
+        private static readonly Parameter RequestOptionsParameter = new("context", "The request options", RequestOptionsParameterType, Constant.Default(RequestOptionsParameterType), false);
         private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
         private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
         private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);

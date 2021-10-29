@@ -59,7 +59,7 @@ namespace custom_baseUrl_paging_LowLevel
 
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
@@ -78,7 +78,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -94,7 +94,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlRequest(accountName)
                         : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -103,7 +103,7 @@ namespace custom_baseUrl_paging_LowLevel
 
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
@@ -122,7 +122,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -138,7 +138,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlRequest(accountName)
                         : CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -147,7 +147,7 @@ namespace custom_baseUrl_paging_LowLevel
 
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
@@ -166,7 +166,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -182,7 +182,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlOperationRequest(accountName)
                         : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -191,7 +191,7 @@ namespace custom_baseUrl_paging_LowLevel
 
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
@@ -210,7 +210,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -226,7 +226,7 @@ namespace custom_baseUrl_paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesPartialUrlOperationRequest(accountName)
                         : CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -236,7 +236,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
@@ -255,7 +255,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -273,7 +273,7 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -283,7 +283,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <summary> A paging operation that combines custom url, paging and partial URL. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="nextLink"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
@@ -302,7 +302,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             if (accountName == null)
@@ -320,7 +320,7 @@ namespace custom_baseUrl_paging_LowLevel
                 do
                 {
                     var message = CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));

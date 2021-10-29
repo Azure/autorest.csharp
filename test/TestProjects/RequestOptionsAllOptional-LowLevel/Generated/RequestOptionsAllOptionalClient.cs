@@ -57,9 +57,9 @@ namespace RequestOptionsAllOptional_LowLevel
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestOptions options = null)
+        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyResponseBody");
@@ -67,7 +67,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -81,9 +81,9 @@ namespace RequestOptionsAllOptional_LowLevel
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestOptions options = null)
+        public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyResponseBody");
@@ -91,7 +91,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -102,7 +102,7 @@ namespace RequestOptionsAllOptional_LowLevel
 
         /// <summary> RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -119,7 +119,7 @@ namespace RequestOptionsAllOptional_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.RequestBodyResponseBody");
@@ -127,7 +127,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateRequestBodyResponseBodyRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -138,7 +138,7 @@ namespace RequestOptionsAllOptional_LowLevel
 
         /// <summary> RequestBody and ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -155,7 +155,7 @@ namespace RequestOptionsAllOptional_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response RequestBodyResponseBody(RequestContent content, RequestOptions options = null)
+        public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.RequestBodyResponseBody");
@@ -163,7 +163,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateRequestBodyResponseBodyRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -174,10 +174,10 @@ namespace RequestOptionsAllOptional_LowLevel
 
         /// <summary> Delete. </summary>
         /// <param name="resourceName"> name. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestOptions options = null)
+        public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.DeleteNoRequestBodyResponseBody");
@@ -185,7 +185,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -196,10 +196,10 @@ namespace RequestOptionsAllOptional_LowLevel
 
         /// <summary> Delete. </summary>
         /// <param name="resourceName"> name. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestOptions options = null)
+        public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.DeleteNoRequestBodyResponseBody");
@@ -207,7 +207,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteNoRequestBodyResponseBodyRequest(resourceName);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -217,9 +217,9 @@ namespace RequestOptionsAllOptional_LowLevel
         }
 
         /// <summary> No RequestBody and No ResponseBody. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestOptions options = null)
+        public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyNoResponseBody");
@@ -227,7 +227,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -237,9 +237,9 @@ namespace RequestOptionsAllOptional_LowLevel
         }
 
         /// <summary> No RequestBody and No ResponseBody. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response NoRequestBodyNoResponseBody(RequestOptions options = null)
+        public virtual Response NoRequestBodyNoResponseBody(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyNoResponseBody");
@@ -247,7 +247,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateNoRequestBodyNoResponseBodyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -258,9 +258,9 @@ namespace RequestOptionsAllOptional_LowLevel
 
         /// <summary> RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.RequestBodyNoResponseBody");
@@ -268,7 +268,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -279,9 +279,9 @@ namespace RequestOptionsAllOptional_LowLevel
 
         /// <summary> RequestBody and No ResponseBody. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestOptions options = null)
+        public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.RequestBodyNoResponseBody");
@@ -289,7 +289,7 @@ namespace RequestOptionsAllOptional_LowLevel
             try
             {
                 using HttpMessage message = CreateRequestBodyNoResponseBodyRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

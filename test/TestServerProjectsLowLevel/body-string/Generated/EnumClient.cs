@@ -53,7 +53,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -64,7 +64,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNotExpandableAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNotExpandableAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
@@ -72,7 +72,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotExpandableRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -82,7 +82,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -93,7 +93,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNotExpandable(RequestOptions options = null)
+        public virtual Response GetNotExpandable(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
@@ -101,7 +101,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotExpandableRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -112,7 +112,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -124,7 +124,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutNotExpandableAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutNotExpandableAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
@@ -132,7 +132,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNotExpandableRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -143,7 +143,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -155,7 +155,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutNotExpandable(RequestContent content, RequestOptions options = null)
+        public virtual Response PutNotExpandable(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
@@ -163,7 +163,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNotExpandableRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -173,7 +173,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -184,7 +184,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetReferencedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetReferencedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
@@ -192,7 +192,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetReferencedRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -213,7 +213,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetReferenced(RequestOptions options = null)
+        public virtual Response GetReferenced(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
@@ -221,7 +221,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetReferencedRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -232,7 +232,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -244,7 +244,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutReferencedAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutReferencedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
@@ -252,7 +252,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutReferencedRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -263,7 +263,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -275,7 +275,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutReferenced(RequestContent content, RequestOptions options = null)
+        public virtual Response PutReferenced(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
@@ -283,7 +283,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutReferencedRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -293,7 +293,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -310,7 +310,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetReferencedConstantAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetReferencedConstantAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
@@ -318,7 +318,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetReferencedConstantRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -328,7 +328,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -345,7 +345,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetReferencedConstant(RequestOptions options = null)
+        public virtual Response GetReferencedConstant(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
@@ -353,7 +353,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetReferencedConstantRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -364,7 +364,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -382,7 +382,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutReferencedConstantAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutReferencedConstantAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
@@ -390,7 +390,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutReferencedConstantRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -401,7 +401,7 @@ namespace body_string_LowLevel
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request options. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -419,7 +419,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutReferencedConstant(RequestContent content, RequestOptions options = null)
+        public virtual Response PutReferencedConstant(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
@@ -427,7 +427,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutReferencedConstantRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
