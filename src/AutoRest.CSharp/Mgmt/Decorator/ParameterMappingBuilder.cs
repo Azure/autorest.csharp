@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         if (pair[0].IsReference && pair[0].SkipUrlEncoding)
                         {
                             // if we only have one segment in this group, it should always be a reference
-                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, pair[0], $"{idVariableName}{invocationSuffix}.GetParts({segmentPairs.Count - indexOfProvidersPair})"));
+                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, pair[0], $"{idVariableName}{invocationSuffix}.GetParts({2 * (segmentPairs.Count - indexOfProvidersPair)})"));
                         }
                     }
                 }

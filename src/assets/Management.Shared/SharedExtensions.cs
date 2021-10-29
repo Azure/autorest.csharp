@@ -16,13 +16,19 @@ namespace Azure.ResourceManager.Core
     /// </summary>
     internal static class SharedExtensions
     {
+        /// <summary>
+        /// Collects the segments in a resource identifier into a string
+        /// </summary>
+        /// <param name="resourceId">the resource identifier</param>
+        /// <param name="start">the index of segment we would like to start</param>
+        /// <returns></returns>
         public static string GetParts(this ResourceIdentifier resourceId, int start)
         {
             var parts = resourceId.ToString().Split('/').ToList();
-            var indexOfProviders = parts.IndexOf("providers");
+            var indexOfProviders = parts.LastIndexOf("providers");
             if (indexOfProviders < 0)
                 throw new InvalidOperationException($"{resourceId} does not have a providers segment");
-            return string.Join("/", parts.Skip(indexOfProviders + 2 * start));
+            return string.Join("/", parts.Skip(indexOfProviders + start));
         }
 
         /// <summary>
