@@ -325,6 +325,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.";
         }
 
-        private static string ParentPrefix(Resource resource) => string.Join("", resource.Parent(_context).Select(p => p.ResourceName));
+        private string ParentPrefix(Resource resource) => string.Join("", resource.Parent(_context).Select(p => p.ResourceName));
     }
 }
