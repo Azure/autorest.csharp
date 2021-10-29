@@ -12,8 +12,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     public class MgmtConfiguration
     {
         public MgmtConfiguration(
-            string[] operationGroupsToOmit,
-            string[] requestPathIsNonResource,
+            IReadOnlyList<string> operationGroupsToOmit,
+            IReadOnlyList<string> requestPathIsNonResource,
+            IReadOnlyList<string> noPropertyTypeReplacement,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
             JsonElement? requestPathToResourceData = default,
@@ -44,6 +45,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             OperationGroupsToOmit = operationGroupsToOmit;
             RequestPathIsNonResource = requestPathIsNonResource;
+            NoPropertyTypeReplacement = noPropertyTypeReplacement;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
             ShowRequestPathAndOperationId = !IsValidJsonElement(showRequestPathAndOperationId) ? false : Convert.ToBoolean(showRequestPathAndOperationId.ToString());
             DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
@@ -66,8 +68,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
-        public string[] OperationGroupsToOmit { get; }
-        public string[] RequestPathIsNonResource { get; }
+        public IReadOnlyList<string> OperationGroupsToOmit { get; }
+        public IReadOnlyList<string> RequestPathIsNonResource { get; }
+        public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
 
         public bool IsArmCore { get; }
 
@@ -76,6 +79,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new MgmtConfiguration(
                 operationGroupsToOmit: autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 requestPathIsNonResource: autoRest.GetValue<string[]?>("request-path-is-non-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                noPropertyTypeReplacement: autoRest.GetValue<string[]?>("no-property-type-replacement").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
                 requestPathToResourceData: autoRest.GetValue<JsonElement?>("request-path-to-resource-data").GetAwaiter().GetResult(),
@@ -93,6 +97,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             WriteNonEmptySettings(writer, nameof(MergeOperations), MergeOperations);
             WriteNonEmptySettings(writer, nameof(RequestPathIsNonResource), RequestPathIsNonResource);
+            WriteNonEmptySettings(writer, nameof(NoPropertyTypeReplacement), NoPropertyTypeReplacement);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceName), RequestPathToResourceName);
@@ -114,6 +119,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             root.TryGetProperty(nameof(OperationGroupsToOmit), out var operationGroupsToOmit);
             root.TryGetProperty(nameof(RequestPathIsNonResource), out var requestPathIsNonResource);
+            root.TryGetProperty(nameof(NoPropertyTypeReplacement), out var noPropertyTypeReplacment);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
@@ -130,6 +136,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 ? requestPathIsNonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : new string[0];
 
+            var noPropertyTypeReplacementList = noPropertyTypeReplacment.ValueKind == JsonValueKind.Array
+                ? noPropertyTypeReplacment.EnumerateArray().Select(t => t.ToString()).ToList()
+                : new List<string>();
+
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(ShowRequestPathAndOperationId), out var showRequestPathAndOperationId);
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
@@ -138,6 +148,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupList,
                 requestPathIsNonResource: requestPathIsNonResourceList,
+                noPropertyTypeReplacement: noPropertyTypeReplacementList,
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
                 requestPathToResourceData: requestPathToResourceData,
@@ -199,9 +210,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static void WriteNonEmptySettings(
             Utf8JsonWriter writer,
             string settingName,
-            string[] settings)
+            IReadOnlyList<string> settings)
         {
-            if (settings.Length > 0)
+            if (settings.Count() > 0)
             {
                 writer.WriteStartArray(settingName);
                 foreach (var s in settings)

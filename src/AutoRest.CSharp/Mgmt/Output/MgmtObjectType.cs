@@ -105,6 +105,15 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
+        /// <summary>
+        /// Check whether this type should be replaced when used as property type.
+        /// </summary>
+        /// <returns>true if this type should NOT be replaced when used as property type; false elsewise</returns>
+        public bool ShouldNotReplaceForProperty()
+        {
+            return this._context.Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(this.Type.Name);
+        }
+
         protected override CSharpType? CreateInheritedType()
         {
             CSharpType? inheritedType = base.CreateInheritedType();

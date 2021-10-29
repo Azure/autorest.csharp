@@ -55,35 +55,39 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (_valueCache.TryGetValue(typeToReplace.ObjectSchema, out var result))
                 return result;
-            foreach (System.Type replacementType in GetReferenceClassCollection())
-            {
-                var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == PropertyReferenceAttributeName).First();
-                var propertiesToSkipArray = attributeObj?.GetType().GetProperty("SkipTypes")?.GetValue(attributeObj) as Type[];
-                var propertiesToSkip = propertiesToSkipArray.Select(p => p.Name).ToHashSet();
-                List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !propertiesToSkip.Contains(p.PropertyType.Name)).ToList();
-                List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.Where(p => !propertiesToSkip.Contains(p.ValueType.Name)).ToList();
 
-                if (replacementType == typeof(ResourceIdentity))
+            if (!typeToReplace.ShouldNotReplaceForProperty())
+            {
+                foreach (System.Type replacementType in GetReferenceClassCollection())
                 {
-                    List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
-                    foreach (var parentProperty in replacementTypeProperties)
+                    var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == PropertyReferenceAttributeName).First();
+                    var propertiesToSkipArray = attributeObj?.GetType().GetProperty("SkipTypes")?.GetValue(attributeObj) as Type[];
+                    var propertiesToSkip = propertiesToSkipArray.Select(p => p.Name).ToHashSet();
+                    List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !propertiesToSkip.Contains(p.PropertyType.Name)).ToList();
+                    List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.Where(p => !propertiesToSkip.Contains(p.ValueType.Name)).ToList();
+
+                    if (replacementType == typeof(ResourceIdentity))
                     {
-                        if (parentProperty.PropertyType.IsClass && parentProperty.PropertyType != typeof(string))
+                        List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
+                        foreach (var parentProperty in replacementTypeProperties)
                         {
-                            flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
+                            if (parentProperty.PropertyType.IsClass && parentProperty.PropertyType != typeof(string))
+                            {
+                                flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
+                            }
+                            else
+                            {
+                                flattenedReplacementTypeProperties.Add(parentProperty);
+                            }
                         }
-                        else
-                        {
-                            flattenedReplacementTypeProperties.Add(parentProperty);
-                        }
+                        replacementTypeProperties = flattenedReplacementTypeProperties;
                     }
-                    replacementTypeProperties = flattenedReplacementTypeProperties;
-                }
-                if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType>{{replacementType, typeToReplace.Type}}))
-                {
-                    result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
-                    _valueCache.TryAdd(typeToReplace.ObjectSchema, result);
-                    return result;
+                    if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
+                    {
+                        result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
+                        _valueCache.TryAdd(typeToReplace.ObjectSchema, result);
+                        return result;
+                    }
                 }
             }
             _valueCache.TryAdd(typeToReplace.ObjectSchema, null);

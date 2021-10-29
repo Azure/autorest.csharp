@@ -336,6 +336,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\Generated"
     },
+    "NoTypeReplacement": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NoTypeReplacement\\Generated"
+    },
     "object-type": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type\\Generated"
