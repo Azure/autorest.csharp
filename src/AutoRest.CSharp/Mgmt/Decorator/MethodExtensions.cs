@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static bool IsPagingOperation(this MgmtRestOperation restOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            return restOperation.GetPagingMethod(context) != null;
+            return restOperation.Operation.Language.Default.Paging != null;
         }
 
         public static PagingMethod? GetPagingMethod(this MgmtRestOperation restOperation, BuildContext<MgmtOutputLibrary> context)
