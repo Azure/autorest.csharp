@@ -37,14 +37,14 @@ namespace MgmtScopeResource
             _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
+        /// <summary> Gets the valid resource type for this object. </summary>
+        protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
+
         /// <summary> Verify that the input resource Id is a valid container for this type. </summary>
         /// <param name="identifier"> The input resource Id to check. </param>
         protected override void ValidateResourceType(ResourceIdentifier identifier)
         {
         }
-
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
 
         // Container level operations.
 
