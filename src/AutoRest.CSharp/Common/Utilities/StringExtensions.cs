@@ -309,18 +309,5 @@ namespace AutoRest.CSharp.Utilities
             var indent = new string(' ', indentation);
             return builder.Append(indent);
         }
-
-        private static readonly HashSet<char> InvalidCharacters = new() { '.', '/', ' ' };
-
-        public static string RemoveInvalidCharacters(this string str)
-        {
-            var builder = new StringBuilder();
-            foreach (var c in str)
-            {
-                if (!InvalidCharacters.Contains(c))
-                    builder.Append(c);
-            }
-            return builder.ToString();
-        }
     }
 }
