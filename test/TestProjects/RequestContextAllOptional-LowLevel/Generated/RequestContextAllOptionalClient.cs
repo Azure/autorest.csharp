@@ -11,10 +11,10 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace RequestOptionsAllOptional_LowLevel
+namespace RequestContextAllOptional_LowLevel
 {
-    /// <summary> The RequestOptionsAllOptional service client. </summary>
-    public partial class RequestOptionsAllOptionalClient
+    /// <summary> The RequestContextAllOptional service client. </summary>
+    public partial class RequestContextAllOptionalClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -26,17 +26,17 @@ namespace RequestOptionsAllOptional_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
 
-        /// <summary> Initializes a new instance of RequestOptionsAllOptionalClient for mocking. </summary>
-        protected RequestOptionsAllOptionalClient()
+        /// <summary> Initializes a new instance of RequestContextAllOptionalClient for mocking. </summary>
+        protected RequestContextAllOptionalClient()
         {
         }
 
-        /// <summary> Initializes a new instance of RequestOptionsAllOptionalClient. </summary>
+        /// <summary> Initializes a new instance of RequestContextAllOptionalClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public RequestOptionsAllOptionalClient(AzureKeyCredential credential, Uri endpoint = null, RequestOptionsAllOptionalClientOptions options = null)
+        public RequestContextAllOptionalClient(AzureKeyCredential credential, Uri endpoint = null, RequestContextAllOptionalClientOptions options = null)
         {
             if (credential == null)
             {
@@ -44,7 +44,7 @@ namespace RequestOptionsAllOptional_LowLevel
             }
             endpoint ??= new Uri("http://localhost:3000");
 
-            options ??= new RequestOptionsAllOptionalClientOptions();
+            options ??= new RequestContextAllOptionalClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
@@ -62,7 +62,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -86,7 +86,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -122,7 +122,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.RequestBodyResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -158,7 +158,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.RequestBodyResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -180,7 +180,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.DeleteNoRequestBodyResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -202,7 +202,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.DeleteNoRequestBodyResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try
             {
@@ -222,7 +222,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyNoResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
             scope.Start();
             try
             {
@@ -242,7 +242,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual Response NoRequestBodyNoResponseBody(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyNoResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.NoRequestBodyNoResponseBody");
             scope.Start();
             try
             {
@@ -263,7 +263,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.RequestBodyNoResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
             scope.Start();
             try
             {
@@ -284,7 +284,7 @@ namespace RequestOptionsAllOptional_LowLevel
         public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.RequestBodyNoResponseBody");
+            using var scope = _clientDiagnostics.CreateScope("RequestContextAllOptionalClient.RequestBodyNoResponseBody");
             scope.Start();
             try
             {

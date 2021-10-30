@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace RequestOptionsAllOptional_LowLevel
+namespace RequestContextAllOptional_LowLevel
 {
-    /// <summary> Client options for RequestOptionsAllOptionalClient. </summary>
-    public partial class RequestOptionsAllOptionalClientOptions : ClientOptions
+    /// <summary> Client options for RequestContextAllOptionalClient. </summary>
+    public partial class RequestContextAllOptionalClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace RequestOptionsAllOptional_LowLevel
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of RequestOptionsAllOptionalClientOptions. </summary>
-        public RequestOptionsAllOptionalClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of RequestContextAllOptionalClientOptions. </summary>
+        public RequestContextAllOptionalClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

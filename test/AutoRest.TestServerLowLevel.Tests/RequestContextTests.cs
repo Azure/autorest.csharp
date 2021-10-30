@@ -16,7 +16,7 @@ using url_LowLevel;
 
 namespace AutoRest.TestServer.Tests
 {
-    public class RequestOptionsTests : TestServerLowLevelTestBase
+    public class RequestContextTests : TestServerLowLevelTestBase
     {
         [Test]
         public Task RequestThrowsByDefault () => Test(host =>
