@@ -1,12 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.ComponentModel;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Models
@@ -33,6 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public string Name { get; }
         public string? Description => Method.Description;
+        public IEnumerable<Parameter> Parameters => Method.Parameters;
         public CSharpType? ReturnType => Method.ReturnType;
         public string Accessibility => Method.Accessibility;
         /// <summary>

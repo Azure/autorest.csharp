@@ -24,11 +24,44 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
             : base(operationSets, resourceName, ResourceType.Any, context) // The collection might include multiple resource types, therefore we do not need the ResourceType property in Resource base class
         {
+            GetAllOperation = EnsureGetAllOperation();
         }
 
-        public Resource Resource => _context.Library.GetArmResource(RequestPaths.First());
+        private Resource? _resource;
+        public Resource Resource => _resource ??= _context.Library.GetArmResource(RequestPaths.First());
 
         public override string ResourceName => Resource.ResourceName;
+
+        public MgmtClientOperation? GetAllOperation { get; }
+
+        private MgmtClientOperation? EnsureGetAllOperation()
+        {
+            var candidates = ClientOperations.Where(operation => operation.Name == "GetAll" && !HasExtraParameter(operation));
+            // we need to filter out the methods that does not have extra mandatory parameters in our current context
+            if (candidates.Count() > 1)
+                throw new InvalidOperationException($"The ResourceCollection {Type.Name} contains more than one `GetAll` method with no required parameters. RequestPaths: {string.Join(", ", RequestPaths)}");
+            return candidates.FirstOrDefault();
+        }
+
+        private static bool HasExtraParameter(MgmtClientOperation clientOperation)
+        {
+            foreach (var operation in clientOperation)
+            {
+                RequestPath diff;
+                if (operation.RequestPath.IsAncestorOf(operation.ContextualPath))
+                    diff = operation.RequestPath.TrimAncestorFrom(operation.ContextualPath);
+                else
+                    diff = operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
+                if (!diff.All(segment => segment.IsConstant))
+                    return true;
+                foreach (var parameter in operation.Parameters)
+                {
+                    if (!parameter.IsInPathOf(operation.Method) && parameter.IsMandatory())
+                        return true;
+                }
+            }
+            return false;
+        }
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {

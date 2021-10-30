@@ -18,7 +18,6 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using ResourceType = AutoRest.CSharp.Mgmt.Models.ResourceType;
@@ -46,20 +45,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string BranchIdVariableName => "Id";
 
-        private MgmtClientOperation _getAllOperation;
-        private bool _isPaging;
+        private MgmtClientOperation? _getAllOperation;
 
         public ResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context)
             : base(writer, resourceCollection.Resource, context)
         {
             _resourceCollection = resourceCollection;
-            _getAllOperation = FindGetAllOperation();
-            _isPaging = _getAllOperation.IsPagingOperation(context);
-        }
-
-        private MgmtClientOperation FindGetAllOperation()
-        {
-            return _resourceCollection.ClientOperations.First(clientOperation => clientOperation.Name == "GetAll");
+            _getAllOperation = _resourceCollection.GetAllOperation;
         }
 
         public override void Write()
@@ -69,10 +61,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{_resourceCollection.Description}");
-                _writer.Append($"{_resourceCollection.Declaration.Accessibility} partial class {TypeNameOfThis} : ");
-                _writer.Append($"{BaseClass}, {new CSharpType(typeof(IEnumerable<>), _resource.Type)}");
-                var asyncEnum = _isPaging ? $", {new CSharpType(typeof(IAsyncEnumerable<>), _resource.Type)}" : string.Empty;
-                _writer.Line($"{asyncEnum}");
+                _writer.Append($"{_resourceCollection.Declaration.Accessibility} partial class {TypeNameOfThis} : {BaseClass}");
+                if (_getAllOperation != null)
+                {
+                    _writer.Append($", {new CSharpType(typeof(IEnumerable<>), _resource.Type)}");
+                    var asyncEnum = _getAllOperation.IsPagingOperation(Context) ? $", {new CSharpType(typeof(IAsyncEnumerable<>), _resource.Type)}" : string.Empty;
+                    _writer.Line($"{asyncEnum}");
+                }
                 using (_writer.Scope())
                 {
                     WriteFields();
@@ -350,7 +345,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteEnumerableImpl(CodeWriter writer)
         {
-            string value = _isPaging ? string.Empty : ".Value";
+            if (_getAllOperation == null)
+                return;
+            var isPaging = _getAllOperation.IsPagingOperation(Context);
+            string value = isPaging ? string.Empty : ".Value";
 
             _writer.Line();
             _writer.Line($"{new CSharpType(typeof(IEnumerator<>), _resource.Type)} {new CSharpType(typeof(IEnumerable<>), _resource.Type)}.GetEnumerator()");
@@ -365,7 +363,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"return GetAll(){value}.GetEnumerator();");
             }
 
-            if (_isPaging)
+            if (isPaging)
             {
                 _writer.Line();
                 _writer.Line($"{new CSharpType(typeof(IAsyncEnumerator<>), _resource.Type)} {new CSharpType(typeof(IAsyncEnumerable<>), _resource.Type)}.GetAsyncEnumerator({typeof(CancellationToken)} cancellationToken)");

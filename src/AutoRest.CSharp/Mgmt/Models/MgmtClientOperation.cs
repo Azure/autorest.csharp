@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -23,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operations => operations.Name).ToArray());
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray());
             }
 
             return null;
@@ -48,6 +49,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         // TODO -- we need a better way to get the description of this
         public string? Description => _operations.First().Description;
+
+        // TODO -- we need a better way to get this
+        public IEnumerable<Parameter> Parameters => _operations.First().Parameters;
 
         public CSharpType? ReturnType => _operations.First().ReturnType;
 

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -20,7 +19,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineExtensionImage and their operations over its parent. </summary>
-    public partial class VirtualMachineExtensionImageCollection : ArmCollection, IEnumerable<VirtualMachineExtensionImage>
+    public partial class VirtualMachineExtensionImageCollection : ArmCollection
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly VirtualMachineExtensionImagesRestOperations _virtualMachineExtensionImagesRestClient;
@@ -471,16 +470,6 @@ namespace Azure.ResourceManager.Sample
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        IEnumerator<VirtualMachineExtensionImage> IEnumerable<VirtualMachineExtensionImage>.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
         }
 
         // Builders.
