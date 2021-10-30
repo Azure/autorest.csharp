@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using Azure.Core;
-using ExactMatchFlattenInheritance;
 
 namespace ExactMatchFlattenInheritance.Models
 {
@@ -17,20 +16,20 @@ namespace ExactMatchFlattenInheritance.Models
         /// <summary> Initializes a new instance of AzureResourceFlattenModel2ListResult. </summary>
         internal AzureResourceFlattenModel2ListResult()
         {
-            Value = new ChangeTrackingList<AzureResourceFlattenModel2Data>();
+            Value = new ChangeTrackingList<AzureResourceFlattenModel2>();
         }
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel2ListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal AzureResourceFlattenModel2ListResult(IReadOnlyList<AzureResourceFlattenModel2Data> value, string nextLink)
+        internal AzureResourceFlattenModel2ListResult(IReadOnlyList<AzureResourceFlattenModel2> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<AzureResourceFlattenModel2Data> Value { get; }
+        public IReadOnlyList<AzureResourceFlattenModel2> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

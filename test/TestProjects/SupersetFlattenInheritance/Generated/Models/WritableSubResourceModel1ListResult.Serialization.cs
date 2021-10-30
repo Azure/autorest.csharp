@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using SupersetFlattenInheritance;
 
 namespace SupersetFlattenInheritance.Models
 {
@@ -16,7 +15,7 @@ namespace SupersetFlattenInheritance.Models
     {
         internal static WritableSubResourceModel1ListResult DeserializeWritableSubResourceModel1ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<WritableSubResourceModel1Data>> value = default;
+            Optional<IReadOnlyList<WritableSubResourceModel1>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +26,10 @@ namespace SupersetFlattenInheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<WritableSubResourceModel1Data> array = new List<WritableSubResourceModel1Data>();
+                    List<WritableSubResourceModel1> array = new List<WritableSubResourceModel1>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(WritableSubResourceModel1Data.DeserializeWritableSubResourceModel1Data(item));
+                        array.Add(WritableSubResourceModel1.DeserializeWritableSubResourceModel1(item));
                     }
                     value = array;
                     continue;

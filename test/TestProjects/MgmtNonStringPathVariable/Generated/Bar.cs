@@ -214,15 +214,9 @@ namespace MgmtNonStringPathVariable
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Bar.cs
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _barsRestClient.GetAsync(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ManagementGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtListMethods/Generated/ManagementGroup.cs
             }
             catch (Exception e)
             {
@@ -249,15 +243,9 @@ namespace MgmtNonStringPathVariable
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Bar.cs
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _barsRestClient.Get(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.Name, cancellationToken);
-                return Response.FromValue(new ManagementGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtListMethods/Generated/ManagementGroup.cs
             }
             catch (Exception e)
             {
@@ -284,15 +272,9 @@ namespace MgmtNonStringPathVariable
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Bar.cs
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _barsRestClient.GetAsync(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ManagementGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtListMethods/Generated/ManagementGroup.cs
             }
             catch (Exception e)
             {
@@ -319,15 +301,9 @@ namespace MgmtNonStringPathVariable
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Bar.cs
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _barsRestClient.Get(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.Name, cancellationToken);
-                return Response.FromValue(new ManagementGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtListMethods/Generated/ManagementGroup.cs
             }
             catch (Exception e)
             {
@@ -353,15 +329,9 @@ namespace MgmtNonStringPathVariable
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Bar.cs
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _barsRestClient.GetAsync(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ManagementGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtListMethods/Generated/ManagementGroup.cs
             }
             catch (Exception e)
             {
@@ -387,15 +357,9 @@ namespace MgmtNonStringPathVariable
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Bar.cs
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _barsRestClient.Get(Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.Name, cancellationToken);
-                return Response.FromValue(new ManagementGroup(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtListMethods/Generated/ManagementGroup.cs
             }
             catch (Exception e)
             {
@@ -414,7 +378,6 @@ namespace MgmtNonStringPathVariable
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<BarUpdateOperation> UpdateAsync(BarUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Bar.cs
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
@@ -467,67 +430,6 @@ namespace MgmtNonStringPathVariable
                 scope.Failed(e);
                 throw;
             }
-=======
-            async Task<Page<DescendantInfo>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("ManagementGroup.GetDescendants");
-                scope.Start();
-                try
-                {
-                    var response = await _restClient.GetDescendantsAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<DescendantInfo>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("ManagementGroup.GetDescendants");
-                scope.Start();
-                try
-                {
-                    var response = await _restClient.GetDescendantsNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Gets a list of MgmtGrpParentWithNonResChWithLocs in the ManagementGroup. </summary>
-        /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocs and their operations over a ManagementGroup. </returns>
-        public MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs()
-        {
-            return new MgmtGrpParentWithNonResChWithLocCollection(this);
-        }
-
-        /// <summary> Gets a list of MgmtGrpParentWithNonResChes in the ManagementGroup. </summary>
-        /// <returns> An object representing collection of MgmtGrpParentWithNonResChes and their operations over a ManagementGroup. </returns>
-        public MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes()
-        {
-            return new MgmtGrpParentWithNonResChCollection(this);
-        }
-
-        /// <summary> Gets a list of MgmtGrpParentWithLocs in the ManagementGroup. </summary>
-        /// <returns> An object representing collection of MgmtGrpParentWithLocs and their operations over a ManagementGroup. </returns>
-        public MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs()
-        {
-            return new MgmtGrpParentWithLocCollection(this);
-        }
-
-        /// <summary> Gets a list of MgmtGroupParents in the ManagementGroup. </summary>
-        /// <returns> An object representing collection of MgmtGroupParents and their operations over a ManagementGroup. </returns>
-        public MgmtGroupParentCollection GetMgmtGroupParents()
-        {
-            return new MgmtGroupParentCollection(this);
->>>>>>> origin/feature/v3:test/TestProjects/MgmtListMethods/Generated/ManagementGroup.cs
         }
     }
 }

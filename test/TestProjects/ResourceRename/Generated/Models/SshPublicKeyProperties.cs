@@ -7,7 +7,7 @@
 
 namespace ResourceRename.Models
 {
-    /// <summary> The SshPublicKeyProperties. </summary>
+    /// <summary> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </summary>
     public partial class SshPublicKeyProperties
     {
         /// <summary> Initializes a new instance of SshPublicKeyProperties. </summary>

@@ -13,42 +13,42 @@ namespace MgmtListMethods
     public static partial class ManagementGroupExtensions
     {
         #region MgmtGrpParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChWithLocContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChWithLocCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocContainer" /> object. </returns>
-        public static MgmtGrpParentWithNonResChWithLocContainer GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroup managementGroup)
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocCollection" /> object. </returns>
+        public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroup managementGroup)
         {
-            return new MgmtGrpParentWithNonResChWithLocContainer(managementGroup);
+            return new MgmtGrpParentWithNonResChWithLocCollection(managementGroup);
         }
         #endregion
 
         #region MgmtGrpParentWithNonResCh
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChContainer" /> object. </returns>
-        public static MgmtGrpParentWithNonResChContainer GetMgmtGrpParentWithNonResChes(this ManagementGroup managementGroup)
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChCollection" /> object. </returns>
+        public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes(this ManagementGroup managementGroup)
         {
-            return new MgmtGrpParentWithNonResChContainer(managementGroup);
+            return new MgmtGrpParentWithNonResChCollection(managementGroup);
         }
         #endregion
 
         #region MgmtGrpParentWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithLocContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a MgmtGrpParentWithLocCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithLocContainer" /> object. </returns>
-        public static MgmtGrpParentWithLocContainer GetMgmtGrpParentWithLocs(this ManagementGroup managementGroup)
+        /// <returns> Returns a <see cref="MgmtGrpParentWithLocCollection" /> object. </returns>
+        public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs(this ManagementGroup managementGroup)
         {
-            return new MgmtGrpParentWithLocContainer(managementGroup);
+            return new MgmtGrpParentWithLocCollection(managementGroup);
         }
         #endregion
 
         #region MgmtGroupParent
-        /// <summary> Gets an object representing a MgmtGroupParentContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a MgmtGroupParentCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="MgmtGroupParentContainer" /> object. </returns>
-        public static MgmtGroupParentContainer GetMgmtGroupParents(this ManagementGroup managementGroup)
+        /// <returns> Returns a <see cref="MgmtGroupParentCollection" /> object. </returns>
+        public static MgmtGroupParentCollection GetMgmtGroupParents(this ManagementGroup managementGroup)
         {
-            return new MgmtGroupParentContainer(managementGroup);
+            return new MgmtGroupParentCollection(managementGroup);
         }
         #endregion
     }

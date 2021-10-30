@@ -16,15 +16,17 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Management;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of MgmtGrpParentWithLoc and their operations over a ManagementGroup. </summary>
+    /// <summary> A class representing collection of MgmtGrpParentWithLoc and their operations over its parent. </summary>
     public partial class MgmtGrpParentWithLocCollection : ArmCollection, IEnumerable<MgmtGrpParentWithLoc>, IAsyncEnumerable<MgmtGrpParentWithLoc>
+
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly MgmtGrpParentWithLocsRestOperations _restClient;
+        private readonly MgmtGrpParentWithLocsRestOperations _mgmtGrpParentWithLocsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithLocCollection"/> class for mocking. </summary>
         protected MgmtGrpParentWithLocCollection()
@@ -36,22 +38,7 @@ namespace MgmtListMethods
         internal MgmtGrpParentWithLocCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new MgmtGrpParentWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-        }
-
-        IEnumerator<MgmtGrpParentWithLoc> IEnumerable<MgmtGrpParentWithLoc>.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IAsyncEnumerator<MgmtGrpParentWithLoc> IAsyncEnumerable<MgmtGrpParentWithLoc>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            _mgmtGrpParentWithLocsRestClient = new MgmtGrpParentWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -59,6 +46,9 @@ namespace MgmtListMethods
 
         // Collection level operations.
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGrpParentWithLocs_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -80,7 +70,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.Name, mgmtGrpParentWithLocName, parameters, cancellationToken);
+                var response = _mgmtGrpParentWithLocsRestClient.CreateOrUpdate(Id.Name, mgmtGrpParentWithLocName, parameters, cancellationToken);
                 var operation = new MgmtGrpParentWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -93,6 +83,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGrpParentWithLocs_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -114,7 +107,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.Name, mgmtGrpParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithLocsRestClient.CreateOrUpdateAsync(Id.Name, mgmtGrpParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtGrpParentWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -127,21 +120,25 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGrpParentWithLocs_Get
+        /// <summary> Retrieves information. </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public virtual Response<MgmtGrpParentWithLoc> Get(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.Get");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
-                var response = _restClient.Get(Id.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken);
+                var response = _mgmtGrpParentWithLocsRestClient.Get(Id.Name, mgmtGrpParentWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MgmtGrpParentWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -153,21 +150,25 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGrpParentWithLocs_Get
+        /// <summary> Retrieves information. </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<MgmtGrpParentWithLoc>> GetAsync(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.Get");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithLocsRestClient.GetAsync(Id.Name, mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new MgmtGrpParentWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -181,19 +182,20 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public virtual Response<MgmtGrpParentWithLoc> GetIfExists(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
-                var response = _restClient.Get(Id.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken);
+                var response = _mgmtGrpParentWithLocsRestClient.Get(Id.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<MgmtGrpParentWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new MgmtGrpParentWithLoc(this, response.Value), response.GetRawResponse());
@@ -207,19 +209,20 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<MgmtGrpParentWithLoc>> GetIfExistsAsync(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.GetIfExists");
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGrpParentWithLocsRestClient.GetAsync(Id.Name, mgmtGrpParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<MgmtGrpParentWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new MgmtGrpParentWithLoc(this, response.Value), response.GetRawResponse());
@@ -233,18 +236,19 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
                 var response = GetIfExists(mgmtGrpParentWithLocName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -257,18 +261,19 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.CheckIfExists");
+            if (mgmtGrpParentWithLocName == null)
+            {
+                throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithLocCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (mgmtGrpParentWithLocName == null)
-                {
-                    throw new ArgumentNullException(nameof(mgmtGrpParentWithLocName));
-                }
-
                 var response = await GetIfExistsAsync(mgmtGrpParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -279,6 +284,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGrpParentWithLocs_List
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="MgmtGrpParentWithLoc" /> that may take multiple service requests to iterate over. </returns>
@@ -290,7 +298,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(Id.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGrpParentWithLocsRestClient.List(Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -305,7 +313,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGrpParentWithLocsRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -317,6 +325,9 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs
+        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
+        /// OperationId: MgmtGrpParentWithLocs_List
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="MgmtGrpParentWithLoc" /> that may take multiple service requests to iterate over. </returns>
@@ -328,7 +339,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGrpParentWithLocsRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -343,7 +354,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGrpParentWithLocsRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGrpParentWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -355,7 +366,22 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        IEnumerator<MgmtGrpParentWithLoc> IEnumerable<MgmtGrpParentWithLoc>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<MgmtGrpParentWithLoc> IAsyncEnumerable<MgmtGrpParentWithLoc>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, MgmtGrpParentWithLoc, MgmtGrpParentWithLocData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, MgmtGrpParentWithLoc, MgmtGrpParentWithLocData> Construct() { }
     }
 }

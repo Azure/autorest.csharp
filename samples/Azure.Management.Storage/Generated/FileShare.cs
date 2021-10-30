@@ -23,7 +23,7 @@ namespace Azure.Management.Storage
     public partial class FileShare : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FileSharesRestOperations _restClient;
+        private readonly FileSharesRestOperations _fileSharesRestClient;
         private readonly FileShareData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FileShare"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FileSharesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fileSharesRestClient = new FileSharesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="FileShare"/> class. </summary>
@@ -48,7 +48,7 @@ namespace Azure.Management.Storage
         internal FileShare(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FileSharesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fileSharesRestClient = new FileSharesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="FileShare"/> class. </summary>
@@ -60,7 +60,7 @@ namespace Azure.Management.Storage
         internal FileShare(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FileSharesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fileSharesRestClient = new FileSharesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -84,6 +84,9 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Get
         /// <summary> Gets properties of a specified share. </summary>
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
@@ -94,7 +97,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, xMsSnapshot, cancellationToken).ConfigureAwait(false);
+                var response = await _fileSharesRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, expand, xMsSnapshot, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
@@ -106,6 +109,9 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Get
         /// <summary> Gets properties of a specified share. </summary>
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
@@ -116,7 +122,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, xMsSnapshot, cancellationToken);
+                var response = _fileSharesRestClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, expand, xMsSnapshot, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
@@ -144,6 +150,9 @@ namespace Azure.Management.Storage
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Delete
         /// <summary> Deletes specified share under its account. </summary>
         /// <param name="xMsSnapshot"> Optional, used to delete a snapshot. </param>
         /// <param name="include"> Optional. Valid values are: snapshots, leased-snapshots, none. The default value is snapshots. For &apos;snapshots&apos;, the file share is deleted including all of its file share snapshots. If the file share contains leased-snapshots, the deletion fails. For &apos;leased-snapshots&apos;, the file share is deleted included all of its file share snapshots (leased/unleased). For &apos;none&apos;, the file share is deleted if it has no share snapshots. If the file share contains any snapshots (leased or unleased), the deletion fails. </param>
@@ -155,7 +164,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, xMsSnapshot, include, cancellationToken).ConfigureAwait(false);
+                var response = await _fileSharesRestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, xMsSnapshot, include, cancellationToken).ConfigureAwait(false);
                 var operation = new FileShareDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -168,6 +177,9 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Delete
         /// <summary> Deletes specified share under its account. </summary>
         /// <param name="xMsSnapshot"> Optional, used to delete a snapshot. </param>
         /// <param name="include"> Optional. Valid values are: snapshots, leased-snapshots, none. The default value is snapshots. For &apos;snapshots&apos;, the file share is deleted including all of its file share snapshots. If the file share contains leased-snapshots, the deletion fails. For &apos;leased-snapshots&apos;, the file share is deleted included all of its file share snapshots (leased/unleased). For &apos;none&apos;, the file share is deleted if it has no share snapshots. If the file share contains any snapshots (leased or unleased), the deletion fails. </param>
@@ -179,7 +191,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, xMsSnapshot, include, cancellationToken);
+                var response = _fileSharesRestClient.Delete(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, xMsSnapshot, include, cancellationToken);
                 var operation = new FileShareDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -191,11 +203,15 @@ namespace Azure.Management.Storage
                 throw;
             }
         }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Update
         /// <summary> Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. </summary>
         /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileShare"/> is null. </exception>
-        public virtual async Task<Response<FileShare>> UpdateAsync(FileShareData fileShare, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FileShare>> UpdateAsync(FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (fileShare == null)
             {
@@ -206,7 +222,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, fileShare, cancellationToken).ConfigureAwait(false);
+                var response = await _fileSharesRestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, fileShare, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -216,6 +232,9 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Update
         /// <summary> Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. </summary>
         /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -231,7 +250,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, fileShare, cancellationToken);
+                var response = _fileSharesRestClient.Update(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, fileShare, cancellationToken);
                 return Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -241,11 +260,14 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/restore
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Restore
         /// <summary> Restore a file share within a valid retention days if share soft delete is enabled. </summary>
         /// <param name="deletedShare"> The DeletedShare to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deletedShare"/> is null. </exception>
-        public virtual async Task<Response> RestoreAsync(DeletedShare deletedShare, CancellationToken cancellationToken = default)
+        public async virtual Task<Response> RestoreAsync(DeletedShare deletedShare, CancellationToken cancellationToken = default)
         {
             if (deletedShare == null)
             {
@@ -256,7 +278,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.RestoreAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, deletedShare, cancellationToken).ConfigureAwait(false);
+                var response = await _fileSharesRestClient.RestoreAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, deletedShare, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -266,6 +288,9 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/restore
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Restore
         /// <summary> Restore a file share within a valid retention days if share soft delete is enabled. </summary>
         /// <param name="deletedShare"> The DeletedShare to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -281,7 +306,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Restore(Id.ResourceGroupName, Id.Parent.Name, Id.Name, deletedShare, cancellationToken);
+                var response = _fileSharesRestClient.Restore(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, deletedShare, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -291,17 +316,20 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/lease
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Lease
         /// <summary> The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. </summary>
         /// <param name="xMsSnapshot"> Optional. Specify the snapshot time to lease a snapshot. </param>
         /// <param name="parameters"> Lease Share request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<LeaseShareResponse>> LeaseAsync(string xMsSnapshot = null, LeaseShareRequest parameters = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<LeaseShareResponse>> LeaseAsync(string xMsSnapshot = null, LeaseShareRequest parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShare.Lease");
             scope.Start();
             try
             {
-                var response = await _restClient.LeaseAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, xMsSnapshot, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _fileSharesRestClient.LeaseAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, xMsSnapshot, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -311,6 +339,9 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/lease
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// OperationId: FileShares_Lease
         /// <summary> The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. </summary>
         /// <param name="xMsSnapshot"> Optional. Specify the snapshot time to lease a snapshot. </param>
         /// <param name="parameters"> Lease Share request body. </param>
@@ -321,7 +352,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Lease(Id.ResourceGroupName, Id.Parent.Name, Id.Name, xMsSnapshot, parameters, cancellationToken);
+                var response = _fileSharesRestClient.Lease(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, xMsSnapshot, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)

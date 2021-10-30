@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using ExactMatchInheritance;
 
 namespace ExactMatchInheritance.Models
 {
@@ -16,7 +15,7 @@ namespace ExactMatchInheritance.Models
     {
         internal static ExactMatchModel3ListResult DeserializeExactMatchModel3ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<ExactMatchModel3Data>> value = default;
+            Optional<IReadOnlyList<ExactMatchModel3>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +26,10 @@ namespace ExactMatchInheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ExactMatchModel3Data> array = new List<ExactMatchModel3Data>();
+                    List<ExactMatchModel3> array = new List<ExactMatchModel3>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ExactMatchModel3Data.DeserializeExactMatchModel3Data(item));
+                        array.Add(ExactMatchModel3.DeserializeExactMatchModel3(item));
                     }
                     value = array;
                     continue;

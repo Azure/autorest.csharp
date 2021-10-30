@@ -6,20 +6,12 @@
         "version": "2020-06-01"
     },
     "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
     "security": [
         {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+            "azure_auth": ["user_impersonation"]
         }
     ],
     "securityDefinitions": {
@@ -36,9 +28,7 @@
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}": {
             "put": {
-                "tags": [
-                    "SshPublicKeys"
-                ],
+                "tags": ["SshPublicKeys"],
                 "operationId": "SshPublicKeys_Create",
                 "description": "Creates a new SSH public key resource.",
                 "parameters": [
@@ -85,17 +75,10 @@
                             "$ref": "#/definitions/SshPublicKeyResource"
                         }
                     }
-                },
-                "x-ms-examples": {
-                    "Create a new SSH public key resource.": {
-                        "$ref": "./examples/CreateAnSshPublicKey.json"
-                    }
                 }
             },
             "delete": {
-                "tags": [
-                    "SshPublicKeys"
-                ],
+                "tags": ["SshPublicKeys"],
                 "operationId": "SshPublicKeys_Delete",
                 "description": "Delete an SSH public key.",
                 "parameters": [
@@ -130,9 +113,7 @@
                 }
             },
             "get": {
-                "tags": [
-                    "SshPublicKeys"
-                ],
+                "tags": ["SshPublicKeys"],
                 "operationId": "SshPublicKeys_Get",
                 "description": "Retrieves information about an SSH public key.",
                 "parameters": [
@@ -164,17 +145,34 @@
                             "$ref": "#/definitions/SshPublicKeyResource"
                         }
                     }
-                },
-                "x-ms-examples": {
-                    "Get an ssh public key.": {
-                        "$ref": "./examples/GetAnSshPublicKey.json"
-                    }
                 }
             }
         }
     },
     "definitions": {
         "SshPublicKeyResource": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "readOnly": true
+                },
+                "type": {
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "type": "string",
+                    "readOnly": true
+                },
+                "properties": {
+                    "type": "object",
+                    "$ref": "#/definitions/SshPublicKeyProperties"
+                }
+            },
+            "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
+        },
+        "SshPublicKeyProperties": {
+            "type": "object",
             "properties": {
                 "path": {
                     "type": "string",

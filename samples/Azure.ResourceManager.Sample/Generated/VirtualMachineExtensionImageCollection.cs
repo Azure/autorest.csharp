@@ -42,6 +42,9 @@ namespace Azure.ResourceManager.Sample
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineExtensionImages_Get
         /// <summary> Gets a virtual machine extension image. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -84,6 +87,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineExtensionImages_Get
         /// <summary> Gets a virtual machine extension image. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -290,6 +296,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineExtensionImages_ListTypes
         /// <summary> Gets a list of virtual machine extension image types. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -320,6 +329,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineExtensionImages_ListTypes
         /// <summary> Gets a list of virtual machine extension image types. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -350,6 +362,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineExtensionImages_ListVersions
         /// <summary> Gets a list of virtual machine extension image versions. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -388,6 +403,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: VirtualMachineExtensionImages_ListVersions
         /// <summary> Gets a list of virtual machine extension image versions. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>

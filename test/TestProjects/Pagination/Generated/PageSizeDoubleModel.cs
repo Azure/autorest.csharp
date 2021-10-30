@@ -22,7 +22,7 @@ namespace Pagination
     public partial class PageSizeDoubleModel : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PageSizeDoubleModelsRestOperations _restClient;
+        private readonly PageSizeDoubleModelsRestOperations _pageSizeDoubleModelsRestClient;
         private readonly PageSizeDoubleModelData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModel"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace Pagination
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _pageSizeDoubleModelsRestClient = new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModel"/> class. </summary>
@@ -47,7 +47,7 @@ namespace Pagination
         internal PageSizeDoubleModel(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _pageSizeDoubleModelsRestClient = new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModel"/> class. </summary>
@@ -59,7 +59,7 @@ namespace Pagination
         internal PageSizeDoubleModel(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _pageSizeDoubleModelsRestClient = new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -90,7 +90,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDoubleModelsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeDoubleModel(this, response.Value), response.GetRawResponse());
@@ -109,7 +109,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _pageSizeDoubleModelsRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDoubleModel(this, response.Value), response.GetRawResponse());

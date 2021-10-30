@@ -72,7 +72,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetValidAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetValid");
@@ -109,7 +109,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetValid(RequestOptions options = null)
+        public virtual Response GetValid(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetValid");
@@ -222,7 +222,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDotSyntaxAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDotSyntaxAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
@@ -257,7 +257,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDotSyntax(RequestOptions options = null)
+        public virtual Response GetDotSyntax(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
@@ -302,7 +302,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
@@ -347,7 +347,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComposedWithDiscriminator(RequestOptions options = null)
+        public virtual Response GetComposedWithDiscriminator(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
@@ -392,7 +392,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
@@ -437,7 +437,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComposedWithoutDiscriminator(RequestOptions options = null)
+        public virtual Response GetComposedWithoutDiscriminator(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
@@ -483,7 +483,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplicatedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComplicatedAsync(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
@@ -529,7 +529,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplicated(RequestOptions options = null)
+        public virtual Response GetComplicated(RequestOptions options)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");

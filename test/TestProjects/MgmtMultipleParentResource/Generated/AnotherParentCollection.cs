@@ -21,11 +21,12 @@ using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class representing collection of AnotherParent and their operations over a ResourceGroup. </summary>
+    /// <summary> A class representing collection of AnotherParent and their operations over its parent. </summary>
     public partial class AnotherParentCollection : ArmCollection, IEnumerable<AnotherParent>, IAsyncEnumerable<AnotherParent>
+
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AnotherParentsRestOperations _restClient;
+        private readonly AnotherParentsRestOperations _anotherParentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="AnotherParentCollection"/> class for mocking. </summary>
         protected AnotherParentCollection()
@@ -37,22 +38,7 @@ namespace MgmtMultipleParentResource
         internal AnotherParentCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<AnotherParent> IEnumerable<AnotherParent>.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IAsyncEnumerator<AnotherParent> IAsyncEnumerable<AnotherParent>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            _anotherParentsRestClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -60,6 +46,9 @@ namespace MgmtMultipleParentResource
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AnotherParents_CreateOrUpdate
         /// <summary> The operation to create or update the run command. </summary>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
@@ -81,8 +70,8 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, anotherName, anotherBody, cancellationToken);
-                var operation = new AnotherParentCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, anotherName, anotherBody).Request, response);
+                var response = _anotherParentsRestClient.CreateOrUpdate(Id.ResourceGroupName, anotherName, anotherBody, cancellationToken);
+                var operation = new AnotherParentCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _anotherParentsRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, anotherName, anotherBody).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -94,6 +83,9 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AnotherParents_CreateOrUpdate
         /// <summary> The operation to create or update the run command. </summary>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
@@ -115,8 +107,8 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, anotherName, anotherBody, cancellationToken).ConfigureAwait(false);
-                var operation = new AnotherParentCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, anotherName, anotherBody).Request, response);
+                var response = await _anotherParentsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, anotherName, anotherBody, cancellationToken).ConfigureAwait(false);
+                var operation = new AnotherParentCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _anotherParentsRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, anotherName, anotherBody).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -128,22 +120,26 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AnotherParents_Get
+        /// <summary> The operation to get the run command. </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public virtual Response<AnotherParent> Get(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.Get");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken);
+                var response = _anotherParentsRestClient.Get(Id.ResourceGroupName, anotherName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AnotherParent(Parent, response.Value), response.GetRawResponse());
@@ -155,22 +151,26 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AnotherParents_Get
+        /// <summary> The operation to get the run command. </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public async virtual Task<Response<AnotherParent>> GetAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.Get");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _anotherParentsRestClient.GetAsync(Id.ResourceGroupName, anotherName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParent(Parent, response.Value), response.GetRawResponse());
@@ -185,19 +185,20 @@ namespace MgmtMultipleParentResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public virtual Response<AnotherParent> GetIfExists(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken);
+                var response = _anotherParentsRestClient.Get(Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<AnotherParent>(null, response.GetRawResponse())
                     : Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
@@ -212,19 +213,20 @@ namespace MgmtMultipleParentResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public async virtual Task<Response<AnotherParent>> GetIfExistsAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.GetIfExists");
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _anotherParentsRestClient.GetAsync(Id.ResourceGroupName, anotherName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<AnotherParent>(null, response.GetRawResponse())
                     : Response.FromValue(new AnotherParent(this, response.Value), response.GetRawResponse());
@@ -239,18 +241,19 @@ namespace MgmtMultipleParentResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
                 var response = GetIfExists(anotherName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -264,18 +267,19 @@ namespace MgmtMultipleParentResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.CheckIfExists");
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-
                 var response = await GetIfExistsAsync(anotherName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -286,6 +290,9 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AnotherParents_List
         /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -298,7 +305,7 @@ namespace MgmtMultipleParentResource
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(Id.ResourceGroupName, expand, cancellationToken: cancellationToken);
+                    var response = _anotherParentsRestClient.List(Id.ResourceGroupName, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new AnotherParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -313,7 +320,7 @@ namespace MgmtMultipleParentResource
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, expand, cancellationToken: cancellationToken);
+                    var response = _anotherParentsRestClient.ListNextPage(nextLink, Id.ResourceGroupName, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new AnotherParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -325,6 +332,9 @@ namespace MgmtMultipleParentResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: AnotherParents_List
         /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -337,7 +347,7 @@ namespace MgmtMultipleParentResource
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _anotherParentsRestClient.ListAsync(Id.ResourceGroupName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new AnotherParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -352,7 +362,7 @@ namespace MgmtMultipleParentResource
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _anotherParentsRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new AnotherParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -410,7 +420,22 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        IEnumerator<AnotherParent> IEnumerable<AnotherParent>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<AnotherParent> IAsyncEnumerable<AnotherParent>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, AnotherParent, AnotherParentData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AnotherParent, AnotherParentData> Construct() { }
     }
 }

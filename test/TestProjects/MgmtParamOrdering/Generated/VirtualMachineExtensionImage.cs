@@ -63,11 +63,7 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-<<<<<<< HEAD:test/TestProjects/MgmtParamOrdering/Generated/VirtualMachineExtensionImage.cs
         public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/artifacttypes/types/versions";
-=======
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/azureResourceFlattenModel2s";
->>>>>>> origin/feature/v3:test/TestProjects/ExactMatchFlattenInheritance/Generated/AzureResourceFlattenModel2.cs
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -167,15 +163,9 @@ namespace MgmtParamOrdering
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-<<<<<<< HEAD:test/TestProjects/MgmtParamOrdering/Generated/VirtualMachineExtensionImage.cs
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineExtensionImagesRestClient.GetAsync(Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AzureResourceFlattenModel2(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/ExactMatchFlattenInheritance/Generated/AzureResourceFlattenModel2.cs
             }
             catch (Exception e)
             {
@@ -202,15 +192,9 @@ namespace MgmtParamOrdering
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-<<<<<<< HEAD:test/TestProjects/MgmtParamOrdering/Generated/VirtualMachineExtensionImage.cs
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineExtensionImagesRestClient.Get(Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new AzureResourceFlattenModel2(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/ExactMatchFlattenInheritance/Generated/AzureResourceFlattenModel2.cs
             }
             catch (Exception e)
             {
@@ -237,15 +221,9 @@ namespace MgmtParamOrdering
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-<<<<<<< HEAD:test/TestProjects/MgmtParamOrdering/Generated/VirtualMachineExtensionImage.cs
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineExtensionImagesRestClient.GetAsync(Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AzureResourceFlattenModel2(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/ExactMatchFlattenInheritance/Generated/AzureResourceFlattenModel2.cs
             }
             catch (Exception e)
             {
@@ -272,15 +250,9 @@ namespace MgmtParamOrdering
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-<<<<<<< HEAD:test/TestProjects/MgmtParamOrdering/Generated/VirtualMachineExtensionImage.cs
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineExtensionImagesRestClient.Get(Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new AzureResourceFlattenModel2(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/ExactMatchFlattenInheritance/Generated/AzureResourceFlattenModel2.cs
             }
             catch (Exception e)
             {
@@ -306,15 +278,9 @@ namespace MgmtParamOrdering
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-<<<<<<< HEAD:test/TestProjects/MgmtParamOrdering/Generated/VirtualMachineExtensionImage.cs
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineExtensionImagesRestClient.GetAsync(Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AzureResourceFlattenModel2(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/ExactMatchFlattenInheritance/Generated/AzureResourceFlattenModel2.cs
             }
             catch (Exception e)
             {
@@ -340,15 +306,9 @@ namespace MgmtParamOrdering
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-<<<<<<< HEAD:test/TestProjects/MgmtParamOrdering/Generated/VirtualMachineExtensionImage.cs
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineExtensionImagesRestClient.Get(Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new AzureResourceFlattenModel2(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/ExactMatchFlattenInheritance/Generated/AzureResourceFlattenModel2.cs
             }
             catch (Exception e)
             {

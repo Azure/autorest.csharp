@@ -498,7 +498,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string expand)
+        internal HttpMessage CreateListRequest(string resourceGroupName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -526,14 +526,14 @@ namespace MgmtOperations
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<AvailabilitySetListResult>> GetAllAsync(string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySetListResult>> ListAsync(string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName, expand);
+            using var message = CreateListRequest(resourceGroupName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -554,14 +554,14 @@ namespace MgmtOperations
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<AvailabilitySetListResult> GetAll(string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySetListResult> List(string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName, expand);
+            using var message = CreateListRequest(resourceGroupName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

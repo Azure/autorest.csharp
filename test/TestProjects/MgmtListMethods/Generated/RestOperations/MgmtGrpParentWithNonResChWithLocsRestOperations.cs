@@ -223,7 +223,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetAllRequest(string groupId)
+        internal HttpMessage CreateListRequest(string groupId)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -244,14 +244,14 @@ namespace MgmtListMethods
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
-        public async Task<Response<MgmtGrpParentWithNonResChWithLocListResult>> GetAllAsync(string groupId, CancellationToken cancellationToken = default)
+        public async Task<Response<MgmtGrpParentWithNonResChWithLocListResult>> ListAsync(string groupId, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
                 throw new ArgumentNullException(nameof(groupId));
             }
 
-            using var message = CreateGetAllRequest(groupId);
+            using var message = CreateListRequest(groupId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -271,14 +271,14 @@ namespace MgmtListMethods
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
-        public Response<MgmtGrpParentWithNonResChWithLocListResult> GetAll(string groupId, CancellationToken cancellationToken = default)
+        public Response<MgmtGrpParentWithNonResChWithLocListResult> List(string groupId, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
                 throw new ArgumentNullException(nameof(groupId));
             }
 
-            using var message = CreateGetAllRequest(groupId);
+            using var message = CreateListRequest(groupId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -294,7 +294,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetNonResourceChildRequest(string groupId, string mgmtGrpParentWithNonResChWithLocName)
+        internal HttpMessage CreateListNonResourceChildRequest(string groupId, string mgmtGrpParentWithNonResChWithLocName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -318,7 +318,7 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public async Task<Response<NonResourceChildListResult>> GetNonResourceChildAsync(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public async Task<Response<NonResourceChildListResult>> ListNonResourceChildAsync(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
@@ -329,7 +329,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
-            using var message = CreateGetNonResourceChildRequest(groupId, mgmtGrpParentWithNonResChWithLocName);
+            using var message = CreateListNonResourceChildRequest(groupId, mgmtGrpParentWithNonResChWithLocName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -350,7 +350,7 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public Response<NonResourceChildListResult> GetNonResourceChild(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public Response<NonResourceChildListResult> ListNonResourceChild(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
@@ -361,7 +361,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
             }
 
-            using var message = CreateGetNonResourceChildRequest(groupId, mgmtGrpParentWithNonResChWithLocName);
+            using var message = CreateListNonResourceChildRequest(groupId, mgmtGrpParentWithNonResChWithLocName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -377,7 +377,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string groupId)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string groupId)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -396,7 +396,7 @@ namespace MgmtListMethods
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="groupId"/> is null. </exception>
-        public async Task<Response<MgmtGrpParentWithNonResChWithLocListResult>> GetAllNextPageAsync(string nextLink, string groupId, CancellationToken cancellationToken = default)
+        public async Task<Response<MgmtGrpParentWithNonResChWithLocListResult>> ListNextPageAsync(string nextLink, string groupId, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -407,7 +407,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(groupId));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, groupId);
+            using var message = CreateListNextPageRequest(nextLink, groupId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -428,7 +428,7 @@ namespace MgmtListMethods
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="groupId"/> is null. </exception>
-        public Response<MgmtGrpParentWithNonResChWithLocListResult> GetAllNextPage(string nextLink, string groupId, CancellationToken cancellationToken = default)
+        public Response<MgmtGrpParentWithNonResChWithLocListResult> ListNextPage(string nextLink, string groupId, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -439,7 +439,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(groupId));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, groupId);
+            using var message = CreateListNextPageRequest(nextLink, groupId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

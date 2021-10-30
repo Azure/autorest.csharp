@@ -21,11 +21,12 @@ using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of SubParent and their operations over a Subscription. </summary>
+    /// <summary> A class representing collection of SubParent and their operations over its parent. </summary>
     public partial class SubParentCollection : ArmCollection, IEnumerable<SubParent>, IAsyncEnumerable<SubParent>
+
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SubParentsRestOperations _restClient;
+        private readonly SubParentsRestOperations _subParentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentCollection"/> class for mocking. </summary>
         protected SubParentCollection()
@@ -37,22 +38,7 @@ namespace MgmtListMethods
         internal SubParentCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<SubParent> IEnumerable<SubParent>.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IAsyncEnumerator<SubParent> IAsyncEnumerable<SubParent>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            _subParentsRestClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -60,6 +46,9 @@ namespace MgmtListMethods
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: SubParents_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -81,7 +70,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(subParentName, parameters, cancellationToken);
+                var response = _subParentsRestClient.CreateOrUpdate(subParentName, parameters, cancellationToken);
                 var operation = new SubParentCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -94,6 +83,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: SubParents_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="subParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -115,7 +107,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(subParentName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentsRestClient.CreateOrUpdateAsync(subParentName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new SubParentCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -128,21 +120,25 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: SubParents_Get
+        /// <summary> Retrieves information. </summary>
         /// <param name="subParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<SubParent> Get(string subParentName, CancellationToken cancellationToken = default)
         {
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentCollection.Get");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
-                var response = _restClient.Get(subParentName, cancellationToken: cancellationToken);
+                var response = _subParentsRestClient.Get(subParentName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParent(Parent, response.Value), response.GetRawResponse());
@@ -154,21 +150,25 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: SubParents_Get
+        /// <summary> Retrieves information. </summary>
         /// <param name="subParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public async virtual Task<Response<SubParent>> GetAsync(string subParentName, CancellationToken cancellationToken = default)
         {
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentCollection.Get");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
-                var response = await _restClient.GetAsync(subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subParentsRestClient.GetAsync(subParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubParent(Parent, response.Value), response.GetRawResponse());
@@ -182,19 +182,20 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<SubParent> GetIfExists(string subParentName, CancellationToken cancellationToken = default)
         {
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
-                var response = _restClient.Get(subParentName, cancellationToken: cancellationToken);
+                var response = _subParentsRestClient.Get(subParentName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SubParent>(null, response.GetRawResponse())
                     : Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
@@ -208,19 +209,20 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public async virtual Task<Response<SubParent>> GetIfExistsAsync(string subParentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
-                var response = await _restClient.GetAsync(subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subParentsRestClient.GetAsync(subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SubParent>(null, response.GetRawResponse())
                     : Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
@@ -234,18 +236,19 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string subParentName, CancellationToken cancellationToken = default)
         {
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
                 var response = GetIfExists(subParentName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -258,18 +261,19 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subParentName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string subParentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.CheckIfExists");
+            if (subParentName == null)
+            {
+                throw new ArgumentNullException(nameof(subParentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubParentCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (subParentName == null)
-                {
-                    throw new ArgumentNullException(nameof(subParentName));
-                }
-
                 var response = await GetIfExistsAsync(subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -280,6 +284,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: SubParents_List
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SubParent" /> that may take multiple service requests to iterate over. </returns>
@@ -291,7 +298,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(cancellationToken: cancellationToken);
+                    var response = _subParentsRestClient.List(cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -306,7 +313,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, cancellationToken: cancellationToken);
+                    var response = _subParentsRestClient.ListNextPage(nextLink, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -318,6 +325,9 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: SubParents_List
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SubParent" /> that may take multiple service requests to iterate over. </returns>
@@ -329,7 +339,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subParentsRestClient.ListAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -344,7 +354,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subParentsRestClient.ListNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -402,7 +412,22 @@ namespace MgmtListMethods
             }
         }
 
+        IEnumerator<SubParent> IEnumerable<SubParent>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<SubParent> IAsyncEnumerable<SubParent>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, SubParent, SubParentData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, SubParent, SubParentData> Construct() { }
     }
 }

@@ -19,11 +19,11 @@ using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> A class representing collection of EnvironmentContainerResource and their operations over a Workspace. </summary>
+    /// <summary> A class representing collection of EnvironmentContainerResource and their operations over its parent. </summary>
     public partial class EnvironmentContainerResourceCollection : ArmCollection, IEnumerable<EnvironmentContainerResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly EnvironmentContainersRestOperations _restClient;
+        private readonly EnvironmentContainersRestOperations _environmentContainersRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="EnvironmentContainerResourceCollection"/> class for mocking. </summary>
         protected EnvironmentContainerResourceCollection()
@@ -35,17 +35,7 @@ namespace MgmtParamOrdering
         internal EnvironmentContainerResourceCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<EnvironmentContainerResource> IEnumerable<EnvironmentContainerResource>.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
+            _environmentContainersRestClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -53,6 +43,9 @@ namespace MgmtParamOrdering
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// OperationId: EnvironmentContainers_CreateOrUpdate
         /// <summary> Create or update container. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="body"> Container entity to create or update. </param>
@@ -74,7 +67,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, name, body, cancellationToken);
+                var response = _environmentContainersRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, name, body, cancellationToken);
                 var operation = new EnvironmentContainerCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -87,6 +80,9 @@ namespace MgmtParamOrdering
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// OperationId: EnvironmentContainers_CreateOrUpdate
         /// <summary> Create or update container. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="body"> Container entity to create or update. </param>
@@ -108,7 +104,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, name, body, cancellationToken).ConfigureAwait(false);
+                var response = await _environmentContainersRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, name, body, cancellationToken).ConfigureAwait(false);
                 var operation = new EnvironmentContainerCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -121,21 +117,25 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// OperationId: EnvironmentContainers_Get
+        /// <summary> Get container. </summary>
         /// <param name="name"> Container name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<EnvironmentContainerResource> Get(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.Get");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken);
+                var response = _environmentContainersRestClient.Get(Id.ResourceGroupName, Id.Name, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new EnvironmentContainerResource(Parent, response.Value), response.GetRawResponse());
@@ -147,21 +147,25 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// OperationId: EnvironmentContainers_Get
+        /// <summary> Get container. </summary>
         /// <param name="name"> Container name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<EnvironmentContainerResource>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.Get");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _environmentContainersRestClient.GetAsync(Id.ResourceGroupName, Id.Name, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new EnvironmentContainerResource(Parent, response.Value), response.GetRawResponse());
@@ -175,19 +179,20 @@ namespace MgmtParamOrdering
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> Container name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<EnvironmentContainerResource> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken);
+                var response = _environmentContainersRestClient.Get(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<EnvironmentContainerResource>(null, response.GetRawResponse())
                     : Response.FromValue(new EnvironmentContainerResource(this, response.Value), response.GetRawResponse());
@@ -201,19 +206,20 @@ namespace MgmtParamOrdering
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> Container name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<EnvironmentContainerResource>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetIfExists");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _environmentContainersRestClient.GetAsync(Id.ResourceGroupName, Id.Name, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<EnvironmentContainerResource>(null, response.GetRawResponse())
                     : Response.FromValue(new EnvironmentContainerResource(this, response.Value), response.GetRawResponse());
@@ -227,18 +233,19 @@ namespace MgmtParamOrdering
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> Container name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
                 var response = GetIfExists(name, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -251,18 +258,19 @@ namespace MgmtParamOrdering
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> Container name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.CheckIfExists");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
                 var response = await GetIfExistsAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -273,24 +281,9 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// <summary> Get container. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<EnvironmentContainerResource>>> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetAll");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new EnvironmentContainerResource(Parent, data)).ToArray() as IReadOnlyList<EnvironmentContainerResource>, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// OperationId: EnvironmentContainers_List
         /// <summary> Get container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<EnvironmentContainerResource>> GetAll(CancellationToken cancellationToken = default)
@@ -299,8 +292,8 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _restClient.GetAll(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new EnvironmentContainerResource(Parent, data)).ToArray() as IReadOnlyList<EnvironmentContainerResource>, response.GetRawResponse());
+                var response = _environmentContainersRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(value => new EnvironmentContainerResource(Parent, value)).ToArray() as IReadOnlyList<EnvironmentContainerResource>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -309,7 +302,38 @@ namespace MgmtParamOrdering
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// OperationId: EnvironmentContainers_List
+        /// <summary> Get container. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<IReadOnlyList<EnvironmentContainerResource>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _environmentContainersRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(value => new EnvironmentContainerResource(Parent, value)).ToArray() as IReadOnlyList<EnvironmentContainerResource>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        IEnumerator<EnvironmentContainerResource> IEnumerable<EnvironmentContainerResource>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, EnvironmentContainerResource, EnvironmentContainerResourceData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, EnvironmentContainerResource, EnvironmentContainerResourceData> Construct() { }
     }
 }

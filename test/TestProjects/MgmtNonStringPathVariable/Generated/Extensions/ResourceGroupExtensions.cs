@@ -13,22 +13,22 @@ namespace MgmtNonStringPathVariable
     public static partial class ResourceGroupExtensions
     {
         #region Fake
-        /// <summary> Gets an object representing a FakeContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a FakeCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="FakeContainer" /> object. </returns>
-        public static FakeContainer GetFakes(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="FakeCollection" /> object. </returns>
+        public static FakeCollection GetFakes(this ResourceGroup resourceGroup)
         {
-            return new FakeContainer(resourceGroup);
+            return new FakeCollection(resourceGroup);
         }
         #endregion
 
         #region Bar
-        /// <summary> Gets an object representing a BarContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a BarCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="BarContainer" /> object. </returns>
-        public static BarContainer GetBars(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="BarCollection" /> object. </returns>
+        public static BarCollection GetBars(this ResourceGroup resourceGroup)
         {
-            return new BarContainer(resourceGroup);
+            return new BarCollection(resourceGroup);
         }
         #endregion
     }

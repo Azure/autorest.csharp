@@ -15,15 +15,16 @@ using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 using TenantOnly.Models;
 
 namespace TenantOnly
 {
-    /// <summary> A class representing collection of BillingAccount and their operations over a Tenant. </summary>
+    /// <summary> A class representing collection of BillingAccount and their operations over its parent. </summary>
     public partial class BillingAccountCollection : ArmCollection, IEnumerable<BillingAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BillingAccountsRestOperations _restClient;
+        private readonly BillingAccountsRestOperations _billingAccountsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccountCollection"/> class for mocking. </summary>
         protected BillingAccountCollection()
@@ -35,24 +36,17 @@ namespace TenantOnly
         internal BillingAccountCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-        }
-
-        IEnumerator<BillingAccount> IEnumerable<BillingAccount>.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
+            _billingAccountsRestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
+        protected override ResourceType ValidResourceType => Tenant.ResourceType;
 
         // Collection level operations.
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_Create
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -74,8 +68,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _restClient.Create(billingAccountName, parameters, cancellationToken);
-                var operation = new BillingAccountCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var response = _billingAccountsRestClient.Create(billingAccountName, parameters, cancellationToken);
+                var operation = new BillingAccountCreateOperation(Parent, _clientDiagnostics, Pipeline, _billingAccountsRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -87,6 +81,9 @@ namespace TenantOnly
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_Create
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -108,8 +105,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await _restClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new BillingAccountCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
+                var response = await _billingAccountsRestClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new BillingAccountCreateOperation(Parent, _clientDiagnostics, Pipeline, _billingAccountsRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,22 +118,26 @@ namespace TenantOnly
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_Get
+        /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public virtual Response<BillingAccount> Get(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (billingAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(billingAccountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Get");
             scope.Start();
             try
             {
-                if (billingAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(billingAccountName));
-                }
-
-                var response = _restClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
+                var response = _billingAccountsRestClient.Get(billingAccountName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
@@ -148,22 +149,26 @@ namespace TenantOnly
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_Get
+        /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public async virtual Task<Response<BillingAccount>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (billingAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(billingAccountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.Get");
             scope.Start();
             try
             {
-                if (billingAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(billingAccountName));
-                }
-
-                var response = await _restClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _billingAccountsRestClient.GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
@@ -178,19 +183,20 @@ namespace TenantOnly
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public virtual Response<BillingAccount> GetIfExists(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (billingAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(billingAccountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (billingAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(billingAccountName));
-                }
-
-                var response = _restClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
+                var response = _billingAccountsRestClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<BillingAccount>(null, response.GetRawResponse())
                     : Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
@@ -205,19 +211,20 @@ namespace TenantOnly
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public async virtual Task<Response<BillingAccount>> GetIfExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
+            if (billingAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(billingAccountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (billingAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(billingAccountName));
-                }
-
-                var response = await _restClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _billingAccountsRestClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<BillingAccount>(null, response.GetRawResponse())
                     : Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
@@ -232,18 +239,19 @@ namespace TenantOnly
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (billingAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(billingAccountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (billingAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(billingAccountName));
-                }
-
                 var response = GetIfExists(billingAccountName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -257,18 +265,19 @@ namespace TenantOnly
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.CheckIfExists");
+            if (billingAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(billingAccountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (billingAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(billingAccountName));
-                }
-
                 var response = await GetIfExistsAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -279,25 +288,9 @@ namespace TenantOnly
             }
         }
 
-        /// <summary> Gets a billing account by its ID. </summary>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<BillingAccount>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAllAsync(expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new BillingAccount(Parent, data)).ToArray() as IReadOnlyList<BillingAccount>, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_List
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -307,8 +300,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _restClient.GetAll(expand, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new BillingAccount(Parent, data)).ToArray() as IReadOnlyList<BillingAccount>, response.GetRawResponse());
+                var response = _billingAccountsRestClient.List(expand, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(value => new BillingAccount(Parent, value)).ToArray() as IReadOnlyList<BillingAccount>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -317,7 +310,39 @@ namespace TenantOnly
             }
         }
 
+        /// RequestPath: /providers/Microsoft.Billing/billingAccounts
+        /// ContextualPath: /
+        /// OperationId: BillingAccounts_List
+        /// <summary> Gets a billing account by its ID. </summary>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<IReadOnlyList<BillingAccount>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _billingAccountsRestClient.ListAsync(expand, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(value => new BillingAccount(Parent, value)).ToArray() as IReadOnlyList<BillingAccount>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        IEnumerator<BillingAccount> IEnumerable<BillingAccount>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
     }
 }

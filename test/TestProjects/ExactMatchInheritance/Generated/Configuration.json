@@ -10,12 +10,5 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "OperationGroupToResource": {
-    "ExactMatchModel2s": "NonResource",
-    "ExactMatchModel4s": "NonResource"
-  },
-  "OperationGroupToParent": {
-    "ExactMatchModel2s": "subscriptions",
-    "ExactMatchModel4s": "subscriptions"
-  }
+  "ShowRequestPathAndOperationId": true
 }

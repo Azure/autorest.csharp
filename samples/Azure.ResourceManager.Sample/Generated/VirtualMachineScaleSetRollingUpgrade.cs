@@ -88,6 +88,9 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets the parent resource of this resource. </summary>
         public ArmResource Parent { get; }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest
+        /// OperationId: VirtualMachineScaleSetRollingUpgrades_GetLatest
         /// <summary> Gets the status of the latest virtual machine scale set rolling upgrade. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<VirtualMachineScaleSetRollingUpgrade>> GetAsync(CancellationToken cancellationToken = default)
@@ -108,6 +111,9 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest
+        /// OperationId: VirtualMachineScaleSetRollingUpgrades_GetLatest
         /// <summary> Gets the status of the latest virtual machine scale set rolling upgrade. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineScaleSetRollingUpgrade> Get(CancellationToken cancellationToken = default)

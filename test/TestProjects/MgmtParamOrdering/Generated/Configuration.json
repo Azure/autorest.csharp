@@ -10,13 +10,5 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "OperationGroupToResourceType": {
-    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension"
-  },
-  "OperationGroupToResource": {
-    "VirtualMachineExtensionImages": "NonResource"
-  },
-  "OperationGroupToParent": {
-    "VirtualMachineExtensionImages": "subscriptions"
-  }
+  "ShowRequestPathAndOperationId": true
 }

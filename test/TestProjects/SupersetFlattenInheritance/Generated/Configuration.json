@@ -10,10 +10,5 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "OperationGroupToResource": {
-    "NonResourceModel1s": "NonResource"
-  },
-  "OperationGroupToParent": {
-    "NonResourceModel1s": "resourceGroups"
-  }
+  "ShowRequestPathAndOperationId": true
 }

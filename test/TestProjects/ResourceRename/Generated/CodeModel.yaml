@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_3
+    - !StringSchema &ref_7
       type: string
       apiVersions:
         - !ApiVersion 
@@ -28,8 +28,8 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SshPublicKeyInfoPath
-          description: 'Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys'
+          name: SshPublicKeyInfoId
+          description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_2
       type: string
@@ -38,13 +38,43 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SshPublicKeyInfoKeyData
+          name: SshPublicKeyInfoType
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SshPublicKeyInfoName
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SshPublicKeyPropertiesPath
+          description: 'Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys'
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SshPublicKeyPropertiesKeyData
           description: >-
             SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in
             Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_4
+    - !ConstantSchema &ref_8
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -54,7 +84,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_8
+    - !ConstantSchema &ref_12
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -64,7 +94,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_10
+    - !ConstantSchema &ref_14
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -75,29 +105,80 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_9
+    - !ObjectSchema &ref_13
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
-        - !Property &ref_12
+        - !Property 
           schema: *ref_1
-          serializedName: path
+          readOnly: true
+          serializedName: id
           language: !Languages 
             default:
-              name: path
-              description: 'Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys'
+              name: id
+              description: ''
           protocol: !Protocols {}
-        - !Property &ref_13
+        - !Property 
           schema: *ref_2
-          serializedName: keyData
+          readOnly: true
+          serializedName: type
           language: !Languages 
             default:
-              name: keyData
-              description: >-
-                SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in
-                Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+              name: type
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_3
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: ''
+          protocol: !Protocols {}
+        - !Property &ref_16
+          schema: !ObjectSchema &ref_6
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_4
+                serializedName: path
+                language: !Languages 
+                  default:
+                    name: path
+                    description: 'Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys'
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_5
+                serializedName: keyData
+                language: !Languages 
+                  default:
+                    name: keyData
+                    description: >-
+                      SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs
+                      in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: SshPublicKeyProperties
+                description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: properties
+          language: !Languages 
+            default:
+              name: properties
+              description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -110,9 +191,10 @@ schemas: !Schemas
           description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
           namespace: ''
       protocol: !Protocols {}
+    - *ref_6
 globalParameters:
-  - !Parameter &ref_7
-    schema: *ref_3
+  - !Parameter &ref_11
+    schema: *ref_7
     implementation: Client
     required: true
     extensions:
@@ -125,7 +207,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_5
+  - !Parameter &ref_9
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -141,8 +223,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_6
-    schema: *ref_4
+  - !Parameter &ref_10
+    schema: *ref_8
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -163,9 +245,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_5
-          - !Parameter &ref_16
-            schema: *ref_3
+          - *ref_9
+          - !Parameter &ref_18
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -176,8 +258,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_17
-            schema: *ref_3
+          - !Parameter &ref_19
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -188,13 +270,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_6
-          - *ref_7
+          - *ref_10
+          - *ref_11
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_8
+                schema: *ref_12
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -206,8 +288,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_11
-                schema: *ref_9
+              - !Parameter &ref_15
+                schema: *ref_13
                 flattened: true
                 implementation: Method
                 required: true
@@ -220,7 +302,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_10
+                schema: *ref_14
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -232,33 +314,19 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_14
-                schema: *ref_1
+              - !VirtualParameter &ref_17
+                schema: *ref_6
                 implementation: Method
-                originalParameter: *ref_11
+                originalParameter: *ref_15
                 pathToProperty: []
-                targetProperty: *ref_12
+                targetProperty: *ref_16
                 language: !Languages 
                   default:
-                    name: path
-                    description: 'Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys'
-                protocol: !Protocols {}
-              - !VirtualParameter &ref_15
-                schema: *ref_2
-                implementation: Method
-                originalParameter: *ref_11
-                pathToProperty: []
-                targetProperty: *ref_13
-                language: !Languages 
-                  default:
-                    name: keyData
-                    description: >-
-                      SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs
-                      in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+                    name: properties
+                    description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_14
-              - *ref_15
+              - *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -272,11 +340,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_16
-          - *ref_17
+          - *ref_18
+          - *ref_19
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_13
             language: !Languages 
               default:
                 name: ''
@@ -289,7 +357,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_13
             language: !Languages 
               default:
                 name: ''
@@ -311,9 +379,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_5
-          - !Parameter &ref_18
-            schema: *ref_3
+          - *ref_9
+          - !Parameter &ref_20
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -324,8 +392,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_19
-            schema: *ref_3
+          - !Parameter &ref_21
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -336,8 +404,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_6
-          - *ref_7
+          - *ref_10
+          - *ref_11
         requests:
           - !Request 
             language: !Languages 
@@ -350,8 +418,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_18
-          - *ref_19
+          - *ref_20
+          - *ref_21
         responses:
           - !Response 
             language: !Languages 
@@ -381,9 +449,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_5
-          - !Parameter &ref_20
-            schema: *ref_3
+          - *ref_9
+          - !Parameter &ref_22
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -394,8 +462,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_21
-            schema: *ref_3
+          - !Parameter &ref_23
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -406,13 +474,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_6
-          - *ref_7
+          - *ref_10
+          - *ref_11
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_10
+                schema: *ref_14
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -435,11 +503,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_20
-          - *ref_21
+          - *ref_22
+          - *ref_23
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_13
             language: !Languages 
               default:
                 name: ''

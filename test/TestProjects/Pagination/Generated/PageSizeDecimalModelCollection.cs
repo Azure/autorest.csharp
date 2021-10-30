@@ -21,11 +21,12 @@ using Pagination.Models;
 
 namespace Pagination
 {
-    /// <summary> A class representing collection of PageSizeDecimalModel and their operations over a ResourceGroup. </summary>
+    /// <summary> A class representing collection of PageSizeDecimalModel and their operations over its parent. </summary>
     public partial class PageSizeDecimalModelCollection : ArmCollection, IEnumerable<PageSizeDecimalModel>, IAsyncEnumerable<PageSizeDecimalModel>
+
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly PageSizeDecimalModelsRestOperations _restClient;
+        private readonly PageSizeDecimalModelsRestOperations _pageSizeDecimalModelsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDecimalModelCollection"/> class for mocking. </summary>
         protected PageSizeDecimalModelCollection()
@@ -37,22 +38,7 @@ namespace Pagination
         internal PageSizeDecimalModelCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new PageSizeDecimalModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<PageSizeDecimalModel> IEnumerable<PageSizeDecimalModel>.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IAsyncEnumerator<PageSizeDecimalModel> IAsyncEnumerable<PageSizeDecimalModel>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            _pageSizeDecimalModelsRestClient = new PageSizeDecimalModelsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -80,7 +66,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = _pageSizeDecimalModelsRestClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
                 var operation = new PageSizeDecimalModelPutOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -113,7 +99,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDecimalModelsRestClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new PageSizeDecimalModelPutOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -126,21 +112,21 @@ namespace Pagination
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<PageSizeDecimalModel> Get(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelCollection.Get");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _pageSizeDecimalModelsRestClient.Get(Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDecimalModel(Parent, response.Value), response.GetRawResponse());
@@ -152,21 +138,21 @@ namespace Pagination
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<PageSizeDecimalModel>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelCollection.Get");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDecimalModelsRestClient.GetAsync(Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeDecimalModel(Parent, response.Value), response.GetRawResponse());
@@ -180,19 +166,20 @@ namespace Pagination
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<PageSizeDecimalModel> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _pageSizeDecimalModelsRestClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<PageSizeDecimalModel>(null, response.GetRawResponse())
                     : Response.FromValue(new PageSizeDecimalModel(this, response.Value), response.GetRawResponse());
@@ -206,19 +193,20 @@ namespace Pagination
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<PageSizeDecimalModel>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelCollection.GetIfExists");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDecimalModelsRestClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<PageSizeDecimalModel>(null, response.GetRawResponse())
                     : Response.FromValue(new PageSizeDecimalModel(this, response.Value), response.GetRawResponse());
@@ -232,18 +220,19 @@ namespace Pagination
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string name, CancellationToken cancellationToken = default)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
                 var response = GetIfExists(name, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -256,18 +245,19 @@ namespace Pagination
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelCollection.CheckIfExists");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
                 var response = await GetIfExistsAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -278,9 +268,10 @@ namespace Pagination
             }
         }
 
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PageSizeDecimalModel" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<PageSizeDecimalModel> GetAll(CancellationToken cancellationToken = default)
+        public virtual Pageable<PageSizeDecimalModel> GetAll(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             Page<PageSizeDecimalModel> FirstPageFunc(int? pageSizeHint)
             {
@@ -288,7 +279,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _pageSizeDecimalModelsRestClient.List(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -303,7 +294,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _pageSizeDecimalModelsRestClient.ListNextPage(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -315,9 +306,10 @@ namespace Pagination
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PageSizeDecimalModel" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<PageSizeDecimalModel> GetAllAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<PageSizeDecimalModel> GetAllAsync(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<PageSizeDecimalModel>> FirstPageFunc(int? pageSizeHint)
             {
@@ -325,7 +317,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeDecimalModelsRestClient.ListAsync(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -340,7 +332,7 @@ namespace Pagination
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeDecimalModelsRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeDecimalModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -398,7 +390,22 @@ namespace Pagination
             }
         }
 
+        IEnumerator<PageSizeDecimalModel> IEnumerable<PageSizeDecimalModel>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<PageSizeDecimalModel> IAsyncEnumerable<PageSizeDecimalModel>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, PageSizeDecimalModel, PageSizeDecimalModelData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, PageSizeDecimalModel, PageSizeDecimalModelData> Construct() { }
     }
 }

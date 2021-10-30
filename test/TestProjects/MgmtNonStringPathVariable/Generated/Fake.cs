@@ -19,19 +19,13 @@ using MgmtNonStringPathVariable.Models;
 
 namespace MgmtNonStringPathVariable
 {
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
     /// <summary> A Class representing a Fake along with the instance operations that can be performed on it. </summary>
     public partial class Fake : ArmResource
-=======
-    /// <summary> A Class representing a AnotherParentChildBody along with the instance operations that can be performed on it. </summary>
-    public partial class AnotherParentChildBody : ArmResource
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakesRestOperations _fakesRestClient;
         private readonly FakeData _data;
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class for mocking. </summary>
         protected Fake()
         {
@@ -41,17 +35,6 @@ namespace MgmtNonStringPathVariable
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
         internal Fake(ArmResource options, FakeData resource) : base(options, resource.Id)
-=======
-        /// <summary> Initializes a new instance of the <see cref="AnotherParentChildBody"/> class for mocking. </summary>
-        protected AnotherParentChildBody()
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref = "AnotherParentChildBody"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AnotherParentChildBody(ArmResource options, ChildBodyData resource) : base(options, resource.Id)
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         {
             HasData = true;
             _data = resource;
@@ -59,37 +42,22 @@ namespace MgmtNonStringPathVariable
             _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Fake(ArmResource options, ResourceIdentifier id) : base(options, id)
-=======
-        /// <summary> Initializes a new instance of the <see cref="AnotherParentChildBody"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal AnotherParentChildBody(ArmResource options, ResourceIdentifier id) : base(options, id)
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         /// <summary> Initializes a new instance of the <see cref="Fake"/> class. </summary>
-=======
-        /// <summary> Initializes a new instance of the <see cref="AnotherParentChildBody"/> class. </summary>
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         /// <param name="clientOptions"> The client options to build client context. </param>
         /// <param name="credential"> The credential to build client context. </param>
         /// <param name="uri"> The uri to build client context. </param>
         /// <param name="pipeline"> The pipeline to build client context. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         internal Fake(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
-=======
-        internal AnotherParentChildBody(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
@@ -122,26 +90,16 @@ namespace MgmtNonStringPathVariable
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         public async virtual Task<Response<Fake>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Fake.Get");
-=======
-        public async virtual Task<Response<AnotherParentChildBody>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.Get");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
                 var response = await _fakesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
                 return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
-=======
-                return Response.FromValue(new AnotherParentChildBody(this, response.Value), response.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -156,26 +114,16 @@ namespace MgmtNonStringPathVariable
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         public virtual Response<Fake> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Fake.Get");
-=======
-        public virtual Response<AnotherParentChildBody> Get(string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.Get");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
                 var response = _fakesRestClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
                 return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
-=======
-                return Response.FromValue(new AnotherParentChildBody(this, response.Value), response.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -208,11 +156,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<FakeDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.Delete");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.Delete");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
@@ -237,11 +181,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual FakeDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.Delete");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.Delete");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
@@ -263,36 +203,22 @@ namespace MgmtNonStringPathVariable
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         public async virtual Task<Response<Fake>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
-=======
-        public async virtual Task<Response<AnotherParentChildBody>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.AddTag");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.AddTag");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _fakesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AnotherParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -306,36 +232,22 @@ namespace MgmtNonStringPathVariable
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         public virtual Response<Fake> AddTag(string key, string value, CancellationToken cancellationToken = default)
-=======
-        public virtual Response<AnotherParentChildBody> AddTag(string key, string value, CancellationToken cancellationToken = default)
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.AddTag");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.AddTag");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _fakesRestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new AnotherParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -348,37 +260,23 @@ namespace MgmtNonStringPathVariable
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         public async virtual Task<Response<Fake>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
-=======
-        public async virtual Task<Response<AnotherParentChildBody>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.SetTags");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.SetTags");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _fakesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AnotherParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -391,37 +289,23 @@ namespace MgmtNonStringPathVariable
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         public virtual Response<Fake> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
-=======
-        public virtual Response<AnotherParentChildBody> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.SetTags");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.SetTags");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _fakesRestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new AnotherParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -434,36 +318,22 @@ namespace MgmtNonStringPathVariable
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         public async virtual Task<Response<Fake>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
-=======
-        public async virtual Task<Response<AnotherParentChildBody>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.RemoveTag");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.RemoveTag");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _fakesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AnotherParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -476,36 +346,22 @@ namespace MgmtNonStringPathVariable
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
         public virtual Response<Fake> RemoveTag(string key, CancellationToken cancellationToken = default)
-=======
-        public virtual Response<AnotherParentChildBody> RemoveTag(string key, CancellationToken cancellationToken = default)
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.RemoveTag");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.RemoveTag");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _fakesRestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
-=======
-                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new AnotherParentChildBody(this, originalResponse.Value), originalResponse.GetRawResponse());
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             }
             catch (Exception e)
             {
@@ -529,11 +385,7 @@ namespace MgmtNonStringPathVariable
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.StartUpdate");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.Update");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {
@@ -565,11 +417,7 @@ namespace MgmtNonStringPathVariable
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-<<<<<<< HEAD:test/TestProjects/MgmtNonStringPathVariable/Generated/Fake.cs
             using var scope = _clientDiagnostics.CreateScope("Fake.StartUpdate");
-=======
-            using var scope = _clientDiagnostics.CreateScope("AnotherParentChildBody.Update");
->>>>>>> origin/feature/v3:test/TestProjects/MgmtMultipleParentResource/Generated/AnotherParentChildBody.cs
             scope.Start();
             try
             {

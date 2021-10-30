@@ -13,8 +13,5 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/AzureResource.json
 namespace: SupersetFlattenInheritance
-operation-group-to-resource:
-   NonResourceModel1s: NonResource
-operation-group-to-parent:
-   NonResourceModel1s: resourceGroups
+show-request-path: true
 ```

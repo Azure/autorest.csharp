@@ -23,13 +23,13 @@ namespace ResourceRename
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="properties"></param>
+        /// <param name="properties"> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </param>
         internal SshPublicKeyInfoData(ResourceIdentifier id, string name, ResourceType type, SshPublicKeyProperties properties) : base(id, name, type)
         {
             Properties = properties;
         }
 
-        /// <summary> Gets or sets the properties. </summary>
+        /// <summary> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </summary>
         public SshPublicKeyProperties Properties { get; set; }
     }
 }

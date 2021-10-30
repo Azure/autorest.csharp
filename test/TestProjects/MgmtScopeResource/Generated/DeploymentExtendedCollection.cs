@@ -20,11 +20,12 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A class representing collection of DeploymentExtended and their operations over a Tenant. </summary>
+    /// <summary> A class representing collection of DeploymentExtended and their operations over its parent. </summary>
     public partial class DeploymentExtendedCollection : ArmCollection, IEnumerable<DeploymentExtended>, IAsyncEnumerable<DeploymentExtended>
+
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DeploymentsRestOperations _restClient;
+        private readonly DeploymentsRestOperations _deploymentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedCollection"/> class for mocking. </summary>
         protected DeploymentExtendedCollection()
@@ -36,23 +37,11 @@ namespace MgmtScopeResource
         internal DeploymentExtendedCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _deploymentsRestClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-        IEnumerator<DeploymentExtended> IEnumerable<DeploymentExtended>.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IAsyncEnumerator<DeploymentExtended> IAsyncEnumerable<DeploymentExtended>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
-        }
+        /// <summary> Gets the valid resource type for this object. </summary>
+        protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
 
         /// <summary> Verify that the input resource Id is a valid collection for this type. </summary>
         /// <param name="identifier"> The input resource Id to check. </param>
@@ -60,11 +49,11 @@ namespace MgmtScopeResource
         {
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
-
         // Collection level operations.
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// ContextualPath: /{scope}
+        /// OperationId: Deployments_CreateOrUpdateAtScope
         /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
@@ -86,8 +75,8 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdateAtScope(Id, deploymentName, parameters, cancellationToken);
-                var operation = new DeploymentCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
+                var response = _deploymentsRestClient.CreateOrUpdateAtScope(Id, deploymentName, parameters, cancellationToken);
+                var operation = new DeploymentCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _deploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -99,6 +88,9 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// ContextualPath: /{scope}
+        /// OperationId: Deployments_CreateOrUpdateAtScope
         /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
@@ -120,8 +112,8 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAtScopeAsync(Id, deploymentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new DeploymentCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
+                var response = await _deploymentsRestClient.CreateOrUpdateAtScopeAsync(Id, deploymentName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new DeploymentCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _deploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -133,21 +125,25 @@ namespace MgmtScopeResource
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// ContextualPath: /{scope}
+        /// OperationId: Deployments_GetAtScope
+        /// <summary> Gets a deployment. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public virtual Response<DeploymentExtended> Get(string deploymentName, CancellationToken cancellationToken = default)
         {
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-
-                var response = _restClient.GetAtScope(Id, deploymentName, cancellationToken: cancellationToken);
+                var response = _deploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeploymentExtended(Parent, response.Value), response.GetRawResponse());
@@ -159,21 +155,25 @@ namespace MgmtScopeResource
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// ContextualPath: /{scope}
+        /// OperationId: Deployments_GetAtScope
+        /// <summary> Gets a deployment. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public async virtual Task<Response<DeploymentExtended>> GetAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-
-                var response = await _restClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _deploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(Parent, response.Value), response.GetRawResponse());
@@ -187,19 +187,20 @@ namespace MgmtScopeResource
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public virtual Response<DeploymentExtended> GetIfExists(string deploymentName, CancellationToken cancellationToken = default)
         {
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-
-                var response = _restClient.GetAtScope(Id, deploymentName, cancellationToken: cancellationToken);
+                var response = _deploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<DeploymentExtended>(null, response.GetRawResponse())
                     : Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
@@ -213,19 +214,20 @@ namespace MgmtScopeResource
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public async virtual Task<Response<DeploymentExtended>> GetIfExistsAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-
-                var response = await _restClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _deploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<DeploymentExtended>(null, response.GetRawResponse())
                     : Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
@@ -239,18 +241,19 @@ namespace MgmtScopeResource
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string deploymentName, CancellationToken cancellationToken = default)
         {
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-
                 var response = GetIfExists(deploymentName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -263,18 +266,19 @@ namespace MgmtScopeResource
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.CheckIfExists");
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-
                 var response = await GetIfExistsAsync(deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -285,6 +289,9 @@ namespace MgmtScopeResource
             }
         }
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/
+        /// ContextualPath: /{scope}
+        /// OperationId: Deployments_ListAtScope
         /// <summary> Get all the deployments at the given scope. </summary>
         /// <param name="filter"> The filter to apply on the operation. For example, you can use $filter=provisioningState eq &apos;{state}&apos;. </param>
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
@@ -298,7 +305,7 @@ namespace MgmtScopeResource
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAtScope(Id, filter, top, cancellationToken: cancellationToken);
+                    var response = _deploymentsRestClient.ListAtScope(Id, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -313,7 +320,7 @@ namespace MgmtScopeResource
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAtScopeNextPage(nextLink, Id, filter, top, cancellationToken: cancellationToken);
+                    var response = _deploymentsRestClient.ListAtScopeNextPage(nextLink, Id, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -325,6 +332,9 @@ namespace MgmtScopeResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /{scope}/providers/Microsoft.Resources/deployments/
+        /// ContextualPath: /{scope}
+        /// OperationId: Deployments_ListAtScope
         /// <summary> Get all the deployments at the given scope. </summary>
         /// <param name="filter"> The filter to apply on the operation. For example, you can use $filter=provisioningState eq &apos;{state}&apos;. </param>
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
@@ -338,7 +348,7 @@ namespace MgmtScopeResource
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAtScopeAsync(Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _deploymentsRestClient.ListAtScopeAsync(Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -353,7 +363,7 @@ namespace MgmtScopeResource
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAtScopeNextPageAsync(nextLink, Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _deploymentsRestClient.ListAtScopeNextPageAsync(nextLink, Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtended(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -365,7 +375,22 @@ namespace MgmtScopeResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        IEnumerator<DeploymentExtended> IEnumerable<DeploymentExtended>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<DeploymentExtended> IAsyncEnumerable<DeploymentExtended>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, DeploymentExtended, DeploymentExtendedData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DeploymentExtended, DeploymentExtendedData> Construct() { }
     }
 }
