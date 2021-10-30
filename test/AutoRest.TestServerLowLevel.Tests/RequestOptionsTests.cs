@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure;
 using NUnit.Framework;
 using url_LowLevel;
 
@@ -28,16 +29,7 @@ namespace AutoRest.TestServer.Tests
         public Task RequestThrowsCanBeDisabled () => Test(host =>
         {
             PathsClient paths = new PathsClient(Key, host);
-            Assert.DoesNotThrowAsync(async () => await paths.EnumValidAsync("no color", new Azure.RequestOptions(Azure.ResponseStatusOption.NoThrow)));
-        }, ignoreScenario: true);
-
-        [Test]
-        public Task RequestCallback () => Test(async host =>
-        {
-            bool callbackInvoked = false;
-            PathsClient paths = new PathsClient(Key, host);
-            await paths.EnumValidAsync("green color", new Azure.RequestOptions(_ => callbackInvoked = true));
-            Assert.True(callbackInvoked);
+            Assert.DoesNotThrowAsync(async () => await paths.EnumValidAsync("no color", ErrorOptions.NoThrow));
         }, ignoreScenario: true);
     }
 }
