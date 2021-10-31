@@ -54,12 +54,12 @@ namespace RequestOptionsAllOptional_LowLevel
 
         /// <summary> No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="options"> The request options. </param>
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, RequestOptions options, int? top = null, int skip = 12, string status = "start")
+        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyResponseBody");
@@ -78,12 +78,12 @@ namespace RequestOptionsAllOptional_LowLevel
 
         /// <summary> No RequestBody and ResponseBody. </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="options"> The request options. </param>
         /// <param name="top"> Query parameter top. </param>
         /// <param name="skip"> Query parameter skip. </param>
         /// <param name="status"> Query parameter status. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response NoRequestBodyResponseBody(int id, RequestOptions options, int? top = null, int skip = 12, string status = "start")
+        public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestOptionsAllOptionalClient.NoRequestBodyResponseBody");

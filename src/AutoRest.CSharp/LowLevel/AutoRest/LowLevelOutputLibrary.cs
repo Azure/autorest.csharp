@@ -18,6 +18,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _codeModel = codeModel;
             _context = context;
+            UpdateListMethodNames();
             _restClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
         }
 
@@ -31,6 +32,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return restClients;
+        }
+
+        private void UpdateListMethodNames()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    operation.Language.Default.Name = operation.Language.Default.Name.RenameListToGet(operationGroup.Key.IsNullOrEmpty() ? _codeModel.Language.Default.Name.ReplaceLast("Client", "") : operationGroup.Key);
+                }
+            }
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)

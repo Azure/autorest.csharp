@@ -200,14 +200,14 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ListAsync(RequestOptions options)
+        public virtual async Task<Response> GetBodyAndPathsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.List");
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateListRequest();
+                using HttpMessage message = CreateGetBodyAndPathsRequest();
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -220,14 +220,14 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response List(RequestOptions options)
+        public virtual Response GetBodyAndPaths(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.List");
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateListRequest();
+                using HttpMessage message = CreateGetBodyAndPathsRequest();
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -240,14 +240,14 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all products. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ListItemsAsync(RequestOptions options)
+        public virtual async Task<Response> GetItemsAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.ListItems");
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateListItemsRequest();
+                using HttpMessage message = CreateGetItemsRequest();
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -260,14 +260,14 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all products. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ListItems(RequestOptions options)
+        public virtual Response GetItems(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.ListItems");
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateListItemsRequest();
+                using HttpMessage message = CreateGetItemsRequest();
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -334,7 +334,7 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateListRequest()
+        internal HttpMessage CreateGetBodyAndPathsRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -348,7 +348,7 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateListItemsRequest()
+        internal HttpMessage CreateGetItemsRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;

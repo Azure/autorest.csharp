@@ -309,5 +309,40 @@ namespace AutoRest.CSharp.Utilities
             var indent = new string(' ', indentation);
             return builder.Append(indent);
         }
+
+        //https://stackoverflow.com/a/8809437/294804
+        public static string ReplaceFirst(this string text, string oldValue, string newValue)
+        {
+            var position = text.IndexOf(oldValue, StringComparison.Ordinal);
+            return position < 0 ? text : text.Substring(0, position) + newValue + text.Substring(position + oldValue.Length);
+        }
+
+        public static string ReplaceLast(this string text, string oldValue, string newValue)
+        {
+            var position = text.LastIndexOf(oldValue, StringComparison.Ordinal);
+            return position < 0 ? text : text.Substring(0, position) + newValue + text.Substring(position + oldValue.Length);
+        }
+
+        public static string RenameListToGet(this string methodName, string resourceName)
+        {
+            var newName = methodName;
+            if (methodName.Equals("List") || methodName.Equals("ListAll"))
+            {
+                newName = $"Get{resourceName.ToPlural(inputIsKnownToBeSingular: false)}";
+            }
+            else if (methodName.StartsWith("ListBy"))
+            {
+                newName = methodName.ReplaceFirst("List", $"Get{resourceName.ToPlural(inputIsKnownToBeSingular: false)}");
+            }
+            else if (methodName.StartsWith("List"))
+            {
+                var words = methodName.SplitByCamelCase();
+                var lastNoun = words.LastOrDefault();
+                if (lastNoun != null && !words.Any(w => new HashSet<string> { "By", "With" }.Contains(w)))
+                    methodName = methodName.ReplaceLast(lastNoun, lastNoun.ToPlural(inputIsKnownToBeSingular: false));
+                newName = methodName.ReplaceFirst("List", "Get");
+            }
+            return newName;
+        }
     }
 }
