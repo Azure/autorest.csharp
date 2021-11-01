@@ -53,7 +53,7 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head200Async(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -73,7 +73,7 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual Response Head200(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -93,7 +93,7 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head204Async(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -113,7 +113,7 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual Response Head204(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -133,7 +133,7 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head404Async(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -153,7 +153,7 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual Response Head404(RequestContext context = null)
 #pragma warning restore AZC0002

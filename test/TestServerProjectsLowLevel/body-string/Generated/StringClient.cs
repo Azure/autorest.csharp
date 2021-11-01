@@ -53,7 +53,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null string value value. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -82,7 +82,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null string value value. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -112,7 +112,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value null. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -142,7 +142,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value null. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -171,7 +171,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get empty string value value &apos;&apos;. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -200,7 +200,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get empty string value value &apos;&apos;. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -230,7 +230,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -261,7 +261,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -291,7 +291,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -320,7 +320,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -350,7 +350,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -381,7 +381,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -411,7 +411,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -440,7 +440,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -470,7 +470,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -501,7 +501,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -531,7 +531,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get String value when no string value is sent in response payload. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -560,7 +560,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get String value when no string value is sent in response payload. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -589,7 +589,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64 encoded. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -618,7 +618,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64 encoded. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -647,7 +647,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64url encoded. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -676,7 +676,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64url encoded. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -706,7 +706,7 @@ namespace body_string_LowLevel
 
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -737,7 +737,7 @@ namespace body_string_LowLevel
 
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -767,7 +767,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -796,7 +796,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{

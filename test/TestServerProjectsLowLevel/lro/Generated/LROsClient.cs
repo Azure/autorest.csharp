@@ -54,7 +54,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -110,7 +110,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -166,7 +166,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -222,7 +222,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -278,7 +278,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -334,7 +334,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -389,7 +389,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -431,7 +431,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -474,7 +474,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -530,7 +530,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -586,7 +586,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -642,7 +642,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -698,7 +698,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -754,7 +754,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -810,7 +810,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -866,7 +866,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -922,7 +922,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -978,7 +978,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1034,7 +1034,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1090,7 +1090,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1146,7 +1146,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1202,7 +1202,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1258,7 +1258,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1314,7 +1314,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1370,7 +1370,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1426,7 +1426,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1482,7 +1482,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1538,7 +1538,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1594,7 +1594,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1650,7 +1650,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1706,7 +1706,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1762,7 +1762,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1818,7 +1818,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1860,7 +1860,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1902,7 +1902,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1944,7 +1944,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1986,7 +1986,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2034,7 +2034,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2082,7 +2082,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2130,7 +2130,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2177,7 +2177,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2219,7 +2219,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2261,7 +2261,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2303,7 +2303,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2345,7 +2345,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2387,7 +2387,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2429,7 +2429,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete succeeds and returns right away. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2458,7 +2458,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete succeeds and returns right away. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2487,7 +2487,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2529,7 +2529,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2571,7 +2571,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2613,7 +2613,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2655,7 +2655,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2684,7 +2684,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2713,7 +2713,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2742,7 +2742,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2771,7 +2771,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2800,7 +2800,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2829,7 +2829,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2858,7 +2858,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2887,7 +2887,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2916,7 +2916,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2945,7 +2945,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2974,7 +2974,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3003,7 +3003,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3038,7 +3038,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3074,7 +3074,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3117,7 +3117,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3160,7 +3160,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3216,7 +3216,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3271,7 +3271,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3313,7 +3313,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3355,7 +3355,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3397,7 +3397,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3439,7 +3439,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3481,7 +3481,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3524,7 +3524,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3580,7 +3580,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3636,7 +3636,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3692,7 +3692,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3748,7 +3748,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3791,7 +3791,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3834,7 +3834,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3877,7 +3877,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{

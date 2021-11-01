@@ -57,7 +57,7 @@ namespace custom_baseUrl_LowLevel
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -88,7 +88,7 @@ namespace custom_baseUrl_LowLevel
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:

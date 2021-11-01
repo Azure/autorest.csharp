@@ -53,7 +53,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -82,7 +82,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -111,7 +111,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -140,7 +140,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -169,7 +169,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -198,7 +198,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{

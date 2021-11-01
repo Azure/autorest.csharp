@@ -55,7 +55,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -85,7 +85,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -115,7 +115,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -145,7 +145,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -175,7 +175,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -205,7 +205,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{

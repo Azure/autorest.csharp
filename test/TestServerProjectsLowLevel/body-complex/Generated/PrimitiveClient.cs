@@ -53,7 +53,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with integer properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -88,7 +88,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with integer properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -124,7 +124,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -161,7 +161,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -197,7 +197,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with long properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -232,7 +232,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with long properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -268,7 +268,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -305,7 +305,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -341,7 +341,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with float properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -376,7 +376,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with float properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -412,7 +412,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -449,7 +449,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -485,7 +485,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with double properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -520,7 +520,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with double properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -556,7 +556,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -593,7 +593,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -629,7 +629,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with bool properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -664,7 +664,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with bool properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -700,7 +700,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -737,7 +737,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -773,7 +773,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with string properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -809,7 +809,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with string properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -846,7 +846,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -884,7 +884,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -921,7 +921,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with date properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -956,7 +956,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with date properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -992,7 +992,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1029,7 +1029,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1065,7 +1065,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1100,7 +1100,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1136,7 +1136,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1173,7 +1173,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1209,7 +1209,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1244,7 +1244,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1280,7 +1280,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1317,7 +1317,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1353,7 +1353,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with duration properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1387,7 +1387,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with duration properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1422,7 +1422,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1458,7 +1458,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1493,7 +1493,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with byte properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1527,7 +1527,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with byte properties. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1562,7 +1562,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1598,7 +1598,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:

@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static readonly CSharpType RequestContextParameterType = new(typeof(RequestContext), true);
 
-        private static readonly Parameter RequestContextParameter = new("context", "The request options", RequestContextParameterType, Constant.Default(RequestContextParameterType), false);
+        private static readonly Parameter RequestContextParameter = new("context", "The request context", RequestContextParameterType, Constant.Default(RequestContextParameterType), false);
         private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
         private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
         private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);

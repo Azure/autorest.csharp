@@ -14,7 +14,7 @@ namespace Azure.Core
     {
         public static async ValueTask<Response> ProcessMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, CancellationToken cancellationToken = default)
         {
-            var (userCt, statusOption) = ApplyRequestOptions(requestContext, message);
+            var (userCt, statusOption) = ApplyRequestContext(requestContext, message);
             if (!userCt.CanBeCanceled || !cancellationToken.CanBeCanceled)
             {
                 await pipeline.SendAsync(message, cancellationToken.CanBeCanceled ? cancellationToken : userCt).ConfigureAwait(false);
@@ -35,7 +35,7 @@ namespace Azure.Core
 
         public static Response ProcessMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, CancellationToken cancellationToken = default)
         {
-            var (userCt, statusOption) = ApplyRequestOptions(requestContext, message);
+            var (userCt, statusOption) = ApplyRequestContext(requestContext, message);
             if (!userCt.CanBeCanceled || !cancellationToken.CanBeCanceled)
             {
                 pipeline.Send(message, cancellationToken.CanBeCanceled ? cancellationToken : userCt);
@@ -56,7 +56,7 @@ namespace Azure.Core
 
         public static async ValueTask<Response<bool>> ProcessHeadAsBoolMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
         {
-            var (cancellationToken, statusOption) = ApplyRequestOptions(requestContext, message);
+            var (cancellationToken, statusOption) = ApplyRequestContext(requestContext, message);
             await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -77,7 +77,7 @@ namespace Azure.Core
 
         public static Response<bool> ProcessHeadAsBoolMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
         {
-            var (cancellationToken, statusOption) = ApplyRequestOptions(requestContext, message);
+            var (cancellationToken, statusOption) = ApplyRequestContext(requestContext, message);
             pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -96,7 +96,7 @@ namespace Azure.Core
             }
         }
 
-        private static (CancellationToken CancellationToken, ErrorOptions ErrorOptions) ApplyRequestOptions(RequestContext? requestContext, HttpMessage message)
+        private static (CancellationToken CancellationToken, ErrorOptions ErrorOptions) ApplyRequestContext(RequestContext? requestContext, HttpMessage message)
         {
             if (requestContext == null)
             {

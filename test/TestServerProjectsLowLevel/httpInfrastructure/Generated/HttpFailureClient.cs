@@ -53,7 +53,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -82,7 +82,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -111,7 +111,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -131,7 +131,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual Response GetNoModelError(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -151,7 +151,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty response from server. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
@@ -171,7 +171,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty response from server. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
         public virtual Response GetNoModelEmpty(RequestContext context = null)
 #pragma warning restore AZC0002

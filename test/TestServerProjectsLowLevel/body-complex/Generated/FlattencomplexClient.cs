@@ -52,7 +52,7 @@ namespace body_complex_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -83,7 +83,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{

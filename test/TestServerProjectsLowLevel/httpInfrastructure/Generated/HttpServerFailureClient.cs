@@ -53,7 +53,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -82,7 +82,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -111,7 +111,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -140,7 +140,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -170,7 +170,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -200,7 +200,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -230,7 +230,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -260,7 +260,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
