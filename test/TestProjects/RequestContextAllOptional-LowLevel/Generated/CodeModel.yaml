@@ -1,7 +1,7 @@
 !CodeModel 
 info: !Info 
   description: Test
-  title: RequestOptionsAllOptional
+  title: RequestContextAllOptional
 schemas: !Schemas 
   numbers:
     - !NumberSchema &ref_4
@@ -494,7 +494,7 @@ security: !Security
       headerName: Fake-Subscription-Key
 language: !Languages 
   default:
-    name: RequestOptionsAllOptional
+    name: RequestContextAllOptional
     description: ''
 protocol: !Protocols 
   http: !HttpModel {}

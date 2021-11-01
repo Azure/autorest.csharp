@@ -53,7 +53,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get null array value. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -64,7 +64,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
@@ -72,7 +72,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -82,7 +82,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get null array value. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -93,7 +93,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNull(RequestOptions options = null)
+        public virtual Response GetNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
@@ -101,7 +101,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -111,7 +111,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get invalid array [1, 2, 3. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -122,7 +122,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetInvalidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
@@ -130,7 +130,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetInvalidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -140,7 +140,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get invalid array [1, 2, 3. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -151,7 +151,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetInvalid(RequestOptions options = null)
+        public virtual Response GetInvalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
@@ -159,7 +159,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetInvalidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get empty array value []. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -180,7 +180,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -188,7 +188,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get empty array value []. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -209,7 +209,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmpty(RequestOptions options = null)
+        public virtual Response GetEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -217,7 +217,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -228,7 +228,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value empty []. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -240,7 +240,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
@@ -248,7 +248,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -259,7 +259,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value empty []. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -271,7 +271,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutEmpty(RequestContent content, RequestOptions options = null)
+        public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
@@ -279,7 +279,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -289,7 +289,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [true, false, false, true]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -300,7 +300,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBooleanTfftAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetBooleanTfftAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
@@ -308,7 +308,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanTfftRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -318,7 +318,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [true, false, false, true]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -329,7 +329,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBooleanTfft(RequestOptions options = null)
+        public virtual Response GetBooleanTfft(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
@@ -337,7 +337,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanTfftRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -348,7 +348,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value empty [true, false, false, true]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -360,7 +360,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutBooleanTfftAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutBooleanTfftAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
@@ -368,7 +368,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutBooleanTfftRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -379,7 +379,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value empty [true, false, false, true]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -391,7 +391,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutBooleanTfft(RequestContent content, RequestOptions options = null)
+        public virtual Response PutBooleanTfft(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
@@ -399,7 +399,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutBooleanTfftRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -409,7 +409,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [true, null, false]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -420,7 +420,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
@@ -428,7 +428,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanInvalidNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -438,7 +438,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [true, null, false]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -449,7 +449,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBooleanInvalidNull(RequestOptions options = null)
+        public virtual Response GetBooleanInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
@@ -457,7 +457,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanInvalidNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -467,7 +467,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -478,7 +478,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
@@ -486,7 +486,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanInvalidStringRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -496,7 +496,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -507,7 +507,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBooleanInvalidString(RequestOptions options = null)
+        public virtual Response GetBooleanInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
@@ -515,7 +515,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBooleanInvalidStringRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -525,7 +525,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -536,7 +536,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntegerValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetIntegerValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
@@ -544,7 +544,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntegerValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -554,7 +554,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -565,7 +565,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetIntegerValid(RequestOptions options = null)
+        public virtual Response GetIntegerValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
@@ -573,7 +573,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntegerValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -584,7 +584,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -596,7 +596,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutIntegerValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutIntegerValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
@@ -604,7 +604,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutIntegerValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -615,7 +615,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -627,7 +627,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutIntegerValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutIntegerValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
@@ -635,7 +635,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutIntegerValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -645,7 +645,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [1, null, 0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -656,7 +656,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntInvalidNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetIntInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
@@ -664,7 +664,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntInvalidNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -674,7 +674,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [1, null, 0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -685,7 +685,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetIntInvalidNull(RequestOptions options = null)
+        public virtual Response GetIntInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
@@ -693,7 +693,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntInvalidNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -703,7 +703,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -714,7 +714,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntInvalidStringAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetIntInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
@@ -722,7 +722,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntInvalidStringRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -732,7 +732,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -743,7 +743,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetIntInvalidString(RequestOptions options = null)
+        public virtual Response GetIntInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
@@ -751,7 +751,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetIntInvalidStringRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -761,7 +761,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -772,7 +772,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetLongValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetLongValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
@@ -780,7 +780,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetLongValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -790,7 +790,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -801,7 +801,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetLongValid(RequestOptions options = null)
+        public virtual Response GetLongValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
@@ -809,7 +809,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetLongValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -820,7 +820,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -832,7 +832,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutLongValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutLongValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
@@ -840,7 +840,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutLongValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -851,7 +851,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -863,7 +863,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutLongValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutLongValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
@@ -871,7 +871,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutLongValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -881,7 +881,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get long array value [1, null, 0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -892,7 +892,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetLongInvalidNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetLongInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
@@ -900,7 +900,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetLongInvalidNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -910,7 +910,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get long array value [1, null, 0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -921,7 +921,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetLongInvalidNull(RequestOptions options = null)
+        public virtual Response GetLongInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
@@ -929,7 +929,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetLongInvalidNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -939,7 +939,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -950,7 +950,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetLongInvalidStringAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetLongInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
@@ -958,7 +958,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetLongInvalidStringRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -968,7 +968,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -979,7 +979,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetLongInvalidString(RequestOptions options = null)
+        public virtual Response GetLongInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
@@ -987,7 +987,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetLongInvalidStringRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -997,7 +997,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1008,7 +1008,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFloatValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetFloatValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
@@ -1016,7 +1016,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFloatValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1026,7 +1026,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1037,7 +1037,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFloatValid(RequestOptions options = null)
+        public virtual Response GetFloatValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
@@ -1045,7 +1045,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFloatValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1056,7 +1056,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1068,7 +1068,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutFloatValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutFloatValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
@@ -1076,7 +1076,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutFloatValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1087,7 +1087,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1099,7 +1099,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutFloatValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutFloatValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
@@ -1107,7 +1107,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutFloatValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1117,7 +1117,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1128,7 +1128,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFloatInvalidNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetFloatInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
@@ -1136,7 +1136,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFloatInvalidNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1146,7 +1146,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1157,7 +1157,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFloatInvalidNull(RequestOptions options = null)
+        public virtual Response GetFloatInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
@@ -1165,7 +1165,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFloatInvalidNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1175,7 +1175,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1186,7 +1186,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFloatInvalidStringAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetFloatInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
@@ -1194,7 +1194,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFloatInvalidStringRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1204,7 +1204,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1215,7 +1215,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFloatInvalidString(RequestOptions options = null)
+        public virtual Response GetFloatInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
@@ -1223,7 +1223,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFloatInvalidStringRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1233,7 +1233,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1244,7 +1244,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDoubleValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDoubleValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
@@ -1252,7 +1252,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDoubleValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1262,7 +1262,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1273,7 +1273,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDoubleValid(RequestOptions options = null)
+        public virtual Response GetDoubleValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
@@ -1281,7 +1281,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDoubleValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1292,7 +1292,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1304,7 +1304,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDoubleValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutDoubleValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
@@ -1312,7 +1312,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDoubleValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1323,7 +1323,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1335,7 +1335,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutDoubleValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutDoubleValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
@@ -1343,7 +1343,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDoubleValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1353,7 +1353,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1364,7 +1364,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
@@ -1372,7 +1372,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDoubleInvalidNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1382,7 +1382,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1393,7 +1393,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDoubleInvalidNull(RequestOptions options = null)
+        public virtual Response GetDoubleInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
@@ -1401,7 +1401,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDoubleInvalidNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1411,7 +1411,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1422,7 +1422,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
@@ -1430,7 +1430,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDoubleInvalidStringRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1440,7 +1440,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1451,7 +1451,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDoubleInvalidString(RequestOptions options = null)
+        public virtual Response GetDoubleInvalidString(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
@@ -1459,7 +1459,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDoubleInvalidStringRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1469,7 +1469,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1480,7 +1480,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetStringValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
@@ -1488,7 +1488,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1498,7 +1498,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1509,7 +1509,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetStringValid(RequestOptions options = null)
+        public virtual Response GetStringValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
@@ -1517,7 +1517,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1528,7 +1528,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1540,7 +1540,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutStringValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutStringValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
@@ -1548,7 +1548,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutStringValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1559,7 +1559,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1571,7 +1571,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutStringValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutStringValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
@@ -1579,7 +1579,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutStringValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1589,7 +1589,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1600,7 +1600,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEnumValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetEnumValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
@@ -1608,7 +1608,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEnumValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1618,7 +1618,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1629,7 +1629,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEnumValid(RequestOptions options = null)
+        public virtual Response GetEnumValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
@@ -1637,7 +1637,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEnumValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1648,7 +1648,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1660,7 +1660,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutEnumValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutEnumValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
@@ -1668,7 +1668,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutEnumValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1679,7 +1679,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1691,7 +1691,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutEnumValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutEnumValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
@@ -1699,7 +1699,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutEnumValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1709,7 +1709,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1720,7 +1720,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringEnumValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetStringEnumValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
@@ -1728,7 +1728,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringEnumValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1738,7 +1738,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1749,7 +1749,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetStringEnumValid(RequestOptions options = null)
+        public virtual Response GetStringEnumValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
@@ -1757,7 +1757,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringEnumValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1768,7 +1768,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1780,7 +1780,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutStringEnumValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutStringEnumValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
@@ -1788,7 +1788,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutStringEnumValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1799,7 +1799,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1811,7 +1811,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutStringEnumValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutStringEnumValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
@@ -1819,7 +1819,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutStringEnumValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1829,7 +1829,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1840,7 +1840,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringWithNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetStringWithNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
@@ -1848,7 +1848,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringWithNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1858,7 +1858,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1869,7 +1869,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetStringWithNull(RequestOptions options = null)
+        public virtual Response GetStringWithNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
@@ -1877,7 +1877,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringWithNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1887,7 +1887,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1898,7 +1898,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringWithInvalidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetStringWithInvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
@@ -1906,7 +1906,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringWithInvalidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1916,7 +1916,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1927,7 +1927,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetStringWithInvalid(RequestOptions options = null)
+        public virtual Response GetStringWithInvalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
@@ -1935,7 +1935,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetStringWithInvalidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1945,7 +1945,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1956,7 +1956,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetUuidValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetUuidValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
@@ -1964,7 +1964,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetUuidValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1974,7 +1974,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1985,7 +1985,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetUuidValid(RequestOptions options = null)
+        public virtual Response GetUuidValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
@@ -1993,7 +1993,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetUuidValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2004,7 +2004,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2016,7 +2016,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutUuidValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutUuidValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
@@ -2024,7 +2024,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutUuidValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2035,7 +2035,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2047,7 +2047,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutUuidValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutUuidValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
@@ -2055,7 +2055,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutUuidValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2065,7 +2065,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2076,7 +2076,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
@@ -2084,7 +2084,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetUuidInvalidCharsRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2094,7 +2094,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2105,7 +2105,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetUuidInvalidChars(RequestOptions options = null)
+        public virtual Response GetUuidInvalidChars(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
@@ -2113,7 +2113,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetUuidInvalidCharsRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2123,7 +2123,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2134,7 +2134,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDateValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
@@ -2142,7 +2142,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2152,7 +2152,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2163,7 +2163,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateValid(RequestOptions options = null)
+        public virtual Response GetDateValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
@@ -2171,7 +2171,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2182,7 +2182,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2194,7 +2194,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDateValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutDateValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
@@ -2202,7 +2202,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDateValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2213,7 +2213,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2225,7 +2225,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutDateValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutDateValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
@@ -2233,7 +2233,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDateValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2243,7 +2243,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2254,7 +2254,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateInvalidNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDateInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
@@ -2262,7 +2262,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateInvalidNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2272,7 +2272,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2283,7 +2283,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateInvalidNull(RequestOptions options = null)
+        public virtual Response GetDateInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
@@ -2291,7 +2291,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateInvalidNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2301,7 +2301,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2312,7 +2312,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateInvalidCharsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDateInvalidCharsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
@@ -2320,7 +2320,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateInvalidCharsRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2330,7 +2330,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2341,7 +2341,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateInvalidChars(RequestOptions options = null)
+        public virtual Response GetDateInvalidChars(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
@@ -2349,7 +2349,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateInvalidCharsRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2359,7 +2359,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2370,7 +2370,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDateTimeValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
@@ -2378,7 +2378,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2388,7 +2388,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2399,7 +2399,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTimeValid(RequestOptions options = null)
+        public virtual Response GetDateTimeValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
@@ -2407,7 +2407,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2418,7 +2418,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2430,7 +2430,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDateTimeValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutDateTimeValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
@@ -2438,7 +2438,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDateTimeValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2449,7 +2449,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2461,7 +2461,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutDateTimeValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutDateTimeValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
@@ -2469,7 +2469,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDateTimeValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2479,7 +2479,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2490,7 +2490,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
@@ -2498,7 +2498,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeInvalidNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2508,7 +2508,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2519,7 +2519,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTimeInvalidNull(RequestOptions options = null)
+        public virtual Response GetDateTimeInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
@@ -2527,7 +2527,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeInvalidNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2537,7 +2537,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2548,7 +2548,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
@@ -2556,7 +2556,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeInvalidCharsRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2566,7 +2566,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2577,7 +2577,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTimeInvalidChars(RequestOptions options = null)
+        public virtual Response GetDateTimeInvalidChars(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
@@ -2585,7 +2585,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeInvalidCharsRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2595,7 +2595,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2606,7 +2606,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
@@ -2614,7 +2614,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeRfc1123ValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2624,7 +2624,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2635,7 +2635,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDateTimeRfc1123Valid(RequestOptions options = null)
+        public virtual Response GetDateTimeRfc1123Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
@@ -2643,7 +2643,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDateTimeRfc1123ValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2654,7 +2654,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2666,7 +2666,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDateTimeRfc1123ValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutDateTimeRfc1123ValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
@@ -2674,7 +2674,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDateTimeRfc1123ValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2685,7 +2685,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2697,7 +2697,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutDateTimeRfc1123Valid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutDateTimeRfc1123Valid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
@@ -2705,7 +2705,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDateTimeRfc1123ValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2715,7 +2715,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2726,7 +2726,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDurationValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDurationValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
@@ -2734,7 +2734,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDurationValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2744,7 +2744,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2755,7 +2755,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDurationValid(RequestOptions options = null)
+        public virtual Response GetDurationValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
@@ -2763,7 +2763,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDurationValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2774,7 +2774,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2786,7 +2786,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDurationValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutDurationValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
@@ -2794,7 +2794,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDurationValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2805,7 +2805,7 @@ namespace body_array_LowLevel
 
         /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2817,7 +2817,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutDurationValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutDurationValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
@@ -2825,7 +2825,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDurationValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2835,7 +2835,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2846,7 +2846,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetByteValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetByteValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
@@ -2854,7 +2854,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetByteValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2864,7 +2864,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2875,7 +2875,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetByteValid(RequestOptions options = null)
+        public virtual Response GetByteValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
@@ -2883,7 +2883,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetByteValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2894,7 +2894,7 @@ namespace body_array_LowLevel
 
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2906,7 +2906,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutByteValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutByteValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
@@ -2914,7 +2914,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutByteValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2925,7 +2925,7 @@ namespace body_array_LowLevel
 
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -2937,7 +2937,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutByteValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutByteValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
@@ -2945,7 +2945,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutByteValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -2955,7 +2955,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2966,7 +2966,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetByteInvalidNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetByteInvalidNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
@@ -2974,7 +2974,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetByteInvalidNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2984,7 +2984,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2995,7 +2995,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetByteInvalidNull(RequestOptions options = null)
+        public virtual Response GetByteInvalidNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
@@ -3003,7 +3003,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetByteInvalidNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3013,7 +3013,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3024,7 +3024,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBase64UrlAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetBase64UrlAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
@@ -3032,7 +3032,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64UrlRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3042,7 +3042,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3053,7 +3053,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBase64Url(RequestOptions options = null)
+        public virtual Response GetBase64Url(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
@@ -3061,7 +3061,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64UrlRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3071,7 +3071,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array of complex type null value. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3088,7 +3088,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComplexNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
@@ -3096,7 +3096,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3106,7 +3106,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array of complex type null value. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3123,7 +3123,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexNull(RequestOptions options = null)
+        public virtual Response GetComplexNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
@@ -3131,7 +3131,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3141,7 +3141,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get empty array of complex type []. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3158,7 +3158,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComplexEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
@@ -3166,7 +3166,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3176,7 +3176,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get empty array of complex type []. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3193,7 +3193,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexEmpty(RequestOptions options = null)
+        public virtual Response GetComplexEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
@@ -3201,7 +3201,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3211,7 +3211,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3228,7 +3228,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexItemNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComplexItemNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
@@ -3236,7 +3236,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexItemNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3246,7 +3246,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3263,7 +3263,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexItemNull(RequestOptions options = null)
+        public virtual Response GetComplexItemNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
@@ -3271,7 +3271,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexItemNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3281,7 +3281,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3298,7 +3298,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexItemEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComplexItemEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
@@ -3306,7 +3306,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexItemEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3316,7 +3316,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3333,7 +3333,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexItemEmpty(RequestOptions options = null)
+        public virtual Response GetComplexItemEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
@@ -3341,7 +3341,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexItemEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3351,7 +3351,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3368,7 +3368,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplexValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComplexValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
@@ -3376,7 +3376,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3386,7 +3386,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3403,7 +3403,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplexValid(RequestOptions options = null)
+        public virtual Response GetComplexValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
@@ -3411,7 +3411,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplexValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3422,7 +3422,7 @@ namespace body_array_LowLevel
 
         /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -3440,7 +3440,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutComplexValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutComplexValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
@@ -3448,7 +3448,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutComplexValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3459,7 +3459,7 @@ namespace body_array_LowLevel
 
         /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -3477,7 +3477,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutComplexValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutComplexValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
@@ -3485,7 +3485,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutComplexValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3495,7 +3495,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get a null array. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3506,7 +3506,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetArrayNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
@@ -3514,7 +3514,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3524,7 +3524,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get a null array. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3535,7 +3535,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayNull(RequestOptions options = null)
+        public virtual Response GetArrayNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
@@ -3543,7 +3543,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3553,7 +3553,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an empty array []. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3564,7 +3564,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetArrayEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
@@ -3572,7 +3572,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3582,7 +3582,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an empty array []. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3593,7 +3593,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayEmpty(RequestOptions options = null)
+        public virtual Response GetArrayEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
@@ -3601,7 +3601,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3611,7 +3611,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3622,7 +3622,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayItemNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetArrayItemNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
@@ -3630,7 +3630,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayItemNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3640,7 +3640,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3651,7 +3651,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayItemNull(RequestOptions options = null)
+        public virtual Response GetArrayItemNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
@@ -3659,7 +3659,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayItemNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3669,7 +3669,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3680,7 +3680,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayItemEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetArrayItemEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
@@ -3688,7 +3688,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayItemEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3698,7 +3698,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3709,7 +3709,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayItemEmpty(RequestOptions options = null)
+        public virtual Response GetArrayItemEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
@@ -3717,7 +3717,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayItemEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3727,7 +3727,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3738,7 +3738,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetArrayValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetArrayValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
@@ -3746,7 +3746,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3756,7 +3756,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3767,7 +3767,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetArrayValid(RequestOptions options = null)
+        public virtual Response GetArrayValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
@@ -3775,7 +3775,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetArrayValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3786,7 +3786,7 @@ namespace body_array_LowLevel
 
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -3798,7 +3798,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutArrayValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutArrayValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
@@ -3806,7 +3806,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutArrayValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3817,7 +3817,7 @@ namespace body_array_LowLevel
 
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -3829,7 +3829,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutArrayValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutArrayValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
@@ -3837,7 +3837,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutArrayValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3847,7 +3847,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries with value null. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3858,7 +3858,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDictionaryNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
@@ -3866,7 +3866,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3876,7 +3876,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries with value null. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3887,7 +3887,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryNull(RequestOptions options = null)
+        public virtual Response GetDictionaryNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
@@ -3895,7 +3895,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3905,7 +3905,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3916,7 +3916,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDictionaryEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
@@ -3924,7 +3924,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3934,7 +3934,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3945,7 +3945,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryEmpty(RequestOptions options = null)
+        public virtual Response GetDictionaryEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
@@ -3953,7 +3953,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -3963,7 +3963,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -3974,7 +3974,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryItemNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDictionaryItemNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
@@ -3982,7 +3982,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryItemNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3992,7 +3992,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -4003,7 +4003,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryItemNull(RequestOptions options = null)
+        public virtual Response GetDictionaryItemNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
@@ -4011,7 +4011,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryItemNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -4021,7 +4021,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -4032,7 +4032,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
@@ -4040,7 +4040,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryItemEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -4050,7 +4050,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -4061,7 +4061,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryItemEmpty(RequestOptions options = null)
+        public virtual Response GetDictionaryItemEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
@@ -4069,7 +4069,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryItemEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -4079,7 +4079,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -4090,7 +4090,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDictionaryValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDictionaryValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
@@ -4098,7 +4098,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -4108,7 +4108,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -4119,7 +4119,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDictionaryValid(RequestOptions options = null)
+        public virtual Response GetDictionaryValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
@@ -4127,7 +4127,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDictionaryValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -4138,7 +4138,7 @@ namespace body_array_LowLevel
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -4150,7 +4150,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDictionaryValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutDictionaryValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
@@ -4158,7 +4158,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDictionaryValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -4169,7 +4169,7 @@ namespace body_array_LowLevel
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -4181,7 +4181,7 @@ namespace body_array_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutDictionaryValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutDictionaryValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
@@ -4189,7 +4189,7 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDictionaryValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

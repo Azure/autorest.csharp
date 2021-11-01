@@ -54,7 +54,7 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -66,7 +66,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestOptions options = null)
+        public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
@@ -74,7 +74,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamExistingKeyRequest(userAgent);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -85,7 +85,7 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -97,7 +97,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamExistingKey(string userAgent, RequestOptions options = null)
+        public virtual Response ParamExistingKey(string userAgent, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
@@ -105,7 +105,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamExistingKeyRequest(userAgent);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -115,7 +115,7 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -126,7 +126,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseExistingKeyAsync(RequestOptions options = null)
+        public virtual async Task<Response> ResponseExistingKeyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
@@ -134,7 +134,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseExistingKeyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -144,7 +144,7 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -155,7 +155,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseExistingKey(RequestOptions options = null)
+        public virtual Response ResponseExistingKey(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
@@ -163,7 +163,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseExistingKeyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -174,7 +174,7 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -186,7 +186,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestOptions options = null)
+        public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
@@ -194,7 +194,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamProtectedKeyRequest(contentType);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -205,7 +205,7 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -217,7 +217,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamProtectedKey(string contentType, RequestOptions options = null)
+        public virtual Response ParamProtectedKey(string contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
@@ -225,7 +225,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamProtectedKeyRequest(contentType);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -235,7 +235,7 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -246,7 +246,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseProtectedKeyAsync(RequestOptions options = null)
+        public virtual async Task<Response> ResponseProtectedKeyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
@@ -254,7 +254,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseProtectedKeyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -264,7 +264,7 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -275,7 +275,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseProtectedKey(RequestOptions options = null)
+        public virtual Response ResponseProtectedKey(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
@@ -283,7 +283,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseProtectedKeyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -295,7 +295,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -307,7 +307,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestOptions options = null)
+        public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
@@ -315,7 +315,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamIntegerRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -327,7 +327,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -339,7 +339,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamInteger(string scenario, int value, RequestOptions options = null)
+        public virtual Response ParamInteger(string scenario, int value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
@@ -347,7 +347,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamIntegerRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -358,7 +358,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -370,7 +370,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
@@ -378,7 +378,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseIntegerRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -389,7 +389,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -401,7 +401,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseInteger(string scenario, RequestOptions options = null)
+        public virtual Response ResponseInteger(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
@@ -409,7 +409,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseIntegerRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -421,7 +421,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -433,7 +433,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestOptions options = null)
+        public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
@@ -441,7 +441,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamLongRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -453,7 +453,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -465,7 +465,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamLong(string scenario, long value, RequestOptions options = null)
+        public virtual Response ParamLong(string scenario, long value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
@@ -473,7 +473,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamLongRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -484,7 +484,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -496,7 +496,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseLongAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseLongAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
@@ -504,7 +504,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseLongRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -515,7 +515,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -527,7 +527,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseLong(string scenario, RequestOptions options = null)
+        public virtual Response ResponseLong(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
@@ -535,7 +535,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseLongRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -547,7 +547,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -559,7 +559,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestOptions options = null)
+        public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
@@ -567,7 +567,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamFloatRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -579,7 +579,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -591,7 +591,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamFloat(string scenario, float value, RequestOptions options = null)
+        public virtual Response ParamFloat(string scenario, float value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
@@ -599,7 +599,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamFloatRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -610,7 +610,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -622,7 +622,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
@@ -630,7 +630,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseFloatRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -641,7 +641,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -653,7 +653,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseFloat(string scenario, RequestOptions options = null)
+        public virtual Response ResponseFloat(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
@@ -661,7 +661,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseFloatRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -673,7 +673,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -685,7 +685,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestOptions options = null)
+        public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
@@ -693,7 +693,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDoubleRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -705,7 +705,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -717,7 +717,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamDouble(string scenario, double value, RequestOptions options = null)
+        public virtual Response ParamDouble(string scenario, double value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
@@ -725,7 +725,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDoubleRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -736,7 +736,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -748,7 +748,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
@@ -756,7 +756,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDoubleRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -767,7 +767,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -779,7 +779,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDouble(string scenario, RequestOptions options = null)
+        public virtual Response ResponseDouble(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
@@ -787,7 +787,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDoubleRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -799,7 +799,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -811,7 +811,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestOptions options = null)
+        public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
@@ -819,7 +819,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamBoolRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -831,7 +831,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -843,7 +843,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamBool(string scenario, bool value, RequestOptions options = null)
+        public virtual Response ParamBool(string scenario, bool value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
@@ -851,7 +851,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamBoolRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -862,7 +862,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -874,7 +874,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
@@ -882,7 +882,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseBoolRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -893,7 +893,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -905,7 +905,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseBool(string scenario, RequestOptions options = null)
+        public virtual Response ResponseBool(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
@@ -913,7 +913,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseBoolRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -925,7 +925,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -937,7 +937,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestOptions options = null)
+        public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
@@ -945,7 +945,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamStringRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -957,7 +957,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -969,7 +969,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamString(string scenario, string value = null, RequestOptions options = null)
+        public virtual Response ParamString(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
@@ -977,7 +977,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamStringRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -988,7 +988,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1000,7 +1000,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseStringAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseStringAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
@@ -1008,7 +1008,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseStringRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1019,7 +1019,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1031,7 +1031,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseString(string scenario, RequestOptions options = null)
+        public virtual Response ResponseString(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
@@ -1039,7 +1039,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseStringRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1051,7 +1051,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1063,7 +1063,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestOptions options = null)
+        public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
@@ -1071,7 +1071,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDateRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1083,7 +1083,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1095,7 +1095,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestOptions options = null)
+        public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
@@ -1103,7 +1103,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDateRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1114,7 +1114,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1126,7 +1126,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDateAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseDateAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
@@ -1134,7 +1134,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDateRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1145,7 +1145,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1157,7 +1157,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDate(string scenario, RequestOptions options = null)
+        public virtual Response ResponseDate(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
@@ -1165,7 +1165,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDateRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1177,7 +1177,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1189,7 +1189,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestOptions options = null)
+        public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
@@ -1197,7 +1197,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDatetimeRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1209,7 +1209,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1221,7 +1221,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestOptions options = null)
+        public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
@@ -1229,7 +1229,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDatetimeRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1240,7 +1240,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1252,7 +1252,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
@@ -1260,7 +1260,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1271,7 +1271,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1283,7 +1283,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDatetime(string scenario, RequestOptions options = null)
+        public virtual Response ResponseDatetime(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
@@ -1291,7 +1291,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1303,7 +1303,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1315,7 +1315,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestOptions options = null)
+        public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
@@ -1323,7 +1323,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1335,7 +1335,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1347,7 +1347,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestOptions options = null)
+        public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
@@ -1355,7 +1355,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1366,7 +1366,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1378,7 +1378,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
@@ -1386,7 +1386,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1397,7 +1397,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1409,7 +1409,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDatetimeRfc1123(string scenario, RequestOptions options = null)
+        public virtual Response ResponseDatetimeRfc1123(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
@@ -1417,7 +1417,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1429,7 +1429,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1441,7 +1441,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestOptions options = null)
+        public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
@@ -1449,7 +1449,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDurationRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1461,7 +1461,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1473,7 +1473,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamDuration(string scenario, TimeSpan value, RequestOptions options = null)
+        public virtual Response ParamDuration(string scenario, TimeSpan value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
@@ -1481,7 +1481,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamDurationRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1492,7 +1492,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1504,7 +1504,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
@@ -1512,7 +1512,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDurationRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1523,7 +1523,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1535,7 +1535,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDuration(string scenario, RequestOptions options = null)
+        public virtual Response ResponseDuration(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
@@ -1543,7 +1543,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseDurationRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1555,7 +1555,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1567,7 +1567,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestOptions options = null)
+        public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
@@ -1575,7 +1575,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamByteRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1587,7 +1587,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1599,7 +1599,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamByte(string scenario, byte[] value, RequestOptions options = null)
+        public virtual Response ParamByte(string scenario, byte[] value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
@@ -1607,7 +1607,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamByteRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1618,7 +1618,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1630,7 +1630,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseByteAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseByteAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
@@ -1638,7 +1638,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseByteRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1649,7 +1649,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1661,7 +1661,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseByte(string scenario, RequestOptions options = null)
+        public virtual Response ResponseByte(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
@@ -1669,7 +1669,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseByteRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1681,7 +1681,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1693,7 +1693,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestOptions options = null)
+        public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
@@ -1701,7 +1701,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamEnumRequest(scenario, value);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1713,7 +1713,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1725,7 +1725,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ParamEnum(string scenario, string value = null, RequestOptions options = null)
+        public virtual Response ParamEnum(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
@@ -1733,7 +1733,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateParamEnumRequest(scenario, value);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1744,7 +1744,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1756,7 +1756,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestOptions options = null)
+        public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
@@ -1764,7 +1764,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseEnumRequest(scenario);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1775,7 +1775,7 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -1787,7 +1787,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ResponseEnum(string scenario, RequestOptions options = null)
+        public virtual Response ResponseEnum(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
@@ -1795,7 +1795,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateResponseEnumRequest(scenario);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1805,7 +1805,7 @@ namespace header_LowLevel
         }
 
         /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1816,7 +1816,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CustomRequestIdAsync(RequestOptions options = null)
+        public virtual async Task<Response> CustomRequestIdAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
@@ -1824,7 +1824,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateCustomRequestIdRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1834,7 +1834,7 @@ namespace header_LowLevel
         }
 
         /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1845,7 +1845,7 @@ namespace header_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response CustomRequestId(RequestOptions options = null)
+        public virtual Response CustomRequestId(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
@@ -1853,7 +1853,7 @@ namespace header_LowLevel
             try
             {
                 using HttpMessage message = CreateCustomRequestIdRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

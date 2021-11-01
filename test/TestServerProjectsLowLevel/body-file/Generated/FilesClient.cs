@@ -53,7 +53,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -64,7 +64,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFileAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetFileAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -72,7 +72,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -82,7 +82,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -93,7 +93,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFile(RequestOptions options = null)
+        public virtual Response GetFile(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -101,7 +101,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -111,7 +111,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -122,7 +122,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetFileLargeAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetFileLargeAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -130,7 +130,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileLargeRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -140,7 +140,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -151,7 +151,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetFileLarge(RequestOptions options = null)
+        public virtual Response GetFileLarge(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -159,7 +159,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetFileLargeRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -180,7 +180,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyFileAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetEmptyFileAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
@@ -188,7 +188,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyFileRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -209,7 +209,7 @@ namespace body_file_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmptyFile(RequestOptions options = null)
+        public virtual Response GetEmptyFile(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
@@ -217,7 +217,7 @@ namespace body_file_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyFileRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

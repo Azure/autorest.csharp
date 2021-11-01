@@ -57,7 +57,7 @@ namespace custom_baseUrl_LowLevel
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -69,7 +69,7 @@ namespace custom_baseUrl_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyAsync(string accountName, RequestOptions options = null)
+        public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
@@ -77,7 +77,7 @@ namespace custom_baseUrl_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(accountName);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -88,7 +88,7 @@ namespace custom_baseUrl_LowLevel
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -100,7 +100,7 @@ namespace custom_baseUrl_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmpty(string accountName, RequestOptions options = null)
+        public virtual Response GetEmpty(string accountName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
@@ -108,7 +108,7 @@ namespace custom_baseUrl_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(accountName);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

@@ -19,7 +19,7 @@ namespace AutoRest.TestServer.Tests
             ParameterInfo[] parameters = typeof(BodyAndPathClient).GetMethod("Create").GetParameters();
             Assert.AreEqual(typeof(string), parameters[0].ParameterType);
             Assert.AreEqual(typeof(RequestContent), parameters[1].ParameterType);
-            Assert.AreEqual(typeof(RequestOptions), parameters[2].ParameterType);
+            Assert.AreEqual(typeof(RequestContext), parameters[2].ParameterType);
         }
 
         [Test]
