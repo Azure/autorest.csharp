@@ -34,11 +34,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        public static RequestPath GetScopePath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
-        {
-            return operationSet.GetRequestPath(context).GetScopePath();
-        }
-
         /// <summary>
         /// Returns true if this request path is a parameterized scope, like the "/{scope}" in "/{scope}/providers/M.C/virtualMachines/{vmName}"
         /// </summary>
@@ -69,21 +64,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return new RequestPath(requestPath.Take(indexOfProvider));
         }
 
-        //public static bool IsScopeResource(this Operation operation, BuildContext<MgmtOutputLibrary> context)
-        //{
-        //    return operation.TryGetScopeResourceTypes(context, out _);
-        //}
-
-        //public static bool TryGetScopeResourceTypes(this Operation operation, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out ResourceType[] resourceTypes)
-        //{
-        //    if (_scopeCache.TryGetValue(operation, out resourceTypes))
-        //        return resourceTypes != null;
-
-        //    resourceTypes = GetScopeResourceTypes(operation, context);
-        //    _scopeCache.TryAdd(operation, resourceTypes);
-        //    return resourceTypes != null;
-        //}
-
         public static ResourceType[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
         {
             if (_scopeTypesCache.TryGetValue(requestPath, out var result))
@@ -102,21 +82,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
             // otherwise we just assume this is scope and this scope could be anything
             return new[] { ResourceType.Subscription, ResourceType.ResourceGroup, ResourceType.ManagementGroup, ResourceType.Tenant, ResourceType.Any };
-        }
-
-        public static RequestPath? GetRequestPath(this ResourceType resourceType)
-        {
-            if (resourceType == ResourceType.Subscription)
-                return RequestPath.Subscription;
-            if (resourceType == ResourceType.ResourceGroup)
-                return RequestPath.ResourceGroup;
-            if (resourceType == ResourceType.ManagementGroup)
-                return RequestPath.ManagementGroup;
-            if (resourceType == ResourceType.Tenant)
-                return RequestPath.Tenant;
-            if (resourceType == ResourceType.Any)
-                return RequestPath.Any;
-            return null;
         }
 
         private static ResourceType BuildResourceType(string resourceType) => resourceType switch

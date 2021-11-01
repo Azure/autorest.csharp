@@ -29,9 +29,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                     return false;
                 if (!operation.IsGetResourceOperation(responseBodyType, resourceData, _context))
                     return false;
-                // if we are a GET for a resource, we do not need to check whether this is a singleton. This condition is included above
-                //if (OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
-                //    return false;
 
                 return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
             };

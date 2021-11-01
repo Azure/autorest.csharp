@@ -32,9 +32,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
             }
+
+            DefaultName = _lroInfo.ClientPrefix.ToSingular() + _operation.CSharpName() + "Operation";
         }
 
-        protected override string DefaultName => _lroInfo.ClientPrefix.ToSingular() + _operation.CSharpName() + "Operation";
+        protected override string DefaultName { get; }
 
         protected override string DefaultNamespace => _defaultNamespace ??= $"{base.DefaultNamespace}.Models";
 

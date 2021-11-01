@@ -14,41 +14,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class MethodExtensions
     {
-        public static IEnumerable<Segment> GetExtraScopes(RequestPath operationRequestPath, RequestPath contextualPath)
-        {
-            // the contextual request path must be the parent of the request path of this operation
-            // for instance we have operation path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild
-            // we will get "providers/Microsoft.Fake/locations/{location}/nonResourceChild"
-            // An exception happens in the scope resources. The parameterized scope might be the contextual path of an operation,
-            // but it literally is not the parent of the corresponding operation.
-            // Here to unify these two cases, we just trim the scope out before we compare the diff
-            var diff = contextualPath.TrimAncestorFrom(operationRequestPath);
-            // remove the "providers" segment and its value
-            // we will get "locations/{location}/nonResourceChild"
-            var extraScope = RemoveProviders(diff)
-                        // remove the last segment, which is the thing that we are listing
-                        // we will get "locations/{location}"
-                        .SkipLast(1)
-                        // we only keep the "keys" which has even index
-                        // we will get "locations"
-                        .Where((_, index) => index % 2 == 0);
-
-            return extraScope;
-        }
-
-        private static IEnumerable<Segment> RemoveProviders(IEnumerable<Segment> diff)
-        {
-            var index = diff.ToList().IndexOf(Segment.Providers);
-            if (index < 0)
-                return diff;
-
-            // remove the providers segment and its value
-            var result = new List<Segment>();
-            result.AddRange(diff.Take(index));
-            result.AddRange(diff.Skip(index + 2));
-            return result;
-        }
-
         /// <summary>
         /// Return true if this operation is a list method. Also returns the itemType and a collection of <see cref="Segment"/> as the extra scope
         /// For instance, /subscriptions/{}/providers/M.F/fakes will give you an empty collection for extra scope

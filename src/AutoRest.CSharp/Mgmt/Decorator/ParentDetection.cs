@@ -40,13 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
-            var result = new List<MgmtTypeProvider>();
-            foreach (var resourceOperationSet in resource.OperationSets)
-            {
-                result.AddRange(resourceOperationSet.GetParent(context));
-            }
-
-            return result;
+            return resource.OperationSets.SelectMany(resourceOperationSet => resourceOperationSet.GetParent(context));
         }
 
         private static IEnumerable<MgmtTypeProvider> GetParent(this OperationSet resourceOperationSet, BuildContext<MgmtOutputLibrary> context)
