@@ -98,12 +98,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // Categorize the operation group with their operation paths
             CategorizeOperationGroups();
 
-            DecorateOperationGroup();
+            // Decorate the operation sets to see if it corresponds to a resource
+            DecorateOperationSets();
         }
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
 
         public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= _resourceDataSchemaNameToOperationSets.SelectMany(pair => pair.Value);
+
         /// <summary>
         /// Returns the full list of the operation sets in this swagger
         /// </summary>
@@ -115,34 +117,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public IDictionary<Operation, RestClientMethod> RestClientMethods => EnsureRestClientMethods();
-        //public IDictionary<RestClientMethod, ClientMethod> ClientMethods => EnsureClientMethods();
+
         public IDictionary<RestClientMethod, PagingMethod> PagingMethods => EnsurePagingMethods();
 
-        private IDictionary<Operation, RestClientMethod>? _restClientMethods;
-        //private IDictionary<RestClientMethod, ClientMethod>? _clientMethods;
+
         private IDictionary<RestClientMethod, PagingMethod>? _pagingMethods;
-
-        // Current implementation does not require we have ClientMethods. RestClientMethod can do the same and even more - ClientMethods exclude the LRO methods.
-        //private IDictionary<RestClientMethod, ClientMethod> EnsureClientMethods()
-        //{
-        //    if (_clientMethods != null)
-        //        return _clientMethods;
-
-        //    _clientMethods = new Dictionary<RestClientMethod, ClientMethod>();
-        //    var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
-        //    foreach (var restClient in RestClients)
-        //    {
-        //        var methods = ClientBuilder.BuildMethods(restClient.OperationGroup, restClient, placeholder);
-        //        foreach (var method in methods)
-        //        {
-        //            _clientMethods.Add(method.RestClientMethod, method);
-        //        }
-        //    }
-
-        //    return _clientMethods;
-        //}
-
-        // but we still need PagingMethod to help us handle the paging mechanism
         private IDictionary<RestClientMethod, PagingMethod> EnsurePagingMethods()
         {
             if (_pagingMethods != null)
@@ -162,6 +141,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _pagingMethods;
         }
 
+        private IDictionary<Operation, RestClientMethod>? _restClientMethods;
         private IDictionary<Operation, RestClientMethod> EnsureRestClientMethods()
         {
             if (_restClientMethods != null)
@@ -696,23 +676,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private void DecorateOperationGroup()
+        private void DecorateOperationSets()
         {
             foreach (var operationSet in _rawRequestPathToOperationSets.Values)
             {
-                foreach (var operation in operationSet)
+                if (operationSet.TryGetResourceDataSchemaName(_mgmtConfiguration, out var resourceDataSchemaName))
                 {
-                    if (operationSet.TryGetResourceDataSchemaName(_mgmtConfiguration, out var resourceName))
+                    // if this operation set corresponds to a SDK resource, we add it to the map
+                    HashSet<OperationSet>? result;
+                    if (!_resourceDataSchemaNameToOperationSets.TryGetValue(resourceDataSchemaName, out result))
                     {
-                        // if this operation set corresponds to a SDK resource, we add it to the map
-                        HashSet<OperationSet>? result;
-                        if (!_resourceDataSchemaNameToOperationSets.TryGetValue(resourceName, out result))
-                        {
-                            result = new HashSet<OperationSet>();
-                            _resourceDataSchemaNameToOperationSets.Add(resourceName, result);
-                        }
-                        result.Add(operationSet);
+                        result = new HashSet<OperationSet>();
+                        _resourceDataSchemaNameToOperationSets.Add(resourceDataSchemaName, result);
                     }
+                    result.Add(operationSet);
                 }
             }
         }
