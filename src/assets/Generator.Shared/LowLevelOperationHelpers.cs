@@ -14,6 +14,7 @@ namespace Azure.Core
 {
     internal static class LowLevelOperationHelpers
     {
+#if EXPERIMENTAL
         public static async ValueTask<Operation<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext)
         {
             var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestContext).ConfigureAwait(false);
@@ -37,5 +38,6 @@ namespace Azure.Core
             var response = pipeline.ProcessMessage(message, clientDiagnostics, requestContext);
             return new LowLevelFuncOperation<Pageable<BinaryData>>(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName, r => PageableHelpers.CreatePageable((nl, ps) => createEnumerable(r, nl, ps), clientDiagnostics, scopeName));
         }
+#endif
     }
 }
