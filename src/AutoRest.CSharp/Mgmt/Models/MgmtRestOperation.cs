@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// We use the <see cref="OperationGroup"/> to get a fully quanlified name for this operation
         /// </summary>
         public OperationGroup OperationGroup => RestClient.OperationGroup;
-        public string OperationId => OperationGroup.Key.IsNullOrEmpty() ? Operation.Language.Default.Name : $"{OperationGroup.Key}_{Operation.Language.Default.Name}";
+        public string OperationId => BuildOperationId(OperationGroup, Operation);
         /// <summary>
         /// The name of this operation
         /// </summary>
@@ -62,6 +62,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
+        }
+
+        /// <summary>
+        /// Build "operation_id" property from OperationGroup and Operation
+        /// </summary>
+        /// <param name="operationGroup"></param>
+        /// <param name="operation"></param>
+        /// <returns>Original "operation_id" property</returns>
+        public static string BuildOperationId(OperationGroup operationGroup, Operation operation)
+        {
+            return operationGroup.Key.IsNullOrEmpty() ? operation.Language.Default.Name : $"{operationGroup.Key}_{operation.Language.Default.Name}";
         }
     }
 }
