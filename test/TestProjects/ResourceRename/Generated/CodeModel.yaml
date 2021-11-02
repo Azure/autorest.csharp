@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_10
       type: string
       apiVersions:
         - !ApiVersion 
@@ -73,8 +73,18 @@ schemas: !Schemas
             SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in
             Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
       protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SshPublicKeysGroupListResultNextLink
+          description: The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys.
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_8
+    - !ConstantSchema &ref_11
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -84,17 +94,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_12
-      type: constant
-      value: !ConstantValue 
-        value: application/json
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: ApplicationJson
-          description: Content Type 'application/json'
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_14
+    - !ConstantSchema &ref_15
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -104,97 +104,153 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
+    - !ConstantSchema &ref_18
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_13
+    - !ObjectSchema &ref_17
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: *ref_1
-          readOnly: true
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_2
-          readOnly: true
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_3
-          readOnly: true
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property &ref_16
-          schema: !ObjectSchema &ref_6
-            type: object
+          schema: !ArraySchema &ref_9
+            type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            properties:
-              - !Property 
-                schema: *ref_4
-                serializedName: path
-                language: !Languages 
-                  default:
-                    name: path
-                    description: 'Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys'
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_5
-                serializedName: keyData
-                language: !Languages 
-                  default:
-                    name: keyData
-                    description: >-
-                      SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs
-                      in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
+            elementType: !ObjectSchema &ref_7
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2020-06-01'
+              properties:
+                - !Property 
+                  schema: *ref_1
+                  readOnly: true
+                  serializedName: id
+                  language: !Languages 
+                    default:
+                      name: id
+                      description: ''
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_2
+                  readOnly: true
+                  serializedName: type
+                  language: !Languages 
+                    default:
+                      name: type
+                      description: ''
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_3
+                  readOnly: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: ''
+                  protocol: !Protocols {}
+                - !Property &ref_20
+                  schema: !ObjectSchema &ref_8
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: '2020-06-01'
+                    properties:
+                      - !Property 
+                        schema: *ref_4
+                        serializedName: path
+                        language: !Languages 
+                          default:
+                            name: path
+                            description: 'Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys'
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_5
+                        serializedName: keyData
+                        language: !Languages 
+                          default:
+                            name: keyData
+                            description: >-
+                              SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for
+                              Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - output
+                      - input
+                    language: !Languages 
+                      default:
+                        name: SshPublicKeyProperties
+                        description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
+                        namespace: ''
+                    protocol: !Protocols {}
+                  serializedName: properties
+                  language: !Languages 
+                    default:
+                      name: properties
+                      description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - input
+                - output
+              language: !Languages 
+                default:
+                  name: SshPublicKeyInfo
+                  description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
+                  namespace: ''
+              protocol: !Protocols {}
             language: !Languages 
               default:
-                name: SshPublicKeyProperties
-                description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
-                namespace: ''
+                name: SshPublicKeysGroupListResultValue
+                description: The list of SSH public keys
             protocol: !Protocols {}
-          serializedName: properties
+          required: true
+          serializedName: value
           language: !Languages 
             default:
-              name: properties
-              description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
+              name: value
+              description: The list of SSH public keys
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_6
+          required: false
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys.
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
-        - input
         - output
       language: !Languages 
         default:
-          name: SshPublicKeyInfo
-          description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
+          name: SshPublicKeysGroupListResult
+          description: The list SSH public keys operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_6
+    - *ref_7
+    - *ref_8
+  arrays:
+    - *ref_9
 globalParameters:
-  - !Parameter &ref_11
-    schema: *ref_7
+  - !Parameter &ref_14
+    schema: *ref_10
     implementation: Client
     required: true
     extensions:
@@ -207,7 +263,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_9
+  - !Parameter &ref_12
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -223,8 +279,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_10
-    schema: *ref_8
+  - !Parameter &ref_13
+    schema: *ref_11
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -245,9 +301,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_9
-          - !Parameter &ref_18
-            schema: *ref_7
+          - *ref_12
+          - !Parameter &ref_16
+            schema: *ref_10
             implementation: Method
             required: true
             language: !Languages 
@@ -258,8 +314,80 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_19
-            schema: *ref_7
+          - *ref_13
+          - *ref_14
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_15
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_16
+        responses:
+          - !SchemaResponse 
+            schema: *ref_17
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListByResourceGroup
+            description: Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_12
+          - !Parameter &ref_22
+            schema: *ref_10
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_23
+            schema: *ref_10
             implementation: Method
             required: true
             language: !Languages 
@@ -270,13 +398,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_10
-          - *ref_11
+          - *ref_13
+          - *ref_14
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_12
+                schema: *ref_18
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -288,8 +416,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_15
-                schema: *ref_13
+              - !Parameter &ref_19
+                schema: *ref_7
                 flattened: true
                 implementation: Method
                 required: true
@@ -302,7 +430,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_15
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -314,19 +442,19 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_17
-                schema: *ref_6
+              - !VirtualParameter &ref_21
+                schema: *ref_8
                 implementation: Method
-                originalParameter: *ref_15
+                originalParameter: *ref_19
                 pathToProperty: []
-                targetProperty: *ref_16
+                targetProperty: *ref_20
                 language: !Languages 
                   default:
                     name: properties
                     description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_17
+              - *ref_21
             language: !Languages 
               default:
                 name: ''
@@ -340,11 +468,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_18
-          - *ref_19
+          - *ref_22
+          - *ref_23
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''
@@ -357,7 +485,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''
@@ -379,9 +507,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_9
-          - !Parameter &ref_20
-            schema: *ref_7
+          - *ref_12
+          - !Parameter &ref_24
+            schema: *ref_10
             implementation: Method
             required: true
             language: !Languages 
@@ -392,8 +520,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_21
-            schema: *ref_7
+          - !Parameter &ref_25
+            schema: *ref_10
             implementation: Method
             required: true
             language: !Languages 
@@ -404,8 +532,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_10
-          - *ref_11
+          - *ref_13
+          - *ref_14
         requests:
           - !Request 
             language: !Languages 
@@ -418,8 +546,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_20
-          - *ref_21
+          - *ref_24
+          - *ref_25
         responses:
           - !Response 
             language: !Languages 
@@ -449,9 +577,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_9
-          - !Parameter &ref_22
-            schema: *ref_7
+          - *ref_12
+          - !Parameter &ref_26
+            schema: *ref_10
             implementation: Method
             required: true
             language: !Languages 
@@ -462,8 +590,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_23
-            schema: *ref_7
+          - !Parameter &ref_27
+            schema: *ref_10
             implementation: Method
             required: true
             language: !Languages 
@@ -474,13 +602,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_10
-          - *ref_11
+          - *ref_13
+          - *ref_14
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_15
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -503,11 +631,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_22
-          - *ref_23
+          - *ref_26
+          - *ref_27
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''

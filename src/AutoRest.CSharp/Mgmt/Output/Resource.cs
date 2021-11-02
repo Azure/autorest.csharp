@@ -264,7 +264,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         requestPath,
                         contextualPath,
                         methodName);
-                        
+
                     if (result.TryGetValue(key, out var list))
                     {
                         list.Add(restOperation);

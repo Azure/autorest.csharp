@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -20,7 +21,7 @@ using MgmtNonStringPathVariable.Models;
 namespace MgmtNonStringPathVariable
 {
     /// <summary> A class representing collection of Fake and their operations over its parent. </summary>
-    public partial class FakeCollection : ArmCollection
+    public partial class FakeCollection : ArmCollection, IEnumerable<Fake>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakesRestOperations _fakesRestClient;
@@ -247,22 +248,15 @@ namespace MgmtNonStringPathVariable
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Fakes_List
         /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<IReadOnlyList<Fake>> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<Fake>> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAll");
             scope.Start();
             try
             {
-                var response = _fakesRestClient.List(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
+                var response = _fakesRestClient.List(Id.ResourceGroupName, optionalParam, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new Fake(Parent, value)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -276,22 +270,15 @@ namespace MgmtNonStringPathVariable
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Fakes_List
         /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public async virtual Task<Response<IReadOnlyList<Fake>>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<Fake>>> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("FakeCollection.GetAll");
             scope.Start();
             try
             {
-                var response = await _fakesRestClient.ListAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
+                var response = await _fakesRestClient.ListAsync(Id.ResourceGroupName, optionalParam, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new Fake(Parent, value)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -345,6 +332,16 @@ namespace MgmtNonStringPathVariable
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        IEnumerator<Fake> IEnumerable<Fake>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
         }
 
         // Builders.

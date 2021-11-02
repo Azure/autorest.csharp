@@ -26,7 +26,7 @@ schemas: !Schemas
           name: FakePropertiesPlatformFaultDomainCount
           description: Fault Domain count.
       protocol: !Protocols {}
-    - !NumberSchema &ref_43
+    - !NumberSchema &ref_42
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -499,7 +499,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_15
-    - !ObjectSchema &ref_42
+    - !ObjectSchema &ref_41
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1039,18 +1039,6 @@ operationGroups:
           - !Parameter &ref_40
             schema: *ref_1
             implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: requiredParam
-                description: The expand expression to apply on the operation.
-                serializedName: requiredParam
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - !Parameter &ref_41
-            schema: *ref_1
-            implementation: Method
             language: !Languages 
               default:
                 name: optionalParam
@@ -1090,10 +1078,9 @@ operationGroups:
         signatureParameters:
           - *ref_39
           - *ref_40
-          - *ref_41
         responses:
           - !SchemaResponse 
-            schema: *ref_42
+            schema: *ref_41
             language: !Languages 
               default:
                 name: ''
@@ -1124,7 +1111,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_22
-          - !Parameter &ref_45
+          - !Parameter &ref_44
             schema: *ref_1
             implementation: Method
             required: true
@@ -1136,8 +1123,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_46
-            schema: *ref_43
+          - !Parameter &ref_45
+            schema: *ref_42
             implementation: Method
             required: true
             language: !Languages 
@@ -1166,7 +1153,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_44
+              - !Parameter &ref_43
                 schema: *ref_5
                 implementation: Method
                 required: true
@@ -1192,7 +1179,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_44
+              - *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -1206,8 +1193,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
+          - *ref_44
           - *ref_45
-          - *ref_46
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1248,7 +1235,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_22
-          - !Parameter &ref_48
+          - !Parameter &ref_47
             schema: *ref_1
             implementation: Method
             required: true
@@ -1260,8 +1247,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_49
-            schema: *ref_43
+          - !Parameter &ref_48
+            schema: *ref_42
             implementation: Method
             required: true
             language: !Languages 
@@ -1290,7 +1277,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_47
+              - !Parameter &ref_46
                 schema: *ref_16
                 implementation: Method
                 required: true
@@ -1316,7 +1303,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_47
+              - *ref_46
             language: !Languages 
               default:
                 name: ''
@@ -1330,8 +1317,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
+          - *ref_47
           - *ref_48
-          - *ref_49
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1372,7 +1359,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_22
-          - !Parameter &ref_50
+          - !Parameter &ref_49
             schema: *ref_1
             implementation: Method
             required: true
@@ -1384,8 +1371,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_51
-            schema: *ref_43
+          - !Parameter &ref_50
+            schema: *ref_42
             implementation: Method
             required: true
             language: !Languages 
@@ -1425,8 +1412,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_49
           - *ref_50
-          - *ref_51
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1452,7 +1439,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_22
-          - !Parameter &ref_52
+          - !Parameter &ref_51
             schema: *ref_1
             implementation: Method
             required: true
@@ -1464,8 +1451,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_53
-            schema: *ref_43
+          - !Parameter &ref_52
+            schema: *ref_42
             implementation: Method
             required: true
             language: !Languages 
@@ -1490,8 +1477,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
+          - *ref_51
           - *ref_52
-          - *ref_53
         responses:
           - !Response 
             language: !Languages 

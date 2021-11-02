@@ -6,9 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -18,7 +22,8 @@ using ResourceRename.Models;
 namespace ResourceRename
 {
     /// <summary> A class representing collection of SshPublicKeyInfo and their operations over its parent. </summary>
-    public partial class SshPublicKeyInfoCollection : ArmCollection
+    public partial class SshPublicKeyInfoCollection : ArmCollection, IEnumerable<SshPublicKeyInfo>, IAsyncEnumerable<SshPublicKeyInfo>
+
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SshPublicKeysRestOperations _sshPublicKeysRestClient;
@@ -271,6 +276,88 @@ namespace ResourceRename
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: SshPublicKeys_ListByResourceGroup
+        /// <summary> Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="SshPublicKeyInfo" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<SshPublicKeyInfo> GetAll(CancellationToken cancellationToken = default)
+        {
+            Page<SshPublicKeyInfo> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _sshPublicKeysRestClient.ListByResourceGroup(Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<SshPublicKeyInfo> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _sshPublicKeysRestClient.ListByResourceGroupNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: SshPublicKeys_ListByResourceGroup
+        /// <summary> Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="SshPublicKeyInfo" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<SshPublicKeyInfo> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<SshPublicKeyInfo>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _sshPublicKeysRestClient.ListByResourceGroupAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<SshPublicKeyInfo>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _sshPublicKeysRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyInfo(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
         /// <summary> Filters the list of <see cref="SshPublicKeyInfo" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -315,6 +402,21 @@ namespace ResourceRename
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        IEnumerator<SshPublicKeyInfo> IEnumerable<SshPublicKeyInfo>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<SshPublicKeyInfo> IAsyncEnumerable<SshPublicKeyInfo>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
 
         // Builders.

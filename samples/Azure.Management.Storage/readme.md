@@ -16,6 +16,10 @@ modelerfour:
   lenient-model-deduplication: true
   seal-single-value-enum-by-default: true
 
+list-exception:
+- /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}
+
 show-request-path: true
 
 directive:

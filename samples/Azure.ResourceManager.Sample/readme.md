@@ -12,6 +12,9 @@ public-clients: false
 head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
+
+list-exception:
+- /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
 show-request-path: true
 directive:
   - rename-model:

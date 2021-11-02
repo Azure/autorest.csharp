@@ -10,6 +10,9 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "ListException": [
+    "/{linkId}"
+  ],
   "RequestPathToParent": {
     "/{scope}/providers/Microsoft.Resources/links": "/{linkId}",
     "/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
