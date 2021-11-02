@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("sheep", "sheep")]
         [TestCase("people", "people", false)]
         [TestCase("child", "children")]
+        [TestCase("data", "data", false)]
         public void ValidatePluralize(string noun, string expected, bool inputIsKnownToBeSingle = true)
         {
             var plural = noun.ToPlural(inputIsKnownToBeSingle);
@@ -43,10 +44,11 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("sheep", "sheep")]
         [TestCase("people", "person")]
         [TestCase("children", "child")]
+        [TestCase("data", "data", false)]
         public void ValidateSingularize(string noun, string expected, bool inputIsKnownToBePlural = true)
         {
-            var plural = noun.ToSingular(inputIsKnownToBePlural);
-            Assert.AreEqual(expected, plural);
+            var singular = noun.ToSingular(inputIsKnownToBePlural);
+            Assert.AreEqual(expected, singular);
         }
 
         [TestCase("CamelCase", new[] { "Camel", "Case" })]
@@ -86,9 +88,19 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("ListTermsByGlossaryName", "Glossary", "GetTermsByGlossaryName")]
         [TestCase("ListMyListings", "Glossary", "GetMyListings")]
         [TestCase("ListBlobContainerBlob", "StorageBlob", "GetBlobContainerBlobs")]
+        [TestCase("List", "ApplicationData", "GetAllApplicationData")]
+        [TestCase("ListByFarmerId", "ApplicationData", "GetAllApplicationDataByFarmerId")]
         public void ValidateRenameListToGet(string methodName, string resourceName, string expected)
         {
             var result = methodName.RenameListToGet(resourceName);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase("Get", "ApplicationData", "GetApplicationData")]
+        [TestCase("GetMyData", "ApplicationData", "GetMyData")]
+        public void ValidateRenameGetMethod(string methodName, string resourceName, string expected)
+        {
+            var result = methodName.RenameGetMethod(resourceName);
             Assert.AreEqual(expected, result);
         }
 
