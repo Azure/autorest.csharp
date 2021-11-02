@@ -273,7 +273,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         restClient,
                         requestPath,
                         contextualPath,
-                        methodName); ;
+                        methodName);
 
 
                     if (result.TryGetValue(key, out var list))
