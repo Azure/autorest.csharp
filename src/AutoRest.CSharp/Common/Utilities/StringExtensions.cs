@@ -8,12 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Humanizer;
+using Humanizer.Inflections;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Utilities
 {
     internal static class StringExtensions
     {
+        static StringExtensions()
+        {
+            Vocabularies.Default.AddUncountable("data");
+        }
+
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
         public static bool IsNullOrWhiteSpace(this string? text) => String.IsNullOrWhiteSpace(text);
 
@@ -278,8 +284,26 @@ namespace AutoRest.CSharp.Utilities
             return single.Pluralize(inputIsKnownToBeSingular);
         }
 
+        private static string LastWordToPlural(this string single, bool inputIsKnownToBeSingular = true)
+        {
+            var words = single.SplitByCamelCase();
+            var lastWord = words.LastOrDefault();
+            if (lastWord != null)
+                return single.ReplaceLast(lastWord, lastWord.Pluralize(inputIsKnownToBeSingular));
+            return single.Pluralize(inputIsKnownToBeSingular);
+        }
+
         public static string ToSingular(this string plural, bool inputIsKnownToBePlural = true)
         {
+            return plural.Singularize(inputIsKnownToBePlural);
+        }
+
+        private static string LastWordToSingular(this string plural, bool inputIsKnownToBePlural = true)
+        {
+            var words = plural.SplitByCamelCase();
+            var lastWord = words.LastOrDefault();
+            if (lastWord != null)
+                return plural.ReplaceLast(lastWord, lastWord.Singularize(inputIsKnownToBePlural));
             return plural.Singularize(inputIsKnownToBePlural);
         }
 
@@ -326,23 +350,36 @@ namespace AutoRest.CSharp.Utilities
         public static string RenameListToGet(this string methodName, string resourceName)
         {
             var newName = methodName;
+            var pluralResourceName = resourceName.LastWordToPlural(inputIsKnownToBeSingular: false);
+            var getMethodPrefix = pluralResourceName == resourceName.LastWordToSingular(inputIsKnownToBePlural: false) ? "GetAll" : "Get";
             if (methodName.Equals("List") || methodName.Equals("ListAll"))
             {
-                newName = $"Get{resourceName.ToPlural(inputIsKnownToBeSingular: false)}";
+                newName = $"{getMethodPrefix}{pluralResourceName}";
             }
             else if (methodName.StartsWith("ListBy"))
             {
-                newName = methodName.ReplaceFirst("List", $"Get{resourceName.ToPlural(inputIsKnownToBeSingular: false)}");
+                newName = methodName.ReplaceFirst("List", $"{getMethodPrefix}{pluralResourceName}");
             }
             else if (methodName.StartsWith("List"))
             {
-                var words = methodName.SplitByCamelCase();
-                var lastNoun = words.LastOrDefault();
-                if (lastNoun != null && !words.Any(w => new HashSet<string>{"By", "With"}.Contains(w)))
-                    methodName = methodName.ReplaceLast(lastNoun, lastNoun.ToPlural(inputIsKnownToBeSingular: false));
-                newName = methodName.ReplaceFirst("List", "Get");
+                var words = newName.SplitByCamelCase();
+                // Cases like ListEntitiesAssignedWithTerm is difficult to parse which noun should be plural and will just make no changes to the nouns for now.
+                if (!words.Any(w => new HashSet<string> { "By", "With" }.Contains(w)))
+                {
+                    newName = newName.LastWordToPlural(inputIsKnownToBeSingular: false);
+                }
+                newName = newName.ReplaceFirst("List", getMethodPrefix);
             }
             return newName;
+        }
+
+        public static string RenameGetMethod(this string methodName, string resourceName)
+        {
+            if (methodName.Equals("Get"))
+            {
+                return $"Get{resourceName.LastWordToSingular(inputIsKnownToBePlural: false)}";
+            }
+            return methodName;
         }
     }
 }
