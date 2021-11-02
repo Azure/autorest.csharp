@@ -220,7 +220,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return _clientOperationMap;
 
             var result = new Dictionary<string, List<MgmtRestOperation>>();
-            var methodNames = new Dictionary<string, MgmtRestOperation>();
             foreach ((var operationSet, var operations) in _allOperationMap)
             {
                 var resourceRequestPath = operationSet.GetRequestPath(_context);
@@ -258,24 +257,14 @@ namespace AutoRest.CSharp.Mgmt.Output
                         contextualPath = GetContextualPath(operationSet, requestPath);
                         methodName = GetOperationName(operation, resourceRestClient);
                     }
-
-                    var restClient = _context.Library.GetRestClient(operation.GetHttpPath());
-
-                    // check duplicated names
-                    if (methodNames.TryGetValue(methodName, out MgmtRestOperation? duplicate))
-                    {
-                        ErrorHelpers.ThrowError($"Duplicated method name '{methodName}' is detected. Check operations '{duplicate.OperationId}' and '{MgmtRestOperation.BuildOperationId(restClient.OperationGroup, operation)}'. Consider to use directive 'rename-operation' to avoid conflicts.");
-                    }
-
                     // get the MgmtRestOperation with a proper name
                     var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
-                        restClient,
+                        _context.Library.GetRestClient(operation.GetHttpPath()),
                         requestPath,
                         contextualPath,
                         methodName);
-
-
+                        
                     if (result.TryGetValue(key, out var list))
                     {
                         list.Add(restOperation);
@@ -284,8 +273,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                     {
                         result.Add(key, new List<MgmtRestOperation> { restOperation });
                     }
-
-                    methodNames.Add(methodName, restOperation);
                 }
             }
 
