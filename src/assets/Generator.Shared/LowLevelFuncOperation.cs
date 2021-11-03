@@ -60,9 +60,9 @@ namespace Azure.Core
 
         ValueTask<T> IOperationSource<T>.CreateResultAsync(Response response, CancellationToken cancellationToken) => new ValueTask<T>(_resultSelector(response));
 
-        public static implicit operator LowLevelFuncOperation<T>(LowLevelFuncOperation<BinaryData> operation)
+        public static implicit operator OperationInternals(LowLevelFuncOperation<T> operation)
         {
-            return new LowLevelFuncOperation<T>((OperationInternals)(operation._operation), r => (T)(object)r);
+            return (OperationInternals)operation._operation;
         }
     }
 }
