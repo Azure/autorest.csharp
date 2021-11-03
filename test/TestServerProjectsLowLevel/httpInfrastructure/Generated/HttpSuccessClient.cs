@@ -51,7 +51,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -62,7 +62,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head200Async(RequestOptions options = null)
+        public virtual async Task<Response> Head200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -70,7 +70,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -91,7 +91,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Head200(RequestOptions options = null)
+        public virtual Response Head200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -99,7 +99,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get 200 success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -120,7 +120,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get200Async(RequestOptions options = null)
+        public virtual async Task<Response> Get200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
@@ -128,7 +128,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet200Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -138,7 +138,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get 200 success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -149,7 +149,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get200(RequestOptions options = null)
+        public virtual Response Get200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
@@ -157,7 +157,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet200Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -167,7 +167,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Options 200 success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -178,7 +178,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Options200Async(RequestOptions options = null)
+        public virtual async Task<Response> Options200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
@@ -186,7 +186,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions200Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Options 200 success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -207,7 +207,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Options200(RequestOptions options = null)
+        public virtual Response Options200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
@@ -215,7 +215,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions200Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -226,7 +226,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put boolean value true returning 200 success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -237,7 +237,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Put200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Put200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
@@ -245,7 +245,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -256,7 +256,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put boolean value true returning 200 success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -267,7 +267,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Put200(RequestContent content, RequestOptions options = null)
+        public virtual Response Put200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
@@ -275,7 +275,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -286,7 +286,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -297,7 +297,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Patch200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Patch200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
@@ -305,7 +305,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch200Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -316,7 +316,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -327,7 +327,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Patch200(RequestContent content, RequestOptions options = null)
+        public virtual Response Patch200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
@@ -335,7 +335,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch200Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -346,7 +346,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -357,7 +357,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Post200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
@@ -365,7 +365,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost200Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -376,7 +376,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -387,7 +387,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Post200(RequestContent content, RequestOptions options = null)
+        public virtual Response Post200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
@@ -395,7 +395,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost200Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -406,7 +406,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -417,7 +417,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Delete200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Delete200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
@@ -425,7 +425,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete200Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -436,7 +436,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -447,7 +447,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Delete200(RequestContent content, RequestOptions options = null)
+        public virtual Response Delete200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
@@ -455,7 +455,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete200Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -466,7 +466,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -477,7 +477,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Put201Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Put201Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
@@ -485,7 +485,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -496,7 +496,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -507,7 +507,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Put201(RequestContent content, RequestOptions options = null)
+        public virtual Response Put201(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
@@ -515,7 +515,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -526,7 +526,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -537,7 +537,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post201Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Post201Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
@@ -545,7 +545,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost201Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -556,7 +556,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -567,7 +567,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Post201(RequestContent content, RequestOptions options = null)
+        public virtual Response Post201(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
@@ -575,7 +575,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost201Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -586,7 +586,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -597,7 +597,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Put202Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Put202Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
@@ -605,7 +605,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut202Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -616,7 +616,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -627,7 +627,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Put202(RequestContent content, RequestOptions options = null)
+        public virtual Response Put202(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
@@ -635,7 +635,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut202Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -646,7 +646,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -657,7 +657,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Patch202Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Patch202Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
@@ -665,7 +665,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch202Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -676,7 +676,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -687,7 +687,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Patch202(RequestContent content, RequestOptions options = null)
+        public virtual Response Patch202(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
@@ -695,7 +695,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch202Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -706,7 +706,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -717,7 +717,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post202Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Post202Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
@@ -725,7 +725,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -736,7 +736,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -747,7 +747,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Post202(RequestContent content, RequestOptions options = null)
+        public virtual Response Post202(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
@@ -755,7 +755,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -766,7 +766,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -777,7 +777,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Delete202Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Delete202Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
@@ -785,7 +785,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -796,7 +796,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -807,7 +807,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Delete202(RequestContent content, RequestOptions options = null)
+        public virtual Response Delete202(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
@@ -815,7 +815,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -825,7 +825,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -836,7 +836,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head204Async(RequestOptions options = null)
+        public virtual async Task<Response> Head204Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -844,7 +844,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -854,7 +854,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -865,7 +865,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Head204(RequestOptions options = null)
+        public virtual Response Head204(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -873,7 +873,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -884,7 +884,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -895,7 +895,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Put204Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Put204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
@@ -903,7 +903,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut204Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -914,7 +914,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -925,7 +925,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Put204(RequestContent content, RequestOptions options = null)
+        public virtual Response Put204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
@@ -933,7 +933,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut204Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -944,7 +944,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -955,7 +955,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Patch204Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Patch204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
@@ -963,7 +963,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch204Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -974,7 +974,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -985,7 +985,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Patch204(RequestContent content, RequestOptions options = null)
+        public virtual Response Patch204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
@@ -993,7 +993,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch204Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1004,7 +1004,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1015,7 +1015,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post204Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Post204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
@@ -1023,7 +1023,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost204Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1034,7 +1034,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1045,7 +1045,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Post204(RequestContent content, RequestOptions options = null)
+        public virtual Response Post204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
@@ -1053,7 +1053,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost204Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1064,7 +1064,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1075,7 +1075,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Delete204Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Delete204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
@@ -1083,7 +1083,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete204Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1094,7 +1094,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1105,7 +1105,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Delete204(RequestContent content, RequestOptions options = null)
+        public virtual Response Delete204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
@@ -1113,7 +1113,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete204Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -1123,7 +1123,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 404 status code. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1134,7 +1134,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head404Async(RequestOptions options = null)
+        public virtual async Task<Response> Head404Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
@@ -1142,7 +1142,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1152,7 +1152,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 404 status code. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1163,7 +1163,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Head404(RequestOptions options = null)
+        public virtual Response Head404(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
@@ -1171,7 +1171,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

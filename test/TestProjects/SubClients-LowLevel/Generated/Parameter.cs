@@ -55,10 +55,10 @@ namespace SubClients_LowLevel
         }
 
         /// <param name="subParameter"> The String to use. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestOptions options = null)
+        public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
@@ -66,7 +66,7 @@ namespace SubClients_LowLevel
             try
             {
                 using HttpMessage message = CreateGetSubParameterRequest(subParameter);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -76,10 +76,10 @@ namespace SubClients_LowLevel
         }
 
         /// <param name="subParameter"> The String to use. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual Response GetSubParameter(string subParameter, RequestOptions options = null)
+        public virtual Response GetSubParameter(string subParameter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
@@ -87,7 +87,7 @@ namespace SubClients_LowLevel
             try
             {
                 using HttpMessage message = CreateGetSubParameterRequest(subParameter);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

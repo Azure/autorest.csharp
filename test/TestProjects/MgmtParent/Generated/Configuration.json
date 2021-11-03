@@ -18,5 +18,8 @@
   "OperationGroupToParent": {
     "VirtualMachineExtensionImages": "subscriptions",
     "DedicatedHosts": "Microsoft.Compute/hostGroups"
-  }
+  },
+  "ListException": [
+    "DedicatedHostGroups"
+  ]
 }

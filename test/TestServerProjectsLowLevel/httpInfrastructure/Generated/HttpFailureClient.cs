@@ -51,7 +51,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -62,7 +62,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyErrorAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetEmptyErrorAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
@@ -70,7 +70,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyErrorRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -91,7 +91,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmptyError(RequestOptions options = null)
+        public virtual Response GetEmptyError(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
@@ -99,7 +99,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyErrorRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -109,9 +109,9 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNoModelErrorAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -119,7 +119,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNoModelErrorRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -129,9 +129,9 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty error form server. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetNoModelError(RequestOptions options = null)
+        public virtual Response GetNoModelError(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -139,7 +139,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNoModelErrorRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -149,9 +149,9 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty response from server. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNoModelEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
@@ -159,7 +159,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNoModelEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -169,9 +169,9 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get empty response from server. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetNoModelEmpty(RequestOptions options = null)
+        public virtual Response GetNoModelEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
@@ -179,7 +179,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNoModelEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

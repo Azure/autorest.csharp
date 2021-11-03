@@ -3,7 +3,6 @@
 
 #nullable enable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
@@ -13,9 +12,9 @@ namespace Azure.Core
     internal static class HttpPipelineExtensions
     {
 #if EXPERIMENTAL
-        public static async ValueTask<Response> ProcessMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestOptions? requestOptions, CancellationToken cancellationToken = default)
+        public static async ValueTask<Response> ProcessMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, CancellationToken cancellationToken = default)
         {
-            var (userCt, statusOption) = ApplyRequestOptions(requestOptions, message);
+            var (userCt, statusOption) = ApplyRequestContext(requestContext);
             if (!userCt.CanBeCanceled || !cancellationToken.CanBeCanceled)
             {
                 await pipeline.SendAsync(message, cancellationToken.CanBeCanceled ? cancellationToken : userCt).ConfigureAwait(false);
@@ -26,7 +25,7 @@ namespace Azure.Core
                 await pipeline.SendAsync(message, cts.Token).ConfigureAwait(false);
             }
 
-            if (statusOption == ResponseStatusOption.NoThrow || !message.ResponseClassifier.IsErrorResponse(message))
+            if (statusOption == ErrorOptions.NoThrow || !message.ResponseClassifier.IsErrorResponse(message))
             {
                 return message.Response;
             }
@@ -34,9 +33,9 @@ namespace Azure.Core
             throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
         }
 
-        public static Response ProcessMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestOptions? requestOptions, CancellationToken cancellationToken = default)
+        public static Response ProcessMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, CancellationToken cancellationToken = default)
         {
-            var (userCt, statusOption) = ApplyRequestOptions(requestOptions, message);
+            var (userCt, statusOption) = ApplyRequestContext(requestContext);
             if (!userCt.CanBeCanceled || !cancellationToken.CanBeCanceled)
             {
                 pipeline.Send(message, cancellationToken.CanBeCanceled ? cancellationToken : userCt);
@@ -47,7 +46,7 @@ namespace Azure.Core
                 pipeline.Send(message, cts.Token);
             }
 
-            if (statusOption == ResponseStatusOption.NoThrow || !message.ResponseClassifier.IsErrorResponse(message))
+            if (statusOption == ErrorOptions.NoThrow || !message.ResponseClassifier.IsErrorResponse(message))
             {
                 return message.Response;
             }
@@ -55,9 +54,9 @@ namespace Azure.Core
             throw clientDiagnostics.CreateRequestFailedException(message.Response);
         }
 
-        public static async ValueTask<Response<bool>> ProcessHeadAsBoolMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestOptions? requestOptions)
+        public static async ValueTask<Response<bool>> ProcessHeadAsBoolMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
         {
-            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestOptions).ConfigureAwait(false);
+            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestContext).ConfigureAwait(false);
             switch (response.Status)
             {
                 case >= 200 and < 300:
@@ -70,9 +69,9 @@ namespace Azure.Core
             }
         }
 
-        public static Response<bool> ProcessHeadAsBoolMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestOptions? requestOptions)
+        public static Response<bool> ProcessHeadAsBoolMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
         {
-            var response = pipeline.ProcessMessage(message, clientDiagnostics, requestOptions);
+            var response = pipeline.ProcessMessage(message, clientDiagnostics, requestContext);
             switch (response.Status)
             {
                 case >= 200 and < 300:
@@ -85,15 +84,14 @@ namespace Azure.Core
             }
         }
 
-        private static (CancellationToken CancellationToken, ResponseStatusOption StatusOption) ApplyRequestOptions(RequestOptions? requestOptions, HttpMessage message)
+        private static (CancellationToken CancellationToken, ErrorOptions ErrorOptions) ApplyRequestContext(RequestContext? requestContext)
         {
-            if (requestOptions == null)
+            if (requestContext == null)
             {
-                return (CancellationToken.None, ResponseStatusOption.Default);
+                return (CancellationToken.None, ErrorOptions.Default);
             }
 
-            RequestOptions.Apply(requestOptions, message);
-            return (requestOptions.CancellationToken, requestOptions.StatusOption);
+            return (requestContext.CancellationToken, requestContext.ErrorOptions);
         }
 #endif
     }

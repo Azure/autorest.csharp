@@ -29,9 +29,9 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter : ClientWriter
     {
-        private static readonly CSharpType RequestOptionsParameterType = new(typeof(RequestOptions), true);
+        private static readonly CSharpType RequestContextParameterType = new(typeof(RequestContext), true);
 
-        private static readonly Parameter RequestOptionsParameter = new("options", "The request options", RequestOptionsParameterType, Constant.Default(RequestOptionsParameterType), false);
+        private static readonly Parameter RequestContextParameter = new("context", "The request context", RequestContextParameterType, Constant.Default(RequestContextParameterType), false);
         private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
         private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
         private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);
@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         ? headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessageAsync)
                         : headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage) : nameof(HttpPipelineExtensions.ProcessMessage);
 
-                    writer.AppendRaw("return ").WriteMethodCall(async, $"{client.PipelineField.Name}.{methodName}", $"{messageVariable}, {ClientDiagnosticsField}, {RequestOptionsParameter.Name:I}");
+                    writer.AppendRaw("return ").WriteMethodCall(async, $"{client.PipelineField.Name}.{methodName}", $"{messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}");
                 }
             }
             writer.Line();
@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     var pageVariable = new CodeWriterDeclaration("page");
-                    FormattableString processMessageMethodParameters = $"{PipelineField:I}, {messageVariable}, {ClientDiagnosticsField}, {RequestOptionsParameter.Name:I}, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
+                    FormattableString processMessageMethodParameters = $"{PipelineField:I}, {messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
 
                     if (nextPageMethod == null)
                     {
@@ -314,8 +314,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     var processMessageParameters = isPageable
-                        ? (FormattableString)$"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {RequestOptionsParameter.Name:I}, {createEnumerableMethod:D}"
-                        : (FormattableString)$"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {RequestOptionsParameter.Name:I}";
+                        ? (FormattableString)$"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {RequestContextParameter.Name:I}, {createEnumerableMethod:D}"
+                        : (FormattableString)$"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {RequestContextParameter.Name:I}";
 
                     writer
                         .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
@@ -351,7 +351,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             var messageVariable = new CodeWriterDeclaration("message");
                             writer.Line($"var {messageVariable:D} = Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
 
-                            FormattableString pageableProcessMessageParameters = $"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {RequestOptionsParameter.Name:I}, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
+                            FormattableString pageableProcessMessageParameters = $"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
 
                             writer
                                 .Append($"{pageVariable} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, pageableProcessMessageParameters)
@@ -467,7 +467,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, RestClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, CSharpType returnType, bool async)
         {
-            var parameters = clientMethod.Parameters.Append(RequestOptionsParameter);
+            var parameters = clientMethod.Parameters.Append(RequestContextParameter);
             var asyncText = (async && (clientMethod.Operation.Language.Default.Paging == null || clientMethod.Operation.IsLongRunning)) ? " async" : string.Empty;
             var methodSignature = new MethodSignature(CreateMethodName(clientMethod.Name, async), clientMethod.Description, $"{clientMethod.Accessibility} virtual{asyncText}", returnType, null, parameters.ToArray());
 

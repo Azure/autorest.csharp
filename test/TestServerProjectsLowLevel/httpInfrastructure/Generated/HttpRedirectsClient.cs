@@ -51,7 +51,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -62,7 +62,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head300Async(RequestOptions options = null)
+        public virtual async Task<Response> Head300Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
@@ -70,7 +70,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead300Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -91,7 +91,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Head300(RequestOptions options = null)
+        public virtual Response Head300(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
@@ -99,7 +99,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead300Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -120,7 +120,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get300Async(RequestOptions options = null)
+        public virtual async Task<Response> Get300Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
@@ -128,7 +128,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet300Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -138,7 +138,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -149,7 +149,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get300(RequestOptions options = null)
+        public virtual Response Get300(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
@@ -157,7 +157,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet300Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -167,7 +167,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -178,7 +178,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head301Async(RequestOptions options = null)
+        public virtual async Task<Response> Head301Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
@@ -186,7 +186,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead301Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -207,7 +207,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Head301(RequestOptions options = null)
+        public virtual Response Head301(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
@@ -215,7 +215,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead301Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -225,7 +225,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -236,7 +236,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get301Async(RequestOptions options = null)
+        public virtual async Task<Response> Get301Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
@@ -244,7 +244,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet301Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -254,7 +254,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -265,7 +265,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get301(RequestOptions options = null)
+        public virtual Response Get301(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
@@ -273,7 +273,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet301Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -284,7 +284,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -295,7 +295,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Put301Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Put301Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
@@ -303,7 +303,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut301Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -314,7 +314,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -325,7 +325,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Put301(RequestContent content, RequestOptions options = null)
+        public virtual Response Put301(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
@@ -333,7 +333,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut301Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -343,7 +343,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -354,7 +354,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head302Async(RequestOptions options = null)
+        public virtual async Task<Response> Head302Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
@@ -362,7 +362,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead302Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -372,7 +372,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -383,7 +383,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Head302(RequestOptions options = null)
+        public virtual Response Head302(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
@@ -391,7 +391,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead302Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -401,7 +401,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -412,7 +412,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get302Async(RequestOptions options = null)
+        public virtual async Task<Response> Get302Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
@@ -420,7 +420,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet302Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -430,7 +430,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -441,7 +441,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get302(RequestOptions options = null)
+        public virtual Response Get302(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
@@ -449,7 +449,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet302Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -460,7 +460,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -471,7 +471,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Patch302Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Patch302Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
@@ -479,7 +479,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch302Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -490,7 +490,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -501,7 +501,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Patch302(RequestContent content, RequestOptions options = null)
+        public virtual Response Patch302(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
@@ -509,7 +509,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch302Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -520,7 +520,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -531,7 +531,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post303Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Post303Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
@@ -539,7 +539,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost303Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -550,7 +550,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -561,7 +561,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Post303(RequestContent content, RequestOptions options = null)
+        public virtual Response Post303(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
@@ -569,7 +569,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost303Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -579,7 +579,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Redirect with 307, resulting in a 200 success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -590,7 +590,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head307Async(RequestOptions options = null)
+        public virtual async Task<Response> Head307Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
@@ -598,7 +598,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead307Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -608,7 +608,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Redirect with 307, resulting in a 200 success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -619,7 +619,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Head307(RequestOptions options = null)
+        public virtual Response Head307(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
@@ -627,7 +627,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead307Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -637,7 +637,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Redirect get with 307, resulting in a 200 success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -648,7 +648,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Get307Async(RequestOptions options = null)
+        public virtual async Task<Response> Get307Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
@@ -656,7 +656,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet307Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -666,7 +666,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Redirect get with 307, resulting in a 200 success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -677,7 +677,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Get307(RequestOptions options = null)
+        public virtual Response Get307(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
@@ -685,7 +685,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet307Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -695,7 +695,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> options redirected with 307, resulting in a 200 after redirect. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -706,7 +706,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Options307Async(RequestOptions options = null)
+        public virtual async Task<Response> Options307Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
@@ -714,7 +714,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions307Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -724,7 +724,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> options redirected with 307, resulting in a 200 after redirect. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -735,7 +735,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Options307(RequestOptions options = null)
+        public virtual Response Options307(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
@@ -743,7 +743,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions307Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -754,7 +754,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -765,7 +765,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Put307Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Put307Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
@@ -773,7 +773,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut307Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -784,7 +784,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -795,7 +795,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Put307(RequestContent content, RequestOptions options = null)
+        public virtual Response Put307(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
@@ -803,7 +803,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut307Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -814,7 +814,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -825,7 +825,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Patch307Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Patch307Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
@@ -833,7 +833,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch307Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -844,7 +844,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -855,7 +855,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Patch307(RequestContent content, RequestOptions options = null)
+        public virtual Response Patch307(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
@@ -863,7 +863,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch307Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -874,7 +874,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -885,7 +885,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post307Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Post307Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
@@ -893,7 +893,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost307Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -904,7 +904,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -915,7 +915,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Post307(RequestContent content, RequestOptions options = null)
+        public virtual Response Post307(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
@@ -923,7 +923,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost307Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -934,7 +934,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -945,7 +945,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Delete307Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> Delete307Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
@@ -953,7 +953,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete307Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -964,7 +964,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -975,7 +975,7 @@ namespace httpInfrastructure_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response Delete307(RequestContent content, RequestOptions options = null)
+        public virtual Response Delete307(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
@@ -983,7 +983,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete307Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

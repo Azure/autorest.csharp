@@ -51,7 +51,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -70,7 +70,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetValid");
@@ -78,7 +78,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -88,7 +88,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -107,7 +107,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetValid(RequestOptions options = null)
+        public virtual Response GetValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetValid");
@@ -115,7 +115,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -126,7 +126,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -146,7 +146,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
@@ -154,7 +154,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -165,7 +165,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -185,7 +185,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
@@ -193,7 +193,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -203,7 +203,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -220,7 +220,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDotSyntaxAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetDotSyntaxAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
@@ -228,7 +228,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDotSyntaxRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -238,7 +238,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -255,7 +255,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDotSyntax(RequestOptions options = null)
+        public virtual Response GetDotSyntax(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
@@ -263,7 +263,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetDotSyntaxRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -273,7 +273,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -300,7 +300,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
@@ -308,7 +308,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithDiscriminatorRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -318,7 +318,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -345,7 +345,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComposedWithDiscriminator(RequestOptions options = null)
+        public virtual Response GetComposedWithDiscriminator(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
@@ -353,7 +353,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithDiscriminatorRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -363,7 +363,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -390,7 +390,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
@@ -398,7 +398,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -408,7 +408,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -435,7 +435,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComposedWithoutDiscriminator(RequestOptions options = null)
+        public virtual Response GetComposedWithoutDiscriminator(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
@@ -443,7 +443,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -453,7 +453,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -481,7 +481,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetComplicatedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetComplicatedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
@@ -489,7 +489,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplicatedRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -499,7 +499,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -527,7 +527,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetComplicated(RequestOptions options = null)
+        public virtual Response GetComplicated(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
@@ -535,7 +535,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetComplicatedRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -546,7 +546,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -575,7 +575,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutComplicatedAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutComplicatedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
@@ -583,7 +583,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutComplicatedRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -594,7 +594,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -623,7 +623,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutComplicated(RequestContent content, RequestOptions options = null)
+        public virtual Response PutComplicated(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
@@ -631,7 +631,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutComplicatedRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -642,7 +642,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -688,7 +688,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
@@ -696,7 +696,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutMissingDiscriminatorRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -707,7 +707,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -753,7 +753,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutMissingDiscriminator(RequestContent content, RequestOptions options = null)
+        public virtual Response PutMissingDiscriminator(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
@@ -761,7 +761,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutMissingDiscriminatorRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -772,7 +772,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -792,7 +792,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
@@ -800,7 +800,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidMissingRequiredRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -811,7 +811,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -831,7 +831,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutValidMissingRequired(RequestContent content, RequestOptions options = null)
+        public virtual Response PutValidMissingRequired(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
@@ -839,7 +839,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidMissingRequiredRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

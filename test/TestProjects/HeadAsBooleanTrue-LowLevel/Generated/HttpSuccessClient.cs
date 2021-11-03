@@ -51,9 +51,9 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response<bool>> Head200Async(RequestOptions options = null)
+        public virtual async Task<Response<bool>> Head200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -61,7 +61,7 @@ namespace HeadAsBooleanTrue_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request();
-                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -71,9 +71,9 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response<bool> Head200(RequestOptions options = null)
+        public virtual Response<bool> Head200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -81,7 +81,7 @@ namespace HeadAsBooleanTrue_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request();
-                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -91,9 +91,9 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response<bool>> Head204Async(RequestOptions options = null)
+        public virtual async Task<Response<bool>> Head204Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -101,7 +101,7 @@ namespace HeadAsBooleanTrue_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request();
-                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -111,9 +111,9 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response<bool> Head204(RequestOptions options = null)
+        public virtual Response<bool> Head204(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -121,7 +121,7 @@ namespace HeadAsBooleanTrue_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request();
-                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -131,9 +131,9 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response<bool>> Head404Async(RequestOptions options = null)
+        public virtual async Task<Response<bool>> Head404Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
@@ -141,7 +141,7 @@ namespace HeadAsBooleanTrue_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request();
-                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -151,9 +151,9 @@ namespace HeadAsBooleanTrue_LowLevel
         }
 
         /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response<bool> Head404(RequestOptions options = null)
+        public virtual Response<bool> Head404(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
@@ -161,7 +161,7 @@ namespace HeadAsBooleanTrue_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request();
-                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

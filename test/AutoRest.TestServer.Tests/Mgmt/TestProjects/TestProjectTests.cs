@@ -33,6 +33,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             _projectName = projectName;
         }
 
+        protected HashSet<string> ListExceptions = new HashSet<string>();
+
         protected virtual IEnumerable<Type> MyTypes()
         {
             foreach (var type in GetType().Assembly.GetTypes())
@@ -524,6 +526,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var collection in FindAllCollections())
             {
+                if (ListExceptions.Contains(collection.Name))
+                    continue;
                 Assert.NotNull(collection.GetInterface("IEnumerable"), $"{collection.Name} did not implement IEnumerable");
                 Assert.NotNull(collection.GetInterface("IEnumerable`1"), $"{collection.Name} did not implement IEnumerable<T>");
                 var pageable = typeof(Pageable<>);

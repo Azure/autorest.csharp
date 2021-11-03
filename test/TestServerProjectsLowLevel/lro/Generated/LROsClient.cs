@@ -52,7 +52,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -89,7 +89,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Put200SucceededAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put200SucceededAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
@@ -97,7 +97,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200SucceededRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put200Succeeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put200Succeeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -145,7 +145,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Put200Succeeded(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put200Succeeded(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
@@ -153,7 +153,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200SucceededRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put200Succeeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put200Succeeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -164,7 +164,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -201,7 +201,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Patch200SucceededIgnoreHeadersAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Patch200SucceededIgnoreHeadersAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
@@ -209,7 +209,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch200SucceededIgnoreHeadersRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Patch200SucceededIgnoreHeaders", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Patch200SucceededIgnoreHeaders", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -220,7 +220,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -257,7 +257,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Patch200SucceededIgnoreHeaders(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Patch200SucceededIgnoreHeaders(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
@@ -265,7 +265,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch200SucceededIgnoreHeadersRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Patch200SucceededIgnoreHeaders", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Patch200SucceededIgnoreHeaders", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -276,7 +276,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -313,7 +313,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Put201SucceededAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put201SucceededAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
@@ -321,7 +321,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201SucceededRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put201Succeeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put201Succeeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -332,7 +332,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -369,7 +369,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Put201Succeeded(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put201Succeeded(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
@@ -377,7 +377,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201SucceededRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put201Succeeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put201Succeeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -387,7 +387,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -411,7 +411,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Post202ListAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Post202ListAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202List");
@@ -419,7 +419,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202ListRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Post202List", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Post202List", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -429,7 +429,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -453,7 +453,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Post202List(RequestOptions options = null)
+        public virtual Operation<BinaryData> Post202List(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202List");
@@ -461,7 +461,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202ListRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Post202List", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Post202List", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -472,7 +472,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -509,7 +509,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Put200SucceededNoStateAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put200SucceededNoStateAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
@@ -517,7 +517,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200SucceededNoStateRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put200SucceededNoState", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put200SucceededNoState", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -528,7 +528,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -565,7 +565,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Put200SucceededNoState(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put200SucceededNoState(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
@@ -573,7 +573,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200SucceededNoStateRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put200SucceededNoState", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put200SucceededNoState", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -584,7 +584,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -621,7 +621,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Put202Retry200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put202Retry200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put202Retry200");
@@ -629,7 +629,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut202Retry200Request(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put202Retry200", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put202Retry200", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -640,7 +640,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -677,7 +677,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Put202Retry200(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put202Retry200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put202Retry200");
@@ -685,7 +685,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut202Retry200Request(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put202Retry200", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put202Retry200", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -696,7 +696,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -733,7 +733,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Put201CreatingSucceeded200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put201CreatingSucceeded200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
@@ -741,7 +741,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put201CreatingSucceeded200", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -752,7 +752,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -789,7 +789,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Put201CreatingSucceeded200(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put201CreatingSucceeded200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
@@ -797,7 +797,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put201CreatingSucceeded200", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put201CreatingSucceeded200", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -808,7 +808,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -845,7 +845,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Put200UpdatingSucceeded204Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put200UpdatingSucceeded204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
@@ -853,7 +853,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200UpdatingSucceeded204Request(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put200UpdatingSucceeded204", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put200UpdatingSucceeded204", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -864,7 +864,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -901,7 +901,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Put200UpdatingSucceeded204(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put200UpdatingSucceeded204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
@@ -909,7 +909,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200UpdatingSucceeded204Request(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put200UpdatingSucceeded204", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put200UpdatingSucceeded204", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -920,7 +920,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -957,7 +957,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Put201CreatingFailed200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put201CreatingFailed200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
@@ -965,7 +965,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201CreatingFailed200Request(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put201CreatingFailed200", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put201CreatingFailed200", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -976,7 +976,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1013,7 +1013,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Put201CreatingFailed200(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put201CreatingFailed200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
@@ -1021,7 +1021,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut201CreatingFailed200Request(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put201CreatingFailed200", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put201CreatingFailed200", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1032,7 +1032,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1069,7 +1069,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Put200Acceptedcanceled200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put200Acceptedcanceled200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
@@ -1077,7 +1077,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200Acceptedcanceled200Request(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put200Acceptedcanceled200", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Put200Acceptedcanceled200", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1088,7 +1088,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1125,7 +1125,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Put200Acceptedcanceled200(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put200Acceptedcanceled200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
@@ -1133,7 +1133,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePut200Acceptedcanceled200Request(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put200Acceptedcanceled200", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Put200Acceptedcanceled200", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1144,7 +1144,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1181,7 +1181,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutNoHeaderInRetryAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutNoHeaderInRetryAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
@@ -1189,7 +1189,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNoHeaderInRetryRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutNoHeaderInRetry", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutNoHeaderInRetry", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1200,7 +1200,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1237,7 +1237,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutNoHeaderInRetry(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutNoHeaderInRetry(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
@@ -1245,7 +1245,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNoHeaderInRetryRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutNoHeaderInRetry", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutNoHeaderInRetry", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1256,7 +1256,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1293,7 +1293,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutAsyncRetrySucceededAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRetrySucceededAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
@@ -1301,7 +1301,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncRetrySucceeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncRetrySucceeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1312,7 +1312,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1349,7 +1349,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutAsyncRetrySucceeded(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncRetrySucceeded(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
@@ -1357,7 +1357,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncRetrySucceeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncRetrySucceeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1368,7 +1368,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1405,7 +1405,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutAsyncNoRetrySucceededAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncNoRetrySucceededAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
@@ -1413,7 +1413,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncNoRetrySucceededRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoRetrySucceeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoRetrySucceeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1424,7 +1424,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1461,7 +1461,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutAsyncNoRetrySucceeded(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncNoRetrySucceeded(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
@@ -1469,7 +1469,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncNoRetrySucceededRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoRetrySucceeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoRetrySucceeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1480,7 +1480,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1517,7 +1517,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutAsyncRetryFailedAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRetryFailedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
@@ -1525,7 +1525,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRetryFailedRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncRetryFailed", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncRetryFailed", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1536,7 +1536,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1573,7 +1573,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutAsyncRetryFailed(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncRetryFailed(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
@@ -1581,7 +1581,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncRetryFailedRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncRetryFailed", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncRetryFailed", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1592,7 +1592,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1629,7 +1629,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutAsyncNoRetrycanceledAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncNoRetrycanceledAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
@@ -1637,7 +1637,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncNoRetrycanceledRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoRetrycanceled", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoRetrycanceled", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1648,7 +1648,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1685,7 +1685,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutAsyncNoRetrycanceled(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncNoRetrycanceled(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
@@ -1693,7 +1693,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncNoRetrycanceledRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoRetrycanceled", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoRetrycanceled", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1704,7 +1704,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1741,7 +1741,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutAsyncNoHeaderInRetryAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncNoHeaderInRetryAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
@@ -1749,7 +1749,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncNoHeaderInRetryRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoHeaderInRetry", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoHeaderInRetry", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1760,7 +1760,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1797,7 +1797,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutAsyncNoHeaderInRetry(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncNoHeaderInRetry(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
@@ -1805,7 +1805,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncNoHeaderInRetryRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoHeaderInRetry", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNoHeaderInRetry", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1816,7 +1816,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1839,7 +1839,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutNonResourceAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutNonResourceAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNonResource");
@@ -1847,7 +1847,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNonResourceRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutNonResource", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutNonResource", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1858,7 +1858,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1881,7 +1881,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutNonResource(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutNonResource(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNonResource");
@@ -1889,7 +1889,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNonResourceRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutNonResource", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutNonResource", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1900,7 +1900,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1923,7 +1923,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutAsyncNonResourceAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncNonResourceAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
@@ -1931,7 +1931,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncNonResourceRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNonResource", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNonResource", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1942,7 +1942,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -1965,7 +1965,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutAsyncNonResource(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncNonResource(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
@@ -1973,7 +1973,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncNonResourceRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNonResource", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncNonResource", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -1984,7 +1984,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2013,7 +2013,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutSubResourceAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutSubResourceAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutSubResource");
@@ -2021,7 +2021,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutSubResourceRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutSubResource", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutSubResource", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2032,7 +2032,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2061,7 +2061,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutSubResource(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutSubResource(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutSubResource");
@@ -2069,7 +2069,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutSubResourceRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutSubResource", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutSubResource", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2080,7 +2080,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2109,7 +2109,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PutAsyncSubResourceAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncSubResourceAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
@@ -2117,7 +2117,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncSubResourceRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncSubResource", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncSubResource", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2128,7 +2128,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -2157,7 +2157,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PutAsyncSubResource(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncSubResource(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
@@ -2165,7 +2165,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePutAsyncSubResourceRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncSubResource", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PutAsyncSubResource", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2175,7 +2175,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2199,7 +2199,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Accepted200SucceededAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Accepted200SucceededAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
@@ -2207,7 +2207,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202Accepted200Succeeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202Accepted200Succeeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2217,7 +2217,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2241,7 +2241,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> DeleteProvisioning202Accepted200Succeeded(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteProvisioning202Accepted200Succeeded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
@@ -2249,7 +2249,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202Accepted200Succeeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202Accepted200Succeeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2259,7 +2259,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2283,7 +2283,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202DeletingFailed200Async(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202DeletingFailed200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
@@ -2291,7 +2291,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteProvisioning202DeletingFailed200Request();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202DeletingFailed200", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202DeletingFailed200", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2301,7 +2301,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2325,7 +2325,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> DeleteProvisioning202DeletingFailed200(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteProvisioning202DeletingFailed200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
@@ -2333,7 +2333,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteProvisioning202DeletingFailed200Request();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202DeletingFailed200", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202DeletingFailed200", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2343,7 +2343,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2367,7 +2367,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Deletingcanceled200Async(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Deletingcanceled200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
@@ -2375,7 +2375,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteProvisioning202Deletingcanceled200Request();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202Deletingcanceled200", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202Deletingcanceled200", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2385,7 +2385,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2409,7 +2409,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> DeleteProvisioning202Deletingcanceled200(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteProvisioning202Deletingcanceled200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
@@ -2417,7 +2417,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteProvisioning202Deletingcanceled200Request();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202Deletingcanceled200", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteProvisioning202Deletingcanceled200", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2427,7 +2427,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete succeeds and returns right away. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2438,7 +2438,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Delete204SucceededAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Delete204SucceededAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
@@ -2446,7 +2446,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete204SucceededRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Delete204Succeeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Delete204Succeeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2456,7 +2456,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete succeeds and returns right away. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2467,7 +2467,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Delete204Succeeded(RequestOptions options = null)
+        public virtual Operation<BinaryData> Delete204Succeeded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
@@ -2475,7 +2475,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete204SucceededRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Delete204Succeeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Delete204Succeeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2485,7 +2485,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2509,7 +2509,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Delete202Retry200Async(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Delete202Retry200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
@@ -2517,7 +2517,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202Retry200Request();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Delete202Retry200", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Delete202Retry200", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2527,7 +2527,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2551,7 +2551,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Delete202Retry200(RequestOptions options = null)
+        public virtual Operation<BinaryData> Delete202Retry200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
@@ -2559,7 +2559,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202Retry200Request();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Delete202Retry200", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Delete202Retry200", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2569,7 +2569,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2593,7 +2593,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Delete202NoRetry204Async(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Delete202NoRetry204Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
@@ -2601,7 +2601,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202NoRetry204Request();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Delete202NoRetry204", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Delete202NoRetry204", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2611,7 +2611,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -2635,7 +2635,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Delete202NoRetry204(RequestOptions options = null)
+        public virtual Operation<BinaryData> Delete202NoRetry204(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
@@ -2643,7 +2643,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202NoRetry204Request();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Delete202NoRetry204", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Delete202NoRetry204", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2653,7 +2653,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2664,7 +2664,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> DeleteNoHeaderInRetryAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteNoHeaderInRetryAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
@@ -2672,7 +2672,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteNoHeaderInRetryRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteNoHeaderInRetry", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteNoHeaderInRetry", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2682,7 +2682,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2693,7 +2693,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> DeleteNoHeaderInRetry(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteNoHeaderInRetry(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
@@ -2701,7 +2701,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteNoHeaderInRetryRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteNoHeaderInRetry", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteNoHeaderInRetry", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2711,7 +2711,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2722,7 +2722,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> DeleteAsyncNoHeaderInRetryAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncNoHeaderInRetryAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
@@ -2730,7 +2730,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncNoHeaderInRetryRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncNoHeaderInRetry", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncNoHeaderInRetry", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2740,7 +2740,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2751,7 +2751,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> DeleteAsyncNoHeaderInRetry(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteAsyncNoHeaderInRetry(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
@@ -2759,7 +2759,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncNoHeaderInRetryRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncNoHeaderInRetry", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncNoHeaderInRetry", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2769,7 +2769,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2780,7 +2780,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> DeleteAsyncRetrySucceededAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRetrySucceededAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
@@ -2788,7 +2788,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRetrySucceededRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetrySucceeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetrySucceeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2798,7 +2798,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2809,7 +2809,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> DeleteAsyncRetrySucceeded(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteAsyncRetrySucceeded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
@@ -2817,7 +2817,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRetrySucceededRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetrySucceeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetrySucceeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2827,7 +2827,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2838,7 +2838,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> DeleteAsyncNoRetrySucceededAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncNoRetrySucceededAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
@@ -2846,7 +2846,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncNoRetrySucceededRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncNoRetrySucceeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncNoRetrySucceeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2856,7 +2856,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2867,7 +2867,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> DeleteAsyncNoRetrySucceeded(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteAsyncNoRetrySucceeded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
@@ -2875,7 +2875,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncNoRetrySucceededRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncNoRetrySucceeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncNoRetrySucceeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2885,7 +2885,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2896,7 +2896,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> DeleteAsyncRetryFailedAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRetryFailedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
@@ -2904,7 +2904,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRetryFailedRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetryFailed", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetryFailed", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2914,7 +2914,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2925,7 +2925,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> DeleteAsyncRetryFailed(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteAsyncRetryFailed(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
@@ -2933,7 +2933,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRetryFailedRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetryFailed", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetryFailed", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -2943,7 +2943,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2954,7 +2954,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> DeleteAsyncRetrycanceledAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRetrycanceledAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
@@ -2962,7 +2962,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRetrycanceledRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetrycanceled", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetrycanceled", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2972,7 +2972,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -2983,7 +2983,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> DeleteAsyncRetrycanceled(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteAsyncRetrycanceled(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
@@ -2991,7 +2991,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRetrycanceledRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetrycanceled", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.DeleteAsyncRetrycanceled", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -3001,7 +3001,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3018,7 +3018,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Post200WithPayloadAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Post200WithPayloadAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
@@ -3026,7 +3026,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost200WithPayloadRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Post200WithPayload", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Post200WithPayload", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3036,7 +3036,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3053,7 +3053,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Post200WithPayload(RequestOptions options = null)
+        public virtual Operation<BinaryData> Post200WithPayload(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
@@ -3061,7 +3061,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost200WithPayloadRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Post200WithPayload", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Post200WithPayload", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -3072,7 +3072,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3096,7 +3096,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Post202Retry200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Post202Retry200Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202Retry200");
@@ -3104,7 +3104,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202Retry200Request(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Post202Retry200", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Post202Retry200", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3115,7 +3115,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3139,7 +3139,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Post202Retry200(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Post202Retry200(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202Retry200");
@@ -3147,7 +3147,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202Retry200Request(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Post202Retry200", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Post202Retry200", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -3158,7 +3158,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3195,7 +3195,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> Post202NoRetry204Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Post202NoRetry204Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
@@ -3203,7 +3203,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202NoRetry204Request(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Post202NoRetry204", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.Post202NoRetry204", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3214,7 +3214,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3251,7 +3251,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> Post202NoRetry204(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Post202NoRetry204(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
@@ -3259,7 +3259,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202NoRetry204Request(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Post202NoRetry204", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.Post202NoRetry204", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -3269,7 +3269,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3293,7 +3293,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalLocationGetAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalLocationGetAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
@@ -3301,7 +3301,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostDoubleHeadersFinalLocationGetRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalLocationGet", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalLocationGet", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3311,7 +3311,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3335,7 +3335,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PostDoubleHeadersFinalLocationGet(RequestOptions options = null)
+        public virtual Operation<BinaryData> PostDoubleHeadersFinalLocationGet(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
@@ -3343,7 +3343,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostDoubleHeadersFinalLocationGetRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalLocationGet", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalLocationGet", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -3353,7 +3353,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3377,7 +3377,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
@@ -3385,7 +3385,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalAzureHeaderGet", OperationFinalStateVia.AzureAsyncOperation, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalAzureHeaderGet", OperationFinalStateVia.AzureAsyncOperation, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3395,7 +3395,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3419,7 +3419,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGet(RequestOptions options = null)
+        public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGet(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
@@ -3427,7 +3427,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalAzureHeaderGet", OperationFinalStateVia.AzureAsyncOperation, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalAzureHeaderGet", OperationFinalStateVia.AzureAsyncOperation, context);
             }
             catch (Exception e)
             {
@@ -3437,7 +3437,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3461,7 +3461,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
@@ -3469,7 +3469,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest();
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3479,7 +3479,7 @@ namespace lro_LowLevel
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -3503,7 +3503,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGetDefault(RequestOptions options = null)
+        public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGetDefault(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
@@ -3511,7 +3511,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest();
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -3522,7 +3522,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3559,7 +3559,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PostAsyncRetrySucceededAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostAsyncRetrySucceededAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
@@ -3567,7 +3567,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3578,7 +3578,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3615,7 +3615,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PostAsyncRetrySucceeded(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostAsyncRetrySucceeded(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
@@ -3623,7 +3623,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetrySucceeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -3634,7 +3634,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3671,7 +3671,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PostAsyncNoRetrySucceededAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostAsyncNoRetrySucceededAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
@@ -3679,7 +3679,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncNoRetrySucceededRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncNoRetrySucceeded", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncNoRetrySucceeded", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3690,7 +3690,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3727,7 +3727,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PostAsyncNoRetrySucceeded(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostAsyncNoRetrySucceeded(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
@@ -3735,7 +3735,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncNoRetrySucceededRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncNoRetrySucceeded", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncNoRetrySucceeded", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -3746,7 +3746,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3770,7 +3770,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PostAsyncRetryFailedAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostAsyncRetryFailedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
@@ -3778,7 +3778,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRetryFailedRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetryFailed", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetryFailed", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3789,7 +3789,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3813,7 +3813,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PostAsyncRetryFailed(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostAsyncRetryFailed(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
@@ -3821,7 +3821,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRetryFailedRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetryFailed", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetryFailed", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
@@ -3832,7 +3832,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3856,7 +3856,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> PostAsyncRetrycanceledAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostAsyncRetrycanceledAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
@@ -3864,7 +3864,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRetrycanceledRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetrycanceled", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetrycanceled", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -3875,7 +3875,7 @@ namespace lro_LowLevel
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -3899,7 +3899,7 @@ namespace lro_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> PostAsyncRetrycanceled(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostAsyncRetrycanceled(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
@@ -3907,7 +3907,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRetrycanceledRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetrycanceled", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "LROsClient.PostAsyncRetrycanceled", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {

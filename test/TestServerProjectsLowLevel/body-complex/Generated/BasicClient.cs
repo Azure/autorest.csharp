@@ -53,7 +53,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -71,7 +71,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
@@ -79,7 +79,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -89,7 +89,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -107,7 +107,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetValid(RequestOptions options = null)
+        public virtual Response GetValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
@@ -115,7 +115,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -126,7 +126,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -145,7 +145,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
@@ -153,7 +153,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -164,7 +164,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -183,7 +183,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
@@ -191,7 +191,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -201,7 +201,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -219,7 +219,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetInvalidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
@@ -227,7 +227,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetInvalidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -237,7 +237,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -255,7 +255,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetInvalid(RequestOptions options = null)
+        public virtual Response GetInvalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
@@ -263,7 +263,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetInvalidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -273,7 +273,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is empty. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -291,7 +291,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
@@ -299,7 +299,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -309,7 +309,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is empty. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -327,7 +327,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmpty(RequestOptions options = null)
+        public virtual Response GetEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
@@ -335,7 +335,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -345,7 +345,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type whose properties are null. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -363,7 +363,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
@@ -371,7 +371,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -381,7 +381,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type whose properties are null. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -399,7 +399,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNull(RequestOptions options = null)
+        public virtual Response GetNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
@@ -407,7 +407,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -417,7 +417,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -435,7 +435,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
@@ -443,7 +443,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotProvidedRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -453,7 +453,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -471,7 +471,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNotProvided(RequestOptions options = null)
+        public virtual Response GetNotProvided(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
@@ -479,7 +479,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotProvidedRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

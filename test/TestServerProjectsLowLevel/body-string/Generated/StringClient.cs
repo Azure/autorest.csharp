@@ -51,7 +51,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null string value value. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -62,7 +62,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNullAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNullAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
@@ -70,7 +70,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null string value value. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -91,7 +91,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNull(RequestOptions options = null)
+        public virtual Response GetNull(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
@@ -99,7 +99,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -110,7 +110,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value null. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -121,7 +121,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutNullAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutNullAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutNull");
@@ -129,7 +129,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNullRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -140,7 +140,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value null. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -151,7 +151,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutNull(RequestContent content, RequestOptions options = null)
+        public virtual Response PutNull(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutNull");
@@ -159,7 +159,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutNullRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get empty string value value &apos;&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -180,7 +180,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
@@ -188,7 +188,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get empty string value value &apos;&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -209,7 +209,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetEmpty(RequestOptions options = null)
+        public virtual Response GetEmpty(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
@@ -217,7 +217,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -228,7 +228,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -240,7 +240,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
@@ -248,7 +248,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -259,7 +259,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -271,7 +271,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutEmpty(RequestContent content, RequestOptions options = null)
+        public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
@@ -279,7 +279,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -289,7 +289,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -300,7 +300,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetMbcsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetMbcsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
@@ -308,7 +308,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetMbcsRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -318,7 +318,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -329,7 +329,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetMbcs(RequestOptions options = null)
+        public virtual Response GetMbcs(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
@@ -337,7 +337,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetMbcsRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -348,7 +348,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -360,7 +360,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutMbcsAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutMbcsAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
@@ -368,7 +368,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutMbcsRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -379,7 +379,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -391,7 +391,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutMbcs(RequestContent content, RequestOptions options = null)
+        public virtual Response PutMbcs(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
@@ -399,7 +399,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutMbcsRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -409,7 +409,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -420,7 +420,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetWhitespaceAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetWhitespaceAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
@@ -428,7 +428,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetWhitespaceRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -438,7 +438,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -449,7 +449,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetWhitespace(RequestOptions options = null)
+        public virtual Response GetWhitespace(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
@@ -457,7 +457,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetWhitespaceRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -468,7 +468,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -480,7 +480,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutWhitespaceAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutWhitespaceAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
@@ -488,7 +488,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutWhitespaceRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -499,7 +499,7 @@ namespace body_string_LowLevel
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -511,7 +511,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutWhitespace(RequestContent content, RequestOptions options = null)
+        public virtual Response PutWhitespace(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
@@ -519,7 +519,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutWhitespaceRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -529,7 +529,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get String value when no string value is sent in response payload. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -540,7 +540,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
@@ -548,7 +548,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotProvidedRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -558,7 +558,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get String value when no string value is sent in response payload. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -569,7 +569,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNotProvided(RequestOptions options = null)
+        public virtual Response GetNotProvided(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
@@ -577,7 +577,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNotProvidedRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -587,7 +587,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64 encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -598,7 +598,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBase64EncodedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetBase64EncodedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
@@ -606,7 +606,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64EncodedRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -616,7 +616,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64 encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -627,7 +627,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBase64Encoded(RequestOptions options = null)
+        public virtual Response GetBase64Encoded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
@@ -635,7 +635,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64EncodedRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -645,7 +645,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -656,7 +656,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
@@ -664,7 +664,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64UrlEncodedRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -674,7 +674,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get value that is base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -685,7 +685,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetBase64UrlEncoded(RequestOptions options = null)
+        public virtual Response GetBase64UrlEncoded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
@@ -693,7 +693,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBase64UrlEncodedRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -704,7 +704,7 @@ namespace body_string_LowLevel
 
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -716,7 +716,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutBase64UrlEncodedAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutBase64UrlEncodedAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
@@ -724,7 +724,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -735,7 +735,7 @@ namespace body_string_LowLevel
 
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
@@ -747,7 +747,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutBase64UrlEncoded(RequestContent content, RequestOptions options = null)
+        public virtual Response PutBase64UrlEncoded(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
@@ -755,7 +755,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -765,7 +765,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -776,7 +776,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
@@ -784,7 +784,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -794,7 +794,7 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -805,7 +805,7 @@ namespace body_string_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetNullBase64UrlEncoded(RequestOptions options = null)
+        public virtual Response GetNullBase64UrlEncoded(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
@@ -813,7 +813,7 @@ namespace body_string_LowLevel
             try
             {
                 using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

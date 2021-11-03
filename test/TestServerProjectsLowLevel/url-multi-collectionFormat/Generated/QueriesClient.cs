@@ -53,7 +53,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -64,7 +64,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
@@ -72,7 +72,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -83,7 +83,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -94,7 +94,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
@@ -102,7 +102,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -113,7 +113,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -124,7 +124,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
@@ -132,7 +132,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -143,7 +143,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -154,7 +154,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
@@ -162,7 +162,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -173,7 +173,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -184,7 +184,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
@@ -192,7 +192,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -203,7 +203,7 @@ namespace url_multi_collectionFormat_LowLevel
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -214,7 +214,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
@@ -222,7 +222,7 @@ namespace url_multi_collectionFormat_LowLevel
             try
             {
                 using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

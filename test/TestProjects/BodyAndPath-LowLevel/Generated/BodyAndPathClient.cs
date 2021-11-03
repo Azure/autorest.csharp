@@ -54,10 +54,10 @@ namespace BodyAndPath_LowLevel
         /// <summary> Resets products. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
@@ -65,7 +65,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateRequest(itemName, content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -77,10 +77,10 @@ namespace BodyAndPath_LowLevel
         /// <summary> Resets products. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual Response Create(string itemName, RequestContent content, RequestOptions options = null)
+        public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
@@ -88,7 +88,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateRequest(itemName, content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -102,10 +102,10 @@ namespace BodyAndPath_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemNameStream"/> or <paramref name="content"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestOptions options = null)
+        public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
@@ -113,7 +113,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -127,10 +127,10 @@ namespace BodyAndPath_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemNameStream"/> or <paramref name="content"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestOptions options = null)
+        public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
@@ -138,7 +138,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -151,10 +151,10 @@ namespace BodyAndPath_LowLevel
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
@@ -162,7 +162,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -175,10 +175,10 @@ namespace BodyAndPath_LowLevel
         /// <param name="enumName1"> The first name. Allowed values: &quot;current&quot; | &quot;default&quot;. </param>
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>
 #pragma warning disable AZC0002
-        public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestOptions options = null)
+        public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
@@ -186,7 +186,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -196,9 +196,9 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary> List all. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetBodyAndPathsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -206,7 +206,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBodyAndPathsRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -216,9 +216,9 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary> List all. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetBodyAndPaths(RequestOptions options = null)
+        public virtual Response GetBodyAndPaths(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -226,7 +226,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateGetBodyAndPathsRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -236,9 +236,9 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary> List all products. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetItemsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetItemsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
@@ -246,7 +246,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateGetItemsRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -256,9 +256,9 @@ namespace BodyAndPath_LowLevel
         }
 
         /// <summary> List all products. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response GetItems(RequestOptions options = null)
+        public virtual Response GetItems(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
@@ -266,7 +266,7 @@ namespace BodyAndPath_LowLevel
             try
             {
                 using HttpMessage message = CreateGetItemsRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

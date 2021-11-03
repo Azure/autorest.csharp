@@ -59,7 +59,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -103,7 +103,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetDocumentStatusAsync(Guid id, Guid documentId, RequestOptions options = null)
+        public virtual async Task<Response> GetDocumentStatusAsync(Guid id, Guid documentId, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
@@ -111,7 +111,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -123,7 +123,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -167,7 +167,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetDocumentStatus(Guid id, Guid documentId, RequestOptions options = null)
+        public virtual Response GetDocumentStatus(Guid id, Guid documentId, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
@@ -175,7 +175,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -189,7 +189,7 @@ namespace Azure.AI.DocumentTranslation
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -237,7 +237,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetTranslationStatusAsync(Guid id, RequestOptions options = null)
+        public virtual async Task<Response> GetTranslationStatusAsync(Guid id, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
@@ -245,7 +245,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetTranslationStatusRequest(id);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -259,7 +259,7 @@ namespace Azure.AI.DocumentTranslation
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -307,7 +307,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetTranslationStatus(Guid id, RequestOptions options = null)
+        public virtual Response GetTranslationStatus(Guid id, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
@@ -315,7 +315,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetTranslationStatusRequest(id);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -332,7 +332,7 @@ namespace Azure.AI.DocumentTranslation
         /// All pending documents will be cancelled if possible.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -380,7 +380,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CancelTranslationAsync(Guid id, RequestOptions options = null)
+        public virtual async Task<Response> CancelTranslationAsync(Guid id, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
@@ -388,7 +388,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateCancelTranslationRequest(id);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -405,7 +405,7 @@ namespace Azure.AI.DocumentTranslation
         /// All pending documents will be cancelled if possible.
         /// </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -453,7 +453,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response CancelTranslation(Guid id, RequestOptions options = null)
+        public virtual Response CancelTranslation(Guid id, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
@@ -461,7 +461,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateCancelTranslationRequest(id);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -474,7 +474,7 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
         /// </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -507,7 +507,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
@@ -515,7 +515,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -528,7 +528,7 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
         /// </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -561,7 +561,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetSupportedDocumentFormats(RequestOptions options = null)
+        public virtual Response GetSupportedDocumentFormats(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
@@ -569,7 +569,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -582,7 +582,7 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
         /// </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -615,7 +615,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
@@ -623,7 +623,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -636,7 +636,7 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
         /// </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -669,7 +669,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetSupportedGlossaryFormats(RequestOptions options = null)
+        public virtual Response GetSupportedGlossaryFormats(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
@@ -677,7 +677,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -687,7 +687,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -712,7 +712,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
@@ -720,7 +720,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -730,7 +730,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -755,7 +755,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetSupportedStorageSources(RequestOptions options = null)
+        public virtual Response GetSupportedStorageSources(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
@@ -763,7 +763,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -823,7 +823,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -876,7 +876,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
@@ -887,7 +887,7 @@ namespace Azure.AI.DocumentTranslation
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
                         : CreateGetTranslationsStatusNextPageRequest(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "@nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "@nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -945,7 +945,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -998,7 +998,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
@@ -1009,7 +1009,7 @@ namespace Azure.AI.DocumentTranslation
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
                         : CreateGetTranslationsStatusNextPageRequest(nextLink, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "@nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "@nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1065,7 +1065,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1114,7 +1114,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");
@@ -1125,7 +1125,7 @@ namespace Azure.AI.DocumentTranslation
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
                         : CreateGetDocumentsStatusNextPageRequest(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, options, "value", "@nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "@nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1181,7 +1181,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1230,7 +1230,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");
@@ -1241,7 +1241,7 @@ namespace Azure.AI.DocumentTranslation
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy)
                         : CreateGetDocumentsStatusNextPageRequest(nextLink, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, options, "value", "@nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "@nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1260,7 +1260,7 @@ namespace Azure.AI.DocumentTranslation
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1315,7 +1315,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
@@ -1323,7 +1323,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateStartTranslationRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, options).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1344,7 +1344,7 @@ namespace Azure.AI.DocumentTranslation
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1399,7 +1399,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> StartTranslation(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> StartTranslation(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
@@ -1407,7 +1407,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateStartTranslationRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, options);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context);
             }
             catch (Exception e)
             {
