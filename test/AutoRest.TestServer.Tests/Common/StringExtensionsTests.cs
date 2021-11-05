@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("snake_case", new[] { "Snake", "Case" })]
         [TestCase("single", new[] { "Single" })]
         [TestCase("", new[] { "" })]
+        [TestCase("_", new[] { "", "" })]
         public void ValidateSplitByCamelCase(string camelCase, string[] expected)
         {
             var result = camelCase.SplitByCamelCase().ToArray();
