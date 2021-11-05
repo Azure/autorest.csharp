@@ -288,9 +288,12 @@ namespace AutoRest.CSharp.Utilities
         {
             var words = single.SplitByCamelCase();
             var lastWord = words.LastOrDefault();
-            if (lastWord != null)
-                return single.ReplaceLast(lastWord, lastWord.Pluralize(inputIsKnownToBeSingular));
-            return single.Pluralize(inputIsKnownToBeSingular);
+            var lastWordPlural = lastWord.Pluralize(inputIsKnownToBeSingular);
+            if (inputIsKnownToBeSingular || lastWord != lastWordPlural)
+            {
+                return single.ReplaceLast(lastWord, lastWordPlural);
+            }
+            return single;
         }
 
         public static string ToSingular(this string plural, bool inputIsKnownToBePlural = true)
@@ -302,9 +305,12 @@ namespace AutoRest.CSharp.Utilities
         {
             var words = plural.SplitByCamelCase();
             var lastWord = words.LastOrDefault();
-            if (lastWord != null)
-                return plural.ReplaceLast(lastWord, lastWord.Singularize(inputIsKnownToBePlural));
-            return plural.Singularize(inputIsKnownToBePlural);
+            var lastWordSingular = lastWord.Singularize(inputIsKnownToBePlural);
+            if (inputIsKnownToBePlural || lastWord != lastWordSingular)
+            {
+                return plural.ReplaceLast(lastWord, lastWordSingular);
+            }
+            return plural;
         }
 
         public static string FirstCharToLowerCase(this string str)
@@ -350,23 +356,28 @@ namespace AutoRest.CSharp.Utilities
         public static string RenameListToGet(this string methodName, string resourceName)
         {
             var newName = methodName;
-            var pluralResourceName = resourceName.LastWordToPlural(inputIsKnownToBeSingular: false);
-            var getMethodPrefix = pluralResourceName == resourceName.LastWordToSingular(inputIsKnownToBePlural: false) ? "GetAll" : "Get";
-            if (methodName.Equals("List") || methodName.Equals("ListAll"))
+            if (methodName.Equals("List") || methodName.Equals("ListAll") || methodName.StartsWith("ListBy"))
             {
-                newName = $"{getMethodPrefix}{pluralResourceName}";
-            }
-            else if (methodName.StartsWith("ListBy"))
-            {
-                newName = methodName.ReplaceFirst("List", $"{getMethodPrefix}{pluralResourceName}");
+                var pluralResourceName = resourceName.LastWordToPlural(inputIsKnownToBeSingular: false);
+                var singularResourceName = resourceName.LastWordToSingular(inputIsKnownToBePlural: false);
+                var getMethodPrefix = pluralResourceName == singularResourceName ? "GetAll" : "Get";
+                var wordToBeReplaced = methodName.StartsWith("ListBy") ? "List" : methodName;
+                newName = methodName.ReplaceFirst(wordToBeReplaced, $"{getMethodPrefix}{pluralResourceName}");
             }
             else if (methodName.StartsWith("List"))
             {
-                var words = newName.SplitByCamelCase();
+                var words = methodName.SplitByCamelCase();
+                var getMethodPrefix = "Get";
                 // Cases like ListEntitiesAssignedWithTerm is difficult to parse which noun should be plural and will just make no changes to the nouns for now.
                 if (!words.Any(w => new HashSet<string> { "By", "With" }.Contains(w)))
                 {
-                    newName = newName.LastWordToPlural(inputIsKnownToBeSingular: false);
+                    var pluralMethodName = methodName.LastWordToPlural(inputIsKnownToBeSingular: false);
+                    var singularMethodName = methodName.LastWordToSingular(inputIsKnownToBePlural: false);
+                    if (pluralMethodName == singularMethodName)
+                    {
+                        getMethodPrefix = "GetAll";
+                    }
+                    newName = pluralMethodName;
                 }
                 newName = newName.ReplaceFirst("List", getMethodPrefix);
             }

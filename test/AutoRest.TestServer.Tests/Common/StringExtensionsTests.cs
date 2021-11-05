@@ -22,6 +22,9 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("people", "people", false)]
         [TestCase("child", "children")]
         [TestCase("data", "data", false)]
+        [TestCase("datatip", "datatips")]
+        [TestCase("tipdata", "tipdatas")]
+        [TestCase("da_ta", "da_tas")]
         public void ValidatePluralize(string noun, string expected, bool inputIsKnownToBeSingle = true)
         {
             var plural = noun.ToPlural(inputIsKnownToBeSingle);
@@ -45,6 +48,7 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("people", "person")]
         [TestCase("children", "child")]
         [TestCase("data", "data", false)]
+        [TestCase("datas", "data", false)]
         public void ValidateSingularize(string noun, string expected, bool inputIsKnownToBePlural = true)
         {
             var singular = noun.ToSingular(inputIsKnownToBePlural);
@@ -57,6 +61,7 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("GetAllByLocation", new[] { "Get", "All", "By", "Location" })]
         [TestCase("snake_case", new[] { "Snake", "Case" })]
         [TestCase("single", new[] { "Single" })]
+        [TestCase("", new[] { "" })]
         public void ValidateSplitByCamelCase(string camelCase, string[] expected)
         {
             var result = camelCase.SplitByCamelCase().ToArray();
@@ -90,6 +95,8 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("ListBlobContainerBlob", "StorageBlob", "GetBlobContainerBlobs")]
         [TestCase("List", "ApplicationData", "GetAllApplicationData")]
         [TestCase("ListByFarmerId", "ApplicationData", "GetAllApplicationDataByFarmerId")]
+        [TestCase("ListDataTip", "", "GetDataTips")]
+        [TestCase("ListTipData", "", "GetAllTipData")]
         public void ValidateRenameListToGet(string methodName, string resourceName, string expected)
         {
             var result = methodName.RenameListToGet(resourceName);
@@ -98,6 +105,8 @@ namespace AutoRest.CSharp.Utilities
 
         [TestCase("Get", "ApplicationData", "GetApplicationData")]
         [TestCase("GetMyData", "ApplicationData", "GetMyData")]
+        [TestCase("Get", "DataTips", "GetDataTip")]
+        [TestCase("Get", "TipData", "GetTipData")]
         public void ValidateRenameGetMethod(string methodName, string resourceName, string expected)
         {
             var result = methodName.RenameGetMethod(resourceName);
