@@ -22,8 +22,8 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("people", "people", false)]
         [TestCase("child", "children")]
         [TestCase("data", "data", false)]
-        [TestCase("datatip", "datatips")]
-        [TestCase("tipdata", "tipdatas")]
+        [TestCase("dataTip", "dataTips")]
+        [TestCase("tipData", "tipDatas")]
         [TestCase("da_ta", "da_tas")]
         public void ValidatePluralize(string noun, string expected, bool inputIsKnownToBeSingle = true)
         {
