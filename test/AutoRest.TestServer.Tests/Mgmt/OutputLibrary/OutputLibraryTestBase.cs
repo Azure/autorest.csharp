@@ -48,16 +48,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         }
 
         [Test]
-        public void ValidateResourceClassTypesCount()
+        public void ValidateResourceDataCount()
         {
             var result = Generate(_projectName).Result;
             var context = result.Context;
 
             var count = context.Library.ResourceSchemaMap.Count;
-            var singletonCount = context.Library.OperationSets.Count(set => set.IsSingletonResource(context));
 
-            Assert.AreEqual(count, context.Library.ArmResources.Count(), "Did not find the expected resource count");
-            Assert.AreEqual(count - singletonCount, context.Library.ResourceCollections.Count(), "Did not find the expected resourceCollections count");
             Assert.AreEqual(count, context.Library.ResourceData.Count(), "Did not find the expected resourceData count");
         }
 
