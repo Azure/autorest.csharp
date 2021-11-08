@@ -117,8 +117,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     {
                         if (pair[0].IsReference && pair[0].SkipUrlEncoding)
                         {
+                            // we never have a case that we need to get the substring that have a gap after the provider-namespace key pair, throw an exception when it happens
+                            if (segmentPairs.Count - indexOfProvidersPair != 1)
+                                throw new NotImplementedException("We have a gap between the substring to get and the provider-namespace key pair. We need to update SubstringAfterProviderNamespace function to make sure it can accept an index to adopt this");
                             // if we only have one segment in this group, it should always be a reference
-                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, pair[0], $"{idVariableName}{invocationSuffix}.GetParts({2 * (segmentPairs.Count - indexOfProvidersPair)})"));
+                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, pair[0], $"{idVariableName}{invocationSuffix}.SubstringAfterProviderNamespace()"));
                         }
                     }
                 }
