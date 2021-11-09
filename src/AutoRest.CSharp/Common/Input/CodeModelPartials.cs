@@ -161,14 +161,6 @@ namespace AutoRest.CSharp.Input
         }
 
         public bool IsRequestConditionHeader() {
-            /*
-            string serializeName = Language.Default.Name;
-            if (Language.Default.SerializedName != null)
-            {
-                serializeName = Language.Default.SerializedName;
-            }
-            return ConditionRequstHeader.Contains(serializeName) && In == ParameterLocation.Header;
-            */
             return ConditionRequstHeader.Contains(Language.Default.SerializedName ?? Language.Default.Name) && In == ParameterLocation.Header;
         }
 

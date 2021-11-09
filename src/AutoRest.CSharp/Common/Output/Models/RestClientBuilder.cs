@@ -620,7 +620,6 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter BuildParameter(RequestParameter requestParameter)
         {
             CSharpType type = _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
-            //bool isEtag = false;
             var isRequired = requestParameter.Required == true;
             var defaultValue = ParseConstant(requestParameter);
 

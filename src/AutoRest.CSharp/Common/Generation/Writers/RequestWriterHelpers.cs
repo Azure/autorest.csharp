@@ -270,7 +270,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     RequestHeader[] subs = conditionsHeader.GetSubHeaders().ToArray();
                     foreach (var subHeader in subs)
                     {
-                        //writer.Line($"using {subHeader.Value.Type.Name} {subHeader.Value.Reference.Name} = {header.Value.Reference.Name}.{subHeader.Value.Reference.Name}; ");
                         string fieldName = $"{subHeader.Value.Reference.Name.Substring(0, 1).ToUpper()}{subHeader.Value.Reference.Name.Substring(1)}";
                         writer.Line($"using {subHeader.Value.Type.Name} {subHeader.Value.Reference.Name} = {header.Value.Reference.Name}.{fieldName}; ");
                         WriteHeader(writer, request, subHeader);
