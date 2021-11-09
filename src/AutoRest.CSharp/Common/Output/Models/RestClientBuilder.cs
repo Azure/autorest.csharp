@@ -633,15 +633,9 @@ namespace AutoRest.CSharp.Output.Models
             {
                 defaultValue = Constant.Default(type);
             }
-            //if (requestParameter.In == ParameterLocation.Header /*&& requestParameter.isCondition */)
-            if (/*requestParameter.IsRequestConditionHeader() && */requestParameter.IsMatchConditionHeader())
+            if (requestParameter.IsMatchConditionHeader())
             {
-                //isEtag = true;
                 type = typeof(Azure.ETag);
-                /*
-                type = type.WithNullable(requestParameter.IsNullable || !requestParameter.IsRequired);
-                type = type.WithIsValueType(false);
-                */
                 type = type.WithIsNullableAndIsValueType(requestParameter.IsNullable || !requestParameter.IsRequired, false);
             }
             return new Parameter(

@@ -95,14 +95,6 @@ namespace AutoRest.CSharp.Output.Models
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
 
-                    /*
-                    if (operation.Parameters.Any(p => p.IsRequestConditionHeader()))
-                    {
-                        RequestParameter conditionParamter = operation.Parameters.First(p => p.In == ParameterLocation.Header);
-                        Parameter requestConditionParam = new Parameter("requestConditions", "The content to send as the request conditions of the request.", typeof(Azure.RequestConditions), null, conditionParamter.IsRequired);
-                        parameters.Insert(parameters.Count, requestConditionParam);
-                    }
-                    */
                     if (collapseType != RequestConditionCollapseType.None)
                     {
                         bool isCollapseParamRequired = serviceRequest.Parameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
