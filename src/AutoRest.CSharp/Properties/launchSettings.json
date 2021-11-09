@@ -376,9 +376,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ReferenceTypes\\Generated"
     },
-    "RequestOptionsAllOptional-LowLevel": {
+    "RequestContextAllOptional-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RequestOptionsAllOptional-LowLevel\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RequestContextAllOptional-LowLevel\\Generated"
     },
     "required-optional": {
       "commandName": "Project",
