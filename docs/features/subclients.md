@@ -98,7 +98,7 @@ public virtual PurviewAccountResourceSetRules GetResourceSetRulesClient()
 }
 ```
 
-## Single top-level client [NOT IMPLEMENTED, DESIGN ONLY]
+## Single top-level client
 
 With multiple service clients it may be better to group them all under one top-level client to simplify discoverability. With configuration setting `--single-top-level-client=true`, **autorest.csharp** generates top level client for operation group that has empty name, and all clients for named operation groups become its subclients. Generated subclients are called using `$"{operationGroups.language.default.name}"` format if all operation group names have at least two words. If any of the named operation groups have one word name, `$"{language.default.name}{operationGroups.language.default.name}"` format will be used. 
 

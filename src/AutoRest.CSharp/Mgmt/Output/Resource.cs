@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, IEnumerable<OperationGroup>? nonResourceOperationGroups, string suffixValue, bool isExtension, bool isScope)
-            : base(context, operationGroup.Resource(context.Configuration.MgmtConfiguration) + GetParentValue(operationGroup, context, isExtension, isScope) + suffixValue)
+            : base(context, GetParentValue(operationGroup, context, isExtension, isScope) + operationGroup.Resource(context.Configuration.MgmtConfiguration) + suffixValue)
         {
             _context = context;
             OperationGroup = operationGroup;

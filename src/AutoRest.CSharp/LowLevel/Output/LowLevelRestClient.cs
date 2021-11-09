@@ -8,7 +8,6 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -61,14 +60,28 @@ namespace AutoRest.CSharp.Output.Models
 
         public bool IsSubClient => ParentClientTypeName != null;
 
-        public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context) : base(operationGroup, context, null)
+        public static LowLevelRestClient CreateTopLevelClient(BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
+        {
+            var operationGroup = new OperationGroup { Key = string.Empty };
+            var endpointParameter = context.CodeModel.GlobalParameters.FirstOrDefault(RestClientBuilder.IsEndpointParameter);
+            return new(operationGroup, endpointParameter != null ? new[]{ endpointParameter } : null, context, clientOptions);
+        }
+
+        public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions) : this(operationGroup, null, context, clientOptions) {}
+
+        private LowLevelRestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions) : base(operationGroup, clientParameters, context, null)
         {
             _context = context;
-            ClientOptions = new ClientOptionsTypeProvider(_context);
+            ClientOptions = clientOptions;
             if (ExistingType != null && context.SourceInputModel != null && context.SourceInputModel.TryGetClientSourceInput(ExistingType, out var codeGenClientAttribute))
             {
                 ParentClientTypeName = codeGenClientAttribute.ParentClientType?.Name;
                 _hasPublicConstructors = !IsSubClient || codeGenClientAttribute.ForcePublicConstructors;
+            }
+            else if (ParentClientTypeName == null && context.Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(operationGroup.Language.Default.Name))
+            {
+                ParentClientTypeName = ClientBuilder.GetClientPrefix(string.Empty, context) + ClientBuilder.GetRestClientSuffix(context);
+                _hasPublicConstructors = false;
             }
 
             ClientDiagnosticsField = new("private readonly", typeof(ClientDiagnostics), "_" + ClientDiagnosticsParameter.Name);

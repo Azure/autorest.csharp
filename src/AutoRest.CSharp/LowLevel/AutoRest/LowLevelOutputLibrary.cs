@@ -14,22 +14,30 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         private readonly CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
+        public ClientOptionsTypeProvider ClientOptions { get; }
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
             _codeModel = codeModel;
             _context = context;
+            ClientOptions = new ClientOptionsTypeProvider(_context);
             UpdateListMethodNames();
             _restClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
         }
 
-        public IEnumerable<LowLevelRestClient> RestClients => _restClients.Values;
+        public ICollection<LowLevelRestClient> RestClients => _restClients.Values;
         private Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
         {
             var restClients = new Dictionary<OperationGroup, LowLevelRestClient>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                restClients.Add(operationGroup, new LowLevelRestClient(operationGroup, _context));
+                restClients.Add(operationGroup, new LowLevelRestClient(operationGroup, _context, ClientOptions));
+            }
+
+            if (_context.Configuration.SingleTopLevelClient && restClients.Values.All(rc => rc.IsSubClient))
+            {
+                var topLevelClient = LowLevelRestClient.CreateTopLevelClient(_context, ClientOptions);
+                restClients[topLevelClient.OperationGroup] = topLevelClient;
             }
 
             return restClients;

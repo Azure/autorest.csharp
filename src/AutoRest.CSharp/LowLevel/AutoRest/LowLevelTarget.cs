@@ -30,11 +30,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var lowLevelClientWriter = new LowLevelClientWriter();
                 lowLevelClientWriter.WriteClient(codeWriter, client, subClientsMap.TryGetValue(client.Type.Name, out var subClients) ? subClients : Array.Empty<LowLevelRestClient>(), context);
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
-
-                var optionsWriter = new CodeWriter();
-                ClientOptionsWriter.WriteClientOptions(optionsWriter, client.ClientOptions);
-                project.AddGeneratedFile($"{client.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
             }
+
+            var optionsWriter = new CodeWriter();
+            ClientOptionsWriter.WriteClientOptions(optionsWriter, context.Library.ClientOptions);
+            project.AddGeneratedFile($"{context.Library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
         }
     }
 }

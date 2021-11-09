@@ -20,17 +20,25 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class RestClient : TypeProvider
     {
-        private CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
-        private CachedDictionary<ServiceRequest, RestClientMethod> _nextPageRequestMethods;
+        private readonly CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
+        private readonly CachedDictionary<ServiceRequest, RestClientMethod> _nextPageRequestMethods;
         private RestClientMethod[]? _allMethods;
 
-        public RestClient(OperationGroup operationGroup, BuildContext context, string? clientName)
-            : this (operationGroup, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), ClientBuilder.GetRestClientSuffix(context)) {}
+        protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName)
+            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), ClientBuilder.GetRestClientSuffix(context)) { }
 
-        private RestClient(OperationGroup operationGroup, BuildContext context, string clientPrefix, string restClientSuffix) : base(context, clientPrefix + restClientSuffix)
+        protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string? clientName)
+            : this (operationGroup, clientParameters, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), ClientBuilder.GetRestClientSuffix(context)) {}
+
+        private RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string restClientSuffix) : base(context, clientPrefix + restClientSuffix)
         {
             OperationGroup = operationGroup;
-            Builder = new RestClientBuilder(operationGroup, context);
+            clientParameters ??= operationGroup.Operations
+                .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
+                .Where(p => p.Implementation == ImplementationLocation.Client)
+                .Distinct();
+
+            Builder = new RestClientBuilder(clientParameters, context);
 
             _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
             _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
