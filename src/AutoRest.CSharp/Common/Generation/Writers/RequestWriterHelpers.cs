@@ -13,6 +13,8 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using Azure.Core;
 using AutoRest.CSharp.Utilities;
+using AutoRest.CSharp.Common.Output.Models.Requests;
+using System.Globalization;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -259,9 +261,23 @@ namespace AutoRest.CSharp.Generation.Writers
                     throw new NotImplementedException(bodySerialization.ToString());
             }
         }
-
         private static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header)
         {
+            if (header is RequestConditionsHeader conditionsHeader)
+            {
+                using (WriteValueNullCheck(writer, header.Value))
+                {
+                    RequestHeader[] subs = conditionsHeader.GetSubHeaders().ToArray();
+                    foreach (var subHeader in subs)
+                    {
+                        //writer.Line($"using {subHeader.Value.Type.Name} {subHeader.Value.Reference.Name} = {header.Value.Reference.Name}.{subHeader.Value.Reference.Name}; ");
+                        string fieldName = $"{subHeader.Value.Reference.Name.Substring(0, 1).ToUpper()}{subHeader.Value.Reference.Name.Substring(1)}";
+                        writer.Line($"using {subHeader.Value.Type.Name} {subHeader.Value.Reference.Name} = {header.Value.Reference.Name}.{fieldName}; ");
+                        WriteHeader(writer, request, subHeader);
+                    }
+                }
+                return;
+            }
             string? delimiter = GetSerializationStyleDelimiter(header.SerializationStyle);
             string method = delimiter != null
                 ? nameof(RequestHeaderExtensions.AddDelimited)
@@ -270,7 +286,6 @@ namespace AutoRest.CSharp.Generation.Writers
             using (WriteValueNullCheck(writer, header.Value))
             {
                 writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
-
                 if (header.Value.Type.Equals(typeof(Azure.Core.ContentType)))
                 {
                     WriteConstantOrParameterAsString(writer, header.Value);

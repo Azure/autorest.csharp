@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Requests;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -39,12 +40,41 @@ namespace AutoRest.CSharp.Output.Models
             ClientOptions = new ClientOptionsTypeProvider(_context);
         }
 
+        protected RequestConditionCollapseType GetRequestConditionCollapseType(IEnumerable<RequestParameter> requestParameters)
+        {
+            RequestConditionCollapseType ret = RequestConditionCollapseType.None;
+            int matchCondCount = 0;
+            int requestCondCount = 0;
+            foreach (RequestParameter requestParameter in requestParameters)
+            {
+                if (requestParameter.IsMatchConditionHeader())
+                {
+                    matchCondCount++;
+                    requestCondCount++;
+                } else if (requestParameter.IsRequestConditionHeader())
+                {
+                    requestCondCount++;
+                }
+            }
+
+            if (requestCondCount == 4)
+            {
+                ret = RequestConditionCollapseType.RequestConditionsCollapse;
+            } else if (matchCondCount == 2)
+            {
+                ret = RequestConditionCollapseType.MatchConditionsCollapse;
+            }
+            return ret;
+        }
+
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
             var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
             foreach (var operation in OperationGroup.Operations)
             {
+                //if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Header && p.Language.Default.Name.Equals("If-Match")))
+                RequestConditionCollapseType collapseType = GetRequestConditionCollapseType(operation.Parameters);
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
                     // See also DataPlaneRestClient::EnsureNormalMethods if changing
@@ -64,6 +94,47 @@ namespace AutoRest.CSharp.Output.Models
                     RequestHeader[] requestHeaders = method.Request.Headers;
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
+
+                    /*
+                    if (operation.Parameters.Any(p => p.IsRequestConditionHeader()))
+                    {
+                        RequestParameter conditionParamter = operation.Parameters.First(p => p.In == ParameterLocation.Header);
+                        Parameter requestConditionParam = new Parameter("requestConditions", "The content to send as the request conditions of the request.", typeof(Azure.RequestConditions), null, conditionParamter.IsRequired);
+                        parameters.Insert(parameters.Count, requestConditionParam);
+                    }
+                    */
+                    if (collapseType != RequestConditionCollapseType.None)
+                    {
+                        bool isCollapseParamRequired = serviceRequest.Parameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
+
+                        CSharpType? type = null;
+                        if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
+                        {
+                            type = typeof(Azure.MatchConditions);
+                        } else
+                        {
+                            type = typeof(Azure.RequestConditions);
+                        }
+                        type = type.WithIsNullableAndIsValueType(!isCollapseParamRequired, false);
+
+                        Parameter collapsedParameter = new Parameter("requestConditions", "The content to send as the request conditions of the request.", type, null, isCollapseParamRequired);
+
+                        IEnumerable<RequestParameter>? conditionParameters = null;
+                        if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
+                        {
+                            conditionParameters = operation.Parameters.Where(p => p.IsMatchConditionHeader());
+                        } else
+                        {
+                            conditionParameters = operation.Parameters.Where(p => p.IsRequestConditionHeader());
+                        }
+
+                        foreach (var pram in conditionParameters)
+                        {
+                            int paramIndex = parameters.FindIndex(p => p.Name == pram.CSharpName());
+                            parameters.RemoveAt(paramIndex);
+                        }
+                        parameters.Insert(parameters.Count, collapsedParameter);
+                    }
 
                     if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body))
                     {

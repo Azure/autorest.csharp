@@ -62,6 +62,28 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
+        public void GroupRequestConditionParameter()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    foreach (var pram in operation.Parameters)
+                    {
+                        if (pram.In == ParameterLocation.Header && pram.Language.Default.Name == "If-Match")
+                        {
+                            /*
+                            RequestParameter resquestConnditions = new RequestParameter();
+                            resquestConnditions.In = ParameterLocation.Header;
+
+                            pram.GroupedBy = resquestConnditions;
+                            */
+                        }
+                    }
+                }
+            }
+        }
+
         public override CSharpType? FindTypeByName(string originalName) => null;
     }
 }

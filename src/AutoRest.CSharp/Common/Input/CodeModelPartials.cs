@@ -141,11 +141,40 @@ namespace AutoRest.CSharp.Input
 
     internal partial class RequestParameter
     {
+        private static HashSet<string> ConditionRequstHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "If-Match",
+            "If-None-Match",
+            "If-Modified-Since",
+            "If-Unmodified-Since",
+        };
+        private static HashSet<string> EtagConditionRequstHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "If-Match",
+            "If-None-Match",
+        };
         public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
 
         public RequestParameter ShallowCopy()
         {
             return (RequestParameter)this.MemberwiseClone();
+        }
+
+        public bool IsRequestConditionHeader() {
+            /*
+            string serializeName = Language.Default.Name;
+            if (Language.Default.SerializedName != null)
+            {
+                serializeName = Language.Default.SerializedName;
+            }
+            return ConditionRequstHeader.Contains(serializeName) && In == ParameterLocation.Header;
+            */
+            return ConditionRequstHeader.Contains(Language.Default.SerializedName ?? Language.Default.Name) && In == ParameterLocation.Header;
+        }
+
+        public bool IsMatchConditionHeader()
+        {
+            return EtagConditionRequstHeader.Contains(Language.Default.SerializedName ?? Language.Default.Name) && In == ParameterLocation.Header;
         }
     }
 

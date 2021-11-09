@@ -64,6 +64,29 @@ namespace Azure.Core
             }
         }
 
+        public static void Add(this RequestHeaders headers, string name, ETag value)
+        {
+            headers.Add(name, value.ToString());
+        }
+
+        public static void Add(this RequestHeaders headers, string name, RequestConditions conditions)
+        {
+            if (conditions != null && conditions.IfMatch != null)
+            {
+                //headers.Add(name, conditions.IfMatch != null ? conditions.IfMatch.ToString() : " ");
+                headers.Add(name, "conditionRequest");
+            }
+        }
+        /*
+        public static void Add(this RequestHeaders headers, RequestConditions conditions)
+        {
+            if (conditions.IfMatch != null)
+            {
+                RequestHeaderExtensions.Add(headers, "If-Match", conditions.IfMatch)
+            }
+        }
+        */
+
         public static void AddDelimited<T>(this RequestHeaders headers, string name, IEnumerable<T> value, string delimiter)
         {
             headers.Add(name, string.Join(delimiter, value));

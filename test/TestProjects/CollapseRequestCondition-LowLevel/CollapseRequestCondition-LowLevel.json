@@ -1,0 +1,349 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "CollapseRequestConditions",
+    "description": "RequestCondtion collapse",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/RequestCondtionCollapse/": {
+      "put": {
+        "operationId": "RequestCondtionCollapse_collapsePUT",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          },
+	        {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+          },
+          {
+            "name": "If-Modified-Since",
+            "x-ms-client-name": "ifModifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "x-ms-client-name": "ifUnmodifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time."
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      },
+      "get": {
+        "operationId": "RequestCondtionCollapse_collapseGet",
+        "parameters": [
+	        {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+          },
+          {
+            "name": "If-Modified-Since",
+            "x-ms-client-name": "ifModifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "x-ms-client-name": "ifUnmodifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time."
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/RequestCondtionCollapse/withHead": {
+      "get": {
+        "operationId": "MatchCondtionCollapse_collapseGetWithHead",
+        "parameters": [
+	        {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+          },
+          {
+            "name": "otherHeader",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "otherHeader",
+            "description": "other header"
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/MatchConditionCollapse/": {
+      "put": {
+        "operationId": "MatchCondtionCollapse_collapsePUT",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          },
+	        {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      },
+      "get": {
+        "operationId": "MatchCondtionCollapse_collapseGet",
+        "parameters": [
+	        {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/MatchConditionCollapse/multi": {
+      "get": {
+        "operationId": "MatchCondtionCollapse_MulticollapseGet",
+        "parameters": [
+	        {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+          },
+          {
+            "name": "If-Modified-Since",
+            "x-ms-client-name": "ifModifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/NonCollapse/": {
+      "put": {
+        "operationId": "NonCollapse_collapsePUT",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          },
+	        {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          }  
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      },
+      "get": {
+        "operationId": "NonCollapse_collapseGet",
+        "parameters": [
+	        {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "name": "If-Modified-Since",
+            "x-ms-client-name": "ifModifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
+          },
+          {
+            "name": "If-Unmodified-Since",
+            "x-ms-client-name": "ifUnmodifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time."
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    }
+  }
+}
