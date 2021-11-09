@@ -29,19 +29,27 @@
           },
 	        {
             "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
           },
           {
             "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfNoneMatch",
-            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
           },
           {
             "name": "If-Modified-Since",
@@ -82,19 +90,27 @@
         "parameters": [
 	        {
             "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
           },
           {
             "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfNoneMatch",
-            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
           },
           {
             "name": "If-Modified-Since",
@@ -137,19 +153,27 @@
         "parameters": [
 	        {
             "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
           },
           {
             "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfNoneMatch",
-            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
           },
           {
             "name": "otherHeader",
@@ -181,19 +205,27 @@
           },
 	        {
             "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
           },
           {
             "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfNoneMatch",
-            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
           }
           
         ],
@@ -208,19 +240,27 @@
         "parameters": [
 	        {
             "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
           },
           {
             "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfNoneMatch",
-            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
           }
           
         ],
@@ -237,19 +277,27 @@
         "parameters": [
 	        {
             "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
           },
           {
             "name": "If-None-Match",
+            "x-ms-client-name": "ifNoneMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfNoneMatch",
-            "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs without a matching value."
           },
           {
             "name": "If-Modified-Since",
@@ -286,11 +334,15 @@
           },
 	        {
             "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
           }  
         ],
         "responses": {
@@ -304,11 +356,15 @@
         "parameters": [
 	        {
             "name": "If-Match",
+            "x-ms-client-name": "ifMatch",
             "in": "header",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify an ETag value to operate only on blobs with a matching value."
           },
           {
             "name": "If-Modified-Since",
