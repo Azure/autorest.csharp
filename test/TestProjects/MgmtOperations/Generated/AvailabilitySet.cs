@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -205,7 +204,7 @@ namespace MgmtOperations
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -234,7 +233,7 @@ namespace MgmtOperations
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -263,7 +262,7 @@ namespace MgmtOperations
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -292,7 +291,7 @@ namespace MgmtOperations
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -320,7 +319,7 @@ namespace MgmtOperations
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -348,7 +347,7 @@ namespace MgmtOperations
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -400,58 +399,6 @@ namespace MgmtOperations
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all availability sets in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual async Task<Response<IReadOnlyList<AvailabilitySet>>> TestMethodAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
-        {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestMethod");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.TestMethodAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all availability sets in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<IReadOnlyList<AvailabilitySet>> TestMethod(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
-        {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestMethod");
-            scope.Start();
-            try
-            {
-                var response = _restClient.TestMethod(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -578,9 +525,9 @@ namespace MgmtOperations
 
         /// <summary> Gets a list of AvailabilitySetChildren in the AvailabilitySet. </summary>
         /// <returns> An object representing collection of AvailabilitySetChildren and their operations over a AvailabilitySet. </returns>
-        public AvailabilitySetChildContainer GetAvailabilitySetChildren()
+        public AvailabilitySetChildCollection GetAvailabilitySetChildren()
         {
-            return new AvailabilitySetChildContainer(this);
+            return new AvailabilitySetChildCollection(this);
         }
     }
 }

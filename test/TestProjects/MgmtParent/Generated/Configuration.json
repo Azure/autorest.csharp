@@ -16,6 +16,10 @@
     "VirtualMachineExtensionImages": "NonResource"
   },
   "OperationGroupToParent": {
-    "VirtualMachineExtensionImages": "subscriptions"
-  }
+    "VirtualMachineExtensionImages": "subscriptions",
+    "DedicatedHosts": "Microsoft.Compute/hostGroups"
+  },
+  "ListException": [
+    "DedicatedHostGroups"
+  ]
 }

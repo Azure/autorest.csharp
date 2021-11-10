@@ -371,6 +371,50 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<BlobContainerObjectLevelWormOperation> ObjectLevelWormAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BlobContainer.ObjectLevelWorm");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.ObjectLevelWormAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new BlobContainerObjectLevelWormOperation(_clientDiagnostics, Pipeline, _restClient.CreateObjectLevelWormRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual BlobContainerObjectLevelWormOperation ObjectLevelWorm(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BlobContainer.ObjectLevelWorm");
+            scope.Start();
+            try
+            {
+                var response = _restClient.ObjectLevelWorm(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var operation = new BlobContainerObjectLevelWormOperation(_clientDiagnostics, Pipeline, _restClient.CreateObjectLevelWormRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Gets an object representing a ImmutabilityPolicy along with the instance operations that can be performed on it. </summary>
         /// <returns> Returns a <see cref="ImmutabilityPolicy" /> object. </returns>
         public ImmutabilityPolicy GetImmutabilityPolicy()

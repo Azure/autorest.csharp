@@ -29,6 +29,11 @@ namespace Azure.Management.Storage
                 writer.WritePropertyName("shareDeleteRetentionPolicy");
                 writer.WriteObjectValue(ShareDeleteRetentionPolicy);
             }
+            if (Optional.IsDefined(ProtocolSettings))
+            {
+                writer.WritePropertyName("protocolSettings");
+                writer.WriteObjectValue(ProtocolSettings);
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
@@ -41,6 +46,7 @@ namespace Azure.Management.Storage
             ResourceType type = default;
             Optional<CorsRules> cors = default;
             Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
+            Optional<ProtocolSettings> protocolSettings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"))
@@ -97,11 +103,21 @@ namespace Azure.Management.Storage
                             shareDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
                             continue;
                         }
+                        if (property0.NameEquals("protocolSettings"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            protocolSettings = ProtocolSettings.DeserializeProtocolSettings(property0.Value);
+                            continue;
+                        }
                     }
                     continue;
                 }
             }
-            return new FileServiceData(id, name, type, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value);
+            return new FileServiceData(id, name, type, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value, protocolSettings.Value);
         }
     }
 }

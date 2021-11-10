@@ -78,6 +78,17 @@ namespace Azure.Management.Storage
         }
         #endregion
 
+        #region DeletedAccount
+        /// <summary> Gets an object representing a DeletedAccount along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="DeletedAccount" /> object. </returns>
+        public static DeletedAccount GetDeletedAccount(this ArmClient armClient, ResourceIdentifier id)
+        {
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DeletedAccount(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
+
         #region ManagementPolicy
         /// <summary> Gets an object representing a ManagementPolicy along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -86,6 +97,17 @@ namespace Azure.Management.Storage
         public static ManagementPolicy GetManagementPolicy(this ArmClient armClient, ResourceIdentifier id)
         {
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ManagementPolicy(clientOptions, credential, uri, pipeline, id));
+        }
+        #endregion
+
+        #region BlobInventoryPolicy
+        /// <summary> Gets an object representing a BlobInventoryPolicy along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="BlobInventoryPolicy" /> object. </returns>
+        public static BlobInventoryPolicy GetBlobInventoryPolicy(this ArmClient armClient, ResourceIdentifier id)
+        {
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BlobInventoryPolicy(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 

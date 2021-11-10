@@ -498,7 +498,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateTestMethodRequest(string resourceGroupName, string requiredParam, string optionalParam)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -510,10 +510,9 @@ namespace MgmtOperations
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/availabilitySets", false);
-            uri.AppendQuery("RequiredParam", requiredParam, true);
-            if (optionalParam != null)
+            if (expand != null)
             {
-                uri.AppendQuery("OptionalParam", optionalParam, true);
+                uri.AppendQuery("$expand", expand, true);
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
@@ -522,24 +521,19 @@ namespace MgmtOperations
             return message;
         }
 
-        /// <summary> Lists all availability sets in a resource group. </summary>
+        /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="requiredParam"/> is null. </exception>
-        public async Task<Response<AvailabilitySetListResult>> TestMethodAsync(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<AvailabilitySetListResult>> GetAllAsync(string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
 
-            using var message = CreateTestMethodRequest(resourceGroupName, requiredParam, optionalParam);
+            using var message = CreateGetAllRequest(resourceGroupName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -555,24 +549,19 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> Lists all availability sets in a resource group. </summary>
+        /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="requiredParam"/> is null. </exception>
-        public Response<AvailabilitySetListResult> TestMethod(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<AvailabilitySetListResult> GetAll(string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
 
-            using var message = CreateTestMethodRequest(resourceGroupName, requiredParam, optionalParam);
+            using var message = CreateGetAllRequest(resourceGroupName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

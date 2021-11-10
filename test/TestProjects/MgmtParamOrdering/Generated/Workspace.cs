@@ -202,7 +202,7 @@ namespace MgmtParamOrdering
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -231,7 +231,7 @@ namespace MgmtParamOrdering
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -260,7 +260,7 @@ namespace MgmtParamOrdering
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -289,7 +289,7 @@ namespace MgmtParamOrdering
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -317,7 +317,7 @@ namespace MgmtParamOrdering
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -345,7 +345,7 @@ namespace MgmtParamOrdering
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -407,9 +407,9 @@ namespace MgmtParamOrdering
 
         /// <summary> Gets a list of EnvironmentContainerResources in the Workspace. </summary>
         /// <returns> An object representing collection of EnvironmentContainerResources and their operations over a Workspace. </returns>
-        public EnvironmentContainerResourceContainer GetEnvironmentContainerResources()
+        public EnvironmentContainerResourceCollection GetEnvironmentContainerResources()
         {
-            return new EnvironmentContainerResourceContainer(this);
+            return new EnvironmentContainerResourceCollection(this);
         }
     }
 }

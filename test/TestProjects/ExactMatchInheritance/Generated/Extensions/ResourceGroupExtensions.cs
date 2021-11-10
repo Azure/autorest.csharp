@@ -13,32 +13,32 @@ namespace ExactMatchInheritance
     public static partial class ResourceGroupExtensions
     {
         #region ExactMatchModel1
-        /// <summary> Gets an object representing a ExactMatchModel1Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ExactMatchModel1Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel1Container" /> object. </returns>
-        public static ExactMatchModel1Container GetExactMatchModel1s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="ExactMatchModel1Collection" /> object. </returns>
+        public static ExactMatchModel1Collection GetExactMatchModel1s(this ResourceGroup resourceGroup)
         {
-            return new ExactMatchModel1Container(resourceGroup);
+            return new ExactMatchModel1Collection(resourceGroup);
         }
         #endregion
 
         #region ExactMatchModel3
-        /// <summary> Gets an object representing a ExactMatchModel3Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ExactMatchModel3Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel3Container" /> object. </returns>
-        public static ExactMatchModel3Container GetExactMatchModel3s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="ExactMatchModel3Collection" /> object. </returns>
+        public static ExactMatchModel3Collection GetExactMatchModel3s(this ResourceGroup resourceGroup)
         {
-            return new ExactMatchModel3Container(resourceGroup);
+            return new ExactMatchModel3Collection(resourceGroup);
         }
         #endregion
 
         #region ExactMatchModel5
-        /// <summary> Gets an object representing a ExactMatchModel5Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets an object representing a ExactMatchModel5Collection along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel5Container" /> object. </returns>
-        public static ExactMatchModel5Container GetExactMatchModel5s(this ResourceGroup resourceGroup)
+        /// <returns> Returns a <see cref="ExactMatchModel5Collection" /> object. </returns>
+        public static ExactMatchModel5Collection GetExactMatchModel5s(this ResourceGroup resourceGroup)
         {
-            return new ExactMatchModel5Container(resourceGroup);
+            return new ExactMatchModel5Collection(resourceGroup);
         }
         #endregion
     }

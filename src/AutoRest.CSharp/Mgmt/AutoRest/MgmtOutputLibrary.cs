@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
 
         private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>? _armResources;
-        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>? _resourceContainers;
+        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceCollection>>? _resourceCollections;
         private Dictionary<OperationGroup, ResourceData>? _resourceData;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
@@ -178,9 +178,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<Resource> TupleResources => EnsureArmResources()[ResourceType.Tuple].Values;
 
-        public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers()[ResourceType.Default].Values;
+        public IEnumerable<ResourceCollection> ResourceCollections => EnsureResourceCollections()[ResourceType.Default].Values;
 
-        public IEnumerable<ResourceContainer> TupleResourceContainers => EnsureResourceContainers()[ResourceType.Tuple].Values;
+        public IEnumerable<ResourceCollection> TupleResourceCollections => EnsureResourceCollections()[ResourceType.Tuple].Values;
 
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
@@ -231,13 +231,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
 
-        public ResourceContainer? GetResourceContainer(OperationGroup operationGroup)
+        public ResourceCollection? GetResourceCollection(OperationGroup operationGroup)
         {
-            if (EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out var result))
+            if (EnsureResourceCollections()[ResourceType.Default].TryGetValue(operationGroup, out var result))
             {
                 return result;
             }
-            if (EnsureResourceContainers()[ResourceType.Tuple].TryGetValue(operationGroup, out result))
+            if (EnsureResourceCollections()[ResourceType.Tuple].TryGetValue(operationGroup, out result))
             {
                 return result;
             }
@@ -344,29 +344,29 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>> EnsureResourceContainers()
+        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceCollection>> EnsureResourceCollections()
         {
-            if (_resourceContainers != null)
+            if (_resourceCollections != null)
             {
-                return _resourceContainers;
+                return _resourceCollections;
             }
 
-            _resourceContainers = new Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>();
-            _resourceContainers.Add(ResourceType.Default, new Dictionary<OperationGroup, ResourceContainer>());
-            _resourceContainers.Add(ResourceType.Tuple, new Dictionary<OperationGroup, ResourceContainer>());
+            _resourceCollections = new Dictionary<ResourceType, Dictionary<OperationGroup, ResourceCollection>>();
+            _resourceCollections.Add(ResourceType.Default, new Dictionary<OperationGroup, ResourceCollection>());
+            _resourceCollections.Add(ResourceType.Tuple, new Dictionary<OperationGroup, ResourceCollection>());
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 if (!operationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
                 {
                     var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
-                    var resourceContainer = new ResourceContainer(operationGroup, _context);
-                    // validate to ensure that all the resource container here have unique names
-                    EnsureUniqueName(_resourceContainers, resourceContainer);
-                    _resourceContainers[resourceType].Add(operationGroup, resourceContainer);
+                    var resourceCollection = new ResourceCollection(operationGroup, _context);
+                    // validate to ensure that all the resource collection here have unique names
+                    EnsureUniqueName(_resourceCollections, resourceCollection);
+                    _resourceCollections[resourceType].Add(operationGroup, resourceCollection);
                 }
             }
 
-            return _resourceContainers;
+            return _resourceCollections;
         }
 
         private Dictionary<OperationGroup, ResourceData> EnsureResourceData()

@@ -249,12 +249,12 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 WriteRemoveTagMethod();
             }
 
-            // 1. Listing myself at parent scope -> on the container named list
+            // 1. Listing myself at parent scope -> on the collection named list
             // 2. Listing myself at ancestor scope -> extension method if the ancestor is not in this RP, or follow #3 by listing myself as the children of the ancestor in the operations of the ancestor
             // 3. Listing children (might be resource or not) -> on the operations
 
             // write rest of the methods
-            var resourceContainer = _context.Library.GetResourceContainer(_resource.OperationGroup);
+            var resourceCollection = _context.Library.GetResourceCollection(_resource.OperationGroup);
             foreach (var clientMethod in _resource.ResourceClientMethods)
             {
                 if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
@@ -677,7 +677,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 _writer.Append($"await ");
             }
-            _writer.Line($"TagContainer.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
             _writer.Append($"var originalResponse = ");
             if (async)
             {
@@ -730,15 +730,15 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteChildNonSingletonResourceEntry(OperationGroup operationGroupOfChildResource)
         {
-            var container = _context.Library.GetResourceContainer(operationGroupOfChildResource);
-            if (container == null)
+            var collection = _context.Library.GetResourceCollection(operationGroupOfChildResource);
+            if (collection == null)
                 return;
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
-            _writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
-            using (_writer.Scope($"public {container.Type} Get{container.ResourceName.ToPlural()}()"))
+            _writer.WriteXmlDocumentationSummary($"Gets a list of {collection.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
+            _writer.WriteXmlDocumentationReturns($"An object representing collection of {collection.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
+            using (_writer.Scope($"public {collection.Type} Get{collection.ResourceName.ToPlural()}()"))
             {
-                _writer.Line($"return new {container.Type}(this);");
+                _writer.Line($"return new {collection.Type}(this);");
             }
         }
 

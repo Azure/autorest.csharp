@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             IReadOnlyList<string> operationGroupIsExtension,
             IReadOnlyList<string> operationGroupsToOmit,
             IReadOnlyList<string> noPropertyTypeReplacement,
+            IReadOnlyList<string> listException,
             JsonElement? operationGroupToResourceType = default,
             JsonElement? operationGroupToResource = default,
             JsonElement? operationGroupToParent = default,
@@ -41,6 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupIsExtension = operationGroupIsExtension;
             OperationGroupsToOmit = operationGroupsToOmit;
             NoPropertyTypeReplacement = noPropertyTypeReplacement;
+            ListException = listException;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
         }
 
@@ -53,6 +55,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyList<string> OperationGroupIsExtension { get; }
         public IReadOnlyList<string> OperationGroupsToOmit { get; }
         public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
+        public IReadOnlyList<string> ListException { get; }
         public bool IsArmCore { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
@@ -62,6 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<string[]?>("operation-group-is-extension").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("no-property-type-replacement").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                autoRest.GetValue<string[]?>("list-exception").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult(),
@@ -80,6 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(OperationGroupIsTuple), OperationGroupIsTuple);
             WriteNonEmptySettings(writer, nameof(OperationGroupIsExtension), OperationGroupIsExtension);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
+            WriteNonEmptySettings(writer, nameof(ListException), ListException);
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
         }
@@ -95,6 +100,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(OperationGroupToSingletonResource), out var singletonResource);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
             root.TryGetProperty(nameof(NoPropertyTypeReplacement), out var noPropertyTypeReplacment);
+            root.TryGetProperty(nameof(ListException), out var listException);
 
             var operationGroupIsTupleList = operationGroupIsTuple.ValueKind == JsonValueKind.Array
                 ? operationGroupIsTuple.EnumerateArray().Select(t => t.ToString()).ToArray()
@@ -112,6 +118,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 ? noPropertyTypeReplacment.EnumerateArray().Select(t => t.ToString()).ToList()
                 : new List<string>();
 
+            var listExceptionList = listException.ValueKind == JsonValueKind.Array
+                ? listException.EnumerateArray().Select(t => t.ToString()).ToList()
+                : new List<string>();
+
             root.TryGetProperty("ArmCore", out var isArmCore);
 
             return new MgmtConfiguration(
@@ -119,6 +129,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 operationGroupIsExtensionList,
                 operationGroupList,
                 noPropertyTypeReplacementList,
+                listExceptionList,
                 operationGroupToResourceType,
                 operationGroupToResource,
                 operationGroupToParent,

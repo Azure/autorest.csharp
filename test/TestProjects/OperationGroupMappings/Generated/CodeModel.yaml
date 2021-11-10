@@ -4,7 +4,7 @@ info: !Info
   title: OperationGroupMappings
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_12
+    - !NumberSchema &ref_13
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -15,7 +15,7 @@ schemas: !Schemas
           name: UsageCurrentValue
           description: The current usage of the resource.
       protocol: !Protocols {}
-    - !NumberSchema &ref_13
+    - !NumberSchema &ref_14
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -104,7 +104,17 @@ schemas: !Schemas
           name: ResourceLocation
           description: Resource location
       protocol: !Protocols {}
-    - !StringSchema &ref_27
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AvailabilitySetListResultNextLink
+          description: The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
+      protocol: !Protocols {}
+    - !StringSchema &ref_31
       type: string
       apiVersions:
         - !ApiVersion 
@@ -115,7 +125,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -125,7 +135,7 @@ schemas: !Schemas
           name: UsageNameValue
           description: The name of the resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_16
       type: string
       apiVersions:
         - !ApiVersion 
@@ -135,7 +145,7 @@ schemas: !Schemas
           name: UsageNameLocalizedValue
           description: The localized name of the resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_17
       type: string
       apiVersions:
         - !ApiVersion 
@@ -146,7 +156,7 @@ schemas: !Schemas
           description: The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_20
+    - !ConstantSchema &ref_22
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -156,7 +166,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_24
+    - !ConstantSchema &ref_26
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -166,7 +176,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_11
+    - !ConstantSchema &ref_12
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -189,102 +199,150 @@ schemas: !Schemas
           description: Resource tags
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_2
+    - !ObjectSchema &ref_28
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      parents: !Relations 
-        all:
-          - !ObjectSchema &ref_8
-            type: object
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_20
+            type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            children: !Relations 
-              all:
-                - *ref_2
-              immediate:
-                - *ref_2
-            properties:
-              - !Property 
-                schema: *ref_3
-                readOnly: true
-                required: false
-                serializedName: id
-                language: !Languages 
-                  default:
-                    name: id
-                    description: Resource Id
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_4
-                readOnly: true
-                required: false
-                serializedName: name
-                language: !Languages 
-                  default:
-                    name: name
-                    description: Resource name
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_5
-                readOnly: true
-                required: false
-                serializedName: type
-                language: !Languages 
-                  default:
-                    name: type
-                    description: Resource type
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_6
-                required: true
-                serializedName: location
-                language: !Languages 
-                  default:
-                    name: location
-                    description: Resource location
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_7
-                required: false
-                serializedName: tags
-                language: !Languages 
-                  default:
-                    name: tags
-                    description: Resource tags
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - output
-            extensions:
-              x-ms-azure-resource: true
+            elementType: !ObjectSchema &ref_2
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2020-06-01'
+              parents: !Relations 
+                all:
+                  - !ObjectSchema &ref_8
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: '2020-06-01'
+                    children: !Relations 
+                      all:
+                        - *ref_2
+                      immediate:
+                        - *ref_2
+                    properties:
+                      - !Property 
+                        schema: *ref_3
+                        readOnly: true
+                        required: false
+                        serializedName: id
+                        language: !Languages 
+                          default:
+                            name: id
+                            description: Resource Id
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_4
+                        readOnly: true
+                        required: false
+                        serializedName: name
+                        language: !Languages 
+                          default:
+                            name: name
+                            description: Resource name
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_5
+                        readOnly: true
+                        required: false
+                        serializedName: type
+                        language: !Languages 
+                          default:
+                            name: type
+                            description: Resource type
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_6
+                        required: true
+                        serializedName: location
+                        language: !Languages 
+                          default:
+                            name: location
+                            description: Resource location
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_7
+                        required: false
+                        serializedName: tags
+                        language: !Languages 
+                          default:
+                            name: tags
+                            description: Resource tags
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - output
+                    extensions:
+                      x-ms-azure-resource: true
+                    language: !Languages 
+                      default:
+                        name: Resource
+                        description: The Resource model definition.
+                        namespace: ''
+                    protocol: !Protocols {}
+                immediate:
+                  - *ref_8
+              properties:
+                - !Property 
+                  schema: *ref_9
+                  serializedName: foo
+                  language: !Languages 
+                    default:
+                      name: foo
+                      description: ''
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_10
+                  serializedName: sku
+                  language: !Languages 
+                    default:
+                      name: sku
+                      description: sku
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - output
+              language: !Languages 
+                default:
+                  name: AvailabilitySet
+                  description: >-
+                    Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
+                    information about availability sets, see [Manage the availability of virtual
+                    machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance,
+                    see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br>
+                    Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+                  namespace: ''
+              protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Resource
-                description: The Resource model definition.
-                namespace: ''
+                name: AvailabilitySetListResultValue
+                description: The list of compute resource usages.
             protocol: !Protocols {}
-        immediate:
-          - *ref_8
-      properties:
-        - !Property 
-          schema: *ref_9
-          serializedName: foo
+          required: true
+          serializedName: value
           language: !Languages 
             default:
-              name: foo
-              description: ''
+              name: value
+              description: The list of compute resource usages.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_10
-          serializedName: sku
+          schema: *ref_11
+          required: false
+          serializedName: nextLink
           language: !Languages 
             default:
-              name: sku
-              description: sku
+              name: nextLink
+              description: The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -292,36 +350,32 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: AvailabilitySet
-          description: >-
-            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-            information about availability sets, see [Manage the availability of virtual
-            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
-            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
-            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+          name: AvailabilitySetListResult
+          description: The List Usages operation response.
           namespace: ''
       protocol: !Protocols {}
+    - *ref_2
     - *ref_8
-    - !ObjectSchema &ref_29
+    - !ObjectSchema &ref_33
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_19
+          schema: !ArraySchema &ref_21
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !ObjectSchema &ref_17
+            elementType: !ObjectSchema &ref_18
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2020-06-01'
               properties:
                 - !Property 
-                  schema: *ref_11
+                  schema: *ref_12
                   required: true
                   serializedName: unit
                   language: !Languages 
@@ -330,7 +384,7 @@ schemas: !Schemas
                       description: An enum describing the unit of usage measurement.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_12
+                  schema: *ref_13
                   required: true
                   serializedName: currentValue
                   language: !Languages 
@@ -339,7 +393,7 @@ schemas: !Schemas
                       description: The current usage of the resource.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_13
+                  schema: *ref_14
                   required: true
                   serializedName: limit
                   language: !Languages 
@@ -348,14 +402,14 @@ schemas: !Schemas
                       description: The maximum permitted usage of the resource.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_18
+                  schema: !ObjectSchema &ref_19
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_14
+                        schema: *ref_15
                         serializedName: value
                         language: !Languages 
                           default:
@@ -363,7 +417,7 @@ schemas: !Schemas
                             description: The name of the resource.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_15
+                        schema: *ref_16
                         serializedName: localizedValue
                         language: !Languages 
                           default:
@@ -410,7 +464,7 @@ schemas: !Schemas
               description: The list of compute resource usages.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_16
+          schema: *ref_17
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -428,12 +482,13 @@ schemas: !Schemas
           description: The List Usages operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_17
     - *ref_18
-  arrays:
     - *ref_19
+  arrays:
+    - *ref_20
+    - *ref_21
 globalParameters:
-  - !Parameter &ref_23
+  - !Parameter &ref_25
     schema: *ref_1
     implementation: Client
     required: true
@@ -447,7 +502,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_21
+  - !Parameter &ref_23
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -463,8 +518,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_22
-    schema: *ref_20
+  - !Parameter &ref_24
+    schema: *ref_22
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -485,8 +540,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_21
-          - !Parameter &ref_25
+          - *ref_23
+          - !Parameter &ref_27
             schema: *ref_1
             implementation: Method
             required: true
@@ -498,7 +553,74 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_26
+          - *ref_24
+          - *ref_25
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_27
+        responses:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: Retrieves information about an availability set.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_23
+          - !Parameter &ref_29
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_30
             schema: *ref_1
             implementation: Method
             required: true
@@ -510,13 +632,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_22
-          - *ref_23
+          - *ref_24
+          - *ref_25
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -539,8 +661,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_25
-          - *ref_26
+          - *ref_29
+          - *ref_30
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -573,9 +695,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_21
-          - !Parameter &ref_28
-            schema: *ref_27
+          - *ref_23
+          - !Parameter &ref_32
+            schema: *ref_31
             implementation: Method
             required: true
             language: !Languages 
@@ -586,13 +708,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_22
-          - *ref_23
+          - *ref_24
+          - *ref_25
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -615,10 +737,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_28
+          - *ref_32
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_33
             language: !Languages 
               default:
                 name: ''

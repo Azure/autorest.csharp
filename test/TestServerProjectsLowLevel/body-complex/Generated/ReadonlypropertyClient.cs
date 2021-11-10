@@ -53,7 +53,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that have readonly properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -70,7 +70,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> GetValidAsync(RequestOptions options = null)
+        public virtual async Task<Response> GetValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.GetValid");
@@ -78,7 +78,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -88,7 +88,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that have readonly properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -105,7 +105,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response GetValid(RequestOptions options = null)
+        public virtual Response GetValid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.GetValid");
@@ -113,7 +113,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreateGetValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -124,7 +124,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that have readonly properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -142,7 +142,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.PutValid");
@@ -150,7 +150,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -161,7 +161,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types that have readonly properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -179,7 +179,7 @@ namespace body_complex_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response PutValid(RequestContent content, RequestOptions options = null)
+        public virtual Response PutValid(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.PutValid");
@@ -187,7 +187,7 @@ namespace body_complex_LowLevel
             try
             {
                 using HttpMessage message = CreatePutValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

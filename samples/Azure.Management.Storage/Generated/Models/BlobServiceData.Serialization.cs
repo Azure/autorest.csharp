@@ -59,6 +59,11 @@ namespace Azure.Management.Storage
                 writer.WritePropertyName("containerDeleteRetentionPolicy");
                 writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
             }
+            if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
+            {
+                writer.WritePropertyName("lastAccessTimeTrackingPolicy");
+                writer.WriteObjectValue(LastAccessTimeTrackingPolicy);
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
@@ -77,6 +82,7 @@ namespace Azure.Management.Storage
             Optional<ChangeFeed> changeFeed = default;
             Optional<RestorePolicyProperties> restorePolicy = default;
             Optional<DeleteRetentionPolicy> containerDeleteRetentionPolicy = default;
+            Optional<LastAccessTimeTrackingPolicy> lastAccessTimeTrackingPolicy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"))
@@ -188,11 +194,21 @@ namespace Azure.Management.Storage
                             containerDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
                             continue;
                         }
+                        if (property0.NameEquals("lastAccessTimeTrackingPolicy"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            lastAccessTimeTrackingPolicy = LastAccessTimeTrackingPolicy.DeserializeLastAccessTimeTrackingPolicy(property0.Value);
+                            continue;
+                        }
                     }
                     continue;
                 }
             }
-            return new BlobServiceData(id, name, type, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value);
+            return new BlobServiceData(id, name, type, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value, lastAccessTimeTrackingPolicy.Value);
         }
     }
 }

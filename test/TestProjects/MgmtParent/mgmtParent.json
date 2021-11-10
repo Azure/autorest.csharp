@@ -1113,6 +1113,25 @@
             ],
             "description": "Specifies information about the Dedicated host."
         },
+        "DedicatedHostGroupListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DedicatedHostGroup"
+                    },
+                    "description": "The list of dedicated hosts"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The list dedicated host operation response."
+        },
         "DedicatedHostGroup": {
             "properties": {
                 "foo": {

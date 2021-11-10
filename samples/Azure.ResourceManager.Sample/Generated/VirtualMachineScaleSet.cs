@@ -202,7 +202,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -231,7 +231,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -260,7 +260,7 @@ namespace Azure.ResourceManager.Sample
                 await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -289,7 +289,7 @@ namespace Azure.ResourceManager.Sample
                 TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -317,7 +317,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -345,7 +345,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1235,9 +1235,9 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a list of VirtualMachineScaleSetExtensions in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetExtensions and their operations over a VirtualMachineScaleSet. </returns>
-        public VirtualMachineScaleSetExtensionContainer GetVirtualMachineScaleSetExtensions()
+        public VirtualMachineScaleSetExtensionCollection GetVirtualMachineScaleSetExtensions()
         {
-            return new VirtualMachineScaleSetExtensionContainer(this);
+            return new VirtualMachineScaleSetExtensionCollection(this);
         }
 
         /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgrade along with the instance operations that can be performed on it. </summary>
@@ -1249,16 +1249,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a list of VirtualMachineScaleSetVirtualMachineExtensions in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetVirtualMachineExtensions and their operations over a VirtualMachineScaleSet. </returns>
-        public VirtualMachineScaleSetVirtualMachineExtensionContainer GetVirtualMachineScaleSetVirtualMachineExtensions()
+        public VirtualMachineScaleSetVirtualMachineExtensionCollection GetVirtualMachineScaleSetVirtualMachineExtensions()
         {
-            return new VirtualMachineScaleSetVirtualMachineExtensionContainer(this);
+            return new VirtualMachineScaleSetVirtualMachineExtensionCollection(this);
         }
 
         /// <summary> Gets a list of VirtualMachineScaleSetVMs in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetVMs and their operations over a VirtualMachineScaleSet. </returns>
-        public VirtualMachineScaleSetVMContainer GetVirtualMachineScaleSetVMs()
+        public VirtualMachineScaleSetVMCollection GetVirtualMachineScaleSetVMs()
         {
-            return new VirtualMachineScaleSetVMContainer(this);
+            return new VirtualMachineScaleSetVMCollection(this);
         }
     }
 }
