@@ -100,16 +100,19 @@ namespace AutoRest.CSharp.Output.Models
                         bool isCollapseParamRequired = serviceRequest.Parameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
 
                         CSharpType? type = null;
+                        string name = "";
                         if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
                         {
                             type = typeof(Azure.MatchConditions);
+                            name = "matchConditions";
                         } else
                         {
                             type = typeof(Azure.RequestConditions);
+                            name = "requestConditions";
                         }
                         type = type.WithIsNullableAndIsValueType(!isCollapseParamRequired, false);
 
-                        Parameter collapsedParameter = new Parameter("requestConditions", "The content to send as the request conditions of the request.", type, null, isCollapseParamRequired);
+                        Parameter collapsedParameter = new Parameter(name, "The content to send as the request conditions of the request.", type, null, isCollapseParamRequired);
 
                         IEnumerable<RequestParameter>? conditionParameters = null;
                         if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)

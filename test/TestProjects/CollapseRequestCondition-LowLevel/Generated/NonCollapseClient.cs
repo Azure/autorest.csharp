@@ -56,14 +56,14 @@ namespace CollapseRequestConditions
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapsePUTAsync(RequestContent content, ETag ifMatch = (string)null, RequestOptions options = null)
+        public virtual async Task<Response> CollapsePutAsync(RequestContent content, ETag ifMatch = (string)null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePUT");
+            using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePUTRequest(content, ifMatch);
+                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -77,14 +77,14 @@ namespace CollapseRequestConditions
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapsePUT(RequestContent content, ETag ifMatch = (string)null, RequestOptions options = null)
+        public virtual Response CollapsePut(RequestContent content, ETag ifMatch = (string)null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePUT");
+            using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePUTRequest(content, ifMatch);
+                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -138,7 +138,7 @@ namespace CollapseRequestConditions
             }
         }
 
-        internal HttpMessage CreateCollapsePUTRequest(RequestContent content, ETag ifMatch)
+        internal HttpMessage CreateCollapsePutRequest(RequestContent content, ETag ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;

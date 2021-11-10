@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace CollapseRequestConditions
 {
-    /// <summary> The RequestCondtionCollapse service client. </summary>
-    public partial class RequestCondtionCollapseClient
+    /// <summary> The RequestConditionCollapse service client. </summary>
+    public partial class RequestConditionCollapseClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -26,17 +26,17 @@ namespace CollapseRequestConditions
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
 
-        /// <summary> Initializes a new instance of RequestCondtionCollapseClient for mocking. </summary>
-        protected RequestCondtionCollapseClient()
+        /// <summary> Initializes a new instance of RequestConditionCollapseClient for mocking. </summary>
+        protected RequestConditionCollapseClient()
         {
         }
 
-        /// <summary> Initializes a new instance of RequestCondtionCollapseClient. </summary>
+        /// <summary> Initializes a new instance of RequestConditionCollapseClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public RequestCondtionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
+        public RequestConditionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
         {
             if (credential == null)
             {
@@ -56,14 +56,14 @@ namespace CollapseRequestConditions
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapsePUTAsync(RequestConditions requestConditions, RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> CollapsePutAsync(RequestConditions requestConditions, RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestCondtionCollapseClient.CollapsePUT");
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePUTRequest(requestConditions, content);
+                using HttpMessage message = CreateCollapsePutRequest(requestConditions, content);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -77,14 +77,14 @@ namespace CollapseRequestConditions
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapsePUT(RequestConditions requestConditions, RequestContent content, RequestOptions options = null)
+        public virtual Response CollapsePut(RequestConditions requestConditions, RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestCondtionCollapseClient.CollapsePUT");
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePUTRequest(requestConditions, content);
+                using HttpMessage message = CreateCollapsePutRequest(requestConditions, content);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -100,7 +100,7 @@ namespace CollapseRequestConditions
         public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestCondtionCollapseClient.CollapseGet");
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
             scope.Start();
             try
             {
@@ -120,7 +120,7 @@ namespace CollapseRequestConditions
         public virtual Response CollapseGet(RequestConditions requestConditions, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestCondtionCollapseClient.CollapseGet");
+            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
             scope.Start();
             try
             {
@@ -134,14 +134,14 @@ namespace CollapseRequestConditions
             }
         }
 
-        internal HttpMessage CreateCollapsePUTRequest(RequestConditions requestConditions, RequestContent content)
+        internal HttpMessage CreateCollapsePutRequest(RequestConditions requestConditions, RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/RequestCondtionCollapse/", false);
+            uri.AppendPath("/RequestConditionCollapse/", false);
             request.Uri = uri;
             if (requestConditions != null)
             {
@@ -179,7 +179,7 @@ namespace CollapseRequestConditions
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/RequestCondtionCollapse/", false);
+            uri.AppendPath("/RequestConditionCollapse/", false);
             request.Uri = uri;
             if (requestConditions != null)
             {

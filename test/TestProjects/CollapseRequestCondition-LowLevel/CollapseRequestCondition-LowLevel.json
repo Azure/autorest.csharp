@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CollapseRequestConditions",
-    "description": "RequestCondtion collapse",
+    "description": "Search/replace RequestConditions/MatchConditions for conditions",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -16,9 +16,9 @@
     "application/json"
   ],
   "paths": {
-    "/RequestCondtionCollapse/": {
+    "/RequestConditionCollapse/": {
       "put": {
-        "operationId": "RequestCondtionCollapse_collapsePUT",
+        "operationId": "RequestConditionCollapse_collapsePut",
         "parameters": [
           {
             "name": "body",
@@ -86,7 +86,7 @@
         }
       },
       "get": {
-        "operationId": "RequestCondtionCollapse_collapseGet",
+        "operationId": "RequestConditionCollapse_collapseGet",
         "parameters": [
 	        {
             "name": "If-Match",
@@ -147,9 +147,9 @@
         }
       }
     },
-    "/RequestCondtionCollapse/withHead": {
+    "/MatchConditionCollapse/withHead": {
       "get": {
-        "operationId": "MatchCondtionCollapse_collapseGetWithHead",
+        "operationId": "MatchConditionCollapse_collapseGetWithHead",
         "parameters": [
 	        {
             "name": "If-Match",
@@ -194,7 +194,7 @@
     },
     "/MatchConditionCollapse/": {
       "put": {
-        "operationId": "MatchCondtionCollapse_collapsePUT",
+        "operationId": "MatchConditionCollapse_collapsePut",
         "parameters": [
           {
             "name": "body",
@@ -236,7 +236,7 @@
         }
       },
       "get": {
-        "operationId": "MatchCondtionCollapse_collapseGet",
+        "operationId": "MatchConditionCollapse_collapseGet",
         "parameters": [
 	        {
             "name": "If-Match",
@@ -273,7 +273,7 @@
     },
     "/MatchConditionCollapse/multi": {
       "get": {
-        "operationId": "MatchCondtionCollapse_MulticollapseGet",
+        "operationId": "MatchConditionCollapse_MulticollapseGet",
         "parameters": [
 	        {
             "name": "If-Match",
@@ -323,7 +323,7 @@
     },
     "/NonCollapse/": {
       "put": {
-        "operationId": "NonCollapse_collapsePUT",
+        "operationId": "NonCollapse_collapsePut",
         "parameters": [
           {
             "name": "body",

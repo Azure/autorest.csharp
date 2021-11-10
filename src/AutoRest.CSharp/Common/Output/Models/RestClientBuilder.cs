@@ -299,16 +299,19 @@ namespace AutoRest.CSharp.Output.Models
             if (collapseType != RequestConditionCollapseType.None)
             {
                 CSharpType? type = null;
+                string name = "";
                 if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
                 {
                     type = typeof(Azure.MatchConditions);
+                    name = "matchConditions";
                 } else
                 {
                     type = typeof(Azure.RequestConditions);
+                    name = "requestConditions";
                 }
                 bool isCollapseParamRequired = requestParameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
                 type = type.WithIsNullableAndIsValueType(!isCollapseParamRequired, false);
-                requestConditionsPram = new Parameter("requestConditions", "The content to send as the request conditions of the request.", type, null, false);
+                requestConditionsPram = new Parameter(name, "The content to send as the request conditions of the request.", type, null, false);
                 requestConditions = new RequestConditionsHeader("conditions", requestConditionsPram, RequestParameterSerializationStyle.Simple);
                 List<RequestHeader> newHeaders = new List<RequestHeader>();
                 foreach (var header in headers)
@@ -636,6 +639,10 @@ namespace AutoRest.CSharp.Output.Models
             {
                 type = typeof(Azure.ETag);
                 type = type.WithIsNullableAndIsValueType(requestParameter.IsNullable || !requestParameter.IsRequired, false);
+                if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
+                {
+                    type = type.WithNullable(true);
+                }
             }
             return new Parameter(
                 requestParameter.CSharpName(),

@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.Input
             "If-Modified-Since",
             "If-Unmodified-Since",
         };
-        private static HashSet<string> EtagConditionRequstHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        private static HashSet<string> MatchConditionRequstHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "If-Match",
             "If-None-Match",
@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.Input
 
         public bool IsMatchConditionHeader()
         {
-            return EtagConditionRequstHeader.Contains(Language.Default.SerializedName ?? Language.Default.Name) && In == ParameterLocation.Header;
+            return MatchConditionRequstHeader.Contains(Language.Default.SerializedName ?? Language.Default.Name) && In == ParameterLocation.Header;
         }
     }
 

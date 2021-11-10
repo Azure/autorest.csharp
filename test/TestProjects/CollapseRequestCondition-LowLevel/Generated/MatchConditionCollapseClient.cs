@@ -13,8 +13,8 @@ using Azure.Core.Pipeline;
 
 namespace CollapseRequestConditions
 {
-    /// <summary> The MatchCondtionCollapse service client. </summary>
-    public partial class MatchCondtionCollapseClient
+    /// <summary> The MatchConditionCollapse service client. </summary>
+    public partial class MatchConditionCollapseClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -26,17 +26,17 @@ namespace CollapseRequestConditions
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get => _pipeline; }
 
-        /// <summary> Initializes a new instance of MatchCondtionCollapseClient for mocking. </summary>
-        protected MatchCondtionCollapseClient()
+        /// <summary> Initializes a new instance of MatchConditionCollapseClient for mocking. </summary>
+        protected MatchConditionCollapseClient()
         {
         }
 
-        /// <summary> Initializes a new instance of MatchCondtionCollapseClient. </summary>
+        /// <summary> Initializes a new instance of MatchConditionCollapseClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public MatchCondtionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
+        public MatchConditionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
         {
             if (credential == null)
             {
@@ -53,17 +53,17 @@ namespace CollapseRequestConditions
         }
 
         /// <param name="otherHeader"> other header. </param>
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetWithHeadAsync(string otherHeader = null, MatchConditions requestConditions, RequestOptions options = null)
+        public virtual async Task<Response> CollapseGetWithHeadAsync(string otherHeader = null, MatchConditions matchConditions, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchCondtionCollapseClient.CollapseGetWithHead");
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, requestConditions);
+                using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -74,17 +74,17 @@ namespace CollapseRequestConditions
         }
 
         /// <param name="otherHeader"> other header. </param>
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGetWithHead(string otherHeader = null, MatchConditions requestConditions, RequestOptions options = null)
+        public virtual Response CollapseGetWithHead(string otherHeader = null, MatchConditions matchConditions, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchCondtionCollapseClient.CollapseGetWithHead");
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, requestConditions);
+                using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -94,18 +94,18 @@ namespace CollapseRequestConditions
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapsePUTAsync(MatchConditions requestConditions, RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> CollapsePutAsync(MatchConditions matchConditions, RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchCondtionCollapseClient.CollapsePUT");
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePUTRequest(requestConditions, content);
+                using HttpMessage message = CreateCollapsePutRequest(matchConditions, content);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -115,18 +115,18 @@ namespace CollapseRequestConditions
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapsePUT(MatchConditions requestConditions, RequestContent content, RequestOptions options = null)
+        public virtual Response CollapsePut(MatchConditions matchConditions, RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchCondtionCollapseClient.CollapsePUT");
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePUTRequest(requestConditions, content);
+                using HttpMessage message = CreateCollapsePutRequest(matchConditions, content);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -136,17 +136,17 @@ namespace CollapseRequestConditions
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetAsync(MatchConditions requestConditions, RequestOptions options = null)
+        public virtual async Task<Response> CollapseGetAsync(MatchConditions matchConditions, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchCondtionCollapseClient.CollapseGet");
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(requestConditions);
+                using HttpMessage message = CreateCollapseGetRequest(matchConditions);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -156,17 +156,17 @@ namespace CollapseRequestConditions
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGet(MatchConditions requestConditions, RequestOptions options = null)
+        public virtual Response CollapseGet(MatchConditions matchConditions, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchCondtionCollapseClient.CollapseGet");
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(requestConditions);
+                using HttpMessage message = CreateCollapseGetRequest(matchConditions);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -177,17 +177,17 @@ namespace CollapseRequestConditions
         }
 
         /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> MulticollapseGetAsync(DateTimeOffset? ifModifiedSince = null, MatchConditions requestConditions, RequestOptions options = null)
+        public virtual async Task<Response> MulticollapseGetAsync(DateTimeOffset? ifModifiedSince = null, MatchConditions matchConditions, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchCondtionCollapseClient.MulticollapseGet");
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateMulticollapseGetRequest(ifModifiedSince, requestConditions);
+                using HttpMessage message = CreateMulticollapseGetRequest(ifModifiedSince, matchConditions);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -198,17 +198,17 @@ namespace CollapseRequestConditions
         }
 
         /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response MulticollapseGet(DateTimeOffset? ifModifiedSince = null, MatchConditions requestConditions, RequestOptions options = null)
+        public virtual Response MulticollapseGet(DateTimeOffset? ifModifiedSince = null, MatchConditions matchConditions, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchCondtionCollapseClient.MulticollapseGet");
+            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateMulticollapseGetRequest(ifModifiedSince, requestConditions);
+                using HttpMessage message = CreateMulticollapseGetRequest(ifModifiedSince, matchConditions);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -218,27 +218,27 @@ namespace CollapseRequestConditions
             }
         }
 
-        internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions requestConditions)
+        internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/RequestCondtionCollapse/withHead", false);
+            uri.AppendPath("/MatchConditionCollapse/withHead", false);
             request.Uri = uri;
             if (otherHeader != null)
             {
                 request.Headers.Add("otherHeader", otherHeader);
             }
-            if (requestConditions != null)
+            if (matchConditions != null)
             {
-                using ETag ifMatch = requestConditions.IfMatch;
+                using ETag ifMatch = matchConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = requestConditions.IfNoneMatch;
+                using ETag ifNoneMatch = matchConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
@@ -248,7 +248,7 @@ namespace CollapseRequestConditions
             return message;
         }
 
-        internal HttpMessage CreateCollapsePUTRequest(MatchConditions requestConditions, RequestContent content)
+        internal HttpMessage CreateCollapsePutRequest(MatchConditions matchConditions, RequestContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -257,14 +257,14 @@ namespace CollapseRequestConditions
             uri.Reset(_endpoint);
             uri.AppendPath("/MatchConditionCollapse/", false);
             request.Uri = uri;
-            if (requestConditions != null)
+            if (matchConditions != null)
             {
-                using ETag ifMatch = requestConditions.IfMatch;
+                using ETag ifMatch = matchConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = requestConditions.IfNoneMatch;
+                using ETag ifNoneMatch = matchConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
@@ -276,7 +276,7 @@ namespace CollapseRequestConditions
             return message;
         }
 
-        internal HttpMessage CreateCollapseGetRequest(MatchConditions requestConditions)
+        internal HttpMessage CreateCollapseGetRequest(MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -285,14 +285,14 @@ namespace CollapseRequestConditions
             uri.Reset(_endpoint);
             uri.AppendPath("/MatchConditionCollapse/", false);
             request.Uri = uri;
-            if (requestConditions != null)
+            if (matchConditions != null)
             {
-                using ETag ifMatch = requestConditions.IfMatch;
+                using ETag ifMatch = matchConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = requestConditions.IfNoneMatch;
+                using ETag ifNoneMatch = matchConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
@@ -302,7 +302,7 @@ namespace CollapseRequestConditions
             return message;
         }
 
-        internal HttpMessage CreateMulticollapseGetRequest(DateTimeOffset? ifModifiedSince, MatchConditions requestConditions)
+        internal HttpMessage CreateMulticollapseGetRequest(DateTimeOffset? ifModifiedSince, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -315,14 +315,14 @@ namespace CollapseRequestConditions
             {
                 request.Headers.Add("If-Modified-Since", ifModifiedSince.Value, "R");
             }
-            if (requestConditions != null)
+            if (matchConditions != null)
             {
-                using ETag ifMatch = requestConditions.IfMatch;
+                using ETag ifMatch = matchConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = requestConditions.IfNoneMatch;
+                using ETag ifNoneMatch = matchConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
