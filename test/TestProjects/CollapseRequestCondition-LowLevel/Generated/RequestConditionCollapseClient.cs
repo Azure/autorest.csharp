@@ -52,18 +52,18 @@ namespace CollapseRequestConditions
             _endpoint = endpoint;
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapsePutAsync(RequestConditions requestConditions, RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> CollapsePutAsync(RequestContent content, RequestConditions requestConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(requestConditions, content);
+                using HttpMessage message = CreateCollapsePutRequest(content, requestConditions);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -73,18 +73,18 @@ namespace CollapseRequestConditions
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapsePut(RequestConditions requestConditions, RequestContent content, RequestOptions options = null)
+        public virtual Response CollapsePut(RequestContent content, RequestConditions requestConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(requestConditions, content);
+                using HttpMessage message = CreateCollapsePutRequest(content, requestConditions);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -97,7 +97,7 @@ namespace CollapseRequestConditions
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions, RequestOptions options = null)
+        public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
@@ -117,7 +117,7 @@ namespace CollapseRequestConditions
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGet(RequestConditions requestConditions, RequestOptions options = null)
+        public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
@@ -134,7 +134,7 @@ namespace CollapseRequestConditions
             }
         }
 
-        internal HttpMessage CreateCollapsePutRequest(RequestConditions requestConditions, RequestContent content)
+        internal HttpMessage CreateCollapsePutRequest(RequestContent content, RequestConditions requestConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;

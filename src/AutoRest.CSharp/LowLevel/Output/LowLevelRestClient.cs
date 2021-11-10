@@ -111,8 +111,19 @@ namespace AutoRest.CSharp.Output.Models
                             name = "requestConditions";
                         }
                         type = type.WithIsNullableAndIsValueType(!isCollapseParamRequired, false);
-
-                        Parameter collapsedParameter = new Parameter(name, "The content to send as the request conditions of the request.", type, null, isCollapseParamRequired);
+                        Constant? defaultValue = null;
+                        if (!isCollapseParamRequired && defaultValue == null)
+                        {
+                            defaultValue = Constant.Default(type);
+                        }
+                        Parameter collapsedParameter = new Parameter(
+                                                                name,
+                                                                "The content to send as the request conditions of the request.",
+                                                                type,
+                                                                defaultValue,
+                                                                isCollapseParamRequired,
+                                                                false,
+                                                                false);
 
                         IEnumerable<RequestParameter>? conditionParameters = null;
                         if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)

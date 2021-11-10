@@ -56,7 +56,7 @@ namespace CollapseRequestConditions
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetWithHeadAsync(string otherHeader = null, MatchConditions matchConditions, RequestOptions options = null)
+        public virtual async Task<Response> CollapseGetWithHeadAsync(string otherHeader = null, MatchConditions matchConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
@@ -77,7 +77,7 @@ namespace CollapseRequestConditions
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGetWithHead(string otherHeader = null, MatchConditions matchConditions, RequestOptions options = null)
+        public virtual Response CollapseGetWithHead(string otherHeader = null, MatchConditions matchConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
@@ -94,18 +94,18 @@ namespace CollapseRequestConditions
             }
         }
 
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapsePutAsync(MatchConditions matchConditions, RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> CollapsePutAsync(RequestContent content, MatchConditions matchConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(matchConditions, content);
+                using HttpMessage message = CreateCollapsePutRequest(content, matchConditions);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -115,18 +115,18 @@ namespace CollapseRequestConditions
             }
         }
 
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapsePut(MatchConditions matchConditions, RequestContent content, RequestOptions options = null)
+        public virtual Response CollapsePut(RequestContent content, MatchConditions matchConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(matchConditions, content);
+                using HttpMessage message = CreateCollapsePutRequest(content, matchConditions);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
             }
             catch (Exception e)
@@ -139,7 +139,7 @@ namespace CollapseRequestConditions
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetAsync(MatchConditions matchConditions, RequestOptions options = null)
+        public virtual async Task<Response> CollapseGetAsync(MatchConditions matchConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
@@ -159,7 +159,7 @@ namespace CollapseRequestConditions
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGet(MatchConditions matchConditions, RequestOptions options = null)
+        public virtual Response CollapseGet(MatchConditions matchConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
@@ -180,7 +180,7 @@ namespace CollapseRequestConditions
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> MulticollapseGetAsync(DateTimeOffset? ifModifiedSince = null, MatchConditions matchConditions, RequestOptions options = null)
+        public virtual async Task<Response> MulticollapseGetAsync(DateTimeOffset? ifModifiedSince = null, MatchConditions matchConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
@@ -201,7 +201,7 @@ namespace CollapseRequestConditions
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response MulticollapseGet(DateTimeOffset? ifModifiedSince = null, MatchConditions matchConditions, RequestOptions options = null)
+        public virtual Response MulticollapseGet(DateTimeOffset? ifModifiedSince = null, MatchConditions matchConditions = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
@@ -248,7 +248,7 @@ namespace CollapseRequestConditions
             return message;
         }
 
-        internal HttpMessage CreateCollapsePutRequest(MatchConditions matchConditions, RequestContent content)
+        internal HttpMessage CreateCollapsePutRequest(RequestContent content, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;

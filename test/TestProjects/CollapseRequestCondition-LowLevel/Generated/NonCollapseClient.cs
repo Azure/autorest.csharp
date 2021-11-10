@@ -56,7 +56,7 @@ namespace CollapseRequestConditions
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapsePutAsync(RequestContent content, ETag ifMatch = (string)null, RequestOptions options = null)
+        public virtual async Task<Response> CollapsePutAsync(RequestContent content, ETag ifMatch = (ETag)null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
@@ -77,7 +77,7 @@ namespace CollapseRequestConditions
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapsePut(RequestContent content, ETag ifMatch = (string)null, RequestOptions options = null)
+        public virtual Response CollapsePut(RequestContent content, ETag ifMatch = (ETag)null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
@@ -99,7 +99,7 @@ namespace CollapseRequestConditions
         /// <param name="ifUnmodifiedSince"> Specify this header value to operate only on a blob if it has not been modified since the specified date/time. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetAsync(ETag ifMatch = (string)null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestOptions options = null)
+        public virtual async Task<Response> CollapseGetAsync(ETag ifMatch = (ETag)null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
@@ -121,7 +121,7 @@ namespace CollapseRequestConditions
         /// <param name="ifUnmodifiedSince"> Specify this header value to operate only on a blob if it has not been modified since the specified date/time. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGet(ETag ifMatch = (string)null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestOptions options = null)
+        public virtual Response CollapseGet(ETag ifMatch = (ETag)null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
