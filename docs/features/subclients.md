@@ -49,15 +49,15 @@ For each operation group, **autorest.csharp** generates individual client type c
 ```cs
 public partial class NamedGroupClient
 {
-    public virtual async Task<Response> Op1Async(RequestOptions options = null);
-    public virtual Response Op1(RequestOptions options = null);
+    public virtual async Task<Response> Op1Async(RequestContext options = null);
+    public virtual Response Op1(RequestContext options = null);
 }
 ```
 ```cs
 public partial class MyServiceClient
 {
-    public virtual async Task<Response> Op2Async(RequestOptions options = null);
-    public virtual Response Op2(RequestOptions options = null);
+    public virtual async Task<Response> Op2Async(RequestContext options = null);
+    public virtual Response Op2(RequestContext options = null);
 }
 ```
 
@@ -105,8 +105,8 @@ With multiple service clients it may be better to group them all under one top-l
 ```cs
 public partial class MyServiceClient
 {
-    public virtual async Task<Response> Op2Async(RequestOptions options = null);
-    public virtual Response Op2(RequestOptions options = null);
+    public virtual async Task<Response> Op2Async(RequestContext options = null);
+    public virtual Response Op2(RequestContext options = null);
 
     public virtual NamedGroup GetNamedGroup();
 }
@@ -114,8 +114,8 @@ public partial class MyServiceClient
 ```cs
 public partial class NamedGroup
 {
-    public virtual async Task<Response> Op1Async(RequestOptions options = null);
-    public virtual Response Op1(RequestOptions options = null);
+    public virtual async Task<Response> Op1Async(RequestContext options = null);
+    public virtual Response Op1(RequestContext options = null);
 }
 ```
 
@@ -174,8 +174,8 @@ Operations inside one operation group may contain methods bound to a specific re
 ```cs
 public partial class PurviewAccountsClient
 {
-    public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken = null, RequestOptions options = null);
-    public virtual Pageable<BinaryData> GetCollections(string skipToken = null, RequestOptions options = null);
+    public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken = null, RequestContext options = null);
+    public virtual Pageable<BinaryData> GetCollections(string skipToken = null, RequestContext options = null);
 
     public virtual PurviewAccountCollections GetPurviewAccountCollections(string collectionName)
 }
@@ -186,11 +186,11 @@ public partial class PurviewAccountCollections
 {
     public string CollectionName { get; }
 
-    public virtual async Task<Response> GetCollectionAsync(RequestOptions options = null);
-    public virtual Response GetCollection(RequestOptions options = null);
+    public virtual async Task<Response> GetCollectionAsync(RequestContext options = null);
+    public virtual Response GetCollection(RequestContext options = null);
 
-    public virtual async Task<Response> CreateOrUpdateCollectionAsync(RequestContent content, RequestOptions options = null);
-    public virtual Response CreateOrUpdateCollection(RequestContent content, RequestOptions options = null);
+    public virtual async Task<Response> CreateOrUpdateCollectionAsync(RequestContent content, RequestContext options = null);
+    public virtual Response CreateOrUpdateCollection(RequestContent content, RequestContext options = null);
 }
 ```
 
