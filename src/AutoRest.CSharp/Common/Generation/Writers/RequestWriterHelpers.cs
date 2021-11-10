@@ -271,7 +271,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     foreach (var subHeader in subs)
                     {
                         string fieldName = $"{subHeader.Value.Reference.Name.Substring(0, 1).ToUpper()}{subHeader.Value.Reference.Name.Substring(1)}";
-                        writer.Line($"using {subHeader.Value.Type.Name} {subHeader.Value.Reference.Name} = {header.Value.Reference.Name}.{fieldName}; ");
+                        writer.Line($"{subHeader.Value.Type.Name}? {subHeader.Value.Reference.Name} = {header.Value.Reference.Name}.{fieldName}; ");
                         WriteHeader(writer, request, subHeader);
                     }
                 }

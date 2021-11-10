@@ -64,9 +64,14 @@ namespace Azure.Core
             }
         }
 
-        public static void Add(this RequestHeaders headers, string name, ETag value)
+        public static void Add(this RequestHeaders headers, string name, ETag? value)
         {
-            headers.Add(name, value.ToString());
+            if (value != null)
+            {
+#pragma warning disable CS8604 // Possible null reference argument.
+                headers.Add(name, value.ToString());
+#pragma warning restore CS8604 // Possible null reference argument.
+            }
         }
 
         public static void AddDelimited<T>(this RequestHeaders headers, string name, IEnumerable<T> value, string delimiter)

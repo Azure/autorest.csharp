@@ -145,22 +145,22 @@ namespace CollapseRequestConditions
             request.Uri = uri;
             if (requestConditions != null)
             {
-                using ETag ifMatch = requestConditions.IfMatch;
+                ETag? ifMatch = requestConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = requestConditions.IfNoneMatch;
+                ETag? ifNoneMatch = requestConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
                 }
-                using DateTimeOffset ifModifiedSince = requestConditions.IfModifiedSince;
+                DateTimeOffset? ifModifiedSince = requestConditions.IfModifiedSince;
                 if (ifModifiedSince != null)
                 {
                     request.Headers.Add("If-Modified-Since", ifModifiedSince.Value, "R");
                 }
-                using DateTimeOffset ifUnmodifiedSince = requestConditions.IfUnmodifiedSince;
+                DateTimeOffset? ifUnmodifiedSince = requestConditions.IfUnmodifiedSince;
                 if (ifUnmodifiedSince != null)
                 {
                     request.Headers.Add("If-Unmodified-Since", ifUnmodifiedSince.Value, "R");
@@ -183,22 +183,22 @@ namespace CollapseRequestConditions
             request.Uri = uri;
             if (requestConditions != null)
             {
-                using ETag ifMatch = requestConditions.IfMatch;
+                ETag? ifMatch = requestConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = requestConditions.IfNoneMatch;
+                ETag? ifNoneMatch = requestConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
                 }
-                using DateTimeOffset ifModifiedSince = requestConditions.IfModifiedSince;
+                DateTimeOffset? ifModifiedSince = requestConditions.IfModifiedSince;
                 if (ifModifiedSince != null)
                 {
                     request.Headers.Add("If-Modified-Since", ifModifiedSince.Value, "R");
                 }
-                using DateTimeOffset ifUnmodifiedSince = requestConditions.IfUnmodifiedSince;
+                DateTimeOffset? ifUnmodifiedSince = requestConditions.IfUnmodifiedSince;
                 if (ifUnmodifiedSince != null)
                 {
                     request.Headers.Add("If-Unmodified-Since", ifUnmodifiedSince.Value, "R");

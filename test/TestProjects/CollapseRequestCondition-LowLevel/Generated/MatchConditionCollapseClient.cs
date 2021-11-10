@@ -233,12 +233,12 @@ namespace CollapseRequestConditions
             }
             if (matchConditions != null)
             {
-                using ETag ifMatch = matchConditions.IfMatch;
+                ETag? ifMatch = matchConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = matchConditions.IfNoneMatch;
+                ETag? ifNoneMatch = matchConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
@@ -259,12 +259,12 @@ namespace CollapseRequestConditions
             request.Uri = uri;
             if (matchConditions != null)
             {
-                using ETag ifMatch = matchConditions.IfMatch;
+                ETag? ifMatch = matchConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = matchConditions.IfNoneMatch;
+                ETag? ifNoneMatch = matchConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
@@ -287,12 +287,12 @@ namespace CollapseRequestConditions
             request.Uri = uri;
             if (matchConditions != null)
             {
-                using ETag ifMatch = matchConditions.IfMatch;
+                ETag? ifMatch = matchConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = matchConditions.IfNoneMatch;
+                ETag? ifNoneMatch = matchConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
@@ -317,12 +317,12 @@ namespace CollapseRequestConditions
             }
             if (matchConditions != null)
             {
-                using ETag ifMatch = matchConditions.IfMatch;
+                ETag? ifMatch = matchConditions.IfMatch;
                 if (ifMatch != null)
                 {
                     request.Headers.Add("If-Match", ifMatch);
                 }
-                using ETag ifNoneMatch = matchConditions.IfNoneMatch;
+                ETag? ifNoneMatch = matchConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
                     request.Headers.Add("If-None-Match", ifNoneMatch);
