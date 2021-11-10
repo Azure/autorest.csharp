@@ -39,12 +39,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             if (RequestPaths.Any(path => _context.Configuration.MgmtConfiguration.ListException.Contains(path)))
                 return null;
+            var suppressListException = _context.Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
             var candidates = ClientOperations.Where(operation => operation.Name == "GetAll" && !HasExtraParameter(operation));
             // we need to filter out the methods that does not have extra mandatory parameters in our current context
-            if (candidates.Count() > 1)
-                ErrorHelpers.ThrowError($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) contains more than one `GetAll` method with no required parameters.");
-            if (!candidates.Any())
-                ErrorHelpers.ThrowError($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method with no required parameters");
+            if (!suppressListException && candidates.Count() > 1)
+                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) contains more than one `GetAll` method with no required parameters.");
+            if (!suppressListException && !candidates.Any())
+                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method with no required parameters");
             return candidates.FirstOrDefault();
         }
 

@@ -13,5 +13,7 @@
   "OperationGroupsToOmit": [
     "Model1s"
   ],
-  "ShowRequestPathAndOperationId": true
+  "MgmtDebug": {
+    "ShowRequestPath": true
+  }
 }

@@ -13,5 +13,7 @@
   "RequestPathToResourceName": {
     "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": "BuiltInPolicyDefinition"
   },
-  "ShowRequestPathAndOperationId": true
+  "MgmtDebug": {
+    "ShowRequestPath": true
+  }
 }

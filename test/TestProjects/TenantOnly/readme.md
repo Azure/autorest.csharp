@@ -1,5 +1,6 @@
 # TenantOnly
-### AutoRest Configuration
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -9,5 +10,6 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/TenantOnly.json
 namespace: Azure.TenantOnly
-show-request-path: true
+mgmt-debug:
+  show-request-path: true
 ```

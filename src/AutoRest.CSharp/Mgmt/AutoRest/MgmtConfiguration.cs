@@ -11,6 +11,41 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     public class MgmtConfiguration
     {
+        public class MgmtDebugConfiguration
+        {
+            private const string MgmtDebugOptionsFormat = "mgmt-debug.{0}";
+
+            public bool ShowRequestPath { get; }
+            public bool SuppressListException { get; }
+
+            public MgmtDebugConfiguration(
+                JsonElement? showRequestPath = default,
+                JsonElement? suppressListException = default)
+            {
+                ShowRequestPath = !IsValidJsonElement(showRequestPath) ? false : Convert.ToBoolean(showRequestPath.ToString());
+                SuppressListException = !IsValidJsonElement(suppressListException) ? false : Convert.ToBoolean(suppressListException.ToString());
+            }
+
+            internal static MgmtDebugConfiguration GetConfiguration(IPluginCommunication autoRest)
+            {
+                return new MgmtDebugConfiguration(
+                    showRequestPath: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "show-request-path")).GetAwaiter().GetResult(),
+                    suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult());
+            }
+
+            public void Write(Utf8JsonWriter writer, string settingName)
+            {
+                if (!ShowRequestPath)
+                    return;
+
+                writer.WriteStartObject(settingName);
+
+                writer.WriteBoolean(nameof(ShowRequestPath), ShowRequestPath);
+
+                writer.WriteEndObject();
+            }
+        }
+
         public MgmtConfiguration(
             IReadOnlyList<string> operationGroupsToOmit,
             IReadOnlyList<string> requestPathIsNonResource,
@@ -24,9 +59,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? requestPathToSingletonResource = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
-            JsonElement? showRequestPathAndOperationId = default,
             JsonElement? resourceModelRequiresType = default,
-            JsonElement? resourceModelRequiresName = default)
+            JsonElement? resourceModelRequiresName = default,
+            MgmtDebugConfiguration? mgmtDebug = default)
         {
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
             RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
@@ -34,6 +69,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             RequestPathToResourceType = !IsValidJsonElement(requestPathToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceType.ToString());
             RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
             RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
+            MgmtDebug = mgmtDebug ?? new MgmtDebugConfiguration();
             // TODO: A unified way to load from both readme and configuration.json
             try
             {
@@ -49,12 +85,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             NoPropertyTypeReplacement = noPropertyTypeReplacement;
             ListException = listException;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
-            ShowRequestPathAndOperationId = !IsValidJsonElement(showRequestPathAndOperationId) ? false : Convert.ToBoolean(showRequestPathAndOperationId.ToString());
             DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
             DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
         }
 
-        public bool ShowRequestPathAndOperationId { get; }
+        public MgmtDebugConfiguration MgmtDebug { get; }
         /// <summary>
         /// Will the resource model detection require type property? Defaults to true
         /// </summary>
@@ -92,7 +127,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
-                showRequestPathAndOperationId: autoRest.GetValue<JsonElement?>("show-request-path").GetAwaiter().GetResult(),
+                mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult());
         }
@@ -110,10 +145,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
             WriteNonEmptySettings(writer, nameof(RequestPathToScopeResourceTypes), RequestPathToScopeResourceTypes);
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
+            MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
-            if (ShowRequestPathAndOperationId)
-                writer.WriteBoolean(nameof(ShowRequestPathAndOperationId), ShowRequestPathAndOperationId);
             if (!DoesResourceModelRequireType)
                 writer.WriteBoolean(nameof(DoesResourceModelRequireType), DoesResourceModelRequireType);
             if (!DoesResourceModelRequireName)
@@ -151,7 +185,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 : new string[0];
 
             root.TryGetProperty("ArmCore", out var isArmCore);
-            root.TryGetProperty(nameof(ShowRequestPathAndOperationId), out var showRequestPathAndOperationId);
+            //root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebug);
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
 
@@ -168,7 +202,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
-                showRequestPathAndOperationId: showRequestPathAndOperationId,
+                //mgmtDebug: mgmtDebug,
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName);
         }

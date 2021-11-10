@@ -1,5 +1,7 @@
 # MgmtParent
-### AutoRest Configuration
+
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -11,7 +13,9 @@ input-file:
   - $(this-folder)/Deployments.json
   - $(this-folder)/Links.json
 namespace: MgmtScopeResource
-show-request-path: true
+
+mgmt-debug:
+  show-request-path: true
 list-exception:
 - /{linkId}
 request-path-to-resource-data:

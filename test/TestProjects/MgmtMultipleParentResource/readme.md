@@ -1,5 +1,7 @@
 # MgmtParent
-### AutoRest Configuration
+
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -9,5 +11,6 @@ input-file: $(this-folder)/mgmtMultipleParentResource.json
 namespace: MgmtMultipleParentResource
 modelerfour:
   lenient-model-deduplication: true
-show-request-path: true
+mgmt-debug:
+  show-request-path: true
 ```

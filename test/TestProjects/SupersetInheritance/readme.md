@@ -1,5 +1,7 @@
 # SupersetInheritance
-### AutoRest Configuration
+
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -9,5 +11,6 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/SupersetInheritance.json
 namespace: SupersetInheritance
-show-request-path: true
+mgmt-debug:
+  show-request-path: true
 ```

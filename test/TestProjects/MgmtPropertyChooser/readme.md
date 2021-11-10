@@ -1,5 +1,7 @@
 # MgmtPropertyChooser
-### AutoRest Configuration
+
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -10,5 +12,6 @@ model-namespace: false
 input-file: $(this-folder)/MgmtPropertyChooser.json
 namespace: MgmtPropertyChooser
 
-show-request-path: true
+mgmt-debug:
+  show-request-path: true
 ```

@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual string ContextProperty => "";
         protected BuildContext<MgmtOutputLibrary> Context { get; }
         protected MgmtConfiguration Config => Context.Configuration.MgmtConfiguration;
-        protected bool ShowRequestPathAndOperationId => Config.ShowRequestPathAndOperationId;
+        protected bool ShowRequestPathAndOperationId => Config.MgmtDebug.ShowRequestPath;
 
         private MgmtTypeProvider _provider;
         protected virtual MgmtTypeProvider This => _provider;

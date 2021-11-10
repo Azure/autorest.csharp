@@ -1,5 +1,7 @@
 # ExactMatchInheritance
-### AutoRest Configuration
+
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -14,5 +16,6 @@ modelerfour:
 
 list-exception:
 - /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-show-request-path: true
+mgmt-debug:
+  show-request-path: true
 ```

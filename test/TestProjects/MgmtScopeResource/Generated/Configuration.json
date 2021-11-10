@@ -26,5 +26,7 @@
   "RequestPathToResourceType": {
     "/{linkId}": "Microsoft.Resources/links"
   },
-  "ShowRequestPathAndOperationId": true
+  "MgmtDebug": {
+    "ShowRequestPath": true
+  }
 }

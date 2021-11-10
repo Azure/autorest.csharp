@@ -1,6 +1,7 @@
 # Azure.Management.Storage
 
-### AutoRest Configuration
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -20,7 +21,8 @@ list-exception:
 - /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}
 
-show-request-path: true
+mgmt-debug:
+  show-request-path: true
 
 directive:
   - rename-model:
