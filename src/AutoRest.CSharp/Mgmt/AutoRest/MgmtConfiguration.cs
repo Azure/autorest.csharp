@@ -54,6 +54,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 writer.WriteStartObject(settingName);
 
                 writer.WriteBoolean(nameof(ShowRequestPath), ShowRequestPath);
+                writer.WriteBoolean(nameof(SuppressListException), SuppressListException);
 
                 writer.WriteEndObject();
             }
