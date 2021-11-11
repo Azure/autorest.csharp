@@ -40,22 +40,6 @@ namespace AutoRest.CSharp.Output.Models
             ClientOptions = new ClientOptionsTypeProvider(_context);
         }
 
-        protected RequestConditionCollapseType GetRequestConditionCollapseType(IEnumerable<RequestParameter> requestParameters)
-        {
-            int matchCondCount = requestParameters.Count(p => p.IsMatchConditionHeader());
-            int requestCondCount = requestParameters.Count(p => p.IsRequestConditionHeader());
-
-            if (requestCondCount == 4)
-            {
-                return RequestConditionCollapseType.RequestConditionsCollapse;
-            }
-            if (matchCondCount == 2)
-            {
-                return RequestConditionCollapseType.MatchConditionsCollapse;
-            }
-            return RequestConditionCollapseType.None;
-        }
-
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
             var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
@@ -81,6 +65,7 @@ namespace AutoRest.CSharp.Output.Models
                     RequestHeader[] requestHeaders = method.Request.Headers;
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
+
                     if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body))
                     {
                         RequestParameter bodyParameter = serviceRequest.Parameters.First(p => p.In == ParameterLocation.Body);

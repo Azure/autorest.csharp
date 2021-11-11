@@ -13,17 +13,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Requests
     {
         public RequestConditionsHeader(string name, ReferenceOrConstant value, RequestParameterSerializationStyle serializationStyle, SerializationFormat format = SerializationFormat.Default): base(name, value, serializationStyle, format)
         {
-            subHeaders = new List<RequestHeader>();
-        }
-        private List<RequestHeader> subHeaders;
-        public void AddSubHeader(RequestHeader sub)
-        {
-            subHeaders.Add(sub);
-        }
-
-        public List<RequestHeader> GetSubHeaders()
-        {
-            return subHeaders;
         }
     }
 }

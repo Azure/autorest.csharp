@@ -261,6 +261,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     throw new NotImplementedException(bodySerialization.ToString());
             }
         }
+
         private static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header)
         {
             string? delimiter = GetSerializationStyleDelimiter(header.SerializationStyle);

@@ -231,7 +231,7 @@ namespace AutoRest.CSharp.Output.Models
                     format = SerializationFormat.DateTime_RFC1123;
                 }
                 bool isCollapseParamRequired = requestParameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
-                type = type.WithIsNullableAndIsValueType(!isCollapseParamRequired, false);
+                type = type.WithNullable(!isCollapseParamRequired);
                 Constant? defaultValue = null;
                 if (!isCollapseParamRequired && defaultValue == null)
                 {
@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Output.Models
                     type = typeof(Azure.RequestConditions);
                     name = "requestConditions";
                 }
-                type = type.WithIsNullableAndIsValueType(!isCollapseParamRequired, false);
+                type = type.WithNullable(!isCollapseParamRequired);
                 Constant? defaultValue = null;
                 if (!isCollapseParamRequired && defaultValue == null)
                 {
@@ -369,63 +369,6 @@ namespace AutoRest.CSharp.Output.Models
                 methodParameters.Add(collapseConditionParameter);
             }
             return OrderParameters(methodParameters);
-        }
-
-        private RequestHeader[] BuildRequestConditionsHeader2(RequestHeader[] headers, IList<RequestParameter> requestParameters)
-        {
-            RequestConditionCollapseType collapseType = GetRequestConditionCollapseType(requestParameters);
-            RequestConditionsHeader? requestConditions = null;
-            Parameter? requestConditionsPram = null;
-
-            if (collapseType != RequestConditionCollapseType.None)
-            {
-                CSharpType? type = null;
-                string name = "";
-                SerializationFormat format = SerializationFormat.Default;
-                if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
-                {
-                    type = typeof(Azure.MatchConditions);
-                    name = "matchConditions";
-                } else
-                {
-                    type = typeof(Azure.RequestConditions);
-                    name = "requestConditions";
-                    format = SerializationFormat.DateTime_RFC1123;
-                }
-                bool isCollapseParamRequired = requestParameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
-                type = type.WithIsNullableAndIsValueType(!isCollapseParamRequired, false);
-                Constant? defaultValue = null;
-                if (!isCollapseParamRequired && defaultValue == null)
-                {
-                    defaultValue = Constant.Default(type);
-                }
-                requestConditionsPram = new Parameter(
-                                                    name,
-                                                    "The content to send as the request conditions of the request.",
-                                                    type,
-                                                    defaultValue,
-                                                    isCollapseParamRequired,
-                                                    false,
-                                                    false);
-                requestConditions = new RequestConditionsHeader("conditions", requestConditionsPram, RequestParameterSerializationStyle.Simple, format);
-                List<RequestHeader> newHeaders = new List<RequestHeader>();
-                foreach (var header in headers)
-                {
-                    if ((collapseType == RequestConditionCollapseType.MatchConditionsCollapse && header.IsMatchCondition) ||
-                        (collapseType == RequestConditionCollapseType.RequestConditionsCollapse && header.IsRequestCondition))
-                    {
-                        requestConditions.AddSubHeader(header);
-                    } else
-                    {
-                        newHeaders.Add(header);
-                    }
-                }
-                newHeaders.Add(requestConditions);
-                return newHeaders.ToArray();
-            } else
-            {
-                return headers;
-            }
         }
         private RequestBody? BuildRequestBody(
             IList<RequestParameter> requestParameters,

@@ -9,7 +9,6 @@ modelerfour:
   always-create-content-type-parameter: true
 pipeline:
   csharpgen:
-    attach: true
     input: modelerfour/identity
   csharpgen/emitter:
     input: csharpgen

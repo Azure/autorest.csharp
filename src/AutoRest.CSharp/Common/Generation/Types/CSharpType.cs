@@ -45,17 +45,6 @@ namespace AutoRest.CSharp.Generation.Types
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
         }
 
-        public CSharpType(Type type, bool isNullable, bool isValueType, params CSharpType[] arguments)
-        {
-            Debug.Assert(type.Namespace != null, "type.Namespace != null");
-            _type = type;
-
-            Namespace = type.Namespace;
-            Name = type.IsGenericType ? type.Name.Substring(0, type.Name.IndexOf('`')) : type.Name;
-            IsNullable = isNullable;
-            IsValueType = isValueType;
-        }
-
         public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false, CSharpType[]? arguments = default)
         {
             _implementation = implementation;
@@ -111,15 +100,6 @@ namespace AutoRest.CSharp.Generation.Types
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, isNullable, Arguments)
                 : new CSharpType(Implementation, Namespace, Name, IsValueType, isNullable);
-        public CSharpType WithIsValueType(bool isValueType) =>
-                isValueType == IsValueType ? this : IsFrameworkType
-                ? new CSharpType(FrameworkType, IsNullable, isValueType, Arguments)
-                : new CSharpType(Implementation, Namespace, Name, isValueType, IsNullable);
-
-        public CSharpType WithIsNullableAndIsValueType(bool isNullable, bool isValueType) =>
-                (isNullable == IsNullable && isValueType == IsValueType) ? this : IsFrameworkType
-                ? new CSharpType(FrameworkType, isNullable, isValueType, Arguments)
-                : new CSharpType(Implementation, Namespace, Name, isValueType, isNullable);
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
 
