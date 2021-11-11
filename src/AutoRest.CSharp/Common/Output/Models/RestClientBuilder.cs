@@ -643,7 +643,7 @@ namespace AutoRest.CSharp.Output.Models
             if (requestParameter.IsMatchConditionHeader())
             {
                 type = typeof(Azure.ETag);
-                type = type.WithIsNullableAndIsValueType(requestParameter.IsNullable || !requestParameter.IsRequired, true);
+                type = type.WithNullable(requestParameter.IsNullable || !requestParameter.IsRequired);
             }
 
             if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
