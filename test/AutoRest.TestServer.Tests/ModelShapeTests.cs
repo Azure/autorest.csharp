@@ -501,7 +501,7 @@ namespace AutoRest.TestServer.Tests
         public void ModelFactory_DeclaresOnlyStaticMethodsForReadonlyTypes()
         {
             TypeAsserts.TypeIsStatic(typeof(SchemaMappingModelFactory));
-            TypeAsserts.TypeOnlyDeclaredThesePublicMethods(typeof(SchemaMappingModelFactory),
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(SchemaMappingModelFactory),
                 nameof(MixedModel), nameof(MixedModelWithReadonlyProperty), nameof(OutputModel), nameof(ReadonlyModel));
         }
 

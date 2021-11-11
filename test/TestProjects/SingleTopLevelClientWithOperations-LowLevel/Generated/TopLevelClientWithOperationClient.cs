@@ -88,19 +88,19 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        private volatile Client1Client _cachedClient1Client;
-        private volatile Client2Client _cachedClient2Client;
+        private volatile Client1 _cachedClient1;
+        private volatile Client2 _cachedClient2;
 
-        /// <summary> Initializes a new instance of Client1Client. </summary>
-        public virtual Client1Client GetClient1ClientClient()
+        /// <summary> Initializes a new instance of Client1. </summary>
+        public virtual Client1 GetClient1Client()
         {
-            return _cachedClient1Client ??= new Client1Client(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            return _cachedClient1 ??= new Client1(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
         }
 
-        /// <summary> Initializes a new instance of Client2Client. </summary>
-        public virtual Client2Client GetClient2ClientClient()
+        /// <summary> Initializes a new instance of Client2. </summary>
+        public virtual Client2 GetClient2Client()
         {
-            return _cachedClient2Client ??= new Client2Client(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            return _cachedClient2 ??= new Client2(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
         }
 
         internal HttpMessage CreateOperationRequest()

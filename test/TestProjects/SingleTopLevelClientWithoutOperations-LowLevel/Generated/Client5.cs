@@ -11,10 +11,10 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace SingleTopLevelClientWithOperations_LowLevel
+namespace SingleTopLevelClientWithoutOperations_LowLevel
 {
-    /// <summary> The Client1 service client. </summary>
-    public partial class Client1Client
+    /// <summary> The Client5 service client. </summary>
+    public partial class Client5
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -25,18 +25,18 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Client1Client for mocking. </summary>
-        protected Client1Client()
+        /// <summary> Initializes a new instance of Client5 for mocking. </summary>
+        protected Client5()
         {
         }
 
-        /// <summary> Initializes a new instance of Client1Client. </summary>
+        /// <summary> Initializes a new instance of Client5. </summary>
         /// <param name="clientDiagnostics"> The ClientDiagnostics instance to use. </param>
         /// <param name="pipeline"> The pipeline instance to use. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        internal Client1Client(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint = null)
+        internal Client5(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint = null)
         {
             if (clientDiagnostics == null)
             {
@@ -59,7 +59,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("Client1Client.Operation");
+            using var scope = _clientDiagnostics.CreateScope("Client5.Operation");
             scope.Start();
             try
             {
@@ -78,7 +78,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         public virtual Response Operation(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("Client1Client.Operation");
+            using var scope = _clientDiagnostics.CreateScope("Client5.Operation");
             scope.Start();
             try
             {
@@ -99,7 +99,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/client1", false);
+            uri.AppendPath("/client3", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;

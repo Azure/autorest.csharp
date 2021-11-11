@@ -13,7 +13,7 @@
   "paths": {
     "/client1": {
       "get": {
-        "operationId": "Client1_Operation",
+        "operationId": "Client3_Operation",
         "responses": {
           "200": {
             "description": "Success",
@@ -26,7 +26,7 @@
     },
     "/client2": {
       "get": {
-        "operationId": "Client2_Operation",
+        "operationId": "Client4_Operation",
         "responses": {
           "200": {
             "description": "Success",
@@ -39,7 +39,7 @@
     },
     "/client3": {
       "get": {
-        "operationId": "Client3_Operation",
+        "operationId": "Client5_Operation",
         "responses": {
           "200": {
             "description": "Success",

@@ -25,12 +25,9 @@ namespace AutoRest.CSharp.Output.Models
         private RestClientMethod[]? _allMethods;
 
         protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName)
-            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), ClientBuilder.GetRestClientSuffix(context)) { }
+            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context)) { }
 
-        protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string? clientName)
-            : this (operationGroup, clientParameters, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), ClientBuilder.GetRestClientSuffix(context)) {}
-
-        private RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string restClientSuffix) : base(context, clientPrefix + restClientSuffix)
+        protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string defaultClientSuffix) : base(context, clientPrefix + defaultClientSuffix)
         {
             OperationGroup = operationGroup;
             clientParameters ??= operationGroup.Operations
@@ -46,12 +43,10 @@ namespace AutoRest.CSharp.Output.Models
             Parameters = Builder.GetOrderedParameters();
 
             ClientPrefix = clientPrefix;
-            RestClientSuffix = restClientSuffix;
         }
 
         protected RestClientBuilder Builder;
         internal OperationGroup OperationGroup { get; }
-        protected string RestClientSuffix { get; }
         public Parameter[] Parameters { get; }
         public virtual string Description { get; } = "";
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();

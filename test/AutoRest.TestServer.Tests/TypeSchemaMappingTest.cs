@@ -263,7 +263,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelFactoryPublicMethods()
         {
-            TypeAsserts.TypeOnlyDeclaredThesePublicMethods(typeof(MainModelFactory), nameof(ModelWithGuidProperty), nameof(ModelWithAbstractModel));
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(MainModelFactory), nameof(ModelWithGuidProperty), nameof(ModelWithAbstractModel));
         }
 
         [Test]

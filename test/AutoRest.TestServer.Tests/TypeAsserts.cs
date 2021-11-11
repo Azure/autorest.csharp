@@ -42,10 +42,10 @@ namespace AutoRest.TestServer.Tests
             Assert.Fail($"Type \"{type}\" is expected not to be public.");
         }
 
-        public static void TypeOnlyDeclaredThesePublicMethods(Type type, params string[] expectedMethodNames)
+        public static void TypeOnlyDeclaresThesePublicMethods(Type type, params string[] expectedMethodNames)
         {
             var publicMethodNames = type.GetMethods(Public | Static | Instance)
-                .Where(m => m.DeclaringType == type)
+                .Where(m => m.DeclaringType == type && !m.IsSpecialName)
                 .Select(m => m.Name)
                 .ToList();
 

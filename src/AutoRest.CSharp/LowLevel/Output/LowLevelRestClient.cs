@@ -60,16 +60,19 @@ namespace AutoRest.CSharp.Output.Models
 
         public bool IsSubClient => ParentClientTypeName != null;
 
-        public static LowLevelRestClient CreateTopLevelClient(BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
+        public static LowLevelRestClient CreateEmptyTopLevelClient(BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions)
         {
             var operationGroup = new OperationGroup { Key = string.Empty };
             var endpointParameter = context.CodeModel.GlobalParameters.FirstOrDefault(RestClientBuilder.IsEndpointParameter);
-            return new(operationGroup, endpointParameter != null ? new[]{ endpointParameter } : null, context, clientOptions);
+            var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<RequestParameter>();
+            return new(operationGroup, clientParameters, context, clientOptions, null);
         }
 
-        public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions) : this(operationGroup, null, context, clientOptions) {}
+        public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions, string? parentClientTypeName)
+            : this(operationGroup, null, context, clientOptions, parentClientTypeName) { }
 
-        private LowLevelRestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions) : base(operationGroup, clientParameters, context, null)
+        private LowLevelRestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext<LowLevelOutputLibrary> context, ClientOptionsTypeProvider clientOptions, string? parentClientTypeName)
+            : base(operationGroup, clientParameters, context, ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context), parentClientTypeName != null ? string.Empty : ClientBuilder.GetClientSuffix(context))
         {
             _context = context;
             ClientOptions = clientOptions;
@@ -78,9 +81,9 @@ namespace AutoRest.CSharp.Output.Models
                 ParentClientTypeName = codeGenClientAttribute.ParentClientType?.Name;
                 _hasPublicConstructors = !IsSubClient || codeGenClientAttribute.ForcePublicConstructors;
             }
-            else if (ParentClientTypeName == null && context.Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(operationGroup.Language.Default.Name))
+            else if (ParentClientTypeName == null && !string.IsNullOrEmpty(parentClientTypeName) && !string.IsNullOrEmpty(operationGroup.Language.Default.Name))
             {
-                ParentClientTypeName = ClientBuilder.GetClientPrefix(string.Empty, context) + ClientBuilder.GetRestClientSuffix(context);
+                ParentClientTypeName = parentClientTypeName;
                 _hasPublicConstructors = false;
             }
 

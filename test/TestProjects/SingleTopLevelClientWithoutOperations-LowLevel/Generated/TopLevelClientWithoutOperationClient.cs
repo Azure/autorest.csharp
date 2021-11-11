@@ -49,26 +49,26 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             _endpoint = endpoint;
         }
 
-        private volatile Client1Client _cachedClient1Client;
-        private volatile Client2Client _cachedClient2Client;
-        private volatile Client3Client _cachedClient3Client;
+        private volatile Client3 _cachedClient3;
+        private volatile Client4 _cachedClient4;
+        private volatile Client5 _cachedClient5;
 
-        /// <summary> Initializes a new instance of Client1Client. </summary>
-        public virtual Client1Client GetClient1ClientClient()
+        /// <summary> Initializes a new instance of Client3. </summary>
+        public virtual Client3 GetClient3Client()
         {
-            return _cachedClient1Client ??= new Client1Client(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            return _cachedClient3 ??= new Client3(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
         }
 
-        /// <summary> Initializes a new instance of Client2Client. </summary>
-        public virtual Client2Client GetClient2ClientClient()
+        /// <summary> Initializes a new instance of Client4. </summary>
+        public virtual Client4 GetClient4Client()
         {
-            return _cachedClient2Client ??= new Client2Client(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            return _cachedClient4 ??= new Client4(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
         }
 
-        /// <summary> Initializes a new instance of Client3Client. </summary>
-        public virtual Client3Client GetClient3ClientClient()
+        /// <summary> Initializes a new instance of Client5. </summary>
+        public virtual Client5 GetClient5Client()
         {
-            return _cachedClient3Client ??= new Client3Client(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            return _cachedClient5 ??= new Client5(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
         }
     }
 }

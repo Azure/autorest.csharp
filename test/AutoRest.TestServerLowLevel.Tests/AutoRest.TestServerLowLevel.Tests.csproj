@@ -35,6 +35,7 @@
 
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
+    <Compile Include="../AutoRest.TestServer.Tests/TypeAsserts.cs" />
   </ItemGroup>
 
 </Project>

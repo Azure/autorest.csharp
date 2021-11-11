@@ -50,7 +50,7 @@ globalParameters:
         in: uri
 operationGroups:
   - !OperationGroup 
-    $key: Client1
+    $key: Client3
     operations:
       - !Operation 
         apiVersions:
@@ -106,11 +106,11 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: Client1
+        name: Client3
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: Client2
+    $key: Client4
     operations:
       - !Operation 
         apiVersions:
@@ -166,11 +166,11 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: Client2
+        name: Client4
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: Client3
+    $key: Client5
     operations:
       - !Operation 
         apiVersions:
@@ -226,7 +226,7 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: Client3
+        name: Client5
         description: ''
     protocol: !Protocols {}
 security: !Security 
