@@ -41,22 +41,42 @@ namespace Azure.Core
             _source = source;
         }
 
+        /// <summary>
+        /// Wait for operation to complete. Using the `Retry-After` header in last response as the polling interval.
+        /// If it's not avaiable, then use the last available `Retry-After` header, otherwise use default value.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
         {
-            return WaitForCompletionAsync(DefaultPollingInterval, cancellationToken);
+            return PollForCompletionAsync(() => { UpdatePollInterval(); }, cancellationToken);
         }
 
+        /// <summary>
+        /// Wait for operation to complete. Use the given polling interval.
+        /// </summary>
+        /// <param name="pollingInterval"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        {
+            PollingInterval = pollingInterval;
+            return await PollForCompletionAsync(() => { }, cancellationToken).ConfigureAwait(false);
+        }
+
+        private async ValueTask<Response<T>> PollForCompletionAsync(Action getPollInterval, CancellationToken cancellationToken)
         {
             while (true)
             {
+                getPollInterval();
+                await Task.Delay(PollingInterval, cancellationToken).ConfigureAwait(false);
+
                 await UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
+
                 if (HasCompleted)
                 {
                     return Response.FromValue(Value, GetRawResponse());
                 }
-
-                await Task.Delay(pollingInterval, cancellationToken).ConfigureAwait(false);
             }
         }
 

@@ -21,7 +21,17 @@ namespace Azure.Core
     /// </summary>
     internal class OperationInternals
     {
-        public static TimeSpan DefaultPollingInterval { get; private set; } = TimeSpan.FromSeconds(1);
+        /// <summary>
+        /// Default polling internval. According to the spec, the default value should be 60 seconds. Here we set the default
+        /// value to 30 seconds as a compromise, since 60 seconds seems too long. Other language SDKs like Java and Python adopt
+        /// 30 seconds as well.
+        /// </summary>
+        public static TimeSpan DefaultPollingInterval { get; private set; } = TimeSpan.FromSeconds(30);
+
+        /// <summary>
+        /// Interval before the next polling request. The value may change between each request.
+        /// </summary>
+        protected TimeSpan PollingInterval { get; set; } = DefaultPollingInterval;
 
         private static readonly string[] s_failureStates = { "failed", "canceled" };
         private static readonly string[] s_terminalStates = { "succeeded", "failed", "canceled" };
@@ -64,22 +74,43 @@ namespace Azure.Core
 
         public Response GetRawResponse() => _rawResponse;
 
+        /// <summary>
+        /// Wait for operation to complete. Using the `Retry-After` header in last response as the polling interval.
+        /// If it's not avaiable, then use the last available `Retry-After` header, otherwise use default value.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default)
         {
-            return WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken);
+            return PollForCompletionResponseAsync(() => { UpdatePollInterval(); }, cancellationToken);
         }
 
+        /// <summary>
+        /// Wait for operation to complete. Use the given polling interval.
+        /// </summary>
+        /// <param name="pollingInterval"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        {
+            PollingInterval = pollingInterval;
+            return await PollForCompletionResponseAsync(() => { }, cancellationToken).ConfigureAwait(false);
+        }
+
+        private async ValueTask<Response> PollForCompletionResponseAsync(Action getPollInterval, CancellationToken cancellationToken)
         {
             while (true)
             {
+                getPollInterval();
+
+                await Task.Delay(PollingInterval, cancellationToken).ConfigureAwait(false);
+
                 await UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
+
                 if (HasCompleted)
                 {
                     return GetRawResponse();
                 }
-
-                await Task.Delay(pollingInterval, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -312,6 +343,17 @@ namespace Azure.Core
 
             _pollUri = _originalUri.AbsoluteUri;
             _headerFrom = HeaderFrom.None;
+        }
+
+        protected void UpdatePollInterval()
+        {
+            if (_rawResponse.Headers.TryGetValue("Retry-After", out string? retryAfter))
+            {
+                if (uint.TryParse(retryAfter, out uint interval))
+                {
+                    PollingInterval = TimeSpan.FromSeconds(interval);
+                }
+            }
         }
 
         private void UpdatePollUri()
