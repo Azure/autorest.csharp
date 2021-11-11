@@ -145,26 +145,7 @@ namespace CollapseRequestConditions
             request.Uri = uri;
             if (requestConditions != null)
             {
-                ETag? ifMatch = requestConditions.IfMatch;
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch.Value);
-                }
-                ETag? ifNoneMatch = requestConditions.IfNoneMatch;
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch.Value);
-                }
-                DateTimeOffset? ifModifiedSince = requestConditions.IfModifiedSince;
-                if (ifModifiedSince != null)
-                {
-                    request.Headers.Add("If-Modified-Since", ifModifiedSince.Value, "R");
-                }
-                DateTimeOffset? ifUnmodifiedSince = requestConditions.IfUnmodifiedSince;
-                if (ifUnmodifiedSince != null)
-                {
-                    request.Headers.Add("If-Unmodified-Since", ifUnmodifiedSince.Value, "R");
-                }
+                request.Headers.Add(requestConditions, "R");
             }
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
@@ -183,26 +164,7 @@ namespace CollapseRequestConditions
             request.Uri = uri;
             if (requestConditions != null)
             {
-                ETag? ifMatch = requestConditions.IfMatch;
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch.Value);
-                }
-                ETag? ifNoneMatch = requestConditions.IfNoneMatch;
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch.Value);
-                }
-                DateTimeOffset? ifModifiedSince = requestConditions.IfModifiedSince;
-                if (ifModifiedSince != null)
-                {
-                    request.Headers.Add("If-Modified-Since", ifModifiedSince.Value, "R");
-                }
-                DateTimeOffset? ifUnmodifiedSince = requestConditions.IfUnmodifiedSince;
-                if (ifUnmodifiedSince != null)
-                {
-                    request.Headers.Add("If-Unmodified-Since", ifUnmodifiedSince.Value, "R");
-                }
+                request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;

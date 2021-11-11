@@ -42,29 +42,18 @@ namespace AutoRest.CSharp.Output.Models
 
         protected RequestConditionCollapseType GetRequestConditionCollapseType(IEnumerable<RequestParameter> requestParameters)
         {
-            RequestConditionCollapseType ret = RequestConditionCollapseType.None;
-            int matchCondCount = 0;
-            int requestCondCount = 0;
-            foreach (RequestParameter requestParameter in requestParameters)
-            {
-                if (requestParameter.IsMatchConditionHeader())
-                {
-                    matchCondCount++;
-                    requestCondCount++;
-                } else if (requestParameter.IsRequestConditionHeader())
-                {
-                    requestCondCount++;
-                }
-            }
+            int matchCondCount = requestParameters.Count(p => p.IsMatchConditionHeader());
+            int requestCondCount = requestParameters.Count(p => p.IsRequestConditionHeader());
 
             if (requestCondCount == 4)
             {
-                ret = RequestConditionCollapseType.RequestConditionsCollapse;
-            } else if (matchCondCount == 2)
-            {
-                ret = RequestConditionCollapseType.MatchConditionsCollapse;
+                return RequestConditionCollapseType.RequestConditionsCollapse;
             }
-            return ret;
+            if (matchCondCount == 2)
+            {
+                return RequestConditionCollapseType.MatchConditionsCollapse;
+            }
+            return RequestConditionCollapseType.None;
         }
 
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()

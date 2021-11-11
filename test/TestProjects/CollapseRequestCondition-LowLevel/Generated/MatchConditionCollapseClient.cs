@@ -233,16 +233,7 @@ namespace CollapseRequestConditions
             }
             if (matchConditions != null)
             {
-                ETag? ifMatch = matchConditions.IfMatch;
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch.Value);
-                }
-                ETag? ifNoneMatch = matchConditions.IfNoneMatch;
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch.Value);
-                }
+                request.Headers.Add(matchConditions);
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -259,16 +250,7 @@ namespace CollapseRequestConditions
             request.Uri = uri;
             if (matchConditions != null)
             {
-                ETag? ifMatch = matchConditions.IfMatch;
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch.Value);
-                }
-                ETag? ifNoneMatch = matchConditions.IfNoneMatch;
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch.Value);
-                }
+                request.Headers.Add(matchConditions);
             }
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
@@ -287,16 +269,7 @@ namespace CollapseRequestConditions
             request.Uri = uri;
             if (matchConditions != null)
             {
-                ETag? ifMatch = matchConditions.IfMatch;
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch.Value);
-                }
-                ETag? ifNoneMatch = matchConditions.IfNoneMatch;
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch.Value);
-                }
+                request.Headers.Add(matchConditions);
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -317,16 +290,7 @@ namespace CollapseRequestConditions
             }
             if (matchConditions != null)
             {
-                ETag? ifMatch = matchConditions.IfMatch;
-                if (ifMatch != null)
-                {
-                    request.Headers.Add("If-Match", ifMatch.Value);
-                }
-                ETag? ifNoneMatch = matchConditions.IfNoneMatch;
-                if (ifNoneMatch != null)
-                {
-                    request.Headers.Add("If-None-Match", ifNoneMatch.Value);
-                }
+                request.Headers.Add(matchConditions);
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;

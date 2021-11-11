@@ -263,20 +263,6 @@ namespace AutoRest.CSharp.Generation.Writers
         }
         private static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header)
         {
-            if (header is RequestConditionsHeader conditionsHeader)
-            {
-                using (WriteValueNullCheck(writer, header.Value))
-                {
-                    RequestHeader[] subs = conditionsHeader.GetSubHeaders().ToArray();
-                    foreach (var subHeader in subs)
-                    {
-                        string fieldName = $"{subHeader.Value.Reference.Name.Substring(0, 1).ToUpper()}{subHeader.Value.Reference.Name.Substring(1)}";
-                        writer.Line($"{subHeader.Value.Type.Name}? {subHeader.Value.Reference.Name} = {header.Value.Reference.Name}.{fieldName}; ");
-                        WriteHeader(writer, request, subHeader);
-                    }
-                }
-                return;
-            }
             string? delimiter = GetSerializationStyleDelimiter(header.SerializationStyle);
             string method = delimiter != null
                 ? nameof(RequestHeaderExtensions.AddDelimited)
@@ -284,7 +270,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteValueNullCheck(writer, header.Value))
             {
-                writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
+                if (header is RequestConditionsHeader conditionsHeader)
+                {
+                    writer.Append($"{request}.Headers.{method}(");
+                } else
+                {
+                    writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
+                }
                 if (header.Value.Type.Equals(typeof(Azure.Core.ContentType)))
                 {
                     WriteConstantOrParameterAsString(writer, header.Value);

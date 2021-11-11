@@ -300,6 +300,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 CSharpType? type = null;
                 string name = "";
+                SerializationFormat format = SerializationFormat.Default;
                 if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
                 {
                     type = typeof(Azure.MatchConditions);
@@ -308,6 +309,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     type = typeof(Azure.RequestConditions);
                     name = "requestConditions";
+                    format = SerializationFormat.DateTime_RFC1123;
                 }
                 bool isCollapseParamRequired = requestParameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
                 type = type.WithIsNullableAndIsValueType(!isCollapseParamRequired, false);
@@ -324,7 +326,7 @@ namespace AutoRest.CSharp.Output.Models
                                                     isCollapseParamRequired,
                                                     false,
                                                     false);
-                requestConditions = new RequestConditionsHeader("conditions", requestConditionsPram, RequestParameterSerializationStyle.Simple);
+                requestConditions = new RequestConditionsHeader("conditions", requestConditionsPram, RequestParameterSerializationStyle.Simple, format);
                 List<RequestHeader> newHeaders = new List<RequestHeader>();
                 foreach (var header in headers)
                 {
