@@ -148,12 +148,12 @@ namespace CollapseRequestConditions
                 ETag? ifMatch = requestConditions.IfMatch;
                 if (ifMatch != null)
                 {
-                    request.Headers.Add("If-Match", ifMatch);
+                    request.Headers.Add("If-Match", ifMatch.Value);
                 }
                 ETag? ifNoneMatch = requestConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
-                    request.Headers.Add("If-None-Match", ifNoneMatch);
+                    request.Headers.Add("If-None-Match", ifNoneMatch.Value);
                 }
                 DateTimeOffset? ifModifiedSince = requestConditions.IfModifiedSince;
                 if (ifModifiedSince != null)
@@ -186,12 +186,12 @@ namespace CollapseRequestConditions
                 ETag? ifMatch = requestConditions.IfMatch;
                 if (ifMatch != null)
                 {
-                    request.Headers.Add("If-Match", ifMatch);
+                    request.Headers.Add("If-Match", ifMatch.Value);
                 }
                 ETag? ifNoneMatch = requestConditions.IfNoneMatch;
                 if (ifNoneMatch != null)
                 {
-                    request.Headers.Add("If-None-Match", ifNoneMatch);
+                    request.Headers.Add("If-None-Match", ifNoneMatch.Value);
                 }
                 DateTimeOffset? ifModifiedSince = requestConditions.IfModifiedSince;
                 if (ifModifiedSince != null)
