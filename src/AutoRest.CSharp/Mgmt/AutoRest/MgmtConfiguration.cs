@@ -22,8 +22,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 JsonElement? showRequestPath = default,
                 JsonElement? suppressListException = default)
             {
-                ShowRequestPath = !IsValidJsonElement(showRequestPath) ? false : Convert.ToBoolean(showRequestPath.ToString());
-                SuppressListException = !IsValidJsonElement(suppressListException) ? false : Convert.ToBoolean(suppressListException.ToString());
+                ShowRequestPath = showRequestPath == null || !IsValidJsonElement(showRequestPath) ? false : Convert.ToBoolean(showRequestPath.ToString());
+                SuppressListException = suppressListException == null || !IsValidJsonElement(suppressListException) ? false : Convert.ToBoolean(suppressListException.ToString());
+            }
+
+            internal static MgmtDebugConfiguration LoadConfiguration(JsonElement root)
+            {
+                if (root.ValueKind != JsonValueKind.Object)
+                    return new MgmtDebugConfiguration();
+
+                root.TryGetProperty(nameof(ShowRequestPath), out var showRequestPath);
+                root.TryGetProperty(nameof(SuppressListException), out var suppressListException);
+
+                return new MgmtDebugConfiguration(
+                    showRequestPath: showRequestPath,
+                    suppressListException: suppressListException);
             }
 
             internal static MgmtDebugConfiguration GetConfiguration(IPluginCommunication autoRest)
@@ -51,6 +64,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             IReadOnlyList<string> requestPathIsNonResource,
             IReadOnlyList<string> noPropertyTypeReplacement,
             IReadOnlyList<string> listException,
+            MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
             JsonElement? requestPathToResourceData = default,
@@ -60,8 +74,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
             JsonElement? resourceModelRequiresType = default,
-            JsonElement? resourceModelRequiresName = default,
-            MgmtDebugConfiguration? mgmtDebug = default)
+            JsonElement? resourceModelRequiresName = default)
         {
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
             RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
@@ -69,7 +82,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             RequestPathToResourceType = !IsValidJsonElement(requestPathToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceType.ToString());
             RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
             RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
-            MgmtDebug = mgmtDebug ?? new MgmtDebugConfiguration();
+            MgmtDebug = mgmtDebug;
             // TODO: A unified way to load from both readme and configuration.json
             try
             {
@@ -119,6 +132,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathIsNonResource: autoRest.GetValue<string[]?>("request-path-is-non-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 noPropertyTypeReplacement: autoRest.GetValue<string[]?>("no-property-type-replacement").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 listException: autoRest.GetValue<string[]?>("list-exception").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
                 requestPathToResourceData: autoRest.GetValue<JsonElement?>("request-path-to-resource-data").GetAwaiter().GetResult(),
@@ -127,7 +141,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
-                mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult());
         }
@@ -185,7 +198,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 : new string[0];
 
             root.TryGetProperty("ArmCore", out var isArmCore);
-            //root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebug);
+            root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
             root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
 
@@ -194,6 +207,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathIsNonResource: requestPathIsNonResourceList,
                 noPropertyTypeReplacement: noPropertyTypeReplacementList,
                 listException: listExceptionList,
+                mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
                 requestPathToResourceData: requestPathToResourceData,
@@ -202,7 +216,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
-                //mgmtDebug: mgmtDebug,
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName);
         }
