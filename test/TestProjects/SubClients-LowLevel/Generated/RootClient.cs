@@ -95,12 +95,16 @@ namespace SubClients_LowLevel
             }
         }
 
-        private volatile Parameter _cachedParameter0;
+        private readonly object _syncObj = new object();
+        private Parameter _cachedParameter0;
 
         /// <summary> Initializes a new instance of Parameter. </summary>
         public virtual Parameter GetParameterClient()
         {
-            return _cachedParameter0 ??= new Parameter(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            lock (_syncObj)
+            {
+                return _cachedParameter0 ??= new Parameter(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            }
         }
 
         internal HttpMessage CreateGetCachedParameterRequest()

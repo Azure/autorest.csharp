@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure;
 using Azure.Core;
 using NUnit.Framework;
 using SubClients_LowLevel;
@@ -13,19 +14,29 @@ namespace AutoRest.TestServer.Tests
     public class SubClientTests
     {
         [Test]
-        public void SubClientPublicMethods()
+        public void SubClient_PublicMethods()
         {
             TypeAsserts.HasPublicInstanceMethod(typeof(RootClient), $"Get{nameof(Parameter)}Client");
         }
 
         [Test]
-        public void TopLevelClientWithOperationPublicMethods()
+        public void SubClient_CachedInstance()
+        {
+            var p = "p";
+            var rootClient = new RootClient(p, new AzureKeyCredential("fake-key"));
+            var parameterClient1 = rootClient.GetParameterClient();
+            var parameterClient2 = rootClient.GetParameterClient();
+            Assert.AreSame(parameterClient1, parameterClient2);
+        }
+
+        [Test]
+        public void TopLevelClientWithOperation_PublicMethods()
         {
             TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(TopLevelClientWithOperationClient), "Operation", "OperationAsync", $"Get{nameof(Client1)}Client", $"Get{nameof(Client2)}Client");
         }
 
         [Test]
-        public void TopLevelClientWithoutOperationPublicMethods()
+        public void TopLevelClientWithoutOperation_PublicMethods()
         {
             TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(TopLevelClientWithoutOperationClient), $"Get{nameof(Client3)}Client", $"Get{nameof(Client4)}Client", $"Get{nameof(Client5)}Client");
         }

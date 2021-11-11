@@ -49,26 +49,36 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             _endpoint = endpoint;
         }
 
-        private volatile Client3 _cachedClient3;
-        private volatile Client4 _cachedClient4;
-        private volatile Client5 _cachedClient5;
+        private readonly object _syncObj = new object();
+        private Client3 _cachedClient3;
+        private Client4 _cachedClient4;
+        private Client5 _cachedClient5;
 
         /// <summary> Initializes a new instance of Client3. </summary>
         public virtual Client3 GetClient3Client()
         {
-            return _cachedClient3 ??= new Client3(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            lock (_syncObj)
+            {
+                return _cachedClient3 ??= new Client3(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            }
         }
 
         /// <summary> Initializes a new instance of Client4. </summary>
         public virtual Client4 GetClient4Client()
         {
-            return _cachedClient4 ??= new Client4(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            lock (_syncObj)
+            {
+                return _cachedClient4 ??= new Client4(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            }
         }
 
         /// <summary> Initializes a new instance of Client5. </summary>
         public virtual Client5 GetClient5Client()
         {
-            return _cachedClient5 ??= new Client5(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            lock (_syncObj)
+            {
+                return _cachedClient5 ??= new Client5(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
+            }
         }
     }
 }
