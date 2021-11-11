@@ -55,9 +55,9 @@ namespace media_types_LowLevel
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestOptions options = null)
+        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
@@ -65,7 +65,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -77,9 +77,9 @@ namespace media_types_LowLevel
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestOptions options = null)
+        public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
@@ -87,7 +87,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -98,7 +98,7 @@ namespace media_types_LowLevel
 
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -108,7 +108,7 @@ namespace media_types_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
@@ -116,7 +116,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -127,7 +127,7 @@ namespace media_types_LowLevel
 
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -137,7 +137,7 @@ namespace media_types_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response AnalyzeBody(RequestContent content, RequestOptions options = null)
+        public virtual Response AnalyzeBody(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
@@ -145,7 +145,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -157,9 +157,9 @@ namespace media_types_LowLevel
         /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestOptions options = null)
+        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
@@ -167,7 +167,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -179,9 +179,9 @@ namespace media_types_LowLevel
         /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestOptions options = null)
+        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
@@ -189,7 +189,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace media_types_LowLevel
 
         /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -210,7 +210,7 @@ namespace media_types_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
@@ -218,7 +218,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -229,7 +229,7 @@ namespace media_types_LowLevel
 
         /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <code>{
@@ -239,7 +239,7 @@ namespace media_types_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, RequestOptions options = null)
+        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
@@ -247,7 +247,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -258,9 +258,9 @@ namespace media_types_LowLevel
 
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
@@ -268,7 +268,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateContentTypeWithEncodingRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -279,9 +279,9 @@ namespace media_types_LowLevel
 
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response ContentTypeWithEncoding(RequestContent content, RequestOptions options = null)
+        public virtual Response ContentTypeWithEncoding(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
@@ -289,7 +289,7 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateContentTypeWithEncodingRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

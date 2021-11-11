@@ -53,9 +53,9 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head200Async(RequestOptions options = null)
+        public virtual async Task<Response> Head200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -63,7 +63,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -73,9 +73,9 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response Head200(RequestOptions options = null)
+        public virtual Response Head200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -83,7 +83,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead200Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -93,9 +93,9 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head204Async(RequestOptions options = null)
+        public virtual async Task<Response> Head204Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -103,7 +103,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -113,9 +113,9 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response Head204(RequestOptions options = null)
+        public virtual Response Head204(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -123,7 +123,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead204Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -133,9 +133,9 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Head404Async(RequestOptions options = null)
+        public virtual async Task<Response> Head404Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
@@ -143,7 +143,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -153,9 +153,9 @@ namespace head_LowLevel
         }
 
         /// <summary> Return 404 status code if successful. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response Head404(RequestOptions options = null)
+        public virtual Response Head404(RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
@@ -163,7 +163,7 @@ namespace head_LowLevel
             try
             {
                 using HttpMessage message = CreateHead404Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
