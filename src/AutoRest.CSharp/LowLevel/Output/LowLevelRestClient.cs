@@ -62,8 +62,6 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var operation in OperationGroup.Operations)
             {
-                //if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Header && p.Language.Default.Name.Equals("If-Match")))
-                RequestConditionCollapseType collapseType = GetRequestConditionCollapseType(operation.Parameters);
                 foreach (ServiceRequest serviceRequest in operation.Requests)
                 {
                     // See also DataPlaneRestClient::EnsureNormalMethods if changing
@@ -83,54 +81,6 @@ namespace AutoRest.CSharp.Output.Models
                     RequestHeader[] requestHeaders = method.Request.Headers;
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
-
-                    if (collapseType != RequestConditionCollapseType.None)
-                    {
-                        bool isCollapseParamRequired = serviceRequest.Parameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
-
-                        CSharpType? type = null;
-                        string name = "";
-                        if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
-                        {
-                            type = typeof(Azure.MatchConditions);
-                            name = "matchConditions";
-                        } else
-                        {
-                            type = typeof(Azure.RequestConditions);
-                            name = "requestConditions";
-                        }
-                        type = type.WithIsNullableAndIsValueType(!isCollapseParamRequired, false);
-                        Constant? defaultValue = null;
-                        if (!isCollapseParamRequired && defaultValue == null)
-                        {
-                            defaultValue = Constant.Default(type);
-                        }
-                        Parameter collapsedParameter = new Parameter(
-                                                                name,
-                                                                "The content to send as the request conditions of the request.",
-                                                                type,
-                                                                defaultValue,
-                                                                isCollapseParamRequired,
-                                                                false,
-                                                                false);
-
-                        IEnumerable<RequestParameter>? conditionParameters = null;
-                        if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
-                        {
-                            conditionParameters = operation.Parameters.Where(p => p.IsMatchConditionHeader());
-                        } else
-                        {
-                            conditionParameters = operation.Parameters.Where(p => p.IsRequestConditionHeader());
-                        }
-
-                        foreach (var pram in conditionParameters)
-                        {
-                            int paramIndex = parameters.FindIndex(p => p.Name == pram.CSharpName());
-                            parameters.RemoveAt(paramIndex);
-                        }
-                        parameters.Insert(parameters.Count, collapsedParameter);
-                    }
-
                     if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body))
                     {
                         RequestParameter bodyParameter = serviceRequest.Parameters.First(p => p.In == ParameterLocation.Body);
