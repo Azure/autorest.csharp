@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -49,7 +50,6 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
             _endpoint = endpoint;
         }
 
-        private readonly object _syncObj = new object();
         private Client3 _cachedClient3;
         private Client4 _cachedClient4;
         private Client5 _cachedClient5;
@@ -57,28 +57,19 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <summary> Initializes a new instance of Client3. </summary>
         public virtual Client3 GetClient3Client()
         {
-            lock (_syncObj)
-            {
-                return _cachedClient3 ??= new Client3(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
-            }
+            return Volatile.Read(ref _cachedClient3) ?? Interlocked.CompareExchange(ref _cachedClient3, new Client3(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient3;
         }
 
         /// <summary> Initializes a new instance of Client4. </summary>
         public virtual Client4 GetClient4Client()
         {
-            lock (_syncObj)
-            {
-                return _cachedClient4 ??= new Client4(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
-            }
+            return Volatile.Read(ref _cachedClient4) ?? Interlocked.CompareExchange(ref _cachedClient4, new Client4(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient4;
         }
 
         /// <summary> Initializes a new instance of Client5. </summary>
         public virtual Client5 GetClient5Client()
         {
-            lock (_syncObj)
-            {
-                return _cachedClient5 ??= new Client5(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
-            }
+            return Volatile.Read(ref _cachedClient5) ?? Interlocked.CompareExchange(ref _cachedClient5, new Client5(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient5;
         }
     }
 }

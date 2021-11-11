@@ -368,8 +368,6 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelRestClient parentClient, LowLevelRestClient[] subClients)
         {
             var factoryMethods = new List<(FieldDeclaration?, MethodSignature, List<Reference>)>();
-            var syncObjField = new FieldDeclaration("private readonly", typeof(object), "_syncObj", $"new object()");
-            var requiresSyncObj = false;
             foreach (var subClient in subClients)
             {
                 var methodParameters = new List<Parameter>();
@@ -403,14 +401,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     var field = new FieldDeclaration("private", subClient.Type, $"_cached{subClient.Type.Name}");
-                    requiresSyncObj = true;
                     factoryMethods.Add((field, methodSignature, constructorCallParameters));
                 }
-            }
-
-            if (requiresSyncObj)
-            {
-                writer.WriteFieldDeclaration(syncObjField);
             }
 
             foreach (var (field, _, _) in factoryMethods)
@@ -433,10 +425,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (field != null)
                     {
-                        using (writer.Scope($"lock ({syncObjField.Name})"))
-                        {
-                            writer.Line($"return {field.Name} ??= new {methodSignature.ReturnType}({constructorCallParameters.GetIdentifiersFormattable()});");
-                        }
+                        writer
+                            .Append($"return {typeof(Volatile)}.{nameof(Volatile.Read)}(ref {field.Name})")
+                            .Append($" ?? {typeof(Interlocked)}.{nameof(Interlocked.CompareExchange)}(ref {field.Name}, new {methodSignature.ReturnType}({constructorCallParameters.GetIdentifiersFormattable()}), null)")
+                            .Line($" ?? {field.Name};");
                     }
                     else
                     {

@@ -1114,7 +1114,7 @@ namespace Azure.Analytics.Purview.Account
             }
         }
 
-        private volatile PurviewAccountResourceSetRules _cachedPurviewAccountResourceSetRules;
+        private PurviewAccountResourceSetRules _cachedPurviewAccountResourceSetRules;
 
         /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
         /// <param name="collectionName"> The String to use. </param>
@@ -1132,7 +1132,7 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Initializes a new instance of PurviewAccountResourceSetRules. </summary>
         public virtual PurviewAccountResourceSetRules GetResourceSetRulesClient()
         {
-            return _cachedPurviewAccountResourceSetRules ??= new PurviewAccountResourceSetRules(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion);
+            return Volatile.Read(ref _cachedPurviewAccountResourceSetRules) ?? Interlocked.CompareExchange(ref _cachedPurviewAccountResourceSetRules, new PurviewAccountResourceSetRules(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedPurviewAccountResourceSetRules;
         }
 
         internal HttpMessage CreateGetAccountPropertiesRequest()

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -95,16 +96,12 @@ namespace SubClients_LowLevel
             }
         }
 
-        private readonly object _syncObj = new object();
         private Parameter _cachedParameter0;
 
         /// <summary> Initializes a new instance of Parameter. </summary>
         public virtual Parameter GetParameterClient()
         {
-            lock (_syncObj)
-            {
-                return _cachedParameter0 ??= new Parameter(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
-            }
+            return Volatile.Read(ref _cachedParameter0) ?? Interlocked.CompareExchange(ref _cachedParameter0, new Parameter(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedParameter0;
         }
 
         internal HttpMessage CreateGetCachedParameterRequest()

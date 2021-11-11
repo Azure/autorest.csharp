@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -88,26 +89,19 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        private readonly object _syncObj = new object();
         private Client1 _cachedClient1;
         private Client2 _cachedClient2;
 
         /// <summary> Initializes a new instance of Client1. </summary>
         public virtual Client1 GetClient1Client()
         {
-            lock (_syncObj)
-            {
-                return _cachedClient1 ??= new Client1(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
-            }
+            return Volatile.Read(ref _cachedClient1) ?? Interlocked.CompareExchange(ref _cachedClient1, new Client1(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient1;
         }
 
         /// <summary> Initializes a new instance of Client2. </summary>
         public virtual Client2 GetClient2Client()
         {
-            lock (_syncObj)
-            {
-                return _cachedClient2 ??= new Client2(_clientDiagnostics, _pipeline, _keyCredential, _endpoint);
-            }
+            return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient2;
         }
 
         internal HttpMessage CreateOperationRequest()
