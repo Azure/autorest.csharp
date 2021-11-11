@@ -40,7 +40,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    operation.Language.Default.Name = operation.Language.Default.Name.RenameListToGet(operationGroup.Key.IsNullOrEmpty() ? _codeModel.Language.Default.Name.ReplaceLast("Client", "") : operationGroup.Key);
+                    var resourceName = operationGroup.Key.IsNullOrEmpty() ? _codeModel.Language.Default.Name.ReplaceLast("Client", "") : operationGroup.Key;
+                    operation.Language.Default.Name = operation.Language.Default.Name.RenameGetMethod(resourceName).RenameListToGet(resourceName);
                 }
             }
         }
