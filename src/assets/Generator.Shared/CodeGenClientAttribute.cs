@@ -11,7 +11,6 @@ namespace Azure.Core
     internal class CodeGenClientAttribute : CodeGenTypeAttribute
     {
         public Type? ParentClient { get; set; }
-        public bool ForcePublicConstructors { get; set; }
 
         public CodeGenClientAttribute(string originalName) : base(originalName)
         {

@@ -66,7 +66,7 @@ public partial class MyServiceClient
 Each client can be made a subclient of another client (without circular dependency) using `CodeGenClientAttribute.ParentClient` parameter. Since `CodeGenClientAttribute` is applied to the client type, user will explicitly specify new client type name. According to [guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-subclients), type should have a name without "Client" suffix and an internal constructor. **autorest.csharp** will add a factory method to the type, specified in `ParentClient`.
 
 ```cs
-[CodeGenClient("CollectionsClient", ParentClient = typeof(PurviewAccountsClient), ForcePublicConstructors = true)]
+[CodeGenClient("CollectionsClient", ParentClient = typeof(PurviewAccountsClient))]
 public partial class PurviewAccountCollections { }
 ```
 

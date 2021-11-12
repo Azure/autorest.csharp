@@ -79,14 +79,13 @@ namespace AutoRest.CSharp.Output.Models
             if (ExistingType != null && context.SourceInputModel != null && context.SourceInputModel.TryGetClientSourceInput(ExistingType, out var codeGenClientAttribute))
             {
                 ParentClientTypeName = codeGenClientAttribute.ParentClientType?.Name;
-                _hasPublicConstructors = !IsSubClient || codeGenClientAttribute.ForcePublicConstructors;
             }
             else if (ParentClientTypeName == null && !string.IsNullOrEmpty(parentClientTypeName) && !string.IsNullOrEmpty(operationGroup.Language.Default.Name))
             {
                 ParentClientTypeName = parentClientTypeName;
-                _hasPublicConstructors = false;
             }
 
+            _hasPublicConstructors = !IsSubClient;
             ClientDiagnosticsField = new("private readonly", typeof(ClientDiagnostics), "_" + ClientDiagnosticsParameter.Name);
             PipelineField = new("private readonly", typeof(HttpPipeline), "_" + PipelineParameter.Name);
 

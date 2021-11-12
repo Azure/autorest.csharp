@@ -68,20 +68,15 @@ namespace AutoRest.CSharp.Input.Source
                     if (SymbolEqualityComparer.Default.Equals(attributeType, _clientAttribute))
                     {
                         INamedTypeSymbol? parentClientType = null;
-                        bool forcePublicConstructors = false;
                         foreach ((var argumentName, TypedConstant constant) in attribute.NamedArguments)
                         {
-                            if (argumentName == nameof(CodeGenClientAttribute.ForcePublicConstructors) && constant.Value is not null)
-                            {
-                                forcePublicConstructors = (bool)constant.Value;
-                            }
-                            else if (argumentName == nameof(CodeGenClientAttribute.ParentClient))
+                            if (argumentName == nameof(CodeGenClientAttribute.ParentClient))
                             {
                                 parentClientType = (INamedTypeSymbol?)constant.Value;
                             }
                         }
 
-                        clientSourceInput = new ClientSourceInput(parentClientType, forcePublicConstructors);
+                        clientSourceInput = new ClientSourceInput(parentClientType);
                         return true;
                     }
 

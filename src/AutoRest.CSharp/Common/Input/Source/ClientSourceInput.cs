@@ -5,5 +5,5 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
 {
-    internal record ClientSourceInput(INamedTypeSymbol? ParentClientType, bool ForcePublicConstructors);
+    internal record ClientSourceInput(INamedTypeSymbol? ParentClientType);
 }
