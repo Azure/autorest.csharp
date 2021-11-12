@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Output.Builders
                 );
             }
 
-            return new TypeDeclarationOptions(defaultName,defaultNamespace, defaultAccessibility, false, false);
+            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, false, false);
         }
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)
