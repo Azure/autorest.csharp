@@ -34,8 +34,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     Console.Error.WriteLine("Attempting to attach debugger.");
                     System.Diagnostics.Debugger.Launch();
                 }
-                await plugin.Execute(autoRest);
-                return true;
+                return await plugin.Execute(autoRest);
             }
             catch (Exception e)
             {
