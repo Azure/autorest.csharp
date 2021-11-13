@@ -20,13 +20,12 @@ namespace custom_baseUrl_paging_LowLevel
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _host;
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
         protected PagingClient()
@@ -48,7 +47,6 @@ namespace custom_baseUrl_paging_LowLevel
             {
                 throw new ArgumentNullException(nameof(host));
             }
-
             options ??= new AutoRestParameterizedHostTestPagingClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

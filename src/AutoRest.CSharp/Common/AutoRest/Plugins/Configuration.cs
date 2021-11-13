@@ -9,6 +9,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
+        public static string ProjectRelativeDirectory = "../";
+
         public static class Options
         {
             public const string OutputFolder = "output-folder";
@@ -22,10 +24,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public const string HeadAsBoolean = "head-as-boolean";
             public const string SkipCSProjPackageReference = "skip-csproj-packagereference";
             public const string LowLevelClient = "low-level-client";
+            public const string SingleTopLevelClient = "single-top-level-client";
             public const string AttachDebuggerFormat = "{0}.attach";
         }
 
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool singleTopLevelClient, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -38,6 +41,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;
+            SingleTopLevelClient = singleTopLevelClient;
             MgmtConfiguration = mgmtConfiguration;
         }
 
@@ -51,8 +55,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool ModelNamespace { get; }
         public bool HeadAsBoolean { get; }
         public bool SkipCSProjPackageReference { get; }
-        public static string ProjectRelativeDirectory = "../";
         public bool LowLevelClient { get; }
+        public bool SingleTopLevelClient { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
@@ -69,6 +73,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 headAsBoolean: GetOptionValue(autoRest, Options.HeadAsBoolean),
                 skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
                 lowLevelClient: GetOptionValue(autoRest, Options.LowLevelClient),
+                singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
@@ -95,6 +100,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 case Options.SkipCSProjPackageReference:
                     return false;
                 case Options.LowLevelClient:
+                    return false;
+                case Options.SingleTopLevelClient:
                     return false;
                 default:
                     return null;

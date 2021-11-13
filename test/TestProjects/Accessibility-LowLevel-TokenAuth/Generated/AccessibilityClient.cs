@@ -16,15 +16,14 @@ namespace Accessibility_LowLevel_TokenAuth
     /// <summary> The Accessibility service client. </summary>
     public partial class AccessibilityClient
     {
-        private static readonly string[] AuthorizationScopes = { "https://test.azure.com/.default" };
+        private static readonly string[] AuthorizationScopes = new string[] { "https://test.azure.com/.default" };
         private readonly TokenCredential _tokenCredential;
-
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of AccessibilityClient for mocking. </summary>
         protected AccessibilityClient()
@@ -43,7 +42,6 @@ namespace Accessibility_LowLevel_TokenAuth
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AccessibilityClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);

@@ -3,7 +3,6 @@
 
 #nullable enable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
@@ -57,43 +56,31 @@ namespace Azure.Core
 
         public static async ValueTask<Response<bool>> ProcessHeadAsBoolMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
         {
-            var (cancellationToken, statusOption) = ApplyRequestContext(requestContext);
-            await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
+            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestContext).ConfigureAwait(false);
+            switch (response.Status)
             {
                 case >= 200 and < 300:
-                    return Response.FromValue(true, message.Response);
+                    return Response.FromValue(true, response);
                 case >= 400 and < 500:
-                    return Response.FromValue(false, message.Response);
+                    return Response.FromValue(false, response);
                 default:
-                    var exception = await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                    if (statusOption == ErrorOptions.NoThrow)
-                    {
-                        return new ErrorResponse<bool>(message.Response, exception);
-                    }
-
-                    throw exception;
+                    var exception = await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
+                    return new ErrorResponse<bool>(response, exception);
             }
         }
 
         public static Response<bool> ProcessHeadAsBoolMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
         {
-            var (cancellationToken, statusOption) = ApplyRequestContext(requestContext);
-            pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
+            var response = pipeline.ProcessMessage(message, clientDiagnostics, requestContext);
+            switch (response.Status)
             {
                 case >= 200 and < 300:
-                    return Response.FromValue(true, message.Response);
+                    return Response.FromValue(true, response);
                 case >= 400 and < 500:
-                    return Response.FromValue(false, message.Response);
+                    return Response.FromValue(false, response);
                 default:
-                    var exception = clientDiagnostics.CreateRequestFailedException(message.Response);
-                    if (statusOption == ErrorOptions.NoThrow)
-                    {
-                        return new ErrorResponse<bool>(message.Response, exception);
-                    }
-
-                    throw exception;
+                    var exception = clientDiagnostics.CreateRequestFailedException(response);
+                    return new ErrorResponse<bool>(response, exception);
             }
         }
 

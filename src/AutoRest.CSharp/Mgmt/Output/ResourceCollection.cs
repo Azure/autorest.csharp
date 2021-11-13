@@ -36,13 +36,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         private ClientMethod? _getByIdMethod;
 
         public ResourceCollection(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-            : base(operationGroup, context)
+            : base(operationGroup, context, null, _suffixValue)
         {
             _context = context;
         }
 
         public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod && !IsPutMethod(m.RestClientMethod)
-        && !ListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !SubscriptionExtensionsListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !ResourceListMethods.Any(r => r.GetRestClientMethod() == m.RestClientMethod));
+            && ListMethods.All(s => m.RestClientMethod != s.GetRestClientMethod()) && !SubscriptionExtensionsListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && ResourceListMethods.All(r => r.GetRestClientMethod() != m.RestClientMethod));
 
         public Resource Resource => _context.Library.GetArmResource(OperationGroup);
 
@@ -105,8 +105,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return method.Request.HttpMethod.Equals(RequestMethod.Put) &&
                 (method.Name.StartsWith("CreateOrUpdate") || method.Name.StartsWith("Create") || method.Name.StartsWith("Put"));
         }
-
-        protected override string SuffixValue => _suffixValue;
 
         protected override IEnumerable<ClientMethod> GetMethodsInScope()
         {

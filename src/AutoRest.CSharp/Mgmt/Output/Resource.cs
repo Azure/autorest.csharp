@@ -41,30 +41,40 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected MgmtRestClient? _restClient;
         public bool IsScopeOrExtension { get; }
 
-        public Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context,
-            IEnumerable<OperationGroup>? nonResourceOperationGroups = null): base(context)
+        public Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, IEnumerable<OperationGroup>? nonResourceOperationGroups = null)
+            : this(operationGroup, context, nonResourceOperationGroups, string.Empty)
+        {
+        }
+
+        protected Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, IEnumerable<OperationGroup>? nonResourceOperationGroups, string suffixValue)
+            : this(operationGroup, context, nonResourceOperationGroups, suffixValue,
+                // check if this is an extension resource, if so, we need to append the name of its parent to this resource name unless it's also a scope resource
+                operationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration),
+                operationGroup.IsScopeResource(context.Configuration.MgmtConfiguration))
+        {
+        }
+
+        private Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, IEnumerable<OperationGroup>? nonResourceOperationGroups, string suffixValue, bool isExtension, bool isScope)
+            : base(context, GetParentValue(operationGroup, context, isExtension, isScope) + operationGroup.Resource(context.Configuration.MgmtConfiguration) + suffixValue)
         {
             _context = context;
             OperationGroup = operationGroup;
-            // check if this is an extension resource, if so, we need to add the name of its parent to the front of this resource name unless it's also a scope resource
-            var isExtension = operationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration);
-            var isScope = operationGroup.IsScopeResource(context.Configuration.MgmtConfiguration);
-            string parentValue = "";
+            IsScopeOrExtension = isScope || isExtension;
+            _childOperations = nonResourceOperationGroups?.ToDictionary(og => og, og => new MgmtNonResourceOperation(og, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
+        }
+
+        private static string GetParentValue(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool isExtension, bool isScope)
+        {
             if (isExtension && !isScope)
             {
                 var parentOperationGroup = operationGroup.ParentOperationGroup(context);
-                // if we cannot find a parent operation group, we just give up and add nothing.
+                // if we cannot find a parent operation group, we just give up and append nothing.
                 // this case will only happen when resource's parent is tenant, subscriptions, or resourceGroups
-                parentValue = parentOperationGroup?.Key.ToSingular(false) ?? string.Empty;
+                return parentOperationGroup?.Key.ToSingular(false) ?? string.Empty;
             }
 
-            IsScopeOrExtension = isScope || isExtension;
-            DefaultName = parentValue + operationGroup.Resource(context.Configuration.MgmtConfiguration) + SuffixValue;
-            _childOperations = nonResourceOperationGroups?.ToDictionary(operationGroup => operationGroup,
-                operationGroup => new MgmtNonResourceOperation(operationGroup, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
+            return string.Empty;
         }
-
-        protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility => "public";
 
@@ -73,8 +83,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceCollection? ResourceCollection => _context.Library.GetResourceCollection(OperationGroup);
 
         public virtual string ResourceName => Type.Name;
-
-        protected virtual string SuffixValue => string.Empty;
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 

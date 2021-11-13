@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Type _type;
 
         public SystemObjectType(Type type, BuildContext context)
-            : base(context)
+            : base(context, GetNameWithoutGeneric(type), type.Namespace)
         {
             _type = type;
         }
@@ -29,9 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal override Type? SerializeAs => GetSerializeAs(_type);
 
-        protected override string DefaultName => GetNameWithoutGeneric(_type);
         protected override string DefaultAccessibility { get; } = "public";
-        protected override string DefaultNamespace => _type.Namespace ?? base.DefaultNamespace;
 
         private string ToCamelCase(string name)
         {
@@ -75,7 +73,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private string GetNameWithoutGeneric(Type t)
+        private static string GetNameWithoutGeneric(Type t)
         {
             if (!t.IsGenericType)
                 return t.Name;

@@ -14,22 +14,37 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         private readonly CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
+        public ClientOptionsTypeProvider ClientOptions { get; }
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
             _codeModel = codeModel;
             _context = context;
+            ClientOptions = new ClientOptionsTypeProvider(_context);
             UpdateListMethodNames();
             _restClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
         }
 
-        public IEnumerable<LowLevelRestClient> RestClients => _restClients.Values;
+        public ICollection<LowLevelRestClient> RestClients => _restClients.Values;
         private Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
         {
             var restClients = new Dictionary<OperationGroup, LowLevelRestClient>();
+
+            string? topLevelClientName = null;
+            if (_context.Configuration.SingleTopLevelClient)
+            {
+                var topLevelOperationGroup = _codeModel.OperationGroups.FirstOrDefault(og => string.IsNullOrEmpty(og.Key));
+                var topLevelClient = topLevelOperationGroup != null ? new LowLevelRestClient(topLevelOperationGroup, _context, ClientOptions, null) : LowLevelRestClient.CreateEmptyTopLevelClient(_context, ClientOptions);
+                restClients.Add(topLevelClient.OperationGroup, topLevelClient);
+                topLevelClientName = topLevelClient.Declaration.Name;
+            }
+
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                restClients.Add(operationGroup, new LowLevelRestClient(operationGroup, _context));
+                if (!restClients.ContainsKey(operationGroup))
+                {
+                    restClients.Add(operationGroup, new LowLevelRestClient(operationGroup, _context, ClientOptions, topLevelClientName));
+                }
             }
 
             return restClients;
