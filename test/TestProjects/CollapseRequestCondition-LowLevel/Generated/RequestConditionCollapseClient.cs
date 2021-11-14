@@ -18,13 +18,12 @@ namespace CollapseRequestConditions
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of RequestConditionCollapseClient for mocking. </summary>
         protected RequestConditionCollapseClient()
@@ -43,7 +42,6 @@ namespace CollapseRequestConditions
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new CollapseRequestConditionsClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
@@ -54,9 +52,9 @@ namespace CollapseRequestConditions
 
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapsePutAsync(RequestContent content, RequestConditions requestConditions = null, RequestOptions options = null)
+        public virtual async Task<Response> CollapsePutAsync(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
@@ -64,7 +62,7 @@ namespace CollapseRequestConditions
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, requestConditions);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -75,9 +73,9 @@ namespace CollapseRequestConditions
 
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapsePut(RequestContent content, RequestConditions requestConditions = null, RequestOptions options = null)
+        public virtual Response CollapsePut(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
@@ -85,7 +83,7 @@ namespace CollapseRequestConditions
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, requestConditions);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -95,9 +93,9 @@ namespace CollapseRequestConditions
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestOptions options = null)
+        public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
@@ -105,7 +103,7 @@ namespace CollapseRequestConditions
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(requestConditions);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -115,9 +113,9 @@ namespace CollapseRequestConditions
         }
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestOptions options = null)
+        public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
@@ -125,7 +123,7 @@ namespace CollapseRequestConditions
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(requestConditions);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {

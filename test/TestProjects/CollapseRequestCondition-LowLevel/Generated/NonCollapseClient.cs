@@ -18,13 +18,12 @@ namespace CollapseRequestConditions
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of NonCollapseClient for mocking. </summary>
         protected NonCollapseClient()
@@ -43,7 +42,6 @@ namespace CollapseRequestConditions
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new CollapseRequestConditionsClientOptions();
 
             _clientDiagnostics = new ClientDiagnostics(options);
@@ -54,9 +52,9 @@ namespace CollapseRequestConditions
 
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapsePutAsync(RequestContent content, ETag? ifMatch = null, RequestOptions options = null)
+        public virtual async Task<Response> CollapsePutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
@@ -64,7 +62,7 @@ namespace CollapseRequestConditions
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, ifMatch);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -75,9 +73,9 @@ namespace CollapseRequestConditions
 
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapsePut(RequestContent content, ETag? ifMatch = null, RequestOptions options = null)
+        public virtual Response CollapsePut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
@@ -85,7 +83,7 @@ namespace CollapseRequestConditions
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, ifMatch);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -97,9 +95,9 @@ namespace CollapseRequestConditions
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
         /// <param name="ifUnmodifiedSince"> Specify this header value to operate only on a blob if it has not been modified since the specified date/time. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CollapseGetAsync(ETag? ifMatch = null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestOptions options = null)
+        public virtual async Task<Response> CollapseGetAsync(ETag? ifMatch = null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
@@ -107,7 +105,7 @@ namespace CollapseRequestConditions
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(ifMatch, ifModifiedSince, ifUnmodifiedSince);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -119,9 +117,9 @@ namespace CollapseRequestConditions
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="ifModifiedSince"> Specify this header value to operate only on a blob if it has been modified since the specified date/time. </param>
         /// <param name="ifUnmodifiedSince"> Specify this header value to operate only on a blob if it has not been modified since the specified date/time. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context. </param>
 #pragma warning disable AZC0002
-        public virtual Response CollapseGet(ETag? ifMatch = null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestOptions options = null)
+        public virtual Response CollapseGet(ETag? ifMatch = null, DateTimeOffset? ifModifiedSince = null, DateTimeOffset? ifUnmodifiedSince = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
@@ -129,7 +127,7 @@ namespace CollapseRequestConditions
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(ifMatch, ifModifiedSince, ifUnmodifiedSince);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
             {
