@@ -92,7 +92,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets the existing immutability policy along with the corresponding ETag in response headers and body. </summary>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ImmutabilityPolicy>> GetAsync(string ifMatch = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ImmutabilityPolicy>> GetAsync(ETag? ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Get");
             scope.Start();
@@ -113,7 +113,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets the existing immutability policy along with the corresponding ETag in response headers and body. </summary>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ImmutabilityPolicy> Get(string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<ImmutabilityPolicy> Get(ETag? ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Get");
             scope.Start();
@@ -151,14 +151,8 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public async virtual Task<ImmutabilityPolicyDeleteOperation> DeleteAsync(string ifMatch, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<ImmutabilityPolicyDeleteOperation> DeleteAsync(ETag ifMatch, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Delete");
             scope.Start();
             try
@@ -180,14 +174,8 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual ImmutabilityPolicyDeleteOperation Delete(string ifMatch, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual ImmutabilityPolicyDeleteOperation Delete(ETag ifMatch, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Delete");
             scope.Start();
             try
@@ -208,7 +196,7 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ImmutabilityPolicy>> CreateOrUpdateAsync(string ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ImmutabilityPolicy>> CreateOrUpdateAsync(ETag? ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.CreateOrUpdate");
             scope.Start();
@@ -228,7 +216,7 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ImmutabilityPolicy> CreateOrUpdate(string ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        public virtual Response<ImmutabilityPolicy> CreateOrUpdate(ETag? ifMatch = null, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.CreateOrUpdate");
             scope.Start();
@@ -247,14 +235,8 @@ namespace Azure.Management.Storage
         /// <summary> Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation. </summary>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual async Task<Response<ImmutabilityPolicy>> LockAsync(string ifMatch, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ImmutabilityPolicy>> LockAsync(ETag ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Lock");
             scope.Start();
             try
@@ -272,14 +254,8 @@ namespace Azure.Management.Storage
         /// <summary> Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation. </summary>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual Response<ImmutabilityPolicy> Lock(string ifMatch, CancellationToken cancellationToken = default)
+        public virtual Response<ImmutabilityPolicy> Lock(ETag ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Lock");
             scope.Start();
             try
@@ -298,14 +274,8 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual async Task<Response<ImmutabilityPolicy>> ExtendAsync(string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ImmutabilityPolicy>> ExtendAsync(ETag ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Extend");
             scope.Start();
             try
@@ -324,14 +294,8 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual Response<ImmutabilityPolicy> Extend(string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        public virtual Response<ImmutabilityPolicy> Extend(ETag ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Extend");
             scope.Start();
             try

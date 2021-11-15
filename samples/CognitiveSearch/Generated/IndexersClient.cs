@@ -120,14 +120,15 @@ namespace CognitiveSearch
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return await RestClient.CreateOrUpdateAsync(indexerName, prefer, indexer, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateOrUpdateAsync(indexerName, prefer, indexer, requestOptions, accessCondition, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -142,14 +143,15 @@ namespace CognitiveSearch
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Indexer> CreateOrUpdate(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<Indexer> CreateOrUpdate(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return RestClient.CreateOrUpdate(indexerName, prefer, indexer, requestOptions, accessCondition, cancellationToken);
+                return RestClient.CreateOrUpdate(indexerName, prefer, indexer, requestOptions, accessCondition, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -162,14 +164,15 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Delete");
             scope.Start();
             try
             {
-                return await RestClient.DeleteAsync(indexerName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.DeleteAsync(indexerName, requestOptions, accessCondition, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -182,14 +185,15 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Delete");
             scope.Start();
             try
             {
-                return RestClient.Delete(indexerName, requestOptions, accessCondition, cancellationToken);
+                return RestClient.Delete(indexerName, requestOptions, accessCondition, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {

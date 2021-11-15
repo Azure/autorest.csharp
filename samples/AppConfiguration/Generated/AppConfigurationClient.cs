@@ -129,17 +129,16 @@ namespace AppConfiguration
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, IEnumerable<Get7ItemsItem> select = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.GetKeyValue");
             scope.Start();
             try
             {
-                return await RestClient.GetKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false);
+                return await RestClient.GetKeyValueAsync(key, label, acceptDatetime, select, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -152,17 +151,16 @@ namespace AppConfiguration
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> GetKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual Response<KeyValue> GetKeyValue(string key, string label = null, string acceptDatetime = null, IEnumerable<Get7ItemsItem> select = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.GetKeyValue");
             scope.Start();
             try
             {
-                return RestClient.GetKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken);
+                return RestClient.GetKeyValue(key, label, acceptDatetime, select, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -174,17 +172,16 @@ namespace AppConfiguration
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to create. </param>
         /// <param name="label"> The label of the key-value to create. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> PutKeyValueAsync(string key, string label = null, KeyValue entity = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutKeyValue");
             scope.Start();
             try
             {
-                return await RestClient.PutKeyValueAsync(key, label, ifMatch, ifNoneMatch, entity, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PutKeyValueAsync(key, label, entity, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -196,17 +193,16 @@ namespace AppConfiguration
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to create. </param>
         /// <param name="label"> The label of the key-value to create. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
+        public virtual Response<KeyValue> PutKeyValue(string key, string label = null, KeyValue entity = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutKeyValue");
             scope.Start();
             try
             {
-                return RestClient.PutKeyValue(key, label, ifMatch, ifNoneMatch, entity, cancellationToken);
+                return RestClient.PutKeyValue(key, label, entity, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -220,7 +216,7 @@ namespace AppConfiguration
         /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> DeleteKeyValueAsync(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> DeleteKeyValueAsync(string key, string label = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteKeyValue");
             scope.Start();
@@ -240,7 +236,7 @@ namespace AppConfiguration
         /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> DeleteKeyValue(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<KeyValue> DeleteKeyValue(string key, string label = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteKeyValue");
             scope.Start();
@@ -259,17 +255,16 @@ namespace AppConfiguration
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, IEnumerable<Head7ItemsItem> select = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeyValue");
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, select, matchConditions, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -282,17 +277,16 @@ namespace AppConfiguration
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual Response CheckKeyValue(string key, string label = null, string acceptDatetime = null, IEnumerable<Head7ItemsItem> select = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeyValue");
             scope.Start();
             try
             {
-                return RestClient.CheckKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).GetRawResponse();
+                return RestClient.CheckKeyValue(key, label, acceptDatetime, select, matchConditions, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -346,16 +340,15 @@ namespace AppConfiguration
         /// <summary> Locks a key-value. </summary>
         /// <param name="key"> The key of the key-value to lock. </param>
         /// <param name="label"> The label, if any, of the key-value to lock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> PutLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> PutLockAsync(string key, string label = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutLock");
             scope.Start();
             try
             {
-                return await RestClient.PutLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PutLockAsync(key, label, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -367,16 +360,15 @@ namespace AppConfiguration
         /// <summary> Locks a key-value. </summary>
         /// <param name="key"> The key of the key-value to lock. </param>
         /// <param name="label"> The label, if any, of the key-value to lock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> PutLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<KeyValue> PutLock(string key, string label = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutLock");
             scope.Start();
             try
             {
-                return RestClient.PutLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
+                return RestClient.PutLock(key, label, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -388,16 +380,15 @@ namespace AppConfiguration
         /// <summary> Unlocks a key-value. </summary>
         /// <param name="key"> The key of the key-value to unlock. </param>
         /// <param name="label"> The label, if any, of the key-value to unlock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> DeleteLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<KeyValue>> DeleteLockAsync(string key, string label = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteLock");
             scope.Start();
             try
             {
-                return await RestClient.DeleteLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                return await RestClient.DeleteLockAsync(key, label, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -409,16 +400,15 @@ namespace AppConfiguration
         /// <summary> Unlocks a key-value. </summary>
         /// <param name="key"> The key of the key-value to unlock. </param>
         /// <param name="label"> The label, if any, of the key-value to unlock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> DeleteLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<KeyValue> DeleteLock(string key, string label = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteLock");
             scope.Start();
             try
             {
-                return RestClient.DeleteLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
+                return RestClient.DeleteLock(key, label, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {

@@ -161,7 +161,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions, AccessCondition accessCondition, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -173,16 +173,12 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (accessCondition?.IfMatch != null)
-            {
-                request.Headers.Add("If-Match", accessCondition.IfMatch);
-            }
-            if (accessCondition?.IfNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
-            }
             request.Headers.Add("Prefer", prefer.ToString());
             request.Headers.Add("Accept", "application/json");
+            if (matchConditions != null)
+            {
+                request.Headers.Add(matchConditions);
+            }
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(indexer);
@@ -196,9 +192,10 @@ namespace CognitiveSearch
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> or <paramref name="indexer"/> is null. </exception>
-        public async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -209,7 +206,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexer));
             }
 
-            using var message = CreateCreateOrUpdateRequest(indexerName, prefer, indexer, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(indexerName, prefer, indexer, requestOptions, accessCondition, matchConditions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -232,9 +229,10 @@ namespace CognitiveSearch
         /// <param name="indexer"> The definition of the indexer to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> or <paramref name="indexer"/> is null. </exception>
-        public Response<Indexer> CreateOrUpdate(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response<Indexer> CreateOrUpdate(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -245,7 +243,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(indexer));
             }
 
-            using var message = CreateCreateOrUpdateRequest(indexerName, prefer, indexer, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(indexerName, prefer, indexer, requestOptions, accessCondition, matchConditions);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -262,7 +260,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string indexerName, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateDeleteRequest(string indexerName, Models.RequestOptions requestOptions, AccessCondition accessCondition, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -274,15 +272,11 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (accessCondition?.IfMatch != null)
-            {
-                request.Headers.Add("If-Match", accessCondition.IfMatch);
-            }
-            if (accessCondition?.IfNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
-            }
             request.Headers.Add("Accept", "application/json");
+            if (matchConditions != null)
+            {
+                request.Headers.Add(matchConditions);
+            }
             return message;
         }
 
@@ -290,16 +284,17 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var message = CreateDeleteRequest(indexerName, requestOptions, accessCondition);
+            using var message = CreateDeleteRequest(indexerName, requestOptions, accessCondition, matchConditions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -315,16 +310,17 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public Response Delete(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response Delete(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
                 throw new ArgumentNullException(nameof(indexerName));
             }
 
-            using var message = CreateDeleteRequest(indexerName, requestOptions, accessCondition);
+            using var message = CreateDeleteRequest(indexerName, requestOptions, accessCondition, matchConditions);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
