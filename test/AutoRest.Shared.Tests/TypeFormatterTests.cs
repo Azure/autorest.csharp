@@ -13,9 +13,9 @@ namespace Azure.Core.Tests
         public static object[] DateTimeOffsetCases =
         {
             new object[] { "O", new DateTimeOffset(2020, 05, 04, 03, 02, 01, 123, default), "2020-05-04T03:02:01.1230000Z" },
-            //new object[] { "O", new DateTimeOffset(2020, 05, 04, 03, 02, 01, 123, new TimeSpan(1, 0, 0)), "2020-05-04T03:02:01.1230000+01:00" },
+            new object[] { "O", new DateTimeOffset(2020, 05, 04, 03, 02, 01, 123, new TimeSpan(1, 0, 0)), "2020-05-04T02:02:01.1230000Z" },
             new object[] { "O", new DateTimeOffset(3155378975999999999, default), "9999-12-31T23:59:59.9999999Z" },
-            //new object[] { "O", new DateTimeOffset(3155378975999999999, new TimeSpan(1, 0, 0)), "9999-12-31T23:59:59.9999999+01:00" },
+            new object[] { "O", new DateTimeOffset(3155378975999999999, new TimeSpan(1, 0, 0)), "9999-12-31T22:59:59.9999999Z" },
 
             new object[] { "o", new DateTimeOffset(2020, 05, 04, 03, 02, 01, 123, default), "2020-05-04T03:02:01.1230000Z" },
 
