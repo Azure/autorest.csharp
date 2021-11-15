@@ -48,13 +48,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             public void Write(Utf8JsonWriter writer, string settingName)
             {
-                if (!ShowRequestPath)
+                if (!ShowRequestPath && !SuppressListException)
                     return;
 
                 writer.WriteStartObject(settingName);
 
-                writer.WriteBoolean(nameof(ShowRequestPath), ShowRequestPath);
-                writer.WriteBoolean(nameof(SuppressListException), SuppressListException);
+                if (ShowRequestPath)
+                    writer.WriteBoolean(nameof(ShowRequestPath), ShowRequestPath);
+                if (SuppressListException)
+                    writer.WriteBoolean(nameof(SuppressListException), SuppressListException);
 
                 writer.WriteEndObject();
             }
