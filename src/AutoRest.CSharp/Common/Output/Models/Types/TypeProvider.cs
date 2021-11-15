@@ -10,13 +10,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal abstract class TypeProvider
     {
+        private readonly Lazy<INamedTypeSymbol?> _existingType;
         private TypeDeclarationOptions? _type;
 
-        protected TypeProvider(BuildContext context, string? defaultNamespace = default)
+        protected TypeProvider(BuildContext context)
         {
             Context = context;
-            DefaultNamespace = defaultNamespace ?? Context.DefaultNamespace;
-            ExistingType = Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName);
+            _existingType = new Lazy<INamedTypeSymbol?>(() => Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
 
         public CSharpType Type => new CSharpType(
@@ -28,10 +28,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal BuildContext Context { get; private set; }
         protected abstract string DefaultName { get; }
-        protected string DefaultNamespace { get; }
+        protected virtual string DefaultNamespace => Context.DefaultNamespace;
         protected abstract string DefaultAccessibility { get; }
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
-        protected INamedTypeSymbol? ExistingType { get; }
+        protected INamedTypeSymbol? ExistingType => _existingType.Value;
 
         internal virtual Type? SerializeAs => null;
 

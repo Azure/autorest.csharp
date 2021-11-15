@@ -13,17 +13,19 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal sealed class ModelFactoryTypeProvider : TypeProvider
     {
         protected override string DefaultName { get; }
+        protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; }
         public IEnumerable<MethodSignature> Methods { get; }
         public string DefaultClientName { get; }
 
         public ModelFactoryTypeProvider(BuildContext context, IEnumerable<MethodSignature> methods) : this(context, methods, ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context)) { }
 
-        private ModelFactoryTypeProvider(BuildContext context, IEnumerable<MethodSignature> methods, string defaultClientName) : base(context, GetDefaultNamespace(default, context))
+        private ModelFactoryTypeProvider(BuildContext context, IEnumerable<MethodSignature> methods, string defaultClientName) : base(context)
         {
             Methods = methods;
 
             DefaultName = $"{defaultClientName}ModelFactory";
+            DefaultNamespace = GetDefaultNamespace(default, context);
             DefaultClientName = defaultClientName;
             DefaultAccessibility = "public";
         }

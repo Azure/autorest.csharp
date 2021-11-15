@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         {
         }
 
-        protected LongRunningOperation(Input.Operation operation, BuildContext context, LongRunningOperationInfo lroInfo, string defaultName, string? defaultNamespace = default) : base(context, defaultNamespace)
+        protected LongRunningOperation(Input.Operation operation, BuildContext context, LongRunningOperationInfo lroInfo, string defaultName) : base(context)
         {
             Debug.Assert(operation.IsLongRunning);
 

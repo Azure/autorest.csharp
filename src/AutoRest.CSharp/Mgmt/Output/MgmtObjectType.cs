@@ -24,13 +24,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         protected MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, bool isResourceType)
-            : base(objectSchema, context, GetDefaultName(objectSchema, isResourceType), GetDefaultNamespace(context, objectSchema, isResourceType))
+            : base(objectSchema, context)
         {
             _context = context;
             IsResourceType = isResourceType;
+            DefaultName = GetDefaultName(objectSchema, isResourceType);
+            DefaultNamespace = GetDefaultNamespace(context, objectSchema, isResourceType);
         }
 
         protected bool IsResourceType { get; }
+        protected override string DefaultName { get; }
+        protected override string DefaultNamespace { get; }
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 

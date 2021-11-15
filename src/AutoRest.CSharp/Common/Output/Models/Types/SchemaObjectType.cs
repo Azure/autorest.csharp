@@ -31,12 +31,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeDiscriminator? _discriminator;
 
         public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
-            : this(objectSchema, context, objectSchema.CSharpName(), GetDefaultNamespace(objectSchema.Extensions?.Namespace, context)) {}
-
-        protected SchemaObjectType(ObjectSchema objectSchema, BuildContext context, string defaultName, string defaultNamespace)
-            : base(context, defaultNamespace)
+            : base(context)
         {
-            DefaultName = defaultName;
+            DefaultName = objectSchema.CSharpName();
+            DefaultNamespace = GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
             ObjectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
@@ -62,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal ObjectSchema ObjectSchema { get; }
 
         protected override string DefaultName { get; }
-
+        protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
         public bool IsStruct => ExistingType?.IsValueType == true;

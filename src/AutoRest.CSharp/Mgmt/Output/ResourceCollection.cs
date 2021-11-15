@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private ClientMethod? _getByIdMethod;
 
         public ResourceCollection(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-            : base(operationGroup, context, null, _suffixValue)
+            : base(operationGroup, context)
         {
             _context = context;
         }

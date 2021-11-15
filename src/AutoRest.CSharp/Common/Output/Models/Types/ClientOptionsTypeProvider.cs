@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ClientOptionsTypeProvider(BuildContext context) : this(context, ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context)) { }
 
-        private ClientOptionsTypeProvider(BuildContext context, string defaultClientName) : base(context, context.DefaultNamespace)
+        private ClientOptionsTypeProvider(BuildContext context, string defaultClientName) : base(context)
         {
             DefaultName = $"{defaultClientName}ClientOptions";
             DefaultClientName = defaultClientName;
