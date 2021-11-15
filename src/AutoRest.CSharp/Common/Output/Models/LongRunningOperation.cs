@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         {
         }
 
-        protected LongRunningOperation(Input.Operation operation, BuildContext context, LongRunningOperationInfo lroInfo, string defaultName, string? defaultNamespace = default) : base(context, defaultName, defaultNamespace)
+        protected LongRunningOperation(Input.Operation operation, BuildContext context, LongRunningOperationInfo lroInfo, string defaultName, string? defaultNamespace = default) : base(context, defaultNamespace)
         {
             Debug.Assert(operation.IsLongRunning);
 
@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 }
             }
 
+            DefaultName = defaultName;
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
         }
@@ -55,6 +56,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public RestClientMethod? NextPageMethod { get; }
         public PagingResponseInfo? PagingResponse { get; }
         public string Description { get; }
+        protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
     }
 }

@@ -30,14 +30,16 @@ namespace AutoRest.CSharp.Output.Models
         {
         }
 
-        private DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context, string clientPrefix, string clientSuffix) : base(context, clientPrefix + clientSuffix)
+        private DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context, string clientPrefix, string clientSuffix) : base(context)
         {
             _operationGroup = operationGroup;
             _context = context;
+            DefaultName = clientPrefix + clientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
         }
 
         public string ClientShortName { get; }
+        protected override string DefaultName { get; }
         public string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(_operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
         public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(_operationGroup, RestClient, Declaration).ToArray();

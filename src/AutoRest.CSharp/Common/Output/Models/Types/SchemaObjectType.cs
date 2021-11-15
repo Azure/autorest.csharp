@@ -34,8 +34,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             : this(objectSchema, context, objectSchema.CSharpName(), GetDefaultNamespace(objectSchema.Extensions?.Namespace, context)) {}
 
         protected SchemaObjectType(ObjectSchema objectSchema, BuildContext context, string defaultName, string defaultNamespace)
-            : base(context, defaultName, defaultNamespace)
+            : base(context, defaultNamespace)
         {
+            DefaultName = defaultName;
             ObjectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
@@ -59,6 +60,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         internal ObjectSchema ObjectSchema { get; }
+
+        protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;

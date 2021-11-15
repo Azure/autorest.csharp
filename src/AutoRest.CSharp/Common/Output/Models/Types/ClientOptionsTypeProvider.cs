@@ -12,12 +12,14 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         public string DefaultClientName { get; }
         public IReadOnlyList<ApiVersion> ApiVersions { get;}
+        protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
         public ClientOptionsTypeProvider(BuildContext context) : this(context, ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context)) { }
 
-        private ClientOptionsTypeProvider(BuildContext context, string defaultClientName) : base(context, $"{defaultClientName}ClientOptions", context.DefaultNamespace)
+        private ClientOptionsTypeProvider(BuildContext context, string defaultClientName) : base(context, context.DefaultNamespace)
         {
+            DefaultName = $"{defaultClientName}ClientOptions";
             DefaultClientName = defaultClientName;
             DefaultAccessibility = "public";
 

@@ -12,10 +12,9 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private TypeDeclarationOptions? _type;
 
-        protected TypeProvider(BuildContext context, string defaultName, string? defaultNamespace = default)
+        protected TypeProvider(BuildContext context, string? defaultNamespace = default)
         {
             Context = context;
-            DefaultName = defaultName;
             DefaultNamespace = defaultNamespace ?? Context.DefaultNamespace;
             ExistingType = Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName);
         }
@@ -28,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         internal BuildContext Context { get; private set; }
-        protected string DefaultName { get; }
+        protected abstract string DefaultName { get; }
         protected string DefaultNamespace { get; }
         protected abstract string DefaultAccessibility { get; }
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;

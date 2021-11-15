@@ -55,9 +55,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, IEnumerable<OperationGroup>? nonResourceOperationGroups, string suffixValue, bool isExtension, bool isScope)
-            : base(context, GetParentValue(operationGroup, context, isExtension, isScope) + operationGroup.Resource(context.Configuration.MgmtConfiguration) + suffixValue)
+            : base(context)
         {
             _context = context;
+            DefaultName = GetParentValue(operationGroup, context, isExtension, isScope) + operationGroup.Resource(context.Configuration.MgmtConfiguration) + suffixValue;
             OperationGroup = operationGroup;
             IsScopeOrExtension = isScope || isExtension;
             _childOperations = nonResourceOperationGroups?.ToDictionary(og => og, og => new MgmtNonResourceOperation(og, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
@@ -75,6 +76,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return string.Empty;
         }
+
+        protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility => "public";
 

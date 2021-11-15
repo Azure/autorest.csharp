@@ -28,15 +28,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        private EnumType(Schema schema, BuildContext context, Schema baseType, IEnumerable<ChoiceValue> choices, bool isExtendable) : base(context, schema.CSharpName(), GetDefaultNamespace(schema, context))
+        private EnumType(Schema schema, BuildContext context, Schema baseType, IEnumerable<ChoiceValue> choices, bool isExtendable) : base(context, GetDefaultNamespace(schema, context))
         {
             _choices = choices;
 
             var usage = context.SchemaUsageProvider.GetUsage(schema);
             var hasUsage = usage.HasFlag(SchemaTypeUsage.Model);
+            DefaultName = schema.CSharpName();
             DefaultAccessibility = schema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
-
-            GetDefaultNamespace(schema, context);
 
             if (ExistingType != null)
             {
@@ -75,6 +74,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType BaseType { get; }
         public bool IsExtendable { get; }
         public string? Description { get; }
+        protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         protected override TypeKind TypeKind => IsExtendable ? TypeKind.Struct : TypeKind.Enum;
 

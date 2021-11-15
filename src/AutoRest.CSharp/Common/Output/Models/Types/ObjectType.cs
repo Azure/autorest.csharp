@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
 
-        protected ObjectType(BuildContext context, string defaultName, string? defaultNamespace = default) : base(context, defaultName, defaultNamespace)
+        protected ObjectType(BuildContext context, string? defaultNamespace = default) : base(context, defaultNamespace)
         {
         }
 

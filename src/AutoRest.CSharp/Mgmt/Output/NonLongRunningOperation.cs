@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class NonLongRunningOperation : TypeProvider
     {
         public NonLongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext<MgmtOutputLibrary> context, LongRunningOperationInfo lroInfo)
-            : base(context, lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation", $"{context.DefaultNamespace}.Models")
+            : base(context, $"{context.DefaultNamespace}.Models")
         {
             Debug.Assert(!operation.IsLongRunning);
 
@@ -39,6 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 ResultDataType = context.Library.GetResourceData(operationGroup).Type;
             }
 
+            DefaultName = lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
         }
@@ -54,6 +55,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         /// <value></value>
         public CSharpType? ResultDataType { get; }
+
+        protected override string DefaultName { get; }
 
         public string Description { get; }
 

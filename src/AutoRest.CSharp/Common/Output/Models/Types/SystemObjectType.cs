@@ -20,10 +20,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Type _type;
 
         public SystemObjectType(Type type, BuildContext context)
-            : base(context, GetNameWithoutGeneric(type), type.Namespace)
+            : base(context, type.Namespace)
         {
             _type = type;
+            DefaultName = GetNameWithoutGeneric(type);
         }
+
+        protected override string DefaultName { get; }
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => null;
 
