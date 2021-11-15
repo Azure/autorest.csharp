@@ -11,10 +11,12 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class ResourceData : MgmtObjectType
     {
         public ResourceData(ObjectSchema schema, BuildContext<MgmtOutputLibrary> context)
-            : base(schema, context, true)
+            : base(schema, context)
         {
             Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(schema.Name));
         }
+
+        protected override bool IsResourceType => true;
 
         protected string CreateDescription(string clientPrefix)
         {
