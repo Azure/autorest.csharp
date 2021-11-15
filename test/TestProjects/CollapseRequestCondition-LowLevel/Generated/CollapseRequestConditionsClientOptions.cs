@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace CollapseRequestConditions
+namespace CollapseRequestCondition_LowLevel
 {
     /// <summary> Client options for CollapseRequestConditionsClient. </summary>
     public partial class CollapseRequestConditionsClientOptions : ClientOptions
