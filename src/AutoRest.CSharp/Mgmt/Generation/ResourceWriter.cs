@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"{_resource.Declaration.Accessibility} partial class {TypeNameOfThis}: {BaseClass}");
 
                 if (_resource.GetOperation == null)
-                    ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
+                    throw new ErrorHelpers.ErrorException($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
 Check the swagger definition, and use 'request-path-to-resource-name' or 'request-path-is-non-resource' directive to specify the correct resource if necessary.");
 
                 var inheritType = new CSharpType(typeof(TrackedResource));

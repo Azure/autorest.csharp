@@ -21,12 +21,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         public MgmtLongRunningOperation(Input.Operation operation, OperationGroup operationGroup, LongRunningOperationInfo lroInfo, BuildContext<MgmtOutputLibrary> context)
             : base(operation, context, lroInfo, lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation")
         {
+            DefaultNamespace = $"{context.DefaultNamespace}.Models";
             if (operation.ShouldWrapResultType(ResultType, context))
             {
                 WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
             }
-
-            DefaultNamespace = $"{context.DefaultNamespace}.Models";
         }
 
         /// <summary>

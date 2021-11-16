@@ -37,9 +37,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private MgmtClientOperation? EnsureGetAllOperation()
         {
-            if (RequestPaths.Any(path => _context.Configuration.MgmtConfiguration.ListException.Contains(path)))
-                return null;
-            var suppressListException = _context.Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
+            // if this resource was listed in list-exception section, we suppress the exception here
+            // or if the debug flag `--mgmt-debug.suppress-list-exception` is on, we suppress the exception here
+            var suppressListException = RequestPaths.Any(path => _context.Configuration.MgmtConfiguration.ListException.Contains(path))
+                || _context.Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
             var candidates = ClientOperations.Where(operation => operation.Name == "GetAll" && !HasExtraParameter(operation));
             // we need to filter out the methods that does not have extra mandatory parameters in our current context
             if (!suppressListException && candidates.Count() > 1)

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AutoRest.CSharp.Mgmt.Models
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     public static class EnumerableExtensions
     {
