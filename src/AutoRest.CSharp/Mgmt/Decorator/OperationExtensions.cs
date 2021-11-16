@@ -18,7 +18,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
-    internal static class OperationExtension
+    internal static class OperationExtensions
     {
         /// <summary>
         /// Returns the CSharpName of an operation in management plane pattern where we replace the word List with Get or GetAll depending on if there are following words
@@ -37,6 +37,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var replacedWords = wordToReplace.AsIEnumerable().Concat(words.Skip(1));
             return string.Join("", replacedWords);
         }
+
+        public static string OperationId(this Operation operation, OperationGroup operationGroup)
+        {
+            if (_operationIdCache.TryGetValue(operation, out var result))
+                return result;
+            result = operationGroup.Key.IsNullOrEmpty() ? operation.Language.Default.Name : $"{operationGroup.Key}_{operation.Language.Default.Name}";
+            _operationIdCache.TryAdd(operation, result);
+            return result;
+        }
+
+        private static readonly ConcurrentDictionary<Operation, string> _operationIdCache = new ConcurrentDictionary<Operation, string>();
 
         private static readonly ConcurrentDictionary<Operation, RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
 

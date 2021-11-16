@@ -62,6 +62,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual string GetOperationName(Operation operation, MgmtRestClient? resourceRestClient)
         {
             var operationGroup = _context.Library.GetRestClient(operation.GetHttpPath()).OperationGroup;
+            var operationId = operation.OperationId(operationGroup);
+            // search the configuration for a override of this operation
+            if (Context.Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out var operationName))
+                return operationName;
+
             var resourceOperationGroup = resourceRestClient?.OperationGroup;
             if (operationGroup == resourceOperationGroup)
             {
