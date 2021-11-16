@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? requestPathToResourceType = default,
             JsonElement? requestPathToScopeResourceTypes = default,
             JsonElement? requestPathToSingletonResource = default,
-            JsonElement? operationIdToName = default,
+            JsonElement? overrideOperationName = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
             JsonElement? resourceModelRequiresType = default,
@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             RequestPathToResourceType = !IsValidJsonElement(requestPathToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceType.ToString());
             RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
             RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
-            OverrideOperationName = !IsValidJsonElement(operationIdToName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationIdToName.ToString());
+            OverrideOperationName = !IsValidJsonElement(overrideOperationName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(overrideOperationName.ToString());
             MgmtDebug = mgmtDebug;
             // TODO: A unified way to load from both readme and configuration.json
             try
@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToResourceType: autoRest.GetValue<JsonElement?>("request-path-to-resource-type").GetAwaiter().GetResult(),
                 requestPathToScopeResourceTypes: autoRest.GetValue<JsonElement?>("request-path-to-scope-resource-types").GetAwaiter().GetResult(),
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
-                operationIdToName: autoRest.GetValue<JsonElement?>("override-operation-name").GetAwaiter().GetResult(),
+                overrideOperationName: autoRest.GetValue<JsonElement?>("override-operation-name").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathToResourceType: requestPathToResourceType,
                 requestPathToScopeResourceTypes: requestPathToScopeResourceTypes,
                 requestPathToSingletonResource: requestPathToSingletonResource,
-                operationIdToName: operationIdToName,
+                overrideOperationName: operationIdToName,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
                 resourceModelRequiresType: resourceModelRequiresType,
