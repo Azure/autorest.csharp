@@ -9,8 +9,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public static string ProjectRelativeDirectory = "../";
-
         public static class Options
         {
             public const string OutputFolder = "output-folder";
@@ -26,9 +24,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public const string LowLevelClient = "low-level-client";
             public const string SingleTopLevelClient = "single-top-level-client";
             public const string AttachDebuggerFormat = "{0}.attach";
+            public const string ProjectRelativeDirectory = "project-directory-relative-to-output-folder";
         }
 
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool singleTopLevelClient, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool singleTopLevelClient, MgmtConfiguration mgmtConfiguration, string? projectRelativeDirectory)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -43,6 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             LowLevelClient = lowLevelClient;
             SingleTopLevelClient = singleTopLevelClient;
             MgmtConfiguration = mgmtConfiguration;
+            ProjectRelativeDirectory = projectRelativeDirectory ?? "../";
         }
 
         public string OutputFolder { get; }
@@ -59,6 +59,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool SingleTopLevelClient { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
+        public string ProjectRelativeDirectory { get; }
+
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
             return new Configuration(
@@ -74,7 +76,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
                 lowLevelClient: GetOptionValue(autoRest, Options.LowLevelClient),
                 singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
-                mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
+                mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
+                projectRelativeDirectory: autoRest.GetValue<string?>(Options.ProjectRelativeDirectory).GetAwaiter().GetResult()
             );
         }
 

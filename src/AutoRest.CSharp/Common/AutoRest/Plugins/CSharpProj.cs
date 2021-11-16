@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
 
-            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
+            await autoRest.WriteFile($"{configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
 
             return true;
         }

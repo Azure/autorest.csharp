@@ -122,7 +122,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
                 ReadOption(root, Configuration.Options.LowLevelClient),
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
-                MgmtConfiguration.LoadConfiguration(root)
+                MgmtConfiguration.LoadConfiguration(root),
+                root.GetProperty(nameof(Configuration.ProjectRelativeDirectory)).GetString()
             );
         }
     }
