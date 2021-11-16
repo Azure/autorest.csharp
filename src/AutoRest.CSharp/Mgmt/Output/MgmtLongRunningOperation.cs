@@ -25,6 +25,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
             }
+
+            DefaultNamespace = $"{context.DefaultNamespace}.Models";
         }
 
         /// <summary>
@@ -33,5 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         /// <value></value>
         public CSharpType? WrapperType { get; }
+
+        protected override string DefaultNamespace { get; }
     }
 }
