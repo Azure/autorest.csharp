@@ -11,4 +11,7 @@ input-file: $(this-folder)/mgmtListMethods.json
 namespace: MgmtListMethods
 mgmt-debug:
   show-request-path: true
+
+override-operation-name:
+  FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription: GetFakeParentWithAncestorWithNonResChWithLocs
 ```

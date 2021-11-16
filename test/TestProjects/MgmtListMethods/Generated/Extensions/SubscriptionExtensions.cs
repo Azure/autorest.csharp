@@ -125,7 +125,7 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLocData> GetBySubscriptionFakeParentWithAncestorWithNonResChWithLocsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLocData> ListFakeParentWithAncestorWithNonResChWithLocsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -133,7 +133,7 @@ namespace MgmtListMethods
                 var restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<FakeParentWithAncestorWithNonResChWithLocData>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionFakeParentWithAncestorWithNonResChWithLocs");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeParentWithAncestorWithNonResChWithLocs");
                     scope.Start();
                     try
                     {
@@ -148,7 +148,7 @@ namespace MgmtListMethods
                 }
                 async Task<Page<FakeParentWithAncestorWithNonResChWithLocData>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionFakeParentWithAncestorWithNonResChWithLocs");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeParentWithAncestorWithNonResChWithLocs");
                     scope.Start();
                     try
                     {
@@ -173,7 +173,7 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithNonResChWithLocData> GetBySubscriptionFakeParentWithAncestorWithNonResChWithLocs(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<FakeParentWithAncestorWithNonResChWithLocData> ListFakeParentWithAncestorWithNonResChWithLocs(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -181,7 +181,7 @@ namespace MgmtListMethods
                 var restOperations = GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<FakeParentWithAncestorWithNonResChWithLocData> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionFakeParentWithAncestorWithNonResChWithLocs");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeParentWithAncestorWithNonResChWithLocs");
                     scope.Start();
                     try
                     {
@@ -196,7 +196,7 @@ namespace MgmtListMethods
                 }
                 Page<FakeParentWithAncestorWithNonResChWithLocData> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionFakeParentWithAncestorWithNonResChWithLocs");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeParentWithAncestorWithNonResChWithLocs");
                     scope.Start();
                     try
                     {
