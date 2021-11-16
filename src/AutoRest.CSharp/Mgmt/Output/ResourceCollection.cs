@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private ClientMethod? _getByIdMethod;
 
         public ResourceCollection(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-            : base(operationGroup, context, null, _suffixValue)
+            : base(operationGroup, context)
         {
             _context = context;
         }
@@ -105,6 +105,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             return method.Request.HttpMethod.Equals(RequestMethod.Put) &&
                 (method.Name.StartsWith("CreateOrUpdate") || method.Name.StartsWith("Create") || method.Name.StartsWith("Put"));
         }
+
+        protected override string SuffixValue => _suffixValue;
 
         protected override IEnumerable<ClientMethod> GetMethodsInScope()
         {

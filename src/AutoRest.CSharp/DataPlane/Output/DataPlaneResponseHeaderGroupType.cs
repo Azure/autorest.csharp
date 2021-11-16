@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
         }
 
         private DataPlaneResponseHeaderGroupType(HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context, string operationName, string clientName)
-            : base(context, clientName + operationName + "Headers")
+            : base(context)
         {
             ResponseHeader CreateResponseHeader(HttpResponseHeader header)
             {
@@ -39,10 +39,12 @@ namespace AutoRest.CSharp.Output.Models.Responses
                     BuilderHelpers.EscapeXmlDescription(header.Language!.Default.Description));
             }
 
+            DefaultName = clientName + operationName + "Headers";
             Description = $"Header model for {operationName}";
             Headers = httpResponseHeaders.Select(CreateResponseHeader).ToArray();
         }
 
+        protected override string DefaultName { get; }
         public string Description { get; }
         public ResponseHeader[] Headers { get; }
         protected override string DefaultAccessibility { get; } = "internal";

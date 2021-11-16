@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models
         protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName)
             : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context)) { }
 
-        protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string defaultClientSuffix) : base(context, clientPrefix + defaultClientSuffix)
+        protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string defaultClientSuffix) : base(context)
         {
             OperationGroup = operationGroup;
             clientParameters ??= operationGroup.Operations
@@ -43,6 +43,7 @@ namespace AutoRest.CSharp.Output.Models
             Parameters = Builder.GetOrderedParameters();
 
             ClientPrefix = clientPrefix;
+            DefaultName = clientPrefix + defaultClientSuffix;
         }
 
         protected RestClientBuilder Builder;
@@ -51,6 +52,7 @@ namespace AutoRest.CSharp.Output.Models
         public virtual string Description { get; } = "";
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
+        protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "internal";
 
         private IEnumerable<RestClientMethod> BuildAllMethods()
