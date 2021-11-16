@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class Resource : MgmtTypeProvider
     {
         private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
-        
+
         public IEnumerable<OperationSet> OperationSets { get; }
 
         private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperationMap;
