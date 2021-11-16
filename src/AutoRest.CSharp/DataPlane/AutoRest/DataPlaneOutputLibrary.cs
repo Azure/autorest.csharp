@@ -155,7 +155,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                             operations.Add(
                                 operation,
                                 new LongRunningOperation(
-                                    operationGroup,
                                     operation,
                                     _context,
                                     FindLongRunningOperationInfo(operationGroup, operation)));

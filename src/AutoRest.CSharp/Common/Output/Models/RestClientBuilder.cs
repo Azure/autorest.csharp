@@ -28,17 +28,13 @@ namespace AutoRest.CSharp.Output.Models
         private readonly OutputLibrary _library;
         private readonly Dictionary<string, Parameter> _parameters;
 
-        public RestClientBuilder(OperationGroup operationGroup, BuildContext context)
+        public RestClientBuilder(IEnumerable<RequestParameter> clientParameters, BuildContext context)
         {
             _serializationBuilder = new SerializationBuilder();
             _context = context;
             _library = context.BaseLibrary!;
 
-            _parameters = operationGroup.Operations
-                .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
-                .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct()
-                .ToDictionary(p => p.Language.Default.Name, BuildClientParameter);
+            _parameters = clientParameters.ToDictionary(p => p.Language.Default.Name, BuildClientParameter);
         }
 
         public Parameter[] GetOrderedParameters()
@@ -533,7 +529,7 @@ namespace AutoRest.CSharp.Output.Models
         public Parameter BuildClientParameter(RequestParameter requestParameter)
         {
             var parameter = BuildParameter(requestParameter);
-            if (requestParameter.Origin == "modelerfour:synthesized/host")
+            if (IsEndpointParameter(requestParameter))
             {
                 parameter = new Parameter(
                     "endpoint",
@@ -546,6 +542,9 @@ namespace AutoRest.CSharp.Output.Models
 
             return parameter;
         }
+
+        public static bool IsEndpointParameter(RequestParameter requestParameter)
+            => requestParameter.Origin == "modelerfour:synthesized/host";
 
         private Parameter BuildParameter(RequestParameter requestParameter)
         {

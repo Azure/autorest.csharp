@@ -10,7 +10,6 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -36,15 +35,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultName = _lroInfo.ClientPrefix.ToSingular() + _operation.CSharpName() + "Operation";
         }
 
-        protected override string DefaultName { get; }
-
-        protected override string DefaultNamespace => _defaultNamespace ??= $"{base.DefaultNamespace}.Models";
-
         /// <summary>
         /// Type of the [Resource] class to replace whatever response type in the LRO.
         /// Only valid for PUT operations.
         /// </summary>
         /// <value></value>
         public CSharpType? WrapperType { get; }
+
+        protected override string DefaultNamespace { get; }
     }
 }

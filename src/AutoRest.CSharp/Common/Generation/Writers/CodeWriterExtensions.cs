@@ -42,6 +42,23 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
+        public static CodeWriter WriteFieldDeclaration(this CodeWriter writer, FieldDeclaration field)
+        {
+            if (field.Description != null)
+            {
+                writer.Line().WriteXmlDocumentationSummary(field.Description);
+            }
+
+            writer.Append($"{field.Modifiers} {field.Type} {field.Declaration:D}");
+
+            if (field.DefaultValue != null)
+            {
+                writer.AppendRaw(" = ").Append(field.DefaultValue);
+            }
+
+            return writer.Line($";");
+        }
+
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignature method, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)

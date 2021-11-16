@@ -25,17 +25,21 @@ namespace AutoRest.CSharp.Output.Models
         private LongRunningOperationMethod[]? _longRunningOperationMethods;
         private DataPlaneRestClient? _restClient;
 
-        public DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context): base(context)
+        public DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context) :
+            this(operationGroup, context, ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context), ClientBuilder.GetClientSuffix(context))
+        {
+        }
+
+        private DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context, string clientPrefix, string clientSuffix) : base(context)
         {
             _operationGroup = operationGroup;
             _context = context;
-            var clientPrefix = ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context);
-            var clientSuffix = ClientBuilder.GetClientSuffix(context);
             DefaultName = clientPrefix + clientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
         }
 
         public string ClientShortName { get; }
+        protected override string DefaultName { get; }
         public string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(_operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
         public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(_operationGroup, RestClient, Declaration).ToArray();
@@ -43,8 +47,6 @@ namespace AutoRest.CSharp.Output.Models
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_operationGroup, RestClient, Declaration).ToArray();
 
         public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
-
-        protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility { get; } = "public";
 
