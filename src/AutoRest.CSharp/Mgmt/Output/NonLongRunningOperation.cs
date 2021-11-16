@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class NonLongRunningOperation : TypeProvider
     {
-        public NonLongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext<MgmtOutputLibrary> context, LongRunningOperationInfo lroInfo)
+        public NonLongRunningOperation(Operation operation, LongRunningOperationInfo lroInfo, BuildContext<MgmtOutputLibrary> context)
             : base(context)
         {
             Debug.Assert(!operation.IsLongRunning);

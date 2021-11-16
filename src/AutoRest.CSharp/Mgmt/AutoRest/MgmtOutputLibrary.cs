@@ -558,10 +558,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             {
                                 _nonLongRunningOperations.Add(
                                     operation,
-                                    new NonLongRunningOperation(
-                                        operation,
-                                        operation.FindLongRunningOperationInfo(_context),
-                                        _context));
+                                    new NonLongRunningOperation(operation, operation.FindLongRunningOperationInfo(_context), _context));
                             }
                         }
                     }

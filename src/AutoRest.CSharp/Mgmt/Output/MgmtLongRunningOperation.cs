@@ -18,21 +18,13 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class MgmtLongRunningOperation : LongRunningOperation
     {
-        private string? _defaultNamespace;
-        private LongRunningOperationInfo _lroInfo;
-        private Input.Operation _operation;
-
         public MgmtLongRunningOperation(Input.Operation operation, OperationGroup operationGroup, LongRunningOperationInfo lroInfo, BuildContext<MgmtOutputLibrary> context)
-            : base(operationGroup, operation, context, lroInfo)
+            : base(operation, context, lroInfo, lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation")
         {
-            _lroInfo = lroInfo;
-            _operation = operation;
             if (operation.ShouldWrapResultType(ResultType, context))
             {
                 WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
             }
-
-            DefaultName = _lroInfo.ClientPrefix.ToSingular() + _operation.CSharpName() + "Operation";
         }
 
         /// <summary>
@@ -41,7 +33,5 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         /// <value></value>
         public CSharpType? WrapperType { get; }
-
-        protected override string DefaultNamespace { get; }
     }
 }
