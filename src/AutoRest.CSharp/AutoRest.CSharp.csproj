@@ -13,6 +13,7 @@
     <PackAsTool>true</PackAsTool>
     <RollForward>Minor</RollForward>
     <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,6 +33,8 @@
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
     <TfmSpecificPackageFile Include="../../src/assets/" PackagePath="content" />
+
+    <Content Include="../../node_modules/autorest/**/*" PackagePath="tools\autorest" />
 
     <Content Include="build\CodeGeneration.targets" PackagePath="build\Microsoft.Azure.AutoRest.CSharp.targets" />
     <Content Include="build\CodeGeneration.targets" PackagePath="buildMultiTargeting\Microsoft.Azure.AutoRest.CSharp.targets" />
@@ -70,7 +73,6 @@
       <_GeneratedPropsFileLines Include="&lt;SourceRoot Include=&quot;%24([System.IO.Path]::GetFullPath('%24(MSBuildThisFileDirectory)..\contentFiles\any\$(TargetFramework)\'))&quot; SourceLinkUrl=&quot;$(_RawUrl)&quot;/&gt;" />
       <_GeneratedPropsFileLines Include="&lt;/ItemGroup&gt;" />
       <_GeneratedPropsFileLines Include="&lt;PropertyGroup&gt;" />
-      <_GeneratedPropsFileLines Include="&lt;AutoRestVersion&gt;$(_AutorestVersion)&lt;/AutoRestVersion&gt;" />
       <_GeneratedPropsFileLines Include="&lt;AutoRestCoreVersion&gt;$(_CoreVersion)&lt;/AutoRestCoreVersion&gt;" />
       <_GeneratedPropsFileLines Include="&lt;/PropertyGroup&gt;" />
       <_GeneratedPropsFileLines Include="&lt;/Project&gt;" />
