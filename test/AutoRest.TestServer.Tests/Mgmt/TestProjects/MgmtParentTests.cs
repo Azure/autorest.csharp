@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("AvailabilitySet", true)]
         [TestCase("DedicatedHostGroup", true)]
         [TestCase("DedicatedHost", true)]
-        [TestCase("VirtualMachineExtensionImage", false)]
+        [TestCase("VirtualMachineExtensionImage", true)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("AvailabilitySetCollection", true)]
         [TestCase("DedicatedHostGroupCollection", true)]
         [TestCase("DedicatedHostCollection", true)]
-        [TestCase("VirtualMachineExtensionImageCollection", false)]
+        [TestCase("VirtualMachineExtensionImageCollection", true)]
         public void ValidateCollections(string collection, bool isExists)
         {
             var collectionTypeExists = FindAllCollections().Any(o => o.Name == collection);

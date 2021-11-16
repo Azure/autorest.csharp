@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -19,19 +20,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmClientExtensionsWriter : MgmtExtensionWriter
     {
-        private CodeWriter _writer;
-        public ArmClientExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
+        public ArmClientExtensionsWriter(CodeWriter writer, MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
         {
-            _writer = writer;
         }
 
         protected override string Description => "A class to add extension methods to ArmClient.";
-        protected override string TypeNameOfThis => "ArmClientExtensions";
         protected override string ExtensionOperationVariableName => "armClient";
 
         protected override Type ExtensionOperationVariableType => typeof(ArmClient);
 
-        public override void WriteExtension()
+        public override void Write()
         {
             using (_writer.Namespace(Context.DefaultNamespace))
             {
@@ -50,16 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            return true;
-        }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
-        }
-
-        protected override void WriteExtensionGetResourceFromIdMethod(CodeWriter writer, Resource resource)
+        protected void WriteExtensionGetResourceFromIdMethod(CodeWriter writer, Resource resource)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it but with no data.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");

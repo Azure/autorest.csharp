@@ -1,5 +1,7 @@
 # MgmtParent
+
 ### AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -10,16 +12,12 @@ namespace: MgmtParent
 model-namespace: false
 public-clients: false
 head-as-boolean: false
-payload-flattening-threshold: 2
-operation-group-to-resource-type:
-   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/vmextension
-operation-group-to-resource:
-   VirtualMachineExtensionImages: NonResource
-operation-group-to-parent:
-   VirtualMachineExtensionImages: subscriptions
-   DedicatedHosts: Microsoft.Compute/hostGroups
-list-exception:
-   DedicatedHostGroups
 modelerfour:
   lenient-model-deduplication: true
+
+list-exception:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
+- /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+mgmt-debug:
+  show-request-path: true
 ```

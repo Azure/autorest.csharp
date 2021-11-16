@@ -1,5 +1,7 @@
 # ExactMatchInheritance
-### AutoRest Configuration
+
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -12,10 +14,8 @@ namespace: MgmtParamOrdering
 modelerfour:
   lenient-model-deduplication: true
 
-operation-group-to-resource-type:
-   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/vmextension
-operation-group-to-resource:
-   VirtualMachineExtensionImages: NonResource
-operation-group-to-parent:
-   VirtualMachineExtensionImages: subscriptions
+list-exception:
+- /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+mgmt-debug:
+  show-request-path: true
 ```

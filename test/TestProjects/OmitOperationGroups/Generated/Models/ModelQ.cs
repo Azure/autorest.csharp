@@ -5,10 +5,13 @@
 
 #nullable disable
 
+using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
+
 namespace OmitOperationGroups.Models
 {
     /// <summary> The ModelQ. </summary>
-    public partial class ModelQ
+    public partial class ModelQ : Resource
     {
         /// <summary> Initializes a new instance of ModelQ. </summary>
         public ModelQ()
@@ -16,8 +19,11 @@ namespace OmitOperationGroups.Models
         }
 
         /// <summary> Initializes a new instance of ModelQ. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="m"></param>
-        internal ModelQ(string m)
+        internal ModelQ(ResourceIdentifier id, string name, ResourceType type, string m) : base(id, name, type)
         {
             M = m;
         }

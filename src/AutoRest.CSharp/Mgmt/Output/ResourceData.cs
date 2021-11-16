@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected string CreateDescription(string clientPrefix)
         {
-            return $"A class representing the {clientPrefix} data model. ";
+            return $"A class representing the {clientPrefix} data model.";
         }
     }
 }

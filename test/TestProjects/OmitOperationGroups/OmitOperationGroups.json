@@ -587,6 +587,28 @@
                     "readOnly": true,
                     "type": "string"
                 }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
+        },
+        "Resource": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string"
+                }
             }
         },
         "ModelZ": {
@@ -666,7 +688,12 @@
                 "m": {
                     "type": "string"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
         }
     },
     "parameters": {

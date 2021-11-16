@@ -23,7 +23,7 @@ namespace MgmtListMethods
     public partial class SubParentWithNonResCh : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SubParentWithNonResChesRestOperations _restClient;
+        private readonly SubParentWithNonResChesRestOperations _subParentWithNonResChesRestClient;
         private readonly SubParentWithNonResChData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResCh"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace MgmtListMethods
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subParentWithNonResChesRestClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResCh"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtListMethods
         internal SubParentWithNonResCh(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subParentWithNonResChesRestClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResCh"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtListMethods
         internal SubParentWithNonResCh(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subParentWithNonResChesRestClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -84,6 +84,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
+        /// OperationId: SubParentWithNonResChes_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SubParentWithNonResCh>> GetAsync(CancellationToken cancellationToken = default)
@@ -92,7 +95,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChesRestClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -104,6 +107,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
+        /// OperationId: SubParentWithNonResChes_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubParentWithNonResCh> Get(CancellationToken cancellationToken = default)
@@ -112,7 +118,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Name, cancellationToken);
+                var response = _subParentWithNonResChesRestClient.Get(Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -159,7 +165,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _subParentWithNonResChesRestClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -188,7 +194,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, cancellationToken);
+                var originalResponse = _subParentWithNonResChesRestClient.Get(Id.Name, cancellationToken);
                 return Response.FromValue(new SubParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -217,7 +223,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _subParentWithNonResChesRestClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -246,7 +252,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, cancellationToken);
+                var originalResponse = _subParentWithNonResChesRestClient.Get(Id.Name, cancellationToken);
                 return Response.FromValue(new SubParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -274,7 +280,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _subParentWithNonResChesRestClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -302,7 +308,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, cancellationToken);
+                var originalResponse = _subParentWithNonResChesRestClient.Get(Id.Name, cancellationToken);
                 return Response.FromValue(new SubParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -312,29 +318,9 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Lists all. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
-        {
-            Page<NonResourceChild> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResCh.GetNonResourceChild");
-                scope.Start();
-                try
-                {
-                    var response = _restClient.GetNonResourceChild(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-        }
-
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}/nonResourceChild
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
+        /// OperationId: SubParentWithNonResChes_ListNonResourceChild
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
@@ -346,7 +332,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetNonResourceChildAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subParentWithNonResChesRestClient.ListNonResourceChildAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -356,6 +342,32 @@ namespace MgmtListMethods
                 }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}/nonResourceChild
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
+        /// OperationId: SubParentWithNonResChes_ListNonResourceChild
+        /// <summary> Lists all. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
+        {
+            Page<NonResourceChild> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("SubParentWithNonResCh.GetNonResourceChild");
+                scope.Start();
+                try
+                {
+                    var response = _subParentWithNonResChesRestClient.ListNonResourceChild(Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
     }
 }

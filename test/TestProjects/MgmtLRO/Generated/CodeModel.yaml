@@ -1479,6 +1479,19 @@ operationGroups:
                   http: !HttpParameter 
                     in: body
                     style: json
+              - !Parameter 
+                schema: *ref_30
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
             signatureParameters:
               - *ref_52
             language: !Languages 
@@ -1497,22 +1510,30 @@ operationGroups:
           - *ref_53
           - *ref_54
         responses:
-          - !Response 
+          - !SchemaResponse 
+            schema: *ref_5
             language: !Languages 
               default:
                 name: ''
                 description: OK
             protocol: !Protocols 
               http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
                 statusCodes:
                   - '200'
-          - !Response 
+          - !SchemaResponse 
+            schema: *ref_5
             language: !Languages 
               default:
                 name: ''
                 description: Accepted
             protocol: !Protocols 
               http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
                 statusCodes:
                   - '201'
         extensions:

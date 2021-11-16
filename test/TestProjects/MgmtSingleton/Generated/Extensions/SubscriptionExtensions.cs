@@ -18,7 +18,7 @@ namespace MgmtSingleton
         /// <returns> Returns a <see cref="SubscriptionParentSingleton" /> object. </returns>
         public static SubscriptionParentSingleton GetSubscriptionParentSingleton(this Subscription subscription)
         {
-            return new SubscriptionParentSingleton(subscription, subscription.Id + "/SubscriptionParentSingleton/default");
+            return new SubscriptionParentSingleton(subscription, subscription.Id + "/providers/Microsoft.Billing/SubscriptionParentSingleton/default");
         }
         #endregion
     }

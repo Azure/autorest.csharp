@@ -20,11 +20,12 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of BlobContainer and their operations over a BlobService. </summary>
+    /// <summary> A class representing collection of BlobContainer and their operations over its parent. </summary>
     public partial class BlobContainerCollection : ArmCollection, IEnumerable<BlobContainer>, IAsyncEnumerable<BlobContainer>
+
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly BlobContainersRestOperations _restClient;
+        private readonly BlobContainersRestOperations _blobContainersRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainerCollection"/> class for mocking. </summary>
         protected BlobContainerCollection()
@@ -36,22 +37,7 @@ namespace Azure.Management.Storage
         internal BlobContainerCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<BlobContainer> IEnumerable<BlobContainer>.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IAsyncEnumerator<BlobContainer> IAsyncEnumerable<BlobContainer>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            _blobContainersRestClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -59,6 +45,9 @@ namespace Azure.Management.Storage
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{BlobServicesName}
+        /// OperationId: BlobContainers_Create
         /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
@@ -80,7 +69,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Create(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken);
+                var response = _blobContainersRestClient.Create(Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken);
                 var operation = new BlobContainerCreateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -93,6 +82,9 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{BlobServicesName}
+        /// OperationId: BlobContainers_Create
         /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
@@ -114,7 +106,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainersRestClient.CreateAsync(Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
                 var operation = new BlobContainerCreateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -127,21 +119,25 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{BlobServicesName}
+        /// OperationId: BlobContainers_Get
+        /// <summary> Gets properties of a specified container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
         public virtual Response<BlobContainer> Get(string containerName, CancellationToken cancellationToken = default)
         {
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Get");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken);
+                var response = _blobContainersRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobContainer(Parent, response.Value), response.GetRawResponse());
@@ -153,21 +149,25 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{BlobServicesName}
+        /// OperationId: BlobContainers_Get
+        /// <summary> Gets properties of a specified container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
         public async virtual Task<Response<BlobContainer>> GetAsync(string containerName, CancellationToken cancellationToken = default)
         {
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.Get");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainersRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new BlobContainer(Parent, response.Value), response.GetRawResponse());
@@ -181,19 +181,20 @@ namespace Azure.Management.Storage
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
         public virtual Response<BlobContainer> GetIfExists(string containerName, CancellationToken cancellationToken = default)
         {
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken);
+                var response = _blobContainersRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<BlobContainer>(null, response.GetRawResponse())
                     : Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
@@ -207,19 +208,20 @@ namespace Azure.Management.Storage
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
         public async virtual Task<Response<BlobContainer>> GetIfExistsAsync(string containerName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetIfExists");
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainersRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<BlobContainer>(null, response.GetRawResponse())
                     : Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
@@ -233,18 +235,19 @@ namespace Azure.Management.Storage
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string containerName, CancellationToken cancellationToken = default)
         {
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-
                 var response = GetIfExists(containerName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -257,18 +260,19 @@ namespace Azure.Management.Storage
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string containerName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.CheckIfExists");
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-
                 var response = await GetIfExistsAsync(containerName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -279,12 +283,16 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{BlobServicesName}
+        /// OperationId: BlobContainers_List
         /// <summary> Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token. </summary>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
         /// <param name="include"> Optional, used to include the properties for soft deleted blob containers. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BlobContainer" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<BlobContainer> GetAll(string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<BlobContainer> GetAll(int? maxpagesize = null, string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
         {
             Page<BlobContainer> FirstPageFunc(int? pageSizeHint)
             {
@@ -292,7 +300,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAll(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
+                    var response = _blobContainersRestClient.List(Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -307,7 +315,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
+                    var response = _blobContainersRestClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -319,12 +327,16 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{BlobServicesName}
+        /// OperationId: BlobContainers_List
         /// <summary> Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token. </summary>
+        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only container names starting with the filter will be listed. </param>
         /// <param name="include"> Optional, used to include the properties for soft deleted blob containers. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BlobContainer" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<BlobContainer> GetAllAsync(string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<BlobContainer> GetAllAsync(int? maxpagesize = null, string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<BlobContainer>> FirstPageFunc(int? pageSizeHint)
             {
@@ -332,7 +344,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _blobContainersRestClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -347,7 +359,7 @@ namespace Azure.Management.Storage
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _blobContainersRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, include, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -359,7 +371,22 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        IEnumerator<BlobContainer> IEnumerable<BlobContainer>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<BlobContainer> IAsyncEnumerable<BlobContainer>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, BlobContainer, BlobContainerData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, BlobContainer, BlobContainerData> Construct() { }
     }
 }

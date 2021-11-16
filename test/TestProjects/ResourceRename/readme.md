@@ -1,5 +1,7 @@
 # ResourceRename
-### AutoRest Configuration
+
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -14,10 +16,8 @@ payload-flattening-threshold: 2
 modelerfour:
   lenient-model-deduplication: true
 
-operation-group-to-resource:
-  SshPublicKeys: NonResource
-operation-group-to-parent:
-  SshPublicKeys: resourceGroups
+mgmt-debug:
+  show-request-path: true
 directive:
   - rename-model:
       from: SshPublicKeyResource

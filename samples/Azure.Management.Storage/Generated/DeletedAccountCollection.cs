@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -20,11 +16,11 @@ using Azure.ResourceManager.Resources;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of DeletedAccount and their operations over a Subscription. </summary>
-    public partial class DeletedAccountCollection : ArmCollection, IEnumerable<DeletedAccount>, IAsyncEnumerable<DeletedAccount>
+    /// <summary> A class representing collection of DeletedAccount and their operations over its parent. </summary>
+    public partial class DeletedAccountCollection : ArmCollection
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DeletedAccountsRestOperations _restClient;
+        private readonly DeletedAccountsRestOperations _deletedAccountsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedAccountCollection"/> class for mocking. </summary>
         protected DeletedAccountCollection()
@@ -36,22 +32,7 @@ namespace Azure.Management.Storage
         internal DeletedAccountCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new DeletedAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<DeletedAccount> IEnumerable<DeletedAccount>.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IAsyncEnumerator<DeletedAccount> IAsyncEnumerable<DeletedAccount>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            _deletedAccountsRestClient = new DeletedAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -59,21 +40,30 @@ namespace Azure.Management.Storage
 
         // Collection level operations.
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: DeletedAccounts_Get
+        /// <summary> Get properties of specified deleted account resource. </summary>
+        /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<DeletedAccount> Get(string deletedAccountName, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public virtual Response<DeletedAccount> Get(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
             try
             {
-                if (deletedAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(deletedAccountName));
-                }
-
-                var response = _restClient.Get(Id.Name, deletedAccountName, cancellationToken: cancellationToken);
+                var response = _deletedAccountsRestClient.Get(location, deletedAccountName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedAccount(Parent, response.Value), response.GetRawResponse());
@@ -85,21 +75,30 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// ContextualPath: /subscriptions/{subscriptionId}
+        /// OperationId: DeletedAccounts_Get
+        /// <summary> Get properties of specified deleted account resource. </summary>
+        /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<DeletedAccount>> GetAsync(string deletedAccountName, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public async virtual Task<Response<DeletedAccount>> GetAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
             try
             {
-                if (deletedAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(deletedAccountName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _deletedAccountsRestClient.GetAsync(location, deletedAccountName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DeletedAccount(Parent, response.Value), response.GetRawResponse());
@@ -112,20 +111,26 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<DeletedAccount> GetIfExists(string deletedAccountName, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public virtual Response<DeletedAccount> GetIfExists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (deletedAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(deletedAccountName));
-                }
-
-                var response = _restClient.Get(Id.Name, deletedAccountName, cancellationToken: cancellationToken);
+                var response = _deletedAccountsRestClient.Get(location, deletedAccountName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<DeletedAccount>(null, response.GetRawResponse())
                     : Response.FromValue(new DeletedAccount(this, response.Value), response.GetRawResponse());
@@ -138,20 +143,26 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<DeletedAccount>> GetIfExistsAsync(string deletedAccountName, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public async virtual Task<Response<DeletedAccount>> GetIfExistsAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (deletedAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(deletedAccountName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _deletedAccountsRestClient.GetAsync(location, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<DeletedAccount>(null, response.GetRawResponse())
                     : Response.FromValue(new DeletedAccount(this, response.Value), response.GetRawResponse());
@@ -164,20 +175,26 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<bool> CheckIfExists(string deletedAccountName, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public virtual Response<bool> CheckIfExists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (deletedAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(deletedAccountName));
-                }
-
-                var response = GetIfExists(deletedAccountName, cancellationToken: cancellationToken);
+                var response = GetIfExists(location, deletedAccountName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -188,20 +205,26 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string deletedAccountName, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.CheckIfExists");
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (deletedAccountName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedAccountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (deletedAccountName == null)
-                {
-                    throw new ArgumentNullException(nameof(deletedAccountName));
-                }
-
-                var response = await GetIfExistsAsync(deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await GetIfExistsAsync(location, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -209,82 +232,6 @@ namespace Azure.Management.Storage
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Lists deleted accounts under the subscription. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DeletedAccount" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DeletedAccount> GetAll(CancellationToken cancellationToken = default)
-        {
-            Page<DeletedAccount> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _restClient.GetAll(cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<DeletedAccount> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _restClient.GetAllNextPage(nextLink, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Lists deleted accounts under the subscription. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DeletedAccount" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DeletedAccount> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            async Task<Page<DeletedAccount>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _restClient.GetAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<DeletedAccount>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _restClient.GetAllNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Filters the list of <see cref="DeletedAccount" /> for this subscription represented as generic resources. </summary>
@@ -334,6 +281,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, DeletedAccount, DeletedAccountData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DeletedAccount, DeletedAccountData> Construct() { }
     }
 }

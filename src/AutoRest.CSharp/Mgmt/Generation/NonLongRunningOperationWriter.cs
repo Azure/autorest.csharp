@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="operation"></param>
-        public static void Write(CodeWriter writer, NonLongRunningOperation operation)
+        public void Write(CodeWriter writer, NonLongRunningOperation operation)
         {
             var responseVariable = "response";
 

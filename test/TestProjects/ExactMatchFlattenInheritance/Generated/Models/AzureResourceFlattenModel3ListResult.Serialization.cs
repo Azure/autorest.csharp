@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using ExactMatchFlattenInheritance;
 
 namespace ExactMatchFlattenInheritance.Models
 {
@@ -16,7 +15,7 @@ namespace ExactMatchFlattenInheritance.Models
     {
         internal static AzureResourceFlattenModel3ListResult DeserializeAzureResourceFlattenModel3ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<AzureResourceFlattenModel3Data>> value = default;
+            Optional<IReadOnlyList<AzureResourceFlattenModel3>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +26,10 @@ namespace ExactMatchFlattenInheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<AzureResourceFlattenModel3Data> array = new List<AzureResourceFlattenModel3Data>();
+                    List<AzureResourceFlattenModel3> array = new List<AzureResourceFlattenModel3>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AzureResourceFlattenModel3Data.DeserializeAzureResourceFlattenModel3Data(item));
+                        array.Add(AzureResourceFlattenModel3.DeserializeAzureResourceFlattenModel3(item));
                     }
                     value = array;
                     continue;

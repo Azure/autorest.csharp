@@ -428,10 +428,16 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        }
                     },
                     "201": {
-                        "description": "Accepted"
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        }
                     }
                 },
                 "x-ms-long-running-operation": true

@@ -8,19 +8,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtExtensionResourceTests() : base("MgmtExtensionResource") { }
 
-        [TestCase("ManagementGroupExtensions", "GetPolicyDefinitions", true)]
-        [TestCase("SubscriptionExtensions", "GetPolicyDefinitions", true)]
+        [TestCase("ManagementGroupExtensions", "GetManagementGroupPolicyDefinitions", true)]
+        [TestCase("SubscriptionExtensions", "GetSubscriptionPolicyDefinitions", true)]
         [TestCase("ResourceGroupExtensions", "GetPolicyDefinitions", false)]
-        [TestCase("PolicyDefinitionCollection", "CreateOrUpdate", true)]
-        [TestCase("PolicyDefinitionCollection", "Get", true)]
-        [TestCase("PolicyDefinitionCollection", "CreateOrUpdateAtManagementGroup", false)]
-        [TestCase("PolicyDefinitionCollection", "GetAtManagementGroup", false)]
-        [TestCase("PolicyDefinitionCollection", "GetBuiltIn", false)]
-        [TestCase("PolicyDefinition", "Get", true)]
-        [TestCase("PolicyDefinition", "GetAtManagementGroup", false)]
-        [TestCase("PolicyDefinition", "GetBuiltIn", false)]
-        [TestCase("PolicyDefinition", "Delete", true)]
-        [TestCase("PolicyDefinition", "DeleteAtManagementGroup", false)]
+        [TestCase("ManagementGroupPolicyDefinitionCollection", "CreateOrUpdate", true)]
+        [TestCase("ManagementGroupPolicyDefinitionCollection", "Get", true)]
+        [TestCase("ManagementGroupPolicyDefinitionCollection", "CreateOrUpdateAtManagementGroup", false)]
+        [TestCase("ManagementGroupPolicyDefinitionCollection", "GetAtManagementGroup", false)]
+        [TestCase("ManagementGroupPolicyDefinitionCollection", "GetBuiltIn", false)]
+        [TestCase("ManagementGroupPolicyDefinition", "Get", true)]
+        [TestCase("ManagementGroupPolicyDefinition", "GetAtManagementGroup", false)]
+        [TestCase("ManagementGroupPolicyDefinition", "GetBuiltIn", false)]
+        [TestCase("ManagementGroupPolicyDefinition", "Delete", true)]
+        [TestCase("ManagementGroupPolicyDefinition", "DeleteAtManagementGroup", false)]
         public void ValidateExtensionResourceMethods(string className, string methodName, bool exist)
         {
             var managementGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtExtensionResource.ManagementGroupExtensions");
