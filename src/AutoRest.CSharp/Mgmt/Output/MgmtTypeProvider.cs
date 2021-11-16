@@ -57,13 +57,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// If it is not, we append the operation group key after operation.CSharpName() to make sure this operation has an unique name.
         /// </summary>
         /// <param name="operation"></param>
-        /// <param name="resourceRestClient">This can be null when in the extension classes where we do not have a rest client for its "resource"</param>
+        /// <param name="clientResourceName">For extension classes, use the ResourceName. For resources, use its operation group name</param>
         /// <returns></returns>
-        protected virtual string GetOperationName(Operation operation, MgmtRestClient? resourceRestClient)
+        protected virtual string GetOperationName(Operation operation, string clientResourceName)
         {
             var operationGroup = _context.Library.GetRestClient(operation.GetHttpPath()).OperationGroup;
-            var resourceOperationGroup = resourceRestClient?.OperationGroup;
-            if (operationGroup == resourceOperationGroup)
+            if (operationGroup.Key == clientResourceName)
             {
                 return operation.MgmtCSharpName(false);
             }
@@ -72,7 +71,18 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (_context.Library.RestClientMethods[operation].IsListMethod(out _))
             {
                 suffix = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ToPlural();
-                return $"{operation.MgmtCSharpName(!suffix.IsNullOrEmpty())}{suffix}";
+                var opName = operation.MgmtCSharpName(!suffix.IsNullOrEmpty());
+                // Remove 'By[Resource]' if the method is put in the [Resource] class. For instance, GetByDatabaseDatabaseColumns now becomes GetDatabaseColumns under Database resource class.
+                if (opName.EndsWith($"By{clientResourceName.ToSingular()}"))
+                {
+                    opName = opName.Substring(0, opName.IndexOf($"By{clientResourceName.ToSingular()}"));
+                }
+                // For other variants, move By[Resource] to the end. For instance, GetByInstanceServerTrustGroups becomes GetServerTrustGroupsByInstance.
+                else if (opName.StartsWith("GetBy") && opName.SplitByCamelCase().ToList()[1] == "By")
+                {
+                    return $"Get{suffix}{opName.Substring(opName.IndexOf("By"))}";
+                }
+                return $"{opName}{suffix}";
             }
             suffix = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ToSingular();
             return $"{operation.MgmtCSharpName(!suffix.IsNullOrEmpty())}{suffix}";

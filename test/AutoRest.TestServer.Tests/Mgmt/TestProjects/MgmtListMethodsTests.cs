@@ -15,13 +15,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLoc", "GetAll", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLocCollection", "GetNonResourceChild", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLoc", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetBySubscriptionResGrpParentWithAncestorWithNonResChWithLocs", true, false)]
+        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithNonResChWithLocs", true, false)]
 
         [TestCase("ResGrpParentWithAncestorWithNonResChCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResCh", "GetAll", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChCollection", "GetNonResourceChild", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResCh", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetBySubscriptionResGrpParentWithAncestorWithNonResChesAsync", true, false)]
+        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithNonResChesAsync", true, false)]
 
         [TestCase("ResGrpParentWithAncestorWithLocCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestorWithLoc", "GetAll", false, false)]
@@ -50,21 +50,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("FakeParentWithAncestorWithNonResChWithLoc", "GetAll", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChWithLocCollection", "GetNonResourceChild", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChWithLoc", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetBySubscriptionFakeParentWithAncestorWithNonResChWithLocs", true, false)] // TODO -- fix this name
+        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResChWithLocs", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorWithNonResChCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestorWithNonResCh", "GetAll", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChCollection", "GetNonResourceChild", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResCh", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetBySubscriptionFakeParentWithAncestorWithNonResChes", true, false)] // TODO -- fix this name
+        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResChes", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorWithLocCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestorWithLoc", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetBySubscriptionFakeParentWithAncestorWithLocs", true, false)] // TODO -- fix this name
+        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithLocs", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestor", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetBySubscriptionFakeParentWithAncestors", true, false)] // TODO -- fix this name
+        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestors", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithNonResChCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithNonResCh", "GetAll", false, false)]
