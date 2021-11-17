@@ -23,17 +23,6 @@ namespace ExactMatchInheritance
         }
         #endregion
 
-        #region ExactMatchModel3
-        /// <summary> Gets an object representing a ExactMatchModel3 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel3" /> object. </returns>
-        public static ExactMatchModel3 GetExactMatchModel3(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ExactMatchModel3(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
         #region ExactMatchModel5
         /// <summary> Gets an object representing a ExactMatchModel5 along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>

@@ -15,6 +15,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
+using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
 {
@@ -22,7 +23,8 @@ namespace OmitOperationGroups
     public partial class Model2 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly Model2SRestOperations _restClient;
+        private readonly Model2SRestOperations _model2sRestClient;
+        private readonly Model4SRestOperations _model4sRestClient;
         private readonly Model2Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="Model2"/> class for mocking. </summary>
@@ -38,7 +40,8 @@ namespace OmitOperationGroups
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Model2"/> class. </summary>
@@ -47,7 +50,8 @@ namespace OmitOperationGroups
         internal Model2(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Model2"/> class. </summary>
@@ -59,7 +63,8 @@ namespace OmitOperationGroups
         internal Model2(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _model4sRestClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -83,6 +88,9 @@ namespace OmitOperationGroups
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// OperationId: Model2s_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Model2>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -90,7 +98,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _model2sRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
@@ -102,6 +110,9 @@ namespace OmitOperationGroups
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// OperationId: Model2s_Get
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Model2> Get(CancellationToken cancellationToken = default)
         {
@@ -109,7 +120,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _model2sRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
@@ -137,11 +148,44 @@ namespace OmitOperationGroups
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> Gets an object representing a Model4 along with the instance operations that can be performed on it. </summary>
-        /// <returns> Returns a <see cref="Model4" /> object. </returns>
-        public Model4 GetModel4()
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// OperationId: Model4s_GetDefault
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<Model4>> GetDefaultModel4Async(CancellationToken cancellationToken = default)
         {
-            return new Model4(this, Id + "/model4s/default");
+            using var scope = _clientDiagnostics.CreateScope("Model2.GetDefaultModel4");
+            scope.Start();
+            try
+            {
+                var response = await _model4sRestClient.GetDefaultAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// OperationId: Model4s_GetDefault
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Model4> GetDefaultModel4(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("Model2.GetDefaultModel4");
+            scope.Start();
+            try
+            {
+                var response = _model4sRestClient.GetDefault(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

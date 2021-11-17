@@ -44,7 +44,7 @@ namespace SupersetFlattenInheritance
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateGetAllRequest(string resourceGroupName)
+        internal HttpMessage CreateListRequest(string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -66,14 +66,14 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<SubResourceModel1ListResult>> GetAllAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<SubResourceModel1ListResult>> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName);
+            using var message = CreateListRequest(resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -92,14 +92,14 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<SubResourceModel1ListResult> GetAll(string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<SubResourceModel1ListResult> List(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName);
+            using var message = CreateListRequest(resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -115,7 +115,7 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string subResourceModel1SName, SubResourceModel1Data parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string subResourceModel1SName, SubResourceModel1 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -144,7 +144,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="subResourceModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SubResourceModel1Data>> PutAsync(string resourceGroupName, string subResourceModel1SName, SubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SubResourceModel1>> PutAsync(string resourceGroupName, string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -165,9 +165,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        SubResourceModel1Data value = default;
+                        SubResourceModel1 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SubResourceModel1Data.DeserializeSubResourceModel1Data(document.RootElement);
+                        value = SubResourceModel1.DeserializeSubResourceModel1(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -180,7 +180,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="subResourceModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SubResourceModel1Data> Put(string resourceGroupName, string subResourceModel1SName, SubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public Response<SubResourceModel1> Put(string resourceGroupName, string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -201,9 +201,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        SubResourceModel1Data value = default;
+                        SubResourceModel1 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SubResourceModel1Data.DeserializeSubResourceModel1Data(document.RootElement);
+                        value = SubResourceModel1.DeserializeSubResourceModel1(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -235,7 +235,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="subResourceModel1SName"/> is null. </exception>
-        public async Task<Response<SubResourceModel1Data>> GetAsync(string resourceGroupName, string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public async Task<Response<SubResourceModel1>> GetAsync(string resourceGroupName, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -252,13 +252,11 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        SubResourceModel1Data value = default;
+                        SubResourceModel1 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SubResourceModel1Data.DeserializeSubResourceModel1Data(document.RootElement);
+                        value = SubResourceModel1.DeserializeSubResourceModel1(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((SubResourceModel1Data)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -268,7 +266,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="subResourceModel1SName"/> is null. </exception>
-        public Response<SubResourceModel1Data> Get(string resourceGroupName, string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public Response<SubResourceModel1> Get(string resourceGroupName, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -285,13 +283,11 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        SubResourceModel1Data value = default;
+                        SubResourceModel1 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SubResourceModel1Data.DeserializeSubResourceModel1Data(document.RootElement);
+                        value = SubResourceModel1.DeserializeSubResourceModel1(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((SubResourceModel1Data)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

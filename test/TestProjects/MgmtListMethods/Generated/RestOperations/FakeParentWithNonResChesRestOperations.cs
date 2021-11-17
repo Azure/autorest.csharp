@@ -230,7 +230,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetNonResourceChildRequest(string fakeName, string fakeParentWithNonResChName)
+        internal HttpMessage CreateListNonResourceChildRequest(string fakeName, string fakeParentWithNonResChName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -256,7 +256,7 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public async Task<Response<NonResourceChildListResult>> GetNonResourceChildAsync(string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public async Task<Response<NonResourceChildListResult>> ListNonResourceChildAsync(string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -267,7 +267,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
             }
 
-            using var message = CreateGetNonResourceChildRequest(fakeName, fakeParentWithNonResChName);
+            using var message = CreateListNonResourceChildRequest(fakeName, fakeParentWithNonResChName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -288,7 +288,7 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public Response<NonResourceChildListResult> GetNonResourceChild(string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public Response<NonResourceChildListResult> ListNonResourceChild(string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -299,7 +299,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
             }
 
-            using var message = CreateGetNonResourceChildRequest(fakeName, fakeParentWithNonResChName);
+            using var message = CreateListNonResourceChildRequest(fakeName, fakeParentWithNonResChName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -315,7 +315,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetTestRequest(string fakeName)
+        internal HttpMessage CreateListTestRequest(string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -338,14 +338,14 @@ namespace MgmtListMethods
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response<FakeParentWithNonResChListResult>> GetTestAsync(string fakeName, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeParentWithNonResChListResult>> ListTestAsync(string fakeName, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateGetTestRequest(fakeName);
+            using var message = CreateListTestRequest(fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -365,14 +365,14 @@ namespace MgmtListMethods
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public Response<FakeParentWithNonResChListResult> GetTest(string fakeName, CancellationToken cancellationToken = default)
+        public Response<FakeParentWithNonResChListResult> ListTest(string fakeName, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateGetTestRequest(fakeName);
+            using var message = CreateListTestRequest(fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -388,7 +388,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetTestNextPageRequest(string nextLink, string fakeName)
+        internal HttpMessage CreateListTestNextPageRequest(string nextLink, string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -407,7 +407,7 @@ namespace MgmtListMethods
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response<FakeParentWithNonResChListResult>> GetTestNextPageAsync(string nextLink, string fakeName, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeParentWithNonResChListResult>> ListTestNextPageAsync(string nextLink, string fakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -418,7 +418,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateGetTestNextPageRequest(nextLink, fakeName);
+            using var message = CreateListTestNextPageRequest(nextLink, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -439,7 +439,7 @@ namespace MgmtListMethods
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response<FakeParentWithNonResChListResult> GetTestNextPage(string nextLink, string fakeName, CancellationToken cancellationToken = default)
+        public Response<FakeParentWithNonResChListResult> ListTestNextPage(string nextLink, string fakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -450,7 +450,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateGetTestNextPageRequest(nextLink, fakeName);
+            using var message = CreateListTestNextPageRequest(nextLink, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

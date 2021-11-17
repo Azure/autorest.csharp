@@ -199,17 +199,6 @@ namespace MgmtListMethods
         }
         #endregion
 
-        #region ManagementGroup
-        /// <summary> Gets an object representing a ManagementGroup along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ManagementGroup" /> object. </returns>
-        public static ManagementGroup GetManagementGroup(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ManagementGroup(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
         #region MgmtGrpParentWithNonResChWithLoc
         /// <summary> Gets an object representing a MgmtGrpParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>

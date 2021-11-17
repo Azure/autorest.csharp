@@ -16,21 +16,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLocCollection", "GetNonResourceChild", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLoc", "GetNonResourceChild", true, false)]
         [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithNonResChWithLocs", true, false)]
-        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithNonResChWithLocsByLocation", true, false)]
 
         [TestCase("ResGrpParentWithAncestorWithNonResChCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResCh", "GetAll", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChCollection", "GetNonResourceChild", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResCh", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithNonResChes", true, false)]
+        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithNonResChesAsync", true, false)]
 
         [TestCase("ResGrpParentWithAncestorWithLocCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestorWithLoc", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithLocs", true, true)]
+        [TestCase("SubscriptionExtensions", "GetTestResGrpParentWithAncestorWithLocs", true, false)]
 
         [TestCase("ResGrpParentWithAncestorCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestor", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithNonResChes", true, false)]
 
         [TestCase("ResGrpParentWithNonResChCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithNonResCh", "GetAll", false, false)]
@@ -52,21 +50,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("FakeParentWithAncestorWithNonResChWithLoc", "GetAll", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChWithLocCollection", "GetNonResourceChild", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChWithLoc", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResChWithLocs", true, true)]
+        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResChWithLocs", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorWithNonResChCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestorWithNonResCh", "GetAll", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChCollection", "GetNonResourceChild", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResCh", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResChes", true, false)]
+        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResChes", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorWithLocCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestorWithLoc", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithLocs", true, true)]
+        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithLocs", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestor", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestors", true, false)]
+        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestors", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithNonResChCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithNonResCh", "GetAll", false, false)]
@@ -104,11 +102,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         // Validate list methods when management groups is a parent
-        [TestCase("ManagementGroupCollection", "GetAll", true, false)]
-        [TestCase("ManagementGroup", "GetAll", false, false)]
-        [TestCase("ManagementGroupCollection", "GetDescendants", false, false)]
-        [TestCase("ManagementGroup", "GetDescendants", true, false)]
-
         [TestCase("MgmtGrpParentWithNonResChWithLocCollection", "GetAll", true, false)]
         [TestCase("MgmtGrpParentWithNonResChWithLoc", "GetAll", false, false)]
         [TestCase("MgmtGrpParentWithNonResChWithLocCollection", "GetNonResourceChild", false, false)]

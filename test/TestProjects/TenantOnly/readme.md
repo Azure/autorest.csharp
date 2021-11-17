@@ -1,5 +1,6 @@
 # TenantOnly
-### AutoRest Configuration
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -9,9 +10,6 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/TenantOnly.json
 namespace: Azure.TenantOnly
-operation-group-to-resource-type:
-   Agreements: "Microsoft.Billing/billingAccounts/agreements"
-operation-group-to-resource:
-   BillingAccounts: BillingAccount
-   Agreements: Agreement
+mgmt-debug:
+  show-request-path: true
 ```

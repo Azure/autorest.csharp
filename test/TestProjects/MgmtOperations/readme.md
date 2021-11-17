@@ -1,5 +1,7 @@
 # MgmtParent
-### AutoRest Configuration
+
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -7,4 +9,6 @@ azure-arm: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/mgmtOperations.json
 namespace: MgmtOperations
+mgmt-debug:
+  show-request-path: true
 ```

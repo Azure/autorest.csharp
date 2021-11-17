@@ -5,16 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
@@ -22,106 +19,76 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
+using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
+using ResourceType = Azure.ResourceManager.ResourceType;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
-        private CodeWriter _writer;
-        private Resource _resource;
-        private BuildContext<MgmtOutputLibrary> _context;
-        private ResourceData _resourceData;
-        private bool _inheritArmResourceBase = false;
+        protected Resource _resource;
+        protected ResourceData _resourceData;
         private bool _isITaggableResource = false;
-        private bool _isDeletableResource = false;
 
         protected virtual Type BaseClass => typeof(ArmResource);
 
         protected override string ContextProperty => "this";
 
-        protected CSharpType TypeOfThis => _resource.Type;
-        protected override string TypeNameOfThis => TypeOfThis.Name;
+        protected override string BranchIdVariableName => "Id.Parent";
 
-        private MgmtConfiguration Config => _context.Configuration.MgmtConfiguration;
-        private bool IsSingleton { get; }
+        private bool IsSingleton => _resource.IsSingleton;
 
-        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
+        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
         {
-            _writer = writer;
             _resource = resource;
-            _context = context;
-            _resourceData = _context.Library.GetResourceData(_resource.OperationGroup);
-
-            IsSingleton = _resource.OperationGroup.IsSingletonResource(Config);
+            _resourceData = resource.ResourceData;
         }
 
-        public void WriteResource()
+        public override void Write()
         {
             WriteUsings(_writer);
 
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{_resource.Description}");
-                _writer.Append($"{_resource.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
+                _writer.Line($"{_resource.Declaration.Accessibility} partial class {TypeNameOfThis}: {BaseClass}");
 
-                _inheritArmResourceBase = _resource.GetMethod != null;
-                _writer.Append($"{BaseClass.Name}, ");
+                if (_resource.GetOperation == null)
+                    throw new ErrorHelpers.ErrorException($@"Get operation is missing for '{TypeOfThis.Name}' resource under '{string.Join(", ", _resource.RequestPaths)}'.
+Check the swagger definition, and use 'request-path-to-resource-name' or 'request-path-is-non-resource' directive to specify the correct resource if necessary.");
 
-                if (_resource.GetMethod == null)
-                    ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under operation group '{_resource.OperationGroup.Key}'.
-Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
-
-                CSharpType inheritType = new CSharpType(typeof(TrackedResource));
+                var inheritType = new CSharpType(typeof(TrackedResource));
                 if (_resourceData.Inherits != null && _resourceData.Inherits.Name == inheritType.Name)
                 {
                     _isITaggableResource = true;
                 }
 
-                var httpMethodsMap = _resource.OperationGroup.OperationHttpMethodMapping();
-                httpMethodsMap.TryGetValue(HttpMethod.Delete, out var deleteMethods);
-                if (deleteMethods != null && deleteMethods.Count > 0)
-                {
-                    _isDeletableResource = true;
-                }
-                _writer.RemoveTrailingCharacter();
-
                 using (_writer.Scope())
                 {
-                    WriteClientFields();
-                    WriteChildRestClients();
-                    WriteClientCtors();
-                    WriteClientProperties();
-                    WriteClientMethods();
+                    WriteFields();
+                    WriteCtors();
+                    WriteProperties();
+                    WriteMethods();
 
-                    // write child
+                    // write children
                     WriteChildResourceEntries();
                 }
             }
         }
 
-        private void WriteClientFields()
+        protected virtual void WriteFields()
         {
-            WriteFields(_writer, _resource.RestClient);
+            WriteFields(_writer, This.RestClients);
             _writer.Line($"private readonly {_resourceData.Type} _data;");
         }
 
-        private void WriteChildRestClients()
-        {
-            foreach (var operationGroup in _resource.ChildOperations.Keys)
-            {
-                _writer.Append($"private {_context.Library.GetRestClient(operationGroup).Type} {GetRestClientName(operationGroup)}").LineRaw(" { get; }");
-            }
-        }
-
-        private void WriteClientCtors()
+        protected virtual void WriteCtors()
         {
             _writer.Line();
-            // write an internal default constructor
+            // write protected default constructor
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis}\"/> class for mocking.");
             using (_writer.Scope($"protected {TypeOfThis.Name}()"))
             { }
@@ -139,29 +106,19 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 if (IsSingleton)
                     _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                foreach (var operationGroup in _resource.ChildOperations.Keys)
-                {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                }
+                WriteRestClientAssignments();
             }
 
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.");
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resource.ResourceIdentifierType} id) : base(options, id)"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {typeof(ResourceIdentifier)} id) : base(options, id)"))
             {
                 if (IsSingleton)
                     _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                foreach (var operationGroup in _resource.ChildOperations.Keys)
-                {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                }
+                WriteRestClientAssignments();
             }
 
             _writer.Line();
@@ -171,23 +128,29 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             _writer.WriteXmlDocumentationParameter("uri", $"The uri to build client context.");
             _writer.WriteXmlDocumentationParameter("pipeline", $"The pipeline to build client context.");
             _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmClientOptions)} clientOptions, {typeof(TokenCredential)} credential, {typeof(Uri)} uri, {typeof(HttpPipeline)} pipeline, {_resource.ResourceIdentifierType} id) : base(clientOptions, credential, uri, pipeline, id)"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmClientOptions)} clientOptions, {typeof(TokenCredential)} credential, {typeof(Uri)} uri, {typeof(HttpPipeline)} pipeline, {typeof(ResourceIdentifier)} id) : base(clientOptions, credential, uri, pipeline, id)"))
             {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                foreach (var operationGroup in _resource.ChildOperations.Keys)
-                {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
-                }
+                WriteRestClientAssignments();
             }
         }
 
-        private void WriteClientProperties()
+        protected void WriteRestClientAssignments()
+        {
+            // write assignment statements of the rest clients of this resource
+            foreach (var client in This.RestClients)
+            {
+                var subscriptionParamString = client.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                _writer.Line($"{GetRestClientVariableName(client)} = new {client.Type.Name}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, {BaseUriField});");
+            }
+        }
+
+        protected virtual void WriteProperties()
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
-            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.OperationGroup.ResourceType(Config)}\";");
+
+            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.ResourceType}\";");
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for the operations");
             _writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
@@ -215,316 +178,101 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteClientMethods()
+        protected virtual void WriteMethods()
         {
-            var clientMethodsList = new List<RestClientMethod>();
-
             _writer.Line();
-            if (_inheritArmResourceBase && _resource.GetMethod != null)
+            // write get method
+            WriteGetMethod(_resource.GetOperation!, true);
+            WriteGetMethod(_resource.GetOperation!, false);
+
+            WriteListAvailableLocationsMethod(true);
+            WriteListAvailableLocationsMethod(false);
+
+            // write delete method
+            WriteDeleteMethod(_resource.DeleteOperation, true);
+            WriteDeleteMethod(_resource.DeleteOperation, false);
+
+            if (_resource.IsSingleton)
             {
-                // write inherited get method
-                WriteGetMethod(_resource.GetMethod, true, _resource.GetMethods, "Get");
-                WriteGetMethod(_resource.GetMethod, false, _resource.GetMethods, "Get");
-
-                clientMethodsList.AddRange(_resource.GetMethods.Select(m => m.RestClientMethod).ToList());
-
-                WriteListAvailableLocationsMethod(true);
-                WriteListAvailableLocationsMethod(false);
-            }
-
-            if (_isDeletableResource)
-            {
-                var deleteMethod = _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true).FirstOrDefault() ?? _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).OrderBy(m => m.Name.Length).FirstOrDefault();
-                var deleteMethods = _resource.IsScopeOrExtension ? _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).ToList() : new List<RestClientMethod> { deleteMethod };
-                // write delete method
-                WriteLRO(deleteMethod, "Delete", deleteMethods);
-                clientMethodsList.AddRange(deleteMethods);
+                // only write create method when this is a singleton
+                WriteCreateOrUpdateMethod(_resource.CreateOperation, true);
+                WriteCreateOrUpdateMethod(_resource.CreateOperation, false);
             }
 
             if (_isITaggableResource)
             {
-                // write update method
-                WriteAddTagMethod();
-                WriteSetTagsMethod();
-                WriteRemoveTagMethod();
+                WriteAddTagMethod(true);
+                WriteAddTagMethod(false);
+                WriteSetTagsMethod(true);
+                WriteSetTagsMethod(false);
+                WriteRemoveTagMethod(true);
+                WriteRemoveTagMethod(false);
             }
+
+            // write update method
+            WriteUpdateMethod(_resource.UpdateOperation, true);
+            WriteUpdateMethod(_resource.UpdateOperation, false);
 
             // 1. Listing myself at parent scope -> on the collection named list
             // 2. Listing myself at ancestor scope -> extension method if the ancestor is not in this RP, or follow #3 by listing myself as the children of the ancestor in the operations of the ancestor
             // 3. Listing children (might be resource or not) -> on the operations
 
-            // write rest of the methods
-            var resourceCollection = _context.Library.GetResourceCollection(_resource.OperationGroup);
-            foreach (var clientMethod in _resource.ResourceClientMethods)
+            // write all the methods that should belong to this resource
+            foreach (var clientOperation in _resource.ClientOperations)
             {
-                if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
-                {
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, _context, true);
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, _context, false);
-                }
+                WriteMethod(clientOperation, true);
+                WriteMethod(clientOperation, false);
             }
 
-            // write paging methods
-            foreach (var listMethod in _resource.ResourceListMethods)
-            {
-                if (listMethod.PagingMethod != null)
-                {
-                    WritePagingMethod(_resource.OperationGroup, listMethod.PagingMethod, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, false);
-                    WritePagingMethod(_resource.OperationGroup, listMethod.PagingMethod, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, true);
-                }
-            }
-
-            // write child methods
-            foreach (var pair in _resource.ChildOperations)
-            {
-                var restClientName = GetRestClientName(pair.Key);
-                foreach (var clientMethod in pair.Value.ClientMethods)
-                {
-                    var originalName = clientMethod.Name;
-                    var methodName = originalName.EndsWith($"By{TypeOfThis.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
-                    Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, _context, true, restClientName);
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, _context, false, restClientName);
-                }
-                foreach (var pagingMethod in pair.Value.PagingMethods)
-                {
-                    var originalName = pagingMethod.Name;
-                    var methodName = originalName.EndsWith($"By{TypeOfThis.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
-                    Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WritePagingMethod(pair.Key, pagingMethod, diagnostic, methodName, GetRestClientName(pair.Key), false);
-                    WritePagingMethod(pair.Key, pagingMethod, diagnostic, methodName, GetRestClientName(pair.Key), true);
-                }
-            }
-
-            // write rest of the LRO methods
-            var mergedMethods = new Dictionary<string, List<RestClientMethod>>();
-            foreach (var clientMethod in _resource.ResourceLROMethods)
-            {
-                if (!clientMethodsList.Contains(clientMethod))
-                {
-                    if (_context.Library.TryGetMethodForMergedOperation($"{_resource.OperationGroup.Key}_{clientMethod.Name}_{clientMethod.Request.HttpMethod}", out var mergedMethodName))
-                    {
-                        if (mergedMethods.TryGetValue(mergedMethodName, out var methods))
-                        {
-                            methods.Add(clientMethod);
-                        }
-                        else
-                        {
-                            mergedMethods.Add(mergedMethodName, new List<RestClientMethod> { clientMethod });
-                        }
-                        continue;
-                    }
-                    WriteLRO(clientMethod);
-                }
-            }
-
-            foreach (var kv in mergedMethods)
-            {
-                WriteLRO(kv.Value.OrderBy(m => m.Name.Length).First(), kv.Key, kv.Value);
-            }
+            // TODO -- what does this used for?
+            //foreach (var kv in mergedMethods)
+            //{
+            //    WriteLRO(kv.Value.OrderBy(m => m.Name.Length).First(), kv.Key, kv.Value);
+            //}
         }
 
-        private void WritePagingMethod(OperationGroup operationGroup, PagingMethod pagingMethod, Diagnostic diagnostic, string clientMethodName, string restClientName, bool async)
+        protected override Models.ResourceType GetBranchResourceType(RequestPath branch)
         {
-            _writer.Line();
-            var nonPathParameters = pagingMethod.Method.NonPathParameters;
-
-            _writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.Description}");
-            foreach (var param in nonPathParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(param);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-
-            CSharpType itemType = pagingMethod.PagingResponse.ItemType;
-            FormattableString returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.";
-            _writer.WriteXmlDocumentationReturns(returnText);
-
-            var returnType = itemType.WrapPageable(async);
-
-            var methodName = CreateMethodName(clientMethodName, async);
-            _writer.Append($"public virtual {returnType} {methodName}(");
-            foreach (var param in nonPathParameters)
-            {
-                _writer.WriteParameter(param);
-            }
-            _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (_writer.Scope())
-            {
-                WritePagingOperationBody(_writer, pagingMethod, itemType, restClientName, diagnostic,
-                    ClientDiagnosticsField, $"", async);
-            }
+            return branch.ParentRequestPath(Context).GetResourceType(Config);
         }
 
-        private string GetRestClientName(OperationGroup operationGroup)
+        protected void WriteGetMethod(MgmtClientOperation operation, bool async)
         {
-            return $"_{operationGroup.Key.ToVariableName()}RestClient";
+            WriteNormalMethod(operation, async, shouldThrowExceptionWhenNull: true);
         }
 
-        private void WriteGetMethod(ClientMethod method, bool async, List<ClientMethod> methods, string? methodName = null)
+        protected void WriteCreateOrUpdateMethod(MgmtClientOperation? operation, bool async)
         {
-            methodName = methodName ?? method.Name;
-            _writer.Line();
-            var nonPathParameters = method.RestClientMethod.NonPathParameters;
-            _writer.WriteXmlDocumentationSummary($"{method.Description}");
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                _writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            var responseType = TypeOfThis.WrapResponse(async);
-            _writer.Append($"public {GetAsyncKeyword(async)} {GetOverride(false, true)} {responseType} {CreateMethodName($"{methodName}", async)}(");
-
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                _writer.WriteParameter(parameter);
-            }
-            _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-            using (_writer.Scope())
-            {
-                _writer.WriteParameterNullChecks(nonPathParameters);
-                Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                using (WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField))
-                {
-                    var response = new CodeWriterDeclaration("response");
-                    response.SetActualName(response.RequestedName);
-                    if (method.RestClientMethod.Operation.IsAncestorScope() || methods.Count < 2)
-                    {
-                        WriteGetMethodBody(method, response, async, nonPathParameters);
-                    }
-                    else
-                    {
-                        var methodDict = methods.ToDictionary(m => m, m => m.RestClientMethod.Operation.AncestorResourceType());
-                        // There could be methods at resource group scope and at resource scope, both with ResourceGroups AncestorResourceType.
-                        ClientMethod? resourceMethod = null;
-                        var resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
-                        var resourceGroupMethodsCount = methodDict.Count(kv => kv.Value == ResourceTypeBuilder.ResourceGroups);
-                        if (resourceGroupMethodsCount > 1)
-                        {
-                            // The parent resource type of a resource method is always resourceGroupsResources
-                            resourceMethod = methodDict.FirstOrDefault(kv => kv.Key.RestClientMethod.Operation.ParentResourceType() == ResourceTypeBuilder.ResourceGroupResources).Key;
-                            if (resourceMethod != null)
-                            {
-                                methodDict.Remove(resourceMethod);
-                                resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
-                            }
-                        }
-                        if (resourceGroupMethod != null)
-                        {
-                            methodDict.Remove(resourceGroupMethod);
-                            var resourceGroupNameVar = resourceMethod == null ? "_" : "var resourceGroupName";
-                            using (_writer.Scope($"if (Id.TryGetResourceGroupName(out {resourceGroupNameVar}))"))
-                            {
-                                if (resourceMethod != null)
-                                {
-                                    using (_writer.Scope($"if (Id.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
-                                    {
-                                        WriteGetMethodBody(resourceGroupMethod, response, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
-                                    }
-                                    using (_writer.Scope($"else"))
-                                    {
-                                        WriteGetMethodBody(resourceMethod, response, async, resourceMethod.RestClientMethod.NonPathParameters, isResourceLevel: true);
-                                    }
-                                }
-                                else
-                                {
-                                    WriteGetMethodBody(resourceGroupMethod, response, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
-                                }
-                            }
-                        } // No else clause with the assumption that resourceMethod only exists when resourceGroupMethod exists.
-                        var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
-                        var tenantMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Tenant).Key;
-                        var elseStr = resourceGroupMethod != null ? (managementGroupMethod == null && tenantMethod == null ? "else" : "else if") : "if";
-                        var subscriptionMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Subscriptions).Key;
-                        if (subscriptionMethod != null)
-                        {
-                            methodDict.Remove(subscriptionMethod);
-                            using (_writer.Scope($"{elseStr} (Id.TryGetSubscriptionId(out _))"))
-                            {
-                                WriteGetMethodBody(subscriptionMethod, response, async, subscriptionMethod.RestClientMethod.NonPathParameters);
-                            }
-                        }
-
-                        elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
-                        if (managementGroupMethod != null)
-                        {
-                            methodDict.Remove(managementGroupMethod);
-                            using (elseStr.IsNullOrEmpty() ? null : _writer.Scope($"{elseStr}"))
-                            {
-                                if (tenantMethod != null)
-                                {
-                                    methodDict.Remove(tenantMethod);
-                                    var parent = new CodeWriterDeclaration("parent");
-                                    _writer.Line($"var {parent:D} = Id;");
-                                    using (_writer.Scope($"while ({parent}.Parent != {typeof(ResourceIdentifier)}.RootResourceIdentifier)"))
-                                    {
-                                        _writer.Line($"{parent} = {parent}.Parent;");
-                                    }
-                                    using (_writer.Scope($"if (parent.ResourceType.Equals({typeof(ManagementGroup)}.ResourceType))"))
-                                    {
-                                        WriteGetMethodBody(managementGroupMethod, response, async, managementGroupMethod.RestClientMethod.NonPathParameters);
-                                    }
-                                    using (_writer.Scope($"else"))
-                                    {
-                                        WriteGetMethodBody(tenantMethod, response, async, tenantMethod.RestClientMethod.NonPathParameters);
-                                    }
-                                }
-                                else
-                                {
-                                    WriteGetMethodBody(managementGroupMethod, response, async, managementGroupMethod.RestClientMethod.NonPathParameters);
-                                }
-                            }
-                        }
-                        else if (tenantMethod != null)
-                        {
-                            methodDict.Remove(tenantMethod);
-                            using (_writer.Scope($"{elseStr}"))
-                            {
-                                WriteGetMethodBody(tenantMethod, response, async, tenantMethod.RestClientMethod.NonPathParameters);
-                            }
-                        }
-
-                        if (methodDict.Count() > 0)
-                        {
-                            throw new Exception($"When trying to merge methods, multiple methods can be mapped to the same scope. The methods not handled: {String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}.");
-                        }
-                    }
-                }
-                _writer.Line();
-            }
+            if (operation == null)
+                return;
+            WriteLROMethod(operation, async);
         }
 
-        private void WriteGetMethodBody(ClientMethod clientMethod, CodeWriterDeclaration response, bool async, List<Parameter> nonPathParameters, bool isResourceLevel = false)
+        protected void WriteDeleteMethod(MgmtClientOperation? operation, bool async)
         {
-            if (isResourceLevel)
-            {
-                _writer.UseNamespace("System.Collections.Generic");
-                _writer.Line($"var parent = Id.Parent;");
-                _writer.Line($"var parentParts = new List<string>();");
-                using (_writer.Scope($"while (!parent.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
-                {
-                    _writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
-                    _writer.Line($"parent = parent.Parent;");
-                }
-                _writer.Line($"var parentResourcePath = parentParts.Count > 0 ? string.Join(\"/\", parentParts) : \"\";");
-                _writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
-            }
-            _writer.Append($"var {response} = ");
-            if (async)
-            {
-                _writer.Append($"await ");
-            }
-            _writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
-            BuildAndWriteParameters(_writer, clientMethod.RestClientMethod, isResourceLevel: isResourceLevel);
-            _writer.Append($"cancellationToken)");
+            if (operation == null)
+                return;
+            WriteLROMethod(operation, async);
+        }
 
-            if (async)
-            {
-                _writer.Append($".ConfigureAwait(false)");
-            }
-            _writer.Line($";");
-            WriteEndOfGet(_writer, TypeOfThis, async);
+        private void WriteUpdateMethod(MgmtClientOperation? operation, bool async)
+        {
+            if (operation == null)
+                return;
+            WriteMethod(operation, async);
+        }
+
+        protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
+        {
+            if (!IsResourceDataType(type, operation))
+                return type;
+
+            return _resource.Type;
+        }
+
+        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation clientOperation)
+        {
+            return _resourceData.Type.Equals(type);
         }
 
         private void WriteListAvailableLocationsMethod(bool async)
@@ -542,13 +290,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteAddTagMethod()
-        {
-            WriteAddTag(true);
-            WriteAddTag(false);
-        }
-
-        private void WriteAddTag(bool async)
+        private void WriteAddTagMethod(bool async)
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Add a tag to the current resource.");
@@ -584,13 +326,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteSetTagsMethod()
-        {
-            WriteSetTags(true);
-            WriteSetTags(false);
-        }
-
-        private void WriteSetTags(bool async)
+        private void WriteSetTagsMethod(bool async)
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Replace the tags on the resource with the given set.");
@@ -630,13 +366,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteRemoveTagMethod()
-        {
-            WriteRemoveTag(true);
-            WriteRemoveTag(false);
-        }
-
-        private void WriteRemoveTag(bool async)
+        private void WriteRemoveTagMethod(bool async)
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Removes a tag by key from the resource.");
@@ -673,113 +403,69 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteTaggableCommonMethod(bool async)
         {
-            if (async)
+            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            // get the corresponding MgmtClientOperation mapping
+            var operationMappings = _resource.GetOperation.ToDictionary(
+                clientOperation => clientOperation.ContextualPath,
+                clientOperation => clientOperation);
+            // build contextual parameters
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
+            // build parameter mapping
+            var parameterMappings = operationMappings.ToDictionary(
+                pair => pair.Key,
+                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+            // we need to write multiple branches for a normal method
+            if (operationMappings.Count == 1)
             {
-                _writer.Append($"await ");
+                // if we only have one branch, we would not need those if-else statements
+                var branch = operationMappings.Keys.First();
+                WriteTaggableCommonMethodBranch(operationMappings[branch], parameterMappings[branch], async);
             }
-            _writer.Line($"TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-            _writer.Append($"var originalResponse = ");
-            if (async)
+            else
             {
-                _writer.Append($"await ");
+                // branches go here
+                throw new NotImplementedException("multi-branch normal method not supported yet");
             }
-            var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, _context).ToList();
-            _writer.Append($"{RestClientField}.{CreateMethodName(_resource.GetMethod.Name, async)}( ");
-            foreach (string paramNames in pathParamNames)
-            {
-                _writer.Append($"{paramNames:I}, ");
-            }
-            foreach (Parameter parameter in _resource.GetMethod.RestClientMethod.NonPathParameters)
-            {
-                if (parameter.ValidateNotNull)
-                {
-                    _writer.Append($"{parameter.Name}, ");
-                }
-                else
-                {
-                    _writer.Append($"null, ");
-                }
-            }
+        }
+
+        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        {
+            _writer.Append($"var originalResponse = {GetAwait(async)} ");
+            // TODO -- we need to implement the branches here as well
+            //var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, Context).ToList();
+            _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}( ");
+            WriteArguments(_writer, parameterMapping, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
             _writer.Line($"return {typeof(Response)}.FromValue(new {TypeOfThis}(this, originalResponse.Value), originalResponse.GetRawResponse());");
         }
 
-        private void WriteLRO(RestClientMethod clientMethod, string? methodName = null, List<RestClientMethod>? clientMethods = null)
+        protected override void WriteResourceCollectionEntry(Resource resource)
         {
-            WriteLROMethod(_writer, clientMethod, _context, _context.Library.IsLongRunningReallyLong(clientMethod), true, true, methodName: methodName, methods: clientMethods);
-            WriteLROMethod(_writer, clientMethod, _context, _context.Library.IsLongRunningReallyLong(clientMethod), false, true, methodName: methodName, methods: clientMethods);
-        }
-
-        private void WriteChildResourceEntries()
-        {
-            foreach (var item in _context.CodeModel.OperationGroups)
-            {
-                if (item.ParentResourceType(Config).Equals(_resource.OperationGroup.ResourceType(Config)))
-                {
-                    if (item.TryGetSingletonResourceSuffix(Config, out var singletonResourceSuffix))
-                    {
-                        WriteChildSingletonResourceEntry(item, singletonResourceSuffix);
-                    }
-                    else
-                    {
-                        WriteChildNonSingletonResourceEntry(item);
-                    }
-                }
-            }
-        }
-
-        private void WriteChildNonSingletonResourceEntry(OperationGroup operationGroupOfChildResource)
-        {
-            var collection = _context.Library.GetResourceCollection(operationGroupOfChildResource);
+            var collection = resource.ResourceCollection;
             if (collection == null)
-                return;
+                throw new InvalidOperationException($"We are about to write a {resource.Type.Name} resource entry in {_resource.Type.Name} resource, but it does not have a collection, this cannot happen");
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets a list of {collection.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
-            _writer.WriteXmlDocumentationReturns($"An object representing collection of {collection.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
-            using (_writer.Scope($"public {collection.Type} Get{collection.ResourceName.ToPlural()}()"))
+            _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.ToPlural()} in the {_resource.Type.Name}.");
+            _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.ToPlural()} and their operations over a {_resource.Type.Name}.");
+            using (_writer.Scope($"public {collection.Type.Name} Get{resource.Type.Name.ToPlural()}()"))
             {
-                _writer.Line($"return new {collection.Type}(this);");
+                _writer.Line($"return new {collection.Type.Name}(this);");
             }
         }
 
-        private void WriteChildSingletonResourceEntry(OperationGroup operationGroupOfChildSingleton, string singletonResourceSuffix)
+        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix)
         {
-            var singletonResource = _context.Library.GetArmResource(operationGroupOfChildSingleton);
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {singletonResource.Type.Name} along with the instance operations that can be performed on it.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{singletonResource.Type.Name}\" /> object.");
-            using (_writer.Scope($"public {singletonResource.Type} Get{singletonResource.Type.Name}()"))
+            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {_resource.Type.Name}.");
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
+            using (_writer.Scope($"public {resource.Type.Name} Get{resource.Type.Name}()"))
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-                _writer.Line($"return new {singletonResource.Type.Name}(this, Id + \"/{singletonResourceSuffix}\");");
+                _writer.Line($"return new {resource.Type.Name}(this, Id + \"/{singletonResourceIdSuffix}\");");
             }
-        }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
-            // operations.Id is the ID of the resource itself, therefore we do not need to make the resource name pass through
-        }
-
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            bool passThru = false;
-            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(_context);
-            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
-            {
-                valueExpression = "Id.ResourceGroupName";
-            }
-            else if (string.Equals(parameter.Name, "subscriptionId", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
-            {
-                valueExpression = "Id.SubscriptionId";
-            }
-            else
-            {
-                parentNameStack.Push($"Id{dotParent}.Name");
-                dotParent += ".Parent";
-            }
-
-            return passThru;
         }
     }
 }

@@ -195,7 +195,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetAllRequest(string optionalParam)
+        internal HttpMessage CreateListRequest(string optionalParam)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -217,9 +217,9 @@ namespace MgmtListMethods
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<TenantTestListResult>> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantTestListResult>> ListAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetAllRequest(optionalParam);
+            using var message = CreateListRequest(optionalParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -238,9 +238,9 @@ namespace MgmtListMethods
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<TenantTestListResult> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
+        public Response<TenantTestListResult> List(string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetAllRequest(optionalParam);
+            using var message = CreateListRequest(optionalParam);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -256,7 +256,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string optionalParam)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -275,14 +275,14 @@ namespace MgmtListMethods
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<TenantTestListResult>> GetAllNextPageAsync(string nextLink, string optionalParam = null, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantTestListResult>> ListNextPageAsync(string nextLink, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, optionalParam);
+            using var message = CreateListNextPageRequest(nextLink, optionalParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -303,14 +303,14 @@ namespace MgmtListMethods
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<TenantTestListResult> GetAllNextPage(string nextLink, string optionalParam = null, CancellationToken cancellationToken = default)
+        public Response<TenantTestListResult> ListNextPage(string nextLink, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, optionalParam);
+            using var message = CreateListNextPageRequest(nextLink, optionalParam);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

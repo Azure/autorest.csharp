@@ -223,7 +223,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetAllRequest(string tenantTestName)
+        internal HttpMessage CreateListRequest(string tenantTestName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -244,14 +244,14 @@ namespace MgmtListMethods
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public async Task<Response<TenantParentWithNonResChListResult>> GetAllAsync(string tenantTestName, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantParentWithNonResChListResult>> ListAsync(string tenantTestName, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
                 throw new ArgumentNullException(nameof(tenantTestName));
             }
 
-            using var message = CreateGetAllRequest(tenantTestName);
+            using var message = CreateListRequest(tenantTestName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -271,14 +271,14 @@ namespace MgmtListMethods
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public Response<TenantParentWithNonResChListResult> GetAll(string tenantTestName, CancellationToken cancellationToken = default)
+        public Response<TenantParentWithNonResChListResult> List(string tenantTestName, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
                 throw new ArgumentNullException(nameof(tenantTestName));
             }
 
-            using var message = CreateGetAllRequest(tenantTestName);
+            using var message = CreateListRequest(tenantTestName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -294,7 +294,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetNonResourceChildRequest(string tenantTestName, string tenantParentWithNonResChName)
+        internal HttpMessage CreateListNonResourceChildRequest(string tenantTestName, string tenantParentWithNonResChName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -318,7 +318,7 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithNonResChName"/> is null. </exception>
-        public async Task<Response<NonResourceChildListResult>> GetNonResourceChildAsync(string tenantTestName, string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
+        public async Task<Response<NonResourceChildListResult>> ListNonResourceChildAsync(string tenantTestName, string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
@@ -329,7 +329,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
             }
 
-            using var message = CreateGetNonResourceChildRequest(tenantTestName, tenantParentWithNonResChName);
+            using var message = CreateListNonResourceChildRequest(tenantTestName, tenantParentWithNonResChName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -350,7 +350,7 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithNonResChName"/> is null. </exception>
-        public Response<NonResourceChildListResult> GetNonResourceChild(string tenantTestName, string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
+        public Response<NonResourceChildListResult> ListNonResourceChild(string tenantTestName, string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
@@ -361,7 +361,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantParentWithNonResChName));
             }
 
-            using var message = CreateGetNonResourceChildRequest(tenantTestName, tenantParentWithNonResChName);
+            using var message = CreateListNonResourceChildRequest(tenantTestName, tenantParentWithNonResChName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -377,7 +377,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string tenantTestName)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string tenantTestName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -396,7 +396,7 @@ namespace MgmtListMethods
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="tenantTestName"/> is null. </exception>
-        public async Task<Response<TenantParentWithNonResChListResult>> GetAllNextPageAsync(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantParentWithNonResChListResult>> ListNextPageAsync(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -407,7 +407,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantTestName));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, tenantTestName);
+            using var message = CreateListNextPageRequest(nextLink, tenantTestName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -428,7 +428,7 @@ namespace MgmtListMethods
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="tenantTestName"/> is null. </exception>
-        public Response<TenantParentWithNonResChListResult> GetAllNextPage(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
+        public Response<TenantParentWithNonResChListResult> ListNextPage(string nextLink, string tenantTestName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -439,7 +439,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(tenantTestName));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, tenantTestName);
+            using var message = CreateListNextPageRequest(nextLink, tenantTestName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

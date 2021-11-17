@@ -11,23 +11,81 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     public class MgmtConfiguration
     {
+        public class MgmtDebugConfiguration
+        {
+            private const string MgmtDebugOptionsFormat = "mgmt-debug.{0}";
+
+            public bool ShowRequestPath { get; }
+            public bool SuppressListException { get; }
+
+            public MgmtDebugConfiguration(
+                JsonElement? showRequestPath = default,
+                JsonElement? suppressListException = default)
+            {
+                ShowRequestPath = showRequestPath == null || !IsValidJsonElement(showRequestPath) ? false : Convert.ToBoolean(showRequestPath.ToString());
+                SuppressListException = suppressListException == null || !IsValidJsonElement(suppressListException) ? false : Convert.ToBoolean(suppressListException.ToString());
+            }
+
+            internal static MgmtDebugConfiguration LoadConfiguration(JsonElement root)
+            {
+                if (root.ValueKind != JsonValueKind.Object)
+                    return new MgmtDebugConfiguration();
+
+                root.TryGetProperty(nameof(ShowRequestPath), out var showRequestPath);
+                root.TryGetProperty(nameof(SuppressListException), out var suppressListException);
+
+                return new MgmtDebugConfiguration(
+                    showRequestPath: showRequestPath,
+                    suppressListException: suppressListException);
+            }
+
+            internal static MgmtDebugConfiguration GetConfiguration(IPluginCommunication autoRest)
+            {
+                return new MgmtDebugConfiguration(
+                    showRequestPath: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "show-request-path")).GetAwaiter().GetResult(),
+                    suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult());
+            }
+
+            public void Write(Utf8JsonWriter writer, string settingName)
+            {
+                if (!ShowRequestPath && !SuppressListException)
+                    return;
+
+                writer.WriteStartObject(settingName);
+
+                if (ShowRequestPath)
+                    writer.WriteBoolean(nameof(ShowRequestPath), ShowRequestPath);
+                if (SuppressListException)
+                    writer.WriteBoolean(nameof(SuppressListException), SuppressListException);
+
+                writer.WriteEndObject();
+            }
+        }
+
         public MgmtConfiguration(
-            IReadOnlyList<string> operationGroupIsTuple,
-            IReadOnlyList<string> operationGroupIsExtension,
             IReadOnlyList<string> operationGroupsToOmit,
+            IReadOnlyList<string> requestPathIsNonResource,
             IReadOnlyList<string> noPropertyTypeReplacement,
             IReadOnlyList<string> listException,
-            JsonElement? operationGroupToResourceType = default,
-            JsonElement? operationGroupToResource = default,
-            JsonElement? operationGroupToParent = default,
-            JsonElement? operationGroupToSingletonResource = default,
+            MgmtDebugConfiguration mgmtDebug,
+            JsonElement? requestPathToParent = default,
+            JsonElement? requestPathToResourceName = default,
+            JsonElement? requestPathToResourceData = default,
+            JsonElement? requestPathToResourceType = default,
+            JsonElement? requestPathToScopeResourceTypes = default,
+            JsonElement? requestPathToSingletonResource = default,
             JsonElement? mergeOperations = default,
-            JsonElement? armCore = default)
+            JsonElement? armCore = default,
+            JsonElement? resourceModelRequiresType = default,
+            JsonElement? resourceModelRequiresName = default)
         {
-            OperationGroupToResourceType = !IsValidJsonElement(operationGroupToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
-            OperationGroupToResource = !IsValidJsonElement(operationGroupToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
-            OperationGroupToParent = !IsValidJsonElement(operationGroupToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
-            OperationGroupToSingletonResource = !IsValidJsonElement(operationGroupToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToSingletonResource.ToString());
+            RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
+            RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
+            RequestPathToResourceData = !IsValidJsonElement(requestPathToResourceData) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceData.ToString());
+            RequestPathToResourceType = !IsValidJsonElement(requestPathToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceType.ToString());
+            RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
+            RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
+            MgmtDebug = mgmtDebug;
             // TODO: A unified way to load from both readme and configuration.json
             try
             {
@@ -38,104 +96,131 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var mergeOperationsStrDict = !IsValidJsonElement(mergeOperations) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(mergeOperations.ToString());
                 MergeOperations = mergeOperationsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
             }
-            OperationGroupIsTuple = operationGroupIsTuple;
-            OperationGroupIsExtension = operationGroupIsExtension;
             OperationGroupsToOmit = operationGroupsToOmit;
+            RequestPathIsNonResource = requestPathIsNonResource;
             NoPropertyTypeReplacement = noPropertyTypeReplacement;
             ListException = listException;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
+            DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
+            DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
         }
 
-        public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
-        public IReadOnlyDictionary<string, string> OperationGroupToResource { get; }
-        public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
-        public IReadOnlyDictionary<string, string> OperationGroupToSingletonResource { get; }
+        public MgmtDebugConfiguration MgmtDebug { get; }
+        /// <summary>
+        /// Will the resource model detection require type property? Defaults to true
+        /// </summary>
+        public bool DoesResourceModelRequireType { get; }
+        /// <summary>
+        /// Will the resource model detection require name property? Defaults to true
+        /// </summary>
+        public bool DoesResourceModelRequireName { get; }
+        public IReadOnlyDictionary<string, string> RequestPathToParent { get; }
+        public IReadOnlyDictionary<string, string> RequestPathToResourceName { get; }
+        public IReadOnlyDictionary<string, string> RequestPathToResourceData { get; }
+        public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
+        public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
+        public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
-        public IReadOnlyList<string> OperationGroupIsTuple { get; }
-        public IReadOnlyList<string> OperationGroupIsExtension { get; }
         public IReadOnlyList<string> OperationGroupsToOmit { get; }
+        public IReadOnlyList<string> RequestPathIsNonResource { get; }
         public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
         public IReadOnlyList<string> ListException { get; }
+
         public bool IsArmCore { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
         {
             return new MgmtConfiguration(
-                autoRest.GetValue<string[]?>("operation-group-is-tuple").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<string[]?>("operation-group-is-extension").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<string[]?>("no-property-type-replacement").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<string[]?>("list-exception").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-singleton-resource").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult());
+                operationGroupsToOmit: autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                requestPathIsNonResource: autoRest.GetValue<string[]?>("request-path-is-non-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                noPropertyTypeReplacement: autoRest.GetValue<string[]?>("no-property-type-replacement").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                listException: autoRest.GetValue<string[]?>("list-exception").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
+                requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
+                requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
+                requestPathToResourceData: autoRest.GetValue<JsonElement?>("request-path-to-resource-data").GetAwaiter().GetResult(),
+                requestPathToResourceType: autoRest.GetValue<JsonElement?>("request-path-to-resource-type").GetAwaiter().GetResult(),
+                requestPathToScopeResourceTypes: autoRest.GetValue<JsonElement?>("request-path-to-scope-resource-types").GetAwaiter().GetResult(),
+                requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
+                mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
+                armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
+                resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
+                resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
         {
-            WriteNonEmptySettings(writer, nameof(OperationGroupToResourceType), OperationGroupToResourceType);
-            WriteNonEmptySettings(writer, nameof(OperationGroupToResource), OperationGroupToResource);
-            WriteNonEmptySettings(writer, nameof(OperationGroupToParent), OperationGroupToParent);
             WriteNonEmptySettings(writer, nameof(MergeOperations), MergeOperations);
-            WriteNonEmptySettings(writer, nameof(OperationGroupToSingletonResource), OperationGroupToSingletonResource);
-            WriteNonEmptySettings(writer, nameof(OperationGroupIsTuple), OperationGroupIsTuple);
-            WriteNonEmptySettings(writer, nameof(OperationGroupIsExtension), OperationGroupIsExtension);
-            WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
+            WriteNonEmptySettings(writer, nameof(RequestPathIsNonResource), RequestPathIsNonResource);
+            WriteNonEmptySettings(writer, nameof(NoPropertyTypeReplacement), NoPropertyTypeReplacement);
             WriteNonEmptySettings(writer, nameof(ListException), ListException);
+            WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
+            WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
+            WriteNonEmptySettings(writer, nameof(RequestPathToResourceName), RequestPathToResourceName);
+            WriteNonEmptySettings(writer, nameof(RequestPathToResourceData), RequestPathToResourceData);
+            WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
+            WriteNonEmptySettings(writer, nameof(RequestPathToScopeResourceTypes), RequestPathToScopeResourceTypes);
+            WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
+            MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
+            if (!DoesResourceModelRequireType)
+                writer.WriteBoolean(nameof(DoesResourceModelRequireType), DoesResourceModelRequireType);
+            if (!DoesResourceModelRequireName)
+                writer.WriteBoolean(nameof(DoesResourceModelRequireName), DoesResourceModelRequireName);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
         {
-            root.TryGetProperty(nameof(OperationGroupIsTuple), out var operationGroupIsTuple);
-            root.TryGetProperty(nameof(OperationGroupIsExtension), out var operationGroupIsExtension);
             root.TryGetProperty(nameof(OperationGroupsToOmit), out var operationGroupsToOmit);
-            root.TryGetProperty(nameof(OperationGroupToResourceType), out var operationGroupToResourceType);
-            root.TryGetProperty(nameof(OperationGroupToResource), out var operationGroupToResource);
-            root.TryGetProperty(nameof(OperationGroupToParent), out var operationGroupToParent);
-            root.TryGetProperty(nameof(OperationGroupToSingletonResource), out var singletonResource);
-            root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
+            root.TryGetProperty(nameof(RequestPathIsNonResource), out var requestPathIsNonResource);
             root.TryGetProperty(nameof(NoPropertyTypeReplacement), out var noPropertyTypeReplacment);
             root.TryGetProperty(nameof(ListException), out var listException);
-
-            var operationGroupIsTupleList = operationGroupIsTuple.ValueKind == JsonValueKind.Array
-                ? operationGroupIsTuple.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
-
-            var operationGroupIsExtensionList = operationGroupIsExtension.ValueKind == JsonValueKind.Array
-                ? operationGroupIsExtension.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+            root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
+            root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
+            root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
+            root.TryGetProperty(nameof(RequestPathToResourceType), out var requestPathToResourceType);
+            root.TryGetProperty(nameof(RequestPathToScopeResourceTypes), out var requestPathToScopeResourceTypes);
+            root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
+            root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
 
             var operationGroupList = operationGroupsToOmit.ValueKind == JsonValueKind.Array
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : new string[0];
 
+            var requestPathIsNonResourceList = requestPathIsNonResource.ValueKind == JsonValueKind.Array
+                ? requestPathIsNonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : new string[0];
+
             var noPropertyTypeReplacementList = noPropertyTypeReplacment.ValueKind == JsonValueKind.Array
-                ? noPropertyTypeReplacment.EnumerateArray().Select(t => t.ToString()).ToList()
-                : new List<string>();
+                ? noPropertyTypeReplacment.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : new string[0];
 
             var listExceptionList = listException.ValueKind == JsonValueKind.Array
-                ? listException.EnumerateArray().Select(t => t.ToString()).ToList()
-                : new List<string>();
+                ? listException.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : new string[0];
 
             root.TryGetProperty("ArmCore", out var isArmCore);
+            root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
+            root.TryGetProperty(nameof(DoesResourceModelRequireType), out var resourceModelRequiresType);
+            root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
 
             return new MgmtConfiguration(
-                operationGroupIsTupleList,
-                operationGroupIsExtensionList,
-                operationGroupList,
-                noPropertyTypeReplacementList,
-                listExceptionList,
-                operationGroupToResourceType,
-                operationGroupToResource,
-                operationGroupToParent,
-                singletonResource,
-                mergeOperations,
-                isArmCore);
+                operationGroupsToOmit: operationGroupList,
+                requestPathIsNonResource: requestPathIsNonResourceList,
+                noPropertyTypeReplacement: noPropertyTypeReplacementList,
+                listException: listExceptionList,
+                mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
+                requestPathToParent: requestPathToParent,
+                requestPathToResourceName: requestPathToResourceName,
+                requestPathToResourceData: requestPathToResourceData,
+                requestPathToResourceType: requestPathToResourceType,
+                requestPathToScopeResourceTypes: requestPathToScopeResourceTypes,
+                requestPathToSingletonResource: requestPathToSingletonResource,
+                mergeOperations: mergeOperations,
+                armCore: isArmCore,
+                resourceModelRequiresType: resourceModelRequiresType,
+                resourceModelRequiresName: resourceModelRequiresName);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

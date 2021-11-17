@@ -19,11 +19,11 @@ using MgmtOperations.Models;
 
 namespace MgmtOperations
 {
-    /// <summary> A class representing collection of AvailabilitySetGrandChild and their operations over a AvailabilitySetChild. </summary>
+    /// <summary> A class representing collection of AvailabilitySetGrandChild and their operations over its parent. </summary>
     public partial class AvailabilitySetGrandChildCollection : ArmCollection, IEnumerable<AvailabilitySetGrandChild>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AvailabilitySetGrandChildRestOperations _restClient;
+        private readonly AvailabilitySetGrandChildRestOperations _availabilitySetGrandChildRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildCollection"/> class for mocking. </summary>
         protected AvailabilitySetGrandChildCollection()
@@ -35,17 +35,7 @@ namespace MgmtOperations
         internal AvailabilitySetGrandChildCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<AvailabilitySetGrandChild> IEnumerable<AvailabilitySetGrandChild>.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
+            _availabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -53,6 +43,9 @@ namespace MgmtOperations
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
+        /// OperationId: availabilitySetGrandChild_CreateOrUpdate
         /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
@@ -74,7 +67,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken);
+                var response = _availabilitySetGrandChildRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken);
                 var operation = new AvailabilitySetGrandChildCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -87,6 +80,9 @@ namespace MgmtOperations
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
+        /// OperationId: availabilitySetGrandChild_CreateOrUpdate
         /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
@@ -108,7 +104,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetGrandChildRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new AvailabilitySetGrandChildCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -121,21 +117,25 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
+        /// OperationId: availabilitySetGrandChild_Get
+        /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual Response<AvailabilitySetGrandChild> Get(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken);
+                var response = _availabilitySetGrandChildRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetGrandChild(Parent, response.Value), response.GetRawResponse());
@@ -147,21 +147,25 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
+        /// OperationId: availabilitySetGrandChild_Get
+        /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySetGrandChild>> GetAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.Get");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetGrandChildRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetGrandChild(Parent, response.Value), response.GetRawResponse());
@@ -175,19 +179,20 @@ namespace MgmtOperations
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual Response<AvailabilitySetGrandChild> GetIfExists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken);
+                var response = _availabilitySetGrandChildRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse())
                     : Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
@@ -201,19 +206,20 @@ namespace MgmtOperations
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySetGrandChild>> GetIfExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExists");
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetGrandChildRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<AvailabilitySetGrandChild>(null, response.GetRawResponse())
                     : Response.FromValue(new AvailabilitySetGrandChild(this, response.Value), response.GetRawResponse());
@@ -227,18 +233,19 @@ namespace MgmtOperations
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
                 var response = GetIfExists(availabilitySetGrandChildName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -251,18 +258,19 @@ namespace MgmtOperations
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CheckIfExists");
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-
                 var response = await GetIfExistsAsync(availabilitySetGrandChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -273,24 +281,9 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> Retrieves information about an availability set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<AvailabilitySetGrandChild>>> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySetGrandChild(Parent, data)).ToArray() as IReadOnlyList<AvailabilitySetGrandChild>, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
+        /// OperationId: availabilitySetGrandChild_List
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<AvailabilitySetGrandChild>> GetAll(CancellationToken cancellationToken = default)
@@ -299,8 +292,8 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = _restClient.GetAll(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySetGrandChild(Parent, data)).ToArray() as IReadOnlyList<AvailabilitySetGrandChild>, response.GetRawResponse());
+                var response = _availabilitySetGrandChildRestClient.List(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySetGrandChild(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySetGrandChild>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -309,7 +302,38 @@ namespace MgmtOperations
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
+        /// OperationId: availabilitySetGrandChild_List
+        /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<IReadOnlyList<AvailabilitySetGrandChild>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _availabilitySetGrandChildRestClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(value => new AvailabilitySetGrandChild(Parent, value)).ToArray() as IReadOnlyList<AvailabilitySetGrandChild>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        IEnumerator<AvailabilitySetGrandChild> IEnumerable<AvailabilitySetGrandChild>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, AvailabilitySetGrandChild, AvailabilitySetGrandChildData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, AvailabilitySetGrandChild, AvailabilitySetGrandChildData> Construct() { }
     }
 }
