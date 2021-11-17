@@ -230,9 +230,9 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the private link resources supported for the key vault. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<IReadOnlyList<PrivateLinkResource>>> GetByVaultPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<PrivateLinkResource>>> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Vault.GetByVaultPrivateLinkResources");
+            using var scope = _clientDiagnostics.CreateScope("Vault.GetPrivateLinkResources");
             scope.Start();
             try
             {
@@ -248,9 +248,9 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the private link resources supported for the key vault. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<PrivateLinkResource>> GetByVaultPrivateLinkResources(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<PrivateLinkResource>> GetPrivateLinkResources(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Vault.GetByVaultPrivateLinkResources");
+            using var scope = _clientDiagnostics.CreateScope("Vault.GetPrivateLinkResources");
             scope.Start();
             try
             {

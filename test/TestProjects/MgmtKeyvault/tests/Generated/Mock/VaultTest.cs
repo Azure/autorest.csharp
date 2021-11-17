@@ -84,12 +84,12 @@ namespace MgmtKeyvault.Tests.Mock
 
         [RecordedTest]
         [Ignore("Generated TestCase")]
-        public async Task GetByVaultPrivateLinkResourcesAsync()
+        public async Task GetPrivateLinkResourcesAsync()
         {
             // Example: KeyVaultListPrivateLinkResources
             var resource = await GetVaultAsync();
 
-            await resource.GetByVaultPrivateLinkResourcesAsync();
+            await resource.GetPrivateLinkResourcesAsync();
         }
     }
 }

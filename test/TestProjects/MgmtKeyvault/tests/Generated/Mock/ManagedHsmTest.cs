@@ -77,12 +77,12 @@ namespace MgmtKeyvault.Tests.Mock
 
         [RecordedTest]
         [Ignore("Generated TestCase")]
-        public async Task GetByMhsmResourceMHSMPrivateLinkResourcesAsync()
+        public async Task GetMHSMPrivateLinkResourcesByMhsmResourceAsync()
         {
             // Example: KeyVaultListPrivateLinkResources
             var resource = await GetManagedHsmAsync();
 
-            await resource.GetByMhsmResourceMHSMPrivateLinkResourcesAsync();
+            await resource.GetMHSMPrivateLinkResourcesByMhsmResourceAsync();
         }
     }
 }

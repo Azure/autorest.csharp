@@ -42,7 +42,7 @@ namespace MgmtKeyvault
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Vault> GetBySubscriptionVaultsAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Vault> GetVaultsAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -50,7 +50,7 @@ namespace MgmtKeyvault
                 var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Vault>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionVaults");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVaults");
                     scope.Start();
                     try
                     {
@@ -65,7 +65,7 @@ namespace MgmtKeyvault
                 }
                 async Task<Page<Vault>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionVaults");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVaults");
                     scope.Start();
                     try
                     {
@@ -88,7 +88,7 @@ namespace MgmtKeyvault
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Vault> GetBySubscriptionVaults(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static Pageable<Vault> GetVaults(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -96,7 +96,7 @@ namespace MgmtKeyvault
                 var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Vault> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionVaults");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVaults");
                     scope.Start();
                     try
                     {
@@ -111,7 +111,7 @@ namespace MgmtKeyvault
                 }
                 Page<Vault> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionVaults");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVaults");
                     scope.Start();
                     try
                     {
@@ -308,7 +308,7 @@ namespace MgmtKeyvault
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ManagedHsm> GetBySubscriptionManagedHsmsAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<ManagedHsm> GetManagedHsmsAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -316,7 +316,7 @@ namespace MgmtKeyvault
                 var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<ManagedHsm>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionManagedHsms");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetManagedHsms");
                     scope.Start();
                     try
                     {
@@ -331,7 +331,7 @@ namespace MgmtKeyvault
                 }
                 async Task<Page<ManagedHsm>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionManagedHsms");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetManagedHsms");
                     scope.Start();
                     try
                     {
@@ -354,7 +354,7 @@ namespace MgmtKeyvault
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ManagedHsm> GetBySubscriptionManagedHsms(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static Pageable<ManagedHsm> GetManagedHsms(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -362,7 +362,7 @@ namespace MgmtKeyvault
                 var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<ManagedHsm> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionManagedHsms");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetManagedHsms");
                     scope.Start();
                     try
                     {
@@ -377,7 +377,7 @@ namespace MgmtKeyvault
                 }
                 Page<ManagedHsm> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionManagedHsms");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetManagedHsms");
                     scope.Start();
                     try
                     {
