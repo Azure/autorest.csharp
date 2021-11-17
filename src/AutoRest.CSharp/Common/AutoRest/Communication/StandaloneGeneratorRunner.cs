@@ -71,6 +71,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.LowLevelClient, configuration.LowLevelClient);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, configuration.SingleTopLevelClient);
+                    writer.WriteString(nameof(Configuration.ProjectRelativeDirectory), configuration.ProjectRelativeDirectory);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
