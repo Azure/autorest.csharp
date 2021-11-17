@@ -5,7 +5,7 @@ Run `dotnet build /t:GenerateCode` to generate code.
 ``` yaml
 azure-arm: true
 library-name: KeyVault
-require: 
+require:
 - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/954bf4ebc679ba55a6cacb39dbdacdbb956359f2/specification/keyvault/resource-manager/readme.md
 - $(this-folder)/../../../../readme.md
 clear-output-folder: true
@@ -51,17 +51,18 @@ directive:
     - from: swagger-document
       where: $['paths']['/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}/purge']['post']
       transform: $.operationId = 'DeletedVaults_Purge'
-    # TODO: the VirtualNetworkRule failed in [Test]TestProjectTests.ValidateRequiredParamsInCtor, need to invesitigate codegen issue on this
-    - from: keyvault.json
-      where: $.definitions.VirtualNetworkRule.required
-      transform: $ = []
+    # TODO: Below paths bring codegen fatal
     - from: swagger-document
       where: $.paths
       transform: delete $['/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/deletedManagedHSMs']
     - from: swagger-document
       where: $.paths
       transform: delete $['/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/deletedVaults']
-list-exception:
-- /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}
-- /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}
+    - from: swagger-document
+      where: $.paths
+      transform: delete $['/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}']
+    - from: swagger-document
+      where: $.paths
+      transform: delete $['/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}']
+
 ```

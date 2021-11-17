@@ -22,29 +22,14 @@ namespace MgmtKeyvault
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region DeletedVault
-        /// <summary> Gets an object representing a DeletedVaultCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DeletedVaultCollection" /> object. </returns>
-        public static DeletedVaultCollection GetDeletedVaults(this Subscription subscription)
-        {
-            return new DeletedVaultCollection(subscription);
-        }
-        #endregion
-
-        #region DeletedManagedHsm
-        /// <summary> Gets an object representing a DeletedManagedHsmCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DeletedManagedHsmCollection" /> object. </returns>
-        public static DeletedManagedHsmCollection GetDeletedManagedHsms(this Subscription subscription)
-        {
-            return new DeletedManagedHsmCollection(subscription);
-        }
-        #endregion
-
         private static VaultsRestOperations GetVaultsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new VaultsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+        }
+
+        private static DeletedVaultsRestOperations GetDeletedVaultsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new DeletedVaultsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         private static ManagedHsmsRestOperations GetManagedHsmsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
@@ -236,6 +221,88 @@ namespace MgmtKeyvault
             );
         }
 
+        /// <summary> Permanently deletes the specified vault. aka Purges the deleted Azure key vault. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the soft-deleted vault. </param>
+        /// <param name="vaultName"> The name of the soft-deleted vault. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
+        public static async Task<DeletedVaultPurgeOperation> PurgeDeletedVaultAsync(this Subscription subscription, string location, string vaultName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (vaultName == null)
+            {
+                throw new ArgumentNullException(nameof(vaultName));
+            }
+
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PurgeDeletedVault");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetDeletedVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.PurgeAsync(location, vaultName, cancellationToken).ConfigureAwait(false);
+                    var operation = new DeletedVaultPurgeOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeRequest(location, vaultName).Request, response);
+                    if (waitForCompletion)
+                        await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                    return operation;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <summary> Permanently deletes the specified vault. aka Purges the deleted Azure key vault. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the soft-deleted vault. </param>
+        /// <param name="vaultName"> The name of the soft-deleted vault. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
+        public static DeletedVaultPurgeOperation PurgeDeletedVault(this Subscription subscription, string location, string vaultName, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (vaultName == null)
+            {
+                throw new ArgumentNullException(nameof(vaultName));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PurgeDeletedVault");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetDeletedVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                    var response = restOperations.Purge(location, vaultName, cancellationToken);
+                    var operation = new DeletedVaultPurgeOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeRequest(location, vaultName).Request, response);
+                    if (waitForCompletion)
+                        operation.WaitForCompletion(cancellationToken);
+                    return operation;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
         /// <summary> Lists the ManagedHsms for this <see cref="Subscription" />. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="top"> Maximum number of results to return. </param>
@@ -354,6 +421,88 @@ namespace MgmtKeyvault
             ResourceFilterCollection filters = new(ManagedHsm.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
+        }
+
+        /// <summary> Permanently deletes the specified managed HSM. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the soft-deleted managed HSM. </param>
+        /// <param name="name"> The name of the soft-deleted managed HSM. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
+        public static async Task<ManagedHsmPurgeDeletedOperation> PurgeDeletedManagedHsmAsync(this Subscription subscription, string location, string name, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PurgeDeletedManagedHsm");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                    var response = await restOperations.PurgeDeletedAsync(location, name, cancellationToken).ConfigureAwait(false);
+                    var operation = new ManagedHsmPurgeDeletedOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeDeletedRequest(location, name).Request, response);
+                    if (waitForCompletion)
+                        await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                    return operation;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <summary> Permanently deletes the specified managed HSM. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the soft-deleted managed HSM. </param>
+        /// <param name="name"> The name of the soft-deleted managed HSM. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
+        public static ManagedHsmPurgeDeletedOperation PurgeDeletedManagedHsm(this Subscription subscription, string location, string name, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PurgeDeletedManagedHsm");
+                scope.Start();
+                try
+                {
+                    var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                    var response = restOperations.PurgeDeleted(location, name, cancellationToken);
+                    var operation = new ManagedHsmPurgeDeletedOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeDeletedRequest(location, name).Request, response);
+                    if (waitForCompletion)
+                        operation.WaitForCompletion(cancellationToken);
+                    return operation;
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
         }
     }
 }

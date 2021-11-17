@@ -15,11 +15,8 @@ namespace MgmtKeyvault.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
             if (Optional.IsDefined(IgnoreMissingVnetServiceEndpoint))
             {
                 writer.WritePropertyName("ignoreMissingVnetServiceEndpoint");
@@ -30,7 +27,7 @@ namespace MgmtKeyvault.Models
 
         internal static VirtualNetworkRule DeserializeVirtualNetworkRule(JsonElement element)
         {
-            Optional<string> id = default;
+            string id = default;
             Optional<bool> ignoreMissingVnetServiceEndpoint = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -50,7 +47,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new VirtualNetworkRule(id.Value, Optional.ToNullable(ignoreMissingVnetServiceEndpoint));
+            return new VirtualNetworkRule(id, Optional.ToNullable(ignoreMissingVnetServiceEndpoint));
         }
     }
 }

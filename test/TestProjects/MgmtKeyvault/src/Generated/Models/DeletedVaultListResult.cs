@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using Azure.Core;
-using MgmtKeyvault;
 
 namespace MgmtKeyvault.Models
 {
@@ -17,11 +16,11 @@ namespace MgmtKeyvault.Models
         /// <summary> Initializes a new instance of DeletedVaultListResult. </summary>
         internal DeletedVaultListResult()
         {
-            Value = new ChangeTrackingList<DeletedVaultData>();
+            Value = new ChangeTrackingList<DeletedVault>();
         }
 
         /// <summary> The list of deleted vaults. </summary>
-        public IReadOnlyList<DeletedVaultData> Value { get; }
+        public IReadOnlyList<DeletedVault> Value { get; }
         /// <summary> The URL to get the next set of deleted vaults. </summary>
         public string NextLink { get; }
     }

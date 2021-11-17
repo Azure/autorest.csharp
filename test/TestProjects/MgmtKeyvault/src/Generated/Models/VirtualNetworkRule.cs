@@ -5,14 +5,24 @@
 
 #nullable disable
 
+using System;
+
 namespace MgmtKeyvault.Models
 {
     /// <summary> A rule governing the accessibility of a vault from a specific virtual network. </summary>
     public partial class VirtualNetworkRule
     {
         /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>
-        public VirtualNetworkRule()
+        /// <param name="id"> Full resource id of a vnet subnet, such as &apos;/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1&apos;. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
+        public VirtualNetworkRule(string id)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            Id = id;
         }
 
         /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>

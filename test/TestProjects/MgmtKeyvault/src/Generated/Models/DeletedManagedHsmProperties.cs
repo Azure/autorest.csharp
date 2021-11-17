@@ -12,29 +12,12 @@ using Azure.Core;
 namespace MgmtKeyvault.Models
 {
     /// <summary> Properties of the deleted managed HSM. </summary>
-    public partial class DeletedManagedHsmProperties
+    internal partial class DeletedManagedHsmProperties
     {
         /// <summary> Initializes a new instance of DeletedManagedHsmProperties. </summary>
         internal DeletedManagedHsmProperties()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
-        }
-
-        /// <summary> Initializes a new instance of DeletedManagedHsmProperties. </summary>
-        /// <param name="mhsmId"> The resource id of the original managed HSM. </param>
-        /// <param name="location"> The location of the original managed HSM. </param>
-        /// <param name="deletionDate"> The deleted date. </param>
-        /// <param name="scheduledPurgeDate"> The scheduled purged date. </param>
-        /// <param name="purgeProtectionEnabled"> Purge protection status of the original managed HSM. </param>
-        /// <param name="tags"> Tags of the original managed HSM. </param>
-        internal DeletedManagedHsmProperties(string mhsmId, string location, DateTimeOffset? deletionDate, DateTimeOffset? scheduledPurgeDate, bool? purgeProtectionEnabled, IReadOnlyDictionary<string, string> tags)
-        {
-            MhsmId = mhsmId;
-            Location = location;
-            DeletionDate = deletionDate;
-            ScheduledPurgeDate = scheduledPurgeDate;
-            PurgeProtectionEnabled = purgeProtectionEnabled;
-            Tags = tags;
         }
 
         /// <summary> The resource id of the original managed HSM. </summary>

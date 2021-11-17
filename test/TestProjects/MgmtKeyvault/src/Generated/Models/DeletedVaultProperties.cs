@@ -12,29 +12,12 @@ using Azure.Core;
 namespace MgmtKeyvault.Models
 {
     /// <summary> Properties of the deleted vault. </summary>
-    public partial class DeletedVaultProperties
+    internal partial class DeletedVaultProperties
     {
         /// <summary> Initializes a new instance of DeletedVaultProperties. </summary>
         internal DeletedVaultProperties()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
-        }
-
-        /// <summary> Initializes a new instance of DeletedVaultProperties. </summary>
-        /// <param name="vaultId"> The resource id of the original vault. </param>
-        /// <param name="location"> The location of the original vault. </param>
-        /// <param name="deletionDate"> The deleted date. </param>
-        /// <param name="scheduledPurgeDate"> The scheduled purged date. </param>
-        /// <param name="tags"> Tags of the original vault. </param>
-        /// <param name="purgeProtectionEnabled"> Purge protection status of the original vault. </param>
-        internal DeletedVaultProperties(string vaultId, string location, DateTimeOffset? deletionDate, DateTimeOffset? scheduledPurgeDate, IReadOnlyDictionary<string, string> tags, bool? purgeProtectionEnabled)
-        {
-            VaultId = vaultId;
-            Location = location;
-            DeletionDate = deletionDate;
-            ScheduledPurgeDate = scheduledPurgeDate;
-            Tags = tags;
-            PurgeProtectionEnabled = purgeProtectionEnabled;
         }
 
         /// <summary> The resource id of the original vault. </summary>

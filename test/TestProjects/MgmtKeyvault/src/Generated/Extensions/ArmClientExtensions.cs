@@ -23,17 +23,6 @@ namespace MgmtKeyvault
         }
         #endregion
 
-        #region DeletedVault
-        /// <summary> Gets an object representing a DeletedVault along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeletedVault" /> object. </returns>
-        public static DeletedVault GetDeletedVault(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DeletedVault(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
         #region PrivateEndpointConnection
         /// <summary> Gets an object representing a PrivateEndpointConnection along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
@@ -53,17 +42,6 @@ namespace MgmtKeyvault
         public static ManagedHsm GetManagedHsm(this ArmClient armClient, ResourceIdentifier id)
         {
             return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ManagedHsm(clientOptions, credential, uri, pipeline, id));
-        }
-        #endregion
-
-        #region DeletedManagedHsm
-        /// <summary> Gets an object representing a DeletedManagedHsm along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeletedManagedHsm" /> object. </returns>
-        public static DeletedManagedHsm GetDeletedManagedHsm(this ArmClient armClient, ResourceIdentifier id)
-        {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DeletedManagedHsm(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 

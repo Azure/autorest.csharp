@@ -9,9 +9,5 @@
   "azure-arm": true,
   "public-clients": true,
   "head-as-boolean": true,
-  "skip-csproj-packagereference": true,
-  "ListException": [
-    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}",
-    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}"
-  ]
+  "skip-csproj-packagereference": true
 }
