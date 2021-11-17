@@ -501,23 +501,5 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.AreEqual(paramTypes[i], parameters[i].ParameterType);
             }
         }
-
-        [Test]
-        [Ignore("The current implementation of list-exception is using request path instead of resource collection name, therefore we have to skip this check to ensure test could pass. Will fix this later")]
-        public void VerifiyEnumerable()
-        {
-            foreach (var collection in FindAllCollections())
-            {
-                if (ListExceptions.Contains(collection.Name))
-                    continue;
-                Assert.NotNull(collection.GetInterface("IEnumerable"), $"{collection.Name} did not implement IEnumerable");
-                Assert.NotNull(collection.GetInterface("IEnumerable`1"), $"{collection.Name} did not implement IEnumerable<T>");
-                var pageable = typeof(Pageable<>);
-                if (collection.GetMethod("GetAll").ReturnType.Name == pageable.Name)
-                {
-                    Assert.NotNull(collection.GetInterface("IAsyncEnumerable`1"), $"{collection.Name} did not implement IAsyncEnumerable<T>");
-                }
-            }
-        }
     }
 }
