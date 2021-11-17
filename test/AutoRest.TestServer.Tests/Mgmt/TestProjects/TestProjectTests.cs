@@ -502,5 +502,22 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.AreEqual(paramTypes[i], parameters[i].ParameterType);
             }
         }
+
+        protected void ValidateMethodExist(string fullClassName, string methodName, params string[] argTypes)
+        {
+            var classToCheck = Assembly.GetExecutingAssembly().GetType(fullClassName);
+            var methods = classToCheck.GetMethods().Where(m => m.Name == methodName);
+            Assert.Greater(methods.Count(), 0, $"Can't find method {fullClassName}.{methodName}!");
+
+            for (int i = 0; i < argTypes.Length; i++)
+            {
+                methods = methods.Where(x =>
+                {
+                    var parameters = x.GetParameters();
+                    return parameters[i].ParameterType.Name == argTypes[i];
+                });
+                Assert.Greater(methods.Count(), 0, $"The {i + 1}nd parameter of {fullClassName}.{methodName}() is not of type {argTypes[i]}!");
+            }
+        }
     }
 }

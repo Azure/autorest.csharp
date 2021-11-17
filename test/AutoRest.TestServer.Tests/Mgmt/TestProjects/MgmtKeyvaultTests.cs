@@ -57,7 +57,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetAsync")]
         [TestCase("DeleteAsync")]
         [TestCase("UpdateAsync")]
-        [TestCase("GetByMhsmResourceMHSMPrivateLinkResourcesAsync")]
         public void ValidateManagedHsmMockTests(string methodName, params string[] argTypes)
         {
             this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.ManagedHsmMockTests", methodName, argTypes);

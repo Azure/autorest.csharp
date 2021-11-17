@@ -120,7 +120,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateEnumerable()
         {
-            (_, var context) = Generate(_projectName).Result;
+            (_, var context) = Generate(_projectName, _subFolder).Result;
 
             foreach (var collection in context.Library.ResourceCollections)
             {
