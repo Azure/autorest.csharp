@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         public static LongRunningOperationInfo FindLongRunningOperationInfo(this Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
-            var mgmtRestClient = context.Library.GetRestClient(operation.GetHttpPath());
+            var mgmtRestClient = context.Library.GetRestClient(operation);
 
             var nextOperationMethod = operation?.Language?.Default?.Paging != null
                 ? mgmtRestClient.GetNextOperationMethod(operation.Requests.Single())
