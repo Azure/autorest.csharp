@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -19,52 +20,40 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ManagementGroupExtensionsWriter : MgmtExtensionWriter
     {
-        private CodeWriter _writer;
-        public ManagementGroupExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
+        public ManagementGroupExtensionsWriter(CodeWriter writer, ManagementGroupExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
         {
-            _writer = writer;
         }
 
         protected override string Description => "A class to add extension methods to ManagementGroup.";
-        protected override string TypeNameOfThis => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups];
+
         protected override string ExtensionOperationVariableName => "managementGroup";
 
         protected override Type ExtensionOperationVariableType => typeof(ManagementGroup);
 
-        public override void WriteExtension()
+        public override void Write()
         {
             using (_writer.Namespace(Context.DefaultNamespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    foreach (var resource in Context.Library.ManagementGroupChildResources)
+                    // Write resource collection entries
+                    WriteChildResourceEntries();
+
+                    // Write RestOperations
+                    foreach (var restClient in _extensions.RestClients)
                     {
-                        _writer.Line($"#region {resource.Type.Name}");
-                        if (resource.OperationGroup.TryGetSingletonResourceSuffix(Configuration, out var singletonResourceSuffix))
-                        {
-                            WriteGetSingletonResourceMethod(_writer, resource, singletonResourceSuffix);
-                        }
-                        else
-                        {
-                            // a non-singleton resource must have a resource collection
-                            WriteGetResourceCollectionMethod(_writer, resource.ResourceCollection!);
-                        }
-                        _writer.LineRaw("#endregion");
-                        _writer.Line();
+                        WriteGetRestOperations(restClient);
                     }
 
+                    // Write other orphan operations with the parent of ResourceGroup
+                    foreach (var clientOperation in _extensions.ClientOperations)
+                    {
+                        WriteMethod(clientOperation, true);
+                        WriteMethod(clientOperation, false);
+                    }
                 }
             }
-        }
-
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            return true;
-        }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
         }
     }
 }

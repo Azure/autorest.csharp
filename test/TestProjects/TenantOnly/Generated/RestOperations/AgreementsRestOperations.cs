@@ -41,7 +41,7 @@ namespace TenantOnly
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateGetAllRequest(string billingAccountName, string expand)
+        internal HttpMessage CreateListRequest(string billingAccountName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -67,14 +67,14 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public async Task<Response<AgreementListResult>> GetAllAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<AgreementListResult>> ListAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
                 throw new ArgumentNullException(nameof(billingAccountName));
             }
 
-            using var message = CreateGetAllRequest(billingAccountName, expand);
+            using var message = CreateListRequest(billingAccountName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -95,14 +95,14 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public Response<AgreementListResult> GetAll(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<AgreementListResult> List(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
                 throw new ArgumentNullException(nameof(billingAccountName));
             }
 
-            using var message = CreateGetAllRequest(billingAccountName, expand);
+            using var message = CreateListRequest(billingAccountName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

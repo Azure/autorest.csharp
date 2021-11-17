@@ -30,8 +30,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CSharpType? _implementsDictionaryType;
         private ObjectTypeDiscriminator? _discriminator;
 
-        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context) : base(context)
+        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
+            : base(context)
         {
+            DefaultName = objectSchema.CSharpName();
+            DefaultNamespace = GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
             ObjectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
@@ -42,7 +45,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
 
-            DefaultNamespace = GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute
@@ -57,9 +59,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal ObjectSchema ObjectSchema { get; }
 
-        protected override string DefaultName => ObjectSchema.CSharpName();
-        protected override string DefaultAccessibility { get; } = "public";
+        protected override string DefaultName { get; }
         protected override string DefaultNamespace { get; }
+        protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
         public bool IsStruct => ExistingType?.IsValueType == true;
 

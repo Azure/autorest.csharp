@@ -21,11 +21,12 @@ using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {
-    /// <summary> A class representing collection of Oven and their operations over a ResourceGroup. </summary>
+    /// <summary> A class representing collection of Oven and their operations over its parent. </summary>
     public partial class OvenCollection : ArmCollection, IEnumerable<Oven>, IAsyncEnumerable<Oven>
+
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly OvensRestOperations _restClient;
+        private readonly OvensRestOperations _ovensRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="OvenCollection"/> class for mocking. </summary>
         protected OvenCollection()
@@ -37,22 +38,7 @@ namespace SubscriptionExtensions
         internal OvenCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new OvensRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<Oven> IEnumerable<Oven>.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IAsyncEnumerator<Oven> IAsyncEnumerable<Oven>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            _ovensRestClient = new OvensRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -60,6 +46,9 @@ namespace SubscriptionExtensions
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Ovens_CreateOrUpdate
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
@@ -81,8 +70,8 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, ovenName, parameters, cancellationToken);
-                var operation = new OvenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, ovenName, parameters).Request, response);
+                var response = _ovensRestClient.CreateOrUpdate(Id.ResourceGroupName, ovenName, parameters, cancellationToken);
+                var operation = new OvenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _ovensRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, ovenName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -94,6 +83,9 @@ namespace SubscriptionExtensions
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Ovens_CreateOrUpdate
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
@@ -115,8 +107,8 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, ovenName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new OvenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, ovenName, parameters).Request, response);
+                var response = await _ovensRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, ovenName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new OvenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _ovensRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, ovenName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -128,21 +120,24 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Ovens_Get
         /// <param name="ovenName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public virtual Response<Oven> Get(string ovenName, CancellationToken cancellationToken = default)
         {
+            if (ovenName == null)
+            {
+                throw new ArgumentNullException(nameof(ovenName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.Get");
             scope.Start();
             try
             {
-                if (ovenName == null)
-                {
-                    throw new ArgumentNullException(nameof(ovenName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken);
+                var response = _ovensRestClient.Get(Id.ResourceGroupName, ovenName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
@@ -154,21 +149,24 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Ovens_Get
         /// <param name="ovenName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public async virtual Task<Response<Oven>> GetAsync(string ovenName, CancellationToken cancellationToken = default)
         {
+            if (ovenName == null)
+            {
+                throw new ArgumentNullException(nameof(ovenName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.Get");
             scope.Start();
             try
             {
-                if (ovenName == null)
-                {
-                    throw new ArgumentNullException(nameof(ovenName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _ovensRestClient.GetAsync(Id.ResourceGroupName, ovenName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
@@ -182,19 +180,20 @@ namespace SubscriptionExtensions
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public virtual Response<Oven> GetIfExists(string ovenName, CancellationToken cancellationToken = default)
         {
+            if (ovenName == null)
+            {
+                throw new ArgumentNullException(nameof(ovenName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (ovenName == null)
-                {
-                    throw new ArgumentNullException(nameof(ovenName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken);
+                var response = _ovensRestClient.Get(Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Oven>(null, response.GetRawResponse())
                     : Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
@@ -208,19 +207,20 @@ namespace SubscriptionExtensions
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public async virtual Task<Response<Oven>> GetIfExistsAsync(string ovenName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenCollection.GetIfExists");
+            if (ovenName == null)
+            {
+                throw new ArgumentNullException(nameof(ovenName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("OvenCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (ovenName == null)
-                {
-                    throw new ArgumentNullException(nameof(ovenName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _ovensRestClient.GetAsync(Id.ResourceGroupName, ovenName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Oven>(null, response.GetRawResponse())
                     : Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
@@ -234,18 +234,19 @@ namespace SubscriptionExtensions
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string ovenName, CancellationToken cancellationToken = default)
         {
+            if (ovenName == null)
+            {
+                throw new ArgumentNullException(nameof(ovenName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("OvenCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (ovenName == null)
-                {
-                    throw new ArgumentNullException(nameof(ovenName));
-                }
-
                 var response = GetIfExists(ovenName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -258,18 +259,19 @@ namespace SubscriptionExtensions
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="ovenName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string ovenName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenCollection.CheckIfExists");
+            if (ovenName == null)
+            {
+                throw new ArgumentNullException(nameof(ovenName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("OvenCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (ovenName == null)
-                {
-                    throw new ArgumentNullException(nameof(ovenName));
-                }
-
                 var response = await GetIfExistsAsync(ovenName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -280,6 +282,9 @@ namespace SubscriptionExtensions
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Ovens_ListAll
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -292,7 +297,7 @@ namespace SubscriptionExtensions
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetByResourceGroup(Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
+                    var response = _ovensRestClient.ListAll(Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -307,7 +312,7 @@ namespace SubscriptionExtensions
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetByResourceGroupNextPage(nextLink, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
+                    var response = _ovensRestClient.ListAllNextPage(nextLink, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -319,6 +324,9 @@ namespace SubscriptionExtensions
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Ovens_ListAll
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -331,7 +339,7 @@ namespace SubscriptionExtensions
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetByResourceGroupAsync(Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _ovensRestClient.ListAllAsync(Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -346,7 +354,7 @@ namespace SubscriptionExtensions
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetByResourceGroupNextPageAsync(nextLink, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _ovensRestClient.ListAllNextPageAsync(nextLink, Id.ResourceGroupName, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -404,7 +412,22 @@ namespace SubscriptionExtensions
             }
         }
 
+        IEnumerator<Oven> IEnumerable<Oven>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<Oven> IAsyncEnumerable<Oven>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, Oven, OvenData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Oven, OvenData> Construct() { }
     }
 }

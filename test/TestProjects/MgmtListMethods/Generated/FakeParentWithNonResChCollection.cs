@@ -20,11 +20,12 @@ using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of FakeParentWithNonResCh and their operations over a Fake. </summary>
+    /// <summary> A class representing collection of FakeParentWithNonResCh and their operations over its parent. </summary>
     public partial class FakeParentWithNonResChCollection : ArmCollection, IEnumerable<FakeParentWithNonResCh>, IAsyncEnumerable<FakeParentWithNonResCh>
+
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FakeParentWithNonResChesRestOperations _restClient;
+        private readonly FakeParentWithNonResChesRestOperations _fakeParentWithNonResChesRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithNonResChCollection"/> class for mocking. </summary>
         protected FakeParentWithNonResChCollection()
@@ -36,22 +37,7 @@ namespace MgmtListMethods
         internal FakeParentWithNonResChCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakeParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<FakeParentWithNonResCh> IEnumerable<FakeParentWithNonResCh>.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().GetEnumerator();
-        }
-
-        IAsyncEnumerator<FakeParentWithNonResCh> IAsyncEnumerable<FakeParentWithNonResCh>.GetAsyncEnumerator(CancellationToken cancellationToken)
-        {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            _fakeParentWithNonResChesRestClient = new FakeParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -59,6 +45,9 @@ namespace MgmtListMethods
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// OperationId: FakeParentWithNonResChes_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -80,7 +69,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.Name, fakeParentWithNonResChName, parameters, cancellationToken);
+                var response = _fakeParentWithNonResChesRestClient.CreateOrUpdate(Id.Name, fakeParentWithNonResChName, parameters, cancellationToken);
                 var operation = new FakeParentWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -93,6 +82,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// OperationId: FakeParentWithNonResChes_CreateOrUpdate
         /// <summary> Create or update. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -114,7 +106,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.Name, fakeParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithNonResChesRestClient.CreateOrUpdateAsync(Id.Name, fakeParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new FakeParentWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -127,21 +119,25 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// OperationId: FakeParentWithNonResChes_Get
+        /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public virtual Response<FakeParentWithNonResCh> Get(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Get");
             scope.Start();
             try
             {
-                if (fakeParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
-                }
-
-                var response = _restClient.Get(Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken);
+                var response = _fakeParentWithNonResChesRestClient.Get(Id.Name, fakeParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -153,21 +149,25 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// OperationId: FakeParentWithNonResChes_Get
+        /// <summary> Retrieves information. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<FakeParentWithNonResCh>> GetAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Get");
             scope.Start();
             try
             {
-                if (fakeParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithNonResChesRestClient.GetAsync(Id.Name, fakeParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -181,19 +181,20 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public virtual Response<FakeParentWithNonResCh> GetIfExists(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (fakeParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
-                }
-
-                var response = _restClient.Get(Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken);
+                var response = _fakeParentWithNonResChesRestClient.Get(Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -207,19 +208,20 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<FakeParentWithNonResCh>> GetIfExistsAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetIfExists");
+            if (fakeParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (fakeParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
-                }
-
-                var response = await _restClient.GetAsync(Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithNonResChesRestClient.GetAsync(Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -233,18 +235,19 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
+            if (fakeParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (fakeParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
-                }
-
                 var response = GetIfExists(fakeParentWithNonResChName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -257,18 +260,19 @@ namespace MgmtListMethods
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.CheckIfExists");
+            if (fakeParentWithNonResChName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResChCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (fakeParentWithNonResChName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeParentWithNonResChName));
-                }
-
                 var response = await GetIfExistsAsync(fakeParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -279,6 +283,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// OperationId: FakeParentWithNonResChes_ListTest
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FakeParentWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
@@ -290,7 +297,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetTest(Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithNonResChesRestClient.ListTest(Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -305,7 +312,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.GetTestNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithNonResChesRestClient.ListTestNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -317,6 +324,9 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// OperationId: FakeParentWithNonResChes_ListTest
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FakeParentWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
@@ -328,7 +338,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetTestAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithNonResChesRestClient.ListTestAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -343,7 +353,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.GetTestNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithNonResChesRestClient.ListTestNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -355,7 +365,22 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        IEnumerator<FakeParentWithNonResCh> IEnumerable<FakeParentWithNonResCh>.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().GetEnumerator();
+        }
+
+        IAsyncEnumerator<FakeParentWithNonResCh> IAsyncEnumerable<FakeParentWithNonResCh>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        {
+            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, FakeParentWithNonResCh, FakeParentWithNonResChData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, FakeParentWithNonResCh, FakeParentWithNonResChData> Construct() { }
     }
 }

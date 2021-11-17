@@ -1,6 +1,7 @@
 # Azure.Management.Storage
 
-### AutoRest Configuration
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml
@@ -14,32 +15,15 @@ namespace: Azure.Management.Storage
 
 modelerfour:
   lenient-model-deduplication: true
+  seal-single-value-enum-by-default: true
 
-operation-group-to-resource-type:
-  Skus: Microsoft.Storage/skus
-  Usages: Microsoft.Storage/locations/usages
-  BlobContainers: Microsoft.Storage/storageAccounts/blobServices/containers
-  ImmutabilityPolicies: Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies
-  FileShares: Microsoft.Storage/storageAccounts/fileServices/shares
-  PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
-  DeletedAccounts: Microsoft.Storage/deletedAccounts
-operation-group-to-resource:
-  StorageAccounts: StorageAccount
-  DeletedAccounts: DeletedAccount
-operation-group-to-parent:
-  Skus: subscriptions
-  BlobServices: Microsoft.Storage/storageAccounts
-  BlobContainers: Microsoft.Storage/storageAccounts/blobServices
-  ImmutabilityPolicies: Microsoft.Storage/storageAccounts/blobServices/containers
-  FileShares: Microsoft.Storage/storageAccounts
-  Usages: subscriptions
-  StorageAccounts: resourceGroups
-  PrivateLinkResources: Microsoft.Storage/storageAccounts
-operation-group-to-singleton-resource:
-  BlobServices: blobServices/default
-  ImmutabilityPolicies: immutabilityPolicies/default
-  FileServices: fileServices/default
-  ManagementPolicies: managementPolicies/default
+list-exception:
+- /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}
+
+mgmt-debug:
+  show-request-path: true
+
 directive:
   - rename-model:
       from: BlobServiceProperties
@@ -60,20 +44,4 @@ directive:
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares"].get.parameters[4].type
     transform: return "integer"
-    #one level of resource hierarchy is swallowed, restoring it by introducing a new operation group
-  - from: swagger-document
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{immutabilityPolicyName}"].put.operationId
-    transform: return "ImmutabilityPolicies_CreateOrUpdate"
-  - from: swagger-document
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{immutabilityPolicyName}"].get.operationId
-    transform: return "ImmutabilityPolicies_Get"
-  - from: swagger-document
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{immutabilityPolicyName}"].delete.operationId
-    transform: return "ImmutabilityPolicies_Delete"
-  - from: swagger-document
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lock"].post.operationId
-    transform: return "ImmutabilityPolicies_Lock"
-  - from: swagger-document
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extend"].post.operationId
-    transform: return "ImmutabilityPolicies_Extend"
 ```

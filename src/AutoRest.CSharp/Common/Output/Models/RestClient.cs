@@ -20,29 +20,35 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class RestClient : TypeProvider
     {
-        private CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
-        private CachedDictionary<ServiceRequest, RestClientMethod> _nextPageRequestMethods;
+        private readonly CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
+        private readonly CachedDictionary<ServiceRequest, RestClientMethod> _nextPageRequestMethods;
         private RestClientMethod[]? _allMethods;
 
-        public RestClient(OperationGroup operationGroup, BuildContext context, string? clientName) : base(context)
+        protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName)
+            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context)) { }
+
+        protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string defaultClientSuffix) : base(context)
         {
             OperationGroup = operationGroup;
-            Builder = new RestClientBuilder(operationGroup, context);
+            clientParameters ??= operationGroup.Operations
+                .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
+                .Where(p => p.Implementation == ImplementationLocation.Client)
+                .Distinct();
+
+            Builder = new RestClientBuilder(clientParameters, context);
 
             _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
             _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
 
             Parameters = Builder.GetOrderedParameters();
 
-            ClientPrefix = ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context);
-            RestClientSuffix = ClientBuilder.GetRestClientSuffix(context);
-            DefaultName = ClientPrefix + RestClientSuffix;
+            ClientPrefix = clientPrefix;
+            DefaultName = clientPrefix + defaultClientSuffix;
         }
 
         protected RestClientBuilder Builder;
         internal OperationGroup OperationGroup { get; }
-        protected string RestClientSuffix { get; }
-        public virtual Parameter[] Parameters { get; }
+        public Parameter[] Parameters { get; }
         public virtual string Description { get; } = "";
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }

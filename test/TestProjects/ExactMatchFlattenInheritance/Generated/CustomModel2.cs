@@ -22,7 +22,7 @@ namespace ExactMatchFlattenInheritance
     public partial class CustomModel2 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CustomModel2SRestOperations _restClient;
+        private readonly CustomModel2SRestOperations _customModel2sRestClient;
         private readonly CustomModel2Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel2"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace ExactMatchFlattenInheritance
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _customModel2sRestClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel2"/> class. </summary>
@@ -47,7 +47,7 @@ namespace ExactMatchFlattenInheritance
         internal CustomModel2(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _customModel2sRestClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel2"/> class. </summary>
@@ -59,7 +59,7 @@ namespace ExactMatchFlattenInheritance
         internal CustomModel2(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _customModel2sRestClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -83,6 +83,9 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
+        /// OperationId: CustomModel2s_Get
         /// <summary> Get an CustomModel2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<CustomModel2>> GetAsync(CancellationToken cancellationToken = default)
@@ -91,7 +94,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2sRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
@@ -103,6 +106,9 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
+        /// OperationId: CustomModel2s_Get
         /// <summary> Get an CustomModel2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomModel2> Get(CancellationToken cancellationToken = default)
@@ -111,7 +117,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _customModel2sRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());

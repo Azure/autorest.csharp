@@ -8,144 +8,48 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceTypeBuilder
     {
-        public const string Subscriptions = "subscriptions";
-        public const string ResourceGroups = "resourceGroups";
-        public const string Tenant = "tenant";
-        public const string Locations = "locations";
-        public const string ManagementGroups = "providers/Microsoft.Management/managementGroups"; // TODO: Fix ResourceType() and make it "Microsoft.Management/managementGroups".
-        public const string ResourceGroupResources = "resourceGroupsResources"; // Represent any resource under a resource group. The resource type for /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
-
-        public static readonly Dictionary<string, string> TypeToExtensionName = new Dictionary<string, string>()
-        {
-            { Subscriptions , "SubscriptionExtensions" },
-            { ResourceGroups , "ResourceGroupExtensions" },
-            { Tenant , "TenantExtensions" },
-            { ManagementGroups , "ManagementGroupExtensions" },
-        };
-
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         private static ConcurrentDictionary<string, string> _operationPathValueCache = new ConcurrentDictionary<string, string>();
 
-        public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)
+        private static ConcurrentDictionary<RequestPath, ResourceType> _requestPathToResourceTypeCache = new ConcurrentDictionary<RequestPath, ResourceType>();
+
+        static ResourceTypeBuilder()
         {
-            string? result = null;
-            if (_valueCache.TryGetValue(operationsGroup, out result))
-                return result;
-
-            if (!config.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out result))
-            {
-                result = ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
-            }
-
-            _valueCache.TryAdd(operationsGroup, result);
-            return result;
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.Subscription, Models.ResourceType.Subscription);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.ResourceGroup, Models.ResourceType.ResourceGroup);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.Tenant, Models.ResourceType.Tenant);
+            _requestPathToResourceTypeCache.TryAdd(RequestPath.ManagementGroup, Models.ResourceType.ManagementGroup);
         }
 
-        public static string ResourceType(this Operation operation)
+        public static ResourceType GetResourceType(this RequestPath requestPath, MgmtConfiguration config)
         {
-            string? result = null;
-            if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
-            {
-                throw new ArgumentException($"The operation does not have an HttpRequest.");
-            }
-            var path = httpRequest.Path;
-            if (_operationPathValueCache.TryGetValue(path, out result))
-                return result;
+            if (_requestPathToResourceTypeCache.TryGetValue(requestPath, out var resourceType))
+                return resourceType;
 
-            var indexOfProvider = path.IndexOf(ProviderSegment.Providers);
-            if (indexOfProvider < 0)
-            {
-                throw new ArgumentException($"Could not set ResourceType for operations group {path}. No {ProviderSegment.Providers} string found in the URI");
-            }
-            var resourceType = ResourceTypeBuilder.ConstructResourceType(path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
-            if (resourceType == string.Empty)
-            {
-                throw new ArgumentException($"Could not set ResourceType for operations group {path}. An unexpected pattern of reference-reference was found in the URI");
-            }
-            result = resourceType.ToString().TrimEnd('/');
-            _operationPathValueCache.TryAdd(path, result);
-            return result;
+            resourceType = CalculateResourceType(requestPath, config);
+            _requestPathToResourceTypeCache.TryAdd(requestPath, resourceType);
+            return resourceType;
         }
 
-        private static string ConstructOperationResourceType(OperationGroup operationsGroup)
+        private static ResourceType CalculateResourceType(RequestPath requestPath, MgmtConfiguration config)
         {
-            var method = GetBestMethod(operationsGroup);
-            if (method == null)
-            {
-                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key}
-                                            Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
-            }
-            var indexOfProvider = method.Path.IndexOf(ProviderSegment.Providers);
-            if (indexOfProvider < 0)
-            {
-                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {ProviderSegment.Providers} string found in the URI");
-            }
-            var resourceType = ResourceTypeBuilder.ConstructResourceType(method.Path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
-            if (resourceType == string.Empty)
-            {
-                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. An unexpected pattern of reference-reference was found in the URI");
-            }
-            return resourceType.ToString().TrimEnd('/');
-        }
+            if (config.RequestPathToResourceType.TryGetValue(requestPath.SerializedPath, out var resourceType))
+                return new ResourceType(resourceType);
 
-
-        private static string ConstructResourceType(string httpRequestUri)
-        {
-            var returnString = new StringBuilder();
-            var insideBrace = false;
-
-            for (int i = 0; i < httpRequestUri.Length; i++)
-            {
-                char ch = httpRequestUri[i];
-                char lastChar = ch;
-
-                if (ch == '{')
-                {
-                    // non-constant-refernce pattern, need to custom defined in readme.md
-                    if (lastChar == '}')
-                    {
-                        return string.Empty;
-                    }
-                    insideBrace = true;
-                }
-                else if (ch == '}')
-                {
-                    insideBrace = false;
-                    i++;
-                }
-                else if (!insideBrace)
-                {
-                    // non-constant-refernce pattern, need to custom defined in readme.md
-                    returnString.Append(ch);
-                }
-                lastChar = ch;
-            }
-            return returnString.ToString();
-        }
-
-        private static HttpRequest? GetBestMethod(OperationGroup operationsGroup)
-        {
-            List<ServiceRequest>? requests;
-            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Put, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Delete, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Patch, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            return null;
+            // we cannot directly return the new ResourceType here, the requestPath here can be a parameterized scope, which does not have a resource type
+            // even if we have the configuration to assign explicit types to a parameterized scope, we do not have enough information to get which request path the current scope variable belongs
+            // therefore we can only return a place holder here to let the caller decide the actual resource type
+            if (requestPath.IsParameterizedScope())
+                return ResourceType.Scope;
+            return ResourceType.ParseRequestPath(requestPath);
         }
     }
 }

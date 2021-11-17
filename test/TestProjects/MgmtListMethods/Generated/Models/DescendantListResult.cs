@@ -19,15 +19,6 @@ namespace MgmtListMethods.Models
             Value = new ChangeTrackingList<DescendantInfo>();
         }
 
-        /// <summary> Initializes a new instance of DescendantListResult. </summary>
-        /// <param name="value"> The list of descendants. </param>
-        /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal DescendantListResult(IReadOnlyList<DescendantInfo> value, string nextLink)
-        {
-            Value = value;
-            NextLink = nextLink;
-        }
-
         /// <summary> The list of descendants. </summary>
         public IReadOnlyList<DescendantInfo> Value { get; }
         /// <summary> The URL to use for getting the next set of results. </summary>

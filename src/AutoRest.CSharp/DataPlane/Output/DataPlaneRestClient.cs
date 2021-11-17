@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Output.Models
         private BuildContext<DataPlaneOutputLibrary> _context;
 
         public DataPlaneRestClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
-            : base(operationGroup, context, context.Library.FindClient(operationGroup)?.Declaration?.Name)
+            : base(operationGroup, context, context.Library.FindClient(operationGroup)?.Declaration.Name)
         {
             _context = context;
         }

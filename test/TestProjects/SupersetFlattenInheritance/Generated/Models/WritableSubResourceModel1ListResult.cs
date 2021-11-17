@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using Azure.Core;
-using SupersetFlattenInheritance;
 
 namespace SupersetFlattenInheritance.Models
 {
@@ -17,20 +16,20 @@ namespace SupersetFlattenInheritance.Models
         /// <summary> Initializes a new instance of WritableSubResourceModel1ListResult. </summary>
         internal WritableSubResourceModel1ListResult()
         {
-            Value = new ChangeTrackingList<WritableSubResourceModel1Data>();
+            Value = new ChangeTrackingList<WritableSubResourceModel1>();
         }
 
         /// <summary> Initializes a new instance of WritableSubResourceModel1ListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal WritableSubResourceModel1ListResult(IReadOnlyList<WritableSubResourceModel1Data> value, string nextLink)
+        internal WritableSubResourceModel1ListResult(IReadOnlyList<WritableSubResourceModel1> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<WritableSubResourceModel1Data> Value { get; }
+        public IReadOnlyList<WritableSubResourceModel1> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

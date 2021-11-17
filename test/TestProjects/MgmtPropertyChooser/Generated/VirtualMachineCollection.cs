@@ -20,11 +20,11 @@ using MgmtPropertyChooser.Models;
 
 namespace MgmtPropertyChooser
 {
-    /// <summary> A class representing collection of VirtualMachine and their operations over a ResourceGroup. </summary>
+    /// <summary> A class representing collection of VirtualMachine and their operations over its parent. </summary>
     public partial class VirtualMachineCollection : ArmCollection, IEnumerable<VirtualMachine>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly VirtualMachinesRestOperations _restClient;
+        private readonly VirtualMachinesRestOperations _virtualMachinesRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineCollection"/> class for mocking. </summary>
         protected VirtualMachineCollection()
@@ -36,17 +36,7 @@ namespace MgmtPropertyChooser
         internal VirtualMachineCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new VirtualMachinesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<VirtualMachine> IEnumerable<VirtualMachine>.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
+            _virtualMachinesRestClient = new VirtualMachinesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -54,6 +44,9 @@ namespace MgmtPropertyChooser
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: VirtualMachines_CreateOrUpdate
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
@@ -75,8 +68,8 @@ namespace MgmtPropertyChooser
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken);
-                var operation = new VirtualMachineCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
+                var response = _virtualMachinesRestClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken);
+                var operation = new VirtualMachineCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _virtualMachinesRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -88,6 +81,9 @@ namespace MgmtPropertyChooser
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: VirtualMachines_CreateOrUpdate
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
@@ -109,8 +105,8 @@ namespace MgmtPropertyChooser
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
+                var response = await _virtualMachinesRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _virtualMachinesRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,21 +118,25 @@ namespace MgmtPropertyChooser
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: VirtualMachines_Get
+        /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public virtual Response<VirtualMachine> Get(string vmName, CancellationToken cancellationToken = default)
         {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.Get");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
+                var response = _virtualMachinesRestClient.Get(Id.ResourceGroupName, vmName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachine(Parent, response.Value), response.GetRawResponse());
@@ -148,21 +148,25 @@ namespace MgmtPropertyChooser
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: VirtualMachines_Get
+        /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public async virtual Task<Response<VirtualMachine>> GetAsync(string vmName, CancellationToken cancellationToken = default)
         {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.Get");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachinesRestClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachine(Parent, response.Value), response.GetRawResponse());
@@ -176,19 +180,20 @@ namespace MgmtPropertyChooser
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public virtual Response<VirtualMachine> GetIfExists(string vmName, CancellationToken cancellationToken = default)
         {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
+                var response = _virtualMachinesRestClient.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachine>(null, response.GetRawResponse())
                     : Response.FromValue(new VirtualMachine(this, response.Value), response.GetRawResponse());
@@ -202,19 +207,20 @@ namespace MgmtPropertyChooser
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public async virtual Task<Response<VirtualMachine>> GetIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachinesRestClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<VirtualMachine>(null, response.GetRawResponse())
                     : Response.FromValue(new VirtualMachine(this, response.Value), response.GetRawResponse());
@@ -228,18 +234,19 @@ namespace MgmtPropertyChooser
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string vmName, CancellationToken cancellationToken = default)
         {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.CheckIfExists");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-
                 var response = GetIfExists(vmName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -252,18 +259,19 @@ namespace MgmtPropertyChooser
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.CheckIfExists");
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-
                 var response = await GetIfExistsAsync(vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -274,24 +282,9 @@ namespace MgmtPropertyChooser
             }
         }
 
-        /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<VirtualMachine>>> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new VirtualMachine(Parent, data)).ToArray() as IReadOnlyList<VirtualMachine>, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: VirtualMachines_List
         /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<VirtualMachine>> GetAll(CancellationToken cancellationToken = default)
@@ -300,8 +293,29 @@ namespace MgmtPropertyChooser
             scope.Start();
             try
             {
-                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new VirtualMachine(Parent, data)).ToArray() as IReadOnlyList<VirtualMachine>, response.GetRawResponse());
+                var response = _virtualMachinesRestClient.List(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachine(Parent, value)).ToArray() as IReadOnlyList<VirtualMachine>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: VirtualMachines_List
+        /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<IReadOnlyList<VirtualMachine>>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _virtualMachinesRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(value => new VirtualMachine(Parent, value)).ToArray() as IReadOnlyList<VirtualMachine>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -356,7 +370,17 @@ namespace MgmtPropertyChooser
             }
         }
 
+        IEnumerator<VirtualMachine> IEnumerable<VirtualMachine>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
     }
 }

@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtLROTests() : base("MgmtLRO") { }
 
         [TestCase("BarCollection", "CreateOrUpdate", typeof(BarCreateOperation))]
-        [TestCase("FakeCollection", "CreateOrUpdate", typeof(FakeCreateOrUpdateOperation))]
+        [TestCase("FakeCollection", "StartCreateOrUpdate", typeof(FakeCreateOrUpdateOperation))]
         public void ValidateLongRunningOperationFunctionInCollection(string className, string functionName, Type returnType)
         {
             var collections = FindAllCollections().First(c => c.Name == className);
@@ -21,7 +21,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(method.ReturnType, returnType, $"method {className}.{functionName} does not return type {returnType}");
         }
 
-        [TestCase("FakeCollection", "CreateOrUpdate")]
         [TestCase("Fake", "Delete")]
         [TestCase("Fake", "DoSomethingSlro")]
         [TestCase("BarCollection", "CreateOrUpdate")]
@@ -31,6 +30,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             ValidateMethods(className, methodName, true, true);
         }
 
+        [TestCase("FakeCollection", "StartCreateOrUpdate")]
         [TestCase("Fake", "StartUpdate")]
         [TestCase("Fake", "StartDoSomethingLRO")]
         [TestCase("Bar", "StartDelete")]

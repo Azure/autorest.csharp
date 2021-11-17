@@ -10,7 +10,6 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -19,24 +18,15 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class MgmtLongRunningOperation : LongRunningOperation
     {
-        private string? _defaultNamespace;
-        private LongRunningOperationInfo _lroInfo;
-        private Input.Operation _operation;
-
-        public MgmtLongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext<MgmtOutputLibrary> context, LongRunningOperationInfo lroInfo)
-            : base(operationGroup, operation, context, lroInfo)
+        public MgmtLongRunningOperation(Input.Operation operation, OperationGroup operationGroup, LongRunningOperationInfo lroInfo, BuildContext<MgmtOutputLibrary> context)
+            : base(operation, context, lroInfo, lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation")
         {
-            _lroInfo = lroInfo;
-            _operation = operation;
-            if (LongRunningOperationHelper.ShouldWrapResultType(context, operationGroup, operation, ResultType))
+            DefaultNamespace = $"{context.DefaultNamespace}.Models";
+            if (operation.ShouldWrapResultType(ResultType, context))
             {
-                WrapperType = context.Library.GetArmResource(operationGroup).Type;
+                WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
             }
         }
-
-        protected override string DefaultName => _lroInfo.ClientPrefix.ToSingular() + _operation.CSharpName() + "Operation";
-
-        protected override string DefaultNamespace => _defaultNamespace ??= $"{base.DefaultNamespace}.Models";
 
         /// <summary>
         /// Type of the [Resource] class to replace whatever response type in the LRO.
@@ -44,5 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         /// <value></value>
         public CSharpType? WrapperType { get; }
+
+        protected override string DefaultNamespace { get; }
     }
 }

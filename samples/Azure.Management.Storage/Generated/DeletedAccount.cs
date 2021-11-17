@@ -22,7 +22,7 @@ namespace Azure.Management.Storage
     public partial class DeletedAccount : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DeletedAccountsRestOperations _restClient;
+        private readonly DeletedAccountsRestOperations _deletedAccountsRestClient;
         private readonly DeletedAccountData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedAccount"/> class for mocking. </summary>
@@ -38,7 +38,7 @@ namespace Azure.Management.Storage
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new DeletedAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _deletedAccountsRestClient = new DeletedAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeletedAccount"/> class. </summary>
@@ -47,7 +47,7 @@ namespace Azure.Management.Storage
         internal DeletedAccount(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new DeletedAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _deletedAccountsRestClient = new DeletedAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeletedAccount"/> class. </summary>
@@ -59,11 +59,11 @@ namespace Azure.Management.Storage
         internal DeletedAccount(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new DeletedAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _deletedAccountsRestClient = new DeletedAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Storage/deletedAccounts";
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/locations/deletedAccounts";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -83,6 +83,9 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// OperationId: DeletedAccounts_Get
         /// <summary> Get properties of specified deleted account resource. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<DeletedAccount>> GetAsync(CancellationToken cancellationToken = default)
@@ -91,7 +94,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _deletedAccountsRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DeletedAccount(this, response.Value), response.GetRawResponse());
@@ -103,6 +106,9 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// OperationId: DeletedAccounts_Get
         /// <summary> Get properties of specified deleted account resource. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeletedAccount> Get(CancellationToken cancellationToken = default)
@@ -111,7 +117,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _deletedAccountsRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedAccount(this, response.Value), response.GetRawResponse());

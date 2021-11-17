@@ -15,9 +15,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtObjectType : SchemaObjectType
     {
-        private string? _defaultNamespace;
         private ObjectTypeProperty[]? _myProperties;
-        private BuildContext<MgmtOutputLibrary> _context;
+        private readonly BuildContext<MgmtOutputLibrary> _context;
 
         public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context)
             : base(objectSchema, context)
@@ -26,17 +25,22 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         protected virtual bool IsResourceType => false;
+        private string? _defaultName;
+        protected override string DefaultName => _defaultName ??= GetDefaultName(ObjectSchema, IsResourceType);
+        private string? _defaultNamespace;
+        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(Context, ObjectSchema, IsResourceType);
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        protected override string DefaultNamespace => _defaultNamespace ??= IsResourceType ? base.DefaultNamespace.Substring(0, base.DefaultNamespace.Length - 7) : base.DefaultNamespace;
-
-        protected override string DefaultName => GetDefaultName(ObjectSchema);
-
-        protected string GetDefaultName(ObjectSchema objectSchema)
+        private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
             var name = objectSchema.CSharpName();
-            return IsResourceType ? name + "Data" : name;
+            return isResourceType ? name + "Data" : name;
+        }
+
+        private static string GetDefaultNamespace(BuildContext context, Schema objectSchema, bool isResourceType)
+        {
+            return isResourceType ? context.DefaultNamespace : GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
         }
 
         private HashSet<string> GetParentPropertyNames()

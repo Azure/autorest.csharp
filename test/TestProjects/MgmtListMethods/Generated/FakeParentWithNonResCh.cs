@@ -23,7 +23,7 @@ namespace MgmtListMethods
     public partial class FakeParentWithNonResCh : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly FakeParentWithNonResChesRestOperations _restClient;
+        private readonly FakeParentWithNonResChesRestOperations _fakeParentWithNonResChesRestClient;
         private readonly FakeParentWithNonResChData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithNonResCh"/> class for mocking. </summary>
@@ -39,7 +39,7 @@ namespace MgmtListMethods
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakeParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakeParentWithNonResChesRestClient = new FakeParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithNonResCh"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtListMethods
         internal FakeParentWithNonResCh(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakeParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakeParentWithNonResChesRestClient = new FakeParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithNonResCh"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtListMethods
         internal FakeParentWithNonResCh(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakeParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakeParentWithNonResChesRestClient = new FakeParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -84,6 +84,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// OperationId: FakeParentWithNonResChes_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<FakeParentWithNonResCh>> GetAsync(CancellationToken cancellationToken = default)
@@ -92,7 +95,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithNonResChesRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -104,6 +107,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// OperationId: FakeParentWithNonResChes_Get
         /// <summary> Retrieves information. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FakeParentWithNonResCh> Get(CancellationToken cancellationToken = default)
@@ -112,7 +118,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _fakeParentWithNonResChesRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -159,7 +165,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeParentWithNonResChesRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -188,7 +194,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var originalResponse = _fakeParentWithNonResChesRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new FakeParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -217,7 +223,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeParentWithNonResChesRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -246,7 +252,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var originalResponse = _fakeParentWithNonResChesRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new FakeParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -274,7 +280,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeParentWithNonResChesRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -302,7 +308,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var originalResponse = _fakeParentWithNonResChesRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new FakeParentWithNonResCh(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -311,15 +317,19 @@ namespace MgmtListMethods
                 throw;
             }
         }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}/nonResourceChild
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// OperationId: FakeParentWithNonResChes_ListNonResourceChild
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<NonResourceChild>>> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<NonResourceChild>>> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithNonResCh.GetNonResourceChild");
             scope.Start();
             try
             {
-                var response = await _restClient.GetNonResourceChildAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithNonResChesRestClient.ListNonResourceChildAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
@@ -329,6 +339,9 @@ namespace MgmtListMethods
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}/nonResourceChild
+        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// OperationId: FakeParentWithNonResChes_ListNonResourceChild
         /// <summary> Lists all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<NonResourceChild>> GetNonResourceChild(CancellationToken cancellationToken = default)
@@ -337,7 +350,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.GetNonResourceChild(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _fakeParentWithNonResChesRestClient.ListNonResourceChild(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)

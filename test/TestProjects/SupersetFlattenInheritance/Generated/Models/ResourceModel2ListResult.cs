@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using Azure.Core;
-using SupersetFlattenInheritance;
 
 namespace SupersetFlattenInheritance.Models
 {
@@ -17,20 +16,20 @@ namespace SupersetFlattenInheritance.Models
         /// <summary> Initializes a new instance of ResourceModel2ListResult. </summary>
         internal ResourceModel2ListResult()
         {
-            Value = new ChangeTrackingList<ResourceModel2Data>();
+            Value = new ChangeTrackingList<ResourceModel2>();
         }
 
         /// <summary> Initializes a new instance of ResourceModel2ListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal ResourceModel2ListResult(IReadOnlyList<ResourceModel2Data> value, string nextLink)
+        internal ResourceModel2ListResult(IReadOnlyList<ResourceModel2> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<ResourceModel2Data> Value { get; }
+        public IReadOnlyList<ResourceModel2> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

@@ -44,7 +44,7 @@ namespace SubscriptionExtensions
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateGetAllRequest(string subscriptionId)
+        internal HttpMessage CreateListRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -64,14 +64,14 @@ namespace SubscriptionExtensions
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        public async Task<Response<ToasterListResult>> GetAllAsync(string subscriptionId, CancellationToken cancellationToken = default)
+        public async Task<Response<ToasterListResult>> ListAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var message = CreateGetAllRequest(subscriptionId);
+            using var message = CreateListRequest(subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -90,14 +90,14 @@ namespace SubscriptionExtensions
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        public Response<ToasterListResult> GetAll(string subscriptionId, CancellationToken cancellationToken = default)
+        public Response<ToasterListResult> List(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var message = CreateGetAllRequest(subscriptionId);
+            using var message = CreateListRequest(subscriptionId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

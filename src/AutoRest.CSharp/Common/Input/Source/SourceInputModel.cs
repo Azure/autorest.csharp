@@ -13,18 +13,19 @@ namespace AutoRest.CSharp.Input.Source
     public class SourceInputModel
     {
         private readonly Compilation _compilation;
-        private readonly INamedTypeSymbol _clientAttribute;
+        private readonly INamedTypeSymbol _typeAttribute;
         private readonly INamedTypeSymbol _modelAttribute;
+        private readonly INamedTypeSymbol _clientAttribute;
         private readonly INamedTypeSymbol _schemaMemberNameAttribute;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
-
 
         public SourceInputModel(Compilation compilation)
         {
             _compilation = compilation;
             _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
-            _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
+            _typeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
             _modelAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenModelAttribute).FullName!)!;
+            _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenClientAttribute).FullName!)!;
 
             IAssemblySymbol assembly = _compilation.Assembly;
 
@@ -57,6 +58,36 @@ namespace AutoRest.CSharp.Input.Source
             return type;
         }
 
+        internal bool TryGetClientSourceInput(INamedTypeSymbol type, [NotNullWhen(true)] out ClientSourceInput? clientSourceInput)
+        {
+            foreach (var attribute in type.GetAttributes())
+            {
+                var attributeType = attribute.AttributeClass;
+                while (attributeType != null)
+                {
+                    if (SymbolEqualityComparer.Default.Equals(attributeType, _clientAttribute))
+                    {
+                        INamedTypeSymbol? parentClientType = null;
+                        foreach ((var argumentName, TypedConstant constant) in attribute.NamedArguments)
+                        {
+                            if (argumentName == nameof(CodeGenClientAttribute.ParentClient))
+                            {
+                                parentClientType = (INamedTypeSymbol?)constant.Value;
+                            }
+                        }
+
+                        clientSourceInput = new ClientSourceInput(parentClientType);
+                        return true;
+                    }
+
+                    attributeType = attributeType.BaseType;
+                }
+            }
+
+            clientSourceInput = null;
+            return false;
+        }
+
         private bool TryGetName(ISymbol symbol, [NotNullWhen(true)] out string? name)
         {
             name = null;
@@ -66,7 +97,7 @@ namespace AutoRest.CSharp.Input.Source
                 var type = attribute.AttributeClass;
                 while (type != null)
                 {
-                    if (SymbolEqualityComparer.Default.Equals(type, _clientAttribute))
+                    if (SymbolEqualityComparer.Default.Equals(type, _typeAttribute))
                     {
                         if (attribute?.ConstructorArguments.Length > 0)
                         {

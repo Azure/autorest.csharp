@@ -32,23 +32,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _choices = choices;
 
-            DefaultName = schema.CSharpName();
             var usage = context.SchemaUsageProvider.GetUsage(schema);
             var hasUsage = usage.HasFlag(SchemaTypeUsage.Model);
+            DefaultName = schema.CSharpName();
+            DefaultNamespace = GetDefaultNamespace(schema, context);
             DefaultAccessibility = schema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
-
-            if (schema.Extensions?.Namespace is string namespaceExtension)
-            {
-                DefaultNamespace = namespaceExtension;
-            }
-            else if (context.Configuration.ModelNamespace)
-            {
-                DefaultNamespace = $"{context.DefaultNamespace}.Models";
-            }
-            else
-            {
-                DefaultNamespace = context.DefaultNamespace;
-            }
 
             if (ExistingType != null)
             {
@@ -69,12 +57,27 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsExtendable = isExtendable;
         }
 
+        private static string GetDefaultNamespace(Schema schema, BuildContext context)
+        {
+            if (schema.Extensions?.Namespace is { } namespaceExtension)
+            {
+                return namespaceExtension;
+            }
+
+            if (context.Configuration.ModelNamespace)
+            {
+                return $"{context.DefaultNamespace}.Models";
+            }
+
+            return context.DefaultNamespace;
+        }
+
         public CSharpType BaseType { get; }
         public bool IsExtendable { get; }
         public string? Description { get; }
         protected override string DefaultName { get; }
-        protected override string DefaultAccessibility { get; }
         protected override string DefaultNamespace { get; }
+        protected override string DefaultAccessibility { get; }
         protected override TypeKind TypeKind => IsExtendable ? TypeKind.Struct : TypeKind.Enum;
 
         public IList<EnumTypeValue> Values => _values ??= BuildValues();

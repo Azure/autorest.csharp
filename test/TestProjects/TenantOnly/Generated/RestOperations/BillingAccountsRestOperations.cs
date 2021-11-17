@@ -41,7 +41,7 @@ namespace TenantOnly
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateGetAllRequest(string expand)
+        internal HttpMessage CreateListRequest(string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -63,9 +63,9 @@ namespace TenantOnly
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<BillingAccountListResult>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<BillingAccountListResult>> ListAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetAllRequest(expand);
+            using var message = CreateListRequest(expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -84,9 +84,9 @@ namespace TenantOnly
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<BillingAccountListResult> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        public Response<BillingAccountListResult> List(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetAllRequest(expand);
+            using var message = CreateListRequest(expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using OmitOperationGroups;
 
 namespace OmitOperationGroups.Models
 {
@@ -16,7 +15,7 @@ namespace OmitOperationGroups.Models
     {
         internal static Model5ListResult DeserializeModel5ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<Model5Data>> value = default;
+            Optional<IReadOnlyList<Model5>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +26,10 @@ namespace OmitOperationGroups.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<Model5Data> array = new List<Model5Data>();
+                    List<Model5> array = new List<Model5>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Model5Data.DeserializeModel5Data(item));
+                        array.Add(Model5.DeserializeModel5(item));
                     }
                     value = array;
                     continue;

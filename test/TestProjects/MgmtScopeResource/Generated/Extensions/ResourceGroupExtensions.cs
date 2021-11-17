@@ -21,5 +21,15 @@ namespace MgmtScopeResource
             return new PolicyAssignmentCollection(resourceGroup);
         }
         #endregion
+
+        #region DeploymentExtended
+        /// <summary> Gets an object representing a DeploymentExtendedCollection along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="DeploymentExtendedCollection" /> object. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroup resourceGroup)
+        {
+            return new DeploymentExtendedCollection(resourceGroup);
+        }
+        #endregion
     }
 }

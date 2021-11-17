@@ -12,13 +12,13 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region PolicyDefinition
-        /// <summary> Gets an object representing a PolicyDefinitionCollection along with the instance operations that can be performed on it. </summary>
+        #region SubscriptionPolicyDefinition
+        /// <summary> Gets an object representing a SubscriptionPolicyDefinitionCollection along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PolicyDefinitionCollection" /> object. </returns>
-        public static PolicyDefinitionCollection GetPolicyDefinitions(this Subscription subscription)
+        /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionCollection" /> object. </returns>
+        public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions(this Subscription subscription)
         {
-            return new PolicyDefinitionCollection(subscription);
+            return new SubscriptionPolicyDefinitionCollection(subscription);
         }
         #endregion
     }
