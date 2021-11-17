@@ -40,7 +40,7 @@
 
   <Target Name="GenerateTest" Condition="'$(_GenerateCode)' == 'true'" >
     <PropertyGroup>
-      <AutoRestInput Condition="Exists('$(MSBuildProjectDirectory)/autorest.test.md')">$(MSBuildProjectDirectory)/autorest.test.md</AutoRestInput>
+      <AutoRestInput Condition="Exists('$(MSBuildProjectDirectory)/autorest.tests.md')">$(MSBuildProjectDirectory)/autorest.tests.md</AutoRestInput>
     </PropertyGroup>
   
     <ReadLinesFromFile File="$(AutoRestInput)">
