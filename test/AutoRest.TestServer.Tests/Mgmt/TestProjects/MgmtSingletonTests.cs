@@ -14,6 +14,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ParentResource", true)]
         [TestCase("SingletonResource", true)]
         [TestCase("SingletonResource2", true)]
+        [TestCase("SingletonResource3", false)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
@@ -47,6 +48,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ParentResource", "GetSingletonResources", false)]
         [TestCase("ParentResource", "GetSingletonResource2", true)]
         [TestCase("ParentResource", "GetSingletonResource2s", false)]
+        [TestCase("ParentResource", "CreateOrUpdateSingletonResources3", true)]
+        [TestCase("ParentResource", "GetSingletonResource3", false)]
         [TestCase("SubscriptionExtensions", "GetSubscriptionParentSingleton", true)]
         [TestCase("SubscriptionExtensions", "GetSubscriptionParentSingletons", false)]
         public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool isExist)

@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class SingletonDetection
     {
-        private static string[] SingletonKeywords = { "default", "latest" };
+        private static string[] SingletonKeywords = { "default", "latest", "current" };
 
         private static ConcurrentDictionary<OperationSet, string?> _singletonResourceCache = new ConcurrentDictionary<OperationSet, string?>();
 

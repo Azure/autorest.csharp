@@ -11,7 +11,7 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "OverrideOperationName": {
-    "FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription": "ListFakeParentWithAncestorWithNonResChWithLocs"
+    "FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription": "GetFakeParentWithAncestorWithNonResChWithLocs"
   },
   "MgmtDebug": {
     "ShowRequestPath": true

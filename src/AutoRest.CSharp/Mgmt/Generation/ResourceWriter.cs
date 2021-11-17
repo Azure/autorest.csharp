@@ -217,7 +217,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             // 2. Listing myself at ancestor scope -> extension method if the ancestor is not in this RP, or follow #3 by listing myself as the children of the ancestor in the operations of the ancestor
             // 3. Listing children (might be resource or not) -> on the operations
 
-            // write all the methods that should belong to this resouce
+            // write all the methods that should belong to this resource
             foreach (var clientOperation in _resource.ClientOperations)
             {
                 WriteMethod(clientOperation, true);

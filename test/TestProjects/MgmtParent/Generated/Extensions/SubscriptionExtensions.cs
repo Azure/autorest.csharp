@@ -44,7 +44,7 @@ namespace MgmtParent
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<AvailabilitySet> GetBySubscriptionAvailabilitySetsAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<AvailabilitySet> GetAvailabilitySetsAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -52,7 +52,7 @@ namespace MgmtParent
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<AvailabilitySet>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -67,7 +67,7 @@ namespace MgmtParent
                 }
                 async Task<Page<AvailabilitySet>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -93,7 +93,7 @@ namespace MgmtParent
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<AvailabilitySet> GetBySubscriptionAvailabilitySets(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        public static Pageable<AvailabilitySet> GetAvailabilitySets(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -101,7 +101,7 @@ namespace MgmtParent
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<AvailabilitySet> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -116,7 +116,7 @@ namespace MgmtParent
                 }
                 Page<AvailabilitySet> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetBySubscriptionAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAvailabilitySets");
                     scope.Start();
                     try
                     {

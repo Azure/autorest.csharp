@@ -255,7 +255,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         var diff = resourceTrimmedPath.TrimAncestorFrom(requestTrimmedPath);
                         key = $"{method}{diff}";
                         contextualPath = GetContextualPath(operationSet, requestPath);
-                        methodName = GetOperationName(operation, resourceRestClient);
+                        methodName = GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                     }
                     // get the MgmtRestOperation with a proper name
                     var restOperation = new MgmtRestOperation(
