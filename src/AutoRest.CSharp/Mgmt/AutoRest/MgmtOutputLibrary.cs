@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var restClientMethod in restClient.Methods)
                 {
-                    // skipp all internal methods
+                    // skip all internal methods
                     if (restClientMethod.Accessibility != "public")
                         continue;
                     _restClientMethods.Add(restClientMethod.Operation, restClientMethod);

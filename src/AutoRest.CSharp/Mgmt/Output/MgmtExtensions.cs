@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     _context.Library.GetRestClient(operation.GetHttpPath()),
                     operation.GetRequestPath(_context),
                     ContextualPath,
-                    GetOperationName(operation, null))));
+                    GetOperationName(operation, ResourceName))));
         }
 
         private IEnumerable<MgmtRestClient>? _restClients;

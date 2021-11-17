@@ -15,6 +15,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtSingleton.Models;
 
 namespace MgmtSingleton
 {
@@ -23,6 +24,7 @@ namespace MgmtSingleton
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ParentResourcesRestOperations _parentResourcesRestClient;
+        private readonly SingletonResources3RestOperations _singletonResources3RestClient;
         private readonly ParentResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class for mocking. </summary>
@@ -39,6 +41,7 @@ namespace MgmtSingleton
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class. </summary>
@@ -48,6 +51,7 @@ namespace MgmtSingleton
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class. </summary>
@@ -60,6 +64,7 @@ namespace MgmtSingleton
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -309,6 +314,62 @@ namespace MgmtSingleton
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _parentResourcesRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ParentResource(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources3/{resourceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
+        /// OperationId: SingletonResources3_CreateOrUpdate
+        /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
+        /// <param name="parameters"> The SingletonResource3 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<Response<SingletonResource3>> CreateOrUpdateSingletonResources3Async(SingletonResource3 parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ParentResource.CreateOrUpdateSingletonResources3");
+            scope.Start();
+            try
+            {
+                var response = await _singletonResources3RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources3/{resourceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
+        /// OperationId: SingletonResources3_CreateOrUpdate
+        /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
+        /// <param name="parameters"> The SingletonResource3 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<SingletonResource3> CreateOrUpdateSingletonResources3(SingletonResource3 parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ParentResource.CreateOrUpdateSingletonResources3");
+            scope.Start();
+            try
+            {
+                var response = _singletonResources3RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {
