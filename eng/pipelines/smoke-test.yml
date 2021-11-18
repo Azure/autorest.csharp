@@ -8,9 +8,9 @@ jobs:
     vmImage: ubuntu-20.04
   steps:
     - task: NodeTool@0
-      displayName: "Install Node 14.x"
+      displayName: "Install Node 1.x"
       inputs:
-        versionSpec: '14.x'
+        versionSpec: '16.x'
     - script: |
         npm ci
       displayName: "Install packages"
