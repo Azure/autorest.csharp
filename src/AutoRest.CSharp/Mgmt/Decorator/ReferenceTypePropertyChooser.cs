@@ -89,7 +89,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         return result;
                     }
                 }
-
             }
             _valueCache.TryAdd(typeToReplace.ObjectSchema, null);
             return null;

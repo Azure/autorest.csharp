@@ -173,7 +173,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateCreateOrUpdateRequest(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime, Models.RequestOptions requestOptions, AccessCondition accessCondition, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -189,16 +189,12 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (accessCondition?.IfMatch != null)
-            {
-                request.Headers.Add("If-Match", accessCondition.IfMatch);
-            }
-            if (accessCondition?.IfNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
-            }
             request.Headers.Add("Prefer", prefer.ToString());
             request.Headers.Add("Accept", "application/json");
+            if (matchConditions != null)
+            {
+                request.Headers.Add(matchConditions);
+            }
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(index);
@@ -213,9 +209,10 @@ namespace CognitiveSearch
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> or <paramref name="index"/> is null. </exception>
-        public async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -226,7 +223,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(index));
             }
 
-            using var message = CreateCreateOrUpdateRequest(indexName, prefer, index, allowIndexDowntime, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(indexName, prefer, index, allowIndexDowntime, requestOptions, accessCondition, matchConditions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -250,9 +247,10 @@ namespace CognitiveSearch
         /// <param name="allowIndexDowntime"> Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> or <paramref name="index"/> is null. </exception>
-        public Response<Models.Index> CreateOrUpdate(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response<Models.Index> CreateOrUpdate(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -263,7 +261,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(index));
             }
 
-            using var message = CreateCreateOrUpdateRequest(indexName, prefer, index, allowIndexDowntime, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(indexName, prefer, index, allowIndexDowntime, requestOptions, accessCondition, matchConditions);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -280,7 +278,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string indexName, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateDeleteRequest(string indexName, Models.RequestOptions requestOptions, AccessCondition accessCondition, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -292,15 +290,11 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (accessCondition?.IfMatch != null)
-            {
-                request.Headers.Add("If-Match", accessCondition.IfMatch);
-            }
-            if (accessCondition?.IfNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
-            }
             request.Headers.Add("Accept", "application/json");
+            if (matchConditions != null)
+            {
+                request.Headers.Add(matchConditions);
+            }
             return message;
         }
 
@@ -308,16 +302,17 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string indexName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string indexName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
                 throw new ArgumentNullException(nameof(indexName));
             }
 
-            using var message = CreateDeleteRequest(indexName, requestOptions, accessCondition);
+            using var message = CreateDeleteRequest(indexName, requestOptions, accessCondition, matchConditions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -333,16 +328,17 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> is null. </exception>
-        public Response Delete(string indexName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response Delete(string indexName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
                 throw new ArgumentNullException(nameof(indexName));
             }
 
-            using var message = CreateDeleteRequest(indexName, requestOptions, accessCondition);
+            using var message = CreateDeleteRequest(indexName, requestOptions, accessCondition, matchConditions);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

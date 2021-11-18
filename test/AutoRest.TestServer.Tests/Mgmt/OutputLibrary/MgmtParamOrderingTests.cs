@@ -4,9 +4,9 @@
 using System;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using NUnit.Framework;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
+using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
@@ -14,25 +14,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public MgmtParamOrderingTests() : base("MgmtParamOrdering") { }
 
-        [Test]
-        public void TestParentComputer()
+        [TestCase("VirtualMachineExtensionImage", "SubscriptionExtensions")]
+        [TestCase("AvailabilitySet", "ResourceGroupExtensions")]
+        [TestCase("DedicatedHost", "DedicatedHostGroup")]
+        public void TestParent(string resourceName, string parentName)
         {
-            var result = Generate("MgmtParamOrdering").Result;
-            var model = result.Model;
-            var context = result.Context;
-            foreach (var operations in model.OperationGroups)
-            {
-                Assert.IsNotNull(operations.ParentResourceType(context.Configuration.MgmtConfiguration));
-                if (operations.Key.Equals("VirtualMachineExtensionImages"))
-                    Assert.AreEqual("subscriptions", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
-                else if (operations.Key.Equals("AvailabilitySets"))
-                    Assert.AreEqual("resourceGroups", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
-                else if (operations.Key.Equals("DedicatedHosts"))
-                    Assert.AreEqual("Microsoft.Compute/hostGroups", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
-            }
+            (_, var context) = Generate("MgmtParamOrdering").Result;
+
+            var resource = context.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
+            Assert.IsNotNull(resource);
+            var parents = resource.Parent(context);
+            Assert.IsTrue(parents.Any(r => r.Type.Name == parentName));
         }
 
-        [TestCase("DedicatedHosts", "CreateOrUpdate", new[] { "subscriptionId", "resourceGroupName", "hostGroupName", "hostName"})]
+        [TestCase("DedicatedHosts", "CreateOrUpdate", new[] { "subscriptionId", "resourceGroupName", "hostGroupName", "hostName" })]
         [TestCase("DedicatedHosts", "Get", new[] { "subscriptionId", "resourceGroupName", "hostGroupName", "hostName" })]
         [TestCase("DedicatedHosts", "Delete", new[] { "subscriptionId", "resourceGroupName", "hostGroupName", "hostName" })]
         [TestCase("DedicatedHostGroups", "CreateOrUpdate", new[] { "subscriptionId", "resourceGroupName", "hostGroupName" })]

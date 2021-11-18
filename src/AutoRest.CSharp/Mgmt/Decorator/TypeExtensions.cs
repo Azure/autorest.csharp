@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             else
             {
-                return type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string));
+                return type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string)) && enumType.IsExtendable;
             };
         }
 
@@ -65,6 +65,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static CSharpType WrapAsync(this CSharpType type, bool isAsync)
         {
             return isAsync ? new CSharpType(typeof(Task<>), type) : type;
+        }
+
+        public static CSharpType WrapAsync(this Type type, bool isAsync)
+        {
+            return new CSharpType(type).WrapAsync(isAsync);
         }
 
         public static CSharpType WrapResponse(this CSharpType type, bool isAsync)

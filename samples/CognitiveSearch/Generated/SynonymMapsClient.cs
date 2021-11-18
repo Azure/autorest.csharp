@@ -44,14 +44,15 @@ namespace CognitiveSearch
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return await RestClient.CreateOrUpdateAsync(synonymMapName, prefer, synonymMap, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateOrUpdateAsync(synonymMapName, prefer, synonymMap, requestOptions, accessCondition, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -66,14 +67,15 @@ namespace CognitiveSearch
         /// <param name="synonymMap"> The definition of the synonym map to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SynonymMap> CreateOrUpdate(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<SynonymMap> CreateOrUpdate(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return RestClient.CreateOrUpdate(synonymMapName, prefer, synonymMap, requestOptions, accessCondition, cancellationToken);
+                return RestClient.CreateOrUpdate(synonymMapName, prefer, synonymMap, requestOptions, accessCondition, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -86,14 +88,15 @@ namespace CognitiveSearch
         /// <param name="synonymMapName"> The name of the synonym map to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string synonymMapName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string synonymMapName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
             scope.Start();
             try
             {
-                return await RestClient.DeleteAsync(synonymMapName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.DeleteAsync(synonymMapName, requestOptions, accessCondition, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -106,14 +109,15 @@ namespace CognitiveSearch
         /// <param name="synonymMapName"> The name of the synonym map to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string synonymMapName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string synonymMapName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
             scope.Start();
             try
             {
-                return RestClient.Delete(synonymMapName, requestOptions, accessCondition, cancellationToken);
+                return RestClient.Delete(synonymMapName, requestOptions, accessCondition, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {

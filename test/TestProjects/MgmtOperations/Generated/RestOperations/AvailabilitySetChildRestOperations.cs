@@ -44,7 +44,7 @@ namespace MgmtOperations
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string availabilitySetName)
+        internal HttpMessage CreateListRequest(string resourceGroupName, string availabilitySetName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -70,7 +70,7 @@ namespace MgmtOperations
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public async Task<Response<AvailabilitySetChildListResult>> GetAllAsync(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySetChildListResult>> ListAsync(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -81,7 +81,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateListRequest(resourceGroupName, availabilitySetName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -102,7 +102,7 @@ namespace MgmtOperations
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public Response<AvailabilitySetChildListResult> GetAll(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySetChildListResult> List(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -113,7 +113,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateGetAllRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateListRequest(resourceGroupName, availabilitySetName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

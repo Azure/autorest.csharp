@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,9 +12,6 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 using NUnit.Framework;
@@ -48,36 +44,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         }
 
         [Test]
-        public void ValidateResourceClassTypesCount()
+        public void ValidateResourceDataCount()
         {
             var result = Generate(_projectName).Result;
             var context = result.Context;
 
             var count = context.Library.ResourceSchemaMap.Count;
-            var singletonCount = context.CodeModel.OperationGroups.Count(
-                c => c.IsSingletonResource(result.Context.Configuration.MgmtConfiguration));
 
-            Assert.AreEqual(count, context.Library.ArmResources.Count() + context.Library.TupleResources.Count(), "Did not find the expected resource count");
-            Assert.AreEqual(count - singletonCount, context.Library.ResourceCollections.Count() + context.Library.TupleResourceCollections.Count(), "Did not find the expected resourceCollections count");
             Assert.AreEqual(count, context.Library.ResourceData.Count(), "Did not find the expected resourceData count");
-        }
-
-        [Test]
-        public void TestTupleResources()
-        {
-            var result = Generate(_projectName).Result;
-            var tupleOperationGroupList = result.Context.Configuration.MgmtConfiguration.OperationGroupIsTuple;
-            foreach (var operationGroup in result.Context.CodeModel.OperationGroups)
-            {
-                if (tupleOperationGroupList.Contains(operationGroup.Key))
-                {
-                    Assert.True(operationGroup.IsTupleResource(result.Context));
-                }
-                else
-                {
-                    Assert.False(operationGroup.IsTupleResource(result.Context));
-                }
-            }
         }
 
         [TestCase("Delete")]
@@ -87,21 +61,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var result = Generate(_projectName).Result;
             var context = result.Context;
 
-            foreach (var resourceOperation in context.Library.ArmResources)
+            foreach (var resource in context.Library.ArmResources)
             {
-                var name = $"{_projectName}.{resourceOperation.Type.Name}";
-                var OperationsType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(OperationsType))
+                var name = $"{_projectName}.{resource.Type.Name}";
+                var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
+                if (IsSingletonOperation(generatedResourceType))
                 {
                     continue;
                 }
 
-                var httpMethodsMap = resourceOperation.OperationGroup.OperationHttpMethodMapping();
-                httpMethodsMap.TryGetValue(HttpMethod.Delete, out var deleteMethods);
-                if (deleteMethods != null && deleteMethods.Count > 0)
+                var deleteOperation = resource.DeleteOperation;
+                if (deleteOperation != null)
                 {
-                    var method = OperationsType.GetMethod(methodName);
-                    Assert.NotNull(method, $"{OperationsType.Name} does not implement the {methodName} method.");
+                    var method = generatedResourceType.GetMethod(methodName);
+                    Assert.NotNull(method, $"{generatedResourceType.Name} does not implement the {methodName} method.");
 
                     Assert.AreEqual(2, method.GetParameters().Length);
                     var param1 = TypeAsserts.HasParameter(method, "waitForCompletion");
@@ -116,21 +89,47 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("GetAsync")]
         public void ValidateGetOverloadMethod(string methodName)
         {
-            var result = Generate(_projectName).Result;
-            var context = result.Context;
+            (_, var context) = Generate(_projectName).Result;
 
-            foreach (var resourceOperation in context.Library.ArmResources)
+            foreach (var resource in context.Library.ArmResources)
             {
-                var name = $"{_projectName}.{resourceOperation.Type.Name}";
-                var OperationsType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(OperationsType))
+                var name = $"{_projectName}.{resource.Type.Name}";
+                var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
+                if (IsSingletonOperation(generatedResourceType))
                 {
                     continue;
                 }
 
-                var restClient = context.Library.GetRestClient(resourceOperation.OperationGroup);
-                var getMethod = restClient.Methods.Where(m => m.Name == "Get" || m.Name == "GetAtScope").FirstOrDefault();
-                Assert.NotNull(getMethod, $"{restClient.Type.Name} does not implement the Get method.");
+                var getOperation = resource.GetOperation;
+                Assert.NotNull(getOperation);
+                var method = generatedResourceType.GetMethod(methodName);
+                Assert.NotNull(method, $"{generatedResourceType.Name} does not implement the {methodName} method.");
+            }
+        }
+
+        [Test]
+        public void ValidateEnumerable()
+        {
+            (_, var context) = Generate(_projectName).Result;
+
+            foreach (var collection in context.Library.ResourceCollections)
+            {
+                // skip this if this collection is in the list-exception configuration
+                if (collection.RequestPaths.Any(path => context.Configuration.MgmtConfiguration.ListException.Contains(path)))
+                    continue;
+                var name = $"{_projectName}.{collection.Type.Name}";
+                var generatedCollectionType = Assembly.GetExecutingAssembly().GetType(name);
+
+                Assert.NotNull(generatedCollectionType.GetInterface("IEnumerable"), $"{generatedCollectionType.Name} did not implement IEnumerable");
+                Assert.NotNull(generatedCollectionType.GetInterface("IEnumerable`1"), $"{generatedCollectionType.Name} did not implement IEnumerable<T>");
+
+                // see if this collection has a Pageable GetAll operation
+                var getAllMethod = generatedCollectionType.GetMethod("GetAll");
+                Assert.NotNull(getAllMethod, $"{collection.Type.Name} should have a GetAll operation");
+                if (getAllMethod.ReturnType.Name == typeof(Azure.Pageable<>).Name)
+                {
+                    Assert.NotNull(generatedCollectionType.GetInterface("IAsyncEnumerable`1"), $"{generatedCollectionType.Name} did not implement IAsyncEnumerable<T>");
+                }
             }
         }
 
@@ -140,38 +139,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             if (propertyInfo == null)
                 return false;
             return type.BaseType == typeof(ArmResource) && propertyInfo.PropertyType == typeof(ArmResource);
-        }
-
-        private Parameter[] GetNonPathParameters(RestClientMethod clientMethod)
-        {
-            var pathParameters = GetPathParameters(clientMethod);
-
-            List<Parameter> nonPathParameters = new List<Parameter>();
-            foreach (Parameter parameter in clientMethod.Parameters)
-            {
-                if (!pathParameters.Contains(parameter))
-                {
-                    nonPathParameters.Add(parameter);
-                }
-            }
-
-            return nonPathParameters.ToArray();
-        }
-
-        private Parameter[] GetPathParameters(RestClientMethod clientMethod)
-        {
-            var pathParameters = clientMethod.Request.PathSegments.Where(m => m.Value.IsConstant == false && m.IsRaw == false);
-            List<Parameter> pathParametersList = new List<Parameter>();
-            foreach (var parameter in clientMethod.Parameters)
-            {
-                if (pathParameters.Any(p => p.Value.Reference.Type.Name == parameter.Type.Name &&
-                p.Value.Reference.Name == parameter.Name))
-                {
-                    pathParametersList.Add(parameter);
-                }
-            }
-
-            return pathParametersList.ToArray();
         }
     }
 }

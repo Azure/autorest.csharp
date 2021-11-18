@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
 {
@@ -68,7 +69,7 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
-        public async Task<Response<Model4Data>> GetDefaultAsync(string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
+        public async Task<Response<Model4>> GetDefaultAsync(string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -85,9 +86,9 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model4Data value = default;
+                        Model4 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Model4Data.DeserializeModel4Data(document.RootElement);
+                        value = Model4.DeserializeModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -99,7 +100,7 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
-        public Response<Model4Data> GetDefault(string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
+        public Response<Model4> GetDefault(string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -116,9 +117,9 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model4Data value = default;
+                        Model4 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Model4Data.DeserializeModel4Data(document.RootElement);
+                        value = Model4.DeserializeModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

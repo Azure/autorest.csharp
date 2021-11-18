@@ -44,14 +44,15 @@ namespace CognitiveSearch
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return await RestClient.CreateOrUpdateAsync(skillsetName, prefer, skillset, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateOrUpdateAsync(skillsetName, prefer, skillset, requestOptions, accessCondition, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -66,14 +67,15 @@ namespace CognitiveSearch
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Skillset> CreateOrUpdate(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<Skillset> CreateOrUpdate(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return RestClient.CreateOrUpdate(skillsetName, prefer, skillset, requestOptions, accessCondition, cancellationToken);
+                return RestClient.CreateOrUpdate(skillsetName, prefer, skillset, requestOptions, accessCondition, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -86,14 +88,15 @@ namespace CognitiveSearch
         /// <param name="skillsetName"> The name of the skillset to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string skillsetName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string skillsetName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Delete");
             scope.Start();
             try
             {
-                return await RestClient.DeleteAsync(skillsetName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+                return await RestClient.DeleteAsync(skillsetName, requestOptions, accessCondition, matchConditions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -106,14 +109,15 @@ namespace CognitiveSearch
         /// <param name="skillsetName"> The name of the skillset to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string skillsetName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string skillsetName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Delete");
             scope.Start();
             try
             {
-                return RestClient.Delete(skillsetName, requestOptions, accessCondition, cancellationToken);
+                return RestClient.Delete(skillsetName, requestOptions, accessCondition, matchConditions, cancellationToken);
             }
             catch (Exception e)
             {

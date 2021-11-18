@@ -20,11 +20,11 @@ using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
 {
-    /// <summary> A class representing collection of Model2 and their operations over a ResourceGroup. </summary>
+    /// <summary> A class representing collection of Model2 and their operations over its parent. </summary>
     public partial class Model2Collection : ArmCollection, IEnumerable<Model2>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly Model2SRestOperations _restClient;
+        private readonly Model2SRestOperations _model2sRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="Model2Collection"/> class for mocking. </summary>
         protected Model2Collection()
@@ -36,17 +36,7 @@ namespace OmitOperationGroups
         internal Model2Collection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-        }
-
-        IEnumerator<Model2> IEnumerable<Model2>.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetAll().Value.GetEnumerator();
+            _model2sRestClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -54,6 +44,9 @@ namespace OmitOperationGroups
 
         // Collection level operations.
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Model2s_CreateOrUpdate
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -74,7 +67,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, model2SName, parameters, cancellationToken);
+                var response = _model2sRestClient.CreateOrUpdate(Id.ResourceGroupName, model2SName, parameters, cancellationToken);
                 var operation = new Model2CreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -87,6 +80,9 @@ namespace OmitOperationGroups
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Model2s_CreateOrUpdate
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
@@ -107,7 +103,7 @@ namespace OmitOperationGroups
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _model2sRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new Model2CreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -120,21 +116,24 @@ namespace OmitOperationGroups
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Model2s_Get
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual Response<Model2> Get(string model2SName, CancellationToken cancellationToken = default)
         {
+            if (model2SName == null)
+            {
+                throw new ArgumentNullException(nameof(model2SName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.Get");
             scope.Start();
             try
             {
-                if (model2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(model2SName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken);
+                var response = _model2sRestClient.Get(Id.ResourceGroupName, model2SName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2(Parent, response.Value), response.GetRawResponse());
@@ -146,21 +145,24 @@ namespace OmitOperationGroups
             }
         }
 
-        /// <summary> Gets details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Model2s_Get
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public async virtual Task<Response<Model2>> GetAsync(string model2SName, CancellationToken cancellationToken = default)
         {
+            if (model2SName == null)
+            {
+                throw new ArgumentNullException(nameof(model2SName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.Get");
             scope.Start();
             try
             {
-                if (model2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(model2SName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _model2sRestClient.GetAsync(Id.ResourceGroupName, model2SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Model2(Parent, response.Value), response.GetRawResponse());
@@ -174,19 +176,20 @@ namespace OmitOperationGroups
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual Response<Model2> GetIfExists(string model2SName, CancellationToken cancellationToken = default)
         {
+            if (model2SName == null)
+            {
+                throw new ArgumentNullException(nameof(model2SName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetIfExists");
             scope.Start();
             try
             {
-                if (model2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(model2SName));
-                }
-
-                var response = _restClient.Get(Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken);
+                var response = _model2sRestClient.Get(Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Model2>(null, response.GetRawResponse())
                     : Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
@@ -200,19 +203,20 @@ namespace OmitOperationGroups
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public async virtual Task<Response<Model2>> GetIfExistsAsync(string model2SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetIfExists");
+            if (model2SName == null)
+            {
+                throw new ArgumentNullException(nameof(model2SName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                if (model2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(model2SName));
-                }
-
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _model2sRestClient.GetAsync(Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Model2>(null, response.GetRawResponse())
                     : Response.FromValue(new Model2(this, response.Value), response.GetRawResponse());
@@ -226,18 +230,19 @@ namespace OmitOperationGroups
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public virtual Response<bool> CheckIfExists(string model2SName, CancellationToken cancellationToken = default)
         {
+            if (model2SName == null)
+            {
+                throw new ArgumentNullException(nameof(model2SName));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.CheckIfExists");
             scope.Start();
             try
             {
-                if (model2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(model2SName));
-                }
-
                 var response = GetIfExists(model2SName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -250,18 +255,19 @@ namespace OmitOperationGroups
 
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         public async virtual Task<Response<bool>> CheckIfExistsAsync(string model2SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model2Collection.CheckIfExists");
+            if (model2SName == null)
+            {
+                throw new ArgumentNullException(nameof(model2SName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("Model2Collection.CheckIfExistsAsync");
             scope.Start();
             try
             {
-                if (model2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(model2SName));
-                }
-
                 var response = await GetIfExistsAsync(model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
@@ -272,15 +278,18 @@ namespace OmitOperationGroups
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Model2s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<Model2>>> GetAllAsync(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<Model2>> GetAll(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetAll");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new Model2(Parent, data)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
+                var response = _model2sRestClient.List(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(value => new Model2(Parent, value)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -289,15 +298,18 @@ namespace OmitOperationGroups
             }
         }
 
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Model2s_List
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Model2>> GetAll(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<IReadOnlyList<Model2>>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Model2Collection.GetAll");
             scope.Start();
             try
             {
-                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new Model2(Parent, data)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
+                var response = await _model2sRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(value => new Model2(Parent, value)).ToArray() as IReadOnlyList<Model2>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -352,7 +364,17 @@ namespace OmitOperationGroups
             }
         }
 
+        IEnumerator<Model2> IEnumerable<Model2>.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetAll().Value.GetEnumerator();
+        }
+
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, Model2, Model2Data> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, Model2, Model2Data> Construct() { }
     }
 }

@@ -10,33 +10,11 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "OperationGroupToResourceType": {
-    "Skus": "Microsoft.Storage/skus",
-    "Usages": "Microsoft.Storage/locations/usages",
-    "BlobContainers": "Microsoft.Storage/storageAccounts/blobServices/containers",
-    "ImmutabilityPolicies": "Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies",
-    "FileShares": "Microsoft.Storage/storageAccounts/fileServices/shares",
-    "PrivateLinkResources": "Microsoft.Storage/storageAccounts/privateLinkResources",
-    "DeletedAccounts": "Microsoft.Storage/deletedAccounts"
-  },
-  "OperationGroupToResource": {
-    "StorageAccounts": "StorageAccount",
-    "DeletedAccounts": "DeletedAccount"
-  },
-  "OperationGroupToParent": {
-    "Skus": "subscriptions",
-    "BlobServices": "Microsoft.Storage/storageAccounts",
-    "BlobContainers": "Microsoft.Storage/storageAccounts/blobServices",
-    "ImmutabilityPolicies": "Microsoft.Storage/storageAccounts/blobServices/containers",
-    "FileShares": "Microsoft.Storage/storageAccounts",
-    "Usages": "subscriptions",
-    "StorageAccounts": "resourceGroups",
-    "PrivateLinkResources": "Microsoft.Storage/storageAccounts"
-  },
-  "OperationGroupToSingletonResource": {
-    "BlobServices": "blobServices/default",
-    "ImmutabilityPolicies": "immutabilityPolicies/default",
-    "FileServices": "fileServices/default",
-    "ManagementPolicies": "managementPolicies/default"
+  "ListException": [
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}"
+  ],
+  "MgmtDebug": {
+    "ShowRequestPath": true
   }
 }

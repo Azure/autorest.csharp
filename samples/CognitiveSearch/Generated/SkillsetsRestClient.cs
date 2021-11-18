@@ -37,7 +37,7 @@ namespace CognitiveSearch
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateCreateOrUpdateRequest(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions, AccessCondition accessCondition, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -49,16 +49,12 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (accessCondition?.IfMatch != null)
-            {
-                request.Headers.Add("If-Match", accessCondition.IfMatch);
-            }
-            if (accessCondition?.IfNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
-            }
             request.Headers.Add("Prefer", prefer.ToString());
             request.Headers.Add("Accept", "application/json");
+            if (matchConditions != null)
+            {
+                request.Headers.Add(matchConditions);
+            }
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(skillset);
@@ -72,9 +68,10 @@ namespace CognitiveSearch
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> or <paramref name="skillset"/> is null. </exception>
-        public async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -85,7 +82,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(skillset));
             }
 
-            using var message = CreateCreateOrUpdateRequest(skillsetName, prefer, skillset, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(skillsetName, prefer, skillset, requestOptions, accessCondition, matchConditions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -108,9 +105,10 @@ namespace CognitiveSearch
         /// <param name="skillset"> The skillset containing one or more skills to create or update in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> or <paramref name="skillset"/> is null. </exception>
-        public Response<Skillset> CreateOrUpdate(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response<Skillset> CreateOrUpdate(string skillsetName, Enum0 prefer, Skillset skillset, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
@@ -121,7 +119,7 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(skillset));
             }
 
-            using var message = CreateCreateOrUpdateRequest(skillsetName, prefer, skillset, requestOptions, accessCondition);
+            using var message = CreateCreateOrUpdateRequest(skillsetName, prefer, skillset, requestOptions, accessCondition, matchConditions);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -138,7 +136,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string skillsetName, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateDeleteRequest(string skillsetName, Models.RequestOptions requestOptions, AccessCondition accessCondition, MatchConditions matchConditions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -150,15 +148,11 @@ namespace CognitiveSearch
             uri.AppendPath("')", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            if (accessCondition?.IfMatch != null)
-            {
-                request.Headers.Add("If-Match", accessCondition.IfMatch);
-            }
-            if (accessCondition?.IfNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
-            }
             request.Headers.Add("Accept", "application/json");
+            if (matchConditions != null)
+            {
+                request.Headers.Add(matchConditions);
+            }
             return message;
         }
 
@@ -166,16 +160,17 @@ namespace CognitiveSearch
         /// <param name="skillsetName"> The name of the skillset to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string skillsetName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string skillsetName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
                 throw new ArgumentNullException(nameof(skillsetName));
             }
 
-            using var message = CreateDeleteRequest(skillsetName, requestOptions, accessCondition);
+            using var message = CreateDeleteRequest(skillsetName, requestOptions, accessCondition, matchConditions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -191,16 +186,17 @@ namespace CognitiveSearch
         /// <param name="skillsetName"> The name of the skillset to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
+        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> is null. </exception>
-        public Response Delete(string skillsetName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response Delete(string skillsetName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
         {
             if (skillsetName == null)
             {
                 throw new ArgumentNullException(nameof(skillsetName));
             }
 
-            using var message = CreateDeleteRequest(skillsetName, requestOptions, accessCondition);
+            using var message = CreateDeleteRequest(skillsetName, requestOptions, accessCondition, matchConditions);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

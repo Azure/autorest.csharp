@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace CollapseRequestConditions
+namespace CollapseRequestCondition_LowLevel
 {
     /// <summary> The RequestConditionCollapse service client. </summary>
     public partial class RequestConditionCollapseClient

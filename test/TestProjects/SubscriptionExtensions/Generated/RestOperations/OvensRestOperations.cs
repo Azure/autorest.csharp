@@ -44,7 +44,7 @@ namespace SubscriptionExtensions
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateGetByResourceGroupRequest(string resourceGroupName, string statusOnly)
+        internal HttpMessage CreateListAllRequest(string resourceGroupName, string statusOnly)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -72,14 +72,14 @@ namespace SubscriptionExtensions
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<OvenListResult>> GetByResourceGroupAsync(string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
+        public async Task<Response<OvenListResult>> ListAllAsync(string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetByResourceGroupRequest(resourceGroupName, statusOnly);
+            using var message = CreateListAllRequest(resourceGroupName, statusOnly);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -100,14 +100,14 @@ namespace SubscriptionExtensions
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<OvenListResult> GetByResourceGroup(string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
+        public Response<OvenListResult> ListAll(string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetByResourceGroupRequest(resourceGroupName, statusOnly);
+            using var message = CreateListAllRequest(resourceGroupName, statusOnly);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -299,7 +299,7 @@ namespace SubscriptionExtensions
             }
         }
 
-        internal HttpMessage CreateGetByResourceGroupNextPageRequest(string nextLink, string resourceGroupName, string statusOnly)
+        internal HttpMessage CreateListAllNextPageRequest(string nextLink, string resourceGroupName, string statusOnly)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -319,7 +319,7 @@ namespace SubscriptionExtensions
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<OvenListResult>> GetByResourceGroupNextPageAsync(string nextLink, string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
+        public async Task<Response<OvenListResult>> ListAllNextPageAsync(string nextLink, string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -330,7 +330,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetByResourceGroupNextPageRequest(nextLink, resourceGroupName, statusOnly);
+            using var message = CreateListAllNextPageRequest(nextLink, resourceGroupName, statusOnly);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -352,7 +352,7 @@ namespace SubscriptionExtensions
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<OvenListResult> GetByResourceGroupNextPage(string nextLink, string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
+        public Response<OvenListResult> ListAllNextPage(string nextLink, string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -363,7 +363,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetByResourceGroupNextPageRequest(nextLink, resourceGroupName, statusOnly);
+            using var message = CreateListAllNextPageRequest(nextLink, resourceGroupName, statusOnly);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

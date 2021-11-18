@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -15,45 +16,39 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class TenantExtensionsWriter : MgmtExtensionWriter
     {
-        private CodeWriter _writer;
-        public TenantExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
+        public TenantExtensionsWriter(CodeWriter writer, Output.MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
         {
-            _writer = writer;
         }
 
         protected override string Description => "A class to add extension methods to Tenant.";
-        protected override string TypeNameOfThis => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Tenant];
         protected override string ExtensionOperationVariableName => "tenant";
 
         protected override Type ExtensionOperationVariableType => typeof(Tenant);
 
-        public override void WriteExtension()
+        public override void Write()
         {
             using (_writer.Namespace(Context.DefaultNamespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{Description}");
                 using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    foreach (var resource in Context.Library.ArmResources)
+                    // Write resource collection entries
+                    WriteChildResourceEntries();
+
+                    // Write RestOperations
+                    foreach (var restClient in _extensions.RestClients)
                     {
-                        if (!resource.OperationGroup.IsAncestorResourceTypeTenant(Context))
-                            continue;
-                        _writer.Line($"#region {resource.Type.Name}");
-                        WriteExtensionGetResourceFromIdMethod(_writer, resource);
-                        _writer.LineRaw("#endregion");
-                        _writer.Line();
+                        WriteGetRestOperations(restClient);
+                    }
+
+                    // Write other orphan operations with the parent of ResourceGroup
+                    foreach (var clientOperation in _extensions.ClientOperations)
+                    {
+                        WriteMethod(clientOperation, true);
+                        WriteMethod(clientOperation, false);
                     }
                 }
             }
-        }
-
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            return true;
-        }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
         }
     }
 }

@@ -25,11 +25,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             Func<string?, bool> f = delegate (string? responseBodyType)
             {
-                if (!_context.Library.TryGetResourceData(OperationGroup, out var resourceData))
+                if (!_context.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
                     return false;
-                if (OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
-                    return false;
-                if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
+                if (!operation.IsGetResourceOperation(responseBodyType, resourceData, _context))
                     return false;
 
                 return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
