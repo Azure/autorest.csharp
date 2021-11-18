@@ -24,26 +24,11 @@ namespace AutoRest.CSharp.Output.Models.Requests
             "Last-Modified",
         };
 
-        private static HashSet<string> ConditionRequstHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "If-Match",
-            "If-None-Match",
-            "If-Modified-Since",
-            "If-Unmodified-Since",
-        };
-
-        private static HashSet<string> MatchConditionRequstHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "If-Match",
-            "If-None-Match"
-        };
         public string Name { get; }
         public ReferenceOrConstant Value { get; }
         public RequestParameterSerializationStyle SerializationStyle { get; }
         public SerializationFormat Format { get; }
         public bool IsContentHeader { get; }
-        public bool IsRequestCondition { get; }
-        public bool IsMatchCondition { get; }
 
         public RequestHeader(string name, ReferenceOrConstant value, RequestParameterSerializationStyle serializationStyle, SerializationFormat format = SerializationFormat.Default)
         {
@@ -52,8 +37,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
             SerializationStyle = serializationStyle;
             Format = format;
             IsContentHeader = ContentHeaders.Contains(name);
-            IsRequestCondition = ConditionRequstHeader.Contains(name);
-            IsMatchCondition = MatchConditionRequstHeader.Contains(name);
         }
     }
 }
