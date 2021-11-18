@@ -13,5 +13,5 @@ mgmt-debug:
   show-request-path: true
 
 override-operation-name:
-  FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription: GetFakeParentWithAncestorWithNonResChWithLocs
+  FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription: GetFakeParentWithAncestorWithNonResourceChWithLoc
 ```
