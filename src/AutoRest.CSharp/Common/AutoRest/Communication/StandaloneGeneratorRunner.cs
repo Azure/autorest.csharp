@@ -46,6 +46,19 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
+        private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, string? value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            var defaultValue = Configuration.GetDefaultOptionStringValue(option);
+            if (defaultValue == null || defaultValue != value)
+            {
+                writer.WriteString(option, value);
+            }
+        }
+
         internal static string SaveConfiguration(Configuration configuration)
         {
             using (var memoryStream = new MemoryStream())
@@ -71,7 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.LowLevelClient, configuration.LowLevelClient);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, configuration.SingleTopLevelClient);
-                    writer.WriteString(nameof(Configuration.ProjectRelativeDirectory), configuration.ProjectRelativeDirectory);
+                    WriteIfNotDefault(writer, Configuration.Options.ProjectRelativeDirectory, configuration.ProjectRelativeDirectory);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -110,6 +123,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
             }
 
+            var hasProjectRelativeDirectory = root.TryGetProperty(Configuration.Options.ProjectRelativeDirectory, out var projectRelativeDirectoryValue);
+
             return new Configuration(
                 Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()),
                 root.GetProperty(nameof(Configuration.Namespace)).GetString(),
@@ -123,8 +138,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
                 ReadOption(root, Configuration.Options.LowLevelClient),
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
-                MgmtConfiguration.LoadConfiguration(root),
-                root.GetProperty(nameof(Configuration.ProjectRelativeDirectory)).GetString()
+                hasProjectRelativeDirectory ? projectRelativeDirectoryValue.GetString() : null,
+                MgmtConfiguration.LoadConfiguration(root)
             );
         }
     }

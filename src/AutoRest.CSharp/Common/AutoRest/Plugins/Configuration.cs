@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public const string ProjectRelativeDirectory = "project-directory-relative-to-output-folder";
         }
 
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool singleTopLevelClient, MgmtConfiguration mgmtConfiguration, string? projectRelativeDirectory)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool singleTopLevelClient, string? projectRelativeDirectory, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -41,8 +41,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;
             SingleTopLevelClient = singleTopLevelClient;
+            ProjectRelativeDirectory = projectRelativeDirectory ?? GetDefaultOptionStringValue(Configuration.Options.ProjectRelativeDirectory);
             MgmtConfiguration = mgmtConfiguration;
-            ProjectRelativeDirectory = projectRelativeDirectory ?? "../";
         }
 
         public string OutputFolder { get; }
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool SingleTopLevelClient { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
-        public string ProjectRelativeDirectory { get; }
+        public string? ProjectRelativeDirectory { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -76,8 +76,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
                 lowLevelClient: GetOptionValue(autoRest, Options.LowLevelClient),
                 singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
-                mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
-                projectRelativeDirectory: autoRest.GetValue<string?>(Options.ProjectRelativeDirectory).GetAwaiter().GetResult()
+                projectRelativeDirectory: autoRest.GetValue<string?>(Options.ProjectRelativeDirectory).GetAwaiter().GetResult(),
+                mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
 
@@ -106,6 +106,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     return false;
                 case Options.SingleTopLevelClient:
                     return false;
+                default:
+                    return null;
+            }
+        }
+
+        public static string? GetDefaultOptionStringValue(string option)
+        {
+            switch (option)
+            {
+                case Options.ProjectRelativeDirectory:
+                    return "../";
                 default:
                     return null;
             }

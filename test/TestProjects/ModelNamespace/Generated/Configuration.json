@@ -8,6 +8,5 @@
   ],
   "public-clients": true,
   "model-namespace": false,
-  "skip-csproj-packagereference": true,
-  "ProjectRelativeDirectory": "../"
+  "skip-csproj-packagereference": true
 }

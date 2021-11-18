@@ -8,6 +8,5 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "low-level-client": true,
-  "ProjectRelativeDirectory": "../"
+  "low-level-client": true
 }
