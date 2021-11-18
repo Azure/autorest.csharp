@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -29,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// We use the <see cref="OperationGroup"/> to get a fully quanlified name for this operation
         /// </summary>
         public OperationGroup OperationGroup => RestClient.OperationGroup;
-        public string OperationId => OperationGroup.Key.IsNullOrEmpty() ? Operation.Language.Default.Name : $"{OperationGroup.Key}_{Operation.Language.Default.Name}";
+        public string OperationId => Operation.OperationId(OperationGroup);
         /// <summary>
         /// The name of this operation
         /// </summary>

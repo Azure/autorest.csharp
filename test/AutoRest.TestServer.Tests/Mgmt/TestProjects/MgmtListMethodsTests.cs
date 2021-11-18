@@ -50,7 +50,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("FakeParentWithAncestorWithNonResChWithLoc", "GetAll", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChWithLocCollection", "GetNonResourceChild", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChWithLoc", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResChWithLocs", true, false)] // TODO -- fix this name
+        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResourceChWithLoc", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorWithNonResChCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestorWithNonResCh", "GetAll", false, false)]
