@@ -11,7 +11,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AppConfiguration.Models;
-using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -355,7 +354,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateGetKeyValueRequest(string key, string label, string acceptDatetime, IEnumerable<Get7ItemsItem> select, MatchConditions matchConditions)
+        internal HttpMessage CreateGetKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -382,11 +381,15 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
-            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
-            if (matchConditions != null)
+            if (ifMatch != null)
             {
-                request.Headers.Add(matchConditions);
+                request.Headers.Add("If-Match", ifMatch);
             }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             return message;
         }
 
@@ -394,18 +397,19 @@ namespace AppConfiguration
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationGetKeyValueHeaders>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, IEnumerable<Get7ItemsItem> select = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationGetKeyValueHeaders>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, select, matchConditions);
+            using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new AppConfigurationGetKeyValueHeaders(message.Response);
             switch (message.Response.Status)
@@ -426,18 +430,19 @@ namespace AppConfiguration
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, AppConfigurationGetKeyValueHeaders> GetKeyValue(string key, string label = null, string acceptDatetime = null, IEnumerable<Get7ItemsItem> select = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, AppConfigurationGetKeyValueHeaders> GetKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, select, matchConditions);
+            using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
             _pipeline.Send(message, cancellationToken);
             var headers = new AppConfigurationGetKeyValueHeaders(message.Response);
             switch (message.Response.Status)
@@ -454,7 +459,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreatePutKeyValueRequest(string key, string label, KeyValue entity, MatchConditions matchConditions)
+        internal HttpMessage CreatePutKeyValueRequest(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -473,11 +478,15 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Sync-Token", syncToken);
             }
-            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
-            if (matchConditions != null)
+            if (ifMatch != null)
             {
-                request.Headers.Add(matchConditions);
+                request.Headers.Add("If-Match", ifMatch);
             }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             if (entity != null)
             {
                 request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
@@ -491,18 +500,19 @@ namespace AppConfiguration
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to create. </param>
         /// <param name="label"> The label of the key-value to create. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationPutKeyValueHeaders>> PutKeyValueAsync(string key, string label = null, KeyValue entity = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationPutKeyValueHeaders>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreatePutKeyValueRequest(key, label, entity, matchConditions);
+            using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new AppConfigurationPutKeyValueHeaders(message.Response);
             switch (message.Response.Status)
@@ -522,18 +532,19 @@ namespace AppConfiguration
         /// <summary> Creates a key-value. </summary>
         /// <param name="key"> The key of the key-value to create. </param>
         /// <param name="label"> The label of the key-value to create. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, AppConfigurationPutKeyValueHeaders> PutKeyValue(string key, string label = null, KeyValue entity = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, AppConfigurationPutKeyValueHeaders> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreatePutKeyValueRequest(key, label, entity, matchConditions);
+            using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
             _pipeline.Send(message, cancellationToken);
             var headers = new AppConfigurationPutKeyValueHeaders(message.Response);
             switch (message.Response.Status)
@@ -550,7 +561,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateDeleteKeyValueRequest(string key, string label, ETag? ifMatch)
+        internal HttpMessage CreateDeleteKeyValueRequest(string key, string label, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -571,7 +582,7 @@ namespace AppConfiguration
             }
             if (ifMatch != null)
             {
-                request.Headers.Add("If-Match", ifMatch.Value);
+                request.Headers.Add("If-Match", ifMatch);
             }
             request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             return message;
@@ -583,7 +594,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationDeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string label = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationDeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -615,7 +626,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, AppConfigurationDeleteKeyValueHeaders> DeleteKeyValue(string key, string label = null, ETag? ifMatch = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, AppConfigurationDeleteKeyValueHeaders> DeleteKeyValue(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -641,7 +652,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateCheckKeyValueRequest(string key, string label, string acceptDatetime, IEnumerable<Head7ItemsItem> select, MatchConditions matchConditions)
+        internal HttpMessage CreateCheckKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -668,9 +679,13 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
-            if (matchConditions != null)
+            if (ifMatch != null)
             {
-                request.Headers.Add(matchConditions);
+                request.Headers.Add("If-Match", ifMatch);
+            }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
             }
             return message;
         }
@@ -679,18 +694,19 @@ namespace AppConfiguration
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<AppConfigurationCheckKeyValueHeaders>> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, IEnumerable<Head7ItemsItem> select = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AppConfigurationCheckKeyValueHeaders>> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, select, matchConditions);
+            using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new AppConfigurationCheckKeyValueHeaders(message.Response);
             switch (message.Response.Status)
@@ -706,18 +722,19 @@ namespace AppConfiguration
         /// <param name="key"> The key of the key-value to retrieve. </param>
         /// <param name="label"> The label of the key-value to retrieve. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<AppConfigurationCheckKeyValueHeaders> CheckKeyValue(string key, string label = null, string acceptDatetime = null, IEnumerable<Head7ItemsItem> select = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AppConfigurationCheckKeyValueHeaders> CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, select, matchConditions);
+            using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
             _pipeline.Send(message, cancellationToken);
             var headers = new AppConfigurationCheckKeyValueHeaders(message.Response);
             switch (message.Response.Status)
@@ -886,7 +903,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreatePutLockRequest(string key, string label, MatchConditions matchConditions)
+        internal HttpMessage CreatePutLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -905,28 +922,33 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Sync-Token", syncToken);
             }
-            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
-            if (matchConditions != null)
+            if (ifMatch != null)
             {
-                request.Headers.Add(matchConditions);
+                request.Headers.Add("If-Match", ifMatch);
             }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             return message;
         }
 
         /// <summary> Locks a key-value. </summary>
         /// <param name="key"> The key of the key-value to lock. </param>
         /// <param name="label"> The label, if any, of the key-value to lock. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationPutLockHeaders>> PutLockAsync(string key, string label = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationPutLockHeaders>> PutLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreatePutLockRequest(key, label, matchConditions);
+            using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new AppConfigurationPutLockHeaders(message.Response);
             switch (message.Response.Status)
@@ -946,17 +968,18 @@ namespace AppConfiguration
         /// <summary> Locks a key-value. </summary>
         /// <param name="key"> The key of the key-value to lock. </param>
         /// <param name="label"> The label, if any, of the key-value to lock. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, AppConfigurationPutLockHeaders> PutLock(string key, string label = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, AppConfigurationPutLockHeaders> PutLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreatePutLockRequest(key, label, matchConditions);
+            using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
             _pipeline.Send(message, cancellationToken);
             var headers = new AppConfigurationPutLockHeaders(message.Response);
             switch (message.Response.Status)
@@ -973,7 +996,7 @@ namespace AppConfiguration
             }
         }
 
-        internal HttpMessage CreateDeleteLockRequest(string key, string label, MatchConditions matchConditions)
+        internal HttpMessage CreateDeleteLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -992,28 +1015,33 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Sync-Token", syncToken);
             }
-            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
-            if (matchConditions != null)
+            if (ifMatch != null)
             {
-                request.Headers.Add(matchConditions);
+                request.Headers.Add("If-Match", ifMatch);
             }
+            if (ifNoneMatch != null)
+            {
+                request.Headers.Add("If-None-Match", ifNoneMatch);
+            }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             return message;
         }
 
         /// <summary> Unlocks a key-value. </summary>
         /// <param name="key"> The key of the key-value to unlock. </param>
         /// <param name="label"> The label, if any, of the key-value to unlock. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationDeleteLockHeaders>> DeleteLockAsync(string key, string label = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<KeyValue, AppConfigurationDeleteLockHeaders>> DeleteLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreateDeleteLockRequest(key, label, matchConditions);
+            using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new AppConfigurationDeleteLockHeaders(message.Response);
             switch (message.Response.Status)
@@ -1033,17 +1061,18 @@ namespace AppConfiguration
         /// <summary> Unlocks a key-value. </summary>
         /// <param name="key"> The key of the key-value to unlock. </param>
         /// <param name="label"> The label, if any, of the key-value to unlock. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, AppConfigurationDeleteLockHeaders> DeleteLock(string key, string label = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<KeyValue, AppConfigurationDeleteLockHeaders> DeleteLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var message = CreateDeleteLockRequest(key, label, matchConditions);
+            using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
             _pipeline.Send(message, cancellationToken);
             var headers = new AppConfigurationDeleteLockHeaders(message.Response);
             switch (message.Response.Status)

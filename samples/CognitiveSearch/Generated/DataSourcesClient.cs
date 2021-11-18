@@ -44,15 +44,14 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return await RestClient.CreateOrUpdateAsync(dataSourceName, prefer, dataSource, requestOptions, accessCondition, matchConditions, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateOrUpdateAsync(dataSourceName, prefer, dataSource, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -67,15 +66,14 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create or update. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
             scope.Start();
             try
             {
-                return RestClient.CreateOrUpdate(dataSourceName, prefer, dataSource, requestOptions, accessCondition, matchConditions, cancellationToken);
+                return RestClient.CreateOrUpdate(dataSourceName, prefer, dataSource, requestOptions, accessCondition, cancellationToken);
             }
             catch (Exception e)
             {
@@ -88,15 +86,14 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string dataSourceName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string dataSourceName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Delete");
             scope.Start();
             try
             {
-                return await RestClient.DeleteAsync(dataSourceName, requestOptions, accessCondition, matchConditions, cancellationToken).ConfigureAwait(false);
+                return await RestClient.DeleteAsync(dataSourceName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -109,15 +106,14 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to delete. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
-        /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string dataSourceName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, MatchConditions matchConditions = null, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string dataSourceName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Delete");
             scope.Start();
             try
             {
-                return RestClient.Delete(dataSourceName, requestOptions, accessCondition, matchConditions, cancellationToken);
+                return RestClient.Delete(dataSourceName, requestOptions, accessCondition, cancellationToken);
             }
             catch (Exception e)
             {
