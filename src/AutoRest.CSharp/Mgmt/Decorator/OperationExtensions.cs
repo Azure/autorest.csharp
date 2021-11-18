@@ -32,9 +32,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var words = originalName.SplitByCamelCase();
             if (!words.First().Equals("List", StringComparison.InvariantCultureIgnoreCase))
                 return originalName;
-            hasSuffix = hasSuffix || words.Count() > 1;
+            words = words.Skip(1); // remove the word List
+            if (words.Any() && words.First().Equals("All", StringComparison.InvariantCultureIgnoreCase))
+                words = words.Skip(1);
+            hasSuffix = hasSuffix || words.Any();
             var wordToReplace = hasSuffix ? "Get" : "GetAll";
-            var replacedWords = wordToReplace.AsIEnumerable().Concat(words.Skip(1));
+            var replacedWords = wordToReplace.AsIEnumerable().Concat(words);
             return string.Join("", replacedWords);
         }
 
