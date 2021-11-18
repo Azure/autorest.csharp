@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return _allOperations.Select(operation => MgmtClientOperation.FromOperation(
                 new MgmtRestOperation(
                     _context.Library.RestClientMethods[operation],
-                    _context.Library.GetRestClient(operation.GetHttpPath()),
+                    _context.Library.GetRestClient(operation),
                     operation.GetRequestPath(_context),
                     ContextualPath,
                     GetOperationName(operation, ResourceName))));

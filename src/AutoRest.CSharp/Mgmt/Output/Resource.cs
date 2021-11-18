@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var requestPath = operation.GetRequestPath(_context);
                     var clientOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
-                        _context.Library.GetRestClient(operation.GetHttpPath()),
+                        _context.Library.GetRestClient(operation),
                         requestPath,
                         GetContextualPath(operationSet, requestPath),
                         name);
@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             foreach ((var operationSet, var operations) in _allOperationMap)
             {
                 var resourceRequestPath = operationSet.GetRequestPath(_context);
-                var resourceRestClient = _context.Library.GetRestClient(resourceRequestPath);
+                var resourceRestClient = _context.Library.GetRestClient(operationSet.First());
                 // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
                 foreach (var operation in operations)
                 {
@@ -260,7 +260,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     // get the MgmtRestOperation with a proper name
                     var restOperation = new MgmtRestOperation(
                         _context.Library.RestClientMethods[operation],
-                        _context.Library.GetRestClient(operation.GetHttpPath()),
+                        _context.Library.GetRestClient(operation),
                         requestPath,
                         contextualPath,
                         methodName);
@@ -314,7 +314,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<MgmtRestClient> EnsureRestClients()
         {
             var childRestClients = ClientOperations.SelectMany(clientOperation => clientOperation.Select(restOperation => restOperation.RestClient)).Distinct();
-            var resourceRestClients = OperationSets.Select(operationSet => _context.Library.GetRestClient(operationSet.RequestPath)).Distinct();
+            var resourceRestClients = OperationSets.SelectMany(operationSet => operationSet.Select(operation => _context.Library.GetRestClient(operation))).Distinct();
 
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
