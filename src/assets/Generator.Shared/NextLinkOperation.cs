@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#nullable enable
+
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -10,54 +12,52 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal class UpdateStatusFromResponseOperation : IOperation
+    internal class NextLinkOperation : IOperation
     {
         private static readonly string[] FailureStates = { "failed", "canceled" };
         private static readonly string[] SuccessStates = { "succeeded" };
-        private static readonly string[] TerminalStates = { "succeeded", "failed", "canceled" };
 
         private readonly HeaderSource _headerSource;
-        private readonly bool _originalHasLocation;
+        private readonly bool _originalResponseHasLocation;
         private readonly Uri _originalUri;
         private readonly OperationFinalStateVia _finalStateVia;
         private readonly RequestMethod _requestMethod;
         private readonly HttpPipeline _pipeline;
-        private readonly OperationState? _initialOperationState;
 
         private string? _lastKnownLocation;
         private string _nextRequestUri;
 
-        public UpdateStatusFromResponseOperation(HttpPipeline pipeline, RequestMethod requestMethod, Uri requestUri, Response response, OperationFinalStateVia finalStateVia)
+        public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri requestUri, Response response, OperationFinalStateVia finalStateVia)
+        {
+            var headerSource = GetHeaderSource(requestMethod, requestUri, response, out var nextRequestUri);
+            if (headerSource == HeaderSource.None && IsTerminalState(response, headerSource, out var failureState))
+            {
+                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
+            }
+
+            var (originalResponseHasLocation, lastKnownLocation) = headerSource == HeaderSource.Location
+                ? (true, nextRequestUri)
+                : response.Headers.TryGetValue("Location", out var locationUri)
+                    ? (true, locationUri)
+                    : (false, null);
+
+            return new NextLinkOperation(pipeline, requestMethod, requestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia);
+        }
+
+        private NextLinkOperation(HttpPipeline pipeline, RequestMethod requestMethod, Uri originalRequestUri, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia)
         {
             _requestMethod = requestMethod;
-            _originalUri = requestUri;
-            _originalHasLocation = _headerSource == HeaderSource.Location;
+            _headerSource = headerSource;
+            _originalUri = originalRequestUri;
+            _nextRequestUri = nextRequestUri;
+            _originalResponseHasLocation = originalResponseHasLocation;
+            _lastKnownLocation = lastKnownLocation;
             _finalStateVia = finalStateVia;
             _pipeline = pipeline;
-
-            _headerSource = GetHeaderSource(requestMethod, requestUri, response, out _nextRequestUri);
-            if (_headerSource == HeaderSource.Location)
-            {
-                _originalHasLocation = true;
-                _lastKnownLocation = _nextRequestUri;
-            }
-
-            if (_headerSource == HeaderSource.None)
-            {
-                if (IsTerminalState(response, _headerSource, out var failureState))
-                {
-                    _initialOperationState = failureState ?? OperationState.Success(response);
-                }
-            }
         }
 
         public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)
         {
-            if (_initialOperationState != null)
-            {
-                return _initialOperationState.Value;
-            }
-
             Response response = await GetResponseAsync(async, _nextRequestUri, cancellationToken).ConfigureAwait(false);
 
             var hasCompleted = IsTerminalState(response, _headerSource, out var failureState);
@@ -74,19 +74,24 @@ namespace Azure.Core
                     ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
                     : response;
 
-                switch (finalResponse.Status)
-                {
-                    case 200:
-                    case 201 when _requestMethod == RequestMethod.Put:
-                    case 204 when _requestMethod != RequestMethod.Put && _requestMethod != RequestMethod.Patch:
-                        return OperationState.Success(finalResponse);
-                    default:
-                        return OperationState.Failure(finalResponse);
-                }
+                return GetOperationStateFromFinalResponse(_requestMethod, finalResponse);
             }
 
             UpdateNextRequestUri(response.Headers);
             return OperationState.Pending(response);
+        }
+
+        private static OperationState GetOperationStateFromFinalResponse(RequestMethod requestMethod, Response response)
+        {
+            switch (response.Status)
+            {
+                case 200:
+                case 201 when requestMethod == RequestMethod.Put:
+                case 204 when requestMethod != RequestMethod.Put && requestMethod != RequestMethod.Patch:
+                    return OperationState.Success(response);
+                default:
+                    return OperationState.Failure(response);
+            }
         }
 
         private void UpdateNextRequestUri(ResponseHeaders headers)
@@ -123,12 +128,12 @@ namespace Azure.Core
                 return null;
             }
 
-            if (_requestMethod == RequestMethod.Put || _originalHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            if (_requestMethod == RequestMethod.Put || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
                 return _originalUri.AbsoluteUri;
             }
 
-            if (_originalHasLocation && _finalStateVia == OperationFinalStateVia.Location)
+            if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.Location)
             {
                 return _lastKnownLocation;
             }
@@ -200,11 +205,6 @@ namespace Azure.Core
                                     return SuccessStates.Contains(state);
                                 }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        OperationState.Failure(response, new RequestFailedException(response.Status, "Response parser error", ex));
-                        return true;
                     }
                     finally
                     {

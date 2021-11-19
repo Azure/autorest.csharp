@@ -1413,7 +1413,7 @@ namespace AutoRest.TestServer.Tests
 
         private static Response WaitForCompletion(Operation operation, CancellationToken cancellationToken = default)
         {
-            return WaitForCompletion(operation, OperationHelpers.DefaultPollingInterval, cancellationToken);
+            return WaitForCompletion(operation, TimeSpan.FromSeconds(1), cancellationToken);
         }
 
         private static Response WaitForCompletion(Operation operation, TimeSpan pollingInterval, CancellationToken cancellationToken = default)
@@ -1432,7 +1432,7 @@ namespace AutoRest.TestServer.Tests
 
         private static Response<TResult> WaitForCompletionWithValue<TResult>(Operation<TResult> operation, CancellationToken cancellationToken = default) where TResult : notnull
         {
-            return WaitForCompletionWithValue(operation, OperationHelpers.DefaultPollingInterval, cancellationToken);
+            return WaitForCompletionWithValue(operation, TimeSpan.FromSeconds(1), cancellationToken);
         }
 
         private static Response<TResult> WaitForCompletionWithValue<TResult>(Operation<TResult> operation, TimeSpan pollingInterval, CancellationToken cancellationToken = default) where TResult : notnull
