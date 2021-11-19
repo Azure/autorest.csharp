@@ -12,14 +12,14 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal class NextLinkOperation : IOperation
+    internal class NextLinkOperationImplementation : IOperation
     {
         private static readonly string[] FailureStates = { "failed", "canceled" };
         private static readonly string[] SuccessStates = { "succeeded" };
 
         private readonly HeaderSource _headerSource;
         private readonly bool _originalResponseHasLocation;
-        private readonly Uri _originalUri;
+        private readonly Uri _startRequestUri;
         private readonly OperationFinalStateVia _finalStateVia;
         private readonly RequestMethod _requestMethod;
         private readonly HttpPipeline _pipeline;
@@ -27,10 +27,10 @@ namespace Azure.Core
         private string? _lastKnownLocation;
         private string _nextRequestUri;
 
-        public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri requestUri, Response response, OperationFinalStateVia finalStateVia)
+        public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
         {
-            var headerSource = GetHeaderSource(requestMethod, requestUri, response, out var nextRequestUri);
-            if (headerSource == HeaderSource.None && IsTerminalState(response, headerSource, out var failureState))
+            var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, out var nextRequestUri);
+            if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
             {
                 return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
             }
@@ -41,14 +41,14 @@ namespace Azure.Core
                     ? (true, locationUri)
                     : (false, null);
 
-            return new NextLinkOperation(pipeline, requestMethod, requestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia);
+            return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia);
         }
 
-        private NextLinkOperation(HttpPipeline pipeline, RequestMethod requestMethod, Uri originalRequestUri, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia)
+        private NextLinkOperationImplementation(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia)
         {
             _requestMethod = requestMethod;
             _headerSource = headerSource;
-            _originalUri = originalRequestUri;
+            _startRequestUri = startRequestUri;
             _nextRequestUri = nextRequestUri;
             _originalResponseHasLocation = originalResponseHasLocation;
             _lastKnownLocation = lastKnownLocation;
@@ -60,7 +60,7 @@ namespace Azure.Core
         {
             Response response = await GetResponseAsync(async, _nextRequestUri, cancellationToken).ConfigureAwait(false);
 
-            var hasCompleted = IsTerminalState(response, _headerSource, out var failureState);
+            var hasCompleted = IsFinalState(response, _headerSource, out var failureState);
             if (failureState != null)
             {
                 return failureState.Value;
@@ -68,7 +68,6 @@ namespace Azure.Core
 
             if (hasCompleted)
             {
-
                 string? finalUri = GetFinalUri();
                 var finalResponse = finalUri != null
                     ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
@@ -130,7 +129,7 @@ namespace Azure.Core
 
             if (_requestMethod == RequestMethod.Put || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
-                return _originalUri.AbsoluteUri;
+                return _startRequestUri.AbsoluteUri;
             }
 
             if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.Location)
@@ -167,13 +166,13 @@ namespace Azure.Core
             }
             else
             {
-                request.Uri.Reset(new Uri(_originalUri, uri));
+                request.Uri.Reset(new Uri(_startRequestUri, uri));
             }
 
             return message;
         }
 
-        private static bool IsTerminalState(Response response, HeaderSource headerSource, out OperationState? failureState)
+        private static bool IsFinalState(Response response, HeaderSource headerSource, out OperationState? failureState)
         {
             failureState = null;
             if (headerSource == HeaderSource.Location)
@@ -264,6 +263,18 @@ namespace Azure.Core
             OperationLocation,
             AzureAsyncOperation,
             Location
+        }
+
+        private class CompletedOperation : IOperation
+        {
+            private readonly OperationState _operationState;
+
+            public CompletedOperation(OperationState operationState)
+            {
+                _operationState = operationState;
+            }
+
+            public ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken) => new(_operationState);
         }
     }
 }

@@ -4,22 +4,23 @@
 #nullable enable
 
 using System;
-using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal class LowLevelFuncOperation<T> : Operation<T> where T : notnull
+    internal class LowLevelFuncOperation<T> : Operation<T>, IOperation<T> where T : notnull
     {
+        private readonly Func<Response, T> _resultSelector;
         private readonly OperationInternal<T> _operation;
+        private readonly IOperation _nextLinkOperation;
 
         internal LowLevelFuncOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
         {
-            var nextLinkOperation = NextLinkOperation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
-            _operation = new OperationInternal<T>(clientDiagnostics, new SelectorOperation<T>(nextLinkOperation, resultSelector), response, scopeName);
+            _resultSelector = resultSelector;
+            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            _operation = new OperationInternal<T>(clientDiagnostics, this, response, scopeName);
         }
 
 #pragma warning disable CA1822
@@ -51,5 +52,21 @@ namespace Azure.Core
 
         /// <inheritdoc />
         public override ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+
+        async ValueTask<OperationState<T>> IOperation<T>.UpdateStateAsync(bool async, CancellationToken cancellationToken)
+        {
+            var state = await _nextLinkOperation.UpdateStateAsync(async, cancellationToken).ConfigureAwait(false);
+            if (state.HasSucceeded)
+            {
+                return OperationState<T>.Success(state.RawResponse, _resultSelector(state.RawResponse));
+            }
+
+            if (state.HasCompleted)
+            {
+                return OperationState<T>.Failure(state.RawResponse, state.OperationFailedException);
+            }
+
+            return OperationState<T>.Pending(state.RawResponse);
+        }
     }
 }

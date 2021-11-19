@@ -28,16 +28,13 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : this(new OperationInternals(clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName))
+            : this(new OperationInternal(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia), originalResponse, scopeName))
         {
         }
 
-        protected OperationOrResponseInternals(OperationInternals operationInternals)
+        protected OperationOrResponseInternals(OperationInternal operationInternal)
         {
-            if (operationInternals is null)
-                throw new ArgumentNullException(nameof(operationInternals));
-
-            Operation = operationInternals;
+            Operation = operationInternal ?? throw new ArgumentNullException(nameof(operationInternal));
         }
 
         public OperationOrResponseInternals(Response response)
@@ -48,7 +45,7 @@ namespace Azure.Core
             VoidResponse = response;
         }
 
-        protected OperationInternals? Operation { get; }
+        protected OperationInternal? Operation { get; }
 
         protected Response? VoidResponse { get; }
 
@@ -63,7 +60,7 @@ namespace Azure.Core
 
         public Response GetRawResponse()
         {
-            return DoesWrapOperation ? Operation!.GetRawResponse() : VoidResponse!;
+            return DoesWrapOperation ? Operation!.RawResponse : VoidResponse!;
         }
 
         public Response UpdateStatus(CancellationToken cancellationToken = default)

@@ -456,19 +456,17 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task LROErrorPut200InvalidJson() => Test(async (host, pipeline) =>
+        public Task LROErrorPut200InvalidJson() => Test((host, pipeline) =>
         {
             var value = new Product();
-            var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPut200InvalidJsonAsync(value);
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.CatchAsync<JsonException>(async () => await (await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPut200InvalidJsonAsync(value)).WaitForCompletionAsync());
         });
 
         [Test]
         public Task LROErrorPut200InvalidJson_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
-            var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPut200InvalidJson(value);
-            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
+            Assert.Catch<JsonException>(() => WaitForCompletion(new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPut200InvalidJson(value)));
         });
 
         [Test]
