@@ -53,7 +53,7 @@ namespace Azure.Analytics.Purview.Account
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
             _apiVersion = options.Version;
         }
@@ -154,7 +154,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetAccountPropertiesRequest();
+                using HttpMessage message = CreateGetAccountPropertiesRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -260,7 +260,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetAccountPropertiesRequest();
+                using HttpMessage message = CreateGetAccountPropertiesRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -373,7 +373,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateAccountPropertiesRequest(content);
+                using HttpMessage message = CreateUpdateAccountPropertiesRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -486,7 +486,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateUpdateAccountPropertiesRequest(content);
+                using HttpMessage message = CreateUpdateAccountPropertiesRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -532,7 +532,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetAccessKeysRequest();
+                using HttpMessage message = CreateGetAccessKeysRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -578,7 +578,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetAccessKeysRequest();
+                using HttpMessage message = CreateGetAccessKeysRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -631,7 +631,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRegenerateAccessKeyRequest(content);
+                using HttpMessage message = CreateRegenerateAccessKeyRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -684,7 +684,7 @@ namespace Azure.Analytics.Purview.Account
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRegenerateAccessKeyRequest(content);
+                using HttpMessage message = CreateRegenerateAccessKeyRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -752,9 +752,9 @@ namespace Azure.Analytics.Purview.Account
             {
                 do
                 {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetCollectionsRequest(skipToken)
-                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken);
+                    using HttpMessage message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetCollectionsRequest(skipToken, context)
+                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -820,9 +820,9 @@ namespace Azure.Analytics.Purview.Account
             {
                 do
                 {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetCollectionsRequest(skipToken)
-                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken);
+                    using HttpMessage message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetCollectionsRequest(skipToken, context)
+                        : CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -962,9 +962,9 @@ namespace Azure.Analytics.Purview.Account
             {
                 do
                 {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetResourceSetRulesRequest(skipToken)
-                        : CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken);
+                    using HttpMessage message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetResourceSetRulesRequest(skipToken, context)
+                        : CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken, context);
                     var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1104,9 +1104,9 @@ namespace Azure.Analytics.Purview.Account
             {
                 do
                 {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetResourceSetRulesRequest(skipToken)
-                        : CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken);
+                    using HttpMessage message = string.IsNullOrEmpty(nextLink)
+                        ? CreateGetResourceSetRulesRequest(skipToken, context)
+                        : CreateGetResourceSetRulesNextPageRequest(nextLink, skipToken, context);
                     var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
@@ -1135,9 +1135,9 @@ namespace Azure.Analytics.Purview.Account
             return Volatile.Read(ref _cachedPurviewAccountResourceSetRules) ?? Interlocked.CompareExchange(ref _cachedPurviewAccountResourceSetRules, new PurviewAccountResourceSetRules(_clientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedPurviewAccountResourceSetRules;
         }
 
-        internal HttpMessage CreateGetAccountPropertiesRequest()
+        internal HttpMessage CreateGetAccountPropertiesRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1150,9 +1150,9 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateUpdateAccountPropertiesRequest(RequestContent content)
+        internal HttpMessage CreateUpdateAccountPropertiesRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1167,9 +1167,9 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetAccessKeysRequest()
+        internal HttpMessage CreateGetAccessKeysRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1182,9 +1182,9 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateRegenerateAccessKeyRequest(RequestContent content)
+        internal HttpMessage CreateRegenerateAccessKeyRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1199,9 +1199,9 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetCollectionsRequest(string skipToken)
+        internal HttpMessage CreateGetCollectionsRequest(string skipToken, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1218,9 +1218,9 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetResourceSetRulesRequest(string skipToken)
+        internal HttpMessage CreateGetResourceSetRulesRequest(string skipToken, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1237,9 +1237,9 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetCollectionsNextPageRequest(string nextLink, string skipToken)
+        internal HttpMessage CreateGetCollectionsNextPageRequest(string nextLink, string skipToken, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1251,9 +1251,9 @@ namespace Azure.Analytics.Purview.Account
             return message;
         }
 
-        internal HttpMessage CreateGetResourceSetRulesNextPageRequest(string nextLink, string skipToken)
+        internal HttpMessage CreateGetResourceSetRulesNextPageRequest(string nextLink, string skipToken, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

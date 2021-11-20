@@ -47,7 +47,7 @@ namespace url_multi_collectionFormat_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -71,7 +71,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -101,7 +101,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -131,7 +131,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -161,7 +161,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -191,7 +191,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -221,7 +221,7 @@ namespace url_multi_collectionFormat_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
+                using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -231,9 +231,9 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -252,9 +252,9 @@ namespace url_multi_collectionFormat_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -273,9 +273,9 @@ namespace url_multi_collectionFormat_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery)
+        internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

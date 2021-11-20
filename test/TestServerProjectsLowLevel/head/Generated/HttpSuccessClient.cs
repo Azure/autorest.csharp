@@ -46,7 +46,7 @@ namespace head_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -60,7 +60,7 @@ namespace head_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead200Request();
+                using HttpMessage message = CreateHead200Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace head_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead200Request();
+                using HttpMessage message = CreateHead200Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -100,7 +100,7 @@ namespace head_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead204Request();
+                using HttpMessage message = CreateHead204Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace head_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead204Request();
+                using HttpMessage message = CreateHead204Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -140,7 +140,7 @@ namespace head_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead404Request();
+                using HttpMessage message = CreateHead404Request(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -160,7 +160,7 @@ namespace head_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead404Request();
+                using HttpMessage message = CreateHead404Request(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -170,9 +170,9 @@ namespace head_LowLevel
             }
         }
 
-        internal HttpMessage CreateHead200Request()
+        internal HttpMessage CreateHead200Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -183,9 +183,9 @@ namespace head_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead204Request()
+        internal HttpMessage CreateHead204Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -196,9 +196,9 @@ namespace head_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateHead404Request()
+        internal HttpMessage CreateHead404Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();

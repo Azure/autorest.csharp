@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", null, null, UseUserAgentOverride());
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, clientMethod.Parameters, "internal", null, null, UseUserAgentOverride(), false);
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)

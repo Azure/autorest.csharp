@@ -47,7 +47,7 @@ namespace body_complex_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
             _apiVersion = options.Version;
         }
@@ -78,7 +78,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
+                using HttpMessage message = CreateGetValidRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -114,7 +114,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
+                using HttpMessage message = CreateGetValidRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -152,7 +152,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
+                using HttpMessage message = CreatePutValidRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -190,7 +190,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
+                using HttpMessage message = CreatePutValidRequest(content, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -226,7 +226,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetInvalidRequest();
+                using HttpMessage message = CreateGetInvalidRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -262,7 +262,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetInvalidRequest();
+                using HttpMessage message = CreateGetInvalidRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -298,7 +298,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest();
+                using HttpMessage message = CreateGetEmptyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -334,7 +334,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest();
+                using HttpMessage message = CreateGetEmptyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -370,7 +370,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNullRequest();
+                using HttpMessage message = CreateGetNullRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -406,7 +406,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNullRequest();
+                using HttpMessage message = CreateGetNullRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -442,7 +442,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotProvidedRequest();
+                using HttpMessage message = CreateGetNotProvidedRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -478,7 +478,7 @@ namespace body_complex_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotProvidedRequest();
+                using HttpMessage message = CreateGetNotProvidedRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -488,9 +488,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetValidRequest()
+        internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -502,9 +502,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePutValidRequest(RequestContent content)
+        internal HttpMessage CreatePutValidRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -519,9 +519,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetInvalidRequest()
+        internal HttpMessage CreateGetInvalidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -533,9 +533,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetEmptyRequest()
+        internal HttpMessage CreateGetEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -547,9 +547,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNullRequest()
+        internal HttpMessage CreateGetNullRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -561,9 +561,9 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetNotProvidedRequest()
+        internal HttpMessage CreateGetNotProvidedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

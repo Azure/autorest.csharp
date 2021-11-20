@@ -82,7 +82,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         var responseClassifierType = CreateResponseClassifierType(method);
                         responseClassifierTypes.Add(responseClassifierType);
-                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", fieldNames, responseClassifierType.Name, false);
+                        var parameters = method.Parameters.Append(RequestContextParameter).ToArray();
+                        RequestWriterHelpers.WriteRequestCreation(writer, method, parameters, "internal", fieldNames, responseClassifierType.Name, false, context.Configuration.LowLevelClient);
                     }
 
                     foreach ((string name, StatusCodes[] statusCodes) in responseClassifierTypes.Distinct())
@@ -142,7 +143,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
                 writer.Line($"{client.ClientDiagnosticsField.Name:I} = new {client.ClientDiagnosticsField.Type}({clientOptionsParameter.Name:I});");
 
-                FormattableString perCallPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{ new {typeof(LowLevelCallbackPolicy)}()}}";
+                FormattableString perCallPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{ }}";
                 FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
 
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
@@ -219,7 +220,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
-                    writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});");
+                    var parameters = restMethod.Parameters.Append(RequestContextParameter).ToArray();
+                    writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({parameters.GetIdentifiersFormattable()});");
 
                     var methodName = async
                         ? headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessageAsync)
@@ -257,11 +259,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     var messageVariable = new CodeWriterDeclaration("message");
                     var pageVariable = new CodeWriterDeclaration("page");
                     FormattableString processMessageMethodParameters = $"{PipelineField:I}, {messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
+                    var parameters = method.Parameters.Append(RequestContextParameter).ToArray();
 
                     if (nextPageMethod == null)
                     {
                         writer
-                            .Line($"using var {messageVariable:D} = Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()});")
+                            .Line($"using {typeof(HttpMessage)} {messageVariable:D} = Create{method.Name}Request({parameters.GetIdentifiersFormattable()});")
                             .Append($"var {pageVariable:D} = ").WriteMethodCall(async, PageableProcessMessageMethodAsyncName, PageableProcessMessageMethodName, processMessageMethodParameters)
                             .Line($"yield return {pageVariable};");
                         return;
@@ -271,14 +274,15 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (method != nextPageMethod)
                         {
+                            var nextPageParameters = nextPageMethod.Parameters.Append(RequestContextParameter).ToArray();
                             writer
-                                .Line($"var {messageVariable:D} = string.IsNullOrEmpty(nextLink)")
-                                .Line($"    ? Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()})")
-                                .Line($"    : Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
+                                .Line($"using {typeof(HttpMessage)} {messageVariable:D} = string.IsNullOrEmpty(nextLink)")
+                                .Line($"    ? {RequestWriterHelpers.CreateRequestMethodName(method.Name)}({parameters.GetIdentifiersFormattable()})")
+                                .Line($"    : {RequestWriterHelpers.CreateRequestMethodName(nextPageMethod.Name)}({nextPageParameters.GetIdentifiersFormattable()});");
                         }
                         else
                         {
-                            writer.Line($"var {messageVariable:D} = Create{method.Name}Request({method.Parameters.GetIdentifiersFormattable()});");
+                            writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = Create{method.Name}Request({parameters.GetIdentifiersFormattable()});");
                         }
 
                         writer
@@ -317,8 +321,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         ? (FormattableString)$"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {RequestContextParameter.Name:I}, {createEnumerableMethod:D}"
                         : (FormattableString)$"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {RequestContextParameter.Name:I}";
 
+                    var parameters = startMethod.Parameters.Append(RequestContextParameter).ToArray();
                     writer
-                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
+                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({parameters.GetIdentifiersFormattable()});")
                         .AppendRaw("return ")
                         .WriteMethodCall(async, LroProcessMessageMethodAsyncName, LroProcessMessageMethodName, processMessageParameters);
                 }
@@ -349,7 +354,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (writer.Scope($"while (!string.IsNullOrEmpty({NextLinkParameter.Name}))"))
                         {
                             var messageVariable = new CodeWriterDeclaration("message");
-                            writer.Line($"var {messageVariable:D} = Create{nextPageMethod.Name}Request({nextPageMethod.Parameters.GetIdentifiersFormattable()});");
+                            var nextPageParameters = nextPageMethod.Parameters.Append(RequestContextParameter).ToArray();
+                            writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(nextPageMethod.Name)}({nextPageParameters.GetIdentifiersFormattable()});");
 
                             FormattableString pageableProcessMessageParameters = $"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {RequestContextParameter.Name:I}, {pagingResponseInfo.ItemName:L}, {pagingResponseInfo.NextLinkName:L}{(async ? $", {EnumeratorCancellationTokenParameter.Name:I}" : "")}";
 

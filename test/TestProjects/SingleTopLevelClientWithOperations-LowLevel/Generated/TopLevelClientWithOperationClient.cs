@@ -47,7 +47,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -60,7 +60,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest();
+                using HttpMessage message = CreateOperationRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -79,7 +79,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOperationRequest();
+                using HttpMessage message = CreateOperationRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -104,9 +104,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(_clientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient2;
         }
 
-        internal HttpMessage CreateOperationRequest()
+        internal HttpMessage CreateOperationRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

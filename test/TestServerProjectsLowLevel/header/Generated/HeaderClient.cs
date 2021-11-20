@@ -46,7 +46,7 @@ namespace header_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -71,7 +71,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamExistingKeyRequest(userAgent);
+                using HttpMessage message = CreateParamExistingKeyRequest(userAgent, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,7 +102,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamExistingKeyRequest(userAgent);
+                using HttpMessage message = CreateParamExistingKeyRequest(userAgent, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -131,7 +131,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseExistingKeyRequest();
+                using HttpMessage message = CreateResponseExistingKeyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -160,7 +160,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseExistingKeyRequest();
+                using HttpMessage message = CreateResponseExistingKeyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -191,7 +191,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamProtectedKeyRequest(contentType);
+                using HttpMessage message = CreateParamProtectedKeyRequest(contentType, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -222,7 +222,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamProtectedKeyRequest(contentType);
+                using HttpMessage message = CreateParamProtectedKeyRequest(contentType, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -251,7 +251,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseProtectedKeyRequest();
+                using HttpMessage message = CreateResponseProtectedKeyRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -280,7 +280,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseProtectedKeyRequest();
+                using HttpMessage message = CreateResponseProtectedKeyRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -312,7 +312,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamIntegerRequest(scenario, value);
+                using HttpMessage message = CreateParamIntegerRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -344,7 +344,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamIntegerRequest(scenario, value);
+                using HttpMessage message = CreateParamIntegerRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -375,7 +375,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseIntegerRequest(scenario);
+                using HttpMessage message = CreateResponseIntegerRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -406,7 +406,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseIntegerRequest(scenario);
+                using HttpMessage message = CreateResponseIntegerRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -438,7 +438,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamLongRequest(scenario, value);
+                using HttpMessage message = CreateParamLongRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -470,7 +470,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamLongRequest(scenario, value);
+                using HttpMessage message = CreateParamLongRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -501,7 +501,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseLongRequest(scenario);
+                using HttpMessage message = CreateResponseLongRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -532,7 +532,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseLongRequest(scenario);
+                using HttpMessage message = CreateResponseLongRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -564,7 +564,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamFloatRequest(scenario, value);
+                using HttpMessage message = CreateParamFloatRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -596,7 +596,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamFloatRequest(scenario, value);
+                using HttpMessage message = CreateParamFloatRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -627,7 +627,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseFloatRequest(scenario);
+                using HttpMessage message = CreateResponseFloatRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -658,7 +658,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseFloatRequest(scenario);
+                using HttpMessage message = CreateResponseFloatRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -690,7 +690,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDoubleRequest(scenario, value);
+                using HttpMessage message = CreateParamDoubleRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -722,7 +722,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDoubleRequest(scenario, value);
+                using HttpMessage message = CreateParamDoubleRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -753,7 +753,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDoubleRequest(scenario);
+                using HttpMessage message = CreateResponseDoubleRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -784,7 +784,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDoubleRequest(scenario);
+                using HttpMessage message = CreateResponseDoubleRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -816,7 +816,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamBoolRequest(scenario, value);
+                using HttpMessage message = CreateParamBoolRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -848,7 +848,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamBoolRequest(scenario, value);
+                using HttpMessage message = CreateParamBoolRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -879,7 +879,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseBoolRequest(scenario);
+                using HttpMessage message = CreateResponseBoolRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -910,7 +910,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseBoolRequest(scenario);
+                using HttpMessage message = CreateResponseBoolRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -942,7 +942,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamStringRequest(scenario, value);
+                using HttpMessage message = CreateParamStringRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -974,7 +974,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamStringRequest(scenario, value);
+                using HttpMessage message = CreateParamStringRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1005,7 +1005,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseStringRequest(scenario);
+                using HttpMessage message = CreateResponseStringRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1036,7 +1036,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseStringRequest(scenario);
+                using HttpMessage message = CreateResponseStringRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1068,7 +1068,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDateRequest(scenario, value);
+                using HttpMessage message = CreateParamDateRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1100,7 +1100,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDateRequest(scenario, value);
+                using HttpMessage message = CreateParamDateRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1131,7 +1131,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDateRequest(scenario);
+                using HttpMessage message = CreateResponseDateRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1162,7 +1162,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDateRequest(scenario);
+                using HttpMessage message = CreateResponseDateRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1194,7 +1194,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDatetimeRequest(scenario, value);
+                using HttpMessage message = CreateParamDatetimeRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1226,7 +1226,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDatetimeRequest(scenario, value);
+                using HttpMessage message = CreateParamDatetimeRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1257,7 +1257,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDatetimeRequest(scenario);
+                using HttpMessage message = CreateResponseDatetimeRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1288,7 +1288,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDatetimeRequest(scenario);
+                using HttpMessage message = CreateResponseDatetimeRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1320,7 +1320,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value);
+                using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1352,7 +1352,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value);
+                using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1383,7 +1383,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario);
+                using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1414,7 +1414,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario);
+                using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1446,7 +1446,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDurationRequest(scenario, value);
+                using HttpMessage message = CreateParamDurationRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1478,7 +1478,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamDurationRequest(scenario, value);
+                using HttpMessage message = CreateParamDurationRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1509,7 +1509,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDurationRequest(scenario);
+                using HttpMessage message = CreateResponseDurationRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1540,7 +1540,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseDurationRequest(scenario);
+                using HttpMessage message = CreateResponseDurationRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1572,7 +1572,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamByteRequest(scenario, value);
+                using HttpMessage message = CreateParamByteRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1604,7 +1604,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamByteRequest(scenario, value);
+                using HttpMessage message = CreateParamByteRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1635,7 +1635,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseByteRequest(scenario);
+                using HttpMessage message = CreateResponseByteRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1666,7 +1666,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseByteRequest(scenario);
+                using HttpMessage message = CreateResponseByteRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1698,7 +1698,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamEnumRequest(scenario, value);
+                using HttpMessage message = CreateParamEnumRequest(scenario, value, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1730,7 +1730,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateParamEnumRequest(scenario, value);
+                using HttpMessage message = CreateParamEnumRequest(scenario, value, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1761,7 +1761,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseEnumRequest(scenario);
+                using HttpMessage message = CreateResponseEnumRequest(scenario, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1792,7 +1792,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateResponseEnumRequest(scenario);
+                using HttpMessage message = CreateResponseEnumRequest(scenario, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1821,7 +1821,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCustomRequestIdRequest();
+                using HttpMessage message = CreateCustomRequestIdRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1850,7 +1850,7 @@ namespace header_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCustomRequestIdRequest();
+                using HttpMessage message = CreateCustomRequestIdRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -1860,9 +1860,9 @@ namespace header_LowLevel
             }
         }
 
-        internal HttpMessage CreateParamExistingKeyRequest(string userAgent)
+        internal HttpMessage CreateParamExistingKeyRequest(string userAgent, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1875,9 +1875,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseExistingKeyRequest()
+        internal HttpMessage CreateResponseExistingKeyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1889,9 +1889,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamProtectedKeyRequest(string contentType)
+        internal HttpMessage CreateParamProtectedKeyRequest(string contentType, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1903,9 +1903,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseProtectedKeyRequest()
+        internal HttpMessage CreateResponseProtectedKeyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1917,9 +1917,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamIntegerRequest(string scenario, int value)
+        internal HttpMessage CreateParamIntegerRequest(string scenario, int value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1933,9 +1933,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseIntegerRequest(string scenario)
+        internal HttpMessage CreateResponseIntegerRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1948,9 +1948,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamLongRequest(string scenario, long value)
+        internal HttpMessage CreateParamLongRequest(string scenario, long value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1964,9 +1964,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseLongRequest(string scenario)
+        internal HttpMessage CreateResponseLongRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1979,9 +1979,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamFloatRequest(string scenario, float value)
+        internal HttpMessage CreateParamFloatRequest(string scenario, float value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1995,9 +1995,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseFloatRequest(string scenario)
+        internal HttpMessage CreateResponseFloatRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2010,9 +2010,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamDoubleRequest(string scenario, double value)
+        internal HttpMessage CreateParamDoubleRequest(string scenario, double value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2026,9 +2026,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseDoubleRequest(string scenario)
+        internal HttpMessage CreateResponseDoubleRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2041,9 +2041,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamBoolRequest(string scenario, bool value)
+        internal HttpMessage CreateParamBoolRequest(string scenario, bool value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2057,9 +2057,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseBoolRequest(string scenario)
+        internal HttpMessage CreateResponseBoolRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2072,9 +2072,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamStringRequest(string scenario, string value)
+        internal HttpMessage CreateParamStringRequest(string scenario, string value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2091,9 +2091,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseStringRequest(string scenario)
+        internal HttpMessage CreateResponseStringRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2106,9 +2106,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value)
+        internal HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2122,9 +2122,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseDateRequest(string scenario)
+        internal HttpMessage CreateResponseDateRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2137,9 +2137,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
+        internal HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2153,9 +2153,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseDatetimeRequest(string scenario)
+        internal HttpMessage CreateResponseDatetimeRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2168,9 +2168,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value)
+        internal HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2187,9 +2187,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseDatetimeRfc1123Request(string scenario)
+        internal HttpMessage CreateResponseDatetimeRfc1123Request(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2202,9 +2202,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value)
+        internal HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2218,9 +2218,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseDurationRequest(string scenario)
+        internal HttpMessage CreateResponseDurationRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2233,9 +2233,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamByteRequest(string scenario, byte[] value)
+        internal HttpMessage CreateParamByteRequest(string scenario, byte[] value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2249,9 +2249,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseByteRequest(string scenario)
+        internal HttpMessage CreateResponseByteRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2264,9 +2264,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateParamEnumRequest(string scenario, string value)
+        internal HttpMessage CreateParamEnumRequest(string scenario, string value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2283,9 +2283,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateResponseEnumRequest(string scenario)
+        internal HttpMessage CreateResponseEnumRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2298,9 +2298,9 @@ namespace header_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateCustomRequestIdRequest()
+        internal HttpMessage CreateCustomRequestIdRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();

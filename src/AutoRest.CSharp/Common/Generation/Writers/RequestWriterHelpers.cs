@@ -18,10 +18,9 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, IReadOnlyDictionary<string, string>? fieldNames, string? responseClassifierType, bool writeUserAgentOverride)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, Parameter[] parameters, string methodAccessibility, IReadOnlyDictionary<string, string>? fieldNames, string? responseClassifierType, bool writeUserAgentOverride, bool isLowLovelClientRequest)
         {
             using var methodScope = writer.AmbientScope();
-            var parameters = clientMethod.Parameters;
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
             writer.Append($"{methodAccessibility} {typeof(HttpMessage)} {methodName}(");
@@ -37,7 +36,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                writer.Line($"var {message:D} = _pipeline.CreateMessage();");
+                writer.Append($"var {message:D} = _pipeline.CreateMessage(");
+                if (isLowLovelClientRequest)
+                {
+                    writer.Append($"{parameters[parameters.Length-1].Name:I}");
+                }
+                writer.Line($");");
                 writer.Line($"var {request:D} = {message}.Request;");
 
                 var method = clientMethod.Request.HttpMethod;

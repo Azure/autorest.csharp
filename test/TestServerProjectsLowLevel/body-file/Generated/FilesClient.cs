@@ -46,7 +46,7 @@ namespace body_file_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -69,7 +69,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFileRequest();
+                using HttpMessage message = CreateGetFileRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -98,7 +98,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFileRequest();
+                using HttpMessage message = CreateGetFileRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -127,7 +127,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFileLargeRequest();
+                using HttpMessage message = CreateGetFileLargeRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -156,7 +156,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFileLargeRequest();
+                using HttpMessage message = CreateGetFileLargeRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -185,7 +185,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyFileRequest();
+                using HttpMessage message = CreateGetEmptyFileRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -214,7 +214,7 @@ namespace body_file_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyFileRequest();
+                using HttpMessage message = CreateGetEmptyFileRequest(context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -224,9 +224,9 @@ namespace body_file_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetFileRequest()
+        internal HttpMessage CreateGetFileRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
@@ -239,9 +239,9 @@ namespace body_file_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetFileLargeRequest()
+        internal HttpMessage CreateGetFileLargeRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
@@ -254,9 +254,9 @@ namespace body_file_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetEmptyFileRequest()
+        internal HttpMessage CreateGetEmptyFileRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;

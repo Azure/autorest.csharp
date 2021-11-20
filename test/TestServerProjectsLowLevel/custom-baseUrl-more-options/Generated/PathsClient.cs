@@ -55,7 +55,7 @@ namespace custom_baseUrl_more_options_LowLevel
 
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _subscriptionId = subscriptionId;
             _dnsSuffix = dnsSuffix;
         }
@@ -84,7 +84,7 @@ namespace custom_baseUrl_more_options_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion);
+                using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
                 return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace custom_baseUrl_more_options_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion);
+                using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
                 return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
             }
             catch (Exception e)
@@ -128,9 +128,9 @@ namespace custom_baseUrl_more_options_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion)
+        internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
