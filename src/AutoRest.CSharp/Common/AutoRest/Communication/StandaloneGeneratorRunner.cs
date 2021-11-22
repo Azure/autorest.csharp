@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.LowLevelClient, configuration.LowLevelClient);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, configuration.SingleTopLevelClient);
-                    WriteIfNotDefault(writer, Configuration.Options.ProjectRelativeDirectory, configuration.ProjectRelativeDirectory);
+                    WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, configuration.ProjectFolder);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -112,6 +112,18 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
+        private static string ReadStringOption(JsonElement root, string option)
+        {
+            if (root.TryGetProperty(option, out JsonElement value))
+            {
+                return value.GetString();
+            }
+            else
+            {
+                return Configuration.GetDefaultOptionStringValue(option)!;
+            }
+        }
+
         internal static Configuration LoadConfiguration(string basePath, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
@@ -122,8 +134,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
             {
                 sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
             }
-
-            var hasProjectRelativeDirectory = root.TryGetProperty(Configuration.Options.ProjectRelativeDirectory, out var projectRelativeDirectoryValue);
 
             return new Configuration(
                 Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()),
@@ -138,7 +148,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
                 ReadOption(root, Configuration.Options.LowLevelClient),
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
-                hasProjectRelativeDirectory ? projectRelativeDirectoryValue.GetString() : null,
+                ReadStringOption(root, Configuration.Options.ProjectFolder),
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }

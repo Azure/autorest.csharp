@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -118,8 +119,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var csProjPackageReference = string.Format(_csProjPackageReference, version);
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
-
-            await autoRest.WriteFile($"{configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
+            await autoRest.WriteFile($"{configuration.ProjectFolder}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
 
             return true;
         }

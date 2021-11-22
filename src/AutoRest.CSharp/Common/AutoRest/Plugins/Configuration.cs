@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.IO;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Communication;
 
@@ -24,10 +25,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public const string LowLevelClient = "low-level-client";
             public const string SingleTopLevelClient = "single-top-level-client";
             public const string AttachDebuggerFormat = "{0}.attach";
-            public const string ProjectRelativeDirectory = "project-directory-relative-to-output-folder";
+            public const string ProjectFolder = "project-folder";
         }
 
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool singleTopLevelClient, string? projectRelativeDirectory, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool singleTopLevelClient, string projectFolder, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -41,7 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;
             SingleTopLevelClient = singleTopLevelClient;
-            ProjectRelativeDirectory = projectRelativeDirectory ?? GetDefaultOptionStringValue(Configuration.Options.ProjectRelativeDirectory);
+            ProjectFolder = Path.IsPathRooted(projectFolder) ? Path.GetRelativePath(outputFolder, projectFolder) : projectFolder;
             MgmtConfiguration = mgmtConfiguration;
         }
 
@@ -59,7 +60,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool SingleTopLevelClient { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
-        public string? ProjectRelativeDirectory { get; }
+        public string ProjectFolder { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -76,7 +77,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
                 lowLevelClient: GetOptionValue(autoRest, Options.LowLevelClient),
                 singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
-                projectRelativeDirectory: autoRest.GetValue<string?>(Options.ProjectRelativeDirectory).GetAwaiter().GetResult(),
+                projectFolder: GetOptionStringValue(autoRest, Options.ProjectFolder, TrimFileSuffix),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
@@ -111,11 +112,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
+        private static string GetOptionStringValue(IPluginCommunication autoRest, string option, Func<string, string>? func)
+        {
+            var projectFolder = autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult();
+            return projectFolder == null ? GetDefaultOptionStringValue(option)! : (func == null ? projectFolder : func(projectFolder));
+        }
+
         public static string? GetDefaultOptionStringValue(string option)
         {
             switch (option)
             {
-                case Options.ProjectRelativeDirectory:
+                case Options.ProjectFolder:
                     return "../";
                 default:
                     return null;

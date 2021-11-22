@@ -8,5 +8,5 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "project-directory-relative-to-output-folder": "../../"
+  "project-folder": "..\\.."
 }

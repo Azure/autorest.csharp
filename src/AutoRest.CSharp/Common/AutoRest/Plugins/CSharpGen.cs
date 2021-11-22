@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ValidateConfiguration (configuration);
 
             Directory.CreateDirectory(configuration.OutputFolder);
-            var projectDirectory = Path.Combine(configuration.OutputFolder, configuration.ProjectRelativeDirectory!);
+            var projectDirectory = Path.Combine(configuration.OutputFolder, configuration.ProjectFolder);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
