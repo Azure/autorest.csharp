@@ -17,6 +17,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
@@ -37,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="Resource"/>
         /// </summary>
-        private Dictionary<string, Resource>? _rawRequestPathToArmResource;
+        private Dictionary<string, List<Resource>>? _rawRequestPathToArmResource;
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="ResourceCollection"/>
@@ -233,7 +234,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients().Values.SelectMany(v => v).Distinct();
 
         private IEnumerable<Resource>? _armResources;
-        public IEnumerable<Resource> ArmResources => _armResources ??= EnsureRequestPathToArmResources().Values.Distinct();
+        public IEnumerable<Resource> ArmResources => _armResources ??= EnsureRequestPathToArmResources().SelectMany(pair => pair.Value).Distinct();
 
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= EnsureRequestPathToResourceCollections().Values.Distinct();
@@ -308,17 +309,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRequestPathToResourceData().TryGetValue(requestPath, out resourceData);
         }
 
-        public Resource GetArmResource(string requestPath)
+        public IEnumerable<Resource> GetArmResource(string requestPath)
         {
-            if (TryGetArmResource(requestPath, out var resource))
-                return resource;
+            if (TryGetArmResource(requestPath, out var resources))
+                return resources;
 
             throw new InvalidOperationException($"Cannot get Resource corresponding to {requestPath}");
         }
 
-        public bool TryGetArmResource(string requestPath, [MaybeNullWhen(false)] out Resource resource)
+        public bool TryGetArmResource(string requestPath, [MaybeNullWhen(false)] out List<Resource> resources)
         {
-            return EnsureRequestPathToArmResources().TryGetValue(requestPath, out resource);
+            return EnsureRequestPathToArmResources().TryGetValue(requestPath, out resources);
         }
 
         public MgmtRestClient GetRestClient(Operation operation)
@@ -365,30 +366,94 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _rawRequestPathToRestClient;
         }
 
-        private Dictionary<string, Resource> EnsureRequestPathToArmResources()
+        private Dictionary<string, List<Resource>> EnsureRequestPathToArmResources()
         {
             if (_rawRequestPathToArmResource != null)
                 return _rawRequestPathToArmResource;
 
-            _rawRequestPathToArmResource = new Dictionary<string, Resource>();
+            _rawRequestPathToArmResource = new Dictionary<string, List<Resource>>();
             foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach (var resourceOperations in resourceOperationsList)
                 {
-                    // TODO -- support the request path that contains multiple resource types
                     // we calculate the resource type of the resource
-                    var resourceType = GetResourceType(resourceOperations.Keys);
-                    var resource = new Resource(resourceOperations, resourceName, resourceType, _context);
-                    // one resource might appear multiple times since one resource might corresponds to multiple request paths
-                    foreach (var resourceOperationSet in resourceOperations.Keys)
+                    var resourceTypes = ExpandResourceTypes(GetResourceType(resourceOperations.Keys));
+                    foreach (var resourceType in resourceTypes)
                     {
-                        _rawRequestPathToArmResource.Add(resourceOperationSet.RequestPath, resource);
+                        var resource = new Resource(resourceOperations, resourceName, resourceType, _context);
+                        // one resource might appear multiple times since one resource might corresponds to multiple request paths
+                        foreach (var resourceOperationSet in resourceOperations.Keys)
+                        {
+                            if (_rawRequestPathToArmResource.TryGetValue(resourceOperationSet.RequestPath, out var resources))
+                                resources.Add(resource);
+                            else
+                                _rawRequestPathToArmResource.Add(resourceOperationSet.RequestPath, new List<Resource> { resource });
+                        }
                     }
                 }
             }
 
             return _rawRequestPathToArmResource;
+        }
+
+        private IEnumerable<ResourceType> ExpandResourceTypes(ResourceType resourceType)
+        {
+            // if we only have one resource type and it is a constant
+            if (resourceType.IsConstant)
+                return resourceType.AsIEnumerable();
+
+            // otherwise we need to expand them (the resource type is not a constant)
+            // first we get all the segment that is not a constant
+
+            var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
+            foreach (var segment in resourceType.Where(segment => segment.IsReference))
+            {
+                var type = segment.Reference.Type.Implementation;
+                switch (type)
+                {
+                    case EnumType enumType:
+                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict)));
+                        break;
+                    default:
+                        // TODO -- move this function back to GetResourceType to get full context here
+                        throw new InvalidOperationException($"The resource type {resourceType} contains variables in it, please double check and override it in `request-path-to-resource-type` section.");
+                }
+            }
+
+            // construct new resource types to make the resource types constant again
+            // TODO -- refactor this function by changing this as a static method in ResourceType or in decrator
+            // here we are traversing the segments in this resource type as a tree:
+            // if the segment is constant, just add it into the result
+            // if the segment is not a constant, we need to add its all possible values (they are all constants) into the result
+            // first we build the levels
+            var levels = resourceType.Select(segment => segment.IsConstant ?
+                segment.AsIEnumerable() :
+                possibleValueMap[segment]);
+            // now we traverse the tree to get the result
+            var queue = new Queue<List<Segment>>();
+            foreach (var level in levels)
+            {
+                // initialize
+                if (queue.Count == 0)
+                {
+                    foreach (var _ in level)
+                        queue.Enqueue(new List<Segment>());
+                }
+                // get every element in queue out, and push the new results back
+                int count = queue.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    var list = queue.Dequeue();
+                    foreach (var segment in level)
+                    {
+                        // push the results back with a new element on it
+                        queue.Enqueue(new List<Segment>(list) { segment });
+                    }
+                }
+            }
+
+            return queue.Select(list => new ResourceType(list));
         }
 
         private ResourceType GetResourceType(IEnumerable<OperationSet> operationSets)
@@ -400,8 +465,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             var resourceType = resourceTypes.First();
 
-            if (!resourceType.IsConstant)
-                throw new InvalidOperationException($"The resource type of request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} contains variables in it, please double check and override it in `request-path-to-resource-type` section.");
+            //if (!resourceType.IsConstant)
+            //    throw new InvalidOperationException($"The resource type of request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} contains variables in it, please double check and override it in `request-path-to-resource-type` section.");
 
             if (resourceType == ResourceType.Scope)
                 throw new InvalidOperationException($"Request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} is a 'ById' resource, we cannot derive a resource type from its request path, please double check and override it in `request-path-to-resource-type` section.");
@@ -607,7 +672,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<Resource> FindResources(ResourceData resourceData)
         {
             var requestPaths = EnsureRequestPathToResourceData().Where(pair => pair.Value == resourceData).Select(pair => pair.Key).ToHashSet();
-            return EnsureRequestPathToArmResources().Where(pair => requestPaths.Contains(pair.Key)).Select(pair => pair.Value);
+            return EnsureRequestPathToArmResources().Where(pair => requestPaths.Contains(pair.Key)).SelectMany(pair => pair.Value);
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()

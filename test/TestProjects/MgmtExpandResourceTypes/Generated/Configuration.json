@@ -13,8 +13,9 @@
   "ListException": [
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"
   ],
-  "RequestPathToResourceType": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}": "Microsoft.Network/tests"
+  "OverrideOperationName": {
+    "RecordSets_ListByDnsZone": "GetRecordSets",
+    "RecordSets_ListAllByDnsZone": "GetAllRecordSets"
   },
   "MgmtDebug": {
     "ShowRequestPath": true

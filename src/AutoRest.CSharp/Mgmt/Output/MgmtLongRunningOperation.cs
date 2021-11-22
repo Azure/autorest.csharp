@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -24,7 +25,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
             if (operation.ShouldWrapResultType(ResultType, context))
             {
-                WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
+                // TODO -- this need fix
+                WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).First().Type;
             }
         }
 

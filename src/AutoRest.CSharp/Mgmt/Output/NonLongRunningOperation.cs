@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             if (operation.ShouldWrapResultType(ResultType, context))
             {
-                ResultType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
+                ResultType = context.Library.GetArmResource(operation.GetHttpPath()).First().Type;
                 ResultDataType = context.Library.GetResourceData(operation.GetHttpPath()).Type;
             }
 

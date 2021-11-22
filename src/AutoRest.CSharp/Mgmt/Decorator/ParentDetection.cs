@@ -45,9 +45,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static IEnumerable<MgmtTypeProvider> GetParent(this OperationSet resourceOperationSet, BuildContext<MgmtOutputLibrary> context)
         {
             var parentRequestPath = resourceOperationSet.ParentRequestPath(context);
-            if (context.Library.TryGetArmResource(parentRequestPath, out var parent))
+            if (context.Library.TryGetArmResource(parentRequestPath, out var parents))
             {
-                return parent.AsIEnumerable();
+                return parents;
             }
             // if we cannot find a resource as its parent, its parent must be one of the Extensions
             if (parentRequestPath.Equals(RequestPath.ManagementGroup))

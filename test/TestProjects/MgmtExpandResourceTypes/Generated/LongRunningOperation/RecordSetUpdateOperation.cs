@@ -16,9 +16,9 @@ using MgmtExpandResourceTypes;
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> Updates a record set within a DNS zone. </summary>
-    public partial class RecordSetUpdateOperation : Operation<RecordSet>
+    public partial class RecordSetUpdateOperation : Operation<DnsZoneA>
     {
-        private readonly OperationOrResponseInternals<RecordSet> _operation;
+        private readonly OperationOrResponseInternals<DnsZoneA> _operation;
 
         /// <summary> Initializes a new instance of RecordSetUpdateOperation for mocking. </summary>
         protected RecordSetUpdateOperation()
@@ -27,14 +27,14 @@ namespace MgmtExpandResourceTypes.Models
 
         internal RecordSetUpdateOperation(ArmResource operationsBase, Response<RecordSetData> response)
         {
-            _operation = new OperationOrResponseInternals<RecordSet>(Response.FromValue(new RecordSet(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<DnsZoneA>(Response.FromValue(new DnsZoneA(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override RecordSet Value => _operation.Value;
+        public override DnsZoneA Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,9 +52,9 @@ namespace MgmtExpandResourceTypes.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<RecordSet>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<DnsZoneA>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<RecordSet>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<DnsZoneA>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

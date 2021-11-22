@@ -29,7 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private Resource? _resource;
-        public Resource Resource => _resource ??= _context.Library.GetArmResource(RequestPaths.First());
+        // TODO -- fix this
+        public Resource Resource => _resource ??= _context.Library.GetArmResource(RequestPaths.First()).First();
 
         public override string ResourceName => Resource.ResourceName;
 

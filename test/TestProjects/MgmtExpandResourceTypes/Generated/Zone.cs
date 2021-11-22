@@ -440,11 +440,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<RecordSetData> GetRecordSetsByDnsZoneAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<RecordSetData> GetRecordSetsAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<RecordSetData>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSetsByDnsZone");
+                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
@@ -459,7 +459,7 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetData>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSetsByDnsZone");
+                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
@@ -483,11 +483,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<RecordSetData> GetRecordSetsByDnsZone(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<RecordSetData> GetRecordSets(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             Page<RecordSetData> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSetsByDnsZone");
+                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
@@ -502,7 +502,7 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetData> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSetsByDnsZone");
+                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSets");
                 scope.Start();
                 try
                 {
@@ -526,11 +526,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="recordSetNameSuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<RecordSetData> GetRecordSetsByDnsZoneAsync(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<RecordSetData> GetAllRecordSetsAsync(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<RecordSetData>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSetsByDnsZone");
+                using var scope = _clientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
@@ -545,7 +545,7 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetData>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSetsByDnsZone");
+                using var scope = _clientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
@@ -569,11 +569,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="recordSetNameSuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<RecordSetData> GetRecordSetsByDnsZone(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<RecordSetData> GetAllRecordSets(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
         {
             Page<RecordSetData> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSetsByDnsZone");
+                using var scope = _clientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
@@ -588,7 +588,7 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetData> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("Zone.GetRecordSetsByDnsZone");
+                using var scope = _clientDiagnostics.CreateScope("Zone.GetAllRecordSets");
                 scope.Start();
                 try
                 {
@@ -604,13 +604,103 @@ namespace MgmtExpandResourceTypes
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        #region RecordSet
+        #region DnsZoneA
 
-        /// <summary> Gets a collection of RecordSets in the Zone. </summary>
-        /// <returns> An object representing collection of RecordSets and their operations over a Zone. </returns>
-        public RecordSetCollection GetRecordSets()
+        /// <summary> Gets a collection of DnsZoneAs in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZoneAs and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZoneAs()
         {
-            return new RecordSetCollection(this);
+            return new DnsZoneACollection(this);
+        }
+        #endregion
+
+        #region DnsZoneAAAA
+
+        /// <summary> Gets a collection of DnsZoneAAAAs in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZoneAAAAs and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZoneAAAAs()
+        {
+            return new DnsZoneACollection(this);
+        }
+        #endregion
+
+        #region DnsZoneCAA
+
+        /// <summary> Gets a collection of DnsZoneCAAs in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZoneCAAs and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZoneCAAs()
+        {
+            return new DnsZoneACollection(this);
+        }
+        #endregion
+
+        #region DnsZoneCNAME
+
+        /// <summary> Gets a collection of DnsZoneCNAMEs in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZoneCNAMEs and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZoneCNAMEs()
+        {
+            return new DnsZoneACollection(this);
+        }
+        #endregion
+
+        #region DnsZoneMX
+
+        /// <summary> Gets a collection of DnsZoneMXes in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZoneMXes and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZoneMXes()
+        {
+            return new DnsZoneACollection(this);
+        }
+        #endregion
+
+        #region DnsZoneN
+
+        /// <summary> Gets a collection of DnsZoneNs in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZoneNs and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZoneNs()
+        {
+            return new DnsZoneACollection(this);
+        }
+        #endregion
+
+        #region DnsZonePTR
+
+        /// <summary> Gets a collection of DnsZonePTRs in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZonePTRs and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZonePTRs()
+        {
+            return new DnsZoneACollection(this);
+        }
+        #endregion
+
+        #region DnsZoneSOA
+
+        /// <summary> Gets a collection of DnsZoneSOAs in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZoneSOAs and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZoneSOAs()
+        {
+            return new DnsZoneACollection(this);
+        }
+        #endregion
+
+        #region DnsZoneSRV
+
+        /// <summary> Gets a collection of DnsZoneSRVs in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZoneSRVs and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZoneSRVs()
+        {
+            return new DnsZoneACollection(this);
+        }
+        #endregion
+
+        #region DnsZoneTXT
+
+        /// <summary> Gets a collection of DnsZoneTXTs in the Zone. </summary>
+        /// <returns> An object representing collection of DnsZoneTXTs and their operations over a Zone. </returns>
+        public DnsZoneACollection GetDnsZoneTXTs()
+        {
+            return new DnsZoneACollection(this);
         }
         #endregion
     }

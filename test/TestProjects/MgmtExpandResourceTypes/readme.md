@@ -16,6 +16,10 @@ mgmt-debug:
 list-exception:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
 
-request-path-to-resource-type:
-  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}: Microsoft.Network/tests
+override-operation-name:
+  RecordSets_ListByDnsZone: GetRecordSets
+  RecordSets_ListAllByDnsZone: GetAllRecordSets
+
+# request-path-to-resource-type:
+#   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}: Microsoft.Network/tests
 ```
