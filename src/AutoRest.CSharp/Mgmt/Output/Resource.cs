@@ -28,11 +28,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context));
 
         public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceType resourceType, BuildContext<MgmtOutputLibrary> context)
-            : base(context)
+            : base(context, resourceName)
         {
             _context = context;
             OperationSets = allOperations.Keys;
-            ResourceName = resourceName;
             ResourceType = resourceType;
 
             if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
@@ -165,14 +164,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>
         /// Return null when this resource is a singleton.
         /// </summary>
-        public ResourceCollection? ResourceCollection => _context.Library.GetResourceCollection(RequestPaths.First());
+        public ResourceCollection? ResourceCollection => _context.Library.GetResourceCollection(RequestPaths.First()).FirstOrDefault(collection => collection.ResourceType == ResourceType);
 
         /// <summary>
         /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
         /// </summary>
         public ResourceData ResourceData => _context.Library.GetResourceData(RequestPaths.First());
-
-        public override string ResourceName { get; }
 
         public MgmtClientOperation? CreateOperation { get; }
         public virtual MgmtClientOperation? GetOperation { get; }
@@ -319,7 +316,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
 
-        public virtual ResourceType ResourceType { get; }
+        public ResourceType ResourceType { get; }
 
         protected virtual string CreateDescription(string clientPrefix)
         {

@@ -24,16 +24,17 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         protected BuildContext<MgmtOutputLibrary> _context;
 
-        protected MgmtTypeProvider(BuildContext<MgmtOutputLibrary> context) : base(context)
+        protected MgmtTypeProvider(BuildContext<MgmtOutputLibrary> context, string resourceName) : base(context)
         {
             _context = context;
+            ResourceName = resourceName;
         }
 
         /// <summary>
         /// This is the display name for this TypeProvider.
         /// If this TypeProvider generates an extension class, this will be the resource name of whatever it extends from.
         /// </summary>
-        public abstract string ResourceName { get; }
+        public string ResourceName { get; }
 
         /// <summary>
         /// The collection of <see cref="MgmtRestClient"/> of all the operations that will be included in this generated class

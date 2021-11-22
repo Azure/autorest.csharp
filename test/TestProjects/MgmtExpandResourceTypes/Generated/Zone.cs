@@ -618,9 +618,9 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of DnsZoneAAAAs in the Zone. </summary>
         /// <returns> An object representing collection of DnsZoneAAAAs and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZoneAAAAs()
+        public DnsZoneAAAACollection GetDnsZoneAAAAs()
         {
-            return new DnsZoneACollection(this);
+            return new DnsZoneAAAACollection(this);
         }
         #endregion
 
@@ -628,9 +628,9 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of DnsZoneCAAs in the Zone. </summary>
         /// <returns> An object representing collection of DnsZoneCAAs and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZoneCAAs()
+        public DnsZoneCAACollection GetDnsZoneCAAs()
         {
-            return new DnsZoneACollection(this);
+            return new DnsZoneCAACollection(this);
         }
         #endregion
 
@@ -638,9 +638,9 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of DnsZoneCNAMEs in the Zone. </summary>
         /// <returns> An object representing collection of DnsZoneCNAMEs and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZoneCNAMEs()
+        public DnsZoneCNAMECollection GetDnsZoneCNAMEs()
         {
-            return new DnsZoneACollection(this);
+            return new DnsZoneCNAMECollection(this);
         }
         #endregion
 
@@ -648,9 +648,9 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of DnsZoneMXes in the Zone. </summary>
         /// <returns> An object representing collection of DnsZoneMXes and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZoneMXes()
+        public DnsZoneMXCollection GetDnsZoneMXes()
         {
-            return new DnsZoneACollection(this);
+            return new DnsZoneMXCollection(this);
         }
         #endregion
 
@@ -658,9 +658,9 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of DnsZoneNs in the Zone. </summary>
         /// <returns> An object representing collection of DnsZoneNs and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZoneNs()
+        public DnsZoneNCollection GetDnsZoneNs()
         {
-            return new DnsZoneACollection(this);
+            return new DnsZoneNCollection(this);
         }
         #endregion
 
@@ -668,9 +668,9 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of DnsZonePTRs in the Zone. </summary>
         /// <returns> An object representing collection of DnsZonePTRs and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZonePTRs()
+        public DnsZonePTRCollection GetDnsZonePTRs()
         {
-            return new DnsZoneACollection(this);
+            return new DnsZonePTRCollection(this);
         }
         #endregion
 
@@ -678,9 +678,9 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of DnsZoneSOAs in the Zone. </summary>
         /// <returns> An object representing collection of DnsZoneSOAs and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZoneSOAs()
+        public DnsZoneSOACollection GetDnsZoneSOAs()
         {
-            return new DnsZoneACollection(this);
+            return new DnsZoneSOACollection(this);
         }
         #endregion
 
@@ -688,9 +688,9 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of DnsZoneSRVs in the Zone. </summary>
         /// <returns> An object representing collection of DnsZoneSRVs and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZoneSRVs()
+        public DnsZoneSRVCollection GetDnsZoneSRVs()
         {
-            return new DnsZoneACollection(this);
+            return new DnsZoneSRVCollection(this);
         }
         #endregion
 
@@ -698,9 +698,9 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of DnsZoneTXTs in the Zone. </summary>
         /// <returns> An object representing collection of DnsZoneTXTs and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZoneTXTs()
+        public DnsZoneTXTCollection GetDnsZoneTXTs()
         {
-            return new DnsZoneACollection(this);
+            return new DnsZoneTXTCollection(this);
         }
         #endregion
     }

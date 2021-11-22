@@ -22,17 +22,14 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Collection";
 
-        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, string resourceName, BuildContext<MgmtOutputLibrary> context)
-            : base(operationSets, resourceName, ResourceType.Any, context) // The collection might include multiple resource types, therefore we do not need the ResourceType property in Resource base class
+        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource, BuildContext<MgmtOutputLibrary> context)
+            : base(operationSets, resource.ResourceName, resource.ResourceType, context)
         {
+            Resource = resource;
             GetAllOperation = EnsureGetAllOperation();
         }
 
-        private Resource? _resource;
-        // TODO -- fix this
-        public Resource Resource => _resource ??= _context.Library.GetArmResource(RequestPaths.First()).First();
-
-        public override string ResourceName => Resource.ResourceName;
+        public Resource Resource { get; }
 
         public MgmtClientOperation? GetAllOperation { get; }
 
@@ -100,11 +97,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             return $"A class representing collection of {clientPrefix} and their operations over its parent.";
         }
-
-        /// <summary>
-        /// The resource collection might support multiple resource types, therefore we should never use this property in <see cref="ResourceCollection"/>
-        /// </summary>
-        public override ResourceType ResourceType => throw new InvalidOperationException($"We should not use the property `ResourceType` in ResourceCollection. This is a bug in autorest.csharp, please file an issue about this");
 
         private IEnumerable<MgmtClientOperation>? _allOperations;
         public override IEnumerable<MgmtClientOperation> AllOperations => _allOperations ??= EnsureAllOperations();
