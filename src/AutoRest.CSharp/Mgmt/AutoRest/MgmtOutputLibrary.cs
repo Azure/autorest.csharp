@@ -378,7 +378,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var resourceOperations in resourceOperationsList)
                 {
                     // we calculate the resource type of the resource
-                    var resourceTypes = ExpandResourceTypes(GetResourceType(resourceOperations.Keys));
+                    var resourceTypes = GetResourceType(resourceOperations.Keys).Expand();
                     foreach (var resourceType in resourceTypes)
                     {
                         var resource = new Resource(resourceOperations, resourceName, resourceType, _context);
@@ -395,83 +395,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _rawRequestPathToArmResource;
-        }
-
-        private IEnumerable<ResourceType> ExpandResourceTypes(ResourceType resourceType)
-        {
-            // if we only have one resource type and it is a constant
-            if (resourceType.IsConstant)
-                return resourceType.AsIEnumerable();
-
-            // otherwise we need to expand them (the resource type is not a constant)
-            // first we get all the segment that is not a constant
-
-            var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
-            foreach (var segment in resourceType.Where(segment => segment.IsReference))
-            {
-                var type = segment.Reference.Type.Implementation;
-                switch (type)
-                {
-                    case EnumType enumType:
-                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict)));
-                        break;
-                    default:
-                        // TODO -- move this function back to GetResourceType to get full context here
-                        throw new InvalidOperationException($"The resource type {resourceType} contains variables in it, please double check and override it in `request-path-to-resource-type` section.");
-                }
-            }
-
-            // construct new resource types to make the resource types constant again
-            // TODO -- refactor this function by changing this as a static method in ResourceType or in decrator
-            // here we are traversing the segments in this resource type as a tree:
-            // if the segment is constant, just add it into the result
-            // if the segment is not a constant, we need to add its all possible values (they are all constants) into the result
-            // first we build the levels
-            var levels = resourceType.Select(segment => segment.IsConstant ?
-                segment.AsIEnumerable() :
-                possibleValueMap[segment]);
-            // now we traverse the tree to get the result
-            var queue = new Queue<List<Segment>>();
-            foreach (var level in levels)
-            {
-                // initialize
-                if (queue.Count == 0)
-                {
-                    foreach (var _ in level)
-                        queue.Enqueue(new List<Segment>());
-                }
-                // get every element in queue out, and push the new results back
-                int count = queue.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    var list = queue.Dequeue();
-                    foreach (var segment in level)
-                    {
-                        // push the results back with a new element on it
-                        queue.Enqueue(new List<Segment>(list) { segment });
-                    }
-                }
-            }
-
-            return queue.Select(list => new ResourceType(list));
-        }
-
-        private ResourceType GetResourceType(IEnumerable<OperationSet> operationSets)
-        {
-            var resourceTypes = operationSets.Select(operationSet => operationSet.GetRequestPath(_context).GetResourceType(_mgmtConfiguration)).Distinct();
-
-            if (resourceTypes.Count() > 1)
-                throw new InvalidOperationException($"Request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} contain multiple resource types in it ({string.Join(", ", resourceTypes)}), please double check and override it in `request-path-to-resource-type` section.");
-
-            var resourceType = resourceTypes.First();
-
-            //if (!resourceType.IsConstant)
-            //    throw new InvalidOperationException($"The resource type of request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} contains variables in it, please double check and override it in `request-path-to-resource-type` section.");
-
-            if (resourceType == ResourceType.Scope)
-                throw new InvalidOperationException($"Request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} is a 'ById' resource, we cannot derive a resource type from its request path, please double check and override it in `request-path-to-resource-type` section.");
-
-            return resourceType;
         }
 
         private Dictionary<string, ResourceCollection> EnsureRequestPathToResourceCollections()
@@ -516,6 +439,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // TODO -- we need to categrize the above list to see if some of the resources have the operation list and we can combine them.
             // now by default we will never combine any of them
             return operations.Select(tuple => new Dictionary<OperationSet, IEnumerable<Operation>> { { tuple.Item1, tuple.Item2 } });
+        }
+
+        private ResourceType GetResourceType(IEnumerable<OperationSet> operationSets)
+        {
+            var resourceTypes = operationSets.Select(operationSet => operationSet.GetRequestPath(_context).GetResourceType(_mgmtConfiguration)).Distinct();
+
+            if (resourceTypes.Count() > 1)
+                throw new InvalidOperationException($"Request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} contain multiple resource types in it ({string.Join(", ", resourceTypes)}), please double check and override it in `request-path-to-resource-type` section.");
+
+            var resourceType = resourceTypes.First();
+
+            if (resourceType == ResourceType.Scope)
+                throw new InvalidOperationException($"Request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} is a 'ById' resource, we cannot derive a resource type from its request path, please double check and override it in `request-path-to-resource-type` section.");
+
+            return resourceType;
         }
 
         public IEnumerable<Operation> GetChildOperations(string requestPath)

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -110,6 +112,68 @@ namespace AutoRest.CSharp.Mgmt.Models
         public Segment this[int index] => _segments[index];
 
         public int Count => _segments.Count;
+
+        /// <summary>
+        /// Expands this resource type into multiple resource types if this resource type contains variables in it
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException">throw if the variables in this resource type is not an enum type</exception>
+        public IEnumerable<ResourceType> Expand()
+        {
+            // if this resource type is a constant, we do not need to expand it
+            if (this.IsConstant)
+                return this.AsIEnumerable();
+
+            // otherwise we need to expand them (the resource type is not a constant)
+            // first we get all the segment that is not a constant
+
+            var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
+            foreach (var segment in this.Where(segment => segment.IsReference))
+            {
+                var type = segment.Reference.Type.Implementation;
+                switch (type)
+                {
+                    case EnumType enumType:
+                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict)));
+                        break;
+                    default:
+                        throw new InvalidOperationException($"The resource type {this} contains variables in it, but it is not an enum type, therefore we cannot expand it. Please double check and/or override it in `request-path-to-resource-type` section.");
+                }
+            }
+
+            // construct new resource types to make the resource types constant again
+            // here we are traversing the segments in this resource type as a tree:
+            // if the segment is constant, just add it into the result
+            // if the segment is not a constant, we need to add its all possible values (they are all constants) into the result
+            // first we build the levels
+            var levels = this.Select(segment => segment.IsConstant ?
+                segment.AsIEnumerable() :
+                possibleValueMap[segment]);
+            // now we traverse the tree to get the result
+            var queue = new Queue<List<Segment>>();
+            foreach (var level in levels)
+            {
+                // initialize
+                if (queue.Count == 0)
+                {
+                    foreach (var _ in level)
+                        queue.Enqueue(new List<Segment>());
+                }
+                // get every element in queue out, and push the new results back
+                int count = queue.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    var list = queue.Dequeue();
+                    foreach (var segment in level)
+                    {
+                        // push the results back with a new element on it
+                        queue.Enqueue(new List<Segment>(list) { segment });
+                    }
+                }
+            }
+
+            return queue.Select(list => new ResourceType(list));
+        }
 
         public bool Equals(ResourceType other) => SerializedType.Equals(other.SerializedType, StringComparison.InvariantCultureIgnoreCase);
 
