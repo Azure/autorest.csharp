@@ -1,0 +1,22 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtExpandResourceTypes",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "ListException": [
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"
+  ],
+  "RequestPathToResourceType": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}": "Microsoft.Network/tests"
+  },
+  "MgmtDebug": {
+    "ShowRequestPath": true
+  }
+}
