@@ -404,18 +404,9 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         private void WriteTaggableCommonMethod(bool async)
         {
             _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-            // get the corresponding MgmtClientOperation mapping
-            var operationMappings = _resource.GetOperation.ToDictionary(
-                clientOperation => clientOperation.ContextualPath,
-                clientOperation => clientOperation);
-            // build contextual parameters
-            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
-                contextualPath => contextualPath,
-                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName));
-            // build parameter mapping
-            var parameterMappings = operationMappings.ToDictionary(
-                pair => pair.Key,
-                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+
+            BuildParameters(_resource.GetOperation!, out var operationMappings, out var parameterMappings, out _);
+
             // we need to write multiple branches for a normal method
             if (operationMappings.Count == 1)
             {
