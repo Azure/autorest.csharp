@@ -39,7 +39,7 @@ namespace MgmtParamOrdering
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _workspacesRestClient = new WorkspacesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _workspacesRestClient = new WorkspacesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Workspace"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtParamOrdering
         internal Workspace(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _workspacesRestClient = new WorkspacesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _workspacesRestClient = new WorkspacesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Workspace"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtParamOrdering
         internal Workspace(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _workspacesRestClient = new WorkspacesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _workspacesRestClient = new WorkspacesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -95,7 +95,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _workspacesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _workspacesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(this, response.Value), response.GetRawResponse());
@@ -118,7 +118,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _workspacesRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _workspacesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Workspace(this, response.Value), response.GetRawResponse());
@@ -158,8 +158,8 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _workspacesRestClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new WorkspaceDeleteOperation(_clientDiagnostics, Pipeline, _workspacesRestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = await _workspacesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new WorkspaceDeleteOperation(_clientDiagnostics, Pipeline, _workspacesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -183,8 +183,8 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _workspacesRestClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new WorkspaceDeleteOperation(_clientDiagnostics, Pipeline, _workspacesRestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = _workspacesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new WorkspaceDeleteOperation(_clientDiagnostics, Pipeline, _workspacesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -215,7 +215,7 @@ namespace MgmtParamOrdering
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _workspacesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _workspacesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -244,7 +244,7 @@ namespace MgmtParamOrdering
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _workspacesRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _workspacesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -273,7 +273,7 @@ namespace MgmtParamOrdering
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _workspacesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _workspacesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -302,7 +302,7 @@ namespace MgmtParamOrdering
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _workspacesRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _workspacesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -330,7 +330,7 @@ namespace MgmtParamOrdering
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _workspacesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _workspacesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -358,7 +358,7 @@ namespace MgmtParamOrdering
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _workspacesRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _workspacesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Workspace(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -386,7 +386,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _workspacesRestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _workspacesRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -414,7 +414,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _workspacesRestClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _workspacesRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return Response.FromValue(new Workspace(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

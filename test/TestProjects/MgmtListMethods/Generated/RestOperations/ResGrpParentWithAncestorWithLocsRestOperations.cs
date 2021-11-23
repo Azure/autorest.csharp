@@ -19,7 +19,6 @@ namespace MgmtListMethods
 {
     internal partial class ResGrpParentWithAncestorWithLocsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace MgmtListMethods
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public ResGrpParentWithAncestorWithLocsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public ResGrpParentWithAncestorWithLocsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace MgmtListMethods
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,13 +66,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Create or update. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="resGrpParentWithAncestorWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ResGrpParentWithAncestorWithLocData>> CreateOrUpdateAsync(string resourceGroupName, string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resGrpParentWithAncestorWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ResGrpParentWithAncestorWithLocData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -89,7 +91,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, resGrpParentWithAncestorWithLocName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, resGrpParentWithAncestorWithLocName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -106,13 +108,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Create or update. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="resGrpParentWithAncestorWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ResGrpParentWithAncestorWithLocData> CreateOrUpdate(string resourceGroupName, string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resGrpParentWithAncestorWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<ResGrpParentWithAncestorWithLocData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorWithLocName, ResGrpParentWithAncestorWithLocData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -126,7 +133,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, resGrpParentWithAncestorWithLocName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, resGrpParentWithAncestorWithLocName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -142,7 +149,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string resGrpParentWithAncestorWithLocName)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorWithLocName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -163,12 +170,17 @@ namespace MgmtListMethods
         }
 
         /// <summary> Retrieves information. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
-        public async Task<Response<ResGrpParentWithAncestorWithLocData>> GetAsync(string resourceGroupName, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
+        public async Task<Response<ResGrpParentWithAncestorWithLocData>> GetAsync(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -178,7 +190,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithLocName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, resGrpParentWithAncestorWithLocName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, resGrpParentWithAncestorWithLocName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -197,12 +209,17 @@ namespace MgmtListMethods
         }
 
         /// <summary> Retrieves information. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
-        public Response<ResGrpParentWithAncestorWithLocData> Get(string resourceGroupName, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
+        public Response<ResGrpParentWithAncestorWithLocData> Get(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -212,7 +229,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resGrpParentWithAncestorWithLocName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, resGrpParentWithAncestorWithLocName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, resGrpParentWithAncestorWithLocName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -230,7 +247,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -250,17 +267,22 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all in a resource group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<ResGrpParentWithAncestorWithLocListResult>> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<ResGrpParentWithAncestorWithLocListResult>> ListAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -277,17 +299,22 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all in a resource group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<ResGrpParentWithAncestorWithLocListResult> List(string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<ResGrpParentWithAncestorWithLocListResult> List(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -303,7 +330,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListTestRequest()
+        internal HttpMessage CreateListTestRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -321,10 +348,17 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all in a subscription. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ResGrpParentWithAncestorWithLocListResult>> ListTestAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<ResGrpParentWithAncestorWithLocListResult>> ListTestAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListTestRequest();
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+
+            using var message = CreateListTestRequest(subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -341,10 +375,17 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all in a subscription. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ResGrpParentWithAncestorWithLocListResult> ListTest(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public Response<ResGrpParentWithAncestorWithLocListResult> ListTest(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListTestRequest();
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+
+            using var message = CreateListTestRequest(subscriptionId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -360,7 +401,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListAllRequest(string location)
+        internal HttpMessage CreateListAllRequest(string subscriptionId, string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -380,17 +421,22 @@ namespace MgmtListMethods
         }
 
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public async Task<Response<ResGrpParentWithAncestorWithNonResChWithLocListResult>> ListAllAsync(string location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
+        public async Task<Response<ResGrpParentWithAncestorWithNonResChWithLocListResult>> ListAllAsync(string subscriptionId, string location, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListAllRequest(location);
+            using var message = CreateListAllRequest(subscriptionId, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -407,17 +453,22 @@ namespace MgmtListMethods
         }
 
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public Response<ResGrpParentWithAncestorWithNonResChWithLocListResult> ListAll(string location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
+        public Response<ResGrpParentWithAncestorWithNonResChWithLocListResult> ListAll(string subscriptionId, string location, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListAllRequest(location);
+            using var message = CreateListAllRequest(subscriptionId, location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -433,7 +484,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -449,21 +500,26 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<ResGrpParentWithAncestorWithLocListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<ResGrpParentWithAncestorWithLocListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -481,21 +537,26 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<ResGrpParentWithAncestorWithLocListResult> ListNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<ResGrpParentWithAncestorWithLocListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -511,7 +572,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListTestNextPageRequest(string nextLink)
+        internal HttpMessage CreateListTestNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -527,16 +588,21 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<ResGrpParentWithAncestorWithLocListResult>> ListTestNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<ResGrpParentWithAncestorWithLocListResult>> ListTestNextPageAsync(string nextLink, string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListTestNextPageRequest(nextLink);
+            using var message = CreateListTestNextPageRequest(nextLink, subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -554,16 +620,21 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<ResGrpParentWithAncestorWithLocListResult> ListTestNextPage(string nextLink, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<ResGrpParentWithAncestorWithLocListResult> ListTestNextPage(string nextLink, string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListTestNextPageRequest(nextLink);
+            using var message = CreateListTestNextPageRequest(nextLink, subscriptionId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -579,7 +650,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListAllNextPageRequest(string nextLink, string location)
+        internal HttpMessage CreateListAllNextPageRequest(string nextLink, string subscriptionId, string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -595,21 +666,26 @@ namespace MgmtListMethods
 
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="location"/> is null. </exception>
-        public async Task<Response<ResGrpParentWithAncestorWithNonResChWithLocListResult>> ListAllNextPageAsync(string nextLink, string location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="location"/> is null. </exception>
+        public async Task<Response<ResGrpParentWithAncestorWithNonResChWithLocListResult>> ListAllNextPageAsync(string nextLink, string subscriptionId, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListAllNextPageRequest(nextLink, location);
+            using var message = CreateListAllNextPageRequest(nextLink, subscriptionId, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -627,21 +703,26 @@ namespace MgmtListMethods
 
         /// <summary> Gets all under the specified subscription for the specified location. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="location"/> is null. </exception>
-        public Response<ResGrpParentWithAncestorWithNonResChWithLocListResult> ListAllNextPage(string nextLink, string location, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="location"/> is null. </exception>
+        public Response<ResGrpParentWithAncestorWithNonResChWithLocListResult> ListAllNextPage(string nextLink, string subscriptionId, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListAllNextPageRequest(nextLink, location);
+            using var message = CreateListAllNextPageRequest(nextLink, subscriptionId, location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

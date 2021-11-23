@@ -38,7 +38,7 @@ namespace MgmtListMethods
         internal SubParentWithNonResChCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _subParentWithNonResChesRestClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _subParentWithNonResChesRestClient = new SubParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -70,7 +70,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _subParentWithNonResChesRestClient.CreateOrUpdate(subParentWithNonResChName, parameters, cancellationToken);
+                var response = _subParentWithNonResChesRestClient.CreateOrUpdate(Id.SubscriptionId, subParentWithNonResChName, parameters, cancellationToken);
                 var operation = new SubParentWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -107,7 +107,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _subParentWithNonResChesRestClient.CreateOrUpdateAsync(subParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new SubParentWithNonResChCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -138,7 +138,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _subParentWithNonResChesRestClient.Get(subParentWithNonResChName, cancellationToken);
+                var response = _subParentWithNonResChesRestClient.Get(Id.SubscriptionId, subParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -168,7 +168,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _subParentWithNonResChesRestClient.GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChesRestClient.GetAsync(Id.SubscriptionId, subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubParentWithNonResCh(Parent, response.Value), response.GetRawResponse());
@@ -195,7 +195,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _subParentWithNonResChesRestClient.Get(subParentWithNonResChName, cancellationToken: cancellationToken);
+                var response = _subParentWithNonResChesRestClient.Get(Id.SubscriptionId, subParentWithNonResChName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new SubParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -222,7 +222,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _subParentWithNonResChesRestClient.GetAsync(subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChesRestClient.GetAsync(Id.SubscriptionId, subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SubParentWithNonResCh>(null, response.GetRawResponse())
                     : Response.FromValue(new SubParentWithNonResCh(this, response.Value), response.GetRawResponse());
@@ -298,7 +298,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _subParentWithNonResChesRestClient.List(cancellationToken: cancellationToken);
+                    var response = _subParentWithNonResChesRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -313,7 +313,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _subParentWithNonResChesRestClient.ListNextPage(nextLink, cancellationToken: cancellationToken);
+                    var response = _subParentWithNonResChesRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -339,7 +339,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _subParentWithNonResChesRestClient.ListAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subParentWithNonResChesRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -354,7 +354,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _subParentWithNonResChesRestClient.ListNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subParentWithNonResChesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubParentWithNonResCh(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

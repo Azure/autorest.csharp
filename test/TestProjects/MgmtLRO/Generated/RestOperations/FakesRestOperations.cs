@@ -19,7 +19,6 @@ namespace MgmtLRO
 {
     internal partial class FakesRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace MgmtLRO
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public FakesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public FakesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace MgmtLRO
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string fakeName, FakeData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,13 +66,18 @@ namespace MgmtLRO
         }
 
         /// <summary> Create or update an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -89,7 +91,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, fakeName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, fakeName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -102,13 +104,18 @@ namespace MgmtLRO
         }
 
         /// <summary> Create or update an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -122,7 +129,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, fakeName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, fakeName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -134,7 +141,7 @@ namespace MgmtLRO
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string fakeName, FakeUpdate parameters)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string fakeName, FakeUpdate parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -159,13 +166,18 @@ namespace MgmtLRO
         }
 
         /// <summary> Update an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string resourceGroupName, string fakeName, FakeUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string fakeName, FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -179,7 +191,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, fakeName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, fakeName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -192,13 +204,18 @@ namespace MgmtLRO
         }
 
         /// <summary> Update an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response Update(string resourceGroupName, string fakeName, FakeUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response Update(string subscriptionId, string resourceGroupName, string fakeName, FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -212,7 +229,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, fakeName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, fakeName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -224,7 +241,7 @@ namespace MgmtLRO
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string fakeName)
+        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -244,12 +261,17 @@ namespace MgmtLRO
         }
 
         /// <summary> Delete an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -259,7 +281,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, fakeName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -273,12 +295,17 @@ namespace MgmtLRO
         }
 
         /// <summary> Delete an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response Delete(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public Response Delete(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -288,7 +315,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, fakeName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -301,7 +328,7 @@ namespace MgmtLRO
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string fakeName, string expand)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string fakeName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -326,13 +353,18 @@ namespace MgmtLRO
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response<FakeData>> GetAsync(string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response<FakeData>> GetAsync(string subscriptionId, string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -342,7 +374,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, fakeName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, fakeName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -361,13 +393,18 @@ namespace MgmtLRO
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response<FakeData> Get(string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public Response<FakeData> Get(string subscriptionId, string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -377,7 +414,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, fakeName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, fakeName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -395,7 +432,7 @@ namespace MgmtLRO
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string optionalParam)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -419,18 +456,23 @@ namespace MgmtLRO
         }
 
         /// <summary> Lists all fakes in a resource group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListAsync(string resourceGroupName, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<FakeListResult>> ListAsync(string subscriptionId, string resourceGroupName, string optionalParam = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, optionalParam);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, optionalParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -447,18 +489,23 @@ namespace MgmtLRO
         }
 
         /// <summary> Lists all fakes in a resource group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<FakeListResult> List(string resourceGroupName, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<FakeListResult> List(string subscriptionId, string resourceGroupName, string optionalParam = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, optionalParam);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, optionalParam);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -474,7 +521,7 @@ namespace MgmtLRO
             }
         }
 
-        internal HttpMessage CreateDoSomethingSlroRequest(string resourceGroupName, string fakeName)
+        internal HttpMessage CreateDoSomethingSlroRequest(string subscriptionId, string resourceGroupName, string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -496,12 +543,17 @@ namespace MgmtLRO
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response> DoSomethingSlroAsync(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response> DoSomethingSlroAsync(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -511,7 +563,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateDoSomethingSlroRequest(resourceGroupName, fakeName);
+            using var message = CreateDoSomethingSlroRequest(subscriptionId, resourceGroupName, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -523,12 +575,17 @@ namespace MgmtLRO
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response DoSomethingSlro(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public Response DoSomethingSlro(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -538,7 +595,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateDoSomethingSlroRequest(resourceGroupName, fakeName);
+            using var message = CreateDoSomethingSlroRequest(subscriptionId, resourceGroupName, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -549,7 +606,7 @@ namespace MgmtLRO
             }
         }
 
-        internal HttpMessage CreateDoSomethingLRORequest(string resourceGroupName, string fakeName)
+        internal HttpMessage CreateDoSomethingLRORequest(string subscriptionId, string resourceGroupName, string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -571,12 +628,17 @@ namespace MgmtLRO
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response> DoSomethingLROAsync(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response> DoSomethingLROAsync(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -586,7 +648,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateDoSomethingLRORequest(resourceGroupName, fakeName);
+            using var message = CreateDoSomethingLRORequest(subscriptionId, resourceGroupName, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -598,12 +660,17 @@ namespace MgmtLRO
         }
 
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response DoSomethingLRO(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public Response DoSomethingLRO(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -613,7 +680,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateDoSomethingLRORequest(resourceGroupName, fakeName);
+            using var message = CreateDoSomethingLRORequest(subscriptionId, resourceGroupName, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -39,7 +39,7 @@ namespace MgmtScopeResource
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLink"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtScopeResource
         internal ResourceLink(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLink"/> class. </summary>
@@ -60,7 +60,7 @@ namespace MgmtScopeResource
         internal ResourceLink(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>

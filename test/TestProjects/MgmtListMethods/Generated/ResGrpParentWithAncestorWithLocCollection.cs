@@ -38,7 +38,7 @@ namespace MgmtListMethods
         internal ResGrpParentWithAncestorWithLocCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resGrpParentWithAncestorWithLocsRestClient = new ResGrpParentWithAncestorWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _resGrpParentWithAncestorWithLocsRestClient = new ResGrpParentWithAncestorWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -70,7 +70,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithLocsRestClient.CreateOrUpdate(Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken);
+                var response = _resGrpParentWithAncestorWithLocsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken);
                 var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -107,7 +107,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithLocsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithLocsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -138,7 +138,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithLocsRestClient.Get(Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken);
+                var response = _resGrpParentWithAncestorWithLocsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -168,7 +168,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithLocsRestClient.GetAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestorWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -195,7 +195,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithLocsRestClient.Get(Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken);
+                var response = _resGrpParentWithAncestorWithLocsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
@@ -222,7 +222,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithLocsRestClient.GetAsync(Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ResGrpParentWithAncestorWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new ResGrpParentWithAncestorWithLoc(this, response.Value), response.GetRawResponse());
@@ -298,7 +298,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentWithAncestorWithLocsRestClient.List(Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _resGrpParentWithAncestorWithLocsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -313,7 +313,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentWithAncestorWithLocsRestClient.ListNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _resGrpParentWithAncestorWithLocsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -339,7 +339,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentWithAncestorWithLocsRestClient.ListAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentWithAncestorWithLocsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -354,7 +354,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentWithAncestorWithLocsRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentWithAncestorWithLocsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

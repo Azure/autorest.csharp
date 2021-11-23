@@ -19,7 +19,6 @@ namespace MgmtOperations
 {
     internal partial class AvailabilitySetsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace MgmtOperations
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public AvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public AvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace MgmtOperations
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,13 +66,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Create or update an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AvailabilitySetData>> CreateOrUpdateAsync(string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<AvailabilitySetData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -89,7 +91,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, availabilitySetName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -106,13 +108,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Create or update an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<AvailabilitySetData> CreateOrUpdate(string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<AvailabilitySetData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -126,7 +133,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, availabilitySetName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -142,7 +149,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -167,13 +174,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Update an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AvailabilitySetData>> UpdateAsync(string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<AvailabilitySetData>> UpdateAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -187,7 +199,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, availabilitySetName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -204,13 +216,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Update an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<AvailabilitySetData> Update(string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<AvailabilitySetData> Update(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -224,7 +241,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, availabilitySetName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -240,7 +257,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string availabilitySetName)
+        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string availabilitySetName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -260,12 +277,17 @@ namespace MgmtOperations
         }
 
         /// <summary> Delete an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="availabilitySetName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -275,7 +297,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, availabilitySetName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -288,12 +310,17 @@ namespace MgmtOperations
         }
 
         /// <summary> Delete an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public Response Delete(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="availabilitySetName"/> is null. </exception>
+        public Response Delete(string subscriptionId, string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -303,7 +330,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, availabilitySetName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -315,7 +342,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string availabilitySetName, string expand)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -340,13 +367,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public async Task<Response<AvailabilitySetData>> GetAsync(string resourceGroupName, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="availabilitySetName"/> is null. </exception>
+        public async Task<Response<AvailabilitySetData>> GetAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -356,7 +388,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, availabilitySetName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, availabilitySetName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -375,13 +407,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public Response<AvailabilitySetData> Get(string resourceGroupName, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="availabilitySetName"/> is null. </exception>
+        public Response<AvailabilitySetData> Get(string subscriptionId, string resourceGroupName, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -391,7 +428,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, availabilitySetName, expand);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, availabilitySetName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -409,7 +446,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateTestSetSharedKeyRequest(string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters)
+        internal HttpMessage CreateTestSetSharedKeyRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -435,13 +472,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Testing description. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> TestSetSharedKeyAsync(string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> TestSetSharedKeyAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -455,7 +497,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateTestSetSharedKeyRequest(resourceGroupName, availabilitySetName, parameters);
+            using var message = CreateTestSetSharedKeyRequest(subscriptionId, resourceGroupName, availabilitySetName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -467,13 +509,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Testing description. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response TestSetSharedKey(string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response TestSetSharedKey(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -487,7 +534,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateTestSetSharedKeyRequest(resourceGroupName, availabilitySetName, parameters);
+            using var message = CreateTestSetSharedKeyRequest(subscriptionId, resourceGroupName, availabilitySetName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -498,7 +545,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string expand)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -522,18 +569,23 @@ namespace MgmtOperations
         }
 
         /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<AvailabilitySetListResult>> ListAsync(string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<AvailabilitySetListResult>> ListAsync(string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, expand);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -550,18 +602,23 @@ namespace MgmtOperations
         }
 
         /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<AvailabilitySetListResult> List(string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<AvailabilitySetListResult> List(string subscriptionId, string resourceGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, expand);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -577,7 +634,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateTestLROMethodRequest(string resourceGroupName, AvailabilitySetUpdate parameters)
+        internal HttpMessage CreateTestLROMethodRequest(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -601,12 +658,17 @@ namespace MgmtOperations
         }
 
         /// <summary> Update an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> TestLROMethodAsync(string resourceGroupName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> TestLROMethodAsync(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -616,7 +678,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateTestLROMethodRequest(resourceGroupName, parameters);
+            using var message = CreateTestLROMethodRequest(subscriptionId, resourceGroupName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -628,12 +690,17 @@ namespace MgmtOperations
         }
 
         /// <summary> Update an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response TestLROMethod(string resourceGroupName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response TestLROMethod(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -643,7 +710,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateTestLROMethodRequest(resourceGroupName, parameters);
+            using var message = CreateTestLROMethodRequest(subscriptionId, resourceGroupName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -37,7 +37,7 @@ namespace MgmtListMethods
         internal FakeParentWithAncestorWithNonResChWithLocCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakeParentWithAncestorWithNonResChWithLocsRestClient = new FakeParentWithAncestorWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakeParentWithAncestorWithNonResChWithLocsRestClient = new FakeParentWithAncestorWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -69,7 +69,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.CreateOrUpdate(Id.Name, fakeParentWithAncestorWithNonResChWithLocName, parameters, cancellationToken);
+                var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChWithLocName, parameters, cancellationToken);
                 var operation = new FakeParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -106,7 +106,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.CreateOrUpdateAsync(Id.Name, fakeParentWithAncestorWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new FakeParentWithAncestorWithNonResChWithLocCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -137,7 +137,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.Get(Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken);
+                var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithAncestorWithNonResChWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -167,7 +167,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.GetAsync(Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FakeParentWithAncestorWithNonResChWithLoc(Parent, response.Value), response.GetRawResponse());
@@ -194,7 +194,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.Get(Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken);
+                var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestorWithNonResChWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithAncestorWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
@@ -221,7 +221,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.GetAsync(Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<FakeParentWithAncestorWithNonResChWithLoc>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeParentWithAncestorWithNonResChWithLoc(this, response.Value), response.GetRawResponse());
@@ -297,7 +297,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.ListTest(Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.ListTest(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResChWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -312,7 +312,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.ListTestNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorWithNonResChWithLocsRestClient.ListTestNextPage(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResChWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -338,7 +338,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.ListTestAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.ListTestAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResChWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -353,7 +353,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.ListTestNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorWithNonResChWithLocsRestClient.ListTestNextPageAsync(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorWithNonResChWithLoc(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
