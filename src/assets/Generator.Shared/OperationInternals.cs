@@ -29,6 +29,7 @@ namespace Azure.Core
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
             _operationInternal = new OperationInternal(clientDiagnostics, nextLinkOperation, originalResponse, scopeName);
+            _operationInternal.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
         }
 
         public Response GetRawResponse() => _operationInternal.RawResponse;
