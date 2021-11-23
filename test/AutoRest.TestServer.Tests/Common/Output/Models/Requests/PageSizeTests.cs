@@ -44,6 +44,6 @@ namespace AutoRest.CSharp.Output.Models.Requests.Tests
         public async Task ValidateDecimal() => await new PageSizeDecimalModelsRestOperations(ClientDiagnostics, HttpPipeline, ClientOptions, testServer.Address).ListAsync("test", "test", 123);
 
         [Test]
-        public async Task ValidateString() => await new PageSizeStringModelsRestOperations(ClientDiagnostics, HttpPipeline, ClientOptions, testServer.Address).ListAsync("test", Convert.ToString(123));
+        public async Task ValidateString() => await new PageSizeStringModelsRestOperations(ClientDiagnostics, HttpPipeline, ClientOptions, testServer.Address).ListAsync("test", "test", Convert.ToString(123));
     }
 }
