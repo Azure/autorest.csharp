@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
-            //UpdateSubscriptionIdForTenantIdResource(codeModel);
+            UpdateSubscriptionIdForAllResource(codeModel);
             _codeModel = codeModel;
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
@@ -101,6 +101,32 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // Decorate the operation sets to see if it corresponds to a resource
             DecorateOperationSets();
+        }
+
+        private void UpdateSubscriptionIdForAllResource(CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                var subscriptionParameters = operationGroup.Operations
+                        .SelectMany(op => op.Parameters)
+                        .Where(p => p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase));
+                // subscriptionParameters all reference to the same object, so we need a copy of it.
+                // We only need to change enum value of Implementation, ShallowCopy is enough.
+                var newSubParam = subscriptionParameters.First().ShallowCopy();
+                newSubParam.Implementation = ImplementationLocation.Method;
+                foreach (var op in operationGroup.Operations)
+                {
+                    var newParams = op.Parameters.ToList();
+                    for (int i = 0; i < newParams.Count; i++)
+                    {
+                        if (newParams[i].Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            newParams[i] = newSubParam;
+                        }
+                    }
+                    op.Parameters = newParams;
+                }
+            }
         }
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
