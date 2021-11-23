@@ -75,11 +75,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             using (_writer.Scope($"public {TypeNameOfThis}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
             {
                 _writer.Line($"ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
-            }
-
-            _writer.Line();
-            using (_writer.Scope($"public {TypeNameOfThis}(): this(false)"))
-            {
+                _writer.Line($"System.Environment.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
             }
         }
 

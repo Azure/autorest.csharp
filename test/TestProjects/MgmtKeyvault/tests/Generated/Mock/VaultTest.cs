@@ -23,10 +23,7 @@ namespace MgmtKeyvault.Tests.Mock
         public VaultMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-        }
-
-        public VaultMockTests() : this(false)
-        {
+            System.Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
         private async Task<MgmtKeyvault.VaultCollection> GetVaultCollectionAsync(string resourceGroupName)

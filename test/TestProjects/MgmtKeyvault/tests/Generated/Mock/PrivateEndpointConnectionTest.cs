@@ -22,10 +22,7 @@ namespace MgmtKeyvault.Tests.Mock
         public PrivateEndpointConnectionMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-        }
-
-        public PrivateEndpointConnectionMockTests() : this(false)
-        {
+            System.Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
         private async Task<MgmtKeyvault.PrivateEndpointConnectionCollection> GetPrivateEndpointConnectionCollectionAsync(string resourceGroupName, string vaultName)

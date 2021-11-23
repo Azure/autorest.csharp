@@ -37,7 +37,7 @@ pipeline:
 ```yaml $(testmodeler)
 use-extension:
   # "@autorest/testmodeler": "D://projects//codegen//azure-sdk-tools//tools//sdk-testgen//packages//autorest.testmodeler"
-  "@autorest/testmodeler": "1.0.1"
+  "@autorest/testmodeler": "1.0.2"
 
 
 pipeline:

@@ -22,10 +22,7 @@ namespace MgmtKeyvault.Tests.Mock
         public ManagedHsmMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-        }
-
-        public ManagedHsmMockTests() : this(false)
-        {
+            System.Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
         private async Task<MgmtKeyvault.ManagedHsmCollection> GetManagedHsmCollectionAsync(string resourceGroupName)
