@@ -107,24 +107,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             foreach (var operationGroup in codeModel.OperationGroups)
             {
-                var subscriptionParameters = operationGroup.Operations
-                        .SelectMany(op => op.Parameters)
-                        .Where(p => p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase));
-                // subscriptionParameters all reference to the same object, so we need a copy of it.
-                // We only need to change enum value of Implementation, ShallowCopy is enough.
-                var newSubParam = subscriptionParameters.First().ShallowCopy();
-                newSubParam.Implementation = ImplementationLocation.Method;
                 foreach (var op in operationGroup.Operations)
                 {
-                    var newParams = op.Parameters.ToList();
-                    for (int i = 0; i < newParams.Count; i++)
+                    var newpParams = op.Parameters.ToList();
+                    for (int i = 0; i < newpParams.Count; i++)
                     {
-                        if (newParams[i].Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+                        //updater the first subscriptionId to be 'method'
+                        if (newpParams[i].Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            newParams[i] = newSubParam;
+                            newpParams[i].Implementation = ImplementationLocation.Method;
+                            break;
                         }
                     }
-                    op.Parameters = newParams;
                 }
             }
         }
