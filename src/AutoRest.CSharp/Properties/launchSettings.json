@@ -258,7 +258,7 @@
     },
     "lro-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\lro\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\LRO-LowLevel\\Generated"
     },
     "lro-parameterized-endpoints": {
       "commandName": "Project",

@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        public bool? IsLongRunningReallyLong
+        public bool IsLongRunningReallyLong
         {
             get
             {

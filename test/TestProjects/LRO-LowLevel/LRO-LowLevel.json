@@ -1,0 +1,140 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "LRO Service",
+    "description": "LRO Service",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/test/resources": {
+      "post": {
+        "operationId": "DoSomethingSLRO",
+        "description": ".",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "operationId": "DoSomethingLRO",
+        "description": ".",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "x-ms-long-running-reallyLong": true
+        }
+      }
+    },
+    "/test/resources/{resourceId}": {
+      "put": {
+        "operationId": "PageableSLRO",
+        "description": ".",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceListResult"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "get": {
+        "operationId": "PageableLRO",
+        "description": ".",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceListResult"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "x-ms-long-running-reallyLong": true
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "description": "."
+    },
+    "ResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Resource"
+          },
+          "description": "The list of resources"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Resource."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List resource operation response."
+    }
+  }
+}

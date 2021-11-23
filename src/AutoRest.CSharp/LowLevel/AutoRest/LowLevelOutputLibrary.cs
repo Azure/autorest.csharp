@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _codeModel = codeModel;
             _context = context;
             ClientOptions = new ClientOptionsTypeProvider(_context);
-            UpdateListMethodNames();
+            UpdateMethodNames();
             _restClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
         }
 
@@ -50,14 +50,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             return restClients;
         }
 
-        private void UpdateListMethodNames()
+        private void UpdateMethodNames()
         {
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
+                    // Update list method names
                     var resourceName = operationGroup.Key.IsNullOrEmpty() ? _codeModel.Language.Default.Name.ReplaceLast("Client", "") : operationGroup.Key;
                     operation.Language.Default.Name = operation.Language.Default.Name.RenameGetMethod(resourceName).RenameListToGet(resourceName);
+
+                    // Update Long LRO method names to add "Start" prefix
+                    if (operation.IsLongRunning && operation.IsLongRunningReallyLong)
+                        operation.Language.Default.Name = $"Start{operation.Language.Default.Name}";
                 }
             }
         }

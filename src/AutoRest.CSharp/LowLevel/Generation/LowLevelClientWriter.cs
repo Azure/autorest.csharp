@@ -30,8 +30,13 @@ namespace AutoRest.CSharp.Generation.Writers
     internal class LowLevelClientWriter : ClientWriter
     {
         private static readonly CSharpType RequestContextParameterType = new(typeof(RequestContext), true);
+        private static readonly CSharpType WaitForCompletionParameterType = new(typeof(bool), false);
+
+        private static readonly string WaitForCompletionParameterName = "waitForCompletion";
 
         private static readonly Parameter RequestContextParameter = new("context", "The request context", RequestContextParameterType, Constant.Default(RequestContextParameterType), false);
+        private static readonly Parameter WaitForCompletionParameterAsTrue = new(WaitForCompletionParameterName, "Waits for the completion of the long running operations.", WaitForCompletionParameterType, new Constant(true, WaitForCompletionParameterType), false);
+        private static readonly Parameter WaitForCompletionParameterAsFalse = new(WaitForCompletionParameterName, "Waits for the completion of the long running operations.", WaitForCompletionParameterType, new Constant(false, WaitForCompletionParameterType), false);
         private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
         private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
         private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);
@@ -317,10 +322,14 @@ namespace AutoRest.CSharp.Generation.Writers
                         ? (FormattableString)$"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {RequestContextParameter.Name:I}, {createEnumerableMethod:D}"
                         : (FormattableString)$"{PipelineField}, {messageVariable}, {ClientDiagnosticsField}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {RequestContextParameter.Name:I}";
 
+                    var operationVariable = new CodeWriterDeclaration("operation");
                     writer
                         .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
-                        .AppendRaw("return ")
+                        .Append($"var {operationVariable:D} = ")
                         .WriteMethodCall(async, LroProcessMessageMethodAsyncName, LroProcessMessageMethodName, processMessageParameters);
+                    writer.Line($"if ({WaitForCompletionParameterName})");
+                    writer.WriteMethodCall(async, $"{operationVariable}.WaitForCompletionAsync", $"{operationVariable}.WaitForCompletion", $"");
+                    writer.Line($"return {operationVariable};");
                 }
 
                 if (nextPageMethod != null && pagingResponseInfo != null)
@@ -470,7 +479,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, RestClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, CSharpType returnType, bool async)
         {
-            var parameters = clientMethod.Parameters.Append(RequestContextParameter);
+            IEnumerable<Parameter> parameters = clientMethod.Parameters;
+            if (clientMethod.Operation.IsLongRunning)
+            {
+                parameters = clientMethod.Operation.IsLongRunningReallyLong ?
+                    parameters.Append(WaitForCompletionParameterAsFalse) :
+                    parameters.Append(WaitForCompletionParameterAsTrue);
+            }
+            parameters = parameters.Append(RequestContextParameter);
             var asyncText = (async && (clientMethod.Operation.Language.Default.Paging == null || clientMethod.Operation.IsLongRunning)) ? " async" : string.Empty;
             var methodSignature = new MethodSignature(CreateMethodName(clientMethod.Name, async), clientMethod.Description, $"{clientMethod.Accessibility} virtual{asyncText}", returnType, null, parameters.ToArray());
 

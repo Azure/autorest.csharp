@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static bool IsLongRunningReallyLong(this MgmtRestOperation restOperation)
         {
-            return restOperation.Operation.IsLongRunningReallyLong ?? false;
+            return restOperation.Operation.IsLongRunningReallyLong;
         }
     }
 }

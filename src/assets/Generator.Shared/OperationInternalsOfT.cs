@@ -46,6 +46,11 @@ namespace Azure.Core
             return WaitForCompletionAsync(DefaultPollingInterval, cancellationToken);
         }
 
+        public Response<T> WaitForCompletion(CancellationToken cancellationToken = default)
+        {
+            return WaitForCompletion(DefaultPollingInterval, cancellationToken);
+        }
+
         public async ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
         {
             while (true)
@@ -57,6 +62,20 @@ namespace Azure.Core
                 }
 
                 await Task.Delay(pollingInterval, cancellationToken).ConfigureAwait(false);
+            }
+        }
+
+        public Response<T> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        {
+            while (true)
+            {
+                UpdateStatus(cancellationToken);
+                if (HasCompleted)
+                {
+                    return Response.FromValue(Value, GetRawResponse());
+                }
+
+                Thread.Sleep(pollingInterval);
             }
         }
 
