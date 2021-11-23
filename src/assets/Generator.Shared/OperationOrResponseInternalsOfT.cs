@@ -24,7 +24,7 @@ namespace Azure.Core
     internal class OperationOrResponseInternals<T> : OperationOrResponseInternals
 #pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly OperationInternals<T>? _operation;
+        private readonly OperationInternal<T>? _operation;
         private readonly Response<T>? _valueResponse;
 
         public OperationOrResponseInternals(
@@ -35,9 +35,9 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName))
+            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName).Internal)
         {
-            _operation = Operation as OperationInternals<T>;
+            _operation = Operation as OperationInternal<T>;
         }
 
         public OperationOrResponseInternals(Response<T> response)
@@ -53,7 +53,7 @@ namespace Azure.Core
         public async ValueTask<Response<T>> WaitForCompletionAsync(
             CancellationToken cancellationToken = default)
         {
-            return await WaitForCompletionAsync(OperationInternals<T>.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return await WaitForCompletionAsync(OperationInternals.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
         }
 
         public async ValueTask<Response<T>> WaitForCompletionAsync(
