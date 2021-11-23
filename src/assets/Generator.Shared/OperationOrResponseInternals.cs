@@ -32,7 +32,7 @@ namespace Azure.Core
         {
         }
 
-        protected OperationOrResponseInternals(OperationInternal operationInternal)
+        protected OperationOrResponseInternals(OperationInternalBase operationInternal)
         {
             Operation = operationInternal ?? throw new ArgumentNullException(nameof(operationInternal));
         }
@@ -45,7 +45,7 @@ namespace Azure.Core
             VoidResponse = response;
         }
 
-        protected OperationInternal? Operation { get; }
+        protected OperationInternalBase? Operation { get; }
 
         protected Response? VoidResponse { get; }
 
