@@ -81,7 +81,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
-            //UpdateSubscriptionIdForTenantIdResource(codeModel);
             _codeModel = codeModel;
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
