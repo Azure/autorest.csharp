@@ -1537,6 +1537,7 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
@@ -1555,7 +1556,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, bool waitForCompletion = true, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
@@ -1563,7 +1564,10 @@ namespace paging_LowLevel
             try
             {
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, CreateEnumerableAsync).ConfigureAwait(false);
+                var operation = await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, CreateEnumerableAsync).ConfigureAwait(false);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -1594,6 +1598,7 @@ namespace paging_LowLevel
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="context"> The request context. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
@@ -1612,7 +1617,7 @@ namespace paging_LowLevel
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(string clientRequestId = null, int? maxresults = null, int? timeout = null, bool waitForCompletion = true, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
@@ -1620,7 +1625,10 @@ namespace paging_LowLevel
             try
             {
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, CreateEnumerable);
+                var operation = LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, CreateEnumerable);
+                if (waitForCompletion)
+                    operation.WaitForCompletion();
+                return operation;
             }
             catch (Exception e)
             {

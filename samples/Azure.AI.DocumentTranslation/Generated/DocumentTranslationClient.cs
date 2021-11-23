@@ -1260,6 +1260,7 @@ namespace Azure.AI.DocumentTranslation
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
@@ -1315,7 +1316,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(RequestContent content, bool waitForCompletion = true, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
@@ -1323,7 +1324,10 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateStartTranslationRequest(content);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context).ConfigureAwait(false);
+                var operation = await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context).ConfigureAwait(false);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -1344,6 +1348,7 @@ namespace Azure.AI.DocumentTranslation
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="context"> The request context. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
@@ -1399,7 +1404,7 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// </remarks>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> StartTranslation(RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> StartTranslation(RequestContent content, bool waitForCompletion = true, RequestContext context = null)
 #pragma warning restore AZC0002
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
@@ -1407,7 +1412,10 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateStartTranslationRequest(content);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context);
+                var operation = LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context);
+                if (waitForCompletion)
+                    operation.WaitForCompletion();
+                return operation;
             }
             catch (Exception e)
             {
