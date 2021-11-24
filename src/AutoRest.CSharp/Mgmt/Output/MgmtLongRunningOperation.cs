@@ -25,8 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
             if (operation.ShouldWrapResultType(ResultType, context))
             {
-                // TODO -- this need fix
-                WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).First().Type;
+                WrapperType = context.Library.GetArmResources(operation.GetHttpPath()).First().Type;
             }
         }
 

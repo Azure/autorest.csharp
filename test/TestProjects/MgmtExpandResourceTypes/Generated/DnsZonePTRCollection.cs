@@ -69,7 +69,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
-                var operation = new RecordSetCreateOrUpdateOperation(Parent, response);
+                var operation = new RecordSetCreateOrUpdateOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -108,7 +108,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new RecordSetCreateOrUpdateOperation(Parent, response);
+                var operation = new RecordSetCreateOrUpdateOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;

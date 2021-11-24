@@ -44,7 +44,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // 2. some operations belong to non-resource
                 if (context.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
                 {
-                    return resultType.Name.Equals(resourceData.Type.Name);
+                    // also we need to check the resource corresponding to this resource data.
+                    // It is possible that one resource data could have multiple corresponding resources, in this case we should not wrap the result type
+                    return resultType.Name.Equals(resourceData.Type.Name) && context.Library.GetArmResources(operation.GetHttpPath()).Count() == 1;
                 }
             }
             return false;

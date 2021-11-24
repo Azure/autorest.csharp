@@ -296,15 +296,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRequestPathToResourceData().TryGetValue(requestPath, out resourceData);
         }
 
-        public IEnumerable<Resource> GetArmResource(string requestPath)
+        public IEnumerable<Resource> GetArmResources(string requestPath)
         {
-            if (TryGetArmResource(requestPath, out var resources))
+            if (TryGetArmResources(requestPath, out var resources))
                 return resources;
 
             throw new InvalidOperationException($"Cannot get Resource corresponding to {requestPath}");
         }
 
-        public bool TryGetArmResource(string requestPath, [MaybeNullWhen(false)] out IEnumerable<Resource> resources)
+        public bool TryGetArmResources(string requestPath, [MaybeNullWhen(false)] out IEnumerable<Resource> resources)
         {
             resources = null;
             if (EnsureRequestPathToArmResources().TryGetValue(requestPath, out var map))
@@ -316,15 +316,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return false;
         }
 
-        public IEnumerable<ResourceCollection> GetResourceCollection(string requestPath)
+        public IEnumerable<ResourceCollection> GetResourceCollections(string requestPath)
         {
-            if (TryGetResourceCollection(requestPath, out var collections))
+            if (TryGetResourceCollections(requestPath, out var collections))
                 return collections;
 
             return Enumerable.Empty<ResourceCollection>();
         }
 
-        public bool TryGetResourceCollection(string requestPath, [MaybeNullWhen(false)] out IEnumerable<ResourceCollection> collections)
+        public bool TryGetResourceCollections(string requestPath, [MaybeNullWhen(false)] out IEnumerable<ResourceCollection> collections)
         {
             collections = null;
             if (EnsureRequestPathToResourceCollections().TryGetValue(requestPath, out var map))
