@@ -143,6 +143,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
                     return name;
+                if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{ResourceType}", out name))
+                    return name;
             }
 
             return null;

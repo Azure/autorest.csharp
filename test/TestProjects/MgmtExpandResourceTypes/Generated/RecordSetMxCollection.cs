@@ -19,19 +19,19 @@ using MgmtExpandResourceTypes.Models;
 namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
-    public partial class DnsZoneSRVCollection : ArmCollection
+    public partial class RecordSetMxCollection : ArmCollection
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="DnsZoneSRVCollection"/> class for mocking. </summary>
-        protected DnsZoneSRVCollection()
+        /// <summary> Initializes a new instance of the <see cref="RecordSetMxCollection"/> class for mocking. </summary>
+        protected RecordSetMxCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of DnsZoneSRVCollection class. </summary>
+        /// <summary> Initializes a new instance of RecordSetMxCollection class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal DnsZoneSRVCollection(ArmResource parent) : base(parent)
+        internal RecordSetMxCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
@@ -64,11 +64,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
+                var response = _recordSetsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
                 var operation = new RecordSetCreateOrUpdateOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -103,11 +103,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new RecordSetCreateOrUpdateOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -127,21 +127,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<DnsZoneSRV> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetMx> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.Get");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.Get");
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), relativeRecordSetName, cancellationToken);
+                var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DnsZoneSRV(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetMx(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -157,21 +157,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public async virtual Task<Response<DnsZoneSRV>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetMx>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.Get");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DnsZoneSRV(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetMx(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -184,21 +184,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<DnsZoneSRV> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetMx> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 return response.Value == null
-                    ? Response.FromValue<DnsZoneSRV>(null, response.GetRawResponse())
-                    : Response.FromValue(new DnsZoneSRV(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<RecordSetMx>(null, response.GetRawResponse())
+                    : Response.FromValue(new RecordSetMx(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -211,21 +211,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public async virtual Task<Response<DnsZoneSRV>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetMx>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
-                    ? Response.FromValue<DnsZoneSRV>(null, response.GetRawResponse())
-                    : Response.FromValue(new DnsZoneSRV(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<RecordSetMx>(null, response.GetRawResponse())
+                    : Response.FromValue(new RecordSetMx(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -245,7 +245,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.CheckIfExists");
             scope.Start();
             try
             {
@@ -270,7 +270,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -291,17 +291,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DnsZoneSRV" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DnsZoneSRV> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="RecordSetMx" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<RecordSetMx> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<DnsZoneSRV> FirstPageFunc(int? pageSizeHint)
+            Page<RecordSetMx> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetsRestClient.ListByType(Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DnsZoneSRV(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _recordSetsRestClient.ListByType(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetMx(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -309,14 +309,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            Page<DnsZoneSRV> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<RecordSetMx> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetsRestClient.ListByTypeNextPage(nextLink, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DnsZoneSRV(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _recordSetsRestClient.ListByTypeNextPage(nextLink, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetMx(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -334,17 +334,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DnsZoneSRV" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DnsZoneSRV> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="RecordSetMx" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<RecordSetMx> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<DnsZoneSRV>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<RecordSetMx>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetsRestClient.ListByTypeAsync(Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DnsZoneSRV(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _recordSetsRestClient.ListByTypeAsync(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetMx(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -352,14 +352,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            async Task<Page<DnsZoneSRV>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<RecordSetMx>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DnsZoneSRVCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, "SRV".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DnsZoneSRV(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _recordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetMx(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -371,6 +371,6 @@ namespace MgmtExpandResourceTypes
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DnsZoneSRV, RecordSetData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, RecordSetMx, RecordSetData> Construct() { }
     }
 }

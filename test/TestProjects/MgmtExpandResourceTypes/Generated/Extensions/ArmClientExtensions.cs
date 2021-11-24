@@ -12,113 +12,113 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region DnsZoneA
-        /// <summary> Gets an object representing a DnsZoneA along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetA
+        /// <summary> Gets an object representing a RecordSetA along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZoneA" /> object. </returns>
-        public static DnsZoneA GetDnsZoneA(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetA" /> object. </returns>
+        public static RecordSetA GetRecordSetA(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZoneA(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetA(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region DnsZoneAAAA
-        /// <summary> Gets an object representing a DnsZoneAAAA along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetAaaa
+        /// <summary> Gets an object representing a RecordSetAaaa along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZoneAAAA" /> object. </returns>
-        public static DnsZoneAAAA GetDnsZoneAAAA(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetAaaa" /> object. </returns>
+        public static RecordSetAaaa GetRecordSetAaaa(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZoneAAAA(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetAaaa(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region DnsZoneCAA
-        /// <summary> Gets an object representing a DnsZoneCAA along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetCaa
+        /// <summary> Gets an object representing a RecordSetCaa along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZoneCAA" /> object. </returns>
-        public static DnsZoneCAA GetDnsZoneCAA(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetCaa" /> object. </returns>
+        public static RecordSetCaa GetRecordSetCaa(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZoneCAA(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetCaa(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region DnsZoneCNAME
-        /// <summary> Gets an object representing a DnsZoneCNAME along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetCName
+        /// <summary> Gets an object representing a RecordSetCName along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZoneCNAME" /> object. </returns>
-        public static DnsZoneCNAME GetDnsZoneCNAME(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetCName" /> object. </returns>
+        public static RecordSetCName GetRecordSetCName(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZoneCNAME(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetCName(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region DnsZoneMX
-        /// <summary> Gets an object representing a DnsZoneMX along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetMx
+        /// <summary> Gets an object representing a RecordSetMx along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZoneMX" /> object. </returns>
-        public static DnsZoneMX GetDnsZoneMX(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetMx" /> object. </returns>
+        public static RecordSetMx GetRecordSetMx(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZoneMX(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetMx(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region DnsZoneN
-        /// <summary> Gets an object representing a DnsZoneN along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetNs
+        /// <summary> Gets an object representing a RecordSetNs along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZoneN" /> object. </returns>
-        public static DnsZoneN GetDnsZoneN(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetNs" /> object. </returns>
+        public static RecordSetNs GetRecordSetNs(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZoneN(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetNs(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region DnsZonePTR
-        /// <summary> Gets an object representing a DnsZonePTR along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetPtr
+        /// <summary> Gets an object representing a RecordSetPtr along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZonePTR" /> object. </returns>
-        public static DnsZonePTR GetDnsZonePTR(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetPtr" /> object. </returns>
+        public static RecordSetPtr GetRecordSetPtr(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZonePTR(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetPtr(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region DnsZoneSOA
-        /// <summary> Gets an object representing a DnsZoneSOA along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetSoa
+        /// <summary> Gets an object representing a RecordSetSoa along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZoneSOA" /> object. </returns>
-        public static DnsZoneSOA GetDnsZoneSOA(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetSoa" /> object. </returns>
+        public static RecordSetSoa GetRecordSetSoa(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZoneSOA(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetSoa(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region DnsZoneSRV
-        /// <summary> Gets an object representing a DnsZoneSRV along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetSrv
+        /// <summary> Gets an object representing a RecordSetSrv along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZoneSRV" /> object. </returns>
-        public static DnsZoneSRV GetDnsZoneSRV(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetSrv" /> object. </returns>
+        public static RecordSetSrv GetRecordSetSrv(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZoneSRV(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetSrv(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 
-        #region DnsZoneTXT
-        /// <summary> Gets an object representing a DnsZoneTXT along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetTxt
+        /// <summary> Gets an object representing a RecordSetTxt along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DnsZoneTXT" /> object. </returns>
-        public static DnsZoneTXT GetDnsZoneTXT(this ArmClient armClient, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetTxt" /> object. </returns>
+        public static RecordSetTxt GetRecordSetTxt(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DnsZoneTXT(clientOptions, credential, uri, pipeline, id));
+            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new RecordSetTxt(clientOptions, credential, uri, pipeline, id));
         }
         #endregion
 

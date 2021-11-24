@@ -604,103 +604,103 @@ namespace MgmtExpandResourceTypes
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        #region DnsZoneA
+        #region RecordSetA
 
-        /// <summary> Gets a collection of DnsZoneAs in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZoneAs and their operations over a Zone. </returns>
-        public DnsZoneACollection GetDnsZoneAs()
+        /// <summary> Gets a collection of RecordSetAs in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetAs and their operations over a Zone. </returns>
+        public RecordSetACollection GetRecordSetAs()
         {
-            return new DnsZoneACollection(this);
+            return new RecordSetACollection(this);
         }
         #endregion
 
-        #region DnsZoneAAAA
+        #region RecordSetAaaa
 
-        /// <summary> Gets a collection of DnsZoneAAAAs in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZoneAAAAs and their operations over a Zone. </returns>
-        public DnsZoneAAAACollection GetDnsZoneAAAAs()
+        /// <summary> Gets a collection of RecordSetAaaas in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetAaaas and their operations over a Zone. </returns>
+        public RecordSetAaaaCollection GetRecordSetAaaas()
         {
-            return new DnsZoneAAAACollection(this);
+            return new RecordSetAaaaCollection(this);
         }
         #endregion
 
-        #region DnsZoneCAA
+        #region RecordSetCaa
 
-        /// <summary> Gets a collection of DnsZoneCAAs in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZoneCAAs and their operations over a Zone. </returns>
-        public DnsZoneCAACollection GetDnsZoneCAAs()
+        /// <summary> Gets a collection of RecordSetCaas in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetCaas and their operations over a Zone. </returns>
+        public RecordSetCaaCollection GetRecordSetCaas()
         {
-            return new DnsZoneCAACollection(this);
+            return new RecordSetCaaCollection(this);
         }
         #endregion
 
-        #region DnsZoneCNAME
+        #region RecordSetCName
 
-        /// <summary> Gets a collection of DnsZoneCNAMEs in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZoneCNAMEs and their operations over a Zone. </returns>
-        public DnsZoneCNAMECollection GetDnsZoneCNAMEs()
+        /// <summary> Gets a collection of RecordSetCNames in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetCNames and their operations over a Zone. </returns>
+        public RecordSetCNameCollection GetRecordSetCNames()
         {
-            return new DnsZoneCNAMECollection(this);
+            return new RecordSetCNameCollection(this);
         }
         #endregion
 
-        #region DnsZoneMX
+        #region RecordSetMx
 
-        /// <summary> Gets a collection of DnsZoneMXes in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZoneMXes and their operations over a Zone. </returns>
-        public DnsZoneMXCollection GetDnsZoneMXes()
+        /// <summary> Gets a collection of RecordSetMxes in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetMxes and their operations over a Zone. </returns>
+        public RecordSetMxCollection GetRecordSetMxes()
         {
-            return new DnsZoneMXCollection(this);
+            return new RecordSetMxCollection(this);
         }
         #endregion
 
-        #region DnsZoneN
+        #region RecordSetNs
 
-        /// <summary> Gets a collection of DnsZoneNs in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZoneNs and their operations over a Zone. </returns>
-        public DnsZoneNCollection GetDnsZoneNs()
+        /// <summary> Gets a collection of RecordSetNs in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetNs and their operations over a Zone. </returns>
+        public RecordSetNsCollection GetRecordSetNs()
         {
-            return new DnsZoneNCollection(this);
+            return new RecordSetNsCollection(this);
         }
         #endregion
 
-        #region DnsZonePTR
+        #region RecordSetPtr
 
-        /// <summary> Gets a collection of DnsZonePTRs in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZonePTRs and their operations over a Zone. </returns>
-        public DnsZonePTRCollection GetDnsZonePTRs()
+        /// <summary> Gets a collection of RecordSetPtrs in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetPtrs and their operations over a Zone. </returns>
+        public RecordSetPtrCollection GetRecordSetPtrs()
         {
-            return new DnsZonePTRCollection(this);
+            return new RecordSetPtrCollection(this);
         }
         #endregion
 
-        #region DnsZoneSOA
+        #region RecordSetSoa
 
-        /// <summary> Gets a collection of DnsZoneSOAs in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZoneSOAs and their operations over a Zone. </returns>
-        public DnsZoneSOACollection GetDnsZoneSOAs()
+        /// <summary> Gets a collection of RecordSetSoas in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetSoas and their operations over a Zone. </returns>
+        public RecordSetSoaCollection GetRecordSetSoas()
         {
-            return new DnsZoneSOACollection(this);
+            return new RecordSetSoaCollection(this);
         }
         #endregion
 
-        #region DnsZoneSRV
+        #region RecordSetSrv
 
-        /// <summary> Gets a collection of DnsZoneSRVs in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZoneSRVs and their operations over a Zone. </returns>
-        public DnsZoneSRVCollection GetDnsZoneSRVs()
+        /// <summary> Gets a collection of RecordSetSrvs in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetSrvs and their operations over a Zone. </returns>
+        public RecordSetSrvCollection GetRecordSetSrvs()
         {
-            return new DnsZoneSRVCollection(this);
+            return new RecordSetSrvCollection(this);
         }
         #endregion
 
-        #region DnsZoneTXT
+        #region RecordSetTxt
 
-        /// <summary> Gets a collection of DnsZoneTXTs in the Zone. </summary>
-        /// <returns> An object representing collection of DnsZoneTXTs and their operations over a Zone. </returns>
-        public DnsZoneTXTCollection GetDnsZoneTXTs()
+        /// <summary> Gets a collection of RecordSetTxts in the Zone. </summary>
+        /// <returns> An object representing collection of RecordSetTxts and their operations over a Zone. </returns>
+        public RecordSetTxtCollection GetRecordSetTxts()
         {
-            return new DnsZoneTXTCollection(this);
+            return new RecordSetTxtCollection(this);
         }
         #endregion
     }

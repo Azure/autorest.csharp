@@ -20,22 +20,22 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A Class representing a DnsZoneCAA along with the instance operations that can be performed on it. </summary>
-    public partial class DnsZoneCAA : ArmResource
+    /// <summary> A Class representing a RecordSetSoa along with the instance operations that can be performed on it. </summary>
+    public partial class RecordSetSoa : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
         private readonly RecordSetData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="DnsZoneCAA"/> class for mocking. </summary>
-        protected DnsZoneCAA()
+        /// <summary> Initializes a new instance of the <see cref="RecordSetSoa"/> class for mocking. </summary>
+        protected RecordSetSoa()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "DnsZoneCAA"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "RecordSetSoa"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DnsZoneCAA(ArmResource options, RecordSetData resource) : base(options, resource.Id)
+        internal RecordSetSoa(ArmResource options, RecordSetData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,29 +43,29 @@ namespace MgmtExpandResourceTypes
             _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="DnsZoneCAA"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetSoa"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal DnsZoneCAA(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal RecordSetSoa(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="DnsZoneCAA"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetSoa"/> class. </summary>
         /// <param name="clientOptions"> The client options to build client context. </param>
         /// <param name="credential"> The credential to build client context. </param>
         /// <param name="uri"> The uri to build client context. </param>
         /// <param name="pipeline"> The pipeline to build client context. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal DnsZoneCAA(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
+        internal RecordSetSoa(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones/CAA";
+        public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones/SOA";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -90,16 +90,16 @@ namespace MgmtExpandResourceTypes
         /// OperationId: RecordSets_Get
         /// <summary> Gets a record set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DnsZoneCAA>> GetAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetSoa>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneCAA.Get");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetSoa.Get");
             scope.Start();
             try
             {
                 var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DnsZoneCAA(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -113,16 +113,16 @@ namespace MgmtExpandResourceTypes
         /// OperationId: RecordSets_Get
         /// <summary> Gets a record set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DnsZoneCAA> Get(CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetSoa> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneCAA.Get");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetSoa.Get");
             scope.Start();
             try
             {
                 var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DnsZoneCAA(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -156,7 +156,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<RecordSetDeleteOperation> DeleteAsync(string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneCAA.Delete");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetSoa.Delete");
             scope.Start();
             try
             {
@@ -182,7 +182,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual RecordSetDeleteOperation Delete(string ifMatch = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneCAA.Delete");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetSoa.Delete");
             scope.Start();
             try
             {
@@ -207,19 +207,19 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<DnsZoneCAA>> UpdateAsync(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetSoa>> UpdateAsync(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneCAA.Update");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetSoa.Update");
             scope.Start();
             try
             {
                 var response = await _recordSetsRestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new DnsZoneCAA(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,19 +236,19 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<DnsZoneCAA> Update(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetSoa> Update(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneCAA.Update");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetSoa.Update");
             scope.Start();
             try
             {
                 var response = _recordSetsRestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.ResourceType.Types.Last().ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
-                return Response.FromValue(new DnsZoneCAA(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetSoa(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

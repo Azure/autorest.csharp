@@ -19,19 +19,19 @@ using MgmtExpandResourceTypes.Models;
 namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
-    public partial class DnsZoneMXCollection : ArmCollection
+    public partial class RecordSetPtrCollection : ArmCollection
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="DnsZoneMXCollection"/> class for mocking. </summary>
-        protected DnsZoneMXCollection()
+        /// <summary> Initializes a new instance of the <see cref="RecordSetPtrCollection"/> class for mocking. </summary>
+        protected RecordSetPtrCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of DnsZoneMXCollection class. </summary>
+        /// <summary> Initializes a new instance of RecordSetPtrCollection class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal DnsZoneMXCollection(ArmResource parent) : base(parent)
+        internal RecordSetPtrCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
@@ -64,11 +64,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
+                var response = _recordSetsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
                 var operation = new RecordSetCreateOrUpdateOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -103,11 +103,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new RecordSetCreateOrUpdateOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -127,21 +127,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<DnsZoneMX> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetPtr> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.Get");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken);
+                var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DnsZoneMX(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtr(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -157,21 +157,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public async virtual Task<Response<DnsZoneMX>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetPtr>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.Get");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DnsZoneMX(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtr(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -184,21 +184,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<DnsZoneMX> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetPtr> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.GetIfExists");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                var response = _recordSetsRestClient.Get(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 return response.Value == null
-                    ? Response.FromValue<DnsZoneMX>(null, response.GetRawResponse())
-                    : Response.FromValue(new DnsZoneMX(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<RecordSetPtr>(null, response.GetRawResponse())
+                    : Response.FromValue(new RecordSetPtr(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -211,21 +211,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public async virtual Task<Response<DnsZoneMX>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<RecordSetPtr>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             if (relativeRecordSetName == null)
             {
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.GetIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExistsAsync");
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetsRestClient.GetAsync(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
-                    ? Response.FromValue<DnsZoneMX>(null, response.GetRawResponse())
-                    : Response.FromValue(new DnsZoneMX(this, response.Value), response.GetRawResponse());
+                    ? Response.FromValue<RecordSetPtr>(null, response.GetRawResponse())
+                    : Response.FromValue(new RecordSetPtr(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -245,7 +245,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.CheckIfExists");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.CheckIfExists");
             scope.Start();
             try
             {
@@ -270,7 +270,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentNullException(nameof(relativeRecordSetName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.CheckIfExistsAsync");
+            using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.CheckIfExistsAsync");
             scope.Start();
             try
             {
@@ -291,17 +291,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DnsZoneMX" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DnsZoneMX> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="RecordSetPtr" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<RecordSetPtr> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<DnsZoneMX> FirstPageFunc(int? pageSizeHint)
+            Page<RecordSetPtr> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetsRestClient.ListByType(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DnsZoneMX(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _recordSetsRestClient.ListByType(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtr(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -309,14 +309,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            Page<DnsZoneMX> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<RecordSetPtr> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetsRestClient.ListByTypeNextPage(nextLink, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DnsZoneMX(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _recordSetsRestClient.ListByTypeNextPage(nextLink, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtr(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -334,17 +334,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DnsZoneMX" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DnsZoneMX> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="RecordSetPtr" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<RecordSetPtr> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<DnsZoneMX>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<RecordSetPtr>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetsRestClient.ListByTypeAsync(Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DnsZoneMX(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _recordSetsRestClient.ListByTypeAsync(Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtr(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -352,14 +352,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            async Task<Page<DnsZoneMX>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<RecordSetPtr>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DnsZoneMXCollection.GetAll");
+                using var scope = _clientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DnsZoneMX(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _recordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtr(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -371,6 +371,6 @@ namespace MgmtExpandResourceTypes
         }
 
         // Builders.
-        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, DnsZoneMX, RecordSetData> Construct() { }
+        // public ArmBuilder<Azure.ResourceManager.ResourceIdentifier, RecordSetPtr, RecordSetData> Construct() { }
     }
 }
