@@ -89,11 +89,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             void EnsureByCollection(ResourceCollection resourceCollection)
             {
                 var parentResources = resourceCollection!.Resource.Parent(Context);
-                if (parentResources.Contains(Context.Library.SubscriptionExtensions) ||
-                    parentResources.Contains(Context.Library.TenantExtensions))
-                {
-                    return;
-                }
 
                 if (parentResources.Contains(Context.Library.ResourceGroupExtensions))
                 {
@@ -110,6 +105,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         collectionInitiateParameters.AddRange(GenExampleInstanceMethodParameters(parentResourceCollection!.CreateOperation!));
                         return;
                     }
+                }
+
+                if (parentResources.Contains(Context.Library.SubscriptionExtensions) || parentResources.Contains(Context.Library.TenantExtensions))
+                {
+                    return;
                 }
                 throw new Exception($"Can't get parent resourceCollection for collection {resourceCollection.Type.Name}!");
             }
@@ -336,41 +336,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
                 return GetResponseType(returnType, async);
             }
-        }
-
-        public List<string> WriteOperationParameters(IEnumerable<Parameter> methodParameters, IEnumerable<Parameter> testMethodParameters, ExampleModel exampleModel)
-        {
-            var paramNames = new List<string>();
-            foreach (var passThruParameter in methodParameters)
-            {
-                if (testMethodParameters.Contains(passThruParameter))
-                {
-                    paramNames.Add(passThruParameter.Name);
-                    continue;
-                }
-                string? paramName = null;
-                foreach (ExampleParameter exampleParameter in exampleModel.MethodParameters)
-                {
-                    if (passThruParameter.Name == exampleParameter.Parameter.CSharpName())
-                    {
-                        paramName = WriteExampleParameterDeclaration(_writer, exampleParameter, passThruParameter);
-                    }
-                }
-                if (paramName is null)
-                {
-                    if (passThruParameter.ValidateNotNull)
-                    {
-                        throw new Exception($"parameter {passThruParameter.Name} not found in example {exampleModel.Name}");
-                    }
-                    else
-                    {
-                        paramName = passThruParameter.Name;
-                        _writer.Line($"{passThruParameter.Type} {paramName} = null;");
-                    }
-                }
-                paramNames.Add(paramName);
-            }
-            return paramNames;
         }
 
         protected override CSharpType? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)

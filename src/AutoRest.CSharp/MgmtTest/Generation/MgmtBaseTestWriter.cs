@@ -360,7 +360,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 writer.UseNamespace("System.Text.Json");
                 writer.Append($"JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!)):L})");
             }
-            else if (cst.Name == "ResourceIdentifier")
+            else if (cst.Name == "ResourceIdentifier" || cst.Name == "ResourceType")
             {
                 writer.Append($"new {cst}(${MgmtBaseTestWriter.FormatResourceId(exampleValue.RawValue!.ToString()!):L})");
             }
@@ -513,6 +513,41 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         protected override ResourceType GetBranchResourceType(RequestPath branch)
         {
             throw new NotImplementedException();
+        }
+
+        public List<string> WriteOperationParameters(IEnumerable<Parameter> methodParameters, IEnumerable<Parameter> testMethodParameters, ExampleModel exampleModel)
+        {
+            var paramNames = new List<string>();
+            foreach (var passThruParameter in methodParameters)
+            {
+                if (testMethodParameters.Contains(passThruParameter))
+                {
+                    paramNames.Add(passThruParameter.Name);
+                    continue;
+                }
+                string? paramName = null;
+                foreach (ExampleParameter exampleParameter in exampleModel.MethodParameters)
+                {
+                    if (passThruParameter.Name == exampleParameter.Parameter.CSharpName())
+                    {
+                        paramName = WriteExampleParameterDeclaration(_writer, exampleParameter, passThruParameter);
+                    }
+                }
+                if (paramName is null)
+                {
+                    if (passThruParameter.ValidateNotNull)
+                    {
+                        throw new Exception($"parameter {passThruParameter.Name} not found in example {exampleModel.Name}");
+                    }
+                    else
+                    {
+                        paramName = passThruParameter.Name;
+                        _writer.Line($"{passThruParameter.Type} {paramName} = null;");
+                    }
+                }
+                paramNames.Add(paramName);
+            }
+            return paramNames;
         }
     }
 }

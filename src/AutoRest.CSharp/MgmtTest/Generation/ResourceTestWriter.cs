@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var resourceVariableName = useVariableName(_resource.Type.Name.FirstCharToLowerCase());
             _writer.Line($"var {resourceVariableName} = {GetAwait(async)} Get{_resource.Type.Name}{GetAsyncSuffix(async)}();");
             if (resource != _resource) {
-                var childResourceVariableName =     useVariableName(resource.Type.Name.FirstCharToLowerCase());
+                var childResourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
                 _writer.Line($"var {childResourceVariableName} = {resourceVariableName}.Get{resource.Type.Name}();");
             }
         }
