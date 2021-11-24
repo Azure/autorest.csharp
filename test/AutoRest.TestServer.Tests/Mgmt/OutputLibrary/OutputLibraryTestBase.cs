@@ -76,7 +76,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                     var method = generatedResourceType.GetMethod(methodName);
                     Assert.NotNull(method, $"{generatedResourceType.Name} does not implement the {methodName} method.");
 
-                    Assert.AreEqual(2, method.GetParameters().Length);
+                    Assert.GreaterOrEqual(method.GetParameters().Length, 2);
                     var param1 = TypeAsserts.HasParameter(method, "waitForCompletion");
                     Assert.AreEqual(typeof(bool), param1.ParameterType);
                     var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
