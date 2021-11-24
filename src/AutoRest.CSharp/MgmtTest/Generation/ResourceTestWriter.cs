@@ -125,7 +125,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         _collectionTestWriter!.WriteGetCollection(_resource.ResourceCollection!.CreateOperation!, exampleGroup.Examples.First(), async);
                         _writer.Append($"var createOperation = ");
                         _collectionTestWriter!.WriteInvokeExampleInstanceMethod(_resource.ResourceCollection!.CreateOperation!, async, "CreateOrUpdate", exampleGroup.Examples.First());
-                        _writer.Line($"return createOperation.Value;");
+                        var createRespType = GenResponseType(_resource.ResourceCollection!.CreateOperation!, true, "CreateOrUpdate");
+                        var resultTypeDataName = _resource.ResourceCollection!.CreateOperation!.IsLongRunningOperation() ? ((Mgmt.Output.MgmtLongRunningOperation)createRespType.Arguments[0].Implementation).ResultType?.Name : ((Mgmt.Output.NonLongRunningOperation)createRespType.Arguments[0].Implementation).ResultDataType?.Name;
+                        if (resultTypeDataName != $"{_resource.Type.Name}Data" && _resource.ResourceCollection!.GetOperation!.ReturnType?.Name == $"{_resource.Type.Name}Data") {
+
+                            _writer.Line($"return collection.Get(createOperation.Value.Name);");
+                        }
+                        else {
+                            _writer.Line($"return createOperation.Value;");
+                        }
                     }
                 }
                 else

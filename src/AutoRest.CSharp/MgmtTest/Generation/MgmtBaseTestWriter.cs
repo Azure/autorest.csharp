@@ -541,13 +541,38 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                     else
                     {
-                        paramName = passThruParameter.Name;
+                        paramName = useVariableName(passThruParameter.Name);
                         _writer.Line($"{passThruParameter.Type} {paramName} = null;");
                     }
                 }
                 paramNames.Add(paramName);
             }
             return paramNames;
+        }
+
+        public CSharpType GenResponseType(MgmtClientOperation clientOperation, bool async, string? methodName = null)
+        {
+            if (clientOperation.IsLongRunningOperation() || methodName == "CreateOrUpdate")
+            {
+                var lroObjectType = GetLROObjectType(clientOperation.First().Operation, async);
+                return lroObjectType.WrapAsync(async);
+            }
+            else if (clientOperation.IsPagingOperation(Context))
+            {
+                var itemType = clientOperation.First(restOperation => restOperation.IsPagingOperation(Context)).GetPagingMethod(Context)!.PagingResponse.ItemType;
+                var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
+                return actualItemType.WrapPageable(async);
+            }
+            else if (clientOperation.IsListOperation(Context, out var itemType))
+            {
+                var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType, clientOperation.First())!);
+                return GetResponseType(returnType, async);
+            }
+            else
+            {
+                var returnType = WrapResourceDataType(clientOperation.ReturnType, clientOperation.First());
+                return GetResponseType(returnType, async);
+            }
         }
     }
 }
