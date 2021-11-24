@@ -137,6 +137,10 @@ namespace Azure.Core
                 return _lastKnownLocation;
             }
 
+            if (_requestMethod == RequestMethod.Patch)
+            {
+                return _startRequestUri.AbsoluteUri;
+            }
             return null;
         }
 
