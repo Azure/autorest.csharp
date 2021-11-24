@@ -44,9 +44,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: Retrieve a managed HSM Pool
-            var resource = await GetManagedHsmAsync();
+            var managedHsm = await GetManagedHsmAsync();
 
-            await resource.GetAsync();
+            await managedHsm.GetAsync();
         }
 
         [RecordedTest]
@@ -54,9 +54,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task DeleteAsync()
         {
             // Example: Delete a managed HSM Pool
-            var resource = await GetManagedHsmAsync();
+            var managedHsm = await GetManagedHsmAsync();
 
-            await resource.DeleteAsync();
+            await managedHsm.DeleteAsync();
         }
 
         [RecordedTest]
@@ -64,12 +64,12 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task UpdateAsync()
         {
             // Example: Update an existing managed HSM Pool
-            var resource = await GetManagedHsmAsync();
+            var managedHsm = await GetManagedHsmAsync();
             var parameters = new MgmtKeyvault.ManagedHsmData("westus")
             {
             };
             parameters.Tags.ReplaceWith(new Dictionary<string, string>() { { "Dept", "hsm" }, { "Environment", "dogfood" }, { "Slice", "A" }, });
-            await resource.UpdateAsync(parameters);
+            await managedHsm.UpdateAsync(parameters);
         }
 
         [RecordedTest]
@@ -77,9 +77,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetMHSMPrivateLinkResourcesByMhsmResourceAsync()
         {
             // Example: KeyVaultListPrivateLinkResources
-            var resource = await GetManagedHsmAsync();
+            var managedHsm = await GetManagedHsmAsync();
 
-            await resource.GetMHSMPrivateLinkResourcesByMhsmResourceAsync();
+            await managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync();
         }
     }
 }

@@ -47,9 +47,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
-            var resource = await GetMhsmPrivateEndpointConnectionAsync();
+            var mhsmPrivateEndpointConnection = await GetMhsmPrivateEndpointConnectionAsync();
 
-            await resource.GetAsync();
+            await mhsmPrivateEndpointConnection.GetAsync();
         }
 
         [RecordedTest]
@@ -57,9 +57,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task DeleteAsync()
         {
             // Example: ManagedHsmDeletePrivateEndpointConnection
-            var resource = await GetMhsmPrivateEndpointConnectionAsync();
+            var mhsmPrivateEndpointConnection = await GetMhsmPrivateEndpointConnectionAsync();
 
-            await resource.DeleteAsync();
+            await mhsmPrivateEndpointConnection.DeleteAsync();
         }
     }
 }

@@ -14,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -136,9 +137,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteGetResource(Resource resource, bool async)
         {
-            _writer.Line($"var resource = {GetAwait(async)} Get{_resource.Type.Name}{GetAsyncSuffix(async)}();");
+            _writer.Line($"var {_resource.Type.Name.FirstCharToLowerCase()} = {GetAwait(async)} Get{_resource.Type.Name}{GetAsyncSuffix(async)}();");
             if (resource != _resource) {
-                _writer.Line($"var childResource = resource.Get{resource.Type.Name}();");
+                _writer.Line($"var {resource.Type.Name.FirstCharToLowerCase()} = {_resource.Type.Name.FirstCharToLowerCase()}.Get{resource.Type.Name}();");
             }
         }
 
@@ -182,7 +183,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         List<string> paramNames = this._collectionTestWriter!.WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
 
                         _writer.Line();
-                        _writer.Append($"{GetAwait(async && !clientOperation.IsPagingOperation(Context))} {(resource==_resource?"resource": "childResource")}.{testMethodName}(");
+                        _writer.Append($"{GetAwait(async && !clientOperation.IsPagingOperation(Context))} {resource.Type.Name.FirstCharToLowerCase()}.{testMethodName}(");
                         foreach (var paramName in paramNames)
                         {
                             _writer.Append($"{paramName},");

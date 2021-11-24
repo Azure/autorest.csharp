@@ -45,9 +45,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetAsync()
         {
             // Example: Retrieve a vault
-            var resource = await GetVaultAsync();
+            var vault = await GetVaultAsync();
 
-            await resource.GetAsync();
+            await vault.GetAsync();
         }
 
         [RecordedTest]
@@ -55,9 +55,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task DeleteAsync()
         {
             // Example: Delete a vault
-            var resource = await GetVaultAsync();
+            var vault = await GetVaultAsync();
 
-            await resource.DeleteAsync();
+            await vault.DeleteAsync();
         }
 
         [RecordedTest]
@@ -65,7 +65,7 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task UpdateAsync()
         {
             // Example: Update an existing vault
-            var resource = await GetVaultAsync();
+            var vault = await GetVaultAsync();
             IDictionary<string, string> tags = null;
             var properties = new MgmtKeyvault.Models.VaultPatchProperties()
             {
@@ -76,7 +76,7 @@ namespace MgmtKeyvault.Tests.Mock
                 EnabledForTemplateDeployment = true,
             };
 
-            await resource.UpdateAsync(tags, properties);
+            await vault.UpdateAsync(tags, properties);
         }
 
         [RecordedTest]
@@ -84,9 +84,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetPrivateLinkResourcesAsync()
         {
             // Example: KeyVaultListPrivateLinkResources
-            var resource = await GetVaultAsync();
+            var vault = await GetVaultAsync();
 
-            await resource.GetPrivateLinkResourcesAsync();
+            await vault.GetPrivateLinkResourcesAsync();
         }
     }
 }
