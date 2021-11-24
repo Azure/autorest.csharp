@@ -109,13 +109,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 foreach (var op in operationGroup.Operations)
                 {
-                    var newpParams = op.Parameters.ToList();
-                    for (int i = 0; i < newpParams.Count; i++)
+                    foreach (var p in op.Parameters)
                     {
                         //updater the first subscriptionId to be 'method'
-                        if (newpParams[i].Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+                        if (p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            newpParams[i].Implementation = ImplementationLocation.Method;
+                            p.Implementation = ImplementationLocation.Method;
                             break;
                         }
                     }
