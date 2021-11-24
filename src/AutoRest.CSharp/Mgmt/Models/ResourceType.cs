@@ -77,8 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
         }
 
-        // TODO -- change this back after we refactor the expand method here
-        internal ResourceType(IReadOnlyList<Segment> segments)
+        private ResourceType(IReadOnlyList<Segment> segments)
         {
             _segments = segments;
             SerializedType = Segment.BuildSerializedSegments(segments, false);
