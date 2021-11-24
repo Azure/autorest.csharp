@@ -382,7 +382,7 @@ namespace MgmtSingleton
 
         /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it in the ParentResource. </summary>
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
-        public SingletonResource GetSingletonResource()
+        public virtual SingletonResource GetSingletonResource()
         {
             return new SingletonResource(this, Id + "/singletonResources/default");
         }
@@ -392,7 +392,7 @@ namespace MgmtSingleton
 
         /// <summary> Gets an object representing a SingletonResource2 along with the instance operations that can be performed on it in the ParentResource. </summary>
         /// <returns> Returns a <see cref="SingletonResource2" /> object. </returns>
-        public SingletonResource2 GetSingletonResource2()
+        public virtual SingletonResource2 GetSingletonResource2()
         {
             return new SingletonResource2(this, Id + "/singletonResources2/default");
         }

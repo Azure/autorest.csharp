@@ -428,7 +428,7 @@ namespace MgmtParamOrdering
 
         /// <summary> Gets a collection of DedicatedHosts in the DedicatedHostGroup. </summary>
         /// <returns> An object representing collection of DedicatedHosts and their operations over a DedicatedHostGroup. </returns>
-        public DedicatedHostCollection GetDedicatedHosts()
+        public virtual DedicatedHostCollection GetDedicatedHosts()
         {
             return new DedicatedHostCollection(this);
         }

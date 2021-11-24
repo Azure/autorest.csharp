@@ -323,7 +323,7 @@ namespace TenantOnly
 
         /// <summary> Gets a collection of Agreements in the BillingAccount. </summary>
         /// <returns> An object representing collection of Agreements and their operations over a BillingAccount. </returns>
-        public AgreementCollection GetAgreements()
+        public virtual AgreementCollection GetAgreements()
         {
             return new AgreementCollection(this);
         }
