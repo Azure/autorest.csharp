@@ -175,6 +175,48 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteEnumerableImpl(_writer);
         }
 
+        protected override void BuildParameters(MgmtClientOperation clientOperation, out Dictionary<RequestPath, MgmtRestOperation> operationMappings, out Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, out IReadOnlyList<Parameter> methodParameters)
+        {
+            base.BuildParameters(clientOperation, out operationMappings, out parameterMappings, out methodParameters);
+            // add some extra parameter mapping, if the original resource type of the corresponding resource is not a constant
+            var originalResourceType = _resource.RequestPaths.Select(path => path.GetResourceType(Config)).Single(); // we can assert here we only have one resource type despite it might contains variables in it, since we have checked this in MgmtOutputLibrary.GetResourceType
+            // do nothing if this resource type does not contain variables
+            if (originalResourceType.IsConstant)
+                return;
+            var references = originalResourceType.Select((segment, index) => (Segment: segment, Index: index)).Where(tuple => tuple.Segment.IsReference);
+
+            parameterMappings = parameterMappings.ToDictionary(
+                pair => pair.Key,
+                pair => ReplaceVariablesInResourceType(pair.Value, references));
+
+            methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
+        }
+
+        private IEnumerable<ParameterMapping> ReplaceVariablesInResourceType(IEnumerable<ParameterMapping> original, IEnumerable<(Segment Segment, int Index)> references)
+        {
+            var referencesCache = new List<(Segment Segment, int Index)>(references); // we maintain this cache list to ensure every segment can only match once
+            var list = original.ToList();
+            var resourceType = _resource.ResourceType;
+            for (int i = 0; i < list.Count; i++)
+            {
+                // check if this parameter mapping could match one of our candidates
+                var p = list[i];
+                if (!p.IsPassThru)
+                    continue;
+                var index = referencesCache.FindIndex(r => p.Parameter.Name.Equals(r.Segment.ReferenceName, StringComparison.InvariantCultureIgnoreCase) && p.Parameter.Type.Equals(r.Segment.Type));
+                if (index >= 0)
+                {
+                    // we get a match, remove this from the candidate list
+                    var candidate = referencesCache[index];
+                    referencesCache.Remove(candidate);
+                    //var t = resourceType[candidate.Index];
+                    list[i] = p with { IsPassThru = false, ValueExpression = ParameterMappingBuilder.GetValueExpression(candidate.Segment.Type, $"\"{resourceType[candidate.Index].ConstantValue}\"") };
+                }
+            }
+
+            return list;
+        }
+
         protected override ResourceType GetBranchResourceType(RequestPath branch)
         {
             return branch.GetResourceType(Config);
