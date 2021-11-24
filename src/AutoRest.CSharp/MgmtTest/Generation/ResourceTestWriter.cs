@@ -137,9 +137,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteGetResource(Resource resource, bool async)
         {
-            _writer.Line($"var {_resource.Type.Name.FirstCharToLowerCase()} = {GetAwait(async)} Get{_resource.Type.Name}{GetAsyncSuffix(async)}();");
+            var resourceVariableName = this.useVariableName(_resource.Type.Name.FirstCharToLowerCase());
+            _writer.Line($"var {resourceVariableName} = {GetAwait(async)} Get{_resource.Type.Name}{GetAsyncSuffix(async)}();");
             if (resource != _resource) {
-                _writer.Line($"var {resource.Type.Name.FirstCharToLowerCase()} = {_resource.Type.Name.FirstCharToLowerCase()}.Get{resource.Type.Name}();");
+                var childResourceVariableName = this.useVariableName(resource.Type.Name.FirstCharToLowerCase());
+                _writer.Line($"var {childResourceVariableName} = {resourceVariableName}.Get{resource.Type.Name}();");
             }
         }
 
@@ -178,6 +180,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
+                        clearVariableNames();
                         WriteGetResource(resource, async);
 
                         List<string> paramNames = this._collectionTestWriter!.WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);

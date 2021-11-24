@@ -303,6 +303,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
+                        clearVariableNames();
                         WriteGetCollection(clientOperation, exampleModel, async);
                         WriteInvokeExampleInstanceMethod(clientOperation, async, methodName, exampleModel);
                         break;
@@ -423,7 +424,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
-
+                        clearVariableNames();
                         List<string> paramNames = WriteOperationParameters(methodParameters, testMethodParameters, exampleModel);
 
                         _writer.Line();

@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter
     {
         public static CodeWriter _tagsWriter = new CodeWriter();
+        public HashSet<string>  variableNames = new HashSet<string>();
 
         public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context) : base(writer, provider, context)
         {
@@ -450,9 +451,33 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
+        public string useVariableName(string variableName)
+        {
+            if (!variableNames.Contains(variableName))
+            {
+                variableNames.Add(variableName);
+                return variableName;
+            }
+
+            for (int i = 2; true; i++)
+            {
+                var newName = $"{variableName}{i}";
+                if (!variableNames.Contains(newName))
+                {
+                    variableNames.Add(newName);
+                    return newName;
+                }
+            }
+            throw new Exception($"Can't find a valid variable name start with {variableName}");
+        }
+
+        public void clearVariableNames() {
+            variableNames = new HashSet<string>();
+        }
+
         public string WriteExampleParameterDeclaration(CodeWriter writer, ExampleParameter exampleParameter, Parameter parameter)
         {
-            var variableName = exampleParameter.Parameter.CSharpName();
+            var variableName = useVariableName(exampleParameter.Parameter.CSharpName());
             writer.Append($"var {variableName} = ");
             WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, variableName);
             writer.Line($";");
