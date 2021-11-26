@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
@@ -118,6 +119,80 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             break;
                         }
                     }
+                }
+            }
+        }
+
+        // Initialize ResourceData, Models and resource manager common types
+        private void InitializeModels()
+        {
+            _models = new Dictionary<Schema, TypeProvider>();
+            _resourceModels = new Dictionary<Schema, TypeProvider>();
+
+            // first, construct models and resource data models
+            foreach (var schema in _allSchemas)
+            {
+                if (_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
+                {
+                    var model = BuildResourceModel(schema);
+                    _resourceModels.Add(schema, model);
+                    _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
+                }
+                else
+                {
+                    var model = BuildModel(schema);
+                    _models.Add(schema, model);
+                    _nameToTypeProvider.Add(schema.Name, model);
+                }
+
+            }
+
+            // second, collect any model which can be replaced as whole (not as a property or as a base class)
+            var replacedTypes = new List<MgmtObjectType>();
+            foreach (var schema in _codeModel.Schemas.Objects)
+            {
+                TypeProvider? type;
+
+                if (_models.TryGetValue(schema, out type) || _resourceModels.TryGetValue(schema, out type))
+                {
+                    if (type is MgmtObjectType mgmtObjectType)
+                    {
+                        var csharpType = TypeReferenceTypeChooser.GetExactMatch(mgmtObjectType);
+                        if (csharpType != null)
+                        {
+                            // re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
+                            switch (mgmtObjectType)
+                            {
+                                case ResourceData resourceData:
+                                    replacedTypes.Add(new ResourceData(schema, _context, csharpType.Name, csharpType.Namespace));
+                                    break;
+                                case MgmtReferenceType referenceType:
+                                    replacedTypes.Add(new MgmtReferenceType(schema, _context, csharpType.Name, csharpType.Namespace));
+                                    break;
+                                default:
+                                    replacedTypes.Add(new MgmtObjectType(schema, _context, csharpType.Name, csharpType.Namespace));
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // third, update the entries in cache maps with the new model instances
+            foreach (var replacedType in replacedTypes)
+            {
+                var schema = replacedType.ObjectSchema;
+                var name = schema.Name;
+
+                _nameToTypeProvider[name] = replacedType;
+
+                if (replacedType is ResourceData replacedResourceData)
+                {
+                    _resourceModels[schema] = replacedType;
+                }
+                else
+                {
+                    _models[schema] = replacedType;
                 }
             }
         }
@@ -275,9 +350,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<Schema, TypeProvider>? _models;
 
-        public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
+        public Dictionary<Schema, TypeProvider> ResourceSchemaMap
+        {
+            get
+            {
+                if (_resourceModels == null)
+                    InitializeModels();
+                return _resourceModels!;
+            }
+        }
 
-        internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
+        internal Dictionary<Schema, TypeProvider> SchemaMap
+        {
+            get
+            {
+                if (_models == null)
+                    InitializeModels();
+                return _models!;
+            }
+        }
 
         public IEnumerable<TypeProvider> Models => GetModels();
 
@@ -641,44 +732,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRequestPathToArmResources().Where(pair => requestPaths.Contains(pair.Key)).Select(pair => pair.Value);
         }
 
-        private Dictionary<Schema, TypeProvider> BuildModels()
-        {
-            var models = new Dictionary<Schema, TypeProvider>();
-
-            foreach (var schema in _allSchemas)
-            {
-                if (_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
-                {
-                    continue;
-                }
-                TypeProvider typeOfModel = BuildModel(schema);
-                models.Add(schema, typeOfModel);
-                _nameToTypeProvider.Add(schema.Name, typeOfModel);
-            }
-            return models;
-        }
-
-        private Dictionary<Schema, TypeProvider> BuildResourceModels()
-        {
-            var resourceModels = new Dictionary<Schema, TypeProvider>();
-
-            foreach (var schema in _allSchemas)
-            {
-                if (_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
-                {
-                    TypeProvider typeOfModel = BuildResourceModel(schema);
-                    resourceModels.Add(schema, typeOfModel);
-                    _nameToTypeProvider.Add(schema.Name, typeOfModel); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
-                }
-            }
-            return resourceModels;
-        }
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType)
+            ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
             ? new MgmtReferenceType(objectSchema, _context)
             : new MgmtObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()

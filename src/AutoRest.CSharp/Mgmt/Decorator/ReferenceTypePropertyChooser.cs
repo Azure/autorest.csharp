@@ -33,12 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IList<System.Type> GetReferenceClassCollection()
         {
-            var assembly = Assembly.GetAssembly(typeof(ArmClient));
-            if (assembly == null)
-            {
-                return new List<System.Type>();
-            }
-            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
+            return ReferenceClassFinder.ExternalTypes.Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
         }
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
