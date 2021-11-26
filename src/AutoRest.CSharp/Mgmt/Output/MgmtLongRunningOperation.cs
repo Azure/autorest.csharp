@@ -22,9 +22,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             : base(operation, context, lroInfo, lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation")
         {
             DefaultNamespace = $"{context.DefaultNamespace}.Models";
-            if (operation.ShouldWrapResultType(ResultType, context))
+            if (operation.ShouldWrapResultType(ResultType, context, out var resource))
             {
-                WrapperType = context.Library.GetArmResource(operation.GetHttpPath()).Type;
+                WrapperType = resource.Type;
             }
         }
 
