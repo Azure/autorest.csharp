@@ -28,6 +28,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultAccessibility => "public";
 
+        public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
+
         public override IEnumerable<MgmtClientOperation> ClientOperations => _clientOperations ??= EnsureClientOperations();
 
         private IEnumerable<MgmtClientOperation>? _clientOperations;

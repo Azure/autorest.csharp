@@ -110,25 +110,40 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
-            var resourceGroupExtensionsCodeWriter = new CodeWriter();
-            new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).Write();
-            AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}.cs", resourceGroupExtensionsCodeWriter.ToString());
+            if (!context.Library.ResourceGroupExtensions.IsEmpty)
+            {
+                var resourceGroupExtensionsCodeWriter = new CodeWriter();
+                new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}.cs", resourceGroupExtensionsCodeWriter.ToString());
+            }
 
-            var subscriptionExtensionsCodeWriter = new CodeWriter();
-            new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
-            AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
+            if (!context.Library.SubscriptionExtensions.IsEmpty)
+            {
+                var subscriptionExtensionsCodeWriter = new CodeWriter();
+                new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
+            }
 
-            var managementGroupExtensionsCodeWriter = new CodeWriter();
-            new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context.Library.ManagementGroupExtensions, context).Write();
-            AddGeneratedFile(project, $"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
+            if (!context.Library.ManagementGroupExtensions.IsEmpty)
+            {
+                var managementGroupExtensionsCodeWriter = new CodeWriter();
+                new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context.Library.ManagementGroupExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
+            }
 
-            var tenantExtensionsCodeWriter = new CodeWriter();
-            new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.TenantExtensions, context).Write();
-            AddGeneratedFile(project, $"Extensions/{context.Library.TenantExtensions.Type.Name}.cs", tenantExtensionsCodeWriter.ToString());
+            if (!context.Library.TenantExtensions.IsEmpty)
+            {
+                var tenantExtensionsCodeWriter = new CodeWriter();
+                new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.TenantExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.TenantExtensions.Type.Name}.cs", tenantExtensionsCodeWriter.ToString());
+            }
 
-            var armClientExtensionsCodeWriter = new CodeWriter();
-            new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context.Library.ArmClientExtensions, context).Write();
-            AddGeneratedFile(project, $"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
+            if (!context.Library.ArmClientExtensions.IsEmpty)
+            {
+                var armClientExtensionsCodeWriter = new CodeWriter();
+                new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context.Library.ArmClientExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
+            }
 
             if (_overridenFilenames.Count != 0)
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", _overridenFilenames)}");
