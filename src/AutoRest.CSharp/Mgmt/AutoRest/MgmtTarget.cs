@@ -110,19 +110,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
-            if (!context.Library.ResourceGroupExtensions.IsEmpty)
-            {
-                var resourceGroupExtensionsCodeWriter = new CodeWriter();
-                new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}.cs", resourceGroupExtensionsCodeWriter.ToString());
-            }
+            // we will write the ResourceGroupExtensions class even if it does not contain anything
+            var resourceGroupExtensionsCodeWriter = new CodeWriter();
+            new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).Write();
+            AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}.cs", resourceGroupExtensionsCodeWriter.ToString());
 
-            if (!context.Library.SubscriptionExtensions.IsEmpty)
-            {
-                var subscriptionExtensionsCodeWriter = new CodeWriter();
-                new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
-            }
+            // we will write the SubscriptionExtensions class even if it does not contain anything
+            var subscriptionExtensionsCodeWriter = new CodeWriter();
+            new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
+            AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
 
             if (!context.Library.ManagementGroupExtensions.IsEmpty)
             {
