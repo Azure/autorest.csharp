@@ -397,5 +397,15 @@ namespace MgmtSingleton
             return new SingletonResource2(this, Id + "/singletonResources2/default");
         }
         #endregion
+
+        #region SingletonConfig
+
+        /// <summary> Gets an object representing a SingletonConfig along with the instance operations that can be performed on it in the ParentResource. </summary>
+        /// <returns> Returns a <see cref="SingletonConfig" /> object. </returns>
+        public SingletonConfig GetSingletonConfig()
+        {
+            return new SingletonConfig(this, Id + "/singletonConfigs/web");
+        }
+        #endregion
     }
 }
