@@ -393,7 +393,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         || resourceOperations.Keys.All(operationSet => !operationSet.IsSingletonResource(_context)));
                     var isSingleton = resourceOperations.Keys.Any(operationSet => operationSet.IsSingletonResource(_context));
                     // we calculate the resource type of the resource
-                    var resourceTypes = GetResourceType(resourceOperations.Keys).Expand();
+                    var resourceTypes = resourceOperations.Keys.Select(operationSet => operationSet.GetRequestPath(_context))
+                        .GetResourceType(_context).Expand();
                     foreach (var resourceType in resourceTypes)
                     {
                         var resource = new Resource(resourceOperations, resourceName, resourceType, _context);
@@ -457,21 +458,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // TODO -- we need to categrize the above list to see if some of the resources have the operation list and we can combine them.
             // now by default we will never combine any of them
             return operations.Select(tuple => new Dictionary<OperationSet, IEnumerable<Operation>> { { tuple.Item1, tuple.Item2 } });
-        }
-
-        private ResourceType GetResourceType(IEnumerable<OperationSet> operationSets)
-        {
-            var resourceTypes = operationSets.Select(operationSet => operationSet.GetRequestPath(_context).GetResourceType(_mgmtConfiguration)).Distinct();
-
-            if (resourceTypes.Count() > 1)
-                throw new InvalidOperationException($"Request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} contain multiple resource types in it ({string.Join(", ", resourceTypes)}), please double check and override it in `request-path-to-resource-type` section.");
-
-            var resourceType = resourceTypes.First();
-
-            if (resourceType == ResourceType.Scope)
-                throw new InvalidOperationException($"Request path(s) {string.Join(", ", operationSets.Select(set => set.GetRequestPath(_context)))} is a 'ById' resource, we cannot derive a resource type from its request path, please double check and override it in `request-path-to-resource-type` section.");
-
-            return resourceType;
         }
 
         public IEnumerable<Operation> GetChildOperations(string requestPath)

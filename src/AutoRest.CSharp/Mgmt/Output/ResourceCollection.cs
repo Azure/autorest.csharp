@@ -12,9 +12,11 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -33,39 +35,68 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtClientOperation? GetAllOperation { get; }
 
+        private Dictionary<Parameter, FormattableString> _extraConstructorParameters = new();
+        public IEnumerable<Parameter> ExtraConstructorParameters => _extraConstructorParameters.Keys;
+
+        private List<ContextualParameterMapping> _extraContextualParameterMapping = new();
+        public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping;
+
         private MgmtClientOperation? EnsureGetAllOperation()
         {
             // if this resource was listed in list-exception section, we suppress the exception here
             // or if the debug flag `--mgmt-debug.suppress-list-exception` is on, we suppress the exception here
             var suppressListException = RequestPaths.Any(path => _context.Configuration.MgmtConfiguration.ListException.Contains(path))
                 || _context.Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
-            var candidates = ClientOperations.Where(operation => operation.Name == "GetAll" && !HasExtraParameter(operation));
-            // we need to filter out the methods that does not have extra mandatory parameters in our current context
-            if (!suppressListException && candidates.Count() > 1)
-                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) contains more than one `GetAll` method with no required parameters.");
-            if (!suppressListException && !candidates.Any())
-                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method with no required parameters");
-            return candidates.FirstOrDefault();
-        }
+            var getAllOperation = ClientOperations.Where(operation => operation.Name == "GetAll").OrderBy(operation => ReferenceSegments(operation).Count()).FirstOrDefault();
+            if (!suppressListException && getAllOperation == null)
+                throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method");
 
-        private static bool HasExtraParameter(MgmtClientOperation clientOperation)
-        {
-            foreach (var operation in clientOperation)
+            if (getAllOperation == null)
+                return getAllOperation;
+
+            // calculate the ResourceType from the RequestPath of this resource
+            var resourceType = RequestPaths.GetResourceType(_context);
+            var resourceTypeSegments = resourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
+            // iterate over all the reference segments in the diff of this GetAll operation
+            var candidatesOfParameters = new List<Parameter>(getAllOperation.Parameters);
+            foreach (var segment in ReferenceSegments(getAllOperation))
             {
-                RequestPath diff;
-                if (operation.RequestPath.IsAncestorOf(operation.ContextualPath))
-                    diff = operation.RequestPath.TrimAncestorFrom(operation.ContextualPath);
-                else
-                    diff = operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
-                if (!diff.All(segment => segment.IsConstant))
-                    return true;
-                foreach (var parameter in operation.Parameters)
+                var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
+                if (index < 0)
                 {
-                    if (!parameter.IsInPathOf(operation.Method) && parameter.IsMandatory())
-                        return true;
+                    var parameter = candidatesOfParameters.First(p => p.Name == segment.ReferenceName && p.Type.Equals(segment.Type));
+                    candidatesOfParameters.Remove(parameter);
+                    // this reference is not in the resource type, therefore this parameter goes to the constructor
+                    _extraConstructorParameters.Add(parameter, $"_{segment.ReferenceName}");
+                    // there is a key for this parameter, get the key and add this one to contextual parameter mapping
+                    var key = ParameterMappingBuilder.FindKeyOfParameter(parameter, getAllOperation.First().RequestPath);
+                    _extraContextualParameterMapping.Add(new ContextualParameterMapping(key, segment, GetFieldName(parameter)));
+                }
+                else
+                {
+                    var candidate = resourceTypeSegments[index];
+                    var value = ResourceType[candidate.index];
+                    _extraContextualParameterMapping.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
                 }
             }
-            return false;
+
+            return getAllOperation;
+        }
+
+        public FormattableString GetFieldName(Parameter parameter)
+        {
+            return _extraConstructorParameters[parameter];
+        }
+
+        private static IEnumerable<Segment> ReferenceSegments(MgmtClientOperation clientOperation)
+        {
+            var operation = clientOperation.First();
+            RequestPath diff;
+            if (operation.RequestPath.IsAncestorOf(operation.ContextualPath))
+                diff = operation.RequestPath.TrimAncestorFrom(operation.ContextualPath);
+            else
+                diff = operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
+            return diff.Where(segment => segment.IsReference);
         }
 
         protected override bool ShouldIncludeOperation(Operation operation)

@@ -322,12 +322,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        private static string FindKeyOfParameter(Parameter pathParameter, RequestPath requestPath)
+        public static string FindKeyOfParameter(Reference reference, RequestPath requestPath)
         {
             var segments = requestPath.ToList();
-            int index = segments.FindIndex(segment => segment.IsReference && segment.ReferenceName == pathParameter.Name && segment.Reference.Type.Equals(pathParameter.Type));
+            int index = segments.FindIndex(segment => segment.IsReference && segment.ReferenceName == reference.Name && segment.Type.Equals(reference.Type));
             if (index < 0)
-                throw new InvalidOperationException($"Cannot find the key corresponding to parameter {pathParameter.Name} in path {requestPath}");
+                throw new InvalidOperationException($"Cannot find the key corresponding to parameter {reference.Name} in path {requestPath}");
 
             if (index == 0)
                 return string.Empty;

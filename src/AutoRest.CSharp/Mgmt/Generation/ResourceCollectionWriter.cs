@@ -83,6 +83,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override void WriteFields()
         {
             WriteFields(_writer, _resourceCollection.RestClients);
+
+            foreach (var reference in _resourceCollection.ExtraConstructorParameters)
+            {
+                _writer.Line($"private readonly {reference.Type} {_resourceCollection.GetFieldName(reference)};");
+            }
         }
 
         protected override void WriteCtors()
@@ -97,10 +102,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {TypeNameOfThis} class.");
             _writer.WriteXmlDocumentationParameter("parent", $"The resource representing the parent resource.");
-            using (_writer.Scope($"internal {TypeNameOfThis}({typeof(ArmResource)} parent) : base(parent)"))
+            _writer.WriteXmlDocumentationParameters(_resourceCollection.ExtraConstructorParameters);
+            _writer.Append($"internal {TypeNameOfThis}({typeof(ArmResource)} parent, ");
+            foreach (var reference in _resourceCollection.ExtraConstructorParameters)
+            {
+                _writer.Append($"{reference.Type} {reference.Name}, ");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($") : base(parent)");
+            using (_writer.Scope())
             {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 WriteRestClientAssignments();
+                foreach (var reference in _resourceCollection.ExtraConstructorParameters)
+                {
+                    _writer.Line($"{_resourceCollection.GetFieldName(reference)} = {reference.Name};");
+                }
             }
         }
 
@@ -177,44 +194,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void BuildParameters(MgmtClientOperation clientOperation, out Dictionary<RequestPath, MgmtRestOperation> operationMappings, out Dictionary<RequestPath, IEnumerable<ParameterMapping>> parameterMappings, out IReadOnlyList<Parameter> methodParameters)
         {
-            base.BuildParameters(clientOperation, out operationMappings, out parameterMappings, out methodParameters);
-            // add some extra parameter mapping, if the original resource type of the corresponding resource is not a constant
-            var originalResourceType = _resource.RequestPaths.Select(path => path.GetResourceType(Config)).Single(); // we can assert here we only have one resource type despite it might contains variables in it, since we have checked this in MgmtOutputLibrary.GetResourceType
-            // do nothing if this resource type does not contain variables
-            if (originalResourceType.IsConstant)
-                return;
-            var references = originalResourceType.Select((segment, index) => (Segment: segment, Index: index)).Where(tuple => tuple.Segment.IsReference);
-
-            parameterMappings = parameterMappings.ToDictionary(
+            // get the corresponding MgmtClientOperation mapping
+            operationMappings = clientOperation.ToDictionary(
+                operation => operation.ContextualPath,
+                operation => operation);
+            // build contextual parameters
+            var contextualParameterMappings = operationMappings.Keys.ToDictionary(
+                contextualPath => contextualPath,
+                contextualPath => contextualPath.BuildContextualParameters(Context, IdVariableName).Concat(_resourceCollection.ExtraContextualParameterMapping));
+            // build parameter mapping
+            parameterMappings = operationMappings.ToDictionary(
                 pair => pair.Key,
-                pair => ReplaceVariablesInResourceType(pair.Value, references));
-
+                pair => pair.Value.BuildParameterMapping(contextualParameterMappings[pair.Key]));
+            // we have ensured the operations corresponding to different OperationSet have the same method parameters, therefore here we just need to use the first operation to get the method parameters
             methodParameters = parameterMappings.Values.First().GetPassThroughParameters();
-        }
-
-        private IEnumerable<ParameterMapping> ReplaceVariablesInResourceType(IEnumerable<ParameterMapping> original, IEnumerable<(Segment Segment, int Index)> references)
-        {
-            var referencesCache = new List<(Segment Segment, int Index)>(references); // we maintain this cache list to ensure every segment can only match once
-            var list = original.ToList();
-            var resourceType = _resource.ResourceType;
-            for (int i = 0; i < list.Count; i++)
-            {
-                // check if this parameter mapping could match one of our candidates
-                var p = list[i];
-                if (!p.IsPassThru)
-                    continue;
-                var index = referencesCache.FindIndex(r => p.Parameter.Name.Equals(r.Segment.ReferenceName, StringComparison.InvariantCultureIgnoreCase) && p.Parameter.Type.Equals(r.Segment.Type));
-                if (index >= 0)
-                {
-                    // we get a match, remove this from the candidate list
-                    var candidate = referencesCache[index];
-                    referencesCache.Remove(candidate);
-                    //var t = resourceType[candidate.Index];
-                    list[i] = p with { IsPassThru = false, ValueExpression = ParameterMappingBuilder.GetValueExpression(candidate.Segment.Type, $"\"{resourceType[candidate.Index].ConstantValue}\"") };
-                }
-            }
-
-            return list;
         }
 
         protected override ResourceType GetBranchResourceType(RequestPath branch)
