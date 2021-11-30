@@ -70,7 +70,7 @@ namespace MgmtKeyvault.Tests.Mock
             var properties = new MgmtKeyvault.Models.VaultPatchProperties()
             {
                 TenantId = System.Guid.Parse("00000000-0000-0000-0000-000000000000"),
-                Sku = new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), SkuName.Standard),
+                Sku = new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard),
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
                 EnabledForTemplateDeployment = true,

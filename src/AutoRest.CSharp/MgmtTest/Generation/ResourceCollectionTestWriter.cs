@@ -34,7 +34,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected string TestBaseName => $"MockTestBase";
 
-        public List<Parameter> collectionInitiateParameters = new List<Parameter>();
+        public List<Tuple<Parameter, MgmtClientOperation?>> collectionInitiateParameters = new List<Tuple<Parameter, MgmtClientOperation?>>();
+        public Dictionary<Tuple<Parameter, MgmtClientOperation?>, string> collectionInitiateParametersMap = new Dictionary<Tuple<Parameter, MgmtClientOperation?>, string>();
 
         public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context): base(writer, resourceCollection, context)
         {
@@ -59,7 +60,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     WriteTesterCtors();
                     WriteCreateCollectionMethod(true);
                     WriteCreateOrUpdateTest();
-                    // WriteGetTest();  // disable since can't successed in stateful mock test. enable this if use stateless mock test
+                    WriteGetTest();
                     foreach (var clientOperation in _resourceCollection.ClientOperations)
                     {
                         WriteMethodTest(clientOperation, true);
@@ -92,9 +93,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                 if (parentResources.Contains(Context.Library.ResourceGroupExtensions))
                 {
-                    collectionInitiateParameters.Add(new Parameter("resourceGroupName", "", new CSharpType(typeof(string)), null, true));
+                    collectionInitiateParameters.Add(new Tuple<Parameter, MgmtClientOperation?>(new Parameter("resourceGroupName", "", new CSharpType(typeof(string)), null, true), null));
                     return;
                 }
+
+                if (parentResources.Contains(Context.Library.SubscriptionExtensions) || parentResources.Contains(Context.Library.TenantExtensions))
+                {
+                    return;
+                }
+
 
                 foreach (var parentResource in parentResources)
                 {
@@ -102,14 +109,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         var parentResourceCollection = ((Resource)parentResource).ResourceCollection;
                         EnsureByCollection(parentResourceCollection!);
-                        collectionInitiateParameters.AddRange(GenExampleInstanceMethodParameters(parentResourceCollection!.CreateOperation!));
-                        return;
+                        if (CanCreateResourceFromExample(Context, parentResourceCollection))
+                        {
+                            collectionInitiateParameters.AddRange(from p in GenExampleInstanceMethodParameters(parentResourceCollection!.CreateOperation!) select new Tuple<Parameter, MgmtClientOperation?>(p, parentResourceCollection!.CreateOperation));
+                            return;
+                        }
                     }
-                }
-
-                if (parentResources.Contains(Context.Library.SubscriptionExtensions) || parentResources.Contains(Context.Library.TenantExtensions))
-                {
-                    return;
                 }
                 throw new Exception($"Can't get parent resourceCollection for collection {resourceCollection.Type.Name}!");
             }
@@ -122,8 +127,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public void WriteCollectionDeclaration(ResourceCollection resourceCollection, bool isAsync, ref bool asyncContent)
         {
             var collectionVariable = GenCollectionVariableName(resourceCollection);
-            // var parentResourceType = resourceCollection.OperationGroup.ParentResourceType(Context.Configuration.MgmtConfiguration);
-            // var parentOperationGroup = resourceCollection.OperationGroup.ParentOperationGroup(Context);
 
             var parentResources = resourceCollection!.Resource.Parent(Context);
             if (parentResources.Contains(Context.Library.ResourceGroupExtensions))
@@ -134,7 +137,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             else if (parentResources.Contains(Context.Library.SubscriptionExtensions))
             {
-                _writer.Line($"{resourceCollection.Type.Name} {collectionVariable} = GetArmClient().DefaultSubscription.Get{resourceCollection.Resource.Type.Name.ToPlural()}();");
+                _writer.Line($"{resourceCollection.Type.Name} {collectionVariable} = GetArmClient().GetDefaultSubscription().Get{resourceCollection.Resource.Type.Name.ToPlural()}();");
             }
             else if (parentResources.Contains(Context.Library.TenantExtensions))
             {
@@ -152,11 +155,15 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         WriteCollectionDeclaration(parentResourceCollection, isAsync, ref asyncContent);
 
                         var createParentParameters = GenExampleInstanceMethodParameters(parentResourceCollection.CreateOperation!);
-                        var resourceVariableName = parentResourceCollection.Resource.ResourceName.FirstCharToLowerCase();
+                        var resourceVariableName = parentResourceCollection.Resource.Type.Name.FirstCharToLowerCase();
                         _writer.Append($"var {resourceVariableName}Operation = {GetAwait(isAsync)} TestHelper.{GenExampleInstanceMethodName("CreateOrUpdate", isAsync)}({GenCollectionVariableName(parentResourceCollection)}, ");
                         foreach (var parameter in createParentParameters)
                         {
-                            _writer.Append($"{parameter.Name}, ");
+                            var from = new Tuple<Parameter, MgmtClientOperation?>(parameter, parentResourceCollection.CreateOperation);
+                            var mappedName = collectionInitiateParametersMap.GetValueOrDefault(from);
+                            if (mappedName is null)
+                                mappedName = parameter.Name;
+                            _writer.Append($"{mappedName}, ");
                         }
                         _writer.RemoveTrailingComma();
                         _writer.Line($");");
@@ -176,9 +183,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             EnsureCollectionInitiateParameters();
             _writer.Line();
             _writer.Append($"private {GetAsyncKeyword(isAsync)} {TypeOfCollection.WrapAsync(isAsync)} Get{TypeNameOfCollection}{GetAsyncSuffix(isAsync)}(");
-            foreach (var parameter in collectionInitiateParameters)
+            foreach (var tuple in collectionInitiateParameters)
             {
-                _writer.Append($"{parameter.Type} {parameter.Name}, ");
+                var mappedParameterName = useVariableName(tuple.Item1.Name);
+                _writer.Append($"{tuple.Item1.Type} {mappedParameterName}, ");
+                collectionInitiateParametersMap.Add(tuple, mappedParameterName);
             }
             _writer.RemoveTrailingComma();
             using (_writer.Scope($")"))
@@ -224,7 +233,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 allMethodParameters.Add(methodParameter.Name);
             }
-            foreach (var parameter in collectionInitiateParameters)
+            foreach (var (parameter, op) in collectionInitiateParameters)
             {
                 var found = false;
                 foreach (var exampleMethodParameter in exampleModel.MethodParameters)
@@ -287,7 +296,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var methodName = clientOperation.Name;
 
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
-            foreach ((var branch, var operation) in operationMappings)
+            foreach ((var branch, var operation) in getSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
@@ -310,6 +319,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                 }
                 _writer.Line();
+                break; // TODO: need to create different type of resourceType of collection to test more operation!
             }
         }
 
@@ -331,7 +341,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var methodName = clientOperation.Name;
 
             BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
-            foreach ((var branch, var operation) in operationMappings)
+            foreach ((var branch, var operation) in getSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
@@ -363,7 +373,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                     {
-                        _writer.LineRaw($"// Example: {exampleModel.Name}");
+                        _writer.Line($"// Example: {exampleModel.Name}");
                         clearVariableNames();
                         List<string> paramNames = WriteOperationParameters(methodParameters, testMethodParameters, exampleModel);
 

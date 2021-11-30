@@ -45,6 +45,15 @@ namespace MgmtKeyvault.Tests.Mock
 
         [RecordedTest]
         [Ignore("Generated TestCase")]
+        public async Task GetAsync()
+        {
+            // Example: KeyVaultGetPrivateEndpointConnection
+            var collection = await GetPrivateEndpointConnectionCollectionAsync("sample-group", "sample-vault");
+            await TestHelper.GetExampleInstanceAsync(collection, "sample-pec");
+        }
+
+        [RecordedTest]
+        [Ignore("Generated TestCase")]
         public async Task GetAllAsync()
         {
             // Example: KeyVaultListPrivateEndpointConnection

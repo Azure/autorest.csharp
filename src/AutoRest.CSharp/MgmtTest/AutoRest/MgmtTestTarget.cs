@@ -16,39 +16,44 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
             var extensionsWriter = new CodeWriter();
-            var mockExtensionWriter = new TestHelperWriter(extensionsWriter, context);
-            mockExtensionWriter.WriteMockExtension();
-            project.AddGeneratedFile($"Mock/TestHelper.cs", extensionsWriter.ToString());
 
+            bool hasCollectionTest = false;
             foreach (var resourceCollection in context.Library.ResourceCollections)
             {
-                if (!MgmtBaseTestWriter.CanCreateParentResourceFromExample(context, resourceCollection))
+                var codeWriter = new CodeWriter();
+                var collectionTestWriter = new ResourceCollectionTestWriter(codeWriter, resourceCollection, context);
+                if (!collectionTestWriter.CanCreateParentResourceFromExample(context, resourceCollection))
                 {
                     continue;
                 }
                 if (!MgmtBaseTestWriter.HasCreateExample(context, resourceCollection)
-                    // && !MgmtBaseTestWriter.HasGetExample(context, resourceCollection) // disable since can't successed in stateful mock test. enable this if use stateless mock test
-                    )
+                    && !MgmtBaseTestWriter.HasGetExample(context, resourceCollection))
                 {
                     continue;
                 }
-                var codeWriter = new CodeWriter();
-                var collectionTestWriter = new ResourceCollectionTestWriter(codeWriter, resourceCollection, context);
                 collectionTestWriter.WriteCollectionTest();
 
                 project.AddGeneratedFile($"Mock/{resourceCollection.Type.Name}Test.cs", codeWriter.ToString());
+                hasCollectionTest = true;
+            }
+
+            if (hasCollectionTest)
+            {
+                var mockExtensionWriter = new TestHelperWriter(extensionsWriter, context);
+                mockExtensionWriter.WriteMockExtension();
+                project.AddGeneratedFile($"Mock/TestHelper.cs", extensionsWriter.ToString());
             }
 
             foreach (var resource in context.Library.ArmResources)
             {
-                if (!MgmtBaseTestWriter.CanCreateResourceFromExample(context, resource.ResourceCollection))
+                var codeWriter = new CodeWriter();
+                var resourceTestWriter = new ResourceTestWriter(codeWriter, resource, context);
+                if (!resourceTestWriter.CanCreateResourceFromExample(context, resource.ResourceCollection))
                 {
                     continue;
                 }
 
-                var codeWriter = new CodeWriter();
-                var collectionTestWriter = new ResourceTestWriter(codeWriter, resource, context);
-                collectionTestWriter.WriteCollectionTest();
+                resourceTestWriter.WriteCollectionTest();
 
                 project.AddGeneratedFile($"Mock/{resource.Type.Name}Test.cs", codeWriter.ToString());
             }

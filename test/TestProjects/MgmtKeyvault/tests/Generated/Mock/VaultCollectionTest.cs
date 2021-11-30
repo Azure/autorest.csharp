@@ -42,6 +42,15 @@ namespace MgmtKeyvault.Tests.Mock
 
         [RecordedTest]
         [Ignore("Generated TestCase")]
+        public async Task GetAsync()
+        {
+            // Example: Retrieve a vault
+            var collection = await GetVaultCollectionAsync("sample-resource-group");
+            await TestHelper.GetExampleInstanceAsync(collection, "sample-vault");
+        }
+
+        [RecordedTest]
+        [Ignore("Generated TestCase")]
         public async Task GetAllAsync()
         {
             // Example: List vaults in the specified resource group

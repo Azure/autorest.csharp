@@ -42,11 +42,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         {
                             collectionWriter.WriteExampleInstanceMethod(resourceCollection.CreateOperation, true);
                         }
-                        //// disable since can't successed in stateful mock test. enable this if use stateless mock test
-                        //if (resourceCollection.GetOperation is not null)
-                        //{
-                        //    collectionWriter.WriteExampleInstanceMethod(resourceCollection.GetOperation, true);
-                        //}
+                        if (resourceCollection.GetOperation is not null)
+                        {
+                            collectionWriter.WriteExampleInstanceMethod(resourceCollection.GetOperation, true);
+                        }
                         foreach (var clientOperation in resourceCollection.ClientOperations)
                         {
                             collectionWriter.WriteExampleInstanceMethod(clientOperation, true);

@@ -18,7 +18,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using System.Text.Json;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Models;
-
+using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -93,6 +93,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return null;
         }
 
+        public static IOrderedEnumerable<KeyValuePair<RequestPath, MgmtRestOperation>> getSortedOperationMappings(MgmtClientOperation clientOperation) {
+            var operationMappings = clientOperation.ToDictionary(
+                operation => operation.ContextualPath,
+                operation => operation);
+            return new SortedDictionary<RequestPath, MgmtRestOperation>(operationMappings).OrderByDescending(key => key.ToString().Length);
+        }
+
         public static bool HasExample(BuildContext<MgmtOutputLibrary> context, MgmtClientOperation? clientOperation)
         {
             if (clientOperation is null)
@@ -100,14 +107,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 return false;
             }
 
-            var operationMappings = clientOperation.ToDictionary(
-                operation => operation.ContextualPath,
-                operation => operation);
-            foreach ((var branch, var operation) in operationMappings)
+            foreach ((var branch, var operation) in getSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(context, operation);
                 if (exampleGroup is not null && exampleGroup.Examples.Count > 0)
                     return true;
+                break;
             }
             return false;
         }
@@ -126,12 +131,33 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return HasExample(context, resourceCollection.GetOperation);
         }
 
-        public static bool CanCreateResourceFromExample(BuildContext<MgmtOutputLibrary> context, ResourceCollection? resourceCollection)
+        public bool CanCreateResourceFromExample(BuildContext<MgmtOutputLibrary> context, ResourceCollection? resourceCollection)
         {
-            var hasCreateExample = HasCreateExample(context, resourceCollection);
-            if (!hasCreateExample)
+            if (!HasCreateExample(context, resourceCollection))
             {
                 return false;
+            }
+
+            foreach ((var branch, var operation) in getSortedOperationMappings(resourceCollection!.CreateOperation!))
+            {
+                CSharpType? resultType = null;
+                if (operation.Operation.IsLongRunning)
+                {
+                    LongRunningOperation lro = Context.Library.GetLongRunningOperation(operation.Operation);
+                    MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(lro);
+                    resultType = longRunningOperation.ResultType;
+                }
+                else
+                {
+                    NonLongRunningOperation nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(operation.Operation);
+                    resultType = nonLongRunningOperation.ResultType;
+                }
+                if (resultType is null)
+                {
+                    return false;
+                }
+                break;  // TODO: Currently only one rest operation is tested
+
             }
 
             var parentResources = resourceCollection!.Resource.Parent(context);
@@ -152,7 +178,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return false;
         }
 
-        public static bool CanCreateParentResourceFromExample(BuildContext<MgmtOutputLibrary> context, ResourceCollection? resourceCollection)
+        public bool CanCreateParentResourceFromExample(BuildContext<MgmtOutputLibrary> context, ResourceCollection? resourceCollection)
         {
             if (resourceCollection is null)
                 return false;
@@ -256,7 +282,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 if (paramValue is not null)
                 {
                     WriteExampleValue(writer, p.Type, paramValue!, $"{variableName}.{targetProperty!.Declaration.Name}");
-                    writer.AppendRaw(",");
                 }
                 else
                 {
@@ -267,9 +292,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                     else
                     {
-                        writer.Append($"default /* don't find example value for this parameter!*/,");
+                        writer.Append($"default /* don't find example value for this parameter!*/");
                     }
                 }
+                writer.AppendRaw(",");
                 consumedProperties.Add(targetProperty!);
             }
             writer.RemoveTrailingComma();
@@ -305,7 +331,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                             if (paramValue is not null)
                             {
                                 var newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
-                                if (targetProperty.Declaration.Name == "Tags")
+                                if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name== "IDictionary")
                                 {
                                     MgmtBaseTestWriter._tagsWriter.Append($"{newVariableName}.ReplaceWith(");
                                     WriteExampleValue(_tagsWriter, targetProperty.ValueType, paramValue!, newVariableName);
@@ -331,7 +357,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 using (writer.Scope($"new List<{cst.Arguments[0]}>()", newLine: false))
                 {
                     var idx = 0;
-                    foreach (var element in exampleValue.Elements!)
+                    foreach (var element in exampleValue.Elements ?? new List<ExampleValue>())
                     {
                         WriteExampleValue(writer, cst.Arguments[0], element, $"{variableName}[{idx}]");
                         writer.Append($",");
@@ -343,7 +369,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 using (writer.Scope($"new {new CSharpType(typeof(Dictionary<,>), cst.Arguments)}()", newLine: false))
                 {
-                    foreach (var entry in exampleValue.Properties!)
+                    foreach (var entry in exampleValue.Properties ?? new DictionaryOfExamplValue() { })
                     {
                         using (writer.Scope())
                         {
@@ -358,7 +384,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             else if (cst.Name == "Object")
             {
                 writer.UseNamespace("System.Text.Json");
-                writer.Append($"JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!)):L})");
+                writer.Append($"System.Text.Json.JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!)):L})");
             }
             else if (cst.Name == "ResourceIdentifier" || cst.Name == "ResourceType")
             {
@@ -371,6 +397,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             else if (cst.Name == "Guid")
             {
                 writer.Append($"System.Guid.Parse({exampleValue.RawValue:L})");
+            }
+            else if (cst.Name == "TimeSpan")
+            {
+                writer.Append($"System.TimeSpan.Parse({exampleValue.RawValue:L})");
             }
             else if (exampleValue.RawValue is not null)
             {
@@ -423,7 +453,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     if ((bool)enumType.BaseType.FrameworkType.GetMethod("Equals", new[] { enumType.BaseType.FrameworkType, enumType.BaseType.FrameworkType })!.Invoke(null, new object?[] { exampleValue.RawValue, value.Value.Value })!)
                     {
-                        writer.Append($"{enumType.Declaration.Name}.{value.Declaration.Name}");
+                        writer.Append($"{enumType.Declaration.Namespace}.{enumType.Declaration.Name}.{value.Declaration.Name}");
                         return;
                     }
                 }
@@ -453,6 +483,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public static string useVariableName(string variableName)
         {
+            if (StringExtensions.IsCSharpKeyword(variableName))
+            {
+                variableName = $"@{variableName}";
+            }
             if (!variableNames.Contains(variableName))
             {
                 variableNames.Add(variableName);
@@ -563,7 +597,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var actualItemType = WrapResourceDataType(itemType, clientOperation.First())!;
                 return actualItemType.WrapPageable(async);
             }
-            else if (clientOperation.IsListOperation(Context, out var itemType))
+            else if (clientOperation.IsListOperation(Context, out var itemType) && methodName != "Get")
             {
                 var returnType = new CSharpType(typeof(IReadOnlyList<>), WrapResourceDataType(itemType, clientOperation.First())!);
                 return GetResponseType(returnType, async);

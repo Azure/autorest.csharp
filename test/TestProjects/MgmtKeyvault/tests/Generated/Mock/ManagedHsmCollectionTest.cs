@@ -42,6 +42,15 @@ namespace MgmtKeyvault.Tests.Mock
 
         [RecordedTest]
         [Ignore("Generated TestCase")]
+        public async Task GetAsync()
+        {
+            // Example: Retrieve a managed HSM Pool
+            var collection = await GetManagedHsmCollectionAsync("hsm-group");
+            await TestHelper.GetExampleInstanceAsync(collection, "hsm1");
+        }
+
+        [RecordedTest]
+        [Ignore("Generated TestCase")]
         public async Task GetAllAsync()
         {
             // Example: List managed HSM Pools in a resource group

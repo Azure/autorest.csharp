@@ -22,7 +22,7 @@ namespace MgmtKeyvault.Tests
         public static async Task<MgmtKeyvault.Models.VaultCreateOrUpdateOperation> CreateOrUpdateExampleInstanceAsync(VaultCollection collection, string vaultName)
         {
             // Example: Create a new vault or update an existing vault
-            var parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), SkuName.Standard))
+            var parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard))
             {
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
@@ -30,6 +30,13 @@ namespace MgmtKeyvault.Tests
             });
 
             return await collection.CreateOrUpdateAsync(vaultName, parameters);
+        }
+
+        public static async Task<Response<MgmtKeyvault.Vault>> GetExampleInstanceAsync(VaultCollection collection, string vaultName)
+        {
+            // Example: Retrieve a vault
+
+            return await collection.GetAsync(vaultName);
         }
 
         public static AsyncPageable<MgmtKeyvault.Vault> GetAllExampleInstanceAsync(VaultCollection collection)
@@ -56,6 +63,13 @@ namespace MgmtKeyvault.Tests
             return await collection.CreateOrUpdateAsync(privateEndpointConnectionName, properties);
         }
 
+        public static async Task<Response<MgmtKeyvault.PrivateEndpointConnection>> GetExampleInstanceAsync(PrivateEndpointConnectionCollection collection, string privateEndpointConnectionName)
+        {
+            // Example: KeyVaultGetPrivateEndpointConnection
+
+            return await collection.GetAsync(privateEndpointConnectionName);
+        }
+
         public static AsyncPageable<MgmtKeyvault.PrivateEndpointConnection> GetAllExampleInstanceAsync(PrivateEndpointConnectionCollection collection)
         {
             // Example: KeyVaultListPrivateEndpointConnection
@@ -75,10 +89,17 @@ namespace MgmtKeyvault.Tests
                     SoftDeleteRetentionInDays = 90,
                     EnablePurgeProtection = true,
                 },
-                Sku = new MgmtKeyvault.Models.ManagedHsmSku(new MgmtKeyvault.Models.ManagedHsmSkuFamily("B"), ManagedHsmSkuName.StandardB1),
+                Sku = new MgmtKeyvault.Models.ManagedHsmSku(new MgmtKeyvault.Models.ManagedHsmSkuFamily("B"), MgmtKeyvault.Models.ManagedHsmSkuName.StandardB1),
             };
             parameters.Tags.ReplaceWith(new Dictionary<string, string>() { { "Dept", "hsm" }, { "Environment", "dogfood" }, });
             return await collection.CreateOrUpdateAsync(name, parameters);
+        }
+
+        public static async Task<Response<MgmtKeyvault.ManagedHsm>> GetExampleInstanceAsync(ManagedHsmCollection collection, string name)
+        {
+            // Example: Retrieve a managed HSM Pool
+
+            return await collection.GetAsync(name);
         }
 
         public static AsyncPageable<MgmtKeyvault.ManagedHsm> GetAllExampleInstanceAsync(ManagedHsmCollection collection)
@@ -102,6 +123,13 @@ namespace MgmtKeyvault.Tests
             };
 
             return await collection.CreateOrUpdateAsync(privateEndpointConnectionName, properties);
+        }
+
+        public static async Task<Response<MgmtKeyvault.MhsmPrivateEndpointConnection>> GetExampleInstanceAsync(MhsmPrivateEndpointConnectionCollection collection, string privateEndpointConnectionName)
+        {
+            // Example: ManagedHsmGetPrivateEndpointConnection
+
+            return await collection.GetAsync(privateEndpointConnectionName);
         }
 
         public static AsyncPageable<MgmtKeyvault.MhsmPrivateEndpointConnection> GetAllExampleInstanceAsync(MhsmPrivateEndpointConnectionCollection collection)
