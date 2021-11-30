@@ -219,7 +219,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of BlobContainers in the BlobService. </summary>
         /// <returns> An object representing collection of BlobContainers and their operations over a BlobService. </returns>
-        public BlobContainerCollection GetBlobContainers()
+        public virtual BlobContainerCollection GetBlobContainers()
         {
             return new BlobContainerCollection(this);
         }

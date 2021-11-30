@@ -433,8 +433,6 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
         private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             _writer.Append($"var originalResponse = {GetAwait(async)} ");
-            // TODO -- we need to implement the branches here as well
-            //var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, Context).ToList();
             _writer.Append($"{GetRestClientVariableName(operation.RestClient)}.{CreateMethodName(operation.Method.Name, async)}( ");
             WriteArguments(_writer, parameterMapping, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
@@ -449,7 +447,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets a collection of {resource.Type.Name.ToPlural()} in the {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationReturns($"An object representing collection of {resource.Type.Name.ToPlural()} and their operations over a {_resource.Type.Name}.");
-            using (_writer.Scope($"public {collection.Type.Name} Get{resource.Type.Name.ToPlural()}()"))
+            using (_writer.Scope($"public virtual {collection.Type.Name} Get{resource.Type.Name.ToPlural()}()"))
             {
                 _writer.Line($"return new {collection.Type.Name}(this);");
             }
@@ -460,7 +458,7 @@ Check the swagger definition, and use 'request-path-to-resource-name' or 'reques
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {_resource.Type.Name}.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type}\" /> object.");
-            using (_writer.Scope($"public {resource.Type.Name} Get{resource.Type.Name}()"))
+            using (_writer.Scope($"public virtual {resource.Type.Name} Get{resource.Type.Name}()"))
             {
                 // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
                 // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string

@@ -1506,7 +1506,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a collection of VirtualMachineScaleSetExtensions in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetExtensions and their operations over a VirtualMachineScaleSet. </returns>
-        public VirtualMachineScaleSetExtensionCollection GetVirtualMachineScaleSetExtensions()
+        public virtual VirtualMachineScaleSetExtensionCollection GetVirtualMachineScaleSetExtensions()
         {
             return new VirtualMachineScaleSetExtensionCollection(this);
         }
@@ -1516,7 +1516,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgrade along with the instance operations that can be performed on it in the VirtualMachineScaleSet. </summary>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgrade" /> object. </returns>
-        public VirtualMachineScaleSetRollingUpgrade GetVirtualMachineScaleSetRollingUpgrade()
+        public virtual VirtualMachineScaleSetRollingUpgrade GetVirtualMachineScaleSetRollingUpgrade()
         {
             return new VirtualMachineScaleSetRollingUpgrade(this, Id + "/rollingUpgrades/latest");
         }
@@ -1526,7 +1526,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a collection of VirtualMachineScaleSetVMs in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetVMs and their operations over a VirtualMachineScaleSet. </returns>
-        public VirtualMachineScaleSetVMCollection GetVirtualMachineScaleSetVMs()
+        public virtual VirtualMachineScaleSetVMCollection GetVirtualMachineScaleSetVMs()
         {
             return new VirtualMachineScaleSetVMCollection(this);
         }
