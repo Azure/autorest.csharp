@@ -40,9 +40,9 @@ namespace MgmtScopeResource
         }
         #endregion
 
-        private static ResourceLinksRestOperations GetResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        private static ResourceLinksRestOperations GetResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
         {
-            return new ResourceLinksRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+            return new ResourceLinksRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
@@ -58,14 +58,14 @@ namespace MgmtScopeResource
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResourceLinksRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetResourceLinksRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                 async Task<Page<ResourceLinkData>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAtSubscriptionResourceLinks");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListAtSubscriptionAsync(filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListAtSubscriptionAsync(subscription.Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -80,7 +80,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListAtSubscriptionNextPageAsync(nextLink, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListAtSubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -107,14 +107,14 @@ namespace MgmtScopeResource
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetResourceLinksRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetResourceLinksRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                 Page<ResourceLinkData> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAtSubscriptionResourceLinks");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListAtSubscription(filter, cancellationToken: cancellationToken);
+                        var response = restOperations.ListAtSubscription(subscription.Id.SubscriptionId, filter, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -129,7 +129,7 @@ namespace MgmtScopeResource
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListAtSubscriptionNextPage(nextLink, filter, cancellationToken: cancellationToken);
+                        var response = restOperations.ListAtSubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, filter, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)

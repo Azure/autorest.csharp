@@ -36,7 +36,7 @@ namespace MgmtParamOrdering
         internal WorkspaceCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _workspacesRestClient = new WorkspacesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _workspacesRestClient = new WorkspacesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -68,8 +68,8 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _workspacesRestClient.CreateOrUpdate(Id.ResourceGroupName, workspaceName, parameters, cancellationToken);
-                var operation = new WorkspaceCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _workspacesRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, workspaceName, parameters).Request, response);
+                var response = _workspacesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken);
+                var operation = new WorkspaceCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _workspacesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -105,8 +105,8 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _workspacesRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, workspaceName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new WorkspaceCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _workspacesRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, workspaceName, parameters).Request, response);
+                var response = await _workspacesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new WorkspaceCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _workspacesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -136,7 +136,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _workspacesRestClient.Get(Id.ResourceGroupName, workspaceName, cancellationToken);
+                var response = _workspacesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Workspace(Parent, response.Value), response.GetRawResponse());
@@ -166,7 +166,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _workspacesRestClient.GetAsync(Id.ResourceGroupName, workspaceName, cancellationToken).ConfigureAwait(false);
+                var response = await _workspacesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(Parent, response.Value), response.GetRawResponse());
@@ -193,7 +193,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _workspacesRestClient.Get(Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken);
+                var response = _workspacesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Workspace>(null, response.GetRawResponse())
                     : Response.FromValue(new Workspace(this, response.Value), response.GetRawResponse());
@@ -220,7 +220,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _workspacesRestClient.GetAsync(Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _workspacesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Workspace>(null, response.GetRawResponse())
                     : Response.FromValue(new Workspace(this, response.Value), response.GetRawResponse());
@@ -293,7 +293,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _workspacesRestClient.List(Id.ResourceGroupName, cancellationToken);
+                var response = _workspacesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new Workspace(Parent, value)).ToArray() as IReadOnlyList<Workspace>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -314,7 +314,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _workspacesRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _workspacesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new Workspace(Parent, value)).ToArray() as IReadOnlyList<Workspace>, response.GetRawResponse());
             }
             catch (Exception e)

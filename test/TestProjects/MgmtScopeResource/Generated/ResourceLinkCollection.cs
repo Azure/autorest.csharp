@@ -35,7 +35,7 @@ namespace MgmtScopeResource
         internal ResourceLinkCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _resourceLinksRestClient = new ResourceLinksRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

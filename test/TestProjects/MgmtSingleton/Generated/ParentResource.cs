@@ -40,8 +40,8 @@ namespace MgmtSingleton
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class. </summary>
@@ -50,8 +50,8 @@ namespace MgmtSingleton
         internal ParentResource(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class. </summary>
@@ -63,8 +63,8 @@ namespace MgmtSingleton
         internal ParentResource(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
-            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _singletonResources3RestClient = new SingletonResources3RestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -99,7 +99,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _parentResourcesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _parentResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
@@ -122,7 +122,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _parentResourcesRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _parentResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
@@ -169,7 +169,7 @@ namespace MgmtSingleton
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _parentResourcesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _parentResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ParentResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -198,7 +198,7 @@ namespace MgmtSingleton
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _parentResourcesRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _parentResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ParentResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -227,7 +227,7 @@ namespace MgmtSingleton
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _parentResourcesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _parentResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ParentResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -256,7 +256,7 @@ namespace MgmtSingleton
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _parentResourcesRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _parentResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ParentResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -284,7 +284,7 @@ namespace MgmtSingleton
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagResource.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _parentResourcesRestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _parentResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ParentResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -312,7 +312,7 @@ namespace MgmtSingleton
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagResource.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _parentResourcesRestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _parentResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ParentResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -340,7 +340,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResources3RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _singletonResources3RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -368,7 +368,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResources3RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _singletonResources3RestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)

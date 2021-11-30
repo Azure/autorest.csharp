@@ -36,7 +36,7 @@ namespace MgmtNonStringPathVariable
         internal FakeCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _fakesRestClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -64,8 +64,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = _fakesRestClient.CreateOrUpdate(Id.ResourceGroupName, fakeName, parameters, cancellationToken);
-                var operation = new FakeCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _fakesRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, response);
+                var response = _fakesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken);
+                var operation = new FakeCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _fakesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -97,8 +97,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await _fakesRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _fakesRestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, response);
+                var response = await _fakesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new FakeCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _fakesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -123,7 +123,7 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = _fakesRestClient.Get(Id.ResourceGroupName, fakeName, expand, cancellationToken);
+                var response = _fakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Fake(Parent, response.Value), response.GetRawResponse());
@@ -148,7 +148,7 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await _fakesRestClient.GetAsync(Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _fakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Fake(Parent, response.Value), response.GetRawResponse());
@@ -170,7 +170,7 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = _fakesRestClient.Get(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
+                var response = _fakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<Fake>(null, response.GetRawResponse())
                     : Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
@@ -192,7 +192,7 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await _fakesRestClient.GetAsync(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<Fake>(null, response.GetRawResponse())
                     : Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
@@ -256,7 +256,7 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = _fakesRestClient.List(Id.ResourceGroupName, optionalParam, cancellationToken);
+                var response = _fakesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new Fake(Parent, value)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -278,7 +278,7 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await _fakesRestClient.ListAsync(Id.ResourceGroupName, optionalParam, cancellationToken).ConfigureAwait(false);
+                var response = await _fakesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new Fake(Parent, value)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)

@@ -19,7 +19,6 @@ namespace Azure.ResourceManager.Sample
 {
     internal partial class ProximityPlacementGroupsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public ProximityPlacementGroupsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public ProximityPlacementGroupsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace Azure.ResourceManager.Sample
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,13 +66,18 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Create or update a proximity placement group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroupData>> CreateOrUpdateAsync(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ProximityPlacementGroupData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -89,7 +91,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, proximityPlacementGroupName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -107,13 +109,18 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Create or update a proximity placement group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ProximityPlacementGroupData> CreateOrUpdate(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<ProximityPlacementGroupData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -127,7 +134,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, proximityPlacementGroupName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -144,7 +151,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupUpdate parameters)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupUpdate parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -169,13 +176,18 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Update a proximity placement group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="parameters"> Parameters supplied to the Update Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroupData>> UpdateAsync(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ProximityPlacementGroupData>> UpdateAsync(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -189,7 +201,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, proximityPlacementGroupName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -206,13 +218,18 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Update a proximity placement group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="parameters"> Parameters supplied to the Update Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ProximityPlacementGroupData> Update(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<ProximityPlacementGroupData> Update(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -226,7 +243,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, proximityPlacementGroupName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -242,7 +259,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string proximityPlacementGroupName)
+        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -262,12 +279,17 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Delete a proximity placement group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string proximityPlacementGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -277,7 +299,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(proximityPlacementGroupName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, proximityPlacementGroupName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -289,12 +311,17 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Delete a proximity placement group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public Response Delete(string resourceGroupName, string proximityPlacementGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public Response Delete(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -304,7 +331,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(proximityPlacementGroupName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, proximityPlacementGroupName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -315,7 +342,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -340,13 +367,18 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Retrieves information about a proximity placement group . </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroupData>> GetAsync(string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public async Task<Response<ProximityPlacementGroupData>> GetAsync(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -356,7 +388,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(proximityPlacementGroupName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, proximityPlacementGroupName, includeColocationStatus);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, includeColocationStatus);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -375,13 +407,18 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Retrieves information about a proximity placement group . </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public Response<ProximityPlacementGroupData> Get(string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public Response<ProximityPlacementGroupData> Get(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -391,7 +428,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(proximityPlacementGroupName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, proximityPlacementGroupName, includeColocationStatus);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, includeColocationStatus);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -409,7 +446,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListBySubscriptionRequest()
+        internal HttpMessage CreateListBySubscriptionRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -427,10 +464,17 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Lists all proximity placement groups in a subscription. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ProximityPlacementGroupListResult>> ListBySubscriptionAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<ProximityPlacementGroupListResult>> ListBySubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListBySubscriptionRequest();
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+
+            using var message = CreateListBySubscriptionRequest(subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -447,10 +491,17 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Lists all proximity placement groups in a subscription. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProximityPlacementGroupListResult> ListBySubscription(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public Response<ProximityPlacementGroupListResult> ListBySubscription(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListBySubscriptionRequest();
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+
+            using var message = CreateListBySubscriptionRequest(subscriptionId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -466,7 +517,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListByResourceGroupRequest(string resourceGroupName)
+        internal HttpMessage CreateListByResourceGroupRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -486,17 +537,22 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Lists all proximity placement groups in a resource group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroupListResult>> ListByResourceGroupAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<ProximityPlacementGroupListResult>> ListByResourceGroupAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListByResourceGroupRequest(resourceGroupName);
+            using var message = CreateListByResourceGroupRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -513,17 +569,22 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Lists all proximity placement groups in a resource group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<ProximityPlacementGroupListResult> ListByResourceGroup(string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<ProximityPlacementGroupListResult> ListByResourceGroup(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListByResourceGroupRequest(resourceGroupName);
+            using var message = CreateListByResourceGroupRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -539,7 +600,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink)
+        internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -555,16 +616,21 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists all proximity placement groups in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroupListResult>> ListBySubscriptionNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<ProximityPlacementGroupListResult>> ListBySubscriptionNextPageAsync(string nextLink, string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListBySubscriptionNextPageRequest(nextLink);
+            using var message = CreateListBySubscriptionNextPageRequest(nextLink, subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -582,16 +648,21 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists all proximity placement groups in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<ProximityPlacementGroupListResult> ListBySubscriptionNextPage(string nextLink, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<ProximityPlacementGroupListResult> ListBySubscriptionNextPage(string nextLink, string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListBySubscriptionNextPageRequest(nextLink);
+            using var message = CreateListBySubscriptionNextPageRequest(nextLink, subscriptionId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -607,7 +678,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string resourceGroupName)
+        internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -623,21 +694,26 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists all proximity placement groups in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroupListResult>> ListByResourceGroupNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<ProximityPlacementGroupListResult>> ListByResourceGroupNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListByResourceGroupNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateListByResourceGroupNextPageRequest(nextLink, subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -655,21 +731,26 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists all proximity placement groups in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<ProximityPlacementGroupListResult> ListByResourceGroupNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<ProximityPlacementGroupListResult> ListByResourceGroupNextPage(string nextLink, string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListByResourceGroupNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateListByResourceGroupNextPageRequest(nextLink, subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

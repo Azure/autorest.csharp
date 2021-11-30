@@ -19,7 +19,6 @@ namespace OmitOperationGroups
 {
     internal partial class Model4SRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace OmitOperationGroups
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public Model4SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public Model4SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace OmitOperationGroups
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateGetDefaultRequest(string resourceGroupName, string model2SName)
+        internal HttpMessage CreateGetDefaultRequest(string subscriptionId, string resourceGroupName, string model2SName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -65,12 +62,17 @@ namespace OmitOperationGroups
             return message;
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
-        public async Task<Response<Model4>> GetDefaultAsync(string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="model2SName"/> is null. </exception>
+        public async Task<Response<Model4>> GetDefaultAsync(string subscriptionId, string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -80,7 +82,7 @@ namespace OmitOperationGroups
                 throw new ArgumentNullException(nameof(model2SName));
             }
 
-            using var message = CreateGetDefaultRequest(resourceGroupName, model2SName);
+            using var message = CreateGetDefaultRequest(subscriptionId, resourceGroupName, model2SName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -96,12 +98,17 @@ namespace OmitOperationGroups
             }
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
-        public Response<Model4> GetDefault(string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="model2SName"/> is null. </exception>
+        public Response<Model4> GetDefault(string subscriptionId, string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -111,7 +118,7 @@ namespace OmitOperationGroups
                 throw new ArgumentNullException(nameof(model2SName));
             }
 
-            using var message = CreateGetDefaultRequest(resourceGroupName, model2SName);
+            using var message = CreateGetDefaultRequest(subscriptionId, resourceGroupName, model2SName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

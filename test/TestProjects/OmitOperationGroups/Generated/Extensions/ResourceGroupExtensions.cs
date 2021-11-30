@@ -31,9 +31,9 @@ namespace OmitOperationGroups
         }
         #endregion
 
-        private static Model5SRestOperations GetModel5SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        private static Model5SRestOperations GetModel5SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
         {
-            return new Model5SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+            return new Model5SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
@@ -50,8 +50,8 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.ListAsync(resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                     return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -77,8 +77,8 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.List(resourceGroup.Id.ResourceGroupName, cancellationToken);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken);
                     return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -116,8 +116,8 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.CreateOrUpdateAsync(resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.CreateOrUpdateAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -155,8 +155,8 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.CreateOrUpdate(resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.CreateOrUpdate(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, model5SName, parameters, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -189,8 +189,8 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -223,8 +223,8 @@ namespace OmitOperationGroups
                 scope.Start();
                 try
                 {
-                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken);
+                    var restOperations = GetModel5SRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, model5SName, cancellationToken);
                     return response;
                 }
                 catch (Exception e)

@@ -19,7 +19,6 @@ namespace MgmtExtensionResource
 {
     internal partial class PolicyDefinitionsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace MgmtExtensionResource
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public PolicyDefinitionsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-09-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public PolicyDefinitionsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-09-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace MgmtExtensionResource
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string policyDefinitionName, PolicyDefinitionData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string policyDefinitionName, PolicyDefinitionData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -67,12 +64,17 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> This operation creates or updates a policy definition in the given subscription with the given name. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
         /// <param name="parameters"> The policy definition properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<PolicyDefinitionData>> CreateOrUpdateAsync(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="policyDefinitionName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<PolicyDefinitionData>> CreateOrUpdateAsync(string subscriptionId, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
@@ -82,7 +84,7 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(policyDefinitionName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, policyDefinitionName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -99,12 +101,17 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> This operation creates or updates a policy definition in the given subscription with the given name. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
         /// <param name="parameters"> The policy definition properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<PolicyDefinitionData> CreateOrUpdate(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="policyDefinitionName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<PolicyDefinitionData> CreateOrUpdate(string subscriptionId, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
@@ -114,7 +121,7 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(policyDefinitionName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, policyDefinitionName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -130,7 +137,7 @@ namespace MgmtExtensionResource
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string policyDefinitionName)
+        internal HttpMessage CreateDeleteRequest(string subscriptionId, string policyDefinitionName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -149,17 +156,22 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string subscriptionId, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var message = CreateDeleteRequest(policyDefinitionName);
+            using var message = CreateDeleteRequest(subscriptionId, policyDefinitionName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -172,17 +184,22 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public Response Delete(string policyDefinitionName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is null. </exception>
+        public Response Delete(string subscriptionId, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var message = CreateDeleteRequest(policyDefinitionName);
+            using var message = CreateDeleteRequest(subscriptionId, policyDefinitionName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -194,7 +211,7 @@ namespace MgmtExtensionResource
             }
         }
 
-        internal HttpMessage CreateGetRequest(string policyDefinitionName)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string policyDefinitionName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -213,17 +230,22 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> This operation retrieves the policy definition in the given subscription with the given name. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public async Task<Response<PolicyDefinitionData>> GetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is null. </exception>
+        public async Task<Response<PolicyDefinitionData>> GetAsync(string subscriptionId, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var message = CreateGetRequest(policyDefinitionName);
+            using var message = CreateGetRequest(subscriptionId, policyDefinitionName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -242,17 +264,22 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> This operation retrieves the policy definition in the given subscription with the given name. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public Response<PolicyDefinitionData> Get(string policyDefinitionName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is null. </exception>
+        public Response<PolicyDefinitionData> Get(string subscriptionId, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (policyDefinitionName == null)
             {
                 throw new ArgumentNullException(nameof(policyDefinitionName));
             }
 
-            using var message = CreateGetRequest(policyDefinitionName);
+            using var message = CreateGetRequest(subscriptionId, policyDefinitionName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -600,7 +627,7 @@ namespace MgmtExtensionResource
             }
         }
 
-        internal HttpMessage CreateListRequest(string filter, int? top)
+        internal HttpMessage CreateListRequest(string subscriptionId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -626,12 +653,19 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> This operation retrieves a list of all the policy definitions in a given subscription that match the optional given $filter. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy definitions associated with the subscription, including those that apply directly or from management groups that contain the given subscription. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given subscription. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<PolicyDefinitionListResult>> ListAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<PolicyDefinitionListResult>> ListAsync(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListRequest(filter, top);
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+
+            using var message = CreateListRequest(subscriptionId, filter, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -648,12 +682,19 @@ namespace MgmtExtensionResource
         }
 
         /// <summary> This operation retrieves a list of all the policy definitions in a given subscription that match the optional given $filter. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy definitions associated with the subscription, including those that apply directly or from management groups that contain the given subscription. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given subscription. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<PolicyDefinitionListResult> List(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public Response<PolicyDefinitionListResult> List(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListRequest(filter, top);
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+
+            using var message = CreateListRequest(subscriptionId, filter, top);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -819,7 +860,7 @@ namespace MgmtExtensionResource
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string filter, int? top)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -835,18 +876,23 @@ namespace MgmtExtensionResource
 
         /// <summary> This operation retrieves a list of all the policy definitions in a given subscription that match the optional given $filter. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy definitions associated with the subscription, including those that apply directly or from management groups that contain the given subscription. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given subscription. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<PolicyDefinitionListResult>> ListNextPageAsync(string nextLink, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<PolicyDefinitionListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListNextPageRequest(nextLink, filter, top);
+            using var message = CreateListNextPageRequest(nextLink, subscriptionId, filter, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -864,18 +910,23 @@ namespace MgmtExtensionResource
 
         /// <summary> This operation retrieves a list of all the policy definitions in a given subscription that match the optional given $filter. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy definitions associated with the subscription, including those that apply directly or from management groups that contain the given subscription. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given subscription. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<PolicyDefinitionListResult> ListNextPage(string nextLink, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<PolicyDefinitionListResult> ListNextPage(string nextLink, string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListNextPageRequest(nextLink, filter, top);
+            using var message = CreateListNextPageRequest(nextLink, subscriptionId, filter, top);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

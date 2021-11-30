@@ -19,7 +19,6 @@ namespace SupersetInheritance
 {
     internal partial class SupersetModel2SRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace SupersetInheritance
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public SupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public SupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace SupersetInheritance
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -68,13 +65,18 @@ namespace SupersetInheritance
             return message;
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="supersetModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SupersetModel2>> PutAsync(string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<SupersetModel2>> PutAsync(string subscriptionId, string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -88,7 +90,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, supersetModel2SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, supersetModel2SName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -104,13 +106,18 @@ namespace SupersetInheritance
             }
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="supersetModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SupersetModel2> Put(string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<SupersetModel2> Put(string subscriptionId, string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -124,7 +131,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, supersetModel2SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, supersetModel2SName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -140,7 +147,7 @@ namespace SupersetInheritance
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string supersetModel2SName)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string supersetModel2SName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -160,12 +167,17 @@ namespace SupersetInheritance
             return message;
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="supersetModel2SName"/> is null. </exception>
-        public async Task<Response<SupersetModel2>> GetAsync(string resourceGroupName, string supersetModel2SName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="supersetModel2SName"/> is null. </exception>
+        public async Task<Response<SupersetModel2>> GetAsync(string subscriptionId, string resourceGroupName, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -175,7 +187,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel2SName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, supersetModel2SName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, supersetModel2SName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -191,12 +203,17 @@ namespace SupersetInheritance
             }
         }
 
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="supersetModel2SName"/> is null. </exception>
-        public Response<SupersetModel2> Get(string resourceGroupName, string supersetModel2SName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="supersetModel2SName"/> is null. </exception>
+        public Response<SupersetModel2> Get(string subscriptionId, string resourceGroupName, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -206,7 +223,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel2SName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, supersetModel2SName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, supersetModel2SName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
