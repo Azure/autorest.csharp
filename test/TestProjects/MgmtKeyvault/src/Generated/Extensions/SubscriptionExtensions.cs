@@ -22,19 +22,19 @@ namespace MgmtKeyvault
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        private static VaultsRestOperations GetVaultsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        private static VaultsRestOperations GetVaultsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
         {
-            return new VaultsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+            return new VaultsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
         }
 
-        private static DeletedVaultsRestOperations GetDeletedVaultsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        private static DeletedVaultsRestOperations GetDeletedVaultsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
         {
-            return new DeletedVaultsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+            return new DeletedVaultsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
         }
 
-        private static ManagedHsmsRestOperations GetManagedHsmsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        private static ManagedHsmsRestOperations GetManagedHsmsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
         {
-            return new ManagedHsmsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
+            return new ManagedHsmsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint);
         }
 
         /// <summary> Lists the Vaults for this <see cref="Subscription" />. </summary>
@@ -47,14 +47,14 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                 async Task<Page<Vault>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVaults");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListBySubscriptionAsync(top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -69,7 +69,7 @@ namespace MgmtKeyvault
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -93,14 +93,14 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                 Page<Vault> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVaults");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListBySubscription(top, cancellationToken: cancellationToken);
+                        var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -115,7 +115,7 @@ namespace MgmtKeyvault
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListBySubscriptionNextPage(nextLink, top, cancellationToken: cancellationToken);
+                        var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new Vault(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -176,8 +176,8 @@ namespace MgmtKeyvault
                 scope.Start();
                 try
                 {
-                    var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.CheckNameAvailabilityAsync(name, cancellationToken).ConfigureAwait(false);
+                    var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.CheckNameAvailabilityAsync(subscription.Id.SubscriptionId, name, cancellationToken).ConfigureAwait(false);
                     return response;
                 }
                 catch (Exception e)
@@ -208,8 +208,8 @@ namespace MgmtKeyvault
                 scope.Start();
                 try
                 {
-                    var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                    var response = restOperations.CheckNameAvailability(name, cancellationToken);
+                    var restOperations = GetVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.CheckNameAvailability(subscription.Id.SubscriptionId, name, cancellationToken);
                     return response;
                 }
                 catch (Exception e)
@@ -246,9 +246,9 @@ namespace MgmtKeyvault
                 scope.Start();
                 try
                 {
-                    var restOperations = GetDeletedVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.PurgeAsync(location, vaultName, cancellationToken).ConfigureAwait(false);
-                    var operation = new DeletedVaultPurgeOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeRequest(location, vaultName).Request, response);
+                    var restOperations = GetDeletedVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.PurgeAsync(subscription.Id.SubscriptionId, location, vaultName, cancellationToken).ConfigureAwait(false);
+                    var operation = new DeletedVaultPurgeOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeRequest(subscription.Id.SubscriptionId, location, vaultName).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -287,9 +287,9 @@ namespace MgmtKeyvault
                 scope.Start();
                 try
                 {
-                    var restOperations = GetDeletedVaultsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                    var response = restOperations.Purge(location, vaultName, cancellationToken);
-                    var operation = new DeletedVaultPurgeOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeRequest(location, vaultName).Request, response);
+                    var restOperations = GetDeletedVaultsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.Purge(subscription.Id.SubscriptionId, location, vaultName, cancellationToken);
+                    var operation = new DeletedVaultPurgeOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeRequest(subscription.Id.SubscriptionId, location, vaultName).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
@@ -313,14 +313,14 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                 async Task<Page<ManagedHsm>> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetManagedHsms");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListBySubscriptionAsync(top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListBySubscriptionAsync(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -335,7 +335,7 @@ namespace MgmtKeyvault
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -359,14 +359,14 @@ namespace MgmtKeyvault
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
                 Page<ManagedHsm> FirstPageFunc(int? pageSizeHint)
                 {
                     using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetManagedHsms");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListBySubscription(top, cancellationToken: cancellationToken);
+                        var response = restOperations.ListBySubscription(subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -381,7 +381,7 @@ namespace MgmtKeyvault
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListBySubscriptionNextPage(nextLink, top, cancellationToken: cancellationToken);
+                        var response = restOperations.ListBySubscriptionNextPage(nextLink, subscription.Id.SubscriptionId, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new ManagedHsm(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -448,9 +448,9 @@ namespace MgmtKeyvault
                 scope.Start();
                 try
                 {
-                    var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                    var response = await restOperations.PurgeDeletedAsync(location, name, cancellationToken).ConfigureAwait(false);
-                    var operation = new ManagedHsmPurgeDeletedOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeDeletedRequest(location, name).Request, response);
+                    var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = await restOperations.PurgeDeletedAsync(subscription.Id.SubscriptionId, location, name, cancellationToken).ConfigureAwait(false);
+                    var operation = new ManagedHsmPurgeDeletedOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeDeletedRequest(subscription.Id.SubscriptionId, location, name).Request, response);
                     if (waitForCompletion)
                         await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
@@ -489,9 +489,9 @@ namespace MgmtKeyvault
                 scope.Start();
                 try
                 {
-                    var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                    var response = restOperations.PurgeDeleted(location, name, cancellationToken);
-                    var operation = new ManagedHsmPurgeDeletedOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeDeletedRequest(location, name).Request, response);
+                    var restOperations = GetManagedHsmsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                    var response = restOperations.PurgeDeleted(subscription.Id.SubscriptionId, location, name, cancellationToken);
+                    var operation = new ManagedHsmPurgeDeletedOperation(clientDiagnostics, pipeline, restOperations.CreatePurgeDeletedRequest(subscription.Id.SubscriptionId, location, name).Request, response);
                     if (waitForCompletion)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;

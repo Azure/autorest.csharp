@@ -17,7 +17,6 @@ namespace MgmtKeyvault
 {
     internal partial class DeletedVaultsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -28,13 +27,11 @@ namespace MgmtKeyvault
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public DeletedVaultsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2021-04-01-preview")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public DeletedVaultsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2021-04-01-preview")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -42,7 +39,7 @@ namespace MgmtKeyvault
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreatePurgeRequest(string location, string vaultName)
+        internal HttpMessage CreatePurgeRequest(string subscriptionId, string location, string vaultName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -64,12 +61,17 @@ namespace MgmtKeyvault
         }
 
         /// <summary> Permanently deletes the specified vault. aka Purges the deleted Azure key vault. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location of the soft-deleted vault. </param>
         /// <param name="vaultName"> The name of the soft-deleted vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
-        public async Task<Response> PurgeAsync(string location, string vaultName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="vaultName"/> is null. </exception>
+        public async Task<Response> PurgeAsync(string subscriptionId, string location, string vaultName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
@@ -79,7 +81,7 @@ namespace MgmtKeyvault
                 throw new ArgumentNullException(nameof(vaultName));
             }
 
-            using var message = CreatePurgeRequest(location, vaultName);
+            using var message = CreatePurgeRequest(subscriptionId, location, vaultName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -92,12 +94,17 @@ namespace MgmtKeyvault
         }
 
         /// <summary> Permanently deletes the specified vault. aka Purges the deleted Azure key vault. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location of the soft-deleted vault. </param>
         /// <param name="vaultName"> The name of the soft-deleted vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
-        public Response Purge(string location, string vaultName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="vaultName"/> is null. </exception>
+        public Response Purge(string subscriptionId, string location, string vaultName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
@@ -107,7 +114,7 @@ namespace MgmtKeyvault
                 throw new ArgumentNullException(nameof(vaultName));
             }
 
-            using var message = CreatePurgeRequest(location, vaultName);
+            using var message = CreatePurgeRequest(subscriptionId, location, vaultName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
