@@ -411,22 +411,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 // We will go through each token and when we get the array type inside (for $values),
                 // We will deserialize that token. We exit when we reaches the next end object.
                 return new List<object>();
-
-                //List<object> list = new List<object>();
-                //while (reader.Read())
-                //{
-                //    if (reader.TokenType == JsonTokenType.StartArray)
-                //    {
-                //        list = JsonSerializer.Deserialize<List<object>>(ref reader, options);
-                //    }
-                //    if (reader.TokenType == JsonTokenType.EndObject)
-                //    {
-                //        // finished processing the array and reached the outer closing bracket token of wrapper object.
-                //        break;
-                //    }
-                //}
-
-                // return list;
             }
 
             public override void Write(Utf8JsonWriter writer, List<object> value, JsonSerializerOptions options)
@@ -484,7 +468,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 serializeOptions.Converters.Add(new DictionaryObjectConverter());
                 serializeOptions.Converters.Add(new ArrayConverter());
                 writer.Append($"System.Text.Json.JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!), serializeOptions):L})");
-                // writer.Append($"System.Text.Json.JsonSerializer.Deserialize<object>({JsonSerializer.Serialize<object>(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!)):L})");
             }
             else if (cst.Name == "ResourceIdentifier" || cst.Name == "ResourceType")
             {
@@ -669,13 +652,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 if (paramName is null)
                 {
+                    paramName = useVariableName(passThruParameter.Name);
                     if (passThruParameter.ValidateNotNull)
                     {
-                        throw new Exception($"parameter {passThruParameter.Name} not found in example {exampleModel.Name}");
+                        _writer.Line($"{passThruParameter.Type} {paramName} = null; /* Can't find this parameter in example, please provide value here!*/");
                     }
                     else
                     {
-                        paramName = useVariableName(passThruParameter.Name);
                         _writer.Line($"{passThruParameter.Type} {paramName} = null;");
                     }
                 }
