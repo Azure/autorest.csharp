@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.UseNamespace("System.Threading.Tasks");
             _writer.UseNamespace($"{_context.DefaultNamespace}.Models");
             _writer.UseNamespace("Azure.ResourceManager.Resources");
+            _writer.UseNamespace("Azure.ResourceManager.Resources.Models");
 
             using (_writer.Namespace(TestNamespace))
             {

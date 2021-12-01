@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
 using MgmtKeyvault;
 using MgmtKeyvault.Models;
 
@@ -22,7 +23,7 @@ namespace MgmtKeyvault.Tests
         public static async Task<MgmtKeyvault.Models.VaultCreateOrUpdateOperation> CreateOrUpdateExampleInstanceAsync(VaultCollection collection, string vaultName)
         {
             // Example: Create a new vault or update an existing vault
-            var parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard))
+            MgmtKeyvault.Models.VaultCreateOrUpdateParameters parameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters("westus", new MgmtKeyvault.Models.VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard))
             {
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
@@ -42,7 +43,7 @@ namespace MgmtKeyvault.Tests
         public static AsyncPageable<MgmtKeyvault.Vault> GetAllExampleInstanceAsync(VaultCollection collection)
         {
             // Example: List vaults in the specified resource group
-            var top = 1;
+            int? top = 1;
 
             return collection.GetAllAsync(top);
         }
@@ -50,7 +51,7 @@ namespace MgmtKeyvault.Tests
         public static async Task<MgmtKeyvault.Models.PrivateEndpointConnectionPutOperation> CreateOrUpdateExampleInstanceAsync(PrivateEndpointConnectionCollection collection, string privateEndpointConnectionName)
         {
             // Example: KeyVaultPutPrivateEndpointConnection
-            var properties = new MgmtKeyvault.PrivateEndpointConnectionData()
+            MgmtKeyvault.PrivateEndpointConnectionData properties = new MgmtKeyvault.PrivateEndpointConnectionData()
             {
                 Etag = "",
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.PrivateLinkServiceConnectionState()
@@ -80,7 +81,7 @@ namespace MgmtKeyvault.Tests
         public static async Task<MgmtKeyvault.Models.ManagedHsmCreateOrUpdateOperation> CreateOrUpdateExampleInstanceAsync(ManagedHsmCollection collection, string name)
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
-            var parameters = new MgmtKeyvault.ManagedHsmData("westus")
+            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData("westus")
             {
                 Properties = new MgmtKeyvault.Models.ManagedHsmProperties()
                 {
@@ -113,7 +114,7 @@ namespace MgmtKeyvault.Tests
         public static async Task<MgmtKeyvault.Models.MhsmPrivateEndpointConnectionPutOperation> CreateOrUpdateExampleInstanceAsync(MhsmPrivateEndpointConnectionCollection collection, string privateEndpointConnectionName)
         {
             // Example: ManagedHsmPutPrivateEndpointConnection
-            var properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionData("westus")
+            MgmtKeyvault.MhsmPrivateEndpointConnectionData properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionData("westus")
             {
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.MhsmPrivateLinkServiceConnectionState()
                 {

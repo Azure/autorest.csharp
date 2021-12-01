@@ -19,6 +19,8 @@ using System.Text.Json;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using System.Text.Json.Serialization;
+using Azure.Core.Serialization;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -350,6 +352,98 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
         }
 
+        public class DictionaryObjectConverter : JsonConverter<Dictionary<object, object>>
+        {
+            public override Dictionary<object, object> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                if (reader.TokenType != JsonTokenType.StartObject)
+                {
+                    throw new JsonException();
+                }
+
+                var value = new Dictionary<object, object>();
+
+                while (reader.Read())
+                {
+                    if (reader.TokenType == JsonTokenType.EndObject)
+                    {
+                        return value;
+                    }
+
+                    string keyString = reader.GetString();
+
+                    reader.Read();
+
+                    string itemValue = reader.GetString();
+
+                    value.Add(keyString, itemValue);
+                }
+
+                throw new JsonException("Error Occured");
+            }
+
+            public override void Write(Utf8JsonWriter writer, Dictionary<object, object> value, JsonSerializerOptions options)
+            {
+                writer.WriteStartObject();
+
+                foreach (KeyValuePair<object, object> item in value)
+                {
+                    writer.WriteString(item.Key.ToString(), item.Value.ToString());
+                }
+
+                writer.WriteEndObject();
+            }
+        }
+
+        public class ArrayConverter : JsonConverter<List<object>>
+        {
+            public override List<object> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                // Let's check we are dealing with a proper array format([]) adhering to the JSON spec.
+                if (reader.TokenType == JsonTokenType.StartArray)
+                {
+                    // Proper array, we can deserialize from this token onwards.
+                    return JsonSerializer.Deserialize<List<object>>(ref reader, options);
+                }
+
+                // If we reached here, it means we are dealing with the JSON array in non proper array form
+                // ie: using an object structure with "$type" and "$values" format like below
+                // We will go through each token and when we get the array type inside (for $values),
+                // We will deserialize that token. We exit when we reaches the next end object.
+                return new List<object>();
+
+                //List<object> list = new List<object>();
+                //while (reader.Read())
+                //{
+                //    if (reader.TokenType == JsonTokenType.StartArray)
+                //    {
+                //        list = JsonSerializer.Deserialize<List<object>>(ref reader, options);
+                //    }
+                //    if (reader.TokenType == JsonTokenType.EndObject)
+                //    {
+                //        // finished processing the array and reached the outer closing bracket token of wrapper object.
+                //        break;
+                //    }
+                //}
+
+                // return list;
+            }
+
+            public override void Write(Utf8JsonWriter writer, List<object> value, JsonSerializerOptions options)
+            {
+                // Nothing special to do in write operation. So use default serialize method.
+                // JsonSerializer.Serialize(writer, value, value.GetType(), options);
+
+                writer.WriteStartArray();
+                foreach (var item in value)
+                {
+                    JsonSerializer.Serialize(writer, item, item.GetType(), options);
+                }
+
+                writer.WriteEndArray();
+            }
+        }
+
         public void WriteFrameworkTypeExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, string variableName)
         {
             if (cst.Name == "IList" || cst.Name == "IEnumerable")
@@ -367,6 +461,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             else if (cst.Name == "IDictionary")
             {
+                writer.UseNamespace("System.Collections.Generic");
                 using (writer.Scope($"new {new CSharpType(typeof(Dictionary<,>), cst.Arguments)}()", newLine: false))
                 {
                     foreach (var entry in exampleValue.Properties ?? new DictionaryOfExamplValue() { })
@@ -384,7 +479,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             else if (cst.Name == "Object")
             {
                 writer.UseNamespace("System.Text.Json");
-                writer.Append($"System.Text.Json.JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!)):L})");
+
+                var serializeOptions = new JsonSerializerOptions();
+                serializeOptions.Converters.Add(new DictionaryObjectConverter());
+                serializeOptions.Converters.Add(new ArrayConverter());
+                writer.Append($"System.Text.Json.JsonSerializer.Deserialize<object>({JsonSerializer.Serialize(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!), serializeOptions):L})");
+                // writer.Append($"System.Text.Json.JsonSerializer.Deserialize<object>({JsonSerializer.Serialize<object>(MgmtBaseTestWriter.ConvertToStringDictionary(exampleValue.RawValue!)):L})");
             }
             else if (cst.Name == "ResourceIdentifier" || cst.Name == "ResourceType")
             {
@@ -512,7 +612,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public string WriteExampleParameterDeclaration(CodeWriter writer, ExampleParameter exampleParameter, Parameter parameter)
         {
             var variableName = useVariableName(exampleParameter.Parameter.CSharpName());
-            writer.Append($"var {variableName} = ");
+            writer.Append($"{parameter.Type} {variableName} = ");
             WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, variableName);
             writer.Line($";");
 

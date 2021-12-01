@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
 using MgmtKeyvault.Models;
@@ -67,7 +68,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Update an existing vault
             var vault = await GetVaultAsync();
             IDictionary<string, string> tags = null;
-            var properties = new MgmtKeyvault.Models.VaultPatchProperties()
+            MgmtKeyvault.Models.VaultPatchProperties properties = new MgmtKeyvault.Models.VaultPatchProperties()
             {
                 TenantId = System.Guid.Parse("00000000-0000-0000-0000-000000000000"),
                 Sku = new MgmtKeyvault.Models.Sku(new MgmtKeyvault.Models.SkuFamily("A"), MgmtKeyvault.Models.SkuName.Standard),

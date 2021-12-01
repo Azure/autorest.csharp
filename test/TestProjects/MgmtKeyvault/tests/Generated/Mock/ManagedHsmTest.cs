@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
 using NUnit.Framework;
@@ -65,7 +66,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Update an existing managed HSM Pool
             var managedHsm = await GetManagedHsmAsync();
-            var parameters = new MgmtKeyvault.ManagedHsmData("westus")
+            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData("westus")
             {
             };
             parameters.Tags.ReplaceWith(new Dictionary<string, string>() { { "Dept", "hsm" }, { "Environment", "dogfood" }, { "Slice", "A" }, });

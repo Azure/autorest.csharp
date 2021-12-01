@@ -49,6 +49,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.UseNamespace("Azure.Core.TestFramework");
             _writer.UseNamespace("Azure.ResourceManager.TestFramework");
             _writer.UseNamespace("Azure.ResourceManager.Resources");
+            _writer.UseNamespace("Azure.ResourceManager.Resources.Models");
 
             using (_writer.Namespace(TestNamespace))
             {
