@@ -46,15 +46,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public static object ConvertToStringDictionary(object dict)
+        public static object? ConvertToStringDictionary(object dict)
         {
+            if (dict is null)
+            {
+                return dict;
+            }
             Type t = dict.GetType();
             bool isDict = t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>);
             if (!isDict)
             {
                 return dict;
             }
-            var ret = new Dictionary<string, object>();
+            var ret = new Dictionary<string, object?>();
             foreach (KeyValuePair<object, object> entry in (IEnumerable< KeyValuePair<object, object>>)dict)
             {
                 ret.Add(entry.Key.ToString()!, ConvertToStringDictionary(entry.Value));
@@ -95,11 +99,25 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return null;
         }
 
-        public static IOrderedEnumerable<KeyValuePair<RequestPath, MgmtRestOperation>> getSortedOperationMappings(MgmtClientOperation clientOperation) {
+        public static SortedDictionary<RequestPath, MgmtRestOperation> getSortedOperationMappings(MgmtClientOperation clientOperation) {
             var operationMappings = clientOperation.ToDictionary(
                 operation => operation.ContextualPath,
                 operation => operation);
-            return new SortedDictionary<RequestPath, MgmtRestOperation>(operationMappings).OrderByDescending(key => key.ToString().Length);
+            return new SortedDictionary<RequestPath, MgmtRestOperation>(operationMappings, Comparer<RequestPath>.Create(
+                (x1, x2) =>
+                {
+                    // order by path length descendently
+                    if (x1.ToString() is null)
+                    {
+                        return 1;
+                    }
+                    else if (x2.ToString() is null)
+                    {
+                        return -1;
+                    }
+
+                    return x2.ToString()!.Length - x1.ToString()!.Length;
+                }));
         }
 
         public static bool HasExample(BuildContext<MgmtOutputLibrary> context, MgmtClientOperation? clientOperation)
