@@ -36,7 +36,7 @@ namespace MgmtSingleton
         internal ParentResourceCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _parentResourcesRestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -67,7 +67,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _parentResourcesRestClient.CreateOrUpdate(Id.ResourceGroupName, parentName, parameters, cancellationToken);
+                var response = _parentResourcesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken);
                 var operation = new ParentResourceCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -103,7 +103,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _parentResourcesRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, parentName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _parentResourcesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ParentResourceCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -134,7 +134,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _parentResourcesRestClient.Get(Id.ResourceGroupName, parentName, cancellationToken);
+                var response = _parentResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ParentResource(Parent, response.Value), response.GetRawResponse());
@@ -164,7 +164,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _parentResourcesRestClient.GetAsync(Id.ResourceGroupName, parentName, cancellationToken).ConfigureAwait(false);
+                var response = await _parentResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ParentResource(Parent, response.Value), response.GetRawResponse());
@@ -191,7 +191,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _parentResourcesRestClient.Get(Id.ResourceGroupName, parentName, cancellationToken: cancellationToken);
+                var response = _parentResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<ParentResource>(null, response.GetRawResponse())
                     : Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
@@ -218,7 +218,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _parentResourcesRestClient.GetAsync(Id.ResourceGroupName, parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _parentResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<ParentResource>(null, response.GetRawResponse())
                     : Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
@@ -291,7 +291,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _parentResourcesRestClient.List(Id.ResourceGroupName, cancellationToken);
+                var response = _parentResourcesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(value => new ParentResource(Parent, value)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -312,7 +312,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _parentResourcesRestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _parentResourcesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(value => new ParentResource(Parent, value)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)

@@ -40,7 +40,7 @@ namespace Azure.Management.Storage
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _blobServicesRestClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _blobServicesRestClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="BlobService"/> class. </summary>
@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _blobServicesRestClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _blobServicesRestClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="BlobService"/> class. </summary>
@@ -62,7 +62,7 @@ namespace Azure.Management.Storage
         internal BlobService(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _blobServicesRestClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _blobServicesRestClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -100,7 +100,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _blobServicesRestClient.GetServicePropertiesAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _blobServicesRestClient.GetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new BlobService(this, response.Value), response.GetRawResponse());
@@ -123,7 +123,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _blobServicesRestClient.GetServiceProperties(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var response = _blobServicesRestClient.GetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobService(this, response.Value), response.GetRawResponse());
@@ -170,7 +170,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _blobServicesRestClient.SetServicePropertiesAsync(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _blobServicesRestClient.SetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new BlobServiceSetServicePropertiesOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -202,7 +202,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _blobServicesRestClient.SetServiceProperties(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
+                var response = _blobServicesRestClient.SetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
                 var operation = new BlobServiceSetServicePropertiesOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);

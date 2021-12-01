@@ -19,7 +19,6 @@ namespace MgmtOperations
 {
     internal partial class AvailabilitySetGrandChildRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace MgmtOperations
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public AvailabilitySetGrandChildRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public AvailabilitySetGrandChildRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace MgmtOperations
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -68,13 +65,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="availabilitySetChildName"/> is null. </exception>
-        public async Task<Response<AvailabilitySetGrandChildListResult>> ListAsync(string resourceGroupName, string availabilitySetName, string availabilitySetChildName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="availabilitySetChildName"/> is null. </exception>
+        public async Task<Response<AvailabilitySetGrandChildListResult>> ListAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -88,7 +90,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetChildName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, availabilitySetName, availabilitySetChildName);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -105,13 +107,18 @@ namespace MgmtOperations
         }
 
         /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="availabilitySetChildName"/> is null. </exception>
-        public Response<AvailabilitySetGrandChildListResult> List(string resourceGroupName, string availabilitySetName, string availabilitySetChildName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="availabilitySetChildName"/> is null. </exception>
+        public Response<AvailabilitySetGrandChildListResult> List(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -125,7 +132,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetChildName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, availabilitySetName, availabilitySetChildName);
+            using var message = CreateListRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -141,7 +148,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -166,14 +173,19 @@ namespace MgmtOperations
         }
 
         /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/>, or <paramref name="availabilitySetGrandChildName"/> is null. </exception>
-        public async Task<Response<AvailabilitySetGrandChildData>> GetAsync(string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/>, or <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        public async Task<Response<AvailabilitySetGrandChildData>> GetAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -191,7 +203,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -210,14 +222,19 @@ namespace MgmtOperations
         }
 
         /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/>, or <paramref name="availabilitySetGrandChildName"/> is null. </exception>
-        public Response<AvailabilitySetGrandChildData> Get(string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/>, or <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        public Response<AvailabilitySetGrandChildData> Get(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -235,7 +252,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -253,7 +270,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -282,15 +299,20 @@ namespace MgmtOperations
         }
 
         /// <summary> Create or update an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/>, <paramref name="availabilitySetGrandChildName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AvailabilitySetGrandChildData>> CreateOrUpdateAsync(string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/>, <paramref name="availabilitySetGrandChildName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<AvailabilitySetGrandChildData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -312,7 +334,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -329,15 +351,20 @@ namespace MgmtOperations
         }
 
         /// <summary> Create or update an availability set. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/>, <paramref name="availabilitySetGrandChildName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<AvailabilitySetGrandChildData> CreateOrUpdate(string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/>, <paramref name="availabilitySetGrandChildName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<AvailabilitySetGrandChildData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -359,7 +386,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, availabilitySetGrandChildName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

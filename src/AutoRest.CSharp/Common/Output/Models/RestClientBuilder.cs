@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Requests;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -191,14 +192,76 @@ namespace AutoRest.CSharp.Output.Models
 
             return uriParameters;
         }
+        protected RequestConditionCollapseType GetRequestConditionCollapseType(IEnumerable<RequestParameter> requestParameters)
+        {
+            int matchCondCount = requestParameters.Count(p => p.IsMatchConditionHeader());
+            int requestCondCount = requestParameters.Count(p => p.IsRequestConditionHeader());
 
+            if (requestCondCount == 4)
+            {
+                return RequestConditionCollapseType.RequestConditionsCollapse;
+            }
+            if (matchCondCount == 2)
+            {
+                return RequestConditionCollapseType.MatchConditionsCollapse;
+            }
+            return RequestConditionCollapseType.None;
+        }
+
+        private RequestConditionsHeader? BuildRequestConditionsHeader(IList<RequestParameter> requestParameters, RequestConditionCollapseType collapseType)
+        {
+            if (collapseType != RequestConditionCollapseType.None)
+            {
+                CSharpType? type = null;
+                string name = "";
+                SerializationFormat format = SerializationFormat.Default;
+                if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
+                {
+                    type = typeof(Azure.MatchConditions);
+                    name = "matchConditions";
+                }
+                else
+                {
+                    type = typeof(Azure.RequestConditions);
+                    name = "requestConditions";
+                    format = SerializationFormat.DateTime_RFC1123;
+                }
+                bool isCollapseParamRequired = requestParameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
+                type = type.WithNullable(!isCollapseParamRequired);
+                Constant? defaultValue = null;
+                if (!isCollapseParamRequired && defaultValue == null)
+                {
+                    defaultValue = Constant.Default(type);
+                }
+                Parameter requestConditionsPram = new Parameter(
+                                                    name,
+                                                    "The content to send as the request conditions of the request.",
+                                                    type,
+                                                    defaultValue,
+                                                    isCollapseParamRequired,
+                                                    false,
+                                                    false);
+                return new RequestConditionsHeader("conditions", requestConditionsPram, RequestParameterSerializationStyle.Simple, format);
+            }
+
+            return null;
+        }
         private RequestHeader[] BuildHeaders(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
+            RequestConditionCollapseType collapseType = GetRequestConditionCollapseType(requestParameters);
             List<RequestHeader> headers = new();
             foreach (var requestParameter in requestParameters)
             {
                 if (requestParameter.In == ParameterLocation.Header)
                 {
+                    /* skip raw condition header if collapsed already. */
+                    if (_context.Configuration.LowLevelClient)
+                    {
+                        if ((collapseType == RequestConditionCollapseType.MatchConditionsCollapse && requestParameter.IsMatchConditionHeader()) ||
+                        (collapseType == RequestConditionCollapseType.RequestConditionsCollapse && requestParameter.IsRequestConditionHeader()))
+                            continue;
+                    }
+
                     var (_, reference) = allParameters[requestParameter];
                     var serializedName = GetRequestParameterName(requestParameter);
                     if (requestParameter.Extensions!.HeaderCollectionPrefix != null)
@@ -212,7 +275,20 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return headers.ToArray();
+            if (_context.Configuration.LowLevelClient)
+            {
+                RequestConditionsHeader? collapseConditions = null;
+                if (collapseType != RequestConditionCollapseType.None)
+                {
+                    collapseConditions = BuildRequestConditionsHeader(requestParameters, collapseType);
+                }
+                if (collapseConditions != null)
+                {
+                    headers.Add(collapseConditions);
+                }
+            }
+
+                return headers.ToArray();
         }
 
         private QueryParameter[] BuildQueryParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
@@ -237,11 +313,55 @@ namespace AutoRest.CSharp.Output.Models
             return query.ToArray();
         }
 
+        private Parameter? BuildMethodRequestConditionParameter(IList<RequestParameter> parameters, RequestConditionCollapseType collapseType)
+        {
+            if (collapseType != RequestConditionCollapseType.None)
+            {
+                bool isCollapseParamRequired = parameters.Where(p => p.IsRequestConditionHeader() && p.IsRequired).Any();
+
+                CSharpType? type = null;
+                string name = "";
+                if (collapseType == RequestConditionCollapseType.MatchConditionsCollapse)
+                {
+                    type = typeof(Azure.MatchConditions);
+                    name = "matchConditions";
+                }
+                else
+                {
+                    type = typeof(Azure.RequestConditions);
+                    name = "requestConditions";
+                }
+                type = type.WithNullable(!isCollapseParamRequired);
+                Constant? defaultValue = null;
+                if (!isCollapseParamRequired && defaultValue == null)
+                {
+                    defaultValue = Constant.Default(type);
+                }
+                return new Parameter(
+                                    name,
+                                    "The content to send as the request conditions of the request.",
+                                    type,
+                                    defaultValue,
+                                    isCollapseParamRequired,
+                                    false,
+                                    false);
+            }
+
+            return null;
+        }
         private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
+            RequestConditionCollapseType collapseType = GetRequestConditionCollapseType(parameters);
             List<Parameter> methodParameters = new();
             foreach (var requestParameter in parameters)
             {
+                if (_context.Configuration.LowLevelClient)
+                {
+                    if ((collapseType == RequestConditionCollapseType.MatchConditionsCollapse && requestParameter.IsMatchConditionHeader()) ||
+                        (collapseType == RequestConditionCollapseType.RequestConditionsCollapse && requestParameter.IsRequestConditionHeader()))
+                        continue;
+                }
+
                 var (parameter, _) = allParameters[requestParameter];
                 // Grouped and flattened parameters shouldn't be added to methods
                 if (parameter != null &&
@@ -251,10 +371,17 @@ namespace AutoRest.CSharp.Output.Models
                     methodParameters.Add(parameter);
                 }
             }
+            if (_context.Configuration.LowLevelClient)
+            {
+                Parameter? collapseConditionParameter = BuildMethodRequestConditionParameter(parameters, collapseType);
+                if (collapseConditionParameter != null)
+                {
+                    methodParameters.Add(collapseConditionParameter);
+                }
+            }
 
             return OrderParameters(methodParameters);
         }
-
         private RequestBody? BuildRequestBody(
             IList<RequestParameter> requestParameters,
             Dictionary<RequestParameter, ConstructedParameter> allParameters,
@@ -549,9 +676,14 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter BuildParameter(RequestParameter requestParameter)
         {
             CSharpType type = _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
-
             var isRequired = requestParameter.Required == true;
             var defaultValue = ParseConstant(requestParameter);
+
+            if (_context.Configuration.LowLevelClient && requestParameter.IsMatchConditionHeader())
+            {
+                type = typeof(Azure.ETag);
+                type = type.WithNullable(requestParameter.IsNullable || !requestParameter.IsRequired);
+            }
 
             if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
             {

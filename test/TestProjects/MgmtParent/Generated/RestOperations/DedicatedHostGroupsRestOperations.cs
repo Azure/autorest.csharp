@@ -19,7 +19,6 @@ namespace MgmtParent
 {
     internal partial class DedicatedHostGroupsRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -30,13 +29,11 @@ namespace MgmtParent
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="options"> The client options used to construct the current client. </param>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public DedicatedHostGroupsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public DedicatedHostGroupsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ClientOptions options, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
             this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
@@ -44,7 +41,7 @@ namespace MgmtParent
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,13 +66,18 @@ namespace MgmtParent
         }
 
         /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<DedicatedHostGroupData>> CreateOrUpdateAsync(string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<DedicatedHostGroupData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -89,7 +91,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, hostGroupName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, hostGroupName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -107,13 +109,18 @@ namespace MgmtParent
         }
 
         /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<DedicatedHostGroupData> CreateOrUpdate(string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<DedicatedHostGroupData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -127,7 +134,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, hostGroupName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, hostGroupName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -144,7 +151,7 @@ namespace MgmtParent
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string hostGroupName, DedicatedHostGroupUpdate parameters)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupUpdate parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -169,13 +176,18 @@ namespace MgmtParent
         }
 
         /// <summary> Update an dedicated host group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Update Dedicated Host Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<DedicatedHostGroupData>> UpdateAsync(string resourceGroupName, string hostGroupName, DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<DedicatedHostGroupData>> UpdateAsync(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -189,7 +201,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, hostGroupName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, hostGroupName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -206,13 +218,18 @@ namespace MgmtParent
         }
 
         /// <summary> Update an dedicated host group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Update Dedicated Host Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<DedicatedHostGroupData> Update(string resourceGroupName, string hostGroupName, DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<DedicatedHostGroupData> Update(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -226,7 +243,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, hostGroupName, parameters);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, hostGroupName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -242,7 +259,7 @@ namespace MgmtParent
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string hostGroupName)
+        internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string hostGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -262,12 +279,17 @@ namespace MgmtParent
         }
 
         /// <summary> Delete a dedicated host group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="hostGroupName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -277,7 +299,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, hostGroupName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, hostGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -290,12 +312,17 @@ namespace MgmtParent
         }
 
         /// <summary> Delete a dedicated host group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
-        public Response Delete(string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="hostGroupName"/> is null. </exception>
+        public Response Delete(string subscriptionId, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -305,7 +332,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, hostGroupName);
+            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, hostGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -317,7 +344,7 @@ namespace MgmtParent
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string hostGroupName)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string hostGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -339,12 +366,17 @@ namespace MgmtParent
         }
 
         /// <summary> Retrieves information about a dedicated host group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
-        public async Task<Response<DedicatedHostGroupData>> GetAsync(string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="hostGroupName"/> is null. </exception>
+        public async Task<Response<DedicatedHostGroupData>> GetAsync(string subscriptionId, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -354,7 +386,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, hostGroupName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, hostGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -373,12 +405,17 @@ namespace MgmtParent
         }
 
         /// <summary> Retrieves information about a dedicated host group. </summary>
+        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
-        public Response<DedicatedHostGroupData> Get(string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="hostGroupName"/> is null. </exception>
+        public Response<DedicatedHostGroupData> Get(string subscriptionId, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -388,7 +425,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, hostGroupName);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, hostGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

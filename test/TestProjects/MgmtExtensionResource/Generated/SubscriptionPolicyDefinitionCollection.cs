@@ -38,7 +38,7 @@ namespace MgmtExtensionResource
         internal SubscriptionPolicyDefinitionCollection(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _policyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -70,7 +70,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.CreateOrUpdate(policyDefinitionName, parameters, cancellationToken);
+                var response = _policyDefinitionsRestClient.CreateOrUpdate(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken);
                 var operation = new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -107,7 +107,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.CreateOrUpdateAsync(policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -138,7 +138,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.Get(policyDefinitionName, cancellationToken);
+                var response = _policyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubscriptionPolicyDefinition(Parent, response.Value), response.GetRawResponse());
@@ -168,7 +168,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubscriptionPolicyDefinition(Parent, response.Value), response.GetRawResponse());
@@ -195,7 +195,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = _policyDefinitionsRestClient.Get(policyDefinitionName, cancellationToken: cancellationToken);
+                var response = _policyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse())
                     : Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
@@ -222,7 +222,7 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                var response = await _policyDefinitionsRestClient.GetAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _policyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<SubscriptionPolicyDefinition>(null, response.GetRawResponse())
                     : Response.FromValue(new SubscriptionPolicyDefinition(this, response.Value), response.GetRawResponse());
@@ -300,7 +300,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = _policyDefinitionsRestClient.List(filter, top, cancellationToken: cancellationToken);
+                    var response = _policyDefinitionsRestClient.List(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -315,7 +315,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = _policyDefinitionsRestClient.ListNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
+                    var response = _policyDefinitionsRestClient.ListNextPage(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -343,7 +343,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = await _policyDefinitionsRestClient.ListAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _policyDefinitionsRestClient.ListAsync(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -358,7 +358,7 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    var response = await _policyDefinitionsRestClient.ListNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _policyDefinitionsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

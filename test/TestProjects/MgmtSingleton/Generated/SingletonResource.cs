@@ -40,7 +40,7 @@ namespace MgmtSingleton
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SingletonResource"/> class. </summary>
@@ -50,7 +50,7 @@ namespace MgmtSingleton
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SingletonResource"/> class. </summary>
@@ -62,7 +62,7 @@ namespace MgmtSingleton
         internal SingletonResource(ArmClientOptions clientOptions, TokenCredential credential, Uri uri, HttpPipeline pipeline, ResourceIdentifier id) : base(clientOptions, credential, uri, pipeline, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
+            _singletonResourcesRestClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -100,7 +100,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResourcesRestClient.GetDefaultAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _singletonResourcesRestClient.GetDefaultAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SingletonResource(this, response.Value), response.GetRawResponse());
@@ -123,7 +123,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResourcesRestClient.GetDefault(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var response = _singletonResourcesRestClient.GetDefault(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SingletonResource(this, response.Value), response.GetRawResponse());
@@ -163,7 +163,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResourcesRestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _singletonResourcesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new SingletonResourceDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -188,7 +188,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResourcesRestClient.Delete(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var response = _singletonResourcesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 var operation = new SingletonResourceDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -219,7 +219,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResourcesRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _singletonResourcesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new SingletonResourceCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -250,7 +250,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResourcesRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
+                var response = _singletonResourcesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
                 var operation = new SingletonResourceCreateOrUpdateOperation(this, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -281,7 +281,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResourcesRestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _singletonResourcesRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -309,7 +309,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResourcesRestClient.Update(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
+                var response = _singletonResourcesRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
                 return Response.FromValue(new SingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -332,8 +332,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await _singletonResourcesRestClient.PostTestAsync(Id.ResourceGroupName, Id.Parent.Name, postParameter, cancellationToken).ConfigureAwait(false);
-                var operation = new SingletonResourcePostTestOperation(_clientDiagnostics, Pipeline, _singletonResourcesRestClient.CreatePostTestRequest(Id.ResourceGroupName, Id.Parent.Name, postParameter).Request, response);
+                var response = await _singletonResourcesRestClient.PostTestAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, postParameter, cancellationToken).ConfigureAwait(false);
+                var operation = new SingletonResourcePostTestOperation(_clientDiagnostics, Pipeline, _singletonResourcesRestClient.CreatePostTestRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, postParameter).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -358,8 +358,8 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = _singletonResourcesRestClient.PostTest(Id.ResourceGroupName, Id.Parent.Name, postParameter, cancellationToken);
-                var operation = new SingletonResourcePostTestOperation(_clientDiagnostics, Pipeline, _singletonResourcesRestClient.CreatePostTestRequest(Id.ResourceGroupName, Id.Parent.Name, postParameter).Request, response);
+                var response = _singletonResourcesRestClient.PostTest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, postParameter, cancellationToken);
+                var operation = new SingletonResourcePostTestOperation(_clientDiagnostics, Pipeline, _singletonResourcesRestClient.CreatePostTestRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, postParameter).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
