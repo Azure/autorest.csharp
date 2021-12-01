@@ -1228,7 +1228,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a collection of VirtualMachineExtensions in the VirtualMachine. </summary>
         /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachine. </returns>
-        public virtual VirtualMachineExtensionCollection GetVirtualMachineExtensions()
+        public VirtualMachineExtensionCollection GetVirtualMachineExtensions()
         {
             return new VirtualMachineExtensionCollection(this);
         }

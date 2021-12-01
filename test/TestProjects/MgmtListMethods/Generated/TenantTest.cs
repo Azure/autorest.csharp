@@ -323,7 +323,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithNonResChWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocs and their operations over a TenantTest. </returns>
-        public virtual TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
+        public TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
         {
             return new TenantParentWithNonResChWithLocCollection(this);
         }
@@ -333,7 +333,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithNonResChes in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChes and their operations over a TenantTest. </returns>
-        public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
+        public TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
             return new TenantParentWithNonResChCollection(this);
         }
@@ -343,7 +343,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithLocs in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithLocs and their operations over a TenantTest. </returns>
-        public virtual TenantParentWithLocCollection GetTenantParentWithLocs()
+        public TenantParentWithLocCollection GetTenantParentWithLocs()
         {
             return new TenantParentWithLocCollection(this);
         }
@@ -353,7 +353,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParents in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParents and their operations over a TenantTest. </returns>
-        public virtual TenantParentCollection GetTenantParents()
+        public TenantParentCollection GetTenantParents()
         {
             return new TenantParentCollection(this);
         }
